@@ -6,7 +6,7 @@
     <groupId>com.onevizion</groupId>
     <artifactId>gui-test-core</artifactId>
     <packaging>jar</packaging>
-    <version>8.91-SNAPSHOT</version>
+    <version>8.92-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
