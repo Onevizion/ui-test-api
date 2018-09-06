@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.onevizion</groupId>
-    <artifactId>gui-test-core</artifactId>
+    <artifactId>ui-test-api</artifactId>
     <packaging>jar</packaging>
     <version>8.92-SNAPSHOT</version>
 
@@ -195,6 +195,6 @@
     </pluginRepositories>
 
     <scm>
-        <developerConnection>scm:git:https://github.com/IKAMTeam/gui-test-core.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/IKAMTeam/ui-test-api.git</developerConnection>
     </scm>
 </project>
