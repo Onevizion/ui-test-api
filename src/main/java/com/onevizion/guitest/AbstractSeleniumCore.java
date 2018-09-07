@@ -527,6 +527,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments(Arrays.asList("--disable-translate", "--always-authorize-plugins"));
                     options.setExperimentalOption("prefs", chromePrefs);
+
+                    if (seleniumSettings.getHeadlessMode()) {
+                        options.addArguments("--headless");
+                        options.addArguments("window-size=1024x768");
+                    }
+
                     seleniumSettings.setWebDriver(new ChromeDriver(options));
                 } else if (seleniumSettings.getBrowser().equals("internet explorer 11")) {
                     capability = DesiredCapabilities.internetExplorer();

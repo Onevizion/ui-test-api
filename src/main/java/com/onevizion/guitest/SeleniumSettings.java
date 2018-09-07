@@ -23,40 +23,43 @@ public class SeleniumSettings {
     private ThreadLocal<String> testName = new ThreadLocal<String>();
 
     @Resource
-    private Long defaultTimeout; //need
+    private Long defaultTimeout;
 
     @Resource
-    private String uploadFilesPath; //need
+    private String uploadFilesPath;
 
     @Resource
-    private String remoteAddress; //need
+    private String remoteAddress;
 
     @Resource
-    private Boolean remoteWebDriver; //need
+    private Boolean remoteWebDriver;
 
     @Resource
-    private String screenshotsPath; //need
+    private Boolean headlessMode;
 
     @Resource
-    private String ciAddr; //need
+    private String screenshotsPath;
 
     @Resource
-    private String testPassword; //need
+    private String ciAddr;
 
     @Resource
-    private String testPasswordApiV3; //need
+    private String testPassword;
 
     @Resource
-    private String browser; //need
+    private String testPasswordApiV3;
 
     @Resource
-    private String restApiCredential; //need
+    private String browser;
 
     @Resource
-    private String restApiUrl; //need
+    private String restApiCredential;
 
     @Resource
-    private String serverUrl; //need
+    private String restApiUrl;
+
+    @Resource
+    private String serverUrl;
 
     public WebDriver getWebDriver() {
         return webDriver.get();
@@ -128,6 +131,10 @@ public class SeleniumSettings {
 
     public Boolean getRemoteWebDriver() {
         return remoteWebDriver;
+    }
+
+    public Boolean getHeadlessMode() {
+        return headlessMode;
     }
 
     public String getScreenshotsPath() {
