@@ -1,8 +1,5 @@
 package com.onevizion.guitest.helper.export;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,15 +9,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.springframework.core.io.ClassPathResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
-//import com.aspose.cells.Cells;
-//import com.aspose.cells.Workbook;
 import com.onevizion.guitest.AbstractSeleniumCore;
 import com.onevizion.guitest.SeleniumSettings;
-//import com.onevizion.guitest.db.ExportDbHelper;
 import com.onevizion.guitest.exception.SeleniumUnexpectedException;
 import com.onevizion.guitest.helper.AssertHelper;
 import com.onevizion.guitest.helper.CheckboxHelper;
@@ -31,12 +26,10 @@ import com.onevizion.guitest.helper.WaitHelper;
 import com.onevizion.guitest.helper.WindowHelper;
 import com.onevizion.guitest.vo.entity.ExportRun;
 
-//import au.com.bytecode.opencsv.CSVReader;
-
 @Component
 public class ExportHelper {
 
-    //private final static Logger logger = LoggerFactory.getLogger(ExportHelper.class);
+    private final static Logger logger = LoggerFactory.getLogger(ExportHelper.class);
 
     @Resource
     private WindowHelper windowHelper;
@@ -56,9 +49,6 @@ public class ExportHelper {
     @Resource
     private ExportWaitHelper exportWaitHelper;
 
-    //@Resource
-    //private ExportDbHelper exportDbHelper;
-
     @Resource
     private GridHelper gridHelper;
 
@@ -71,14 +61,22 @@ public class ExportHelper {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void export(Long gridIndex, ExportRun exportRun, List<Integer> uniqueColumns) {
+    public void export(Long gridIndex, ExportRun exportRun, List<Integer> uniqueColumns, CheckExportFile checkExportFile) {
         runExport(gridIndex, exportRun);
         String processId = waitExportDone();
         if (StringUtils.isNotEmpty(exportRun.getFilePath())) {
             if ("Grid to CSV".equals(exportRun.getMode())) {
-                checkExportCsvFile(processId, exportRun.getFilePath(), uniqueColumns);
+                if (checkExportFile != null) {
+                    checkExportFile.checkExportCsvFile(processId, exportRun.getFilePath(), uniqueColumns);
+                } else {
+                    logger.error("export file not verified");
+                }
             } else if ("Grid to Excel".equals(exportRun.getMode())) {
-                checkExportExcelFile(processId, exportRun.getFilePath(), uniqueColumns);
+                if (checkExportFile != null) {
+                    checkExportFile.checkExportExcelFile(processId, exportRun.getFilePath(), uniqueColumns);
+                } else {
+                    logger.error("export file not verified");
+                }
             } else {
                 throw new SeleniumUnexpectedException("Not support Mode. Mode=" + exportRun.getMode());
             }
@@ -87,14 +85,22 @@ public class ExportHelper {
         deleteExport(gridIndex, processId);
     }
 
-    public void export(Long gridIndex, ExportRun exportRun) {
+    public void export(Long gridIndex, ExportRun exportRun, CheckExportFile checkExportFile) {
         runExport(gridIndex, exportRun);
         String processId = waitExportDone();
         if (StringUtils.isNotEmpty(exportRun.getFilePath())) {
             if ("Grid to CSV".equals(exportRun.getMode())) {
-                checkExportCsvFile(processId, exportRun.getFilePath());
+                if (checkExportFile != null) {
+                    checkExportFile.checkExportCsvFile(processId, exportRun.getFilePath());
+                } else {
+                    logger.error("export file not verified");
+                }
             } else if ("Grid to Excel".equals(exportRun.getMode())) {
-                checkExportExcelFile(processId, exportRun.getFilePath());
+                if (checkExportFile != null) {
+                    checkExportFile.checkExportExcelFile(processId, exportRun.getFilePath());
+                } else {
+                    logger.error("export file not verified");
+                }
             } else {
                 throw new SeleniumUnexpectedException("Not support Mode. Mode=" + exportRun.getMode());
             }
@@ -182,220 +188,6 @@ public class ExportHelper {
         Assert.assertEquals(gridRows, new Long(0L), "Grid have wrong rows count");
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-    }
-
-    private void checkExportCsvFile(String processId, String fileName) {
-        throw new SeleniumUnexpectedException("broken code - need fix");
-        /*List<String[]> expectedDataAll;
-        try {
-            CSVReader expectedCsvReader = new CSVReader(new InputStreamReader((new ClassPathResource("com\\onevizion\\guitest\\export\\" + fileName)).getInputStream()));
-            expectedDataAll = expectedCsvReader.readAll();
-            expectedCsvReader.close();
-        } catch (IOException e) {
-            throw new SeleniumUnexpectedException("Can't open CSV file", e);
-        }
-
-        List<String[]> actualDataAll;
-        try {
-            CSVReader actualCsvReader = new CSVReader(new InputStreamReader(exportDbHelper.getExecutedExportFile(Long.valueOf(processId))));
-            actualDataAll = actualCsvReader.readAll();
-            actualCsvReader.close();
-        } catch (IOException e) {
-            throw new SeleniumUnexpectedException("Can't open CSV file", e);
-        }
-
-        Assert.assertEquals(actualDataAll.size(), expectedDataAll.size(), "Wrong rows count");
-        Assert.assertEquals(actualDataAll.size() > 0, true, "Wrong rows count. Rows count should be more than 0");
-
-        for (int row = 0; row < expectedDataAll.size(); row++) {
-            Assert.assertEquals(actualDataAll.get(row).length, expectedDataAll.get(row).length, "Wrong cols count in row[" + row + "]");
-            Assert.assertEquals(actualDataAll.get(row).length > 0, true, "Wrong cols count in row[" + row + "]. Cols count should be more than 0");
-        }
-
-        for (int row = 0; row < expectedDataAll.size(); row++) {
-            for (int col = 0; col < expectedDataAll.get(row).length; col++) {
-                //logger.info("Loop by expected file. Expected row[" + i + "] col[" + j + "] value[" + expectedDataAll.get(i)[j] + "]. Actual row[" + i + "] col[" + j + "] value[" + actualDataAll.get(i)[j] + "]");
-                Assert.assertEquals(actualDataAll.get(row)[col], expectedDataAll.get(row)[col], "Export File wrong on row=[" + row + "] col=[" + col + "]");
-            }
-        }
-
-        for (int row = 0; row < actualDataAll.size(); row++) {
-            for (int col = 0; col < actualDataAll.get(row).length; col++) {
-                //logger.info("Loop by actual file. Expected row[" + i + "] col[" + j + "] value[" + expectedDataAll.get(i)[j] + "]. Actual row[" + i + "] col[" + j + "] value[" + actualDataAll.get(i)[j] + "]");
-                Assert.assertEquals(actualDataAll.get(row)[col], expectedDataAll.get(row)[col], "Export File wrong on row=[" + row + "] col=[" + col + "]");
-            }
-        }*/
-    }
-
-    private void checkExportCsvFile(String processId, String fileName, List<Integer> uniqueColumns) {
-        throw new SeleniumUnexpectedException("broken code - need fix");
-        /*List<String[]> expectedDataAll;
-        try {
-            CSVReader expectedCsvReader = new CSVReader(new InputStreamReader((new ClassPathResource("com\\onevizion\\guitest\\export\\" + fileName)).getInputStream()));
-            expectedDataAll = expectedCsvReader.readAll();
-            expectedCsvReader.close();
-        } catch (IOException e) {
-            throw new SeleniumUnexpectedException("Can't open CSV file", e);
-        }
-
-        List<String[]> actualDataAll;
-        try {
-            CSVReader actualCsvReader = new CSVReader(new InputStreamReader(exportDbHelper.getExecutedExportFile(Long.valueOf(processId))));
-            actualDataAll = actualCsvReader.readAll();
-            actualCsvReader.close();
-        } catch (IOException e) {
-            throw new SeleniumUnexpectedException("Can't open CSV file", e);
-        }
-
-        Assert.assertEquals(actualDataAll.size(), expectedDataAll.size(), "Wrong rows count");
-        Assert.assertEquals(actualDataAll.size() > 0, true, "Wrong rows count. Rows count should be more than 0");
-
-        for (int row = 0; row < expectedDataAll.size(); row++) {
-            Assert.assertEquals(actualDataAll.get(row).length, expectedDataAll.get(row).length, "Wrong cols count in row[" + row + "]");
-            Assert.assertEquals(actualDataAll.get(row).length > 0, true, "Wrong cols count in row[" + row + "]. Cols count should be more than 0");
-        }
-
-        List<String[]> expectedKeys = new ArrayList<String[]>();
-        for (int row = 0; row < expectedDataAll.size(); row++) {
-            String[] num = new String[uniqueColumns.size()];
-            for (int i = 0; i < uniqueColumns.size(); i++) {
-                num[i] = expectedDataAll.get(row)[uniqueColumns.get(i)];
-            }
-            expectedKeys.add(num);
-        }
-
-        for (int actualRow = 0; actualRow < actualDataAll.size(); actualRow++) {
-            String[] num = new String[uniqueColumns.size()];
-            for (int i = 0; i < uniqueColumns.size(); i++) {
-                num[i] = actualDataAll.get(actualRow)[uniqueColumns.get(i)];
-            }
-
-            int row = -1;
-            int expectedRow = -1;
-            for (String[] expectedKey : expectedKeys) {
-                row = row + 1;
-
-                boolean equals = true;
-                for (int i = 0; i < expectedKey.length; i++) {
-                    if (!expectedKey[i].equals(num[i])) {
-                        equals = false;
-                    }
-                }
-
-                if (equals) {
-                    Assert.assertEquals(expectedRow, -1, "Row duplicated");
-                    expectedRow = row;
-                }
-            }
-
-            for (int col = 0; col < actualDataAll.get(actualRow).length; col++) {
-                Assert.assertEquals(actualDataAll.get(actualRow)[col], expectedDataAll.get(expectedRow)[col], "Export File wrong on row=[" + actualRow + "] col=[" + col + "]");
-            }
-        }*/
-    }
-
-    private void checkExportExcelFile(String processId, String fileName) {
-        throw new SeleniumUnexpectedException("broken code - need fix");
-        /*Workbook expectedWorkbook;
-        try {
-            expectedWorkbook = new Workbook((new ClassPathResource("com\\onevizion\\guitest\\export\\" + fileName)).getInputStream());
-        } catch (Exception e) {
-            throw new SeleniumUnexpectedException("Can't open Excel file", e);
-        }
-
-        Workbook actualWorkbook;
-        try {
-            actualWorkbook = new Workbook(exportDbHelper.getExecutedExportFile(Long.valueOf(processId)));
-        } catch (Exception e) {
-            throw new SeleniumUnexpectedException("Can't open Excel file", e);
-        }
-
-        Cells expectedCells = expectedWorkbook.getWorksheets().get(0).getCells();
-        Cells actualCells = actualWorkbook.getWorksheets().get(0).getCells();
-
-        Assert.assertEquals(actualCells.getRows().getCount(), expectedCells.getRows().getCount(), "Wrong rows count");
-        Assert.assertEquals(actualCells.getRows().getCount() > 0, true, "Wrong rows count. Rows count should be more than 0");
-
-        Assert.assertEquals(actualCells.getColumns().getCount(), expectedCells.getColumns().getCount(), "Wrong columns count");
-        Assert.assertEquals(actualCells.getColumns().getCount() > 0, true, "Wrong columns count. Columns count should be more than 0");
-
-        for (int row = 0; row < expectedCells.getRows().getCount(); row++) {
-            for (int col = 0; col < expectedCells.getColumns().getCount(); col++) {
-                //logger.info("Loop by expected file. Expected cell[" + i + "] value[" + expectedCells.get(i).getStringValue() + "]. Actual cell[" + i + "] value[" + actualCells.get(i).getStringValue() + "]");
-                Assert.assertEquals(actualCells.get(row, col).getStringValue(), expectedCells.get(row, col).getStringValue(), "Export File wrong on row=[" + row + "] col=[" + col + "]");
-            }
-        }
-
-        for (int row = 0; row < actualCells.getRows().getCount(); row++) {
-            for (int col = 0; col < actualCells.getColumns().getCount(); col++) {
-                //logger.info("Loop by actual file. Expected cell[" + i + "] value[" + expectedCells.get(i).getStringValue() + "]. Actual cell[" + i + "] value[" + actualCells.get(i).getStringValue() + "]");
-                Assert.assertEquals(actualCells.get(row, col).getStringValue(), expectedCells.get(row, col).getStringValue(), "Export File wrong on row=[" + row + "] col=[" + col + "]");
-            }
-        }*/
-    }
-
-    private void checkExportExcelFile(String processId, String fileName, List<Integer> uniqueColumns) {
-        throw new SeleniumUnexpectedException("broken code - need fix");
-        /*Workbook expectedWorkbook;
-        try {
-            expectedWorkbook = new Workbook((new ClassPathResource("com\\onevizion\\guitest\\export\\" + fileName)).getInputStream());
-        } catch (Exception e) {
-            throw new SeleniumUnexpectedException("Can't open Excel file", e);
-        }
-
-        Workbook actualWorkbook;
-        try {
-            actualWorkbook = new Workbook(exportDbHelper.getExecutedExportFile(Long.valueOf(processId)));
-        } catch (Exception e) {
-            throw new SeleniumUnexpectedException("Can't open Excel file", e);
-        }
-
-        Cells expectedCells = expectedWorkbook.getWorksheets().get(0).getCells();
-        Cells actualCells = actualWorkbook.getWorksheets().get(0).getCells();
-
-        Assert.assertEquals(actualCells.getRows().getCount(), expectedCells.getRows().getCount(), "Wrong rows count");
-        Assert.assertEquals(actualCells.getRows().getCount() > 0, true, "Wrong rows count. Rows count should be more than 0");
-
-        Assert.assertEquals(actualCells.getColumns().getCount(), expectedCells.getColumns().getCount(), "Wrong columns count");
-        Assert.assertEquals(actualCells.getColumns().getCount() > 0, true, "Wrong columns count. Columns count should be more than 0");
-
-        List<String[]> expectedKeys = new ArrayList<String[]>();
-        for (int row = 0; row < expectedCells.getRows().getCount(); row++) {
-            String[] num = new String[uniqueColumns.size()];
-            for (int i = 0; i < uniqueColumns.size(); i++) {
-                num[i] = expectedCells.get(row, uniqueColumns.get(i)).getStringValue();
-            }
-            expectedKeys.add(num);
-        }
-
-        for (int actualRow = 0; actualRow < actualCells.getRows().getCount(); actualRow++) {
-            String[] num = new String[uniqueColumns.size()];
-            for (int i = 0; i < uniqueColumns.size(); i++) {
-                num[i] = actualCells.get(actualRow, uniqueColumns.get(i)).getStringValue();
-            }
-
-            int row = -1;
-            int expectedRow = -1;
-            for (String[] expectedKey : expectedKeys) {
-                row = row + 1;
-
-                boolean equals = true;
-                for (int i = 0; i < expectedKey.length; i++) {
-                    if (!expectedKey[i].equals(num[i])) {
-                        equals = false;
-                    }
-                }
-
-                if (equals) {
-                    Assert.assertEquals(expectedRow, -1, "Row duplicated");
-                    expectedRow = row;
-                }
-            }
-
-            for (int col = 0; col < actualCells.getColumns().getCount(); col++) {
-                Assert.assertEquals(actualCells.get(actualRow, col).getStringValue(), expectedCells.get(expectedRow, col).getStringValue(), "Export File wrong on row=[" + actualRow + "] col=[" + col + "]");
-            }
-        }*/
     }
 
     private WebElement getRunExportElement() {
