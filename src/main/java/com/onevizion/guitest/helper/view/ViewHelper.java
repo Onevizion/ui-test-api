@@ -339,14 +339,16 @@ public class ViewHelper {
 
     public List<WebElement> getLeftColumns() {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        List<WebElement> leftColumns = seleniumSettings.getWebDriver().findElement(By.id(LEFT_COLUMNS_DIV_ID)).findElements(By.className("record"));
+        //List<WebElement> leftColumns = seleniumSettings.getWebDriver().findElement(By.id(LEFT_COLUMNS_DIV_ID)).findElements(By.className("record"));
+        List<WebElement> leftColumns = seleniumSettings.getWebDriver().findElement(By.id(LEFT_COLUMNS_DIV_ID)).findElements(By.className("nameGroup")); //since 8.92.0
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return leftColumns;
     }
 
     public List<WebElement> getRightColumns() {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        List<WebElement> rightColumns = seleniumSettings.getWebDriver().findElement(By.id(RIGHT_COLUMNS_DIV_ID)).findElements(By.className("record"));
+        //List<WebElement> rightColumns = seleniumSettings.getWebDriver().findElement(By.id(RIGHT_COLUMNS_DIV_ID)).findElements(By.className("record"));
+        List<WebElement> rightColumns = seleniumSettings.getWebDriver().findElement(By.id(RIGHT_COLUMNS_DIV_ID)).findElements(By.className("nameGroup")); //since 8.92.0
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return rightColumns;
     }
