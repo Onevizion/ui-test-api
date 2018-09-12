@@ -169,12 +169,10 @@ public class DualListboxHelper {
     public void addValueByTextNew(String btnId, String text) {
         checkValueByTextIsPresentNew(text);
 
-        //Long position = jsHelper.getNewDropDownElementPositionNew("leftListBox", "record", text);
-        Long position = jsHelper.getNewDropDownElementPositionNew("leftListBox", "nameGroup", text); //since 8.92.0
+        Long position = jsHelper.getNewDropDownElementPositionNew("leftListBox", "record", text);
         jsHelper.scrollNewDropDownTop("leftListBox", "scrollContainer", position * 28L);
 
-        //WebElement entityElem = (WebElement) jsHelper.getNewDropDownElementNew("leftListBox", "record", text);
-        WebElement entityElem = (WebElement) jsHelper.getNewDropDownElementNew("leftListBox", "nameGroup", text); //since 8.92.0
+        WebElement entityElem = (WebElement) jsHelper.getNewDropDownElementNew("leftListBox", "record", text);
         elementWaitHelper.waitElementVisible(entityElem);
 
         entityElem.click();
