@@ -412,6 +412,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     public final static String SPECIAL_CHARACTERS_ENCODED_3 = "&amp;";
     public final static String SPECIAL_CHARACTERS_ENCODED_4 = "&quot;";
 
+    public final static String SPECIAL_CHARACTERS_ENCODED = SPECIAL_CHARACTERS_ENCODED_1 + " " + SPECIAL_CHARACTERS_ENCODED_2 + " " + SPECIAL_CHARACTERS_ENCODED_3 + " " + SPECIAL_CHARACTERS_ENCODED_4;
+
     public AbstractSeleniumCore() {
         super();
     }

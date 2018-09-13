@@ -338,7 +338,7 @@ public class WindowHelper {
         try {
             seleniumSettings.getWebDriver().findElement(elementClick).click();
         } catch (WebDriverException e) {
-            logger.warn("Exception in closeModalWithAlert", e);
+            logger.warn("Exception in closeModalFormButtonRule", e);
         }
 
         waitHelper.waitAlert();
@@ -370,6 +370,32 @@ public class WindowHelper {
                             }
                         });
 
+        seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
+        seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
+        waitHelper.waitIsWindowClosed();
+    }
+
+    public void closeModalFormButtonRuleMassAssign(final By elementClick) {
+        final int currentWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
+        waitHelper.waitWebElement(elementClick);
+        String title = seleniumSettings.getWebDriver().getTitle();
+
+        try {
+            seleniumSettings.getWebDriver().findElement(elementClick).click();
+        } catch (WebDriverException e) {
+            logger.warn("Exception in closeModalFormButtonRuleMassAssign", e);
+        }
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout()).withMessage(
+                "Waiting for closing modal window with title=[" + title + "] failed.")
+                .until(
+                        new ExpectedCondition<Boolean>() {
+                            public Boolean apply(WebDriver webdriver) {
+                                return seleniumSettings.getWebDriver().getWindowHandles().size() == currentWindowsCount - 2;
+                            }
+                        });
+
+        seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
         waitHelper.waitIsWindowClosed();
