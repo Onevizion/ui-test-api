@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-class ExportJsHelper extends JsHelper {
+class ExportJs extends JsHelper {
 
     void showNotification() {
         execJs("processEventNotification.showNotification();");

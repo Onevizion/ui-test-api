@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class ExportWaitHelper {
+class ExportWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;

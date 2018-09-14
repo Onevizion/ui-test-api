@@ -27,9 +27,9 @@ import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.vo.entity.ExportRun;
 
 @Component
-public class ExportHelper {
+public class Export {
 
-    private final static Logger logger = LoggerFactory.getLogger(ExportHelper.class);
+    private final static Logger logger = LoggerFactory.getLogger(Export.class);
 
     @Resource
     private WindowHelper windowHelper;
@@ -44,10 +44,10 @@ public class ExportHelper {
     private ElementWaitHelper elementWaitHelper;
 
     @Resource
-    private ExportJsHelper exportJsHelper;
+    private ExportJs exportJs;
 
     @Resource
-    private ExportWaitHelper exportWaitHelper;
+    private ExportWait exportWait;
 
     @Resource
     private GridHelper gridHelper;
@@ -121,9 +121,9 @@ public class ExportHelper {
     }
 
     private String waitExportDone() {
-        exportWaitHelper.waitExport();
+        exportWait.waitExport();
 
-        exportWaitHelper.waitExportDone();
+        exportWait.waitExportDone();
 
         WebElement panel = seleniumSettings.getWebDriver().findElement(By.id("processEventList"));
         WebElement link = panel.findElement(By.className("ge_link"));
