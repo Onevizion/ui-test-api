@@ -36,7 +36,7 @@ public class AssertHelper {
     private CheckboxHelper checkboxHelper;
 
     @Resource
-    private TbHelper tbHelper;
+    private Tb tb;
 
     public void AssertLink(String id, String expectedVal) {
         elementHelper.moveToElementById(id);
@@ -208,7 +208,7 @@ public class AssertHelper {
         WebElement element;
         String errorMessage;
         if (elementPosition > 1) {
-            String idx = tbHelper.getLastFieldIndex(fieldName, elementPosition);
+            String idx = tb.getLastFieldIndex(fieldName, elementPosition);
             element = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
             errorMessage = "Element with id=[idx" + idx + "] should be enabled";
         } else {
@@ -234,7 +234,7 @@ public class AssertHelper {
         WebElement element;
         String errorMessage;
         if (elementPosition > 1) {
-            String idx = tbHelper.getLastFieldIndex(fieldName, elementPosition);
+            String idx = tb.getLastFieldIndex(fieldName, elementPosition);
             element = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
             errorMessage = "Element with id=[idx" + idx + "] should be disabled";
         } else {

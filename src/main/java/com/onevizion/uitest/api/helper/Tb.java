@@ -27,9 +27,9 @@ import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
 @Component
-public class TbHelper {
+public class Tb {
 
-    private final Logger logger = LoggerFactory.getLogger(TbHelper.class);
+    private final Logger logger = LoggerFactory.getLogger(Tb.class);
 
     @Resource
     private SeleniumSettings seleniumSettings;

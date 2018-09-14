@@ -13,14 +13,14 @@ import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.TbHelper;
+import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 public class Comment {
 
     @Resource
-    private TbHelper tbHelper;
+    private Tb tb;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -81,7 +81,7 @@ public class Comment {
     }
 
     public void openCommentFormFromGrid(Long rowIndex, Long columnIndex) {
-        tbHelper.rightClickCell(0L, rowIndex, columnIndex);
+        tb.rightClickCell(0L, rowIndex, columnIndex);
 
         int i = 0;
         do {

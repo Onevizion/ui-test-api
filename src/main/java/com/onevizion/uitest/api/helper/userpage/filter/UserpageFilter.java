@@ -28,7 +28,7 @@ import com.onevizion.uitest.api.helper.FilterHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
-import com.onevizion.uitest.api.helper.TbHelper;
+import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
@@ -65,7 +65,7 @@ public class UserpageFilter {
     private FilterHelper filterHelper;
 
     @Resource
-    private TbHelper tbHelper;
+    private Tb tb;
 
     @Resource
     private SeleniumSettings seleniumSettings;

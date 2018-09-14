@@ -64,7 +64,7 @@ import com.onevizion.uitest.api.helper.RelationSelectorHelper;
 import com.onevizion.uitest.api.helper.SortHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.TabJsHelper;
-import com.onevizion.uitest.api.helper.TbHelper;
+import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.UsersSettings;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -121,7 +121,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Grid2 grid2;
 
     @Resource
-    protected TbHelper tbHelper;
+    protected Tb tb;
 
     @Resource
     protected AssertHelper assertHelper;

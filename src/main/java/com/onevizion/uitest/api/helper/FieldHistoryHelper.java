@@ -39,7 +39,7 @@ public class FieldHistoryHelper {
     private ElementHelper elementHelper;
 
     @Resource
-    private TbHelper tbHelper;
+    private Tb tb;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -119,7 +119,7 @@ public class FieldHistoryHelper {
     private void openFieldHistoryForm(String fieldId, boolean isShowMenu, int elementPosition) {
         String id;
         if (elementPosition > 1) {
-            id = tbHelper.getLastFieldIndex(fieldId, elementPosition);
+            id = tb.getLastFieldIndex(fieldId, elementPosition);
             id = "idx" + id;
         } else {
             id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldId + "'] | //*[string(@name)='" + fieldId + "']")).getAttribute("id");
