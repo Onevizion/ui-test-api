@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-class DocumentJsHelper extends JsHelper {
+class DocumentJs extends JsHelper {
 
     Boolean isReadyStateComplete() {
         return Boolean.valueOf(execJs("return document.readyState").equals("complete"));

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.document.DocumentHelper;
+import com.onevizion.uitest.api.helper.document.Document;
 
 @Component
 public class LogoffHelper {
@@ -25,7 +25,7 @@ public class LogoffHelper {
     private WindowHelper windowHelper;
 
     @Resource
-    private DocumentHelper documentHelper;
+    private Document document;
 
     public void logoff() {
         elementWaitHelper.waitElementById("topPanelUserNameBtn");
@@ -56,7 +56,7 @@ public class LogoffHelper {
         elementWaitHelper.waitElementById("password");
         elementWaitHelper.waitElementById("btn");
 
-        documentHelper.waitReadyStateComplete();
+        document.waitReadyStateComplete();
     }
 
     public void logoffFromApiV3() {

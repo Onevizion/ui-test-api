@@ -76,7 +76,7 @@ import com.onevizion.uitest.api.helper.colorpicker.ColorPickerHelper;
 import com.onevizion.uitest.api.helper.comment.CommentHelper;
 import com.onevizion.uitest.api.helper.configfield.ConfigFieldHelper;
 import com.onevizion.uitest.api.helper.dashboard.DashboardHelper;
-import com.onevizion.uitest.api.helper.document.DocumentHelper;
+import com.onevizion.uitest.api.helper.document.Document;
 import com.onevizion.uitest.api.helper.entity.EntityClientFileHelper;
 import com.onevizion.uitest.api.helper.entity.EntityColorHelper;
 import com.onevizion.uitest.api.helper.entity.EntityComponentPackageHelper;
@@ -217,7 +217,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected JqueryWait jqueryWait;
 
     @Resource
-    protected DocumentHelper documentHelper;
+    protected Document document;
 
     @Resource
     protected DashboardHelper dashboardHelper;

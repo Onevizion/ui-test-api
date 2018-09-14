@@ -10,20 +10,20 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class DocumentWaitHelper {
+class DocumentWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private DocumentJsHelper documentJsHelper;
+    private DocumentJs documentJs;
 
     void waitReadyStateComplete() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for ReadyState complete is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return documentJsHelper.isReadyStateComplete();
+                    return documentJs.isReadyStateComplete();
                 }
             });
     }

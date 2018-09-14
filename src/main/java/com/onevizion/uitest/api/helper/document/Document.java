@@ -5,13 +5,13 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DocumentHelper {
+public class Document {
 
     @Resource
-    private DocumentWaitHelper documentWaitHelper;
+    private DocumentWait documentWait;
 
     public void waitReadyStateComplete() {
-        documentWaitHelper.waitReadyStateComplete();
+        documentWait.waitReadyStateComplete();
     }
 
 }

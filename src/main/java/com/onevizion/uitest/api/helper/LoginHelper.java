@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.document.DocumentHelper;
+import com.onevizion.uitest.api.helper.document.Document;
 
 @Component
 public class LoginHelper {
@@ -19,13 +19,13 @@ public class LoginHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private DocumentHelper documentHelper;
+    private Document document;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
 
     public void login(String userName, String userPassword) {
-        documentHelper.waitReadyStateComplete();
+        document.waitReadyStateComplete();
 
         elementWaitHelper.waitElementById("username");
         elementWaitHelper.waitElementVisibleById("username");
@@ -51,7 +51,7 @@ public class LoginHelper {
     }
 
     public void failLogin(String userName, String userPassword, String errorMessage) {
-        documentHelper.waitReadyStateComplete();
+        document.waitReadyStateComplete();
 
         elementWaitHelper.waitElementById("username");
         elementWaitHelper.waitElementVisibleById("username");
