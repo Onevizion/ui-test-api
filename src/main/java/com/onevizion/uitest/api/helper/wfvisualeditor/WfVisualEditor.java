@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
 
 @Component
-public class WfVisualEditorHelper {
+public class WfVisualEditor {
 
     @Resource
     private ElementHelper elementHelper;
