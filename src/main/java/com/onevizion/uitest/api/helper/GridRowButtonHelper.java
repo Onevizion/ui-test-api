@@ -21,7 +21,7 @@ public class GridRowButtonHelper { //TODO rename to GridRowHelper
     private WaitHelper waitHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -29,7 +29,7 @@ public class GridRowButtonHelper { //TODO rename to GridRowHelper
     public void openGridRowForm(Long gridIdx) {
         showGridRowButton(gridIdx);
 
-        windowHelper.openModal(By.id(BUTTON_EDIT_ROW_ID_BASE + gridIdx));
+        window.openModal(By.id(BUTTON_EDIT_ROW_ID_BASE + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridRowEditorLoad();
     }

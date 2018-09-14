@@ -19,7 +19,7 @@ import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.TrackorTour;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
 
@@ -27,7 +27,7 @@ import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
 public class EntityTrackorTour {
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -56,7 +56,7 @@ public class EntityTrackorTour {
     public void addWithChilds(TrackorTour trackorTour) {
         add(trackorTour);
 
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -67,11 +67,11 @@ public class EntityTrackorTour {
             entityTrackorTourStep.add(trackorTourStep);
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void add(TrackorTour trackorTour) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -100,12 +100,12 @@ public class EntityTrackorTour {
         gridHelper.clearAssignmentGridColumn2(2L, 0L);
         gridHelper.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(TrackorTour trackorTour) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -136,7 +136,7 @@ public class EntityTrackorTour {
         gridHelper.clearAssignmentGridColumn2(3L, 0L);
         gridHelper.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
@@ -144,7 +144,7 @@ public class EntityTrackorTour {
         testInGrid(AbstractSeleniumCore.getGridIdx(), 0L, trackorTour);
         testOnForm(trackorTour);
 
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -158,11 +158,11 @@ public class EntityTrackorTour {
             entityTrackorTourStep.testOnForm(trackorTour.getSteps().get(i));
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testOnForm(TrackorTour trackorTour) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -187,7 +187,7 @@ public class EntityTrackorTour {
         waitHelper.waitGridLoad(3L, 3L);
         gridHelper.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorTour trackorTour) {

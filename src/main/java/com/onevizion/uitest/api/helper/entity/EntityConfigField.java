@@ -21,7 +21,7 @@ import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.configfield.ConfigField;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
@@ -31,7 +31,7 @@ import com.onevizion.uitest.api.vo.entity.ConfigFieldVo;
 public class EntityConfigField {
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -70,7 +70,7 @@ public class EntityConfigField {
     private ElementHelper elementHelper;
 
     public void add(ConfigFieldVo configFieldVo) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -114,12 +114,12 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name("suffix")).sendKeys(configFieldVo.getConfigFieldNumber().getSuffix());
             seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).sendKeys(configFieldVo.getConfigFieldNumber().getDecimal());
-            windowHelper.openModal(By.name("btnrgbNegColor"));
+            window.openModal(By.name("btnrgbNegColor"));
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
-            windowHelper.closeModal(By.className("dhx_button_save"));
-            windowHelper.openModal(By.name("btnrgbPosColor"));
+            window.closeModal(By.className("dhx_button_save"));
+            window.openModal(By.name("btnrgbPosColor"));
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
-            windowHelper.closeModal(By.className("dhx_button_save"));
+            window.closeModal(By.className("dhx_button_save"));
 
             if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkboxHelper.isCheckedByName("parensForNegative"))
                     || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkboxHelper.isCheckedByName("parensForNegative"))) {
@@ -328,12 +328,12 @@ public class EntityConfigField {
             checkboxHelper.clickByName("notCloneLocks");
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(ConfigFieldVo configFieldVo) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -369,12 +369,12 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name("suffix")).sendKeys(configFieldVo.getConfigFieldNumber().getSuffix());
             seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).sendKeys(configFieldVo.getConfigFieldNumber().getDecimal());
-            windowHelper.openModal(By.name("btnrgbNegColor"));
+            window.openModal(By.name("btnrgbNegColor"));
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
-            windowHelper.closeModal(By.className("dhx_button_save"));
-            windowHelper.openModal(By.name("btnrgbPosColor"));
+            window.closeModal(By.className("dhx_button_save"));
+            window.openModal(By.name("btnrgbPosColor"));
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
-            windowHelper.closeModal(By.className("dhx_button_save"));
+            window.closeModal(By.className("dhx_button_save"));
 
             if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkboxHelper.isCheckedByName("parensForNegative"))
                     || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkboxHelper.isCheckedByName("parensForNegative"))) {
@@ -583,15 +583,15 @@ public class EntityConfigField {
         }
 
         if (removeLockable) {
-            windowHelper.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), AbstractSeleniumCore.MESSAGE_DELETE_LOCKABLE);
+            window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), AbstractSeleniumCore.MESSAGE_DELETE_LOCKABLE);
         } else {
-            windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+            window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         }
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(ConfigFieldVo configFieldVo) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -748,7 +748,7 @@ public class EntityConfigField {
         assertHelper.AssertCheckBoxNew("notCloneFieldValue", configFieldVo.getNotCloneValue());
         assertHelper.AssertCheckBoxNew("notCloneLocks", configFieldVo.getNotCloneLock());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, ConfigFieldVo configFieldVo) {
@@ -867,23 +867,23 @@ public class EntityConfigField {
     }
 
     private void setSqlToCodeMirror(String btnId, String sql) {
-        windowHelper.openModal(By.id(btnId));
+        window.openModal(By.id(btnId));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         waitHelper.waitCodeMirrorLoad("SQL");
         waitHelper.waitCodeMirrorHistorySize("SQL", 1L, 0L); //Wait until CodeMirror value is populated from window.dialogArguments['SQL'] js variable
         jsHelper.setValueToCodeMirror("SQL", sql);
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
     private void checkSqlInCodeMirror(String btnId, String sql) {
-        windowHelper.openModal(By.id(btnId));
+        window.openModal(By.id(btnId));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         waitHelper.waitFormLoad();
         waitHelper.waitCodeMirrorLoad("SQL");
         waitHelper.waitCodeMirrorHistorySize("SQL", 1L, 0L); //Wait until CodeMirror value is populated from window.dialogArguments['SQL'] js variable
         assertHelper.AssertCodeMirror("SQL", sql);
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
 }

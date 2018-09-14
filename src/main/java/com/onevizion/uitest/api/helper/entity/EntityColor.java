@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.vo.entity.Color;
 
@@ -22,7 +22,7 @@ import com.onevizion.uitest.api.vo.entity.Color;
 public class EntityColor {
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -43,43 +43,43 @@ public class EntityColor {
     private ColorPicker colorPicker;
 
     public void add(Color color) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
 
-        windowHelper.openModal(By.name("btncolorPicker"));
+        window.openModal(By.name("btncolorPicker"));
         colorPicker.setValue("#" + color.getValue());
-        windowHelper.closeModal(By.className("dhx_button_save"));
+        window.closeModal(By.className("dhx_button_save"));
 
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(Color color) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
 
-        windowHelper.openModal(By.name("btncolorPicker"));
+        window.openModal(By.name("btncolorPicker"));
         colorPicker.setValue("#" + color.getValue());
-        windowHelper.closeModal(By.className("dhx_button_save"));
+        window.closeModal(By.className("dhx_button_save"));
 
         seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(Color color) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -87,7 +87,7 @@ public class EntityColor {
         assertHelper.AssertText("rgbValue", color.getValue());
         assertHelper.AssertText("description", color.getDescription());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, Color color) {

@@ -28,9 +28,9 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.tree.TreeWait;
 
 @Component
-public class WindowHelper {
+public class Window {
 
-    private final Logger logger = LoggerFactory.getLogger(WindowHelper.class);
+    private final Logger logger = LoggerFactory.getLogger(Window.class);
 
     @Resource
     private WaitHelper waitHelper;

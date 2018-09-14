@@ -15,14 +15,14 @@ import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.SecurityRole;
 
 @Component
 public class EntitySecurityRole {
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -43,7 +43,7 @@ public class EntitySecurityRole {
     private CheckboxHelper checkboxHelper;
 
     public void add(SecurityRole securityRole) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -91,12 +91,12 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), "autoNotifAssign");
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), "autoTourAssign");
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(SecurityRole securityRole) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -146,12 +146,12 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), "autoNotifAssign");
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), "autoTourAssign");
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(SecurityRole securityRole) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -205,7 +205,7 @@ public class EntitySecurityRole {
         assertHelper.AssertCheckBoxNew("autoNotifAssign", securityRole.getDefaultAssignments().getGlobalNotif());
         assertHelper.AssertCheckBoxNew("autoTourAssign", securityRole.getDefaultAssignments().getTrackorTour());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, SecurityRole securityRole) {

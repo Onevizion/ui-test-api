@@ -17,14 +17,14 @@ import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
 
 @Component
 public class EntityTrackorTourStep {
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -45,7 +45,7 @@ public class EntityTrackorTourStep {
     private AssertHelper assertHelper;
 
     public void add(TrackorTourStep trackorTourStep) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -82,12 +82,12 @@ public class EntityTrackorTourStep {
         waitHelper.waitWebElement(By.id("contentLabel"));
         jsHelper.setValueToFCKEditor("contentLabel", trackorTourStep.getContentLabel());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(2L, 2L);
     }
 
     public void edit(TrackorTourStep trackorTourStep) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -127,12 +127,12 @@ public class EntityTrackorTourStep {
         waitHelper.waitWebElement(By.id("contentLabel"));
         jsHelper.setValueToFCKEditor("contentLabel", trackorTourStep.getContentLabel());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(2L, 2L);
     }
 
     public void testOnForm(TrackorTourStep trackorTourStep) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -155,7 +155,7 @@ public class EntityTrackorTourStep {
         waitHelper.waitWebElement(By.id("contentLabel"));
         assertHelper.AssertFCKEditor("contentLabel", trackorTourStep.getContentLabel());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorTourStep trackorTourStep) {

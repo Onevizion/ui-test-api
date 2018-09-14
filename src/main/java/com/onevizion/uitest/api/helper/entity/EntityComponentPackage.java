@@ -11,7 +11,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.NewDropDownHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.ComponentPackage;
 
 @Component
@@ -24,7 +24,7 @@ public class EntityComponentPackage {
     private WaitHelper waitHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private AssertHelper assertHelper;
@@ -41,13 +41,13 @@ public class EntityComponentPackage {
         elementWaitHelper.waitElementVisibleById("new_lbCompPkg0");
         elementWaitHelper.waitElementDisplayById("new_rows_lbCompPkg0");
 
-        windowHelper.openModal(By.id("btnAddCompPkg0"));
+        window.openModal(By.id("btnAddCompPkg0"));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackage.getName());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
@@ -59,7 +59,7 @@ public class EntityComponentPackage {
         seleniumSettings.getWebDriver().findElement(By.name("name")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackage.getName());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
@@ -70,7 +70,7 @@ public class EntityComponentPackage {
 
         assertHelper.AssertText("name", componentPackage.getName());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
 }

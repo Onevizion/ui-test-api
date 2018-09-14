@@ -19,7 +19,7 @@ public class UsersSettingsHelper {
     private WaitHelper waitHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -29,13 +29,13 @@ public class UsersSettingsHelper {
         elementWaitHelper.waitElementVisibleById("topPanelUserNameLbl");
         elementWaitHelper.waitElementDisplayById("topPanelUserNameLbl");
 
-        windowHelper.openModal(By.id("topPanelUserNameLbl"));
+        window.openModal(By.id("topPanelUserNameLbl"));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
     }
 
     public void closeUserSettings() {
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
 
         AbstractSeleniumCore.sleep(1000L); //this sleep need because in js code we have setTimeout
 

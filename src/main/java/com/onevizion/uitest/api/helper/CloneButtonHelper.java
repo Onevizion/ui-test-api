@@ -21,7 +21,7 @@ public class CloneButtonHelper {
     private WaitHelper waitHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -29,7 +29,7 @@ public class CloneButtonHelper {
     public void openCloneForm(Long gridIdx) {
         showCloneButton(gridIdx);
 
-        windowHelper.openModal(By.id(BUTTON_CLONE_ID_BASE + gridIdx));
+        window.openModal(By.id(BUTTON_CLONE_ID_BASE + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
     }

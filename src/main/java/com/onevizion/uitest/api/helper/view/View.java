@@ -20,7 +20,7 @@ import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.tree.TreeJs;
 import com.onevizion.uitest.api.helper.tree.TreeWait;
@@ -70,7 +70,7 @@ public class View {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -302,7 +302,7 @@ public class View {
         elementWaitHelper.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
         elementWaitHelper.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
-        windowHelper.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
+        window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
         treeWait.waitTreeLoad(0L);
         waitHelper.waitFormLoad();
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -314,7 +314,7 @@ public class View {
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         treeWait.waitTreeLoad(0L);
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         waitHelper.waitGridLoad(gridIdx, gridIdx);
 
         waitHelper.waitViewsCount(gridIdx, beforeDeleteSize - 1);
@@ -476,7 +476,7 @@ public class View {
     }
 
     public void selectAllColumns(Long gridIdx) {
-        windowHelper.openModal(By.id(View.BUTTON_OPEN + gridIdx));
+        window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -488,7 +488,7 @@ public class View {
             seleniumSettings.getWebDriver().findElement(By.id(ADD_BUTTON_ID)).click();
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(gridIdx, gridIdx);
 
         viewWait.waitCurrentViewName(gridIdx, View.UNSAVED_VIEW_NAME);
@@ -502,7 +502,7 @@ public class View {
     }
 
     private void selectColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
-        windowHelper.openModal(By.id(View.BUTTON_OPEN + gridIdx));
+        window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -529,7 +529,7 @@ public class View {
             }
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(gridIdx, gridIdx);
 
         viewWait.waitCurrentViewName(gridIdx, View.UNSAVED_VIEW_NAME);
@@ -537,7 +537,7 @@ public class View {
     }
 
     private void checkColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
-        windowHelper.openModal(By.id(View.BUTTON_OPEN + gridIdx));
+        window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -558,7 +558,7 @@ public class View {
             Assert.assertEquals(actualRightColumns.get(i).findElements(By.className("labelField")).get(0).getText(), rightColumns.get(i));
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void switchToRootSubgroup() {

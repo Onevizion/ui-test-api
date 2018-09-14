@@ -22,7 +22,7 @@ public class LogoffHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private Document document;

@@ -25,7 +25,7 @@ public class PsSelectorHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -43,7 +43,7 @@ public class PsSelectorHelper {
     private QsHelper qsHelper;
 
     public String selectValue(String buttonName, Long romNum, Long colNum) {
-        windowHelper.openModal(By.name(buttonName));
+        window.openModal(By.name(buttonName));
         waitHelper.waitGridLoad(0L, 0L);
         String ret = null;
 
@@ -59,13 +59,13 @@ public class PsSelectorHelper {
             ret = value;
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         return ret;
     }
 
     public List<String> selectMultipleValues(String buttonName, Long firstRowNum, Long lastRowNum, Long colNum) {
         List<String> ret = new ArrayList<String>();
-        windowHelper.openModal(By.name(buttonName));
+        window.openModal(By.name(buttonName));
         waitHelper.waitGridLoad(0L, 0L);
         List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("cb0_0"));
         if (firstRowNum != null && lastRowNum != null) {
@@ -96,12 +96,12 @@ public class PsSelectorHelper {
                 }
             }
         }
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         return ret;
     }
 
     public String selectSpecificValue(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
-        windowHelper.openModal(btnOpen);
+        window.openModal(btnOpen);
         waitHelper.waitWebElement(btnClose);
         waitHelper.waitGridLoad(0L, 0L);
 
@@ -130,13 +130,13 @@ public class PsSelectorHelper {
 
         String rowId = jsHelper.getGridSelectedRowId(0L);
         String ret = jsHelper.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum);
-        windowHelper.closeModal(btnClose);
+        window.closeModal(btnClose);
         return ret;
     }
 
     public List<String> selectMultipleSpecificValues(By btnOpen, Long colNum, List<String> values, Long filterFiledNum) {
         List<String> ret = new ArrayList<String>();
-        windowHelper.openModal(btnOpen);
+        window.openModal(btnOpen);
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         waitHelper.waitGridLoad(0L, 0L);
 
@@ -173,13 +173,13 @@ public class PsSelectorHelper {
             }
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         return ret;
     }
 
     public List<String> selectMultipleSpecificValues2(String buttonName, Long colNum, List<String> values, Long filterFiledNum) {
         List<String> ret = new ArrayList<String>();
-        windowHelper.openModal(By.name(buttonName));
+        window.openModal(By.name(buttonName));
         waitHelper.waitGridLoad(0L, 0L);
 
         for (String value : values) {
@@ -199,16 +199,16 @@ public class PsSelectorHelper {
         }
 
         if (ret.size() > 0) { 
-            windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
+            window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         } else {
-            windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L));
+            window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L));
         }
         return ret;
     }
 
     public boolean checkValue(By btnOpen, String btnCloseName, String value, Long filterFiledNum) {
         boolean ret = false;
-        windowHelper.openModal(btnOpen);
+        window.openModal(btnOpen);
         waitHelper.waitWebElement(By.id(btnCloseName));
         waitHelper.waitGridLoad(0L, 0L);
 
@@ -238,12 +238,12 @@ public class PsSelectorHelper {
             }
         }
 
-        windowHelper.closeModal(By.id(btnCloseName));
+        window.closeModal(By.id(btnCloseName));
         return ret;
     }
 
     public boolean checkMultipleValues(By btnOpen, String btnCloseName, List<String> values, Long filterFiledNum) {
-        windowHelper.openModal(btnOpen);
+        window.openModal(btnOpen);
         waitHelper.waitWebElement(By.name(btnCloseName));
         waitHelper.waitGridLoad(0L, 0L);
 
@@ -259,7 +259,7 @@ public class PsSelectorHelper {
                     }
                 }
                 if (ret == false) {
-                    windowHelper.closeModal(By.name(btnCloseName));
+                    window.closeModal(By.name(btnCloseName));
                     return ret;
                 }
             }
@@ -278,13 +278,13 @@ public class PsSelectorHelper {
                     }
                 }
                 if (ret == false) {
-                    windowHelper.closeModal(By.name(btnCloseName));
+                    window.closeModal(By.name(btnCloseName));
                     return ret;
                 }
             }
         }
 
-        windowHelper.closeModal(By.name(btnCloseName));
+        window.closeModal(By.name(btnCloseName));
         return true;
     }
 

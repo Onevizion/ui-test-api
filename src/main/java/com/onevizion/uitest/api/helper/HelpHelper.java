@@ -24,7 +24,7 @@ public class HelpHelper {
     private AssertHelper assertHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -44,14 +44,14 @@ public class HelpHelper {
 
         elementHelper.clickById(BUTTON_OPEN);
 
-        windowHelper.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
+        window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         assertHelper.AssertText("name", name);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertSelect("itemTypeId", type);
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void checkHelpOnFilterForm(Long gridIdx, final String name, final String number, final String type) {
@@ -60,14 +60,14 @@ public class HelpHelper {
 
         elementHelper.clickById(BUTTON_OPEN_ON_FILTER_FORM + gridIdx);
 
-        windowHelper.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
+        window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         assertHelper.AssertText("name", name);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertSelect("itemTypeId", type);
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void checkHelpOnViewForm(Long gridIdx, final String name, final String number, final String type) {
@@ -76,14 +76,14 @@ public class HelpHelper {
 
         elementHelper.clickById(BUTTON_OPEN_ON_VIEW_FORM + gridIdx);
 
-        windowHelper.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
+        window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         assertHelper.AssertText("name", name);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertSelect("itemTypeId", type);
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     private WebElement getHelpContainerItem(String helpName) {

@@ -68,7 +68,7 @@ public class FilterHelper {
     private TreeWait treeWait;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private SortHelper sortHelper;
@@ -171,7 +171,7 @@ public class FilterHelper {
     }
 
     public void saveFilterField(String fieldName, FilterFieldType filterFieldType, List<String> cellsValues, Long gridIdx) {
-        windowHelper.openModal(By.id(BUTTON_OPEN + gridIdx));
+        window.openModal(By.id(BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
@@ -187,7 +187,7 @@ public class FilterHelper {
             By btnOpen = By.xpath("//*[string(@submitName)='btn" + fieldName + "'] | //*[string(@name)='btn" + fieldName + "']");
             psSelectorHelper.selectMultipleSpecificValues(btnOpen, 1L, cellsValues, 1L);
         }
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
         waitHelper.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
@@ -252,7 +252,7 @@ public class FilterHelper {
         elementWaitHelper.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
         elementWaitHelper.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
-        windowHelper.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
+        window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
         treeWait.waitTreeLoad(0L);
         waitHelper.waitFormLoad();
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -264,7 +264,7 @@ public class FilterHelper {
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         treeWait.waitTreeLoad(0L);
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         waitHelper.waitGridLoad(gridIdx, gridIdx);
 
         waitHelper.waitFiltersCount(gridIdx, beforeDeleteSize - 1);
@@ -283,11 +283,11 @@ public class FilterHelper {
     }
 
     public void clearFilter(Long gridIdx) {
-        windowHelper.openModal(By.id(BUTTON_OPEN + gridIdx));
+        window.openModal(By.id(BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         seleniumSettings.getWebDriver().findElement(By.name(BUTTON_CLEAR)).click();
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
         waitHelper.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
@@ -335,7 +335,7 @@ public class FilterHelper {
     }
 
     public void assertEmptyFilterField(String fieldName, FilterFieldType filterFieldType, Long gridIdx) {
-        windowHelper.openModal(By.id(BUTTON_OPEN + gridIdx));
+        window.openModal(By.id(BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
@@ -349,11 +349,11 @@ public class FilterHelper {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
             assertHelper.AssertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(""), 1L, true);
         }
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void assertFilterField(String fieldName, FilterFieldType filterFieldType, String cellValue, Long gridIdx) {
-        windowHelper.openModal(By.id(BUTTON_OPEN + gridIdx));
+        window.openModal(By.id(BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
@@ -367,7 +367,7 @@ public class FilterHelper {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
             assertHelper.AssertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(cellValue), 1L, true);
         }
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void checkRowsInGrid(String rowIds, List<String> columnNames) {

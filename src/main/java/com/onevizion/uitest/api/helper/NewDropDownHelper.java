@@ -35,7 +35,7 @@ public class NewDropDownHelper {
     private WaitHelper waitHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private JqueryWait jqueryWait;
@@ -239,7 +239,7 @@ public class NewDropDownHelper {
                     }
                 }
 
-                windowHelper.openModal(By.id(buttonId));
+                window.openModal(By.id(buttonId));
 
                 failOpenWindow = false;
             } catch (ElementNotVisibleException e) {

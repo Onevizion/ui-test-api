@@ -23,7 +23,7 @@ import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.ExportRun;
 
 @Component
@@ -32,7 +32,7 @@ public class Export {
     private final static Logger logger = LoggerFactory.getLogger(Export.class);
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -111,13 +111,13 @@ public class Export {
 
     private void runExport(Long gridIndex, ExportRun exportRun) {
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click(); //TODO move AbstractSelenium.BUTTON_EXPORT_ID_BASE
-        windowHelper.openModal(getRunExportElement());
+        window.openModal(getRunExportElement());
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         new Select(seleniumSettings.getWebDriver().findElement(By.name("GridExportMode"))).selectByVisibleText(exportRun.getMode());
         new Select(seleniumSettings.getWebDriver().findElement(By.name("GridExportDelivery"))).selectByVisibleText(exportRun.getDelivery());
         seleniumSettings.getWebDriver().findElement(By.name("GridExportComment")).sendKeys(exportRun.getComments());
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
     private String waitExportDone() {
@@ -148,13 +148,13 @@ public class Export {
 
     private void checkExport(Long gridIndex, ExportRun exportRun) {
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click();
-        windowHelper.openModal(getExportHistoryElement());
+        window.openModal(getExportHistoryElement());
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
         Long gridRows = gridHelper.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, new Long(1L), "Grid have wrong rows count");
 
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         assertHelper.AssertLink("gridPageName", exportRun.getGridPageName() + " ");
@@ -165,14 +165,14 @@ public class Export {
         assertHelper.AssertLink("un", seleniumSettings.getTestUser());
         assertHelper.AssertTextById("errorMessage", exportRun.getErrorMessage());
         assertHelper.AssertTextById("comments", exportRun.getComments());
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
     }
 
     private void deleteExport(Long gridIndex, String processId) {
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click();
-        windowHelper.openModal(getExportHistoryElement());
+        window.openModal(getExportHistoryElement());
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
         Long gridRows = gridHelper.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
@@ -187,7 +187,7 @@ public class Export {
         gridRows = gridHelper.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, new Long(0L), "Grid have wrong rows count");
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
     }
 
     private WebElement getRunExportElement() {

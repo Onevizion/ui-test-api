@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 
@@ -23,7 +23,7 @@ import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 public class EntityDynamicVtableValue {
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private WaitHelper waitHelper;
@@ -47,7 +47,7 @@ public class EntityDynamicVtableValue {
     private CheckboxHelper checkboxHelper;
 
     public void add(DynamicVtableValue dynamicVtableValue) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -55,9 +55,9 @@ public class EntityDynamicVtableValue {
 
         seleniumSettings.getWebDriver().findElement(By.name("OrderNum")).sendKeys(dynamicVtableValue.getOrdNum());
 
-        windowHelper.openModal(By.name("btncolorDisplayed"));
+        window.openModal(By.name("btncolorDisplayed"));
         colorPicker.setValue("#" + dynamicVtableValue.getColor());
-        windowHelper.closeModal(By.className("dhx_button_save"));
+        window.closeModal(By.className("dhx_button_save"));
 
         if ((dynamicVtableValue.getDisplay().equals("YES") && !checkboxHelper.isCheckedByName("display"))
                 || (dynamicVtableValue.getDisplay().equals("NO") && checkboxHelper.isCheckedByName("display"))) {
@@ -69,12 +69,12 @@ public class EntityDynamicVtableValue {
             checkboxHelper.clickByName("filterable");
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(2L, 2L);
     }
 
     public void edit(DynamicVtableValue dynamicVtableValue) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -84,9 +84,9 @@ public class EntityDynamicVtableValue {
         seleniumSettings.getWebDriver().findElement(By.name("OrderNum")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("OrderNum")).sendKeys(dynamicVtableValue.getOrdNum());
 
-        windowHelper.openModal(By.name("btncolorDisplayed"));
+        window.openModal(By.name("btncolorDisplayed"));
         colorPicker.setValue("#" + dynamicVtableValue.getColor());
-        windowHelper.closeModal(By.className("dhx_button_save"));
+        window.closeModal(By.className("dhx_button_save"));
 
         if ((dynamicVtableValue.getDisplay().equals("YES") && !checkboxHelper.isCheckedByName("display"))
                 || (dynamicVtableValue.getDisplay().equals("NO") && checkboxHelper.isCheckedByName("display"))) {
@@ -98,12 +98,12 @@ public class EntityDynamicVtableValue {
             checkboxHelper.clickByName("filterable");
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(2L, 2L);
     }
 
     public void testOnForm(DynamicVtableValue dynamicVtableValue) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -113,7 +113,7 @@ public class EntityDynamicVtableValue {
         assertHelper.AssertCheckBoxNew("display", dynamicVtableValue.getDisplay());
         assertHelper.AssertCheckBoxNew("filterable", dynamicVtableValue.getFilterable());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, DynamicVtableValue dynamicVtableValue) {

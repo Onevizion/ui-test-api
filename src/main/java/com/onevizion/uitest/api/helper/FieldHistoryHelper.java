@@ -33,7 +33,7 @@ public class FieldHistoryHelper {
     private GridHelper gridHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private ElementHelper elementHelper;
@@ -113,7 +113,7 @@ public class FieldHistoryHelper {
             i = i - 1L;
         }
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     private void openFieldHistoryForm(String fieldId, boolean isShowMenu, int elementPosition) {
@@ -134,7 +134,7 @@ public class FieldHistoryHelper {
                 try {
                     for (WebElement element : seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"))) {
                         if ("Field History".equals(element.getText())) {
-                            windowHelper.openModal(element);
+                            window.openModal(element);
                             break;
                         }
                     }
@@ -144,7 +144,7 @@ public class FieldHistoryHelper {
                 i++;
             } while (i < 5);
         } else {
-            windowHelper.openModal(seleniumSettings.getWebDriver().findElement(By.id(id + "_lbl")));
+            window.openModal(seleniumSettings.getWebDriver().findElement(By.id(id + "_lbl")));
         }
 
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

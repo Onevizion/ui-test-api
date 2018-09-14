@@ -33,7 +33,7 @@ public class RelationSelectorHelper {
     private JqueryWait jqueryWait;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     public final static String RELATION_ID_BASE = "lbParentsChildren";
     public final static String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
@@ -93,12 +93,12 @@ public class RelationSelectorHelper {
     public void openRelationGrid(Long gridIdx) {
         waitHelper.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload relations
-        windowHelper.openModal(By.id(BUTTON_RELATION_ID_BASE + gridIdx));
+        window.openModal(By.id(BUTTON_RELATION_ID_BASE + gridIdx));
         waitHelper.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void closeRelationGrid(Long gridIdx) {
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + gridIdx));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + gridIdx));
         waitHelper.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload relations
     }

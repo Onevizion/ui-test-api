@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.NewDropDownHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.vo.entity.Menu;
 
@@ -24,7 +24,7 @@ public class EntityMenu {
     private WaitHelper waitHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private AssertHelper assertHelper;
@@ -53,7 +53,7 @@ public class EntityMenu {
         assertHelper.AssertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
         assertHelper.AssertCheckBoxNew("showTipOfTheDay", menu.getShowTipOfTheDay());
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testRoleAssignments(Menu menu, List<String> roles) {
@@ -65,7 +65,7 @@ public class EntityMenu {
         waitHelper.waitGridLoad(2L, 2L);
         gridHelper.checkAssignmentGridColumn2(2L, 0L, roles);
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
 }

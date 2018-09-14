@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
-import com.onevizion.uitest.api.helper.WindowHelper;
+import com.onevizion.uitest.api.helper.Window;
 
 @Component
 public class WfVisualEditor {
@@ -24,7 +24,7 @@ public class WfVisualEditor {
     private WaitHelper waitHelper;
 
     @Resource
-    private WindowHelper windowHelper;
+    private Window window;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -48,30 +48,30 @@ public class WfVisualEditor {
     }
 
     public void openAddFormStepBefore() {
-        windowHelper.openModal(By.id("btnAddStepBefore"));
+        window.openModal(By.id("btnAddStepBefore"));
         waitHelper.waitFormLoad();
     }
 
     public void openAddFormStepAfter() {
-        windowHelper.openModal(By.id("btnAddStep"));
+        window.openModal(By.id("btnAddStep"));
         waitHelper.waitFormLoad();
     }
 
     public void openStepEditForm(String text) {
         selectStepNode(text);
-        windowHelper.openModal(By.id("btnEdit"));
+        window.openModal(By.id("btnEdit"));
         waitHelper.waitFormLoad();
     }
 
     public void openStepNotificationsGrid(String text) {
         selectStepNode(text);
-        windowHelper.openModal(By.id("btnNotifications"));
+        window.openModal(By.id("btnNotifications"));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void openStepLinksGrid(String text) {
         selectStepNode(text);
-        windowHelper.openModal(By.id("btnLinks"));
+        window.openModal(By.id("btnLinks"));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
