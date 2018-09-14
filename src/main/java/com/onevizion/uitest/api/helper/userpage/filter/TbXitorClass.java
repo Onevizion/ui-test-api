@@ -21,7 +21,7 @@ public class TbXitorClass {
     private GridHelper gridHelper;
 
     @Resource
-    private UserFilterHelper userFilterHelper;
+    private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, boolean supportOuterOperations, List<String> ... cellValsKeys) {
@@ -33,19 +33,19 @@ public class TbXitorClass {
         List<String> cellVals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         if (supportOuterOperations) {
-            userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", "<>", "(+)<>", "Is Null", "Is Not Null"));
+            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", "<>", "(+)<>", "Is Null", "Is Not Null"));
         } else {
-            userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("=", "<>", "Is Null", "Is Not Null"));
+            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "<>", "Is Null", "Is Not Null"));
         }
 
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "<>", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Null", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Not Null", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "<>", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Null", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Not Null", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
 
         if (supportOuterOperations) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "(+)=", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "(+)<>", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "(+)=", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "(+)<>", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
         }
     }
 

@@ -21,7 +21,7 @@ public class TbCheckboxField {
     private GridHelper gridHelper;
 
     @Resource
-    private UserFilterHelper userFilterHelper;
+    private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, boolean supportOuterOperations, List<String> ... cellValsKeys) {
@@ -33,17 +33,17 @@ public class TbCheckboxField {
         List<String> cellVals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         if (supportOuterOperations) {
-            userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)="));
+            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)="));
         } else {
-            userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("="));
+            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("="));
         }
 
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, "Yes", null, "=", ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, "No", null, "=", ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, "Yes", null, "=", ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, "No", null, "=", ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
 
         if (supportOuterOperations) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, "Yes", null, "(+)=", ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, "No", null, "(+)=", ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, "Yes", null, "(+)=", ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, "No", null, "(+)=", ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
         }
     }
 

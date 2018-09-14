@@ -21,7 +21,7 @@ public class TbDateField {
     private GridHelper gridHelper;
 
     @Resource
-    private UserFilterHelper userFilterHelper;
+    private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String columnId2, String value, boolean supportOuterOperations, boolean supportFieldOperations, List<String> ... cellValsKeys) {
@@ -45,24 +45,24 @@ public class TbDateField {
         }
 
         if (supportOuterOperations && supportFieldOperations) {
-            userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
+            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                     "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "(+)<>", "Is Null", "Is Not Null", "=Field", "<>Field", ">Field", "<Field", ">=Field", "<=Field"));
         } else if (supportOuterOperations && !supportFieldOperations) {
-            userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
+            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                     "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "(+)<>", "Is Null", "Is Not Null"));
         } else if (!supportOuterOperations && supportFieldOperations) {
-            userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
+            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                     "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "Is Null", "Is Not Null", "=Field", "<>Field", ">Field", "<Field", ">=Field", "<=Field"));
         } else {
-            userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
+            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                     "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "Is Null", "Is Not Null"));
         }
 
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
 
         //TODO >=Today
         /*for (Integer i = 0; i < 3; i++) {
@@ -114,22 +114,22 @@ public class TbDateField {
         //TODO This FY to Dt
         //userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This FY to Dt", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
 
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Null", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Not Null", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Null", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Not Null", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
 
         if (supportFieldOperations) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=Field", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         }
 
         if (supportOuterOperations) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)<>", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)<>", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
         }
     }
 
@@ -142,8 +142,8 @@ public class TbDateField {
         String fieldName2 = jsHelper.getGridColumnLabelByColIndex(0L, columnIndex2, 0L);
 
         for (Integer i = 0; i < 3; i++) {
-            userFilterHelper.createTrackorForDateTest(fieldName, fieldName2, ">=Today", Arrays.asList(" - ", i.toString()));
-            userFilterHelper.createTrackorForDateTest(fieldName, fieldName2, ">=Today", Arrays.asList(" + ", i.toString()));
+            userpageFilter.createTrackorForDateTest(fieldName, fieldName2, ">=Today", Arrays.asList(" - ", i.toString()));
+            userpageFilter.createTrackorForDateTest(fieldName, fieldName2, ">=Today", Arrays.asList(" + ", i.toString()));
         }
     }
 

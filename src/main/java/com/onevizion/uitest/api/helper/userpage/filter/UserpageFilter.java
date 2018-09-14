@@ -34,7 +34,7 @@ import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
 @Component
-public class UserFilterHelper {
+public class UserpageFilter {
 
     public final static String BUTTON_OPEN = "btnFilter";
     public final static String BUTTON_CLEAR = "btnClear";
@@ -71,7 +71,7 @@ public class UserFilterHelper {
     private SeleniumSettings seleniumSettings;
 
     public void checkFilterOperators(String fieldName, List<String> dateTypes, List<String> operators) {
-        windowHelper.openModal(By.id(UserFilterHelper.BUTTON_OPEN + 0L));
+        windowHelper.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         psSelectorHelper.selectSpecificValue(By.name("btnWPAttrib1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
@@ -906,7 +906,7 @@ public class UserFilterHelper {
     }
 
     private void selectFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, String operator, ConfigFieldType fieldDataType) {
-        windowHelper.openModal(By.id(UserFilterHelper.BUTTON_OPEN + 0L));
+        windowHelper.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         psSelectorHelper.selectSpecificValue(By.name("btnWPAttrib1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
@@ -988,7 +988,7 @@ public class UserFilterHelper {
     }
 
     private void clearFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, String operator, ConfigFieldType fieldDataType) {
-        windowHelper.openModal(By.id(UserFilterHelper.BUTTON_OPEN + 0L));
+        windowHelper.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
         assertHelper.AssertRadioPsSelector("txtWPAttrib1", "btnWPAttrib1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
@@ -1075,7 +1075,7 @@ public class UserFilterHelper {
                 assertHelper.AssertText("txtWPAttribValue1", "");
             }
         }
-        seleniumSettings.getWebDriver().findElement(By.name(UserFilterHelper.BUTTON_CLEAR)).click();
+        seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();
 
         windowHelper.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
@@ -1904,7 +1904,7 @@ public class UserFilterHelper {
 
     @SuppressWarnings("unchecked")
     public void createTrackorForDateTest(String idFieldName, String dateFieldName, String operator, List<String> ... cellValsKeys){
-        windowHelper.openModal(By.id(UserFilterHelper.BUTTON_ADD + 0L));
+        windowHelper.openModal(By.id(UserpageFilter.BUTTON_ADD + 0L));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 

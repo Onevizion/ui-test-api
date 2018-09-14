@@ -21,7 +21,7 @@ public class TbTaskDate {
     private GridHelper gridHelper;
 
     @Resource
-    private UserFilterHelper userFilterHelper;
+    private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, String startFinish) {
@@ -35,13 +35,13 @@ public class TbTaskDate {
         Long rowsCnt = gridHelper.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
-        userFilterHelper.checkFilterOperators(fieldName, Arrays.asList("S", "F"), Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
+        userpageFilter.checkFilterOperators(fieldName, Arrays.asList("S", "F"), Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                 "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "Is Null", "Is Not Null"));
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, ">", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, ">=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, ">", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, ">=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
         //TODO
         //>=Today
         //<=Today
@@ -54,9 +54,9 @@ public class TbTaskDate {
         //This FQ to Dt
         //This FY
         //This FY to Dt
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<>", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "Is Null", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "Is Not Null", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<>", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "Is Null", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "Is Not Null", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
     }
 
 }

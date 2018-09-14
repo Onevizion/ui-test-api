@@ -21,7 +21,7 @@ public class TbWpTemplateName {
     private GridHelper gridHelper;
 
     @Resource
-    private UserFilterHelper userFilterHelper;
+    private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value) {
@@ -32,8 +32,8 @@ public class TbWpTemplateName {
         Long rowsCnt = gridHelper.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
-        userFilterHelper.checkFilterOperators(fieldName, null, Arrays.asList("="));
-        userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.SELECTOR, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("="));
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.SELECTOR, columnIndex, null, cellVals, null);
     }
 
 }
