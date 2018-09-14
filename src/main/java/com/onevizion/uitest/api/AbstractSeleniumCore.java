@@ -107,7 +107,7 @@ import com.onevizion.uitest.api.helper.tree.TreeHelper;
 import com.onevizion.uitest.api.helper.tree.TreeJsHelper;
 import com.onevizion.uitest.api.helper.tree.TreeWaitHelper;
 import com.onevizion.uitest.api.helper.userpage.filter.UserFilterHelper;
-import com.onevizion.uitest.api.helper.view.ViewHelper;
+import com.onevizion.uitest.api.helper.view.View;
 import com.onevizion.uitest.api.helper.wfvisualeditor.WfVisualEditor;
 import com.onevizion.uitest.api.restapi.CreateTest;
 import com.onevizion.uitest.api.restapi.CreateTestResult;
@@ -160,7 +160,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected NavHelper navHelper;
 
     @Resource
-    protected ViewHelper viewHelper;
+    protected View view;
 
     @Resource
     protected PrivilegiesHelper privilegiesHelper;

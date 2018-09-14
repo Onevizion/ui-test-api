@@ -26,7 +26,7 @@ import com.onevizion.uitest.api.helper.tree.TreeJsHelper;
 import com.onevizion.uitest.api.helper.tree.TreeWaitHelper;
 
 @Component
-public class ViewHelper {
+public class View {
 
     public static final String UNSAVED_VIEW_NAME = "Unsaved View";
     public static final String GENERAL_INFO_VIEW_NAME = "G:General Info";
@@ -94,7 +94,7 @@ public class ViewHelper {
     private ElementWaitHelper elementWaitHelper;
 
     @Resource
-    private ViewWaitHelper viewWaitHelper;
+    private ViewWait viewWait;
 
     @Resource
     private JqueryWaitHelper jqueryWaitHelper;
@@ -219,7 +219,7 @@ public class ViewHelper {
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
         Assert.assertEquals(isSavedView, true, "View " + entityPrefix + " isn't saved");
 
-        viewWaitHelper.waitCurrentViewName(gridIdx, entityPrefix);
+        viewWait.waitCurrentViewName(gridIdx, entityPrefix);
         waitHelper.waitGridLoad(gridIdx, gridIdx);
     }
 
@@ -329,10 +329,10 @@ public class ViewHelper {
         Assert.assertEquals(isDeletedView, false, "View " + entityPrefix + " isn't deleted");
 
         if (currentViewName.equals(entityPrefix)) {
-            viewWaitHelper.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
+            viewWait.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
             waitHelper.waitGridLoad(gridIdx, gridIdx);
         } else {
-            viewWaitHelper.waitCurrentViewName(gridIdx, currentViewName);
+            viewWait.waitCurrentViewName(gridIdx, currentViewName);
             waitHelper.waitGridLoad(gridIdx, gridIdx);
         }
     }
@@ -361,7 +361,7 @@ public class ViewHelper {
         selectColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
-        saveView(gridIdx, entityPrefix + ViewHelper.VIEW_NAME + "1", true, true);
+        saveView(gridIdx, entityPrefix + View.VIEW_NAME + "1", true, true);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
 
@@ -369,7 +369,7 @@ public class ViewHelper {
         selectColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
-        saveView(gridIdx, entityPrefix + ViewHelper.VIEW_NAME + "1", false, true);
+        saveView(gridIdx, entityPrefix + View.VIEW_NAME + "1", false, true);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
 
@@ -377,7 +377,7 @@ public class ViewHelper {
         selectColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
-        saveView(gridIdx, entityPrefix + ViewHelper.VIEW_NAME + "2", true, true);
+        saveView(gridIdx, entityPrefix + View.VIEW_NAME + "2", true, true);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
 
@@ -385,7 +385,7 @@ public class ViewHelper {
         selectColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-        saveView(gridIdx, entityPrefix + ViewHelper.VIEW_NAME + "2", false, true);
+        saveView(gridIdx, entityPrefix + View.VIEW_NAME + "2", false, true);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
@@ -395,47 +395,47 @@ public class ViewHelper {
         checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
 
         //Select Local View 1
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + ViewHelper.VIEW_NAME + "1");
+        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + View.VIEW_NAME + "1");
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
 
         //Select Global View 1
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + ViewHelper.VIEW_NAME + "1");
+        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + View.VIEW_NAME + "1");
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
 
         //Select Unsaved View
-        selectByVisibleText(gridIdx, ViewHelper.UNSAVED_VIEW_NAME);
+        selectByVisibleText(gridIdx, View.UNSAVED_VIEW_NAME);
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsUnsavedView);
         checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
 
         //Select Local View 2
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + ViewHelper.VIEW_NAME + "2");
+        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + View.VIEW_NAME + "2");
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
 
         //Select Global View 2
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + ViewHelper.VIEW_NAME + "2");
+        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + View.VIEW_NAME + "2");
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Delete Local 1
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + ViewHelper.VIEW_NAME + "1");
+        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + View.VIEW_NAME + "1");
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Delete Global 1
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + ViewHelper.VIEW_NAME + "1");
+        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + View.VIEW_NAME + "1");
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Delete Local 2
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + ViewHelper.VIEW_NAME + "2");
+        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + View.VIEW_NAME + "2");
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Delete Global 2
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + ViewHelper.VIEW_NAME + "2");
+        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + View.VIEW_NAME + "2");
         Assert.assertEquals(jsHelper.getGridColumnsCount(gridIdx), gridColumnsUnsavedView);
         checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
     }
@@ -476,7 +476,7 @@ public class ViewHelper {
     }
 
     public void selectAllColumns(Long gridIdx) {
-        windowHelper.openModal(By.id(ViewHelper.BUTTON_OPEN + gridIdx));
+        windowHelper.openModal(By.id(View.BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -491,7 +491,7 @@ public class ViewHelper {
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(gridIdx, gridIdx);
 
-        viewWaitHelper.waitCurrentViewName(gridIdx, ViewHelper.UNSAVED_VIEW_NAME);
+        viewWait.waitCurrentViewName(gridIdx, View.UNSAVED_VIEW_NAME);
         waitHelper.waitGridLoad(gridIdx, gridIdx);
     }
 
@@ -502,7 +502,7 @@ public class ViewHelper {
     }
 
     private void selectColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
-        windowHelper.openModal(By.id(ViewHelper.BUTTON_OPEN + gridIdx));
+        windowHelper.openModal(By.id(View.BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -532,12 +532,12 @@ public class ViewHelper {
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(gridIdx, gridIdx);
 
-        viewWaitHelper.waitCurrentViewName(gridIdx, ViewHelper.UNSAVED_VIEW_NAME);
+        viewWait.waitCurrentViewName(gridIdx, View.UNSAVED_VIEW_NAME);
         waitHelper.waitGridLoad(gridIdx, gridIdx);
     }
 
     private void checkColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
-        windowHelper.openModal(By.id(ViewHelper.BUTTON_OPEN + gridIdx));
+        windowHelper.openModal(By.id(View.BUTTON_OPEN + gridIdx));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
@@ -624,15 +624,15 @@ public class ViewHelper {
     }
 
     public void waitCurrentViewName(Long gridIdx, String viewName) {
-        viewWaitHelper.waitCurrentViewName(gridIdx, viewName);
+        viewWait.waitCurrentViewName(gridIdx, viewName);
     }
 
     public void waitLeftListBoxReady() {
-        viewWaitHelper.waitLeftListBoxReady();
+        viewWait.waitLeftListBoxReady();
     }
 
     public void waitRightListBoxReady() {
-        viewWaitHelper.waitRightListBoxReady();
+        viewWait.waitRightListBoxReady();
     }
 
 }

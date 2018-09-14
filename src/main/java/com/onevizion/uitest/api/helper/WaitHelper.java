@@ -20,7 +20,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
-import com.onevizion.uitest.api.helper.view.ViewHelper;
+import com.onevizion.uitest.api.helper.view.View;
 
 @Component
 public class WaitHelper {
@@ -38,7 +38,7 @@ public class WaitHelper {
     private FilterHelper filterHelper;
 
     @Resource
-    private ViewHelper viewHelper;
+    private View view;
 
     @Resource
     private HtmlSelectHelper htmlSelectHelper;
@@ -154,7 +154,7 @@ public class WaitHelper {
 
     public void waitViewsCount(final Long gridIdx, final int viewsCount) {
         Supplier<Integer> actualValueSupplier = ()-> {
-            return viewHelper.getViewsCount(gridIdx);
+            return view.getViewsCount(gridIdx);
         };
 
         Supplier<String> messageSupplier = ()-> {

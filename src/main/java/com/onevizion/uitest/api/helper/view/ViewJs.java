@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-class ViewJsHelper extends JsHelper {
+class ViewJs extends JsHelper {
 
     Boolean isReadyLeftListBox() {
         //TODO firefox 59 bug

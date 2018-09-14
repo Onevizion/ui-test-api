@@ -12,20 +12,20 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class ViewWaitHelper {
+class ViewWait {
 
     @Resource
-    private ViewHelper viewHelper;
+    private View view;
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ViewJsHelper viewJsHelper;
+    private ViewJs viewJs;
 
     void waitCurrentViewName(Long gridIdx, String viewName) {
         Supplier<String> actualValueSupplier = ()-> {
-            return viewHelper.getCurrentViewName(gridIdx);
+            return view.getCurrentViewName(gridIdx);
         };
 
         Supplier<String> messageSupplier = ()-> {
@@ -46,7 +46,7 @@ class ViewWaitHelper {
             .withMessage("Waiting for leftListBox loading is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return viewJsHelper.isReadyLeftListBox();
+                    return viewJs.isReadyLeftListBox();
                 }
             });
     }
@@ -56,7 +56,7 @@ class ViewWaitHelper {
             .withMessage("Waiting for rightListBox loading is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return viewJsHelper.isReadyRightListBox();
+                    return viewJs.isReadyRightListBox();
                 }
             });
     }

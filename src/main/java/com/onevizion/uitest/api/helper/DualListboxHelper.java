@@ -13,7 +13,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.view.ViewHelper;
+import com.onevizion.uitest.api.helper.view.View;
 
 @Component
 public class DualListboxHelper {
@@ -31,7 +31,7 @@ public class DualListboxHelper {
     private ElementWaitHelper elementWaitHelper;
 
     @Resource
-    private ViewHelper viewHelper;
+    private View view;
 
     /*new void to support new duallist box*/
     public int getElementsCount(WebElement select) {
@@ -80,7 +80,7 @@ public class DualListboxHelper {
     public void removeValueByValueNew(String btnId, String value) {
         
 
-        List<WebElement> rightColumns = viewHelper.getRightColumns();
+        List<WebElement> rightColumns = view.getRightColumns();
         for (WebElement rightColumn : rightColumns) {
             if (value.equals(rightColumn.getAttribute("id"))) {
                 rightColumn.click();
@@ -230,7 +230,7 @@ public class DualListboxHelper {
         int i = 0;
         do {
             try{
-                List<WebElement> leftColumns = viewHelper.getLeftColumns();
+                List<WebElement> leftColumns = view.getLeftColumns();
                 for (WebElement leftColumn : leftColumns) {
                     if (text.equals(htmlSelectHelper.getOptionTextNew(leftColumn))) {
                         i = i + 1;
@@ -253,7 +253,7 @@ public class DualListboxHelper {
         int i = 0;
         do {
             try{
-                List<WebElement> leftColumns = viewHelper.getRightColumns();
+                List<WebElement> leftColumns = view.getRightColumns();
                 for (WebElement leftColumn : leftColumns) {
                     if (text.equals(htmlSelectHelper.getOptionTextNew(leftColumn))) {
                         i = i + 1;
@@ -289,7 +289,7 @@ public class DualListboxHelper {
     public void addValueByValueNew(String btnId, String value) {
         
 
-        List<WebElement> leftColumns = viewHelper.getLeftColumns();
+        List<WebElement> leftColumns = view.getLeftColumns();
         for (int i = 0; i <= leftColumns.size(); i++) {
             if (value.equals(leftColumns.get(i).getAttribute("id"))) {
                 jsHelper.scrollNewDropDownTop("leftListBox", "scrollContainer", i * 28L);
@@ -362,7 +362,7 @@ public class DualListboxHelper {
                 i = i + 1;
             } else {
                 try {
-                    List<WebElement> leftColumns = viewHelper.getLeftColumns();
+                    List<WebElement> leftColumns = view.getLeftColumns();
                     for (WebElement leftColumn : leftColumns) {
                         if (columnNames.get(i).equals(leftColumn.getAttribute("id"))) {
                             i = i + 1;
