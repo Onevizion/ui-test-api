@@ -73,7 +73,7 @@ import com.onevizion.uitest.api.helper.api.v3.ApiV3ParameterHelper;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3ResourceHelper;
 import com.onevizion.uitest.api.helper.clipboard.ClipboardHelper;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPickerHelper;
-import com.onevizion.uitest.api.helper.comment.CommentHelper;
+import com.onevizion.uitest.api.helper.comment.Comment;
 import com.onevizion.uitest.api.helper.configfield.ConfigField;
 import com.onevizion.uitest.api.helper.dashboard.Dashboard;
 import com.onevizion.uitest.api.helper.document.Document;
@@ -274,7 +274,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected ClipboardHelper clipboardHelper;
 
     @Resource
-    protected CommentHelper commentHelper;
+    protected Comment comment;
     /* Helpers End */
 
     /* Entity Helpers Begin */

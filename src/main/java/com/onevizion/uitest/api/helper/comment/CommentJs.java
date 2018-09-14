@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-class CommentJsHelper extends JsHelper {
+class CommentJs extends JsHelper {
 
     WebElement getIframe() {
         return (WebElement) execJs2("return commentWindow.window('comment').getFrame();");

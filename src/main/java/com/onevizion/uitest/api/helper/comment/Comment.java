@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.helper.TbHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 
 @Component
-public class CommentHelper {
+public class Comment {
 
     @Resource
     private TbHelper tbHelper;
@@ -29,7 +29,7 @@ public class CommentHelper {
     private ElementHelper elementHelper;
 
     @Resource
-    private CommentJsHelper commentJsHelper;
+    private CommentJs commentJs;
 
     @Resource
     private WaitHelper waitHelper;
@@ -105,7 +105,7 @@ public class CommentHelper {
 
         waitHelper.waitWebElement(By.className("dhxwin_active"));
 
-        WebElement iframe = commentJsHelper.getIframe();
+        WebElement iframe = commentJs.getIframe();
 
         seleniumSettings.getWebDriver().switchTo().frame(iframe);
         waitHelper.waitWebElement(By.id("comment"));
