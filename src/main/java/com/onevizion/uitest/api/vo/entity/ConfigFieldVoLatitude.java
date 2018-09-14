@@ -2,16 +2,16 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldLatitude {
+public class ConfigFieldVoLatitude {
 
     private String defValueSql;
 
-    private ConfigFieldLatitude() {
+    private ConfigFieldVoLatitude() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldLatitude().new Builder();
+        return new ConfigFieldVoLatitude().new Builder();
     }
 
     public String getDefValueSql() {
@@ -24,15 +24,15 @@ public class ConfigFieldLatitude {
             
         }
 
-        public ConfigFieldLatitude build() {
-            if (ConfigFieldLatitude.this.defValueSql == null) {
+        public ConfigFieldVoLatitude build() {
+            if (ConfigFieldVoLatitude.this.defValueSql == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldLatitude.this;
+            return ConfigFieldVoLatitude.this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldLatitude.this.defValueSql = defValueSql;
+            ConfigFieldVoLatitude.this.defValueSql = defValueSql;
             return this;
         }
 

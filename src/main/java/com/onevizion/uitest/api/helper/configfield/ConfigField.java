@@ -5,13 +5,13 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConfigFieldHelper {
+public class ConfigField {
 
     @Resource
-    private ConfigFieldWaitHelper configFieldWaitHelper;
+    private ConfigFieldWait configFieldWait;
 
     public void waitFieldNameUpdated() {
-        configFieldWaitHelper.waitFieldNameUpdated();
+        configFieldWait.waitFieldNameUpdated();
     }
 
 }

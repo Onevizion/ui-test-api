@@ -2,17 +2,17 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldDropDown {
+public class ConfigFieldVoDropDown {
 
     private String defValueSql;
     private String table;
 
-    private ConfigFieldDropDown() {
+    private ConfigFieldVoDropDown() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldDropDown().new Builder();
+        return new ConfigFieldVoDropDown().new Builder();
     }
 
     public String getDefValueSql() {
@@ -29,21 +29,21 @@ public class ConfigFieldDropDown {
             
         }
 
-        public ConfigFieldDropDown build() {
-            if (ConfigFieldDropDown.this.defValueSql == null ||
-                    ConfigFieldDropDown.this.table == null) {
+        public ConfigFieldVoDropDown build() {
+            if (ConfigFieldVoDropDown.this.defValueSql == null ||
+                    ConfigFieldVoDropDown.this.table == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldDropDown.this;
+            return ConfigFieldVoDropDown.this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldDropDown.this.defValueSql = defValueSql;
+            ConfigFieldVoDropDown.this.defValueSql = defValueSql;
             return this;
         }
 
         public Builder setTable(String table) {
-            ConfigFieldDropDown.this.table = table;
+            ConfigFieldVoDropDown.this.table = table;
             return this;
         }
 

@@ -2,18 +2,17 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldMemo {
+public class ConfigFieldVoText {
 
     private String length;
     private String defValueSql;
-    private String lines;
 
-    private ConfigFieldMemo() {
+    private ConfigFieldVoText() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldMemo().new Builder();
+        return new ConfigFieldVoText().new Builder();
     }
 
     public String getLength() {
@@ -24,37 +23,27 @@ public class ConfigFieldMemo {
         return defValueSql;
     }
 
-    public String getLines() {
-        return lines;
-    }
-
     public class Builder {
 
         private Builder() {
             
         }
 
-        public ConfigFieldMemo build() {
-            if (ConfigFieldMemo.this.length == null ||
-                    ConfigFieldMemo.this.defValueSql == null ||
-                    ConfigFieldMemo.this.lines == null) {
+        public ConfigFieldVoText build() {
+            if (ConfigFieldVoText.this.length == null ||
+                    ConfigFieldVoText.this.defValueSql == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldMemo.this;
+            return ConfigFieldVoText.this;
         }
 
         public Builder setLength(String length) {
-            ConfigFieldMemo.this.length = length;
+            ConfigFieldVoText.this.length = length;
             return this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldMemo.this.defValueSql = defValueSql;
-            return this;
-        }
-
-        public Builder setLines(String lines) {
-            ConfigFieldMemo.this.lines = lines;
+            ConfigFieldVoText.this.defValueSql = defValueSql;
             return this;
         }
 

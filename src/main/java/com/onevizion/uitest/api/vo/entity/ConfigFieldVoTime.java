@@ -2,17 +2,17 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldTime {
+public class ConfigFieldVoTime {
 
     private String defValueSql;
     private String showSeconds;
 
-    private ConfigFieldTime() {
+    private ConfigFieldVoTime() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldTime().new Builder();
+        return new ConfigFieldVoTime().new Builder();
     }
 
     public String getDefValueSql() {
@@ -29,21 +29,21 @@ public class ConfigFieldTime {
             
         }
 
-        public ConfigFieldTime build() {
-            if (ConfigFieldTime.this.defValueSql == null ||
-                    ConfigFieldTime.this.showSeconds == null) {
+        public ConfigFieldVoTime build() {
+            if (ConfigFieldVoTime.this.defValueSql == null ||
+                    ConfigFieldVoTime.this.showSeconds == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldTime.this;
+            return ConfigFieldVoTime.this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldTime.this.defValueSql = defValueSql;
+            ConfigFieldVoTime.this.defValueSql = defValueSql;
             return this;
         }
 
         public Builder setShowSeconds(String showSeconds) {
-            ConfigFieldTime.this.showSeconds = showSeconds;
+            ConfigFieldVoTime.this.showSeconds = showSeconds;
             return this;
         }
 

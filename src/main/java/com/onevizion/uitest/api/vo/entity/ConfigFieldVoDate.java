@@ -2,16 +2,16 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldDate {
+public class ConfigFieldVoDate {
 
     private String defValueSql;
 
-    private ConfigFieldDate() {
+    private ConfigFieldVoDate() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldDate().new Builder();
+        return new ConfigFieldVoDate().new Builder();
     }
 
     public String getDefValueSql() {
@@ -24,15 +24,15 @@ public class ConfigFieldDate {
             
         }
 
-        public ConfigFieldDate build() {
-            if (ConfigFieldDate.this.defValueSql == null) {
+        public ConfigFieldVoDate build() {
+            if (ConfigFieldVoDate.this.defValueSql == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldDate.this;
+            return ConfigFieldVoDate.this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldDate.this.defValueSql = defValueSql;
+            ConfigFieldVoDate.this.defValueSql = defValueSql;
             return this;
         }
 

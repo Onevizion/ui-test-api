@@ -2,17 +2,17 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldDbDropDown {
+public class ConfigFieldVoDbDropDown {
 
     private String defValueSql;
     private String sql;
 
-    private ConfigFieldDbDropDown() {
+    private ConfigFieldVoDbDropDown() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldDbDropDown().new Builder();
+        return new ConfigFieldVoDbDropDown().new Builder();
     }
 
     public String getDefValueSql() {
@@ -29,21 +29,21 @@ public class ConfigFieldDbDropDown {
             
         }
 
-        public ConfigFieldDbDropDown build() {
-            if (ConfigFieldDbDropDown.this.defValueSql == null ||
-                    ConfigFieldDbDropDown.this.sql == null) {
+        public ConfigFieldVoDbDropDown build() {
+            if (ConfigFieldVoDbDropDown.this.defValueSql == null ||
+                    ConfigFieldVoDbDropDown.this.sql == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldDbDropDown.this;
+            return ConfigFieldVoDbDropDown.this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldDbDropDown.this.defValueSql = defValueSql;
+            ConfigFieldVoDbDropDown.this.defValueSql = defValueSql;
             return this;
         }
 
         public Builder setSql(String sql) {
-            ConfigFieldDbDropDown.this.sql = sql;
+            ConfigFieldVoDbDropDown.this.sql = sql;
             return this;
         }
 

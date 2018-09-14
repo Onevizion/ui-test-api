@@ -2,7 +2,7 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldTrackorDropDown {
+public class ConfigFieldVoTrackorSelector {
 
     private String defValueSql;
     private String sql;
@@ -10,13 +10,14 @@ public class ConfigFieldTrackorDropDown {
     private String shortName;
     private String myThingsFilter;
     private String myThingsMarker;
+    private String displayField;
 
-    private ConfigFieldTrackorDropDown() {
+    private ConfigFieldVoTrackorSelector() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldTrackorDropDown().new Builder();
+        return new ConfigFieldVoTrackorSelector().new Builder();
     }
 
     public String getDefValueSql() {
@@ -43,51 +44,61 @@ public class ConfigFieldTrackorDropDown {
         return myThingsMarker;
     }
 
+    public String getDisplayField() {
+        return displayField;
+    }
+
     public class Builder {
 
         private Builder() {
             
         }
 
-        public ConfigFieldTrackorDropDown build() {
-            if (ConfigFieldTrackorDropDown.this.defValueSql == null ||
-                    ConfigFieldTrackorDropDown.this.sql == null ||
-                    ConfigFieldTrackorDropDown.this.trackorType == null ||
-                    ConfigFieldTrackorDropDown.this.shortName == null ||
-                    ConfigFieldTrackorDropDown.this.myThingsFilter == null ||
-                    ConfigFieldTrackorDropDown.this.myThingsMarker == null) {
+        public ConfigFieldVoTrackorSelector build() {
+            if (ConfigFieldVoTrackorSelector.this.defValueSql == null ||
+                    ConfigFieldVoTrackorSelector.this.sql == null ||
+                    ConfigFieldVoTrackorSelector.this.trackorType == null ||
+                    ConfigFieldVoTrackorSelector.this.shortName == null ||
+                    ConfigFieldVoTrackorSelector.this.myThingsFilter == null ||
+                    ConfigFieldVoTrackorSelector.this.myThingsMarker == null ||
+                    ConfigFieldVoTrackorSelector.this.displayField == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldTrackorDropDown.this;
+            return ConfigFieldVoTrackorSelector.this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldTrackorDropDown.this.defValueSql = defValueSql;
+            ConfigFieldVoTrackorSelector.this.defValueSql = defValueSql;
             return this;
         }
 
         public Builder setSql(String sql) {
-            ConfigFieldTrackorDropDown.this.sql = sql;
+            ConfigFieldVoTrackorSelector.this.sql = sql;
             return this;
         }
 
         public Builder setTrackorType(String trackorType) {
-            ConfigFieldTrackorDropDown.this.trackorType = trackorType;
+            ConfigFieldVoTrackorSelector.this.trackorType = trackorType;
             return this;
         }
 
         public Builder setShortName(String shortName) {
-            ConfigFieldTrackorDropDown.this.shortName = shortName;
+            ConfigFieldVoTrackorSelector.this.shortName = shortName;
             return this;
         }
 
         public Builder setMyThingsFilter(String myThingsFilter) {
-            ConfigFieldTrackorDropDown.this.myThingsFilter = myThingsFilter;
+            ConfigFieldVoTrackorSelector.this.myThingsFilter = myThingsFilter;
             return this;
         }
 
         public Builder setMyThingsMarker(String myThingsMarker) {
-            ConfigFieldTrackorDropDown.this.myThingsMarker = myThingsMarker;
+            ConfigFieldVoTrackorSelector.this.myThingsMarker = myThingsMarker;
+            return this;
+        }
+
+        public Builder setDisplayField(String displayField) {
+            ConfigFieldVoTrackorSelector.this.displayField = displayField;
             return this;
         }
 

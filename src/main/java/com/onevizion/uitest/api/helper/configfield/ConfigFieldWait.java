@@ -10,20 +10,20 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class ConfigFieldWaitHelper {
+class ConfigFieldWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ConfigFieldJsHelper configFieldJsHelper;
+    private ConfigFieldJs configFieldJs;
 
     void waitFieldNameUpdated() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for JQuery loading is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return configFieldJsHelper.isFieldNameUpdated();
+                    return configFieldJs.isFieldNameUpdated();
                 }
             });
     }

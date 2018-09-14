@@ -2,7 +2,7 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldNumber {
+public class ConfigFieldVoNumber {
 
     private String length;
     private String defValueSql;
@@ -14,12 +14,12 @@ public class ConfigFieldNumber {
     private String parensForNegative;
     private String separateThousands;
 
-    private ConfigFieldNumber() {
+    private ConfigFieldVoNumber() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldNumber().new Builder();
+        return new ConfigFieldVoNumber().new Builder();
     }
 
     public String getLength() {
@@ -64,63 +64,63 @@ public class ConfigFieldNumber {
             
         }
 
-        public ConfigFieldNumber build() {
-            if (ConfigFieldNumber.this.length == null ||
-                    ConfigFieldNumber.this.defValueSql == null ||
-                    ConfigFieldNumber.this.prefix == null ||
-                    ConfigFieldNumber.this.suffix == null ||
-                    ConfigFieldNumber.this.decimal == null ||
-                    ConfigFieldNumber.this.negativeColor == null ||
-                    ConfigFieldNumber.this.positiveColor == null ||
-                    ConfigFieldNumber.this.parensForNegative == null ||
-                    ConfigFieldNumber.this.separateThousands == null) {
+        public ConfigFieldVoNumber build() {
+            if (ConfigFieldVoNumber.this.length == null ||
+                    ConfigFieldVoNumber.this.defValueSql == null ||
+                    ConfigFieldVoNumber.this.prefix == null ||
+                    ConfigFieldVoNumber.this.suffix == null ||
+                    ConfigFieldVoNumber.this.decimal == null ||
+                    ConfigFieldVoNumber.this.negativeColor == null ||
+                    ConfigFieldVoNumber.this.positiveColor == null ||
+                    ConfigFieldVoNumber.this.parensForNegative == null ||
+                    ConfigFieldVoNumber.this.separateThousands == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldNumber.this;
+            return ConfigFieldVoNumber.this;
         }
 
         public Builder setLength(String length) {
-            ConfigFieldNumber.this.length = length;
+            ConfigFieldVoNumber.this.length = length;
             return this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldNumber.this.defValueSql = defValueSql;
+            ConfigFieldVoNumber.this.defValueSql = defValueSql;
             return this;
         }
 
         public Builder setPrefix(String prefix) {
-            ConfigFieldNumber.this.prefix = prefix;
+            ConfigFieldVoNumber.this.prefix = prefix;
             return this;
         }
 
         public Builder setSuffix(String suffix) {
-            ConfigFieldNumber.this.suffix = suffix;
+            ConfigFieldVoNumber.this.suffix = suffix;
             return this;
         }
 
         public Builder setDecimal(String decimal) {
-            ConfigFieldNumber.this.decimal = decimal;
+            ConfigFieldVoNumber.this.decimal = decimal;
             return this;
         }
 
         public Builder setNegativeColor(String negativeColor) {
-            ConfigFieldNumber.this.negativeColor = negativeColor;
+            ConfigFieldVoNumber.this.negativeColor = negativeColor;
             return this;
         }
 
         public Builder setPositiveColor(String positiveColor) {
-            ConfigFieldNumber.this.positiveColor = positiveColor;
+            ConfigFieldVoNumber.this.positiveColor = positiveColor;
             return this;
         }
 
         public Builder setParensForNegative(String parensForNegative) {
-            ConfigFieldNumber.this.parensForNegative = parensForNegative;
+            ConfigFieldVoNumber.this.parensForNegative = parensForNegative;
             return this;
         }
 
         public Builder setSeparateThousands(String separateThousands) {
-            ConfigFieldNumber.this.separateThousands = separateThousands;
+            ConfigFieldVoNumber.this.separateThousands = separateThousands;
             return this;
         }
 

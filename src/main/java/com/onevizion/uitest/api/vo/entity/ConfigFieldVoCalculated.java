@@ -2,16 +2,16 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldCalculated {
+public class ConfigFieldVoCalculated {
 
     private String sql;
 
-    private ConfigFieldCalculated() {
+    private ConfigFieldVoCalculated() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldCalculated().new Builder();
+        return new ConfigFieldVoCalculated().new Builder();
     }
 
     public String getSql() {
@@ -24,15 +24,15 @@ public class ConfigFieldCalculated {
             
         }
 
-        public ConfigFieldCalculated build() {
-            if (ConfigFieldCalculated.this.sql == null) {
+        public ConfigFieldVoCalculated build() {
+            if (ConfigFieldVoCalculated.this.sql == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldCalculated.this;
+            return ConfigFieldVoCalculated.this;
         }
 
         public Builder setSql(String sql) {
-            ConfigFieldCalculated.this.sql = sql;
+            ConfigFieldVoCalculated.this.sql = sql;
             return this;
         }
 

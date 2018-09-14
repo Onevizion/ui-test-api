@@ -2,18 +2,18 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldMultiSelector {
+public class ConfigFieldVoMultiSelector {
 
     private String defValueSql;
     private String lines;
     private String table;
 
-    private ConfigFieldMultiSelector() {
+    private ConfigFieldVoMultiSelector() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldMultiSelector().new Builder();
+        return new ConfigFieldVoMultiSelector().new Builder();
     }
 
     public String getDefValueSql() {
@@ -34,27 +34,27 @@ public class ConfigFieldMultiSelector {
             
         }
 
-        public ConfigFieldMultiSelector build() {
-            if (ConfigFieldMultiSelector.this.defValueSql == null ||
-                    ConfigFieldMultiSelector.this.lines == null ||
-                    ConfigFieldMultiSelector.this.table == null) {
+        public ConfigFieldVoMultiSelector build() {
+            if (ConfigFieldVoMultiSelector.this.defValueSql == null ||
+                    ConfigFieldVoMultiSelector.this.lines == null ||
+                    ConfigFieldVoMultiSelector.this.table == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldMultiSelector.this;
+            return ConfigFieldVoMultiSelector.this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldMultiSelector.this.defValueSql = defValueSql;
+            ConfigFieldVoMultiSelector.this.defValueSql = defValueSql;
             return this;
         }
 
         public Builder setLines(String lines) {
-            ConfigFieldMultiSelector.this.lines = lines;
+            ConfigFieldVoMultiSelector.this.lines = lines;
             return this;
         }
 
         public Builder setTable(String table) {
-            ConfigFieldMultiSelector.this.table = table;
+            ConfigFieldVoMultiSelector.this.table = table;
             return this;
         }
 

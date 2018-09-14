@@ -2,16 +2,16 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldRollup {
+public class ConfigFieldVoRollup {
 
     private String trackorType;
 
-    private ConfigFieldRollup() {
+    private ConfigFieldVoRollup() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldRollup().new Builder();
+        return new ConfigFieldVoRollup().new Builder();
     }
 
     public String getTrackorType() {
@@ -24,15 +24,15 @@ public class ConfigFieldRollup {
             
         }
 
-        public ConfigFieldRollup build() {
-            if (ConfigFieldRollup.this.trackorType == null) {
+        public ConfigFieldVoRollup build() {
+            if (ConfigFieldVoRollup.this.trackorType == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldRollup.this;
+            return ConfigFieldVoRollup.this;
         }
 
         public Builder setTrackorType(String trackorType) {
-            ConfigFieldRollup.this.trackorType = trackorType;
+            ConfigFieldVoRollup.this.trackorType = trackorType;
             return this;
         }
 

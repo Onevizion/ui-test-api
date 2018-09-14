@@ -2,16 +2,16 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldCheckbox {
+public class ConfigFieldVoLongitude {
 
     private String defValueSql;
 
-    private ConfigFieldCheckbox() {
+    private ConfigFieldVoLongitude() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldCheckbox().new Builder();
+        return new ConfigFieldVoLongitude().new Builder();
     }
 
     public String getDefValueSql() {
@@ -24,15 +24,15 @@ public class ConfigFieldCheckbox {
             
         }
 
-        public ConfigFieldCheckbox build() {
-            if (ConfigFieldCheckbox.this.defValueSql == null) {
+        public ConfigFieldVoLongitude build() {
+            if (ConfigFieldVoLongitude.this.defValueSql == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldCheckbox.this;
+            return ConfigFieldVoLongitude.this;
         }
 
         public Builder setDefValueSql(String defValueSql) {
-            ConfigFieldCheckbox.this.defValueSql = defValueSql;
+            ConfigFieldVoLongitude.this.defValueSql = defValueSql;
             return this;
         }
 

@@ -2,16 +2,16 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldHyperlink {
+public class ConfigFieldVoHyperlink {
 
     private String length;
 
-    private ConfigFieldHyperlink() {
+    private ConfigFieldVoHyperlink() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldHyperlink().new Builder();
+        return new ConfigFieldVoHyperlink().new Builder();
     }
 
     public String getLength() {
@@ -24,15 +24,15 @@ public class ConfigFieldHyperlink {
             
         }
 
-        public ConfigFieldHyperlink build() {
-            if (ConfigFieldHyperlink.this.length == null) {
+        public ConfigFieldVoHyperlink build() {
+            if (ConfigFieldVoHyperlink.this.length == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldHyperlink.this;
+            return ConfigFieldVoHyperlink.this;
         }
 
         public Builder setLength(String length) {
-            ConfigFieldHyperlink.this.length = length;
+            ConfigFieldVoHyperlink.this.length = length;
             return this;
         }
 

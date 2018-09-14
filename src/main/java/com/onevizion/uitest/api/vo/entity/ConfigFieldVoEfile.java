@@ -2,7 +2,7 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ConfigFieldEfile {
+public class ConfigFieldVoEfile {
 
     private String extractMetadata;
     private String imageLatitude;
@@ -16,12 +16,12 @@ public class ConfigFieldEfile {
     private String uploadToAws;
     private String autocaptionTemplate;
 
-    private ConfigFieldEfile() {
+    private ConfigFieldVoEfile() {
         
     }
 
     public static Builder newBuilder() {
-        return new ConfigFieldEfile().new Builder();
+        return new ConfigFieldVoEfile().new Builder();
     }
 
     public String getExtractMetadata() {
@@ -74,75 +74,75 @@ public class ConfigFieldEfile {
             
         }
 
-        public ConfigFieldEfile build() {
-            if (ConfigFieldEfile.this.extractMetadata == null ||
-                    ConfigFieldEfile.this.imageLatitude == null ||
-                    ConfigFieldEfile.this.imageLongitude == null ||
-                    ConfigFieldEfile.this.imageTimeSnapshot == null ||
-                    ConfigFieldEfile.this.resizeMode == null ||
-                    ConfigFieldEfile.this.resizeWidth == null ||
-                    ConfigFieldEfile.this.resizeHeight == null ||
-                    ConfigFieldEfile.this.rotate == null ||
-                    ConfigFieldEfile.this.logBlobChanges == null ||
-                    ConfigFieldEfile.this.uploadToAws == null ||
-                    ConfigFieldEfile.this.autocaptionTemplate == null) {
+        public ConfigFieldVoEfile build() {
+            if (ConfigFieldVoEfile.this.extractMetadata == null ||
+                    ConfigFieldVoEfile.this.imageLatitude == null ||
+                    ConfigFieldVoEfile.this.imageLongitude == null ||
+                    ConfigFieldVoEfile.this.imageTimeSnapshot == null ||
+                    ConfigFieldVoEfile.this.resizeMode == null ||
+                    ConfigFieldVoEfile.this.resizeWidth == null ||
+                    ConfigFieldVoEfile.this.resizeHeight == null ||
+                    ConfigFieldVoEfile.this.rotate == null ||
+                    ConfigFieldVoEfile.this.logBlobChanges == null ||
+                    ConfigFieldVoEfile.this.uploadToAws == null ||
+                    ConfigFieldVoEfile.this.autocaptionTemplate == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ConfigFieldEfile.this;
+            return ConfigFieldVoEfile.this;
         }
 
         public Builder setExtractMetadata(String extractMetadata) {
-            ConfigFieldEfile.this.extractMetadata = extractMetadata;
+            ConfigFieldVoEfile.this.extractMetadata = extractMetadata;
             return this;
         }
 
         public Builder setImageLatitude(String imageLatitude) {
-            ConfigFieldEfile.this.imageLatitude = imageLatitude;
+            ConfigFieldVoEfile.this.imageLatitude = imageLatitude;
             return this;
         }
 
         public Builder setImageLongitude(String imageLongitude) {
-            ConfigFieldEfile.this.imageLongitude = imageLongitude;
+            ConfigFieldVoEfile.this.imageLongitude = imageLongitude;
             return this;
         }
 
         public Builder setImageTimeSnapshot(String imageTimeSnapshot) {
-            ConfigFieldEfile.this.imageTimeSnapshot = imageTimeSnapshot;
+            ConfigFieldVoEfile.this.imageTimeSnapshot = imageTimeSnapshot;
             return this;
         }
 
         public Builder setResizeMode(String resizeMode) {
-            ConfigFieldEfile.this.resizeMode = resizeMode;
+            ConfigFieldVoEfile.this.resizeMode = resizeMode;
             return this;
         }
 
         public Builder setResizeWidth(String resizeWidth) {
-            ConfigFieldEfile.this.resizeWidth = resizeWidth;
+            ConfigFieldVoEfile.this.resizeWidth = resizeWidth;
             return this;
         }
 
         public Builder setResizeHeight(String resizeHeight) {
-            ConfigFieldEfile.this.resizeHeight = resizeHeight;
+            ConfigFieldVoEfile.this.resizeHeight = resizeHeight;
             return this;
         }
 
         public Builder setRotate(String rotate) {
-            ConfigFieldEfile.this.rotate = rotate;
+            ConfigFieldVoEfile.this.rotate = rotate;
             return this;
         }
 
         public Builder setLogBlobChanges(String logBlobChanges) {
-            ConfigFieldEfile.this.logBlobChanges = logBlobChanges;
+            ConfigFieldVoEfile.this.logBlobChanges = logBlobChanges;
             return this;
         }
 
         public Builder setUploadToAws(String uploadToAws) {
-            ConfigFieldEfile.this.uploadToAws = uploadToAws;
+            ConfigFieldVoEfile.this.uploadToAws = uploadToAws;
             return this;
         }
 
         public Builder setAutocaptionTemplate(String autocaptionTemplate) {
-            ConfigFieldEfile.this.autocaptionTemplate = autocaptionTemplate;
+            ConfigFieldVoEfile.this.autocaptionTemplate = autocaptionTemplate;
             return this;
         }
 
