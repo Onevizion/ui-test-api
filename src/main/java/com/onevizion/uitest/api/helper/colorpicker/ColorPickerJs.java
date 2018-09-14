@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-class ColorPickerJsHelper extends JsHelper {
+class ColorPickerJs extends JsHelper {
 
     void setValue(String value) {
         //TODO firefox 59 bug

@@ -10,20 +10,20 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class ColorPickerWaitHelper {
+class ColorPickerWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ColorPickerJsHelper colorPickerJsHelper;
+    private ColorPickerJs colorPickerJs;
 
     void waitColorPicker() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for ColorPicke is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return colorPickerJsHelper.isColorPickerExist();
+                    return colorPickerJs.isColorPickerExist();
                 }
             });
     }

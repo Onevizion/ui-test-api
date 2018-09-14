@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
-import com.onevizion.uitest.api.helper.colorpicker.ColorPickerHelper;
+import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.vo.entity.Color;
 
 @Component
@@ -40,7 +40,7 @@ public class EntityColorHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ColorPickerHelper colorPickerHelper;
+    private ColorPicker colorPicker;
 
     public void add(Color color) {
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -50,7 +50,7 @@ public class EntityColorHelper {
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
 
         windowHelper.openModal(By.name("btncolorPicker"));
-        colorPickerHelper.setValue("#" + color.getValue());
+        colorPicker.setValue("#" + color.getValue());
         windowHelper.closeModal(By.className("dhx_button_save"));
 
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
@@ -68,7 +68,7 @@ public class EntityColorHelper {
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
 
         windowHelper.openModal(By.name("btncolorPicker"));
-        colorPickerHelper.setValue("#" + color.getValue());
+        colorPicker.setValue("#" + color.getValue());
         windowHelper.closeModal(By.className("dhx_button_save"));
 
         seleniumSettings.getWebDriver().findElement(By.name("description")).clear();

@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
-import com.onevizion.uitest.api.helper.colorpicker.ColorPickerHelper;
+import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 
 @Component
@@ -41,7 +41,7 @@ public class EntityDynamicVtableValueHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ColorPickerHelper colorPickerHelper;
+    private ColorPicker colorPicker;
 
     @Resource
     private CheckboxHelper checkboxHelper;
@@ -56,7 +56,7 @@ public class EntityDynamicVtableValueHelper {
         seleniumSettings.getWebDriver().findElement(By.name("OrderNum")).sendKeys(dynamicVtableValue.getOrdNum());
 
         windowHelper.openModal(By.name("btncolorDisplayed"));
-        colorPickerHelper.setValue("#" + dynamicVtableValue.getColor());
+        colorPicker.setValue("#" + dynamicVtableValue.getColor());
         windowHelper.closeModal(By.className("dhx_button_save"));
 
         if ((dynamicVtableValue.getDisplay().equals("YES") && !checkboxHelper.isCheckedByName("display"))
@@ -85,7 +85,7 @@ public class EntityDynamicVtableValueHelper {
         seleniumSettings.getWebDriver().findElement(By.name("OrderNum")).sendKeys(dynamicVtableValue.getOrdNum());
 
         windowHelper.openModal(By.name("btncolorDisplayed"));
-        colorPickerHelper.setValue("#" + dynamicVtableValue.getColor());
+        colorPicker.setValue("#" + dynamicVtableValue.getColor());
         windowHelper.closeModal(By.className("dhx_button_save"));
 
         if ((dynamicVtableValue.getDisplay().equals("YES") && !checkboxHelper.isCheckedByName("display"))
