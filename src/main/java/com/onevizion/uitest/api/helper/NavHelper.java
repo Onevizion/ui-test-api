@@ -26,13 +26,13 @@ public class NavHelper {
     private JsHelper jsHelper;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
 
     public Long getAllRecordsCount(Long gridIdx) {
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navTotal" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(recordsLabel.indexOf("of") + 2).trim();
         recordsLabel = recordsLabel.replace(",", "");
@@ -40,7 +40,7 @@ public class NavHelper {
     }
 
     private Long getFirstRowNum(Long gridIdx) {
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navRange" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(0, recordsLabel.indexOf("..")).trim();
         recordsLabel = recordsLabel.replace(",", "");
@@ -48,7 +48,7 @@ public class NavHelper {
     }
 
     private Long getLastRowNum(Long gridIdx) {
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navRange" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(recordsLabel.indexOf("..") + 2).trim();
         recordsLabel = recordsLabel.replace(",", "");
@@ -56,7 +56,7 @@ public class NavHelper {
     }
 
     public void checkNavigation(Long gridIdx) {
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
 
         Long allRecordsCount = getAllRecordsCount(gridIdx);
         Long actualVisibleRecordsCount = jsHelper.getGridRowsCount(gridIdx);
@@ -75,7 +75,7 @@ public class NavHelper {
             checkCountRowsOnPage(gridIdx);
 
             goToNextPage(gridIdx, pageNum + 1);
-            waitHelper.waitGridLoad(gridIdx, gridIdx);
+            wait.waitGridLoad(gridIdx, gridIdx);
         }
 
         Assert.assertEquals(getFirstRowNum(gridIdx), new Long(1 + (countPages - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
@@ -84,7 +84,7 @@ public class NavHelper {
 
         for (int pageNum = countPages; pageNum > 1; pageNum--) {
             goToPrevPage(gridIdx, pageNum - 1);
-            waitHelper.waitGridLoad(gridIdx, gridIdx);
+            wait.waitGridLoad(gridIdx, gridIdx);
 
             Assert.assertEquals(getFirstRowNum(gridIdx), new Long((pageNum - 2) * actualVisibleRecordsCount + 1), "First num row in grid is wrong");
             Assert.assertEquals(getLastRowNum(gridIdx), new Long((pageNum - 1) * actualVisibleRecordsCount), "Last num row in grid is wrong");

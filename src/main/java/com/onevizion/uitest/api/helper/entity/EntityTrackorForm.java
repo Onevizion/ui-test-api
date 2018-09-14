@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.TrackorForm;
 
@@ -26,7 +26,7 @@ public class EntityTrackorForm {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -48,8 +48,8 @@ public class EntityTrackorForm {
 
     public void add(TrackorForm trackorForm) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).sendKeys(trackorForm.getName());
 
@@ -83,13 +83,13 @@ public class EntityTrackorForm {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(TrackorForm trackorForm) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).sendKeys(trackorForm.getName());
@@ -125,13 +125,13 @@ public class EntityTrackorForm {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(TrackorForm trackorForm) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         assertHelper.AssertText("trackorFormName", trackorForm.getName());
         assertHelper.AssertRadioPsSelector("reportName", "btnreportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getReportName(), 1L, true);

@@ -27,7 +27,7 @@ public class GridHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private CheckboxHelper checkboxHelper;
@@ -93,7 +93,7 @@ public class GridHelper {
             //}
             //Assert.assertEquals(value, val.getValue(), "Check of grid row " + rowIndex + " is failed on " + columnIndex + " column.");
 
-            waitHelper.waitGridCellTxtValue(gridId, columnIndex, rowIndex, val.getValue());
+            wait.waitGridCellTxtValue(gridId, columnIndex, rowIndex, val.getValue());
         }
     }
 
@@ -117,7 +117,7 @@ public class GridHelper {
     public void checkGridRowByRowIndexAndWait(Long gridId, Long rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
             Long columnIndex = jsHelper.getGridColIndexById(gridId, val.getKey());
-            waitHelper.waitGridCellValue(gridId, columnIndex, rowIndex, val.getValue());
+            wait.waitGridCellValue(gridId, columnIndex, rowIndex, val.getValue());
         }
     }
 
@@ -154,9 +154,9 @@ public class GridHelper {
         }
         elementWaitHelper.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId);
         elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId)));
-        waitHelper.waitAlert();
+        wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        waitHelper.waitGridLoad(gridId, parentGridId);
+        wait.waitGridLoad(gridId, parentGridId);
         Long newCnt = jsHelper.getGridRowsCount(gridId);
         Assert.assertEquals(newCnt, oldCnt, "Delete row is wrong");
     }

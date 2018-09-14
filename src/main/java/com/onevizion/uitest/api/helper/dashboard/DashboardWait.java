@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 class DashboardWait {
@@ -20,11 +20,11 @@ class DashboardWait {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     void waitDashboardPageLoaded() {
-        waitHelper.waitWebElement(By.id("dashContainer"));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + 0L));
+        wait.waitWebElement(By.id("dashContainer"));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + 0L));
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
         .withMessage("Waiting for dashboard is failed.")
@@ -37,7 +37,7 @@ class DashboardWait {
     }
 
     void waitDashboardLoad() {
-        waitHelper.waitWebElement(By.id("loaderDashboard"));
+        wait.waitWebElement(By.id("loaderDashboard"));
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
         .withMessage("Waiting for dashboard is failed.")

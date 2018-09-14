@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.helper.document.Document;
 public class LoginHelper {
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -44,10 +44,10 @@ public class LoginHelper {
 
         seleniumSettings.getWebDriver().findElement(By.id("btn")).click();
 
-        waitHelper.waitWebElement(By.id("mainContainer"));
-        waitHelper.waitWebElement(By.id("Table1"));
-        waitHelper.waitWebElement(By.id("messageInfoDivContainer"));
-        waitHelper.waitWebElement(By.id("messageErrorDivContainer"));
+        wait.waitWebElement(By.id("mainContainer"));
+        wait.waitWebElement(By.id("Table1"));
+        wait.waitWebElement(By.id("messageInfoDivContainer"));
+        wait.waitWebElement(By.id("messageErrorDivContainer"));
     }
 
     public void failLogin(String userName, String userPassword, String errorMessage) {
@@ -70,7 +70,7 @@ public class LoginHelper {
 
         seleniumSettings.getWebDriver().findElement(By.id("btn")).click();
 
-        waitHelper.waitWebElement(By.id("auth_message"));
+        wait.waitWebElement(By.id("auth_message"));
         elementWaitHelper.waitElementAttributeById("auth_message", "innerText", errorMessage);
     }
 
@@ -79,14 +79,14 @@ public class LoginHelper {
 
         seleniumSettings.getWebDriver().get(seleniumSettings.getServerUrl() + "/api/v3");
 
-        waitHelper.waitWebElement(By.className("info_title"));
-        waitHelper.waitWebElement(By.className("authorize__btn"));
+        wait.waitWebElement(By.className("info_title"));
+        wait.waitWebElement(By.className("authorize__btn"));
 
         WebElement authorizeBtn = seleniumSettings.getWebDriver().findElement(By.className("authorize__btn"));
         authorizeBtn.click();
 
-        waitHelper.waitWebElement(By.name("username"));
-        waitHelper.waitWebElement(By.name("password"));
+        wait.waitWebElement(By.name("username"));
+        wait.waitWebElement(By.name("password"));
 
         WebElement userNameElem = seleniumSettings.getWebDriver().findElement(By.name("username"));
         userNameElem.clear();
@@ -98,8 +98,8 @@ public class LoginHelper {
 
         seleniumSettings.getWebDriver().findElement(By.className("auth_submit__button")).click();
 
-        waitHelper.waitWebElement(By.className("info_title"));
-        waitHelper.waitWebElement(By.className("authorize__btn"));
+        wait.waitWebElement(By.className("info_title"));
+        wait.waitWebElement(By.className("authorize__btn"));
     }
 
 }

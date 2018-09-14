@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.WpDatePair;
 
@@ -25,7 +25,7 @@ public class EntityWpDatePair {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -44,8 +44,8 @@ public class EntityWpDatePair {
 
     public void add(WpDatePair wpDatePair) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("wpTaskDateType")).sendKeys(wpDatePair.getName());
 
@@ -54,7 +54,7 @@ public class EntityWpDatePair {
         seleniumSettings.getWebDriver().findElement(By.name("abbrLabel")).sendKeys(wpDatePair.getShortLabel());
 
         tabHelper.goToTab(2L); //Role Privs
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
         gridHelper.clearAssignmentGridColumn(2L, 1L);
         gridHelper.clearAssignmentGridColumn(2L, 2L);
         gridHelper.clearAssignmentGridColumn(2L, 3L);
@@ -67,13 +67,13 @@ public class EntityWpDatePair {
         gridHelper.selectAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(WpDatePair wpDatePair) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("wpTaskDateType")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("wpTaskDateType")).sendKeys(wpDatePair.getName());
@@ -85,7 +85,7 @@ public class EntityWpDatePair {
         seleniumSettings.getWebDriver().findElement(By.name("abbrLabel")).sendKeys(wpDatePair.getShortLabel());
 
         tabHelper.goToTab(2L); //Role Privs
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
         gridHelper.clearAssignmentGridColumn(2L, 1L);
         gridHelper.clearAssignmentGridColumn(2L, 2L);
         gridHelper.clearAssignmentGridColumn(2L, 3L);
@@ -98,20 +98,20 @@ public class EntityWpDatePair {
         gridHelper.selectAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(WpDatePair wpDatePair) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         assertHelper.AssertText("wpTaskDateType", wpDatePair.getName());
         assertHelper.AssertText("label", wpDatePair.getLabel());
         assertHelper.AssertText("abbrLabel", wpDatePair.getShortLabel());
 
         tabHelper.goToTab(2L); //Role Privs
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
         gridHelper.checkAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
         gridHelper.checkAssignmentGridColumnNew(2L, 2L, 0L, wpDatePair.getRoles(), "E");
         gridHelper.checkAssignmentGridColumnNew(2L, 3L, 0L, wpDatePair.getRoles(), "A");

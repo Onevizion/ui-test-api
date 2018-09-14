@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 public class MainMenu {
@@ -17,7 +17,7 @@ public class MainMenu {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private JsHelper jsHelper;
@@ -61,7 +61,7 @@ public class MainMenu {
         menuItem.click();
         elementWaitHelper.waitElementVelocityAnimatedFinishById("leftMenu");
         waitPageTitle(item);
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitGridLoad(0L, 0L);
     }
 
     public void selectMenuItemWithTree(String item, String treeItem) {
@@ -79,7 +79,7 @@ public class MainMenu {
         }
         elementWaitHelper.waitElementVelocityAnimatedFinishById("leftMenu");
         waitPageTitle(item + " - " + treeItem);
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitGridLoad(0L, 0L);
     }
 
     private WebElement findMenuItem(String item) {
@@ -116,7 +116,7 @@ public class MainMenu {
     }
 
     private void waitPageTitle(String title) {
-        waitHelper.waitWebElement(By.id("ttlPage"));
+        wait.waitWebElement(By.id("ttlPage"));
         mainMenuWait.waitPageTitle(title);
     }
 

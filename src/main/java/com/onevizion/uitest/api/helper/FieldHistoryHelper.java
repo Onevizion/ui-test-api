@@ -27,7 +27,7 @@ public class FieldHistoryHelper {
     private JsHelper jsHelper;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private GridHelper gridHelper;
@@ -147,8 +147,8 @@ public class FieldHistoryHelper {
             window.openModal(seleniumSettings.getWebDriver().findElement(By.id(id + "_lbl")));
         }
 
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        waitHelper.waitGridLoad(1L, 1L);
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        wait.waitGridLoad(1L, 1L);
     }
 
     private List<String> getHistoryVals(int position, @SuppressWarnings("unchecked") List<String> ... vals) {

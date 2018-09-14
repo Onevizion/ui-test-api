@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.vo.entity.Color;
@@ -25,7 +25,7 @@ public class EntityColor {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private AssertHelper assertHelper;
@@ -44,8 +44,8 @@ public class EntityColor {
 
     public void add(Color color) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
 
@@ -56,13 +56,13 @@ public class EntityColor {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(Color color) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
@@ -75,13 +75,13 @@ public class EntityColor {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(Color color) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         assertHelper.AssertText("colorName", color.getName());
         assertHelper.AssertText("rgbValue", color.getValue());

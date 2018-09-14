@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.tree.Tree;
@@ -22,7 +22,7 @@ public class EntityMenuItem {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private JqueryWait jqueryWait;
@@ -37,8 +37,8 @@ public class EntityMenuItem {
         tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", menuItem);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         jqueryWait.waitJQueryLoad();
 
         if (MenuItemType.SUBGROUP.equals(menuItem.getMenuItemType())) {

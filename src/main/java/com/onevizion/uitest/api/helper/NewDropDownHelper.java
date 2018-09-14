@@ -32,7 +32,7 @@ public class NewDropDownHelper {
     private TreeWait treeWait;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private Window window;
@@ -54,7 +54,7 @@ public class NewDropDownHelper {
 
     public void selectComponentPackage(String name) {
         selectEntity("lbCompPkg0", name);
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     private void selectEntity(String id, String name) {
@@ -121,7 +121,7 @@ public class NewDropDownHelper {
 
     public void deleteComponentPackage(String name) {
         deleteEntity("lbCompPkg0", "CompPkg0", 2, name);
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     private void deleteEntity(String id, String buttonId, int buttonsCnt, String name) {
@@ -142,7 +142,7 @@ public class NewDropDownHelper {
                 Actions act = new Actions(seleniumSettings.getWebDriver());
                 act.moveToElement(entityElem).perform();
 
-                waitHelper.waitWebElement(By.className("newDropDownRowBtnWrapper"));
+                wait.waitWebElement(By.className("newDropDownRowBtnWrapper"));
                 elementWaitHelper.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
                 act.moveToElement(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0)).perform();
                 elementWaitHelper.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
@@ -156,7 +156,7 @@ public class NewDropDownHelper {
                 }
 
                 seleniumSettings.getWebDriver().findElement(By.id("btnDelete" + buttonId)).click();
-                waitHelper.waitAlert();
+                wait.waitAlert();
                 seleniumSettings.getWebDriver().switchTo().alert().accept();
 
                 failOpenWindow = false;
@@ -226,7 +226,7 @@ public class NewDropDownHelper {
                 Actions act = new Actions(seleniumSettings.getWebDriver());
                 act.moveToElement(entityElem).perform();
 
-                waitHelper.waitWebElement(By.className("newDropDownRowBtnWrapper"));
+                wait.waitWebElement(By.className("newDropDownRowBtnWrapper"));
                 elementWaitHelper.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
                 act.moveToElement(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0)).perform();
                 elementWaitHelper.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));

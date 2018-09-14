@@ -27,7 +27,7 @@ public class HelpHelper {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private ElementHelper elementHelper;
@@ -45,8 +45,8 @@ public class HelpHelper {
         elementHelper.clickById(BUTTON_OPEN);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         assertHelper.AssertText("name", name);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertText("formNumber", number);
@@ -61,8 +61,8 @@ public class HelpHelper {
         elementHelper.clickById(BUTTON_OPEN_ON_FILTER_FORM + gridIdx);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         assertHelper.AssertText("name", name);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertText("formNumber", number);
@@ -77,8 +77,8 @@ public class HelpHelper {
         elementHelper.clickById(BUTTON_OPEN_ON_VIEW_FORM + gridIdx);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         assertHelper.AssertText("name", name);
         assertHelper.AssertText("formNumber", number);
         assertHelper.AssertText("formNumber", number);

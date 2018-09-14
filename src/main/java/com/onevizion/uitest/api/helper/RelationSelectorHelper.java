@@ -21,7 +21,7 @@ public class RelationSelectorHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private JsHelper jsHelper;
@@ -91,15 +91,15 @@ public class RelationSelectorHelper {
     }
 
     public void openRelationGrid(Long gridIdx) {
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload relations
         window.openModal(By.id(BUTTON_RELATION_ID_BASE + gridIdx));
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void closeRelationGrid(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + gridIdx));
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload relations
     }
 

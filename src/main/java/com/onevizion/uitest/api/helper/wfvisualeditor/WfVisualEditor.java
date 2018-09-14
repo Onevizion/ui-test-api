@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 
 @Component
@@ -21,7 +21,7 @@ public class WfVisualEditor {
     private ElementHelper elementHelper;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private Window window;
@@ -49,38 +49,38 @@ public class WfVisualEditor {
 
     public void openAddFormStepBefore() {
         window.openModal(By.id("btnAddStepBefore"));
-        waitHelper.waitFormLoad();
+        wait.waitFormLoad();
     }
 
     public void openAddFormStepAfter() {
         window.openModal(By.id("btnAddStep"));
-        waitHelper.waitFormLoad();
+        wait.waitFormLoad();
     }
 
     public void openStepEditForm(String text) {
         selectStepNode(text);
         window.openModal(By.id("btnEdit"));
-        waitHelper.waitFormLoad();
+        wait.waitFormLoad();
     }
 
     public void openStepNotificationsGrid(String text) {
         selectStepNode(text);
         window.openModal(By.id("btnNotifications"));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void openStepLinksGrid(String text) {
         selectStepNode(text);
         window.openModal(By.id("btnLinks"));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void deleteStep(String text) {
         selectStepNode(text);
         elementHelper.clickById("btnDelete");
-        waitHelper.waitAlert();
+        wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        waitHelper.waitFormLoad();
+        wait.waitFormLoad();
     }
 
 }

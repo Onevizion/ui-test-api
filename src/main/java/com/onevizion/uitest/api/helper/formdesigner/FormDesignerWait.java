@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 class FormDesignerWait {
@@ -19,13 +19,13 @@ class FormDesignerWait {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private FormDesignerJs formDesignerJs;
 
     void waitFormDesignerLoad() {
-        waitHelper.waitWebElement(By.id("loaderformDes"));
+        wait.waitWebElement(By.id("loaderformDes"));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for form is failed.")
             .ignoring(StaleElementReferenceException.class)

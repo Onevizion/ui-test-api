@@ -24,7 +24,7 @@ public class CheckboxHelper {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     public void clickByName(String checkboxName) {
         WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.name(checkboxName));

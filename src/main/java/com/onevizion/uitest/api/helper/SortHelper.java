@@ -28,7 +28,7 @@ public class SortHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     public void checkSortColumnByName(Long gridId, String columnName, GridColumnType gridColumnType) {
         Long columnIdx = jsHelper.getColumnIndexByLabel(gridId, columnName);
@@ -38,7 +38,7 @@ public class SortHelper {
     }
 
     public void checkSortColumn(Long gridId, String columnId, GridColumnType gridColumnType) {
-        waitHelper.waitGridLoad(gridId, gridId);
+        wait.waitGridLoad(gridId, gridId);
 
         Long columnIdx = jsHelper.getGridColIndexById(gridId, columnId);
         Long scrollLeft = jsHelper.getGridScrollLeft(gridId, columnIdx);
@@ -77,7 +77,7 @@ public class SortHelper {
         } else {
             if (!columnId.equals(sortColumnId)) {
                 seleniumSettings.getWebDriver().findElements(By.className("hdrcell")).get(columnIdx.intValue()).click();
-                waitHelper.waitGridLoad(gridId, gridId);
+                wait.waitGridLoad(gridId, gridId);
                 seleniumSettings.getWebDriver().findElements(By.className("hdrcell")).get(columnIdx.intValue()).click();
             } else {
                 String gridSortType = jsHelper.getGridSortTypeByGridId(gridId);
@@ -87,7 +87,7 @@ public class SortHelper {
             }
         }
 
-        waitHelper.waitGridLoad(gridId, gridId);
+        wait.waitGridLoad(gridId, gridId);
 
         sortColumnId = jsHelper.getGridSortColumnIdByGridId(gridId);
         Assert.assertEquals(sortColumnId, columnId);

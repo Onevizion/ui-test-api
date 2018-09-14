@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.TbHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 public class Comment {
@@ -32,7 +32,7 @@ public class Comment {
     private CommentJs commentJs;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private GridHelper gridHelper;
@@ -103,15 +103,15 @@ public class Comment {
     private void openCommentForm(WebElement webElement) {
         webElement.click();
 
-        waitHelper.waitWebElement(By.className("dhxwin_active"));
+        wait.waitWebElement(By.className("dhxwin_active"));
 
         WebElement iframe = commentJs.getIframe();
 
         seleniumSettings.getWebDriver().switchTo().frame(iframe);
-        waitHelper.waitWebElement(By.id("comment"));
-        waitHelper.waitWebElement(By.id("btnSubmit"));
-        waitHelper.waitFormLoad();
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitWebElement(By.id("comment"));
+        wait.waitWebElement(By.id("btnSubmit"));
+        wait.waitFormLoad();
+        wait.waitGridLoad(0L, 0L);
     }
 
     public void addComment(String text) {
@@ -124,9 +124,9 @@ public class Comment {
         elementWaitHelper.waitElementEnabledById("btnSubmit");
         seleniumSettings.getWebDriver().findElement(By.id("btnSubmit")).findElement(By.xpath("..")).click();
 
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitGridLoad(0L, 0L);
 
-        waitHelper.waitGridRowsCount(0L, rowsCntBefore + 1L);
+        wait.waitGridRowsCount(0L, rowsCntBefore + 1L);
 
         elementWaitHelper.waitElementDisabledById("btnSubmit");
         elementWaitHelper.waitElementAttributeById("comment", "value", "");
@@ -161,12 +161,12 @@ public class Comment {
 
         seleniumSettings.getWebDriver().findElement(By.id("btnDelete" + rowId)).click();
 
-        waitHelper.waitAlert();
+        wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
 
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitGridLoad(0L, 0L);
 
-        waitHelper.waitGridRowsCount(0L, rowsCntBefore - 1L);
+        wait.waitGridRowsCount(0L, rowsCntBefore - 1L);
     }
 
     public void closeCommentForm() {

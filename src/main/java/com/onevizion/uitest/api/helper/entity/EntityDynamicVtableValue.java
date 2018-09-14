@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
@@ -26,7 +26,7 @@ public class EntityDynamicVtableValue {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private AssertHelper assertHelper;
@@ -48,8 +48,8 @@ public class EntityDynamicVtableValue {
 
     public void add(DynamicVtableValue dynamicVtableValue) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("Value")).sendKeys(dynamicVtableValue.getValue());
 
@@ -70,13 +70,13 @@ public class EntityDynamicVtableValue {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
     }
 
     public void edit(DynamicVtableValue dynamicVtableValue) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("Value")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("Value")).sendKeys(dynamicVtableValue.getValue());
@@ -99,13 +99,13 @@ public class EntityDynamicVtableValue {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
     }
 
     public void testOnForm(DynamicVtableValue dynamicVtableValue) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         assertHelper.AssertText("Value", dynamicVtableValue.getValue());
         assertHelper.AssertText("OrderNum", dynamicVtableValue.getOrdNum());

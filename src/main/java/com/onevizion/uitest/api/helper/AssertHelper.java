@@ -24,7 +24,7 @@ public class AssertHelper {
     private JsHelper jsHelper;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private PsSelectorHelper psSelectorHelper;
@@ -186,7 +186,7 @@ public class AssertHelper {
     }
 
     public void AssertCodeMirror(String elementId, String expectedVal) {
-        waitHelper.waitCodeMirrorLoad(elementId);
+        wait.waitCodeMirrorLoad(elementId);
         String actualVal = jsHelper.getValueFromCodeMirror(elementId);
         Assert.assertEquals(actualVal, expectedVal, "CodeMirror editor for element with id=[" + elementId + "] has wrong value");
     }

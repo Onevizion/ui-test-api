@@ -28,7 +28,7 @@ public class PsSelectorHelper {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private CheckboxHelper checkboxHelper;
@@ -44,7 +44,7 @@ public class PsSelectorHelper {
 
     public String selectValue(String buttonName, Long romNum, Long colNum) {
         window.openModal(By.name(buttonName));
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitGridLoad(0L, 0L);
         String ret = null;
 
         for (Long i = romNum; i <= romNum; i++) {
@@ -66,7 +66,7 @@ public class PsSelectorHelper {
     public List<String> selectMultipleValues(String buttonName, Long firstRowNum, Long lastRowNum, Long colNum) {
         List<String> ret = new ArrayList<String>();
         window.openModal(By.name(buttonName));
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitGridLoad(0L, 0L);
         List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("cb0_0"));
         if (firstRowNum != null && lastRowNum != null) {
             for (Long i = firstRowNum; i <= lastRowNum; i++) {
@@ -102,8 +102,8 @@ public class PsSelectorHelper {
 
     public String selectSpecificValue(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
         window.openModal(btnOpen);
-        waitHelper.waitWebElement(btnClose);
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitWebElement(btnClose);
+        wait.waitGridLoad(0L, 0L);
 
         if (qsHelper.isExistQs(0L)) {
             qsHelper.waitQsActive(0L);
@@ -137,8 +137,8 @@ public class PsSelectorHelper {
     public List<String> selectMultipleSpecificValues(By btnOpen, Long colNum, List<String> values, Long filterFiledNum) {
         List<String> ret = new ArrayList<String>();
         window.openModal(btnOpen);
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
+        wait.waitGridLoad(0L, 0L);
 
         if (qsHelper.isExistQs(0L)) {
             qsHelper.waitQsActive(0L);
@@ -180,7 +180,7 @@ public class PsSelectorHelper {
     public List<String> selectMultipleSpecificValues2(String buttonName, Long colNum, List<String> values, Long filterFiledNum) {
         List<String> ret = new ArrayList<String>();
         window.openModal(By.name(buttonName));
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitGridLoad(0L, 0L);
 
         for (String value : values) {
             if (qsHelper.isTextQs(0L)) {
@@ -209,8 +209,8 @@ public class PsSelectorHelper {
     public boolean checkValue(By btnOpen, String btnCloseName, String value, Long filterFiledNum) {
         boolean ret = false;
         window.openModal(btnOpen);
-        waitHelper.waitWebElement(By.id(btnCloseName));
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitWebElement(By.id(btnCloseName));
+        wait.waitGridLoad(0L, 0L);
 
         if (qsHelper.isExistQs(0L)) {
             qsHelper.waitQsActive(0L);
@@ -244,8 +244,8 @@ public class PsSelectorHelper {
 
     public boolean checkMultipleValues(By btnOpen, String btnCloseName, List<String> values, Long filterFiledNum) {
         window.openModal(btnOpen);
-        waitHelper.waitWebElement(By.name(btnCloseName));
-        waitHelper.waitGridLoad(0L, 0L);
+        wait.waitWebElement(By.name(btnCloseName));
+        wait.waitGridLoad(0L, 0L);
 
         if (qsHelper.isExistQs(0L)) {
             for (String value : values) {

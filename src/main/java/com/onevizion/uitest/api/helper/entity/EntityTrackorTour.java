@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.TrackorTour;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
@@ -30,7 +30,7 @@ public class EntityTrackorTour {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -57,11 +57,11 @@ public class EntityTrackorTour {
         add(trackorTour);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         tabHelper.goToTab(2L); //Tour Steps
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
 
         for (TrackorTourStep trackorTourStep : trackorTour.getSteps()) {
             entityTrackorTourStep.add(trackorTourStep);
@@ -72,8 +72,8 @@ public class EntityTrackorTour {
 
     public void add(TrackorTour trackorTour) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("label")).sendKeys(trackorTour.getLabel());
 
@@ -96,18 +96,18 @@ public class EntityTrackorTour {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorTour.getDescription());
 
         tabHelper.goToTab(2L); //Role Assignments
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
         gridHelper.clearAssignmentGridColumn2(2L, 0L);
         gridHelper.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(TrackorTour trackorTour) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("label")).clear();;
         seleniumSettings.getWebDriver().findElement(By.name("label")).sendKeys(trackorTour.getLabel());
@@ -132,12 +132,12 @@ public class EntityTrackorTour {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorTour.getDescription());
 
         tabHelper.goToTab(3L);//Role Assignments
-        waitHelper.waitGridLoad(3L, 3L);
+        wait.waitGridLoad(3L, 3L);
         gridHelper.clearAssignmentGridColumn2(3L, 0L);
         gridHelper.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testWithChilds(TrackorTour trackorTour) {
@@ -145,11 +145,11 @@ public class EntityTrackorTour {
         testOnForm(trackorTour);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         tabHelper.goToTab(2L); //Tour Steps
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
 
         Assert.assertEquals(gridHelper.getGridRowsCount(2L), new Long(trackorTour.getSteps().size()));
         for (int i = 0; i < trackorTour.getSteps().size(); i++) {
@@ -163,8 +163,8 @@ public class EntityTrackorTour {
 
     public void testOnForm(TrackorTour trackorTour) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         assertHelper.AssertText("label", trackorTour.getLabel());
         assertHelper.AssertSelect("xitorTypeId", trackorTour.getTrackorType());
@@ -184,7 +184,7 @@ public class EntityTrackorTour {
         assertHelper.AssertText("description", trackorTour.getDescription());
 
         tabHelper.goToTab(3L); //Role Assignments
-        waitHelper.waitGridLoad(3L, 3L);
+        wait.waitGridLoad(3L, 3L);
         gridHelper.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

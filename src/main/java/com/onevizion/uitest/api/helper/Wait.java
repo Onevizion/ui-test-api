@@ -23,7 +23,7 @@ import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.view.View;
 
 @Component
-public class WaitHelper {
+public class Wait {
 
     @Resource
     private SeleniumSettings seleniumSettings;

@@ -19,7 +19,7 @@ import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.tree.TreeJs;
@@ -73,7 +73,7 @@ public class View {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private TreeWait treeWait;
@@ -168,7 +168,7 @@ public class View {
         elementWaitHelper.waitElementVisible(viewElem);
         viewElem.click();
 
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
 
@@ -220,7 +220,7 @@ public class View {
         Assert.assertEquals(isSavedView, true, "View " + entityPrefix + " isn't saved");
 
         viewWait.waitCurrentViewName(gridIdx, entityPrefix);
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void openSaveViewForm(Long gridIdx) {
@@ -236,9 +236,9 @@ public class View {
         elementWaitHelper.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
         elementWaitHelper.waitElementDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
 
-        waitHelper.waitWebElement(By.id("lbViewType" + gridIdx));
-        waitHelper.waitWebElement(By.id(FIELD_VIEW_NAME + gridIdx));
-        waitHelper.waitWebElement(By.id(VIEW_DIALOG_OK + gridIdx));
+        wait.waitWebElement(By.id("lbViewType" + gridIdx));
+        wait.waitWebElement(By.id(FIELD_VIEW_NAME + gridIdx));
+        wait.waitWebElement(By.id(VIEW_DIALOG_OK + gridIdx));
 
         AbstractSeleniumCore.sleep(2000L); //TODO when form visible then all elements refreshing. we should first refresh elements and then show form
     }
@@ -279,9 +279,9 @@ public class View {
         closeSaveViewFormOk(gridIdx);
 
         if (isNew) {
-            waitHelper.waitViewsCount(gridIdx, beforeSaveSize + 1);
+            wait.waitViewsCount(gridIdx, beforeSaveSize + 1);
         } else {
-            waitHelper.waitViewsCount(gridIdx, beforeSaveSize);
+            wait.waitViewsCount(gridIdx, beforeSaveSize);
         }
 
         if (isLocal) {
@@ -304,20 +304,20 @@ public class View {
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
         treeWait.waitTreeLoad(0L);
-        waitHelper.waitFormLoad();
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        wait.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         selectViewInOrganize(entityPrefix);
 
         seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
-        waitHelper.waitAlert();
+        wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         treeWait.waitTreeLoad(0L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
 
-        waitHelper.waitViewsCount(gridIdx, beforeDeleteSize - 1);
+        wait.waitViewsCount(gridIdx, beforeDeleteSize - 1);
 
         boolean isDeletedView = false;
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
@@ -330,10 +330,10 @@ public class View {
 
         if (currentViewName.equals(entityPrefix)) {
             viewWait.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
-            waitHelper.waitGridLoad(gridIdx, gridIdx);
+            wait.waitGridLoad(gridIdx, gridIdx);
         } else {
             viewWait.waitCurrentViewName(gridIdx, currentViewName);
-            waitHelper.waitGridLoad(gridIdx, gridIdx);
+            wait.waitGridLoad(gridIdx, gridIdx);
         }
     }
 
@@ -443,11 +443,11 @@ public class View {
     public Select selectApplet(Select apps, Select tabs, String appletName, int cntTabs) {
         apps.selectByVisibleText(appletName);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
-        waitHelper.waitListBoxLoad(tabs);
+        wait.waitListBoxLoad(tabs);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         Assert.assertEquals(apps.getFirstSelectedOption().getText(), appletName);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
-        waitHelper.waitListBoxLoadCnt(tabs, cntTabs);
+        wait.waitListBoxLoadCnt(tabs, cntTabs);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         Assert.assertEquals(tabs.getOptions().size(), cntTabs, "Tabs have wrong cnt");
         return tabs;
@@ -456,9 +456,9 @@ public class View {
     public Select selectTab(Select tabs, Select allFields, String tabName, int cntFields) {
         tabs.selectByVisibleText(tabName);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
-        waitHelper.waitListBoxLoad(allFields);
+        wait.waitListBoxLoad(allFields);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
-        waitHelper.waitListBoxLoadCnt(allFields, cntFields);
+        wait.waitListBoxLoadCnt(allFields, cntFields);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         Assert.assertEquals(allFields.getOptions().size(), cntFields, "All Fields have wrong cnt");
         return allFields;
@@ -467,9 +467,9 @@ public class View {
     public WebElement selectTab(Select tabs, WebElement allFields, String tabName, int cntFields) {
         tabs.selectByVisibleText(tabName);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
-        waitHelper.waitListBoxLoad(allFields);
+        wait.waitListBoxLoad(allFields);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
-        waitHelper.waitListBoxLoadCnt(allFields, cntFields);
+        wait.waitListBoxLoadCnt(allFields, cntFields);
         jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         Assert.assertEquals(allFields.findElements(By.tagName("div")).size(), cntFields, "All Fields have wrong cnt");
         return allFields;
@@ -477,8 +477,8 @@ public class View {
 
     public void selectAllColumns(Long gridIdx) {
         window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         List<WebElement> actualRightColumns = getRightColumns();
         jsHelper.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, "scrollContainer", (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
@@ -489,10 +489,10 @@ public class View {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
 
         viewWait.waitCurrentViewName(gridIdx, View.UNSAVED_VIEW_NAME);
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void selectAndCheckColumns(Long gridIdx, Long gridColumns, List<String> leftColumns, List<String> rightColumns) {
@@ -503,8 +503,8 @@ public class View {
 
     private void selectColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
         window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         waitLeftListBoxReady();
         waitRightListBoxReady();
@@ -530,16 +530,16 @@ public class View {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
 
         viewWait.waitCurrentViewName(gridIdx, View.UNSAVED_VIEW_NAME);
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     private void checkColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
         window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         waitLeftListBoxReady();
         waitRightListBoxReady();

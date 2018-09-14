@@ -62,7 +62,7 @@ public class FilterHelper {
     private TreeJs treeJs;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private TreeWait treeWait;
@@ -154,7 +154,7 @@ public class FilterHelper {
         elementWaitHelper.waitElementVisible(filterElem);
         filterElem.click();
 
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
 
@@ -172,8 +172,8 @@ public class FilterHelper {
 
     public void saveFilterField(String fieldName, FilterFieldType filterFieldType, List<String> cellsValues, Long gridIdx) {
         window.openModal(By.id(BUTTON_OPEN + gridIdx));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
             seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(cellsValues.get(0));
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
@@ -189,7 +189,7 @@ public class FilterHelper {
         }
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
     }
 
@@ -206,8 +206,8 @@ public class FilterHelper {
         elementWaitHelper.waitElementVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);
         elementWaitHelper.waitElementDisplayById(FILTER_DIALOG_CONTAINER + gridIdx);
 
-        waitHelper.waitWebElement(By.id(FIELD_FILTER_NAME + gridIdx));
-        waitHelper.waitWebElement(By.id(FILTER_DIALOG_OK + gridIdx));
+        wait.waitWebElement(By.id(FIELD_FILTER_NAME + gridIdx));
+        wait.waitWebElement(By.id(FILTER_DIALOG_OK + gridIdx));
     }
 
     public void closeSaveFilterFormOk(Long gridIdx) {
@@ -227,7 +227,7 @@ public class FilterHelper {
 
         closeSaveFilterFormOk(gridIdx);
 
-        waitHelper.waitFiltersCount(gridIdx, beforeSaveSize + 1);
+        wait.waitFiltersCount(gridIdx, beforeSaveSize + 1);
 
         boolean isSavedFilter = false;
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
@@ -240,7 +240,7 @@ public class FilterHelper {
         Assert.assertEquals(isSavedFilter, true, "Filter " + AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME + " isn't saved");
 
         filterWaitHelper.waitCurrentFilterName(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME);
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void deleteFilter(Long gridIdx, String entityPrefix) {
@@ -254,20 +254,20 @@ public class FilterHelper {
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
         treeWait.waitTreeLoad(0L);
-        waitHelper.waitFormLoad();
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        wait.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         selectFilterInOrganize(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME);
 
         seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
-        waitHelper.waitAlert();
+        wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         treeWait.waitTreeLoad(0L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
 
-        waitHelper.waitFiltersCount(gridIdx, beforeDeleteSize - 1);
+        wait.waitFiltersCount(gridIdx, beforeDeleteSize - 1);
 
         boolean isDeletedFilter = false;
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
@@ -279,21 +279,21 @@ public class FilterHelper {
         Assert.assertEquals(isDeletedFilter, false, "Filter " + AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME + " isn't deleted");
 
         filterWaitHelper.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void clearFilter(Long gridIdx) {
         window.openModal(By.id(BUTTON_OPEN + gridIdx));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         seleniumSettings.getWebDriver().findElement(By.name(BUTTON_CLEAR)).click();
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
 
         filterWaitHelper.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public String getGridCellValueForFilterTest(Long gridId, String columnId, FilterFieldType filterFieldType) {
@@ -336,8 +336,8 @@ public class FilterHelper {
 
     public void assertEmptyFilterField(String fieldName, FilterFieldType filterFieldType, Long gridIdx) {
         window.openModal(By.id(BUTTON_OPEN + gridIdx));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
             assertHelper.AssertText(fieldName, "");
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
@@ -354,8 +354,8 @@ public class FilterHelper {
 
     public void assertFilterField(String fieldName, FilterFieldType filterFieldType, String cellValue, Long gridIdx) {
         window.openModal(By.id(BUTTON_OPEN + gridIdx));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
             assertHelper.AssertText(fieldName, cellValue);
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {

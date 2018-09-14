@@ -20,7 +20,7 @@ import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.configfield.ConfigField;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
@@ -34,7 +34,7 @@ public class EntityConfigField {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private AssertHelper assertHelper;
@@ -71,8 +71,8 @@ public class EntityConfigField {
 
     public void add(ConfigFieldVo configFieldVo) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             jqueryWait.waitJQueryLoad();
@@ -177,9 +177,9 @@ public class EntityConfigField {
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
             elementHelper.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
-            waitHelper.waitReloadForm("reloaded=1");
-            waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-            waitHelper.waitFormLoad();
+            wait.waitReloadForm("reloaded=1");
+            wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+            wait.waitFormLoad();
 
             tabHelper.goToTab(2L); //Image Settings
 
@@ -329,13 +329,13 @@ public class EntityConfigField {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(ConfigFieldVo configFieldVo) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             jqueryWait.waitJQueryLoad();
@@ -587,13 +587,13 @@ public class EntityConfigField {
         } else {
             window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         }
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(ConfigFieldVo configFieldVo) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             jqueryWait.waitJQueryLoad();
@@ -868,20 +868,20 @@ public class EntityConfigField {
 
     private void setSqlToCodeMirror(String btnId, String sql) {
         window.openModal(By.id(btnId));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
-        waitHelper.waitCodeMirrorLoad("SQL");
-        waitHelper.waitCodeMirrorHistorySize("SQL", 1L, 0L); //Wait until CodeMirror value is populated from window.dialogArguments['SQL'] js variable
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+        wait.waitCodeMirrorLoad("SQL");
+        wait.waitCodeMirrorHistorySize("SQL", 1L, 0L); //Wait until CodeMirror value is populated from window.dialogArguments['SQL'] js variable
         jsHelper.setValueToCodeMirror("SQL", sql);
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
     private void checkSqlInCodeMirror(String btnId, String sql) {
         window.openModal(By.id(btnId));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        waitHelper.waitFormLoad();
-        waitHelper.waitCodeMirrorLoad("SQL");
-        waitHelper.waitCodeMirrorHistorySize("SQL", 1L, 0L); //Wait until CodeMirror value is populated from window.dialogArguments['SQL'] js variable
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        wait.waitFormLoad();
+        wait.waitCodeMirrorLoad("SQL");
+        wait.waitCodeMirrorHistorySize("SQL", 1L, 0L); //Wait until CodeMirror value is populated from window.dialogArguments['SQL'] js variable
         assertHelper.AssertCodeMirror("SQL", sql);
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

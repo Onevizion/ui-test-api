@@ -27,7 +27,7 @@ public class QsHelper {
     private JsHelper jsHelper;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -127,17 +127,17 @@ public class QsHelper {
                 item.click();
             }
         }
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void clickSearchQs(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id("btnSearch" + gridIdx)).click();
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void clickClearQs(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id("btnSearchClear" + gridIdx)).click();
-        waitHelper.waitGridLoad(gridIdx, gridIdx);
+        wait.waitGridLoad(gridIdx, gridIdx);
     }
 
     public void searchValue(Long gridIdx, String fieldName, String search) {

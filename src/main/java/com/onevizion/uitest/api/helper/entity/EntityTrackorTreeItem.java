@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
@@ -27,7 +27,7 @@ public class EntityTrackorTreeItem {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private AssertHelper assertHelper;
@@ -54,8 +54,8 @@ public class EntityTrackorTreeItem {
         tree.selectParentTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         psSelectorHelper.selectSpecificValue(By.name("btntrackorType"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, trackorTreeItem.getTrackorType(), 1L);
 
@@ -92,8 +92,8 @@ public class EntityTrackorTreeItem {
         tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         assertHelper.AssertText("treePath", trackorTreeItem.getTreePath());
         assertHelper.AssertText("trackorType", trackorTreeItem.getTrackorType());
@@ -131,8 +131,8 @@ public class EntityTrackorTreeItem {
         tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         assertHelper.AssertText("treePath", trackorTreeItem.getTreePath());
         assertHelper.AssertText("trackorType", trackorTreeItem.getTrackorType());
@@ -149,11 +149,11 @@ public class EntityTrackorTreeItem {
 
     public void testRolePrivs(List<String> rolePrivsRead, List<String> rolePrivsEdit, List<String> rolePrivsAdd, List<String> rolePrivsDelete, List<String> rolePrivsNone) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         tabHelper.goToTab(2L); //Role Privs
-        waitHelper.waitGridLoad(2L, 2L);
+        wait.waitGridLoad(2L, 2L);
         gridHelper.checkAssignmentGridColumn(2L, 1L, rolePrivsRead);
         gridHelper.checkAssignmentGridColumn(2L, 2L, rolePrivsEdit);
         gridHelper.checkAssignmentGridColumn(2L, 3L, rolePrivsAdd);
@@ -165,11 +165,11 @@ public class EntityTrackorTreeItem {
 
     public void testRoleLockPrivs(List<String> roleLockPrivsLock, List<String> roleLockPrivsUnlock, List<String> roleLockPrivsNone) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         tabHelper.goToTab(3L); //Role Lock Privs
-        waitHelper.waitGridLoad(3L, 3L);
+        wait.waitGridLoad(3L, 3L);
         gridHelper.checkAssignmentGridColumn(3L, 1L, roleLockPrivsLock);
         gridHelper.checkAssignmentGridColumn(3L, 2L, roleLockPrivsUnlock);
         gridHelper.checkAssignmentGridColumn(3L, 3L, roleLockPrivsNone);

@@ -16,7 +16,7 @@ public class UsersSettingsHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private Window window;
@@ -30,8 +30,8 @@ public class UsersSettingsHelper {
         elementWaitHelper.waitElementDisplayById("topPanelUserNameLbl");
 
         window.openModal(By.id("topPanelUserNameLbl"));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
     }
 
     public void closeUserSettings() {
@@ -39,10 +39,10 @@ public class UsersSettingsHelper {
 
         AbstractSeleniumCore.sleep(1000L); //this sleep need because in js code we have setTimeout
 
-        waitHelper.waitWebElement(By.id("mainContainer"));
-        waitHelper.waitWebElement(By.id("Table1"));
-        waitHelper.waitWebElement(By.id("messageInfoDivContainer"));
-        waitHelper.waitWebElement(By.id("messageErrorDivContainer"));
+        wait.waitWebElement(By.id("mainContainer"));
+        wait.waitWebElement(By.id("Table1"));
+        wait.waitWebElement(By.id("messageInfoDivContainer"));
+        wait.waitWebElement(By.id("messageErrorDivContainer"));
     }
 
     public void changeLanguage(String language) {

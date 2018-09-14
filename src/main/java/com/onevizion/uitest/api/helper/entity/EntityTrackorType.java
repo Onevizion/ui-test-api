@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.TrackorType;
 
@@ -28,7 +28,7 @@ public class EntityTrackorType {
     private Window window;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private AssertHelper assertHelper;
@@ -50,8 +50,8 @@ public class EntityTrackorType {
 
     public void add(TrackorType trackorType) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         seleniumSettings.getWebDriver().findElement(By.name("trackorType")).sendKeys(trackorType.getName());
         seleniumSettings.getWebDriver().findElement(By.name("appletLabel")).sendKeys(trackorType.getLabel());
@@ -81,24 +81,24 @@ public class EntityTrackorType {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(TrackorType trackorType) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
         
         
         
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(TrackorType trackorType) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         assertHelper.AssertText("trackorType", trackorType.getName());
         assertHelper.AssertText("appletLabel", trackorType.getLabel());
@@ -134,11 +134,11 @@ public class EntityTrackorType {
 
     public void testRolePrivs(List<String> secGroupsRead, List<String> secGroupsEdit, List<String> secGroupsAdd, List<String> secGroupsDelete, List<String> secGroupsNone) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         tabHelper.goToTab(3L); //Role Privs
-        waitHelper.waitGridLoad(3L, 3L);
+        wait.waitGridLoad(3L, 3L);
         gridHelper.checkAssignmentGridColumn(3L, 1L, secGroupsRead);
         gridHelper.checkAssignmentGridColumn(3L, 2L, secGroupsEdit);
         gridHelper.checkAssignmentGridColumn(3L, 3L, secGroupsAdd);
@@ -150,11 +150,11 @@ public class EntityTrackorType {
 
     public void testRoleRestrictions(List<String> rolesRest, String roleRest) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
 
         tabHelper.goToTab(4L); //Role Restrictions
-        waitHelper.waitGridLoad(4L, 4L);
+        wait.waitGridLoad(4L, 4L);
         gridHelper.checkPrivilegieGridColumn(4L, 1L, rolesRest, roleRest);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

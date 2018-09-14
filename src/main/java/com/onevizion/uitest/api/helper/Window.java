@@ -33,7 +33,7 @@ public class Window {
     private final Logger logger = LoggerFactory.getLogger(Window.class);
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private TreeWait treeWait;
@@ -210,12 +210,12 @@ public class Window {
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-        waitHelper.waitIsWindowClosed();
+        wait.waitIsWindowClosed();
     }
 
     public void closeModalCtrlEnterAndWaitGridLoad() {
         closeModalCtrlEnter();
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void closeModal(final By elementClick) {
@@ -223,7 +223,7 @@ public class Window {
         String title = seleniumSettings.getWebDriver().getTitle();
 
         if (elementClick != null) {
-            waitHelper.waitWebElement(elementClick);
+            wait.waitWebElement(elementClick);
             try {
                 seleniumSettings.getWebDriver().findElement(elementClick).click();
             } catch (WebDriverException e){
@@ -246,7 +246,7 @@ public class Window {
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-        waitHelper.waitIsWindowClosed();
+        wait.waitIsWindowClosed();
     }
 
     @Deprecated
@@ -255,7 +255,7 @@ public class Window {
         String title = seleniumSettings.getWebDriver().getTitle();
 
         if (elementClick != null) {
-            waitHelper.waitWebElement(elementClick);
+            wait.waitWebElement(elementClick);
             try {
                 seleniumSettings.getWebDriver().findElement(elementClick).click();
             } catch (WebDriverException e){
@@ -284,12 +284,12 @@ public class Window {
 
     public void closeModalAndWaitGridLoad(By elementClick) {
         closeModal(elementClick);
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
     public void closeModalWithAlert(final By elementClick, final String message) {
         final int currentWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
-        waitHelper.waitWebElement(elementClick);
+        wait.waitWebElement(elementClick);
         String title = seleniumSettings.getWebDriver().getTitle();
 
         try {
@@ -298,7 +298,7 @@ public class Window {
             logger.warn("Exception in closeModalWithAlert", e);
         }
 
-        waitHelper.waitAlert();
+        wait.waitAlert();
 
         if (message != null) {
             Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
@@ -321,7 +321,7 @@ public class Window {
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-        waitHelper.waitIsWindowClosed();
+        wait.waitIsWindowClosed();
     }
 
     public void closeModalAndWaitTreeLoad(By elementClick) {
@@ -332,7 +332,7 @@ public class Window {
     public void closeModalFormButtonRule(final By elementClick, final String message,
             final String message2) {
         final int currentWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
-        waitHelper.waitWebElement(elementClick);
+        wait.waitWebElement(elementClick);
         String title = seleniumSettings.getWebDriver().getTitle();
 
         try {
@@ -341,7 +341,7 @@ public class Window {
             logger.warn("Exception in closeModalFormButtonRule", e);
         }
 
-        waitHelper.waitAlert();
+        wait.waitAlert();
 
         Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
 
@@ -351,7 +351,7 @@ public class Window {
             
         }
 
-        waitHelper.waitAlert();
+        wait.waitAlert();
 
         Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message2, "Apply alert have wrong message");
 
@@ -372,12 +372,12 @@ public class Window {
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-        waitHelper.waitIsWindowClosed();
+        wait.waitIsWindowClosed();
     }
 
     public void closeModalFormButtonRuleMassAssign(final By elementClick) {
         final int currentWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
-        waitHelper.waitWebElement(elementClick);
+        wait.waitWebElement(elementClick);
         String title = seleniumSettings.getWebDriver().getTitle();
 
         try {
@@ -398,7 +398,7 @@ public class Window {
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-        waitHelper.waitIsWindowClosed();
+        wait.waitIsWindowClosed();
     }
 
     public String closeModal2(final By elementClick) {
@@ -406,7 +406,7 @@ public class Window {
         String title = seleniumSettings.getWebDriver().getTitle();
 
         if (elementClick != null) {
-            waitHelper.waitWebElement(elementClick);
+            wait.waitWebElement(elementClick);
             try {
                 seleniumSettings.getWebDriver().findElement(elementClick).click();
             } catch (WebDriverException e){
@@ -462,7 +462,7 @@ public class Window {
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-        waitHelper.waitIsWindowClosed();
+        wait.waitIsWindowClosed();
 
         return alertMsg;
     }

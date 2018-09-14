@@ -19,14 +19,14 @@ public class PrivilegiesHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
 
     public void checkAddCloneEditDelButtons(Long gridIdx, Boolean isDisplayAdd, Boolean isDisplayClone, Boolean isDisplayEdit, Boolean isDisplayDel) {
         if (isDisplayAdd != null) {
-            waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx));
+            wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx));
             if (isDisplayAdd.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(AbstractSelenium.BUTTON_ADD_ID_BASE + gridIdx, "style", "background-image: none;");
                 elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
@@ -40,7 +40,7 @@ public class PrivilegiesHelper {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         if (isDisplayClone != null) {
-            waitHelper.waitWebElement(By.id(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx));
+            wait.waitWebElement(By.id(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx));
             if (isDisplayClone.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx, "style", "background-image: none;");
                 elementWaitHelper.waitElementAttributeById(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
@@ -54,7 +54,7 @@ public class PrivilegiesHelper {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         if (isDisplayEdit != null) {
-            waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx));
+            wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx));
             if (isDisplayEdit.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(AbstractSelenium.BUTTON_EDIT_ID_BASE + gridIdx, "style", "background-image: none;");
                 elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
@@ -68,7 +68,7 @@ public class PrivilegiesHelper {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         if (isDisplayDel != null) {
-            waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx));
+            wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx));
             if (isDisplayDel.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(AbstractSelenium.BUTTON_DELETE_ID_BASE + gridIdx, "style", "background-image: none;");
                 elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));

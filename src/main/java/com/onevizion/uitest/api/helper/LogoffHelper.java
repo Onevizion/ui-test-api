@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.helper.document.Document;
 public class LogoffHelper {
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -62,10 +62,10 @@ public class LogoffHelper {
     public void logoffFromApiV3() {
         seleniumSettings.getWebDriver().get(seleniumSettings.getServerUrl());
 
-        waitHelper.waitWebElement(By.id("mainContainer"));
-        waitHelper.waitWebElement(By.id("Table1"));
-        waitHelper.waitWebElement(By.id("messageInfoDivContainer"));
-        waitHelper.waitWebElement(By.id("messageErrorDivContainer"));
+        wait.waitWebElement(By.id("mainContainer"));
+        wait.waitWebElement(By.id("Table1"));
+        wait.waitWebElement(By.id("messageInfoDivContainer"));
+        wait.waitWebElement(By.id("messageErrorDivContainer"));
 
         logoff();
     }

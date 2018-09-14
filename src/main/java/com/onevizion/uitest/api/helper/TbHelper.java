@@ -41,7 +41,7 @@ public class TbHelper {
     private AssertHelper assertHelper;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     @Resource
     private FieldHistoryHelper fieldHistoryHelper;
@@ -255,7 +255,7 @@ public class TbHelper {
                     seleniumSettings.getWebDriver().switchTo().defaultContent();
                 }
                 //TODO end remove this code
-                waitHelper.waitFormLoad();
+                wait.waitFormLoad();
 
                 ////TODO begin remove this code
                 //try {
@@ -308,11 +308,11 @@ public class TbHelper {
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
-                waitHelper.waitWebElement(By.id("idx" + idx));
+                wait.waitWebElement(By.id("idx" + idx));
                 jsHelper.setValueToFCKEditor("idx" + idx, value);
             } else {
                 String id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).getAttribute("id");
-                waitHelper.waitWebElement(By.id(id));
+                wait.waitWebElement(By.id(id));
                 jsHelper.setValueToFCKEditor(id, value);
             }
             expVals.put(fieldName, value);
@@ -392,7 +392,7 @@ public class TbHelper {
                     Assert.assertEquals(actualVal, vals.get(field), "Element with id=[idx" + idx + "] has wrong value");
                     seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
                 } else {
-                    waitHelper.waitWebElement(By.id("idx" + idx));
+                    wait.waitWebElement(By.id("idx" + idx));
                     assertHelper.AssertFCKEditor("idx" + idx, vals.get(field));
                 }
             } else {
@@ -407,7 +407,7 @@ public class TbHelper {
                     seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
                 } else {
                     String id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + field + "'] | //*[string(@name)='" + field + "']")).getAttribute("id");
-                    waitHelper.waitWebElement(By.id(id));
+                    wait.waitWebElement(By.id(id));
                     assertHelper.AssertFCKEditor(id, vals.get(field));
                 }
             }
@@ -561,11 +561,11 @@ public class TbHelper {
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                waitHelper.waitWebElement(By.id("idx" + idx));
+                wait.waitWebElement(By.id("idx" + idx));
                 jsHelper.setValueToFCKEditor("idx" + idx, "");
             } else {
                 String id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + field + "'] | //*[string(@name)='" + field + "']")).getAttribute("id");
-                waitHelper.waitWebElement(By.id(id));
+                wait.waitWebElement(By.id(id));
                 jsHelper.setValueToFCKEditor(id, "");
             }
             expVals.put(field, "");
@@ -629,7 +629,7 @@ public class TbHelper {
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             Select sel = new Select(seleniumSettings.getWebDriver().findElement(By.name("epmDd1")));
-            waitHelper.waitListBoxLoad2(sel);
+            wait.waitListBoxLoad2(sel);
             sel.selectByVisibleText(value);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
@@ -716,7 +716,7 @@ public class TbHelper {
                 expVals.put(fieldName, value);
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
-            waitHelper.waitWebElement(By.id("txtEfile1"));
+            wait.waitWebElement(By.id("txtEfile1"));
 
 //            if (seleniumSettings.getBrowser().equals("chrome")) {
 //                WebElement frame = (WebElement) jsHelper.getFrameForFileTbGrid(gridIndex);
@@ -737,11 +737,11 @@ public class TbHelper {
 
                 AbstractSeleniumCore.sleep(500L);
 
-                waitHelper.waitWebElement(By.id("txtEfile1"));
+                wait.waitWebElement(By.id("txtEfile1"));
 
                 WebElement frame = (WebElement) jsHelper.getFrameForFileTbGrid(gridIndex);
                 seleniumSettings.getWebDriver().switchTo().frame(frame);
-                waitHelper.waitWebElement(By.name("eFile_" + fieldId + "_" + tid));
+                wait.waitWebElement(By.name("eFile_" + fieldId + "_" + tid));
                 seleniumSettings.getWebDriver().switchTo().parentFrame();
                 jsHelper.showInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
                 seleniumSettings.getWebDriver().switchTo().frame(frame);
@@ -759,7 +759,7 @@ public class TbHelper {
                 expVals.put(fieldName, value);
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
-            waitHelper.waitWebElement(By.id("epmMemo1"));
+            wait.waitWebElement(By.id("epmMemo1"));
             jsHelper.setValueToFCKEditor("epmMemo1", value);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
@@ -848,7 +848,7 @@ public class TbHelper {
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             Select sel = new Select(seleniumSettings.getWebDriver().findElement(By.name("epmDd1")));
-            waitHelper.waitListBoxLoad2(sel);
+            wait.waitListBoxLoad2(sel);
             sel.selectByVisibleText("");
             gridExpVals.put(gridColumnId, "");
             if (fieldName != null) {
@@ -886,7 +886,7 @@ public class TbHelper {
                 expVals.put(fieldName, "");
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
-            waitHelper.waitWebElement(By.id("epmMemo1"));
+            wait.waitWebElement(By.id("epmMemo1"));
             jsHelper.setValueToFCKEditor("epmMemo1", "");
             gridExpVals.put(gridColumnId, "");
             if (fieldName != null) {

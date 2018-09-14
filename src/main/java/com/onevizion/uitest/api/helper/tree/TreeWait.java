@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.WaitHelper;
+import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 public class TreeWait {
@@ -25,15 +25,15 @@ public class TreeWait {
     private TreeJs treeJs;
 
     @Resource
-    private WaitHelper waitHelper;
+    private Wait wait;
 
     public void waitTreeLoad(final Long treeId) {
         waitTreeLoad(treeId.toString());
     }
 
     public void waitTreeLoad(String treeId) {
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.TREE_ID_BASE + treeId));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + treeId));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.TREE_ID_BASE + treeId));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + treeId));
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tree with id=[" + treeId + "] is failed.")
