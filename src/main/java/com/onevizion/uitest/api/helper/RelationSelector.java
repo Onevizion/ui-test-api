@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 
 @Component
-public class RelationSelectorHelper {
+public class RelationSelector {
 
     @Resource
     private SeleniumSettings seleniumSettings;

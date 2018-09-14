@@ -60,7 +60,7 @@ import com.onevizion.uitest.api.helper.NewDropDownHelper;
 import com.onevizion.uitest.api.helper.PrivilegiesHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
 import com.onevizion.uitest.api.helper.QsHelper;
-import com.onevizion.uitest.api.helper.RelationSelectorHelper;
+import com.onevizion.uitest.api.helper.RelationSelector;
 import com.onevizion.uitest.api.helper.Sort;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.TabJs;
@@ -268,7 +268,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected ColorPicker colorPicker;
 
     @Resource
-    protected RelationSelectorHelper relationSelectorHelper;
+    protected RelationSelector relationSelector;
 
     @Resource
     protected Clipboard clipboard;
