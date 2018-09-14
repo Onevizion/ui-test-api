@@ -13,13 +13,13 @@ import com.onevizion.uitest.api.vo.entity.MenuItem;
 import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
 
 @Component
-public class TreeHelper {
+public class Tree {
 
     @Resource
     private ElementHelper elementHelper;
 
     @Resource
-    private TreeJsHelper treeJsHelper;
+    private TreeJs treeJs;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -28,30 +28,30 @@ public class TreeHelper {
         String itemId = "";
         String curText = "";
         while((!curText.equals(itemText)) && (itemId != null)) {
-            itemId = treeJsHelper.getItemIdInTreeByText(AbstractSeleniumCore.getTreeIdx(), itemText);
-            curText = treeJsHelper.getItemTextInTreeById(AbstractSeleniumCore.getTreeIdx(), itemId).replaceAll("^<.*?>", "").replaceAll("</.*?>$", "");
+            itemId = treeJs.getItemIdInTreeByText(AbstractSeleniumCore.getTreeIdx(), itemText);
+            curText = treeJs.getItemTextInTreeById(AbstractSeleniumCore.getTreeIdx(), itemId).replaceAll("^<.*?>", "").replaceAll("</.*?>$", "");
         } 
     }
 
     public String getTreeItemParentText(String itemText) {
         selectTreeItem(itemText);
-        String itemId = treeJsHelper.getSelectedItemInTree(AbstractSeleniumCore.getTreeIdx());
-        String parentId = treeJsHelper.getItemParentId(AbstractSeleniumCore.getTreeIdx(), itemId);
-        String parentText = treeJsHelper.getItemTextInTreeById(AbstractSeleniumCore.getTreeIdx(), parentId);
+        String itemId = treeJs.getSelectedItemInTree(AbstractSeleniumCore.getTreeIdx());
+        String parentId = treeJs.getItemParentId(AbstractSeleniumCore.getTreeIdx(), itemId);
+        String parentText = treeJs.getItemTextInTreeById(AbstractSeleniumCore.getTreeIdx(), parentId);
         parentText = parentText.replaceAll("^<.*?>", "").replaceAll("</.*?>$", "");
         return parentText;
     }
 
     public void selectTreeItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {
-        treeJsHelper.selectItemInTree(treeId, rootItemId, trackorTreeItem.getTreePath());
+        treeJs.selectItemInTree(treeId, rootItemId, trackorTreeItem.getTreePath());
     }
 
     public void selectTreeItem(Long treeId, String rootItemId, MenuItem menuItem) {
-        treeJsHelper.selectItemInTree(treeId, rootItemId, menuItem.getMenuPath());
+        treeJs.selectItemInTree(treeId, rootItemId, menuItem.getMenuPath());
     }
 
     public void selectParentTreeItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {
-        treeJsHelper.selectParentItemInTree(treeId, rootItemId, trackorTreeItem.getTreePath());
+        treeJs.selectParentItemInTree(treeId, rootItemId, trackorTreeItem.getTreePath());
     }
 
     public TreeNode getTree(Long treeId) {
@@ -59,12 +59,12 @@ public class TreeHelper {
     }
 
     private TreeNode getTreeNode(Long treeId, String itemId) {
-        String name = treeJsHelper.getItemTextInTreeById(treeId, itemId);
+        String name = treeJs.getItemTextInTreeById(treeId, itemId);
         name = name.replaceAll("^<[lL][aA][bB][eE][lL].*?>", "").replaceAll("</[lL][aA][bB][eE][lL]>$", "");
 
         TreeNode tree = new TreeNode(name);
 
-        String subItemsStr = treeJsHelper.getTreeSubItems(treeId, itemId);
+        String subItemsStr = treeJs.getTreeSubItems(treeId, itemId);
         if (StringUtils.isEmpty(subItemsStr)) {
             return tree;
         }

@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.helper.PsSelectorHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
-import com.onevizion.uitest.api.helper.tree.TreeHelper;
+import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
 
 @Component
@@ -48,10 +48,10 @@ public class EntityTrackorTreeItemHelper {
     private GridHelper gridHelper;
 
     @Resource
-    private TreeHelper treeHelper;
+    private Tree tree;
 
     public void add(TrackorTreeItem trackorTreeItem) {
-        treeHelper.selectParentTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
+        tree.selectParentTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -89,7 +89,7 @@ public class EntityTrackorTreeItemHelper {
     }
 
     public void edit(TrackorTreeItem trackorTreeItem) {
-        treeHelper.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
+        tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -128,7 +128,7 @@ public class EntityTrackorTreeItemHelper {
     }
 
     public void testOnForm(TrackorTreeItem trackorTreeItem) {
-        treeHelper.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
+        tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

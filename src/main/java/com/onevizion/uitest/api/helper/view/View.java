@@ -22,8 +22,8 @@ import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
-import com.onevizion.uitest.api.helper.tree.TreeJsHelper;
-import com.onevizion.uitest.api.helper.tree.TreeWaitHelper;
+import com.onevizion.uitest.api.helper.tree.TreeJs;
+import com.onevizion.uitest.api.helper.tree.TreeWait;
 
 @Component
 public class View {
@@ -76,7 +76,7 @@ public class View {
     private WaitHelper waitHelper;
 
     @Resource
-    private TreeWaitHelper treeWaitHelper;
+    private TreeWait treeWait;
 
     @Resource
     private AssertHelper assertHelper;
@@ -85,7 +85,7 @@ public class View {
     private JsHelper jsHelper;
 
     @Resource
-    private TreeJsHelper treeJsHelper;
+    private TreeJs treeJs;
 
     @Resource
     private TabHelper tabHelper;
@@ -132,21 +132,21 @@ public class View {
     public void selectViewInOrganize(String viewName) {
         boolean viewFound = false;
 
-        String globalItemsStr = treeJsHelper.getTreeAllSubItems(0L, "-1");
+        String globalItemsStr = treeJs.getTreeAllSubItems(0L, "-1");
         String[] globalItems = globalItemsStr.split(",");
         for (String globalItem : globalItems) {
-            if (viewName.equals(treeJsHelper.getItemTextInTreeById(0L, globalItem))) {
+            if (viewName.equals(treeJs.getItemTextInTreeById(0L, globalItem))) {
                 viewFound = true;
-                treeJsHelper.selectItemInTree(0L, globalItem);
+                treeJs.selectItemInTree(0L, globalItem);
             }
         }
 
-        String localItemsStr = treeJsHelper.getTreeAllSubItems(0L, "-2");
+        String localItemsStr = treeJs.getTreeAllSubItems(0L, "-2");
         String[] localItems = localItemsStr.split(",");
         for (String localItem : localItems) {
-            if (viewName.equals(treeJsHelper.getItemTextInTreeById(0L, localItem))) {
+            if (viewName.equals(treeJs.getItemTextInTreeById(0L, localItem))) {
                 viewFound = true;
-                treeJsHelper.selectItemInTree(0L, localItem);
+                treeJs.selectItemInTree(0L, localItem);
             }
         }
 
@@ -303,7 +303,7 @@ public class View {
         elementWaitHelper.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
         windowHelper.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
-        treeWaitHelper.waitTreeLoad(0L);
+        treeWait.waitTreeLoad(0L);
         waitHelper.waitFormLoad();
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
@@ -312,7 +312,7 @@ public class View {
         seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
         waitHelper.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        treeWaitHelper.waitTreeLoad(0L);
+        treeWait.waitTreeLoad(0L);
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         waitHelper.waitGridLoad(gridIdx, gridIdx);

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-public class TreeJsHelper extends JsHelper {
+public class TreeJs extends JsHelper {
 
     public Boolean isTreeArrExist() {
         //TODO firefox 59 bug

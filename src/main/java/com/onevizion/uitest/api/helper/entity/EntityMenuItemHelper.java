@@ -11,7 +11,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
-import com.onevizion.uitest.api.helper.tree.TreeHelper;
+import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.MenuItemType;
 import com.onevizion.uitest.api.vo.entity.MenuItem;
 
@@ -31,10 +31,10 @@ public class EntityMenuItemHelper {
     private AssertHelper assertHelper;
 
     @Resource
-    private TreeHelper treeHelper;
+    private Tree tree;
 
     public void testOnForm(MenuItem menuItem) {
-        treeHelper.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", menuItem);
+        tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", menuItem);
 
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

@@ -25,7 +25,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.tree.TreeWaitHelper;
+import com.onevizion.uitest.api.helper.tree.TreeWait;
 
 @Component
 public class WindowHelper {
@@ -36,7 +36,7 @@ public class WindowHelper {
     private WaitHelper waitHelper;
 
     @Resource
-    private TreeWaitHelper treeWaitHelper;
+    private TreeWait treeWait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -326,7 +326,7 @@ public class WindowHelper {
 
     public void closeModalAndWaitTreeLoad(By elementClick) {
         closeModal(elementClick);
-        treeWaitHelper.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
     public void closeModalFormButtonRule(final By elementClick, final String message,

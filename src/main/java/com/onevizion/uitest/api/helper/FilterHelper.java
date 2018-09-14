@@ -17,8 +17,8 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
-import com.onevizion.uitest.api.helper.tree.TreeJsHelper;
-import com.onevizion.uitest.api.helper.tree.TreeWaitHelper;
+import com.onevizion.uitest.api.helper.tree.TreeJs;
+import com.onevizion.uitest.api.helper.tree.TreeWait;
 import com.onevizion.uitest.api.vo.FilterFieldType;
 import com.onevizion.uitest.api.vo.SortType;
 
@@ -59,13 +59,13 @@ public class FilterHelper {
     private JsHelper jsHelper;
 
     @Resource
-    private TreeJsHelper treeJsHelper;
+    private TreeJs treeJs;
 
     @Resource
     private WaitHelper waitHelper;
 
     @Resource
-    private TreeWaitHelper treeWaitHelper;
+    private TreeWait treeWait;
 
     @Resource
     private WindowHelper windowHelper;
@@ -118,21 +118,21 @@ public class FilterHelper {
     public void selectFilterInOrganize(String filterName) {
         boolean filterFound = false;
 
-        String globalItemsStr = treeJsHelper.getTreeAllSubItems(0L, "-1");
+        String globalItemsStr = treeJs.getTreeAllSubItems(0L, "-1");
         String[] globalItems = globalItemsStr.split(",");
         for (String globalItem : globalItems) {
-            if (filterName.equals(treeJsHelper.getItemTextInTreeById(0L, globalItem))) {
+            if (filterName.equals(treeJs.getItemTextInTreeById(0L, globalItem))) {
                 filterFound = true;
-                treeJsHelper.selectItemInTree(0L, globalItem);
+                treeJs.selectItemInTree(0L, globalItem);
             }
         }
 
-        String localItemsStr = treeJsHelper.getTreeAllSubItems(0L, "-2");
+        String localItemsStr = treeJs.getTreeAllSubItems(0L, "-2");
         String[] localItems = localItemsStr.split(",");
         for (String localItem : localItems) {
-            if (filterName.equals(treeJsHelper.getItemTextInTreeById(0L, localItem))) {
+            if (filterName.equals(treeJs.getItemTextInTreeById(0L, localItem))) {
                 filterFound = true;
-                treeJsHelper.selectItemInTree(0L, localItem);
+                treeJs.selectItemInTree(0L, localItem);
             }
         }
 
@@ -253,7 +253,7 @@ public class FilterHelper {
         elementWaitHelper.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
         windowHelper.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
-        treeWaitHelper.waitTreeLoad(0L);
+        treeWait.waitTreeLoad(0L);
         waitHelper.waitFormLoad();
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
@@ -262,7 +262,7 @@ public class FilterHelper {
         seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
         waitHelper.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        treeWaitHelper.waitTreeLoad(0L);
+        treeWait.waitTreeLoad(0L);
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         waitHelper.waitGridLoad(gridIdx, gridIdx);

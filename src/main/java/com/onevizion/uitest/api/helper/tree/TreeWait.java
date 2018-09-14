@@ -16,13 +16,13 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.WaitHelper;
 
 @Component
-public class TreeWaitHelper {
+public class TreeWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private TreeJsHelper treeJsHelper;
+    private TreeJs treeJs;
 
     @Resource
     private WaitHelper waitHelper;
@@ -50,20 +50,20 @@ public class TreeWaitHelper {
             .withMessage("Waiting for PageLoaded with id=[" + treeId + "] is failed.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return treeJsHelper.isTreeLoaded(treeId).equals("1");
+                    return treeJs.isTreeLoaded(treeId).equals("1");
                 }
             });
     }
 
     public void waitTreeLoadCnt(final int cnt) {
-        Supplier<String> supplier = ()-> "Waiting for count items in tree id=[" + AbstractSeleniumCore.getTreeIdx() + "] expectedVal=[" + cnt + "] actualVal=[" + Long.valueOf(treeJsHelper.getTreeAllSubItems(AbstractSeleniumCore.getTreeIdx(), "-1").split(",").length) + "] is failed";
+        Supplier<String> supplier = ()-> "Waiting for count items in tree id=[" + AbstractSeleniumCore.getTreeIdx() + "] expectedVal=[" + cnt + "] actualVal=[" + Long.valueOf(treeJs.getTreeAllSubItems(AbstractSeleniumCore.getTreeIdx(), "-1").split(",").length) + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(supplier)
             .ignoring(StaleElementReferenceException.class)
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return Long.valueOf(treeJsHelper.getTreeAllSubItems(AbstractSeleniumCore.getTreeIdx(), "-1").split(",").length) == cnt;
+                    return Long.valueOf(treeJs.getTreeAllSubItems(AbstractSeleniumCore.getTreeIdx(), "-1").split(",").length) == cnt;
                 }
             });
     }
@@ -73,7 +73,7 @@ public class TreeWaitHelper {
             .withMessage("Waiting for treeArr is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return treeJsHelper.isTreeArrExist();
+                    return treeJs.isTreeArrExist();
                 }
             });
     }
