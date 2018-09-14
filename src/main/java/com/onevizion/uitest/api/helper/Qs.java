@@ -19,9 +19,9 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class QsHelper {
+public class Qs {
 
-    private final Logger logger = LoggerFactory.getLogger(QsHelper.class);
+    private final Logger logger = LoggerFactory.getLogger(Qs.class);
 
     @Resource
     private JsHelper jsHelper;

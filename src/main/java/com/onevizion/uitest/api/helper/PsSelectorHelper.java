@@ -40,7 +40,7 @@ public class PsSelectorHelper {
     private ElementWaitHelper elementWaitHelper;
 
     @Resource
-    private QsHelper qsHelper;
+    private Qs qs;
 
     public String selectValue(String buttonName, Long romNum, Long colNum) {
         window.openModal(By.name(buttonName));
@@ -105,12 +105,12 @@ public class PsSelectorHelper {
         wait.waitWebElement(btnClose);
         wait.waitGridLoad(0L, 0L);
 
-        if (qsHelper.isExistQs(0L)) {
-            qsHelper.waitQsActive(0L);
-            if (qsHelper.isTextQs(0L)) {
-                qsHelper.searchValue(0L, filterFiledNum, "\"" + value + "\"");
-            } else if (qsHelper.isBooleanQs(0L)) {
-                qsHelper.searchBooleanValue(0L, filterFiledNum, value);
+        if (qs.isExistQs(0L)) {
+            qs.waitQsActive(0L);
+            if (qs.isTextQs(0L)) {
+                qs.searchValue(0L, filterFiledNum, "\"" + value + "\"");
+            } else if (qs.isBooleanQs(0L)) {
+                qs.searchBooleanValue(0L, filterFiledNum, value);
             } else {
                 throw new SeleniumUnexpectedException("Not support QS type");
             }
@@ -140,13 +140,13 @@ public class PsSelectorHelper {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         wait.waitGridLoad(0L, 0L);
 
-        if (qsHelper.isExistQs(0L)) {
-            qsHelper.waitQsActive(0L);
+        if (qs.isExistQs(0L)) {
+            qs.waitQsActive(0L);
             for (String value : values) {
-                if (qsHelper.isTextQs(0L)) {
-                    qsHelper.searchValue(0L, filterFiledNum, "\"" + value + "\"");
-                } else if (qsHelper.isBooleanQs(0L)) {
-                    qsHelper.searchBooleanValue(0L, filterFiledNum, value);
+                if (qs.isTextQs(0L)) {
+                    qs.searchValue(0L, filterFiledNum, "\"" + value + "\"");
+                } else if (qs.isBooleanQs(0L)) {
+                    qs.searchBooleanValue(0L, filterFiledNum, value);
                 } else {
                     throw new SeleniumUnexpectedException("Not support QS type");
                 }
@@ -183,10 +183,10 @@ public class PsSelectorHelper {
         wait.waitGridLoad(0L, 0L);
 
         for (String value : values) {
-            if (qsHelper.isTextQs(0L)) {
-                qsHelper.searchValue(0L, filterFiledNum, value);
-            } else if (qsHelper.isBooleanQs(0L)) {
-                qsHelper.searchBooleanValue(0L, filterFiledNum, value);
+            if (qs.isTextQs(0L)) {
+                qs.searchValue(0L, filterFiledNum, value);
+            } else if (qs.isBooleanQs(0L)) {
+                qs.searchBooleanValue(0L, filterFiledNum, value);
             } else {
                 throw new SeleniumUnexpectedException("Not support QS type");
             }
@@ -212,9 +212,9 @@ public class PsSelectorHelper {
         wait.waitWebElement(By.id(btnCloseName));
         wait.waitGridLoad(0L, 0L);
 
-        if (qsHelper.isExistQs(0L)) {
-            qsHelper.waitQsActive(0L);
-            qsHelper.searchValue(0L, filterFiledNum, "*" + value + "*");
+        if (qs.isExistQs(0L)) {
+            qs.waitQsActive(0L);
+            qs.searchValue(0L, filterFiledNum, "*" + value + "*");
             List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("rb0"));
             for (Long i = 0L; i < webElements.size(); i = i + 1L) {
                 String checked = webElements.get(i.intValue()).getAttribute("checked");
@@ -247,9 +247,9 @@ public class PsSelectorHelper {
         wait.waitWebElement(By.name(btnCloseName));
         wait.waitGridLoad(0L, 0L);
 
-        if (qsHelper.isExistQs(0L)) {
+        if (qs.isExistQs(0L)) {
             for (String value : values) {
-                qsHelper.searchValue(0L, filterFiledNum, "*" + value + "*");
+                qs.searchValue(0L, filterFiledNum, "*" + value + "*");
                 List<WebElement> webElements = checkboxHelper.findCheckboxesByName("cb0_0");
                 boolean ret = false;
                 for (Long i = 0L; i < webElements.size(); i = i + 1L) {

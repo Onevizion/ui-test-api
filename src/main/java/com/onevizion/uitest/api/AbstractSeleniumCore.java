@@ -59,7 +59,7 @@ import com.onevizion.uitest.api.helper.NavHelper;
 import com.onevizion.uitest.api.helper.NewDropDownHelper;
 import com.onevizion.uitest.api.helper.PrivilegiesHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
-import com.onevizion.uitest.api.helper.QsHelper;
+import com.onevizion.uitest.api.helper.Qs;
 import com.onevizion.uitest.api.helper.RelationSelector;
 import com.onevizion.uitest.api.helper.Sort;
 import com.onevizion.uitest.api.helper.Tab;
@@ -178,7 +178,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected ElementWaitHelper elementWaitHelper;
 
     @Resource
-    protected QsHelper qsHelper;
+    protected Qs qs;
 
     @Resource
     protected CloneButtonHelper cloneButtonHelper;
