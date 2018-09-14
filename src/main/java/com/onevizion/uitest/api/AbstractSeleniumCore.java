@@ -53,7 +53,7 @@ import com.onevizion.uitest.api.helper.HelpHelper;
 import com.onevizion.uitest.api.helper.HtmlInputHelper;
 import com.onevizion.uitest.api.helper.HtmlSelectHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.LoginHelper;
+import com.onevizion.uitest.api.helper.Login;
 import com.onevizion.uitest.api.helper.Logoff;
 import com.onevizion.uitest.api.helper.Nav;
 import com.onevizion.uitest.api.helper.NewDropDown;
@@ -205,7 +205,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected ElementJsHelper elementJsHelper;
 
     @Resource
-    protected LoginHelper loginHelper;
+    protected Login login;
 
     @Resource
     protected Logoff logoff;

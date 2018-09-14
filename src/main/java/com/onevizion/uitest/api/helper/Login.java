@@ -10,7 +10,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.document.Document;
 
 @Component
-public class LoginHelper {
+public class Login {
 
     @Resource
     private Wait wait;
