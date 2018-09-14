@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
-public class JsHelper {
+public class Js {
 
     @Resource
     private SeleniumSettings seleniumSettings;

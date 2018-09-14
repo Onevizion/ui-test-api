@@ -52,7 +52,7 @@ import com.onevizion.uitest.api.helper.GridRowButtonHelper;
 import com.onevizion.uitest.api.helper.HelpHelper;
 import com.onevizion.uitest.api.helper.HtmlInputHelper;
 import com.onevizion.uitest.api.helper.HtmlSelectHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Login;
 import com.onevizion.uitest.api.helper.Logoff;
 import com.onevizion.uitest.api.helper.Nav;
@@ -127,7 +127,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected AssertHelper assertHelper;
 
     @Resource
-    protected JsHelper jsHelper;
+    protected Js js;
 
     @Resource
     protected DualListboxHelper dualListboxHelper;
@@ -605,8 +605,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 //TODO firefox 59 bug
                 //https://github.com/mozilla/geckodriver/issues/1151
                 //https://bugzilla.mozilla.org/show_bug.cgi?id=1434872
-                jsHelper.resetFormChange();
-                jsHelper.resetGridChange();
+                js.resetFormChange();
+                js.resetGridChange();
                 seleniumSettings.getWebDriver().quit();
                 logger.info(seleniumSettings.getTestName() + " browser close");
             }

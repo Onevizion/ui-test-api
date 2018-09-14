@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
@@ -34,7 +34,7 @@ public class EntityColor {
     private GridHelper gridHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -93,9 +93,9 @@ public class EntityColor {
     public void testInGrid(Long gridId, Long rowIndex, Color color) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Color Code"), color.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "RGB Value"), color.getValue());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), color.getDescription());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Color Code"), color.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "RGB Value"), color.getValue());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), color.getDescription());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

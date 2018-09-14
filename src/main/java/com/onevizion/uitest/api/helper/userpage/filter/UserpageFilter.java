@@ -26,7 +26,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.FilterHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
@@ -44,7 +44,7 @@ public class UserpageFilter {
     public final static int FIRST_MONTH_OF_FISCAL_YEAR = 1;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private Wait wait;
@@ -1081,9 +1081,9 @@ public class UserpageFilter {
     }
 
     public void checkGridTextColumnEquals(Long gridId, Long columnIndex, List<String> values) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         boolean isError = true;
         String gridValue = null;
@@ -1106,9 +1106,9 @@ public class UserpageFilter {
     }
 
     private void checkGridTextColumnEqualsOrNull(Long gridId, Long columnIndex, String value) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1128,9 +1128,9 @@ public class UserpageFilter {
     }
 
     public void checkGridBooleanColumnEquals(Long gridId, Long columnIndex, List<String> values) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         boolean isError = false;
         String gridValue = null;
@@ -1155,9 +1155,9 @@ public class UserpageFilter {
     //it is temporary  solution
     //remove this method
     private void checkGridBooleanColumnEqualsOrNull(Long gridId, Long columnIndex, String value) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1177,9 +1177,9 @@ public class UserpageFilter {
     }
 
     private void checkGridTextColumnNotEquals(Long gridId, Long columnIndex, String value) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1194,9 +1194,9 @@ public class UserpageFilter {
     }
 
     private void checkGridTextColumnNotEqualsOrNull(Long gridId, Long columnIndex, String value) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1217,9 +1217,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnIsNull(Long gridId, Long columnIndex) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1236,9 +1236,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnIsNotNull(Long gridId, Long columnIndex) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1255,11 +1255,11 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnEqualsField(Long gridId, Long columnIndex, Long columnIndex2) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
-        List<String> vals2 = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
+        List<String> vals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
 
         String failMessage = null;
         String gridValue = null;
@@ -1281,11 +1281,11 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnNotEqualsField(Long gridId, Long columnIndex, Long columnIndex2) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
-        List<String> vals2 = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
+        List<String> vals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
 
         String failMessage = null;
         String gridValue = null;
@@ -1307,9 +1307,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMore(Long gridId, Long columnIndex, String value, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1332,9 +1332,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLess(Long gridId, Long columnIndex, String value, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1357,9 +1357,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMoreEquals(Long gridId, Long columnIndex, String value, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1382,9 +1382,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLessEquals(Long gridId, Long columnIndex, String value, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1407,11 +1407,11 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMoreField(Long gridId, Long columnIndex, Long columnIndex2, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
-        List<String> vals2 = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
+        List<String> vals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
 
         String failMessage = null;
         String gridValue = null;
@@ -1439,11 +1439,11 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLessField(Long gridId, Long columnIndex, Long columnIndex2, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
-        List<String> vals2 = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
+        List<String> vals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
 
         String failMessage = null;
         String gridValue = null;
@@ -1471,11 +1471,11 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMoreEqualsField(Long gridId, Long columnIndex, Long columnIndex2, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
-        List<String> vals2 = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
+        List<String> vals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
 
         String failMessage = null;
         String gridValue = null;
@@ -1503,11 +1503,11 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLessEqualsField(Long gridId, Long columnIndex, Long columnIndex2, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
-        List<String> vals2 = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
+        List<String> vals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex2);
 
         String failMessage = null;
         String gridValue = null;
@@ -1535,9 +1535,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMoreEqualsToday(Long gridId, Long columnIndex, int days, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1556,9 +1556,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLessEqualsToday(Long gridId, Long columnIndex, int days, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1577,9 +1577,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnWithin(Long gridId, Long columnIndex, int startDays, int endDays, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1598,9 +1598,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnThisWk(Long gridId, Long columnIndex, int weeks, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1623,9 +1623,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnThisMo(Long gridId, Long columnIndex, int months, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1648,9 +1648,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnThisFQ(Long gridId, Long columnIndex, int fq, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1673,9 +1673,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnThisFY(Long gridId, Long columnIndex, int fy, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1698,9 +1698,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnThisWkToDt(Long gridId, Long columnIndex, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1720,9 +1720,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnThisMoToDt(Long gridId, Long columnIndex, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1742,9 +1742,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnThisFQToDt(Long gridId, Long columnIndex, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
@@ -1764,9 +1764,9 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnThisFYToDt(Long gridId, Long columnIndex, ConfigFieldType fieldDataType) {
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;

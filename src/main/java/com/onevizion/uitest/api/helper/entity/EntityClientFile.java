@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.ClientFile;
@@ -28,7 +28,7 @@ public class EntityClientFile {
     private Wait wait;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private AssertHelper assertHelper;
@@ -46,7 +46,7 @@ public class EntityClientFile {
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("clientFileGroupId"))).selectByVisibleText(clientFile.getFileGroup());
 
-        jsHelper.showInputForFile("inputFileUploader", "FileUploader");
+        js.showInputForFile("inputFileUploader", "FileUploader");
         seleniumSettings.getWebDriver().findElement(By.name("oldFileFileUploader")).sendKeys(seleniumSettings.getUploadFilesPath() + clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -60,7 +60,7 @@ public class EntityClientFile {
 
         assertHelper.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
 
-        jsHelper.showInputForFile("inputFileUploader", "FileUploader");
+        js.showInputForFile("inputFileUploader", "FileUploader");
         seleniumSettings.getWebDriver().findElement(By.name("oldFileFileUploader")).sendKeys(seleniumSettings.getUploadFilesPath() + clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -81,8 +81,8 @@ public class EntityClientFile {
     public void testInGrid(Long gridId, Long rowIndex, ClientFile clientFile) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "File Group"), clientFile.getFileGroup());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "File Name"), clientFile.getFileName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "File Group"), clientFile.getFileGroup());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "File Name"), clientFile.getFileName());
         //TODO Size (Kb)
         //TODO Preview
 

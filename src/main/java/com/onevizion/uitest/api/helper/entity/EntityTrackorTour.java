@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
@@ -48,7 +48,7 @@ public class EntityTrackorTour {
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private EntityTrackorTourStep entityTrackorTourStep;
@@ -153,7 +153,7 @@ public class EntityTrackorTour {
 
         Assert.assertEquals(gridHelper.getGridRowsCount(2L), new Long(trackorTour.getSteps().size()));
         for (int i = 0; i < trackorTour.getSteps().size(); i++) {
-            jsHelper.selectGridRow(2L, new Long(i));
+            js.selectGridRow(2L, new Long(i));
             entityTrackorTourStep.testInGrid(2L, new Long(i), trackorTour.getSteps().get(i));
             entityTrackorTourStep.testOnForm(trackorTour.getSteps().get(i));
         }
@@ -193,13 +193,13 @@ public class EntityTrackorTour {
     public void testInGrid(Long gridId, Long rowIndex, TrackorTour trackorTour) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Tour Label"), trackorTour.getLabel());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Trackor Type"), trackorTour.getTrackorType());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Page Name"), trackorTour.getPageName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Config App Name"), trackorTour.getAppletName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Config Tab Name"), trackorTour.getTabName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Order Number"), trackorTour.getOrderNumber());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), trackorTour.getDescription());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Tour Label"), trackorTour.getLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Type"), trackorTour.getTrackorType());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Page Name"), trackorTour.getPageName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Config App Name"), trackorTour.getAppletName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Config Tab Name"), trackorTour.getTabName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Order Number"), trackorTour.getOrderNumber());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), trackorTour.getDescription());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

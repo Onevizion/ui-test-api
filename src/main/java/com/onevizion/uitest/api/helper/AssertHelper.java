@@ -21,7 +21,7 @@ public class AssertHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private Wait wait;
@@ -177,7 +177,7 @@ public class AssertHelper {
     }
 
     public void AssertFCKEditor(String name, String expectedVal) {
-        String actualVal = jsHelper.getValueFromFCKEditor(name);
+        String actualVal = js.getValueFromFCKEditor(name);
         actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_1, AbstractSeleniumCore.SPECIAL_CHARACTERS_1);
         actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_2, AbstractSeleniumCore.SPECIAL_CHARACTERS_2);
         actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_3, AbstractSeleniumCore.SPECIAL_CHARACTERS_3);
@@ -187,7 +187,7 @@ public class AssertHelper {
 
     public void AssertCodeMirror(String elementId, String expectedVal) {
         wait.waitCodeMirrorLoad(elementId);
-        String actualVal = jsHelper.getValueFromCodeMirror(elementId);
+        String actualVal = js.getValueFromCodeMirror(elementId);
         Assert.assertEquals(actualVal, expectedVal, "CodeMirror editor for element with id=[" + elementId + "] has wrong value");
     }
 

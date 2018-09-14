@@ -2,10 +2,10 @@ package com.onevizion.uitest.api.helper.colorpicker;
 
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 
 @Component
-class ColorPickerJs extends JsHelper {
+class ColorPickerJs extends Js {
 
     void setValue(String value) {
         //TODO firefox 59 bug

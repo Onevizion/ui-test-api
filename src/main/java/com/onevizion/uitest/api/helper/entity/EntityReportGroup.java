@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.ReportGroup;
@@ -33,7 +33,7 @@ public class EntityReportGroup {
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private GridHelper gridHelper;
@@ -75,7 +75,7 @@ public class EntityReportGroup {
     public void testInGrid(Long gridId, Long rowIndex, ReportGroup reportGroup) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Report Group Name"), reportGroup.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Report Group Name"), reportGroup.getName());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

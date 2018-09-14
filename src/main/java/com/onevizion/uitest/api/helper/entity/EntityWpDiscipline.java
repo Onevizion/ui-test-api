@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -40,7 +40,7 @@ public class EntityWpDiscipline {
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     public void add(WpDiscipline wpDiscipline) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -98,8 +98,8 @@ public class EntityWpDiscipline {
     public void testInGrid(Long gridId, Long rowIndex, WpDiscipline wpDiscipline) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Discipline"), wpDiscipline.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), wpDiscipline.getDescription());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Discipline"), wpDiscipline.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), wpDiscipline.getDescription());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

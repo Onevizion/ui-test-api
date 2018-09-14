@@ -24,7 +24,7 @@ public class Qs {
     private final Logger logger = LoggerFactory.getLogger(Qs.class);
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private Wait wait;
@@ -94,16 +94,16 @@ public class Qs {
 
     public void selectQsFieldByName(Long gridIdx, String fieldName) {
         seleniumSettings.getWebDriver().findElement(By.id("qsField" + gridIdx)).click();
-        WebElement qsElem = (WebElement) jsHelper.getNewDropDownElement("qsField" + gridIdx, "customscroll", "item_select", fieldName);
-        Long position = jsHelper.getNewDropDownElementPosition("qsField" + gridIdx, "customscroll", "item_select", fieldName);
-        jsHelper.scrollNewDropDownTop("qsField" + gridIdx, "customscroll", position * 28L);
+        WebElement qsElem = (WebElement) js.getNewDropDownElement("qsField" + gridIdx, "customscroll", "item_select", fieldName);
+        Long position = js.getNewDropDownElementPosition("qsField" + gridIdx, "customscroll", "item_select", fieldName);
+        js.scrollNewDropDownTop("qsField" + gridIdx, "customscroll", position * 28L);
         elementWaitHelper.waitElementVisible(qsElem);
         qsElem.click();
     }
 
     public void selectQsFieldByIdx(Long gridIdx, Long index) {
         seleniumSettings.getWebDriver().findElement(By.id("qsField" + gridIdx)).click();
-        jsHelper.scrollNewDropDownTop("qsField" + gridIdx, "customscroll", (index - 1L) * 28L);
+        js.scrollNewDropDownTop("qsField" + gridIdx, "customscroll", (index - 1L) * 28L);
         seleniumSettings.getWebDriver().findElement(By.id("qsField" + gridIdx)).findElement(By.className("customscroll")).findElements(By.className("item_select")).get(index.intValue() - 1).click();
     }
 

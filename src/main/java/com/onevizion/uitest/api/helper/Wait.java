@@ -29,7 +29,7 @@ public class Wait {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private GridHelper gridHelper;
@@ -74,14 +74,14 @@ public class Wait {
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jsHelper.isGridLoaded(gridId).equals("1");
+                    return js.isGridLoaded(gridId).equals("1");
                 }
             });
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jsHelper.isGridDataLoaded(gridId);
+                    return js.isGridDataLoaded(gridId);
                 }
             });
     }
@@ -93,8 +93,8 @@ public class Wait {
 
         Long parentGridIdNewTemp = gridId;
         //get parentGridId from js instead of java parameter
-        if (jsHelper.getIsSubGrid(gridId)) {
-            parentGridIdNewTemp = jsHelper.getParentGridIdx(gridId);
+        if (js.getIsSubGrid(gridId)) {
+            parentGridIdNewTemp = js.getParentGridIdx(gridId);
         }
 
         final Long parentGridIdNew = parentGridIdNewTemp;
@@ -112,14 +112,14 @@ public class Wait {
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jsHelper.isGridLoaded(gridId).equals("1");
+                    return js.isGridLoaded(gridId).equals("1");
                 }
             });
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jsHelper.isGridDataLoaded(gridId);
+                    return js.isGridDataLoaded(gridId);
                 }
             });
     }
@@ -201,7 +201,7 @@ public class Wait {
             .withMessage("Waiting for closing modal window.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return !jsHelper.isWindowClosed();
+                    return !js.isWindowClosed();
                 }
             });
     }
@@ -234,7 +234,7 @@ public class Wait {
             .ignoring(StaleElementReferenceException.class)
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return !previosTid.equals(jsHelper.getGridCurTid(gridIndex));
+                    return !previosTid.equals(js.getGridCurTid(gridIndex));
                 }
             });
     }
@@ -254,10 +254,10 @@ public class Wait {
 
     public void waitElemsArrCount(final Long afterCount) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("ElemsArr have wrong count. Expected count=[" + afterCount + "] but Actual count=[" + jsHelper.getElemsArrLength() + "]")
+            .withMessage("ElemsArr have wrong count. Expected count=[" + afterCount + "] but Actual count=[" + js.getElemsArrLength() + "]")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return afterCount.equals(jsHelper.getElemsArrLength());
+                    return afterCount.equals(js.getElemsArrLength());
                 }
             });
     }
@@ -484,7 +484,7 @@ public class Wait {
 
     public void waitGridCellValue(final Long gridId, final Long columnIndex, final Long rowIndex, final String val) {
         Supplier<String> actualValueSupplier = ()-> {
-            String value = jsHelper.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
+            String value = js.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
             if ("&nbsp;".equals(value)) {
                 value = "";
             }
@@ -516,8 +516,8 @@ public class Wait {
 
     public void waitGridCellTxtValue(final Long gridId, final Long columnIndex, final Long rowIndex, final String val) {
         Supplier<String> actualValueSupplier = ()-> {
-            String columnType = jsHelper.getGridColumnType(gridId, columnIndex);
-            String value = jsHelper.getGridCellValueTxtByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
+            String columnType = js.getGridColumnType(gridId, columnIndex);
+            String value = js.getGridCellValueTxtByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
             if ("&nbsp;".equals(value)) {
                 value = "";
             }
@@ -553,7 +553,7 @@ public class Wait {
             .until(
                 new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver webdriver) {
-                        return jsHelper.isDxtmlxWindowOpened(windowName);
+                        return js.isDxtmlxWindowOpened(windowName);
                     }
                  });
     }
@@ -563,7 +563,7 @@ public class Wait {
             .withMessage("Waiting for Code Mirror for element with id=["+elementId+"] is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jsHelper.isCodeMirrorLoaded(elementId);
+                    return js.isCodeMirrorLoaded(elementId);
                 }
             });
     }
@@ -573,8 +573,8 @@ public class Wait {
             .withMessage("Waiting for Code Mirror for element with id=["+elementId+"] is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    Long actUndo = jsHelper.getCodeMirrorUndoSize(elementId);
-                    Long actRedo = jsHelper.getCodeMirrorRedoSize(elementId);
+                    Long actUndo = js.getCodeMirrorUndoSize(elementId);
+                    Long actRedo = js.getCodeMirrorRedoSize(elementId);
                     return actUndo == undo && actRedo == redo;
                 }
             });
@@ -585,7 +585,7 @@ public class Wait {
             .withMessage("Waiting for FCK Editor name=[" + name + "] value=[" + value + "] is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return value.equals(jsHelper.getValueFromFCKEditor(name));
+                    return value.equals(js.getValueFromFCKEditor(name));
                 }
             });
     }
@@ -595,7 +595,7 @@ public class Wait {
             .withMessage("Waiting for DropGrid Verification is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jsHelper.isDropGridVerificationFinish();
+                    return js.isDropGridVerificationFinish();
                 }
             });
     }
@@ -605,7 +605,7 @@ public class Wait {
             .withMessage("Waiting for DropGrid Verification is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jsHelper.bplImportFileSubmitDone();
+                    return js.bplImportFileSubmitDone();
                 }
             });
     }

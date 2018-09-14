@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.ConfigAppExtParam;
@@ -30,7 +30,7 @@ public class EntityConfigAppExtParam {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private AssertHelper assertHelper;
@@ -48,7 +48,7 @@ public class EntityConfigAppExtParam {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys("desc param1");
 
         wait.waitCodeMirrorLoad("sqlText");
-        jsHelper.setValueToCodeMirror("sqlText", "select 1 from dual");
+        js.setValueToCodeMirror("sqlText", "select 1 from dual");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -66,7 +66,7 @@ public class EntityConfigAppExtParam {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys("desc param1 edit");
 
         wait.waitCodeMirrorLoad("sqlText");
-        jsHelper.setValueToCodeMirror("sqlText", "select 11 from dual");
+        js.setValueToCodeMirror("sqlText", "select 11 from dual");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -87,9 +87,9 @@ public class EntityConfigAppExtParam {
     public void testInGrid(Long gridId, Long rowIndex, ConfigAppExtParam configAppExtParam) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "URL Param"), configAppExtParam.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), configAppExtParam.getDescription());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "SQL Statement"), configAppExtParam.getSql());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "URL Param"), configAppExtParam.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), configAppExtParam.getDescription());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "SQL Statement"), configAppExtParam.getSql());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

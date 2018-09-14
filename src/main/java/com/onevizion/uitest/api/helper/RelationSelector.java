@@ -24,7 +24,7 @@ public class RelationSelector {
     private Wait wait;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -69,7 +69,7 @@ public class RelationSelector {
     }
 
     public void selectGridRow(Long gridIdx, Long rowIndex) {
-        jsHelper.selectGridRow(gridIdx, rowIndex);
+        js.selectGridRow(gridIdx, rowIndex);
         AbstractSeleniumCore.sleep(1000L);
         jqueryWait.waitJQueryLoad(); //wait reload relations
     }

@@ -2,10 +2,10 @@ package com.onevizion.uitest.api.helper.tree;
 
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 
 @Component
-public class TreeJs extends JsHelper {
+public class TreeJs extends Js {
 
     public Boolean isTreeArrExist() {
         //TODO firefox 59 bug

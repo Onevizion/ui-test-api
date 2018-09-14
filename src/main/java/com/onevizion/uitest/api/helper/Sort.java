@@ -22,7 +22,7 @@ import com.onevizion.uitest.api.vo.SortType;
 public class Sort {
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -31,8 +31,8 @@ public class Sort {
     private Wait wait;
 
     public void checkSortColumnByName(Long gridId, String columnName, GridColumnType gridColumnType) {
-        Long columnIdx = jsHelper.getColumnIndexByLabel(gridId, columnName);
-        String columnId = jsHelper.getGridColIdByIndex(gridId, columnIdx);
+        Long columnIdx = js.getColumnIndexByLabel(gridId, columnName);
+        String columnId = js.getGridColIdByIndex(gridId, columnIdx);
 
         checkSortColumn(gridId, columnId, gridColumnType);
     }
@@ -40,36 +40,36 @@ public class Sort {
     public void checkSortColumn(Long gridId, String columnId, GridColumnType gridColumnType) {
         wait.waitGridLoad(gridId, gridId);
 
-        Long columnIdx = jsHelper.getGridColIndexById(gridId, columnId);
-        Long scrollLeft = jsHelper.getGridScrollLeft(gridId, columnIdx);
+        Long columnIdx = js.getGridColIndexById(gridId, columnId);
+        Long scrollLeft = js.getGridScrollLeft(gridId, columnIdx);
 
-        jsHelper.gridScrollLeft(gridId, scrollLeft);
+        js.gridScrollLeft(gridId, scrollLeft);
         sortColumn(gridId, columnId, SortType.ASC);
         checkColumn(gridId, columnIdx, gridColumnType, SortType.ASC);
 
-        jsHelper.gridScrollLeft(gridId, scrollLeft);
+        js.gridScrollLeft(gridId, scrollLeft);
         sortColumn(gridId, columnId, SortType.DESC);
         checkColumn(gridId, columnIdx, gridColumnType, SortType.DESC);
     }
 
     public void sortColumnByName(Long gridId, String columnName, SortType sortType) {
-        Long columnIdx = jsHelper.getColumnIndexByLabel(gridId, columnName);
-        String columnId = jsHelper.getGridColIdByIndex(gridId, columnIdx);
+        Long columnIdx = js.getColumnIndexByLabel(gridId, columnName);
+        String columnId = js.getGridColIdByIndex(gridId, columnIdx);
         sortColumn(gridId, columnId, sortType);
     }
 
     public void sortColumn(Long gridId, String columnId, SortType sortType) {
-        Long columnIdx = jsHelper.getGridColIndexById(gridId, columnId);
-        String sortColumnId = jsHelper.getGridSortColumnIdByGridId(gridId);
+        Long columnIdx = js.getGridColIndexById(gridId, columnId);
+        String sortColumnId = js.getGridSortColumnIdByGridId(gridId);
 
-        Long scrollLeft = jsHelper.getGridScrollLeft(gridId, columnIdx);
-        jsHelper.gridScrollLeft(gridId, scrollLeft);
+        Long scrollLeft = js.getGridScrollLeft(gridId, columnIdx);
+        js.gridScrollLeft(gridId, scrollLeft);
 
         if (sortType.equals(SortType.ASC)) {
             if (!columnId.equals(sortColumnId)) {
                 seleniumSettings.getWebDriver().findElements(By.className("hdrcell")).get(columnIdx.intValue()).click();
             } else {
-                String gridSortType = jsHelper.getGridSortTypeByGridId(gridId);
+                String gridSortType = js.getGridSortTypeByGridId(gridId);
                 if (!"0".equals(gridSortType)) {
                     seleniumSettings.getWebDriver().findElements(By.className("hdrcell")).get(columnIdx.intValue()).click();
                 }
@@ -80,7 +80,7 @@ public class Sort {
                 wait.waitGridLoad(gridId, gridId);
                 seleniumSettings.getWebDriver().findElements(By.className("hdrcell")).get(columnIdx.intValue()).click();
             } else {
-                String gridSortType = jsHelper.getGridSortTypeByGridId(gridId);
+                String gridSortType = js.getGridSortTypeByGridId(gridId);
                 if (!"1".equals(gridSortType)) {
                     seleniumSettings.getWebDriver().findElements(By.className("hdrcell")).get(columnIdx.intValue()).click();
                 }
@@ -89,9 +89,9 @@ public class Sort {
 
         wait.waitGridLoad(gridId, gridId);
 
-        sortColumnId = jsHelper.getGridSortColumnIdByGridId(gridId);
+        sortColumnId = js.getGridSortColumnIdByGridId(gridId);
         Assert.assertEquals(sortColumnId, columnId);
-        String gridSortType = jsHelper.getGridSortTypeByGridId(gridId);
+        String gridSortType = js.getGridSortTypeByGridId(gridId);
         if (SortType.ASC.equals(sortType)) {
             Assert.assertEquals(gridSortType, "0");
         } else if (SortType.DESC.equals(sortType)) {
@@ -102,7 +102,7 @@ public class Sort {
     }
 
     private void checkColumn(Long gridId, Long columnIdx, GridColumnType gridColumnType, SortType sortType) {
-        Long rowsNum = jsHelper.getGridRowsCount(gridId);
+        Long rowsNum = js.getGridRowsCount(gridId);
 
         if (rowsNum <= 1L) {
             return; //Nothing to check
@@ -111,7 +111,7 @@ public class Sort {
 
         Long curRowNum = 1L;
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) jsHelper.getGridCellsValuesForColumnByColIndex(gridId, rowsNum, columnIdx);
+        List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, rowsNum, columnIdx);
         while (curRowNum < rowsNum) {
             String curVal = vals.get(curRowNum.intValue());
             if (StringUtils.isNotBlank(curVal)) {

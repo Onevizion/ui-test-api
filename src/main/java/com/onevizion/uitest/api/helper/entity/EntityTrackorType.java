@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -37,7 +37,7 @@ public class EntityTrackorType {
     private GridHelper gridHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private Tab tab;
@@ -163,14 +163,14 @@ public class EntityTrackorType {
     public void testInGrid(Long gridId, Long rowIndex, TrackorType trackorType) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Trackor-type Name"), trackorType.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Trackor Label"), trackorType.getLabel());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "\"Item ID\" Label"), trackorType.getLabelItemId());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Prefix Label"), trackorType.getLabelPrefix());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "\"My Items\" Label"), trackorType.getLabelMyItems());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "\"Class\" Label"), trackorType.getLabelClass());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Is ePM User?"), trackorType.getUser());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Can be a Template"), trackorType.getTemplate());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor-type Name"), trackorType.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Label"), trackorType.getLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "\"Item ID\" Label"), trackorType.getLabelItemId());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Prefix Label"), trackorType.getLabelPrefix());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "\"My Items\" Label"), trackorType.getLabelMyItems());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "\"Class\" Label"), trackorType.getLabelClass());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Is ePM User?"), trackorType.getUser());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Can be a Template"), trackorType.getTemplate());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

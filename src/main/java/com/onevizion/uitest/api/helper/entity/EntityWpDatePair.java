@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -40,7 +40,7 @@ public class EntityWpDatePair {
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     public void add(WpDatePair wpDatePair) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -124,10 +124,10 @@ public class EntityWpDatePair {
     public void testInGrid(Long gridId, Long rowIndex, WpDatePair wpDatePair) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Date Pair Name"), wpDatePair.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Label"), wpDatePair.getLabel());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Short Label"), wpDatePair.getShortLabel());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "In Use"), wpDatePair.getUse());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Date Pair Name"), wpDatePair.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Label"), wpDatePair.getLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Short Label"), wpDatePair.getShortLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "In Use"), wpDatePair.getUse());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

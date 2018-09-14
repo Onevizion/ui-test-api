@@ -23,7 +23,7 @@ public class Nav {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private Wait wait;
@@ -59,7 +59,7 @@ public class Nav {
         wait.waitGridLoad(gridIdx, gridIdx);
 
         Long allRecordsCount = getAllRecordsCount(gridIdx);
-        Long actualVisibleRecordsCount = jsHelper.getGridRowsCount(gridIdx);
+        Long actualVisibleRecordsCount = js.getGridRowsCount(gridIdx);
 
         Assert.assertEquals(actualVisibleRecordsCount.compareTo(allRecordsCount) <= 0, true, "Visible records count more than all records count");
 
@@ -98,7 +98,7 @@ public class Nav {
 
     private void checkCountRowsOnPage(Long gridIdx) {
         Long count = getLastRowNum(gridIdx) - getFirstRowNum(gridIdx) + 1;
-        Assert.assertEquals(jsHelper.getGridRowsCount(gridIdx), count, "Actual records count not equals expected records count");
+        Assert.assertEquals(js.getGridRowsCount(gridIdx), count, "Actual records count not equals expected records count");
     }
 
     private void goToNextPage(Long gridIdx, int nextPageNum) {
@@ -126,7 +126,7 @@ public class Nav {
         elementWaitHelper.waitElementVisibleById("navSelect" + gridIdx);
         elementWaitHelper.waitElementDisplayById("navSelect" + gridIdx);
 
-        jsHelper.scrollNewDropDownTop("navSelect" + gridIdx, "scrollContainer", (nextPageNum - 1) * 24L + ((nextPageNum - 1) / 10) * 14L);
+        js.scrollNewDropDownTop("navSelect" + gridIdx, "scrollContainer", (nextPageNum - 1) * 24L + ((nextPageNum - 1) / 10) * 14L);
         elementWaitHelper.waitElementVisible(navRanges.get(nextPageNum - 1));
         navRanges.get(nextPageNum - 1).click();
     }
@@ -156,7 +156,7 @@ public class Nav {
         elementWaitHelper.waitElementVisibleById("navSelect" + gridIdx);
         elementWaitHelper.waitElementDisplayById("navSelect" + gridIdx);
 
-        jsHelper.scrollNewDropDownTop("navSelect" + gridIdx, "scrollContainer", (prevPageNum - 1) * 24L + ((prevPageNum - 1) / 10) * 14L);
+        js.scrollNewDropDownTop("navSelect" + gridIdx, "scrollContainer", (prevPageNum - 1) * 24L + ((prevPageNum - 1) / 10) * 14L);
         elementWaitHelper.waitElementVisible(navRanges.get(prevPageNum - 1));
         navRanges.get(prevPageNum - 1).click();
     }

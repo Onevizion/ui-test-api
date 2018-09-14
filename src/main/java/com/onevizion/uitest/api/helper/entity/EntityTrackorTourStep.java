@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
@@ -39,7 +39,7 @@ public class EntityTrackorTourStep {
     private GridHelper gridHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private AssertHelper assertHelper;
@@ -80,7 +80,7 @@ public class EntityTrackorTourStep {
         seleniumSettings.getWebDriver().findElement(By.name("titleLabel")).sendKeys(trackorTourStep.getTitleLabel());
 
         wait.waitWebElement(By.id("contentLabel"));
-        jsHelper.setValueToFCKEditor("contentLabel", trackorTourStep.getContentLabel());
+        js.setValueToFCKEditor("contentLabel", trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(2L, 2L);
@@ -125,7 +125,7 @@ public class EntityTrackorTourStep {
         seleniumSettings.getWebDriver().findElement(By.name("titleLabel")).sendKeys(trackorTourStep.getTitleLabel());
 
         wait.waitWebElement(By.id("contentLabel"));
-        jsHelper.setValueToFCKEditor("contentLabel", trackorTourStep.getContentLabel());
+        js.setValueToFCKEditor("contentLabel", trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(2L, 2L);
@@ -161,16 +161,16 @@ public class EntityTrackorTourStep {
     public void testInGrid(Long gridId, Long rowIndex, TrackorTourStep trackorTourStep) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Step Title Label"), trackorTourStep.getTitleLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Step Title Label"), trackorTourStep.getTitleLabel());
         if (trackorTourStep.getElementType().equals("name=")) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "HTML Element"), trackorTourStep.getElementName());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "HTML Element"), trackorTourStep.getElementName());
         } else if (trackorTourStep.getElementType().equals("id=")) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "HTML Element"), trackorTourStep.getElementId());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "HTML Element"), trackorTourStep.getElementId());
         } else {
             throw new SeleniumUnexpectedException("Not support ElementType [" + trackorTourStep.getElementType() + "]");
         }
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Popover Placement"), trackorTourStep.getPlacement());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Form Number"), trackorTourStep.getFormNumber());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Popover Placement"), trackorTourStep.getPlacement());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Form Number"), trackorTourStep.getFormNumber());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 public class CheckboxHelper {
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -28,20 +28,20 @@ public class CheckboxHelper {
 
     public void clickByName(String checkboxName) {
         WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.name(checkboxName));
-        WebElement label = jsHelper.getParentElement(checkbox);
+        WebElement label = js.getParentElement(checkbox);
         label.click();
     }
 
     public void clickById(String checkboxId) {
         WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.id(checkboxId));
-        WebElement label = jsHelper.getParentElement(checkbox);
+        WebElement label = js.getParentElement(checkbox);
         if (label.isDisplayed()) {
             label.click();
         }
     }
 
     public void clickByElement(WebElement checkbox) {
-        WebElement label = jsHelper.getParentElement(checkbox);
+        WebElement label = js.getParentElement(checkbox);
         label.click();
     }
 
@@ -53,7 +53,7 @@ public class CheckboxHelper {
         List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name(checkboxname));
         List<WebElement> labels = new ArrayList<WebElement>();
         for (WebElement checkbox : checkboxes) {
-            WebElement label = jsHelper.getParentElement(checkbox);
+            WebElement label = js.getParentElement(checkbox);
             labels.add(label);
         }
         return labels;
@@ -61,12 +61,12 @@ public class CheckboxHelper {
 
     public WebElement findLabelByName(String checkboxname) {
         WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.name(checkboxname));
-        WebElement label = jsHelper.getParentElement(checkbox);
+        WebElement label = js.getParentElement(checkbox);
         return label;
     }
 
     public WebElement findLabelByElement(WebElement checkbox) {
-        WebElement label = jsHelper.getParentElement(checkbox);
+        WebElement label = js.getParentElement(checkbox);
         return label;
     }
 

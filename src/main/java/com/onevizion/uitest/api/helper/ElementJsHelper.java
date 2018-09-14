@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ElementJsHelper extends JsHelper {
+public class ElementJsHelper extends Js {
 
     public void moveToElement(WebElement element) {
         execJs3("arguments[0].scrollIntoView();", element);

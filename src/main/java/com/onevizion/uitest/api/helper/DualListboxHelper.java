@@ -22,7 +22,7 @@ public class DualListboxHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private HtmlSelectHelper htmlSelectHelper;
@@ -52,10 +52,10 @@ public class DualListboxHelper {
     }
 
     public void removeValueByTextNew(String btnId, String text) {
-        Long position = jsHelper.getNewDropDownElementPositionNew("rightListBox", "record", text);
-        jsHelper.scrollNewDropDownTop("rightListBox", "scrollContainer", position * 28L);
+        Long position = js.getNewDropDownElementPositionNew("rightListBox", "record", text);
+        js.scrollNewDropDownTop("rightListBox", "scrollContainer", position * 28L);
 
-        WebElement entityElem = (WebElement) jsHelper.getNewDropDownElementNew("rightListBox", "record", text);
+        WebElement entityElem = (WebElement) js.getNewDropDownElementNew("rightListBox", "record", text);
         elementWaitHelper.waitElementVisible(entityElem);
 
         entityElem.click();
@@ -169,10 +169,10 @@ public class DualListboxHelper {
     public void addValueByTextNew(String btnId, String text) {
         checkValueByTextIsPresentNew(text);
 
-        Long position = jsHelper.getNewDropDownElementPositionNew("leftListBox", "record", text);
-        jsHelper.scrollNewDropDownTop("leftListBox", "scrollContainer", position * 28L);
+        Long position = js.getNewDropDownElementPositionNew("leftListBox", "record", text);
+        js.scrollNewDropDownTop("leftListBox", "scrollContainer", position * 28L);
 
-        WebElement entityElem = (WebElement) jsHelper.getNewDropDownElementNew("leftListBox", "record", text);
+        WebElement entityElem = (WebElement) js.getNewDropDownElementNew("leftListBox", "record", text);
         elementWaitHelper.waitElementVisible(entityElem);
 
         entityElem.click();
@@ -292,7 +292,7 @@ public class DualListboxHelper {
         List<WebElement> leftColumns = view.getLeftColumns();
         for (int i = 0; i <= leftColumns.size(); i++) {
             if (value.equals(leftColumns.get(i).getAttribute("id"))) {
-                jsHelper.scrollNewDropDownTop("leftListBox", "scrollContainer", i * 28L);
+                js.scrollNewDropDownTop("leftListBox", "scrollContainer", i * 28L);
                 leftColumns.get(i).click();
                 break;
             }
@@ -441,7 +441,7 @@ public class DualListboxHelper {
     @Deprecated
     public void checkValues(String selectId, List<String> columnNames) {
         @SuppressWarnings("unchecked")
-        List<String> elementsValues = (List<String>) jsHelper.getElementsValuesFromDualListBox(selectId);
+        List<String> elementsValues = (List<String>) js.getElementsValuesFromDualListBox(selectId);
 
         Assert.assertEquals(htmlSelectHelper.isSelectOptionPresentByValue(elementsValues, columnNames.get(0)), true, "Select have wrong cnt"); //CHECKBOX
         Assert.assertEquals(htmlSelectHelper.isSelectOptionPresentByValue(elementsValues, columnNames.get(1)), true, "Select have wrong cnt"); //DATE
@@ -470,7 +470,7 @@ public class DualListboxHelper {
 
     public void checkValuesNew(String selectId, List<String> columnNames) {
         @SuppressWarnings("unchecked")
-        List<String> elementsValues = (List<String>) jsHelper.getElementsValuesFromDualListBoxNew(selectId);
+        List<String> elementsValues = (List<String>) js.getElementsValuesFromDualListBoxNew(selectId);
 
         Assert.assertEquals(htmlSelectHelper.isSelectOptionPresentByValue(elementsValues, columnNames.get(0)), true, "Select have wrong cnt"); //CHECKBOX
         Assert.assertEquals(htmlSelectHelper.isSelectOptionPresentByValue(elementsValues, columnNames.get(1)), true, "Select have wrong cnt"); //DATE

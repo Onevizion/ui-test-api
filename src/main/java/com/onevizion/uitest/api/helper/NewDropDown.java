@@ -26,7 +26,7 @@ public class NewDropDown {
     private ElementWaitHelper elementWaitHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private TreeWait treeWait;
@@ -74,10 +74,10 @@ public class NewDropDown {
                 elementWaitHelper.waitElementVisibleById("new_rows_" + id);
                 elementWaitHelper.waitElementDisplayById("new_rows_" + id);
 
-                Long position = jsHelper.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
-                jsHelper.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
+                Long position = js.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
+                js.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
 
-                WebElement entityElem = (WebElement) jsHelper.getNewDropDownElement("new_rows_" + id, "scrollContainer", "newDropDownRowContainer", name);
+                WebElement entityElem = (WebElement) js.getNewDropDownElement("new_rows_" + id, "scrollContainer", "newDropDownRowContainer", name);
                 elementWaitHelper.waitElementVisible(entityElem);
 
                 entityElem.click();
@@ -134,10 +134,10 @@ public class NewDropDown {
                 elementWaitHelper.waitElementVisibleById("new_rows_" + id);
                 elementWaitHelper.waitElementDisplayById("new_rows_" + id);
 
-                Long position = jsHelper.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
-                jsHelper.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
+                Long position = js.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
+                js.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
 
-                WebElement entityElem = (WebElement) jsHelper.getNewDropDownElement("new_rows_" + id, "scrollContainer", "newDropDownRowContainer", name);
+                WebElement entityElem = (WebElement) js.getNewDropDownElement("new_rows_" + id, "scrollContainer", "newDropDownRowContainer", name);
 
                 Actions act = new Actions(seleniumSettings.getWebDriver());
                 act.moveToElement(entityElem).perform();
@@ -218,10 +218,10 @@ public class NewDropDown {
                 elementWaitHelper.waitElementVisibleById("new_rows_" + id);
                 elementWaitHelper.waitElementDisplayById("new_rows_" + id);
 
-                Long position = jsHelper.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
-                jsHelper.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
+                Long position = js.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
+                js.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
 
-                WebElement entityElem = (WebElement) jsHelper.getNewDropDownElement("new_rows_" + id, "scrollContainer", "newDropDownRowContainer", name);
+                WebElement entityElem = (WebElement) js.getNewDropDownElement("new_rows_" + id, "scrollContainer", "newDropDownRowContainer", name);
 
                 Actions act = new Actions(seleniumSettings.getWebDriver());
                 act.moveToElement(entityElem).perform();

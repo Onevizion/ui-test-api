@@ -22,13 +22,13 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
 
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 
 public class SeleniumListener extends TestListenerAdapter {
 
     private final Logger logger = LoggerFactory.getLogger(SeleniumListener.class);
 
-    private JsHelper jsHelper = new JsHelper();
+    private Js js = new Js();
 
     @Override
     public void onTestStart(ITestResult tr) {
@@ -142,8 +142,8 @@ public class SeleniumListener extends TestListenerAdapter {
                 //TODO firefox 59 bug
                 //https://github.com/mozilla/geckodriver/issues/1151
                 //https://bugzilla.mozilla.org/show_bug.cgi?id=1434872
-                jsHelper.resetFormChange(test);
-                jsHelper.resetGridChange(test);
+                js.resetFormChange(test);
+                js.resetGridChange(test);
                 test.seleniumSettings.getWebDriver().close();
 
                 new WebDriverWait(test.seleniumSettings.getWebDriver(), test.seleniumSettings.getDefaultTimeout())
@@ -161,7 +161,7 @@ public class SeleniumListener extends TestListenerAdapter {
                     .withMessage("Waiting for closing modal window.")
                     .until(new ExpectedCondition<Boolean>() {
                         public Boolean apply(WebDriver webdriver) {
-                            return !jsHelper.isWindowClosed(test);
+                            return !js.isWindowClosed(test);
                         }
                     });
             }

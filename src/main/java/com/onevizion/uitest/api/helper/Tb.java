@@ -35,7 +35,7 @@ public class Tb {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private AssertHelper assertHelper;
@@ -96,9 +96,9 @@ public class Tb {
 
     public Long getColumnCount(Long gridIdx) {
         Long actualColumnsCnt = 0L;
-        Long columnsCnt = jsHelper.getGridColumnsCount(gridIdx);
+        Long columnsCnt = js.getGridColumnsCount(gridIdx);
         for (long i = 0; i < columnsCnt; i++) {
-            if (!jsHelper.isGridColumnHidden(gridIdx, i) && !jsHelper.getGridColIdByIndex(gridIdx, i).equals("-1")) {
+            if (!js.isGridColumnHidden(gridIdx, i) && !js.getGridColIdByIndex(gridIdx, i).equals("-1")) {
                 actualColumnsCnt = actualColumnsCnt + 1L;
             }
         }
@@ -294,13 +294,13 @@ public class Tb {
                 gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
-            jsHelper.showInputForFileTb(fieldName);
+            js.showInputForFileTb(fieldName);
             seleniumSettings.getWebDriver().switchTo().frame("ifrmHideForm");
             seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).clear();
             seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).sendKeys(seleniumSettings.getUploadFilesPath() + value);
             //webDriver.switchTo().window((String) webDriver.getWindowHandles().toArray()[webDriver.getWindowHandles().size() - 1]);
             seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
-            jsHelper.hideInputForFileTb(fieldName);
+            js.hideInputForFileTb(fieldName);
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
                 gridExpVals.put("fName" + gridColumnId, value);
@@ -309,11 +309,11 @@ public class Tb {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
                 wait.waitWebElement(By.id("idx" + idx));
-                jsHelper.setValueToFCKEditor("idx" + idx, value);
+                js.setValueToFCKEditor("idx" + idx, value);
             } else {
                 String id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).getAttribute("id");
                 wait.waitWebElement(By.id(id));
-                jsHelper.setValueToFCKEditor(id, value);
+                js.setValueToFCKEditor(id, value);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -562,11 +562,11 @@ public class Tb {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
                 wait.waitWebElement(By.id("idx" + idx));
-                jsHelper.setValueToFCKEditor("idx" + idx, "");
+                js.setValueToFCKEditor("idx" + idx, "");
             } else {
                 String id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + field + "'] | //*[string(@name)='" + field + "']")).getAttribute("id");
                 wait.waitWebElement(By.id(id));
-                jsHelper.setValueToFCKEditor(id, "");
+                js.setValueToFCKEditor(id, "");
             }
             expVals.put(field, "");
             if (column != null) {
@@ -602,12 +602,12 @@ public class Tb {
 
     public void editCell(Long gridIndex, Long rowIndex, Long columnIndex, ConfigFieldType fieldDataType, String value,
             String gridColumnId, String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals, Long tid, Long fieldId) {
-        Long scrollLeft = jsHelper.getGridScrollLeft(gridIndex, columnIndex);
-        jsHelper.gridScrollLeft(gridIndex, scrollLeft);
-        Long scrollTop = jsHelper.getGridScrollTop(gridIndex, rowIndex);
-        jsHelper.gridScrollTop(gridIndex, scrollTop);
+        Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
+        js.gridScrollLeft(gridIndex, scrollLeft);
+        Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
+        js.gridScrollTop(gridIndex, scrollTop);
 
-        WebElement gridCell = (WebElement) jsHelper.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
+        WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWaitHelper.waitElementVisible(gridCell);
 
         if (!ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
@@ -739,17 +739,17 @@ public class Tb {
 
                 wait.waitWebElement(By.id("txtEfile1"));
 
-                WebElement frame = (WebElement) jsHelper.getFrameForFileTbGrid(gridIndex);
+                WebElement frame = (WebElement) js.getFrameForFileTbGrid(gridIndex);
                 seleniumSettings.getWebDriver().switchTo().frame(frame);
                 wait.waitWebElement(By.name("eFile_" + fieldId + "_" + tid));
                 seleniumSettings.getWebDriver().switchTo().parentFrame();
-                jsHelper.showInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
+                js.showInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
                 seleniumSettings.getWebDriver().switchTo().frame(frame);
                 elementWaitHelper.waitElementVisibleByName("eFile_" + fieldId + "_" + tid);
                 elementWaitHelper.waitElementDisplayByName("eFile_" + fieldId + "_" + tid);
                 seleniumSettings.getWebDriver().findElement(By.name("eFile_" + fieldId + "_" + tid)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
                 seleniumSettings.getWebDriver().switchTo().parentFrame();
-                jsHelper.hideInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
+                js.hideInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
 //            } else {
 //                throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
 //            }
@@ -760,7 +760,7 @@ public class Tb {
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             wait.waitWebElement(By.id("epmMemo1"));
-            jsHelper.setValueToFCKEditor("epmMemo1", value);
+            js.setValueToFCKEditor("epmMemo1", value);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
@@ -768,7 +768,7 @@ public class Tb {
 
             AbstractSeleniumCore.sleep(500L);
 
-            jsHelper.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
+            js.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
         }
     }
 
@@ -799,12 +799,12 @@ public class Tb {
 
     public void clearCell(Long gridIndex, Long rowIndex, Long columnIndex, ConfigFieldType fieldDataType, String gridColumnId,
             String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals) {
-        Long scrollLeft = jsHelper.getGridScrollLeft(gridIndex, columnIndex);
-        jsHelper.gridScrollLeft(gridIndex, scrollLeft);
-        Long scrollTop = jsHelper.getGridScrollTop(gridIndex, rowIndex);
-        jsHelper.gridScrollTop(gridIndex, scrollTop);
+        Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
+        js.gridScrollLeft(gridIndex, scrollLeft);
+        Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
+        js.gridScrollTop(gridIndex, scrollTop);
 
-        WebElement gridCell = (WebElement) jsHelper.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
+        WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWaitHelper.waitElementVisible(gridCell);
 
         if (!ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
@@ -887,7 +887,7 @@ public class Tb {
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             wait.waitWebElement(By.id("epmMemo1"));
-            jsHelper.setValueToFCKEditor("epmMemo1", "");
+            js.setValueToFCKEditor("epmMemo1", "");
             gridExpVals.put(gridColumnId, "");
             if (fieldName != null) {
                 expVals.put(fieldName, "");
@@ -895,17 +895,17 @@ public class Tb {
 
             AbstractSeleniumCore.sleep(500L);
 
-            jsHelper.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
+            js.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
         }
     }
 
     public void rightClickCell(Long gridIndex, Long rowIndex, Long columnIndex) {
-        Long scrollLeft = jsHelper.getGridScrollLeft(gridIndex, columnIndex);
-        jsHelper.gridScrollLeft(gridIndex, scrollLeft);
-        Long scrollTop = jsHelper.getGridScrollTop(gridIndex, rowIndex);
-        jsHelper.gridScrollTop(gridIndex, scrollTop);
+        Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
+        js.gridScrollLeft(gridIndex, scrollLeft);
+        Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
+        js.gridScrollTop(gridIndex, scrollTop);
 
-        WebElement gridCell = (WebElement) jsHelper.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
+        WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWaitHelper.waitElementVisible(gridCell);
 
         Actions action = new Actions(seleniumSettings.getWebDriver());
@@ -937,12 +937,12 @@ public class Tb {
     }
 
     public void checkCellEnabled(Long gridIndex, Long rowIndex, Long columnIndex, ConfigFieldType fieldDataType) {
-        Long scrollLeft = jsHelper.getGridScrollLeft(gridIndex, columnIndex);
-        jsHelper.gridScrollLeft(gridIndex, scrollLeft);
-        Long scrollTop = jsHelper.getGridScrollTop(gridIndex, rowIndex);
-        jsHelper.gridScrollTop(gridIndex, scrollTop);
+        Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
+        js.gridScrollLeft(gridIndex, scrollLeft);
+        Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
+        js.gridScrollTop(gridIndex, scrollTop);
 
-        WebElement gridCell = (WebElement) jsHelper.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
+        WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWaitHelper.waitElementVisible(gridCell);
 
         if (!ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
@@ -978,7 +978,7 @@ public class Tb {
 
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        jsHelper.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
+        js.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
     }
 
     public void checkCellsDisabled(Long gridIndex, Long rowIndex, List<Long> columns) {
@@ -1006,12 +1006,12 @@ public class Tb {
     }
 
     public void checkCellDisabled(Long gridIndex, Long rowIndex, Long columnIndex, ConfigFieldType fieldDataType) {
-        Long scrollLeft = jsHelper.getGridScrollLeft(gridIndex, columnIndex);
-        jsHelper.gridScrollLeft(gridIndex, scrollLeft);
-        Long scrollTop = jsHelper.getGridScrollTop(gridIndex, rowIndex);
-        jsHelper.gridScrollTop(gridIndex, scrollTop);
+        Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
+        js.gridScrollLeft(gridIndex, scrollLeft);
+        Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
+        js.gridScrollTop(gridIndex, scrollTop);
 
-        WebElement gridCell = (WebElement) jsHelper.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
+        WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWaitHelper.waitElementVisible(gridCell);
 
         if (!ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
@@ -1047,7 +1047,7 @@ public class Tb {
 
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        jsHelper.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
+        js.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
     }
 
     public void checkColumnsExist(Long gridIndex, String prefix) {
@@ -1075,7 +1075,7 @@ public class Tb {
     }
 
     public void checkColumnExist(Long gridIndex, String columnLabel) {
-        Assert.assertEquals(jsHelper.getColumnIndexByLabel(gridIndex, columnLabel) != null, true, "Grid not have column");
+        Assert.assertEquals(js.getColumnIndexByLabel(gridIndex, columnLabel) != null, true, "Grid not have column");
     }
 
     public void checkColumnsNotExist(Long gridIndex, String prefix) {
@@ -1103,7 +1103,7 @@ public class Tb {
     }
 
     public void checkColumnNotExist(Long gridIndex, String columnLabel) {
-        Assert.assertEquals(jsHelper.getColumnIndexByLabel(gridIndex, columnLabel) == null, true, "Grid have column");
+        Assert.assertEquals(js.getColumnIndexByLabel(gridIndex, columnLabel) == null, true, "Grid have column");
     }
 
     public void checkFieldsExist(List<String> fieldIds) {

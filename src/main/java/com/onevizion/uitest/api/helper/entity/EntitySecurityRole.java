@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.SecurityRole;
@@ -34,7 +34,7 @@ public class EntitySecurityRole {
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private GridHelper gridHelper;
@@ -211,8 +211,8 @@ public class EntitySecurityRole {
     public void testInGrid(Long gridId, Long rowIndex, SecurityRole securityRole) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Role Name"), securityRole.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), securityRole.getDescription());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Role Name"), securityRole.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), securityRole.getDescription());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
@@ -35,7 +35,7 @@ public class EntityDynamicVtableValue {
     private GridHelper gridHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -119,11 +119,11 @@ public class EntityDynamicVtableValue {
     public void testInGrid(Long gridId, Long rowIndex, DynamicVtableValue dynamicVtableValue) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Value"), dynamicVtableValue.getValue());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Order Number"), dynamicVtableValue.getOrdNum());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Color"), dynamicVtableValue.getColor());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Display?"), dynamicVtableValue.getDisplay());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Filterable?"), dynamicVtableValue.getFilterable());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Value"), dynamicVtableValue.getValue());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Order Number"), dynamicVtableValue.getOrdNum());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Color"), dynamicVtableValue.getColor());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Display?"), dynamicVtableValue.getDisplay());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Filterable?"), dynamicVtableValue.getFilterable());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

@@ -17,13 +17,13 @@ public class Tab {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private TabJs tabJs;
 
     public void goToTab(Long tabIndex) {
-        jsHelper.scrollNewDropDownTop("newFormMenu", "scrollContainer", tabIndex * 28L);
+        js.scrollNewDropDownTop("newFormMenu", "scrollContainer", tabIndex * 28L);
 
         List<WebElement> tabs = seleniumSettings.getWebDriver().findElement(By.id("formMenuTree")).findElement(By.className("scrollContent")).findElements(By.className("newGuiMenuRowContainer"));
         WebElement tab = tabs.get(tabIndex.intValue() - 1);
@@ -36,7 +36,7 @@ public class Tab {
     }
 
     public void goToTabJS(Long tabIndex) {
-        jsHelper.gotoTab("tabLbl", tabIndex - 1L);
+        js.gotoTab("tabLbl", tabIndex - 1L);
     }
 
     public void hideTabMenu() {

@@ -24,7 +24,7 @@ public class FieldHistoryHelper {
     private static Pattern regexHrefContent = Pattern.compile("<A.+?>(.+?)</A>", Pattern.DOTALL | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private Wait wait;
@@ -80,9 +80,9 @@ public class FieldHistoryHelper {
         for (String val : vals) {
             String value;
             if (isTaskDate) {
-                value = jsHelper.getGridCellValueByRowIndexAndColIndex(1L, i, 1L);
+                value = js.getGridCellValueByRowIndexAndColIndex(1L, i, 1L);
             } else {
-                value = jsHelper.getGridCellValueByRowIndexAndColIndex(1L, i, 0L);
+                value = js.getGridCellValueByRowIndexAndColIndex(1L, i, 0L);
             }
 
             Matcher regexTdMatcher = regexTdContent.matcher(value);

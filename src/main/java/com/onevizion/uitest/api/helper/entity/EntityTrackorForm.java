@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -41,7 +41,7 @@ public class EntityTrackorForm {
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private GridHelper gridHelper;
@@ -149,10 +149,10 @@ public class EntityTrackorForm {
     public void testInGrid(Long gridId, Long rowIndex, TrackorForm trackorForm) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Form Name"), trackorForm.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Report Name"), trackorForm.getReportName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Import Name"), trackorForm.getImportName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), trackorForm.getDescription());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Form Name"), trackorForm.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Report Name"), trackorForm.getReportName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Import Name"), trackorForm.getImportName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), trackorForm.getDescription());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

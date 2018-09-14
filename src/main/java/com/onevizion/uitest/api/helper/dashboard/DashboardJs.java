@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 
 @Component
-class DashboardJs extends JsHelper {
+class DashboardJs extends Js {
 
     @SuppressWarnings("unchecked")
     List<String> getDashlets() {

@@ -56,7 +56,7 @@ public class FilterHelper {
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private TreeJs treeJs;
@@ -150,7 +150,7 @@ public class FilterHelper {
 
         seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
-        WebElement filterElem = (WebElement) jsHelper.getNewDropDownElement(FILTER_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
+        WebElement filterElem = (WebElement) js.getNewDropDownElement(FILTER_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
         elementWaitHelper.waitElementVisible(filterElem);
         filterElem.click();
 
@@ -297,15 +297,15 @@ public class FilterHelper {
     }
 
     public String getGridCellValueForFilterTest(Long gridId, String columnId, FilterFieldType filterFieldType) {
-        if (jsHelper.getGridIsSupportSortByGridId(gridId)) {
+        if (js.getGridIsSupportSortByGridId(gridId)) {
             sort.sortColumn(gridId, columnId, SortType.ASC);
         }
-        Long columnIndex = jsHelper.getGridColIndexById(gridId, columnId);
+        Long columnIndex = js.getGridColIndexById(gridId, columnId);
         if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
             return "YES";
         } else {
-            for (Long i = 0L; i < jsHelper.getGridRowsCount(gridId); i = i + 1L) {
-                String value = (String) jsHelper.getGridCellValueByRowIndexAndColIndex(gridId, i, columnIndex);
+            for (Long i = 0L; i < js.getGridRowsCount(gridId); i = i + 1L) {
+                String value = (String) js.getGridCellValueByRowIndexAndColIndex(gridId, i, columnIndex);
                 if (StringUtils.isNotBlank(value)) {
                     value = value.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", ""); /*Example: condition for link*/
                     value = StringUtils.substringBefore(value, "\n"); /*Example: condition for pl/sql block where value may have character of new line*/
@@ -321,11 +321,11 @@ public class FilterHelper {
     }
 
     public void checkGridColumnByFilterValue(Long gridId, String columnId, String value) {
-        Long columnIndex = jsHelper.getGridColIndexById(gridId, columnId);
-        Long rowsCnt = jsHelper.getGridRowsCount(gridId);
+        Long columnIndex = js.getGridColIndexById(gridId, columnId);
+        Long rowsCnt = js.getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
-        List<String> vals =  (List<String>) jsHelper.getGridCellsValuesForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals =  (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         for (int i = 0; i < rowsCnt.intValue(); i++) {

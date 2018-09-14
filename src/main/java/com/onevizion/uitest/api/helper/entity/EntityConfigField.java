@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
@@ -40,7 +40,7 @@ public class EntityConfigField {
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private GridHelper gridHelper;
@@ -754,114 +754,114 @@ public class EntityConfigField {
     public void testInGrid(Long gridId, Long rowIndex, ConfigFieldVo configFieldVo) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Field Name"), configFieldVo.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Field Label"), configFieldVo.getLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Field Name"), configFieldVo.getName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Field Label"), configFieldVo.getLabel());
 
         if (ConfigFieldType.CHECKBOX.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), "1");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), "1");
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), "10");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), "10");
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), "10");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), "10");
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), "10");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), "10");
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), "15");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), "15");
         } else if (ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), "15");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), "15");
         } else if (ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldHyperlink().getLength());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldHyperlink().getLength());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldMemo().getLength());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldMemo().getLength());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldWiki().getLength());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldWiki().getLength());
         } else if (ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldText().getLength());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldText().getLength());
         } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldNumber().getLength());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), configFieldVo.getConfigFieldNumber().getLength());
         } else {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Max Length"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Max Length"), "");
         }
 
         if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Table Name"), configFieldVo.getConfigFieldDropDown().getTable());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Table Name"), configFieldVo.getConfigFieldDropDown().getTable());
         } else if (ConfigFieldType.SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Table Name"), configFieldVo.getConfigFieldSelector().getTable());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Table Name"), configFieldVo.getConfigFieldSelector().getTable());
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Table Name"), configFieldVo.getConfigFieldMultiSelector().getTable());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Table Name"), configFieldVo.getConfigFieldMultiSelector().getTable());
         } else {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Table Name"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Table Name"), "");
         }
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Data Type"), configFieldVo.getConfigFieldType().getLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Data Type"), configFieldVo.getConfigFieldType().getLabel());
 
         if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldMemo().getLines());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldMemo().getLines());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldWiki().getLines());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldWiki().getLines());
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldMultiSelector().getLines());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldMultiSelector().getLines());
         } else {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Lines Qty"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Lines Qty"), "");
         }
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Field Width (px)"), configFieldVo.getWidth());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), configFieldVo.getDescription());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "TRACKOR Type"), configFieldVo.getTrackorTypeLabel());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Multiple Lines"), configFieldVo.getMultiple());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Read Only"), configFieldVo.getReadOnly());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Field Width (px)"), configFieldVo.getWidth());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), configFieldVo.getDescription());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "TRACKOR Type"), configFieldVo.getTrackorTypeLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Multiple Lines"), configFieldVo.getMultiple());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Read Only"), configFieldVo.getReadOnly());
 
         if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldTrackorSelector().getTrackorType());
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Short Name"), configFieldVo.getConfigFieldTrackorSelector().getShortName());
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldTrackorSelector().getTrackorType());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Short Name"), configFieldVo.getConfigFieldTrackorSelector().getShortName());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter());
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldTrackorDropDown().getTrackorType());
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Short Name"), configFieldVo.getConfigFieldTrackorDropDown().getShortName());
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldTrackorDropDown().getTrackorType());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Short Name"), configFieldVo.getConfigFieldTrackorDropDown().getShortName());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter());
         } else if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldRollup().getTrackorType());
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Short Name"), "");
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), "NO");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldRollup().getTrackorType());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Short Name"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), "NO");
         } else {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), "");
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Short Name"), "");
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), "NO");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Short Name"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), "NO");
         }
 
         if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Log BLOB changes"), configFieldVo.getConfigFieldEfile().getLogBlobChanges());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Log BLOB changes"), configFieldVo.getConfigFieldEfile().getLogBlobChanges());
         } else {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Log BLOB changes"), "NO");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Log BLOB changes"), "NO");
         }
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Mandatory"), configFieldVo.getMandatory());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Two Columns Span"), configFieldVo.getTwoColumns());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Lockable"), configFieldVo.getLockable());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Mandatory"), configFieldVo.getMandatory());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Two Columns Span"), configFieldVo.getTwoColumns());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Lockable"), configFieldVo.getLockable());
 
         if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldCalculated().getSql());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldCalculated().getSql());
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldDbDropDown().getSql());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldDbDropDown().getSql());
         } else if (ConfigFieldType.DB_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldDbSelector().getSql());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldDbSelector().getSql());
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldTrackorDropDown().getSql());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldTrackorDropDown().getSql());
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldTrackorSelector().getSql());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "SQL Query"), configFieldVo.getConfigFieldTrackorSelector().getSql());
         } else {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "SQL Query"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "SQL Query"), "");
         }
 
         if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Selector's Display Field"), configFieldVo.getConfigFieldTrackorSelector().getDisplayField());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Display Field"), configFieldVo.getConfigFieldTrackorSelector().getDisplayField());
         } else {
-            gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Selector's Display Field"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Display Field"), "");
         }
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Calc Total"), configFieldVo.getCalcTotal());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Comments"), configFieldVo.getComment());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Don't Clone Field Value"), configFieldVo.getNotCloneValue());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Calc Total"), configFieldVo.getCalcTotal());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Comments"), configFieldVo.getComment());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Don't Clone Field Value"), configFieldVo.getNotCloneValue());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
@@ -872,7 +872,7 @@ public class EntityConfigField {
         wait.waitFormLoad();
         wait.waitCodeMirrorLoad("SQL");
         wait.waitCodeMirrorHistorySize("SQL", 1L, 0L); //Wait until CodeMirror value is populated from window.dialogArguments['SQL'] js variable
-        jsHelper.setValueToCodeMirror("SQL", sql);
+        js.setValueToCodeMirror("SQL", sql);
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 

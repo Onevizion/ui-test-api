@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
 
@@ -38,7 +38,7 @@ public class Comment {
     private GridHelper gridHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -139,7 +139,7 @@ public class Comment {
 
         Long rowIndex = null;
         for (Long i = 0L; i < rowsCntBefore; i++) {
-            String value = jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, 0L);
+            String value = js.getGridCellValueByRowIndexAndColIndex(0L, i, 0L);
             if (text.equals(value)) {
                 if (rowIndex != null) {
                     throw new SeleniumUnexpectedException("Found many rows with same value[" + text + "]");
@@ -152,8 +152,8 @@ public class Comment {
             throw new SeleniumUnexpectedException("Row with value[" + text + "] not found");
         }
 
-        jsHelper.selectGridRow(0L, rowIndex);
-        String rowId = jsHelper.getGridRowIdByIndex(0L, rowIndex);
+        js.selectGridRow(0L, rowIndex);
+        String rowId = js.getGridRowIdByIndex(0L, rowIndex);
 
         elementWaitHelper.waitElementById("btnDelete" + rowId);
         elementWaitHelper.waitElementVisibleById("btnDelete" + rowId);

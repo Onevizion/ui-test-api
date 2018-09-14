@@ -8,14 +8,14 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
 @Component
 public class TbTaskDate {
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private GridHelper gridHelper;
@@ -25,15 +25,15 @@ public class TbTaskDate {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, String startFinish) {
-        Long columnIndex = jsHelper.getGridColIndexById(0L, columnId);
+        Long columnIndex = js.getGridColIndexById(0L, columnId);
 
-        String fieldName = jsHelper.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
         if ("F".equals(startFinish)) {
             columnIndex = columnIndex + 1L;
         }
 
         Long rowsCnt = gridHelper.getGridRowsCount(0L);
-        List<String> cellVals = (List<String>) jsHelper.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
+        List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         userpageFilter.checkFilterOperators(fieldName, Arrays.asList("S", "F"), Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                 "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "Is Null", "Is Not Null"));

@@ -19,7 +19,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 public class PsSelector {
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -48,7 +48,7 @@ public class PsSelector {
         String ret = null;
 
         for (Long i = romNum; i <= romNum; i++) {
-            String value = jsHelper.getGridCellValueByRowIndexAndColIndex(0L, romNum, colNum);
+            String value = js.getGridCellValueByRowIndexAndColIndex(0L, romNum, colNum);
             value = OnevizionUtils.removeHTMLTags(value);
             value = StringUtils.substringBefore(value, "\n");
             String compareValue = value;
@@ -70,7 +70,7 @@ public class PsSelector {
         List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("cb0_0"));
         if (firstRowNum != null && lastRowNum != null) {
             for (Long i = firstRowNum; i <= lastRowNum; i++) {
-                String value = jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, colNum);
+                String value = js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum);
                 value = OnevizionUtils.removeHTMLTags(value);
                 value = StringUtils.substringBefore(value, "\n");
                 String compareValue = value;
@@ -78,21 +78,21 @@ public class PsSelector {
                 compareValue = compareValue.replaceAll("FIELD", "");
 
                 checkboxHelper.clickByElement(webElements.get(i.intValue()));
-                ret.add(jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
+                ret.add(js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
             }
         } else {
-            Long cnt = jsHelper.getGridRowsCount(0L);
+            Long cnt = js.getGridRowsCount(0L);
             if (cnt.compareTo(new Long(5L)) > 0) {
                 cnt = 5L;
             }
             if (webElements.size() > 0) {
                 for (Long i = 0L; i < cnt; i++) {
-                    String value = jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, colNum);
+                    String value = js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum);
                     value = OnevizionUtils.removeHTMLTags(value);
                     value = StringUtils.substringBefore(value, "\n");
 
                     checkboxHelper.clickByElement(webElements.get(i.intValue()));
-                    ret.add(jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
+                    ret.add(js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
                 }
             }
         }
@@ -117,10 +117,10 @@ public class PsSelector {
             List<WebElement> webElement = seleniumSettings.getWebDriver().findElements(By.name("rb0"));
             webElement.get(0).click();
         } else {
-            Long cnt = jsHelper.getGridRowsCount(0L);
+            Long cnt = js.getGridRowsCount(0L);
             for (Long i = 0L; i < cnt; i++) {
-                if (jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
-                    WebElement rb = (WebElement)jsHelper.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
+                    WebElement rb = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                     elementHelper.moveToElement(rb);
                     rb.click();
                     break;
@@ -128,8 +128,8 @@ public class PsSelector {
             }
         }
 
-        String rowId = jsHelper.getGridSelectedRowId(0L);
-        String ret = jsHelper.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum);
+        String rowId = js.getGridSelectedRowId(0L);
+        String ret = js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum);
         window.closeModal(btnClose);
         return ret;
     }
@@ -151,21 +151,21 @@ public class PsSelector {
                     throw new SeleniumUnexpectedException("Not support QS type");
                 }
                 checkboxHelper.findLabelsByName("cb0_0").get(0).click();
-                String rowId = jsHelper.getGridSelectedRowId(0L);
-                ret.add(jsHelper.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
+                String rowId = js.getGridSelectedRowId(0L);
+                ret.add(js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
             }
         } else {
-            Long cnt = jsHelper.getGridRowsCount(0L);
+            Long cnt = js.getGridRowsCount(0L);
             for (String value : values) {
                 for (Long i = 0L; i < cnt; i++) {
-                    if (jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
-                        WebElement cell = (WebElement)jsHelper.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                    if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
+                        WebElement cell = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
                         WebElement label = checkboxHelper.findLabelByElement(cb);
                         elementHelper.moveToElement(label);
                         label.click();
-                        String rowId = jsHelper.getGridSelectedRowId(0L);
-                        ret.add(jsHelper.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
+                        String rowId = js.getGridSelectedRowId(0L);
+                        ret.add(js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
                         break;
                     }
                 }
@@ -193,8 +193,8 @@ public class PsSelector {
             List<WebElement> webElements = checkboxHelper.findLabelsByName("cb0_0");
             for (WebElement webElement : webElements) {
                 webElement.click();
-                String rowId = jsHelper.getGridSelectedRowId(0L);
-                ret.add(jsHelper.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
+                String rowId = js.getGridSelectedRowId(0L);
+                ret.add(js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
             }
         }
 
@@ -224,11 +224,11 @@ public class PsSelector {
                 }
             }
         } else {
-            Long cnt = jsHelper.getGridRowsCount(0L);
+            Long cnt = js.getGridRowsCount(0L);
             WebElement rb;
             for (Long i = 0L; i < cnt; i++) {
-                if (jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
-                    rb = ((WebElement)jsHelper.getGridCellByRowIndexAndColIndex(0L, i, 0L)).findElement(By.name("rb0"));
+                if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
+                    rb = ((WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L)).findElement(By.name("rb0"));
                     String checked = rb.getAttribute("checked");
                     if (checked != null && checked.equals("true")) {
                         ret = true;
@@ -264,12 +264,12 @@ public class PsSelector {
                 }
             }
         } else {
-            Long cnt = jsHelper.getGridRowsCount(0L);
+            Long cnt = js.getGridRowsCount(0L);
             for (String value : values) {
                 boolean ret = false;
                 for (Long i = 0L; i < cnt; i++) {
-                    if (jsHelper.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
-                        WebElement cell = (WebElement)jsHelper.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                    if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
+                        WebElement cell = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
                         if (checkboxHelper.isElementChecked(cb)) {
                             ret = true;

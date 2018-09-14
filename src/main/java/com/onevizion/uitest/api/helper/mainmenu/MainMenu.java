@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 
 @Component
@@ -20,7 +20,7 @@ public class MainMenu {
     private Wait wait;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;

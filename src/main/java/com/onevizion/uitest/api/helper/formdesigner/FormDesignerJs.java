@@ -10,11 +10,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.FormDesignerField;
 
 @Component
-class FormDesignerJs extends JsHelper {
+class FormDesignerJs extends Js {
 
     Boolean isReadyListBox() {
         //TODO firefox 59 bug

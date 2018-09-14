@@ -11,7 +11,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.JsHelper;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.FormDesignerField;
 
 @Component
@@ -35,7 +35,7 @@ public class FormDesigner {
     private ElementHelper elementHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private Js js;
 
     @Resource
     private FormDesignerWait formDesignerWait;
@@ -355,11 +355,11 @@ public class FormDesigner {
     }
 
     public void scrollFormToRight() {
-        jsHelper.scrollNewDropDownLeft("form1", 2000L);
+        js.scrollNewDropDownLeft("form1", 2000L);
     }
 
     public void scrollFormToLeft() {
-        jsHelper.scrollNewDropDownLeft("form1", 0L);
+        js.scrollNewDropDownLeft("form1", 0L);
     }
 
     public void waitListBoxReady() {
