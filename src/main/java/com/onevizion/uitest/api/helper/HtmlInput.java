@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class HtmlInputHelper {
+public class HtmlInput {
 
-    private final Logger logger = LoggerFactory.getLogger(HtmlInputHelper.class);
+    private final Logger logger = LoggerFactory.getLogger(HtmlInput.class);
 
     @Resource
     private SeleniumSettings seleniumSettings;
