@@ -51,7 +51,7 @@ import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.GridRowButtonHelper;
 import com.onevizion.uitest.api.helper.HelpHelper;
 import com.onevizion.uitest.api.helper.HtmlInputHelper;
-import com.onevizion.uitest.api.helper.HtmlSelectHelper;
+import com.onevizion.uitest.api.helper.HtmlSelect;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Login;
 import com.onevizion.uitest.api.helper.Logoff;
@@ -196,7 +196,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected CompAuditLogHelper compAuditLogHelper;
 
     @Resource
-    protected HtmlSelectHelper htmlSelectHelper;
+    protected HtmlSelect htmlSelect;
 
     @Resource
     protected UsersSettings usersSettings;

@@ -41,7 +41,7 @@ public class Wait {
     private View view;
 
     @Resource
-    private HtmlSelectHelper htmlSelectHelper;
+    private HtmlSelect htmlSelect;
 
     @Resource //TODO bug in Grid-115098 load views/filters before load grid
     private JqueryWait jqueryWait; //TODO bug in Grid-115098 load views/filters before load grid
@@ -353,7 +353,7 @@ public class Wait {
         .until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver webdriver) {
                 for (WebElement option :select.getOptions()) {
-                    if (htmlSelectHelper.getOptionText(option).equals(text)) {
+                    if (htmlSelect.getOptionText(option).equals(text)) {
                         return true;
                     }
                 }

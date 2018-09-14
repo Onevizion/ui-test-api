@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class HtmlSelectHelper {
+public class HtmlSelect {
 
     public boolean isSelectOptionPresent(Select select, String visibleText) {
         boolean isException = true;
