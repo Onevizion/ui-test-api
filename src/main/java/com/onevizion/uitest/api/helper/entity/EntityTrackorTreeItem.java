@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.PsSelectorHelper;
+import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -36,7 +36,7 @@ public class EntityTrackorTreeItem {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private PsSelectorHelper psSelectorHelper;
+    private PsSelector psSelector;
 
     @Resource
     private CheckboxHelper checkboxHelper;
@@ -57,7 +57,7 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        psSelectorHelper.selectSpecificValue(By.name("btntrackorType"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, trackorTreeItem.getTrackorType(), 1L);
+        psSelector.selectSpecificValue(By.name("btntrackorType"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, trackorTreeItem.getTrackorType(), 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("cardinalityId"))).selectByVisibleText(trackorTreeItem.getCardinality());
 

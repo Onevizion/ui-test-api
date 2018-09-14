@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
-public class PsSelectorHelper {
+public class PsSelector {
 
     @Resource
     private JsHelper jsHelper;

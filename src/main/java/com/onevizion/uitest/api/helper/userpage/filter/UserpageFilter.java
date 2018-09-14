@@ -27,7 +27,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.FilterHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.PsSelectorHelper;
+import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -53,7 +53,7 @@ public class UserpageFilter {
     private Window window;
 
     @Resource
-    private PsSelectorHelper psSelectorHelper;
+    private PsSelector psSelector;
 
     @Resource
     private AssertHelper assertHelper;
@@ -74,7 +74,7 @@ public class UserpageFilter {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        psSelectorHelper.selectSpecificValue(By.name("btnWPAttrib1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+        psSelector.selectSpecificValue(By.name("btnWPAttrib1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
         if (dateTypes != null) {
             List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name("tdWPOperator1"))).getOptions();
             Assert.assertEquals(options.size(), dateTypes.size());
@@ -909,7 +909,7 @@ public class UserpageFilter {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        psSelectorHelper.selectSpecificValue(By.name("btnWPAttrib1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+        psSelector.selectSpecificValue(By.name("btnWPAttrib1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
         if (dateType != null) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name("tdWPOperator1"))).selectByVisibleText(dateType);
         }
@@ -918,20 +918,20 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                psSelectorHelper.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                psSelector.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
                     By btnOpen = By.xpath("//*[string(@submitName)='btnTrSelWPAttribValue1'] | //*[string(@name)='btnTrSelWPAttribValue1']");
-                    psSelectorHelper.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
                     By btnOpen = By.xpath("//*[string(@submitName)='btnMultSelWPAttribValue1'] | //*[string(@name)='btnMultSelWPAttribValue1']");
-                    psSelectorHelper.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
                     By btnOpen = By.xpath("//*[string(@submitName)='btnTrDropDownWPAttribValue1'] | //*[string(@name)='btnTrDropDownWPAttribValue1']");
-                    psSelectorHelper.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 0L, value, 1L);
+                    psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 0L, value, 1L);
                 } else {
                     By btnOpen = By.xpath("//*[string(@submitName)='btnSelWPAttribValue1'] | //*[string(@name)='btnSelWPAttribValue1']");
-                    psSelectorHelper.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
@@ -942,7 +942,7 @@ public class UserpageFilter {
             if (operator.equals("=Field") || operator.equals("<>Field")
                     || operator.equals(">Field") || operator.equals("<Field")
                     || operator.equals(">=Field") || operator.equals("<=Field")) {
-                psSelectorHelper.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                psSelector.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             //} else if (operator.equals(">=Today") || operator.equals("<=Today") //TODO check those lines
             //        || operator.equals("This Wk") || operator.equals("This Mo")
             //        || operator.equals("This FQ") || operator.equals("This FY")) {
@@ -979,7 +979,7 @@ public class UserpageFilter {
             }
         } else {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                psSelectorHelper.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                psSelector.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 seleniumSettings.getWebDriver().findElement(By.name("txtWPAttribValue1")).sendKeys("*" + value + "*");
             }

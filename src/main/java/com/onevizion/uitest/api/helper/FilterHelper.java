@@ -74,7 +74,7 @@ public class FilterHelper {
     private Sort sort;
 
     @Resource
-    private PsSelectorHelper psSelectorHelper;
+    private PsSelector psSelector;
 
     @Resource
     private CheckboxHelper checkboxHelper;
@@ -182,10 +182,10 @@ public class FilterHelper {
             checkboxHelper.clickByName(fieldName);
         } else if (filterFieldType.equals(FilterFieldType.RADIO_PS_SELECTOR)) {
             By btnOpen = By.xpath("//*[string(@submitName)='btn" + fieldName + "'] | //*[string(@name)='btn" + fieldName + "']");
-            psSelectorHelper.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, cellsValues.get(0), 1L);
+            psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, cellsValues.get(0), 1L);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
             By btnOpen = By.xpath("//*[string(@submitName)='btn" + fieldName + "'] | //*[string(@name)='btn" + fieldName + "']");
-            psSelectorHelper.selectMultipleSpecificValues(btnOpen, 1L, cellsValues, 1L);
+            psSelector.selectMultipleSpecificValues(btnOpen, 1L, cellsValues, 1L);
         }
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid

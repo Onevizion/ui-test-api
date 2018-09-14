@@ -27,7 +27,7 @@ public class AssertHelper {
     private Wait wait;
 
     @Resource
-    private PsSelectorHelper psSelectorHelper;
+    private PsSelector psSelector;
 
     @Resource
     private ElementHelper elementHelper;
@@ -119,7 +119,7 @@ public class AssertHelper {
         if (isOpenSelector) {
             if (!"".equals(expectedVal)) {
                 By btnOpen = By.xpath("//*[string(@submitName)='" + btnOpenName + "'] | //*[string(@name)='" + btnOpenName + "']");
-                boolean isChecked = psSelectorHelper.checkValue(btnOpen, btnCloseName, expectedVal, filterFieldNum);
+                boolean isChecked = psSelector.checkValue(btnOpen, btnCloseName, expectedVal, filterFieldNum);
                 Assert.assertEquals(isChecked, true, "Radiobutton not selected");
             }
         }
@@ -132,7 +132,7 @@ public class AssertHelper {
         if (isOpenSelector) {
             if (!"".equals(expectedVal)) {
                 By btnOpen = By.id(btnOpenId);
-                boolean isChecked = psSelectorHelper.checkValue(btnOpen, btnCloseName, expectedVal, filterFieldNum);
+                boolean isChecked = psSelector.checkValue(btnOpen, btnCloseName, expectedVal, filterFieldNum);
                 Assert.assertEquals(isChecked, true, "Radiobutton not selected");
             }
         }
@@ -152,7 +152,7 @@ public class AssertHelper {
                 }
             }
             By btnOpen = By.xpath("//*[string(@submitName)='" + btnOpenName + "'] | //*[string(@name)='" + btnOpenName + "']");
-            boolean isChecked = psSelectorHelper.checkMultipleValues(btnOpen, btnCloseName, val, filterFieldNum);
+            boolean isChecked = psSelector.checkMultipleValues(btnOpen, btnCloseName, val, filterFieldNum);
             Assert.assertEquals(isChecked, true, "Radiobutton not selected");
         }
     }
@@ -171,7 +171,7 @@ public class AssertHelper {
                 }
             }
             By btnOpen = By.id(btnOpenId);
-            boolean isChecked = psSelectorHelper.checkMultipleValues(btnOpen, btnCloseName, val, filterFieldNum);
+            boolean isChecked = psSelector.checkMultipleValues(btnOpen, btnCloseName, val, filterFieldNum);
             Assert.assertEquals(isChecked, true, "Radiobutton not selected");
         }
     }

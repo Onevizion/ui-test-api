@@ -47,7 +47,7 @@ public class Tb {
     private FieldHistoryHelper fieldHistoryHelper;
 
     @Resource
-    private PsSelectorHelper psSelectorHelper;
+    private PsSelector psSelector;
 
     @Resource
     private ElementHelper elementHelper;
@@ -235,11 +235,11 @@ public class Tb {
             if (elementPosition > 1) {
                 By btnOpen = By.id("idx" + getLastFieldIndex(fieldName, elementPosition) + "_but");
                 elementHelper.moveToElementById("idx" + getLastFieldIndex(fieldName, elementPosition) + "_but");
-                psSelectorHelper.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             } else {
                 By btnOpen = By.xpath("//*[string(@submitName)='" + fieldName + "_but'] | //*[string(@name)='" + fieldName + "_but']");
                 elementHelper.moveToElementByName(fieldName + "_but");
-                psSelectorHelper.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -282,12 +282,12 @@ public class Tb {
                 elementHelper.moveToElementById("idx" + idx + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("idx" + idx + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
                 By btnOpen = By.id("idx" + idx + "_but");
-                psSelectorHelper.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
+                psSelector.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
             } else {
                 elementHelper.moveToElementByName(fieldName + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "_disp'] | //*[string(@name)='" + fieldName + "_disp']"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
                 By btnOpen = By.xpath("//*[string(@submitName)='" + fieldName + "_but'] | //*[string(@name)='" + fieldName + "_but']");
-                psSelectorHelper.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
+                psSelector.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -637,7 +637,7 @@ public class Tb {
             }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
             By btnOpen = By.xpath("//*[string(@submitName)='btn1'] | //*[string(@name)='btn1']");
-            psSelectorHelper.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+            psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
@@ -646,7 +646,7 @@ public class Tb {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("epmSelector1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             By btnOpen = By.xpath("//*[string(@submitName)='btn1'] | //*[string(@name)='btn1']");
-            psSelectorHelper.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
+            psSelector.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
             gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
             if (fieldName != null) {
                 expVals.put(fieldName, value);

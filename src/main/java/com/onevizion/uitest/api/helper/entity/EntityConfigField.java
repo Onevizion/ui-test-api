@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.PsSelectorHelper;
+import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -61,7 +61,7 @@ public class EntityConfigField {
     private CheckboxHelper checkboxHelper;
 
     @Resource
-    private PsSelectorHelper psSelectorHelper;
+    private PsSelector psSelector;
 
     @Resource
     private Tab tab;
@@ -140,7 +140,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            psSelectorHelper.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldDropDown().getTable(), 2L);
+            psSelector.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldDropDown().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
@@ -164,7 +164,7 @@ public class EntityConfigField {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldDbSelector().getSql());
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDbSelector().getDefValueSql());
         } else if (ConfigFieldType.SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            psSelectorHelper.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldSelector().getTable(), 2L);
+            psSelector.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldSelector().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
@@ -209,7 +209,7 @@ public class EntityConfigField {
                     || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkboxHelper.isCheckedByName("uploadToS3Directly"))) {
                 checkboxHelper.clickByName("uploadToS3Directly");
             }
-            psSelectorHelper.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
+            psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
             tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
@@ -227,7 +227,7 @@ public class EntityConfigField {
                 checkboxHelper.clickByName("myThingsMarket");
             }
 
-            psSelectorHelper.selectSpecificValue(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
+            psSelector.selectSpecificValue(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorSelector().getDefValueSql());
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -259,7 +259,7 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldMultiSelector().getLines());
 
-            psSelectorHelper.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
+            psSelector.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
@@ -395,7 +395,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            psSelectorHelper.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldDropDown().getTable(), 2L);
+            psSelector.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldDropDown().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
@@ -419,7 +419,7 @@ public class EntityConfigField {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldDbSelector().getSql());
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDbSelector().getDefValueSql());
         } else if (ConfigFieldType.SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            psSelectorHelper.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldSelector().getTable(), 2L);
+            psSelector.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldSelector().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
@@ -457,7 +457,7 @@ public class EntityConfigField {
                     || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkboxHelper.isCheckedByName("uploadToS3Directly"))) {
                 checkboxHelper.clickByName("uploadToS3Directly");
             }
-            psSelectorHelper.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
+            psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
             tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
@@ -475,7 +475,7 @@ public class EntityConfigField {
                 checkboxHelper.clickByName("myThingsMarket");
             }
 
-            psSelectorHelper.selectSpecificValue(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
+            psSelector.selectSpecificValue(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorSelector().getDefValueSql());
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -507,7 +507,7 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldMultiSelector().getLines());
 
-            psSelectorHelper.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
+            psSelector.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {

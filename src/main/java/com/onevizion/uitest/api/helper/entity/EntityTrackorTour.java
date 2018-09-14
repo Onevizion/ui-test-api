@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.PsSelectorHelper;
+import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -36,7 +36,7 @@ public class EntityTrackorTour {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private PsSelectorHelper psSelectorHelper;
+    private PsSelector psSelector;
 
     @Resource
     private Tab tab;
@@ -82,11 +82,11 @@ public class EntityTrackorTour {
         new Select(seleniumSettings.getWebDriver().findElement(By.name("startTourPlace"))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            psSelectorHelper.selectSpecificValue(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
+            psSelector.selectSpecificValue(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
         } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
-            psSelectorHelper.selectSpecificValue(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
+            psSelector.selectSpecificValue(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
         } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
-            psSelectorHelper.selectSpecificValue(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
+            psSelector.selectSpecificValue(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
@@ -117,11 +117,11 @@ public class EntityTrackorTour {
         new Select(seleniumSettings.getWebDriver().findElement(By.name("startTourPlace"))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            psSelectorHelper.selectSpecificValue(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
+            psSelector.selectSpecificValue(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
         } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
-            psSelectorHelper.selectSpecificValue(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
+            psSelector.selectSpecificValue(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
         } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
-            psSelectorHelper.selectSpecificValue(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
+            psSelector.selectSpecificValue(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }

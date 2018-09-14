@@ -58,7 +58,7 @@ import com.onevizion.uitest.api.helper.LogoffHelper;
 import com.onevizion.uitest.api.helper.NavHelper;
 import com.onevizion.uitest.api.helper.NewDropDownHelper;
 import com.onevizion.uitest.api.helper.PrivilegiesHelper;
-import com.onevizion.uitest.api.helper.PsSelectorHelper;
+import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Qs;
 import com.onevizion.uitest.api.helper.RelationSelector;
 import com.onevizion.uitest.api.helper.Sort;
@@ -169,7 +169,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected FieldHistoryHelper fieldHistoryHelper;
 
     @Resource
-    protected PsSelectorHelper psSelectorHelper;
+    protected PsSelector psSelector;
 
     @Resource
     protected ElementHelper elementHelper;
