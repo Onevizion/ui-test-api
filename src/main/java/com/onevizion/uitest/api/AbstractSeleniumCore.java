@@ -65,7 +65,7 @@ import com.onevizion.uitest.api.helper.SortHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.TabJsHelper;
 import com.onevizion.uitest.api.helper.TbHelper;
-import com.onevizion.uitest.api.helper.UsersSettingsHelper;
+import com.onevizion.uitest.api.helper.UsersSettings;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3Endpoint;
@@ -199,7 +199,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected HtmlSelectHelper htmlSelectHelper;
 
     @Resource
-    protected UsersSettingsHelper usersSettingsHelper;
+    protected UsersSettings usersSettings;
 
     @Resource
     protected ElementJsHelper elementJsHelper;

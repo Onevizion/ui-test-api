@@ -10,7 +10,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class UsersSettingsHelper {
+public class UsersSettings {
 
     @Resource
     private SeleniumSettings seleniumSettings;
