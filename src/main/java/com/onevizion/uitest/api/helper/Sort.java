@@ -19,7 +19,7 @@ import com.onevizion.uitest.api.vo.GridColumnType;
 import com.onevizion.uitest.api.vo.SortType;
 
 @Component
-public class SortHelper {
+public class Sort {
 
     @Resource
     private JsHelper jsHelper;

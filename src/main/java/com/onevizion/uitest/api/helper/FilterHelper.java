@@ -71,7 +71,7 @@ public class FilterHelper {
     private Window window;
 
     @Resource
-    private SortHelper sortHelper;
+    private Sort sort;
 
     @Resource
     private PsSelectorHelper psSelectorHelper;
@@ -298,7 +298,7 @@ public class FilterHelper {
 
     public String getGridCellValueForFilterTest(Long gridId, String columnId, FilterFieldType filterFieldType) {
         if (jsHelper.getGridIsSupportSortByGridId(gridId)) {
-            sortHelper.sortColumn(gridId, columnId, SortType.ASC);
+            sort.sortColumn(gridId, columnId, SortType.ASC);
         }
         Long columnIndex = jsHelper.getGridColIndexById(gridId, columnId);
         if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
