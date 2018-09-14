@@ -55,7 +55,7 @@ import com.onevizion.uitest.api.helper.HtmlSelectHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.LoginHelper;
 import com.onevizion.uitest.api.helper.LogoffHelper;
-import com.onevizion.uitest.api.helper.NavHelper;
+import com.onevizion.uitest.api.helper.Nav;
 import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Privilegies;
 import com.onevizion.uitest.api.helper.PsSelector;
@@ -157,7 +157,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Sort sort;
 
     @Resource
-    protected NavHelper navHelper;
+    protected Nav nav;
 
     @Resource
     protected View view;

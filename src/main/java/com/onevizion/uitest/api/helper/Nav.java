@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
-public class NavHelper {
+public class Nav {
 
     private final static String BUTTON_NEXT = "navNext";
     private final static String BUTTON_PREV = "navPrev";
