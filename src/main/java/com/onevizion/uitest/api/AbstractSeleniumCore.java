@@ -99,7 +99,7 @@ import com.onevizion.uitest.api.helper.entity.EntityWpDatePairHelper;
 import com.onevizion.uitest.api.helper.entity.EntityWpDisciplineHelper;
 import com.onevizion.uitest.api.helper.export.ExportHelper;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesignerHelper;
-import com.onevizion.uitest.api.helper.grid.Grid2Helper;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.JqueryJs;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
@@ -118,7 +118,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     /* Helpers Begin */
     @Resource
-    protected Grid2Helper grid2Helper;
+    protected Grid2 grid2;
 
     @Resource
     protected TbHelper tbHelper;

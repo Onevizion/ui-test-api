@@ -12,17 +12,17 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class Grid2WaitHelper {
+class Grid2Wait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private Grid2JsHelper grid2JsHelper;
+    private Grid2Js grid2Js;
 
     void waitLoadAllRows(Long gridIdx) {
         Supplier<Boolean> actualValueSupplier = ()-> {
-            return grid2JsHelper.isLoadAllRowsDone(gridIdx);
+            return grid2Js.isLoadAllRowsDone(gridIdx);
         };
 
         Supplier<String> messageSupplier = ()-> {
