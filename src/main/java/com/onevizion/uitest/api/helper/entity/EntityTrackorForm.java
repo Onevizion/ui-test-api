@@ -20,7 +20,7 @@ import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.vo.entity.TrackorForm;
 
 @Component
-public class EntityTrackorFormHelper {
+public class EntityTrackorForm {
 
     @Resource
     private WindowHelper windowHelper;

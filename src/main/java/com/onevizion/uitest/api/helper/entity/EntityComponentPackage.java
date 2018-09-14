@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.vo.entity.ComponentPackage;
 
 @Component
-public class EntityComponentPackageHelper {
+public class EntityComponentPackage {
 
     @Resource
     private NewDropDownHelper newDropDownHelper;

@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.vo.entity.Menu;
 
 @Component
-public class EntityMenuHelper {
+public class EntityMenu {
 
     @Resource
     private WaitHelper waitHelper;

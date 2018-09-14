@@ -21,7 +21,7 @@ import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
 
 @Component
-public class EntityTrackorTourStepHelper {
+public class EntityTrackorTourStep {
 
     @Resource
     private WindowHelper windowHelper;

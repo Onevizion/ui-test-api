@@ -22,7 +22,7 @@ import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.vo.entity.TrackorType;
 
 @Component
-public class EntityTrackorTypeHelper {
+public class EntityTrackorType {
 
     @Resource
     private WindowHelper windowHelper;

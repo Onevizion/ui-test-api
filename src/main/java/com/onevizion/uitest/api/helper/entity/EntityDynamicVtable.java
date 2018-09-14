@@ -22,7 +22,7 @@ import com.onevizion.uitest.api.vo.entity.DynamicVtable;
 import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 
 @Component
-public class EntityDynamicVtableHelper {
+public class EntityDynamicVtable {
 
     @Resource
     private WindowHelper windowHelper;
@@ -49,7 +49,7 @@ public class EntityDynamicVtableHelper {
     private TabHelper tabHelper;
 
     @Resource
-    private EntityDynamicVtableValueHelper entityDynamicVtableValueHelper;
+    private EntityDynamicVtableValue entityDynamicVtableValue;
 
     public void addWithChilds(DynamicVtable dynamicVtable) {
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -69,7 +69,7 @@ public class EntityDynamicVtableHelper {
         waitHelper.waitGridLoad(2L, 2L);
 
         for (DynamicVtableValue dynamicVtableValue : dynamicVtable.getValues()) {
-            entityDynamicVtableValueHelper.add(dynamicVtableValue);
+            entityDynamicVtableValue.add(dynamicVtableValue);
         }
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -118,8 +118,8 @@ public class EntityDynamicVtableHelper {
         Assert.assertEquals(gridHelper.getGridRowsCount(2L), new Long(dynamicVtable.getValues().size()));
         for (int i = 0; i < dynamicVtable.getValues().size(); i++) {
             jsHelper.selectGridRow(2L, new Long(i));
-            entityDynamicVtableValueHelper.testInGrid(2L, new Long(i), dynamicVtable.getValues().get(i));
-            entityDynamicVtableValueHelper.testOnForm(dynamicVtable.getValues().get(i));
+            entityDynamicVtableValue.testInGrid(2L, new Long(i), dynamicVtable.getValues().get(i));
+            entityDynamicVtableValue.testOnForm(dynamicVtable.getValues().get(i));
         }
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

@@ -20,7 +20,7 @@ import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 
 @Component
-public class EntityDynamicVtableValueHelper {
+public class EntityDynamicVtableValue {
 
     @Resource
     private WindowHelper windowHelper;

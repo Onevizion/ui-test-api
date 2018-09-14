@@ -13,13 +13,12 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
-import com.onevizion.uitest.api.vo.entity.WpDiscipline;
+import com.onevizion.uitest.api.vo.entity.ConfigAppExtParam;
 
 @Component
-public class EntityWpDisciplineHelper {
+public class EntityConfigAppExtParam {
 
     @Resource
     private WindowHelper windowHelper;
@@ -31,75 +30,66 @@ public class EntityWpDisciplineHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private TabHelper tabHelper;
-
-    @Resource
-    private GridHelper gridHelper;
+    private JsHelper jsHelper;
 
     @Resource
     private AssertHelper assertHelper;
 
     @Resource
-    private JsHelper jsHelper;
+    private GridHelper gridHelper;
 
-    public void add(WpDiscipline wpDiscipline) {
+    public void add(ConfigAppExtParam configAppExtParam) {
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("discpType")).sendKeys(wpDiscipline.getName());
+        seleniumSettings.getWebDriver().findElement(By.name("paramName")).sendKeys("param1");
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(wpDiscipline.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys("desc param1");
 
-        tabHelper.goToTab(2L); //Role Assignments
-        waitHelper.waitGridLoad(2L, 2L);
-        gridHelper.clearAssignmentGridColumn2(2L, 0L);
-        gridHelper.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
+        waitHelper.waitCodeMirrorLoad("sqlText");
+        jsHelper.setValueToCodeMirror("sqlText", "select 1 from dual");
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
-    public void edit(WpDiscipline wpDiscipline) {
+    public void edit(ConfigAppExtParam configAppExtParam) {
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("discpType")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("discpType")).sendKeys(wpDiscipline.getName());
+        seleniumSettings.getWebDriver().findElement(By.name("paramName")).clear();
+        seleniumSettings.getWebDriver().findElement(By.name("paramName")).sendKeys("param1edit");
 
         seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(wpDiscipline.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys("desc param1 edit");
 
-        tabHelper.goToTab(2L);//Role Assignments
-        waitHelper.waitGridLoad(2L, 2L);
-        gridHelper.clearAssignmentGridColumn2(2L, 0L);
-        gridHelper.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
+        waitHelper.waitCodeMirrorLoad("sqlText");
+        jsHelper.setValueToCodeMirror("sqlText", "select 11 from dual");
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
-    public void testOnForm(WpDiscipline wpDiscipline) {
+    public void testOnForm(ConfigAppExtParam configAppExtParam) {
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
-        assertHelper.AssertText("discpType", wpDiscipline.getName());
-        assertHelper.AssertText("description", wpDiscipline.getDescription());
-
-        tabHelper.goToTab(2L); //Role Assignments
-        waitHelper.waitGridLoad(2L, 2L);
-        gridHelper.checkAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
+        assertHelper.AssertText("paramName", configAppExtParam.getName());
+        assertHelper.AssertText("description", configAppExtParam.getDescription());
+        assertHelper.AssertCodeMirror("sqlText", configAppExtParam.getSql());
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, WpDiscipline wpDiscipline) {
+    public void testInGrid(Long gridId, Long rowIndex, ConfigAppExtParam configAppExtParam) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Discipline"), wpDiscipline.getName());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), wpDiscipline.getDescription());
+        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "URL Param"), configAppExtParam.getName());
+        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), configAppExtParam.getDescription());
+        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "SQL Statement"), configAppExtParam.getSql());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

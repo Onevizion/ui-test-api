@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -16,10 +15,11 @@ import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
-import com.onevizion.uitest.api.vo.entity.ClientFile;
+import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
+import com.onevizion.uitest.api.vo.entity.Color;
 
 @Component
-public class EntityClientFileHelper {
+public class EntityColor {
 
     @Resource
     private WindowHelper windowHelper;
@@ -28,63 +28,74 @@ public class EntityClientFileHelper {
     private WaitHelper waitHelper;
 
     @Resource
-    private JsHelper jsHelper;
-
-    @Resource
     private AssertHelper assertHelper;
 
     @Resource
     private GridHelper gridHelper;
 
     @Resource
+    private JsHelper jsHelper;
+
+    @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void add(ClientFile clientFile) {
+    @Resource
+    private ColorPicker colorPicker;
+
+    public void add(Color color) {
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("clientFileGroupId"))).selectByVisibleText(clientFile.getFileGroup());
+        seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
 
-        jsHelper.showInputForFile("inputFileUploader", "FileUploader");
-        seleniumSettings.getWebDriver().findElement(By.name("oldFileFileUploader")).sendKeys(seleniumSettings.getUploadFilesPath() + clientFile.getFileName());
+        windowHelper.openModal(By.name("btncolorPicker"));
+        colorPicker.setValue("#" + color.getValue());
+        windowHelper.closeModal(By.className("dhx_button_save"));
 
-        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
-    }
-
-    public void edit(ClientFile clientFile) {
-        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        waitHelper.waitFormLoad();
-
-        assertHelper.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
-
-        jsHelper.showInputForFile("inputFileUploader", "FileUploader");
-        seleniumSettings.getWebDriver().findElement(By.name("oldFileFileUploader")).sendKeys(seleniumSettings.getUploadFilesPath() + clientFile.getFileName());
+        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
     }
 
-    public void testOnForm(ClientFile clientFile) {
+    public void edit(Color color) {
         windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
 
-        assertHelper.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
-        assertHelper.AssertText("txtFileUploader", clientFile.getFileName());
+        seleniumSettings.getWebDriver().findElement(By.name("colorName")).clear();
+        seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
+
+        windowHelper.openModal(By.name("btncolorPicker"));
+        colorPicker.setValue("#" + color.getValue());
+        windowHelper.closeModal(By.className("dhx_button_save"));
+
+        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
+        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
+
+        windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        waitHelper.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void testOnForm(Color color) {
+        windowHelper.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        waitHelper.waitFormLoad();
+
+        assertHelper.AssertText("colorName", color.getName());
+        assertHelper.AssertText("rgbValue", color.getValue());
+        assertHelper.AssertText("description", color.getDescription());
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, ClientFile clientFile) {
+    public void testInGrid(Long gridId, Long rowIndex, Color color) {
         Map<Long, String> gridVals = new HashMap<Long, String>();
 
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "File Group"), clientFile.getFileGroup());
-        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "File Name"), clientFile.getFileName());
-        //TODO Size (Kb)
-        //TODO Preview
+        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Color Code"), color.getName());
+        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "RGB Value"), color.getValue());
+        gridVals.put(jsHelper.getColumnIndexByLabel(gridId, "Description"), color.getDescription());
 
         gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

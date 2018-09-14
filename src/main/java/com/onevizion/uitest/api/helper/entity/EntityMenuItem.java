@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.vo.MenuItemType;
 import com.onevizion.uitest.api.vo.entity.MenuItem;
 
 @Component
-public class EntityMenuItemHelper {
+public class EntityMenuItem {
 
     @Resource
     private WindowHelper windowHelper;

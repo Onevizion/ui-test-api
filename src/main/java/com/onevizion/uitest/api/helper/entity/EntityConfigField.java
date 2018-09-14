@@ -28,7 +28,7 @@ import com.onevizion.uitest.api.vo.ConfigFieldType;
 import com.onevizion.uitest.api.vo.entity.ConfigFieldVo;
 
 @Component
-public class EntityConfigFieldHelper {
+public class EntityConfigField {
 
     @Resource
     private WindowHelper windowHelper;

@@ -77,26 +77,26 @@ import com.onevizion.uitest.api.helper.comment.Comment;
 import com.onevizion.uitest.api.helper.configfield.ConfigField;
 import com.onevizion.uitest.api.helper.dashboard.Dashboard;
 import com.onevizion.uitest.api.helper.document.Document;
-import com.onevizion.uitest.api.helper.entity.EntityClientFileHelper;
-import com.onevizion.uitest.api.helper.entity.EntityColorHelper;
-import com.onevizion.uitest.api.helper.entity.EntityComponentPackageHelper;
-import com.onevizion.uitest.api.helper.entity.EntityConfigAppExtHelper;
-import com.onevizion.uitest.api.helper.entity.EntityConfigAppExtParamHelper;
-import com.onevizion.uitest.api.helper.entity.EntityConfigFieldHelper;
-import com.onevizion.uitest.api.helper.entity.EntityDynamicVtableHelper;
-import com.onevizion.uitest.api.helper.entity.EntityDynamicVtableValueHelper;
-import com.onevizion.uitest.api.helper.entity.EntityMenuHelper;
-import com.onevizion.uitest.api.helper.entity.EntityMenuItemHelper;
-import com.onevizion.uitest.api.helper.entity.EntityReportGroupHelper;
-import com.onevizion.uitest.api.helper.entity.EntitySecurityRoleHelper;
-import com.onevizion.uitest.api.helper.entity.EntityTrackorClassHelper;
-import com.onevizion.uitest.api.helper.entity.EntityTrackorFormHelper;
-import com.onevizion.uitest.api.helper.entity.EntityTrackorTourHelper;
-import com.onevizion.uitest.api.helper.entity.EntityTrackorTourStepHelper;
-import com.onevizion.uitest.api.helper.entity.EntityTrackorTreeItemHelper;
-import com.onevizion.uitest.api.helper.entity.EntityTrackorTypeHelper;
-import com.onevizion.uitest.api.helper.entity.EntityWpDatePairHelper;
-import com.onevizion.uitest.api.helper.entity.EntityWpDisciplineHelper;
+import com.onevizion.uitest.api.helper.entity.EntityClientFile;
+import com.onevizion.uitest.api.helper.entity.EntityColor;
+import com.onevizion.uitest.api.helper.entity.EntityComponentPackage;
+import com.onevizion.uitest.api.helper.entity.EntityConfigAppExt;
+import com.onevizion.uitest.api.helper.entity.EntityConfigAppExtParam;
+import com.onevizion.uitest.api.helper.entity.EntityConfigField;
+import com.onevizion.uitest.api.helper.entity.EntityDynamicVtable;
+import com.onevizion.uitest.api.helper.entity.EntityDynamicVtableValue;
+import com.onevizion.uitest.api.helper.entity.EntityMenu;
+import com.onevizion.uitest.api.helper.entity.EntityMenuItem;
+import com.onevizion.uitest.api.helper.entity.EntityReportGroup;
+import com.onevizion.uitest.api.helper.entity.EntitySecurityRole;
+import com.onevizion.uitest.api.helper.entity.EntityTrackorClass;
+import com.onevizion.uitest.api.helper.entity.EntityTrackorForm;
+import com.onevizion.uitest.api.helper.entity.EntityTrackorTour;
+import com.onevizion.uitest.api.helper.entity.EntityTrackorTourStep;
+import com.onevizion.uitest.api.helper.entity.EntityTrackorTreeItem;
+import com.onevizion.uitest.api.helper.entity.EntityTrackorType;
+import com.onevizion.uitest.api.helper.entity.EntityWpDatePair;
+import com.onevizion.uitest.api.helper.entity.EntityWpDiscipline;
 import com.onevizion.uitest.api.helper.export.Export;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesigner;
 import com.onevizion.uitest.api.helper.grid.Grid2;
@@ -279,64 +279,64 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     /* Entity Helpers Begin */
     @Resource
-    protected EntityDynamicVtableHelper entityDynamicVtableHelper;
+    protected EntityDynamicVtable entityDynamicVtable;
 
     @Resource
-    protected EntityDynamicVtableValueHelper entityDynamicVtableValueHelper;
+    protected EntityDynamicVtableValue entityDynamicVtableValue;
 
     @Resource
-    protected EntityTrackorTypeHelper entityTrackorTypeHelper;
+    protected EntityTrackorType entityTrackorType;
 
     @Resource
-    protected EntityTrackorTreeItemHelper entityTrackorTreeItemHelper;
+    protected EntityTrackorTreeItem entityTrackorTreeItem;
 
     @Resource
-    protected EntityMenuHelper entityMenuHelper;
+    protected EntityMenu entityMenu;
 
     @Resource
-    protected EntityMenuItemHelper entityMenuItemHelper;
+    protected EntityMenuItem entityMenuItem;
 
     @Resource
-    protected EntityConfigFieldHelper entityConfigFieldHelper;
+    protected EntityConfigField entityConfigField;
 
     @Resource
-    protected EntityComponentPackageHelper entityComponentPackageHelper;
+    protected EntityComponentPackage entityComponentPackage;
 
     @Resource
-    protected EntityColorHelper entityColorHelper;
+    protected EntityColor entityColor;
 
     @Resource
-    protected EntityClientFileHelper entityClientFileHelper;
+    protected EntityClientFile entityClientFile;
 
     @Resource
-    protected EntityReportGroupHelper entityReportGroupHelper;
+    protected EntityReportGroup entityReportGroup;
 
     @Resource
-    protected EntityTrackorFormHelper entityTrackorFormHelper;
+    protected EntityTrackorForm entityTrackorForm;
 
     @Resource
-    protected EntityTrackorTourHelper entityTrackorTourHelper;
+    protected EntityTrackorTour entityTrackorTour;
 
     @Resource
-    protected EntityTrackorTourStepHelper entityTrackorTourStepHelper;
+    protected EntityTrackorTourStep entityTrackorTourStep;
 
     @Resource
-    protected EntityConfigAppExtHelper entityConfigAppExtHelper;
+    protected EntityConfigAppExt entityConfigAppExt;
 
     @Resource
-    protected EntityConfigAppExtParamHelper entityConfigAppExtParamHelper;
+    protected EntityConfigAppExtParam entityConfigAppExtParam;
 
     @Resource
-    protected EntityTrackorClassHelper entityTrackorClassHelper;
+    protected EntityTrackorClass entityTrackorClass;
 
     @Resource
-    protected EntitySecurityRoleHelper entitySecurityRoleHelper;
+    protected EntitySecurityRole entitySecurityRole;
 
     @Resource
-    protected EntityWpDisciplineHelper entityWpDisciplineHelper;
+    protected EntityWpDiscipline entityWpDiscipline;
 
     @Resource
-    protected EntityWpDatePairHelper entityWpDatePairHelper;
+    protected EntityWpDatePair entityWpDatePair;
     /* Entity Helpers End */
 
     @Resource

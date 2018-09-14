@@ -24,7 +24,7 @@ import com.onevizion.uitest.api.vo.entity.TrackorTour;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
 
 @Component
-public class EntityTrackorTourHelper {
+public class EntityTrackorTour {
 
     @Resource
     private WindowHelper windowHelper;
@@ -51,7 +51,7 @@ public class EntityTrackorTourHelper {
     private JsHelper jsHelper;
 
     @Resource
-    private EntityTrackorTourStepHelper entityTrackorTourStepHelper;
+    private EntityTrackorTourStep entityTrackorTourStep;
 
     public void addWithChilds(TrackorTour trackorTour) {
         add(trackorTour);
@@ -64,7 +64,7 @@ public class EntityTrackorTourHelper {
         waitHelper.waitGridLoad(2L, 2L);
 
         for (TrackorTourStep trackorTourStep : trackorTour.getSteps()) {
-            entityTrackorTourStepHelper.add(trackorTourStep);
+            entityTrackorTourStep.add(trackorTourStep);
         }
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -154,8 +154,8 @@ public class EntityTrackorTourHelper {
         Assert.assertEquals(gridHelper.getGridRowsCount(2L), new Long(trackorTour.getSteps().size()));
         for (int i = 0; i < trackorTour.getSteps().size(); i++) {
             jsHelper.selectGridRow(2L, new Long(i));
-            entityTrackorTourStepHelper.testInGrid(2L, new Long(i), trackorTour.getSteps().get(i));
-            entityTrackorTourStepHelper.testOnForm(trackorTour.getSteps().get(i));
+            entityTrackorTourStep.testInGrid(2L, new Long(i), trackorTour.getSteps().get(i));
+            entityTrackorTourStep.testOnForm(trackorTour.getSteps().get(i));
         }
 
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

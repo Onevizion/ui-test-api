@@ -21,7 +21,7 @@ import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
 
 @Component
-public class EntityTrackorTreeItemHelper {
+public class EntityTrackorTreeItem {
 
     @Resource
     private WindowHelper windowHelper;

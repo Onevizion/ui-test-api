@@ -19,7 +19,7 @@ import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.vo.entity.SecurityRole;
 
 @Component
-public class EntitySecurityRoleHelper {
+public class EntitySecurityRole {
 
     @Resource
     private WindowHelper windowHelper;

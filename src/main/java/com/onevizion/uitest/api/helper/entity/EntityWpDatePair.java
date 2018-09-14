@@ -19,7 +19,7 @@ import com.onevizion.uitest.api.helper.WindowHelper;
 import com.onevizion.uitest.api.vo.entity.WpDatePair;
 
 @Component
-public class EntityWpDatePairHelper {
+public class EntityWpDatePair {
 
     @Resource
     private WindowHelper windowHelper;

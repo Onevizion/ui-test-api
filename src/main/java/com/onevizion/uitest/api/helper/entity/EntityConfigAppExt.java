@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.vo.entity.ConfigAppExt;
 
 @Component
-public class EntityConfigAppExtHelper {
+public class EntityConfigAppExt {
 
     
 
