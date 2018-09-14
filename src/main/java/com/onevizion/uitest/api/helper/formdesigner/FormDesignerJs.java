@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.vo.FormDesignerField;
 
 @Component
-class FormDesignerJsHelper extends JsHelper {
+class FormDesignerJs extends JsHelper {
 
     Boolean isReadyListBox() {
         //TODO firefox 59 bug

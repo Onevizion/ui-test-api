@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.WaitHelper;
 
 @Component
-class FormDesignerWaitHelper {
+class FormDesignerWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -22,7 +22,7 @@ class FormDesignerWaitHelper {
     private WaitHelper waitHelper;
 
     @Resource
-    private FormDesignerJsHelper formDesignerJsHelper;
+    private FormDesignerJs formDesignerJs;
 
     void waitFormDesignerLoad() {
         waitHelper.waitWebElement(By.id("loaderformDes"));
@@ -41,7 +41,7 @@ class FormDesignerWaitHelper {
             .withMessage("Waiting for listBox loading is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return formDesignerJsHelper.isReadyListBox();
+                    return formDesignerJs.isReadyListBox();
                 }
             });
     }

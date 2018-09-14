@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.vo.FormDesignerField;
 
 @Component
-public class FormDesignerHelper {
+public class FormDesigner {
 
     private final static String FIELD_LIST_SEARCH = "searchField";
     private final static String BUTTON_CLEAR_SEARCH = "wrappClearSearch";
@@ -38,10 +38,10 @@ public class FormDesignerHelper {
     private JsHelper jsHelper;
 
     @Resource
-    private FormDesignerWaitHelper formDesignerWaitHelper;
+    private FormDesignerWait formDesignerWait;
 
     @Resource
-    private FormDesignerJsHelper formDesignerJsHelper;
+    private FormDesignerJs formDesignerJs;
 
     public void fillSearch(String name) {
         elementHelper.moveToElementById(FIELD_LIST_SEARCH);
@@ -178,7 +178,7 @@ public class FormDesignerHelper {
     }
 
     public List<FormDesignerField> getElementsOnForm() {
-        return formDesignerJsHelper.getElementsOnForm();
+        return formDesignerJs.getElementsOnForm();
     }
 
     public void checkElementOnFormByPositionAndName(List<FormDesignerField> fields, String row, String col, String fieldName) {
@@ -363,11 +363,11 @@ public class FormDesignerHelper {
     }
 
     public void waitListBoxReady() {
-        formDesignerWaitHelper.waitListBoxReady();
+        formDesignerWait.waitListBoxReady();
     }
 
     public void waitFormDesignerLoad() {
-        formDesignerWaitHelper.waitFormDesignerLoad();
+        formDesignerWait.waitFormDesignerLoad();
     }
 
 }
