@@ -56,7 +56,7 @@ import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.LoginHelper;
 import com.onevizion.uitest.api.helper.LogoffHelper;
 import com.onevizion.uitest.api.helper.NavHelper;
-import com.onevizion.uitest.api.helper.NewDropDownHelper;
+import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Privilegies;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Qs;
@@ -259,7 +259,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected ApiV3Parameter apiV3Parameter;
 
     @Resource
-    protected NewDropDownHelper newDropDownHelper;
+    protected NewDropDown newDropDown;
 
     @Resource
     protected ConfigField configField;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.NewDropDownHelper;
+import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -36,13 +36,13 @@ public class EntityMenu {
     private GridHelper gridHelper;
 
     @Resource
-    private NewDropDownHelper newDropDownHelper;
+    private NewDropDown newDropDown;
 
     @Resource
     private JqueryWait jqueryWait;
 
     public void testOnForm(Menu menu) {
-        newDropDownHelper.openEditMenuForm(menu.getName());
+        newDropDown.openEditMenuForm(menu.getName());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
         jqueryWait.waitJQueryLoad();
@@ -57,7 +57,7 @@ public class EntityMenu {
     }
 
     public void testRoleAssignments(Menu menu, List<String> roles) {
-        newDropDownHelper.openEditMenuForm(menu.getName());
+        newDropDown.openEditMenuForm(menu.getName());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 

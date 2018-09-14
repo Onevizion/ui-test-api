@@ -9,7 +9,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
-import com.onevizion.uitest.api.helper.NewDropDownHelper;
+import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.ComponentPackage;
@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.vo.entity.ComponentPackage;
 public class EntityComponentPackage {
 
     @Resource
-    private NewDropDownHelper newDropDownHelper;
+    private NewDropDown newDropDown;
 
     @Resource
     private Wait wait;
@@ -52,7 +52,7 @@ public class EntityComponentPackage {
     }
 
     public void edit(ComponentPackage componentPackageOld, ComponentPackage componentPackage) {
-        newDropDownHelper.openEditComponentPackageForm(componentPackageOld.getName());
+        newDropDown.openEditComponentPackageForm(componentPackageOld.getName());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
@@ -64,7 +64,7 @@ public class EntityComponentPackage {
     }
 
     public void testOnForm(ComponentPackage componentPackage) {
-        newDropDownHelper.openEditComponentPackageForm(componentPackage.getName());
+        newDropDown.openEditComponentPackageForm(componentPackage.getName());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 

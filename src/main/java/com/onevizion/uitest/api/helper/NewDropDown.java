@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.tree.TreeWait;
 
 @Component
-public class NewDropDownHelper {
+public class NewDropDown {
 
     @Resource
     private SeleniumSettings seleniumSettings;
