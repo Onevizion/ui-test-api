@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class PrivilegiesHelper {
+public class Privilegies {
 
     @Resource
     private SeleniumSettings seleniumSettings;
