@@ -11,7 +11,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.NewDropDownHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
@@ -30,7 +30,7 @@ public class EntityMenu {
     private AssertHelper assertHelper;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private GridHelper gridHelper;
@@ -61,7 +61,7 @@ public class EntityMenu {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(2L); // Roles
+        tab.goToTab(2L); // Roles
         wait.waitGridLoad(2L, 2L);
         gridHelper.checkAssignmentGridColumn2(2L, 0L, roles);
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class TabHelper {
+public class Tab {
 
     @Resource
     private SeleniumSettings seleniumSettings;

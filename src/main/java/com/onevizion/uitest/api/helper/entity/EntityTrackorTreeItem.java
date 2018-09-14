@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.tree.Tree;
@@ -42,7 +42,7 @@ public class EntityTrackorTreeItem {
     private CheckboxHelper checkboxHelper;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private GridHelper gridHelper;
@@ -152,7 +152,7 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(2L); //Role Privs
+        tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);
         gridHelper.checkAssignmentGridColumn(2L, 1L, rolePrivsRead);
         gridHelper.checkAssignmentGridColumn(2L, 2L, rolePrivsEdit);
@@ -168,7 +168,7 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(3L); //Role Lock Privs
+        tab.goToTab(3L); //Role Lock Privs
         wait.waitGridLoad(3L, 3L);
         gridHelper.checkAssignmentGridColumn(3L, 1L, roleLockPrivsLock);
         gridHelper.checkAssignmentGridColumn(3L, 2L, roleLockPrivsUnlock);

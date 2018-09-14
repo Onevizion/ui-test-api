@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.WpDiscipline;
@@ -31,7 +31,7 @@ public class EntityWpDiscipline {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private GridHelper gridHelper;
@@ -51,7 +51,7 @@ public class EntityWpDiscipline {
 
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(wpDiscipline.getDescription());
 
-        tabHelper.goToTab(2L); //Role Assignments
+        tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);
         gridHelper.clearAssignmentGridColumn2(2L, 0L);
         gridHelper.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
@@ -71,7 +71,7 @@ public class EntityWpDiscipline {
         seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(wpDiscipline.getDescription());
 
-        tabHelper.goToTab(2L);//Role Assignments
+        tab.goToTab(2L);//Role Assignments
         wait.waitGridLoad(2L, 2L);
         gridHelper.clearAssignmentGridColumn2(2L, 0L);
         gridHelper.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
@@ -88,7 +88,7 @@ public class EntityWpDiscipline {
         assertHelper.AssertText("discpType", wpDiscipline.getName());
         assertHelper.AssertText("description", wpDiscipline.getDescription());
 
-        tabHelper.goToTab(2L); //Role Assignments
+        tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);
         gridHelper.checkAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
 

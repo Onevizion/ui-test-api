@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
@@ -88,7 +88,7 @@ public class View {
     private TreeJs treeJs;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;

@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.TrackorType;
@@ -40,7 +40,7 @@ public class EntityTrackorType {
     private JsHelper jsHelper;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -115,7 +115,7 @@ public class EntityTrackorType {
         assertHelper.AssertCheckBoxNew("user", trackorType.getUser());
         assertHelper.AssertCheckBoxNew("efileContainer", trackorType.getEfileContainer());
 
-        tabHelper.goToTab(2L); // Key Generation
+        tab.goToTab(2L); // Key Generation
         assertHelper.AssertCheckBoxNew("autokey", trackorType.getAutoKey());
         assertHelper.AssertText("autokeyStartAt", trackorType.getAutoKeyStartAt());
         assertHelper.AssertSelect("lbOwner1", trackorType.getOwner1());
@@ -137,7 +137,7 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(3L); //Role Privs
+        tab.goToTab(3L); //Role Privs
         wait.waitGridLoad(3L, 3L);
         gridHelper.checkAssignmentGridColumn(3L, 1L, secGroupsRead);
         gridHelper.checkAssignmentGridColumn(3L, 2L, secGroupsEdit);
@@ -153,7 +153,7 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(4L); //Role Restrictions
+        tab.goToTab(4L); //Role Restrictions
         wait.waitGridLoad(4L, 4L);
         gridHelper.checkPrivilegieGridColumn(4L, 1L, rolesRest, roleRest);
 

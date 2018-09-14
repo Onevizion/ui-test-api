@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.DynamicVtable;
@@ -46,7 +46,7 @@ public class EntityDynamicVtable {
     private ElementHelper elementHelper;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private EntityDynamicVtableValue entityDynamicVtableValue;
@@ -65,7 +65,7 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(2L); //Values
+        tab.goToTab(2L); //Values
         wait.waitGridLoad(2L, 2L);
 
         for (DynamicVtableValue dynamicVtableValue : dynamicVtable.getValues()) {
@@ -112,7 +112,7 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(2L); //Values
+        tab.goToTab(2L); //Values
         wait.waitGridLoad(2L, 2L);
 
         Assert.assertEquals(gridHelper.getGridRowsCount(2L), new Long(dynamicVtable.getValues().size()));

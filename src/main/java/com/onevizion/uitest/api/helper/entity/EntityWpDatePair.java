@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.WpDatePair;
@@ -31,7 +31,7 @@ public class EntityWpDatePair {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private GridHelper gridHelper;
@@ -53,7 +53,7 @@ public class EntityWpDatePair {
 
         seleniumSettings.getWebDriver().findElement(By.name("abbrLabel")).sendKeys(wpDatePair.getShortLabel());
 
-        tabHelper.goToTab(2L); //Role Privs
+        tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);
         gridHelper.clearAssignmentGridColumn(2L, 1L);
         gridHelper.clearAssignmentGridColumn(2L, 2L);
@@ -84,7 +84,7 @@ public class EntityWpDatePair {
         seleniumSettings.getWebDriver().findElement(By.name("abbrLabel")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("abbrLabel")).sendKeys(wpDatePair.getShortLabel());
 
-        tabHelper.goToTab(2L); //Role Privs
+        tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);
         gridHelper.clearAssignmentGridColumn(2L, 1L);
         gridHelper.clearAssignmentGridColumn(2L, 2L);
@@ -110,7 +110,7 @@ public class EntityWpDatePair {
         assertHelper.AssertText("label", wpDatePair.getLabel());
         assertHelper.AssertText("abbrLabel", wpDatePair.getShortLabel());
 
-        tabHelper.goToTab(2L); //Role Privs
+        tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);
         gridHelper.checkAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
         gridHelper.checkAssignmentGridColumnNew(2L, 2L, 0L, wpDatePair.getRoles(), "E");

@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.vo.entity.TrackorTour;
@@ -39,7 +39,7 @@ public class EntityTrackorTour {
     private PsSelectorHelper psSelectorHelper;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private GridHelper gridHelper;
@@ -60,7 +60,7 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(2L); //Tour Steps
+        tab.goToTab(2L); //Tour Steps
         wait.waitGridLoad(2L, 2L);
 
         for (TrackorTourStep trackorTourStep : trackorTour.getSteps()) {
@@ -95,7 +95,7 @@ public class EntityTrackorTour {
 
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorTour.getDescription());
 
-        tabHelper.goToTab(2L); //Role Assignments
+        tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);
         gridHelper.clearAssignmentGridColumn2(2L, 0L);
         gridHelper.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
@@ -131,7 +131,7 @@ public class EntityTrackorTour {
         seleniumSettings.getWebDriver().findElement(By.name("description")).clear();;
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorTour.getDescription());
 
-        tabHelper.goToTab(3L);//Role Assignments
+        tab.goToTab(3L);//Role Assignments
         wait.waitGridLoad(3L, 3L);
         gridHelper.clearAssignmentGridColumn2(3L, 0L);
         gridHelper.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
@@ -148,7 +148,7 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tabHelper.goToTab(2L); //Tour Steps
+        tab.goToTab(2L); //Tour Steps
         wait.waitGridLoad(2L, 2L);
 
         Assert.assertEquals(gridHelper.getGridRowsCount(2L), new Long(trackorTour.getSteps().size()));
@@ -183,7 +183,7 @@ public class EntityTrackorTour {
         assertHelper.AssertSelect("orderNumber", trackorTour.getOrderNumber());
         assertHelper.AssertText("description", trackorTour.getDescription());
 
-        tabHelper.goToTab(3L); //Role Assignments
+        tab.goToTab(3L); //Role Assignments
         wait.waitGridLoad(3L, 3L);
         gridHelper.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 

@@ -19,7 +19,7 @@ import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.PsSelectorHelper;
-import com.onevizion.uitest.api.helper.TabHelper;
+import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.configfield.ConfigField;
@@ -64,7 +64,7 @@ public class EntityConfigField {
     private PsSelectorHelper psSelectorHelper;
 
     @Resource
-    private TabHelper tabHelper;
+    private Tab tab;
 
     @Resource
     private ElementHelper elementHelper;
@@ -181,7 +181,7 @@ public class EntityConfigField {
             wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
             wait.waitFormLoad();
 
-            tabHelper.goToTab(2L); //Image Settings
+            tab.goToTab(2L); //Image Settings
 
             if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkboxHelper.isCheckedByName("imageExtractMetadata"))
                     || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkboxHelper.isCheckedByName("imageExtractMetadata"))) {
@@ -211,7 +211,7 @@ public class EntityConfigField {
             }
             psSelectorHelper.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
-            tabHelper.goToTab(1L); //General
+            tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldTrackorSelector().getSql());
 
@@ -431,7 +431,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
-            tabHelper.goToTab(2L); //Image Settings
+            tab.goToTab(2L); //Image Settings
 
             if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkboxHelper.isCheckedByName("imageExtractMetadata"))
                     || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkboxHelper.isCheckedByName("imageExtractMetadata"))) {
@@ -459,7 +459,7 @@ public class EntityConfigField {
             }
             psSelectorHelper.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
-            tabHelper.goToTab(1L); //General
+            tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldTrackorSelector().getSql());
 
@@ -670,7 +670,7 @@ public class EntityConfigField {
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
-            tabHelper.goToTab(2L); //Image Settings
+            tab.goToTab(2L); //Image Settings
 
             assertHelper.AssertCheckBoxNew("imageExtractMetadata", configFieldVo.getConfigFieldEfile().getExtractMetadata());
             assertHelper.AssertSelect("imageLatConfigFieldId", configFieldVo.getConfigFieldEfile().getImageLatitude());
@@ -684,7 +684,7 @@ public class EntityConfigField {
             assertHelper.AssertCheckBoxNew("uploadToS3Directly", configFieldVo.getConfigFieldEfile().getUploadToAws());
             assertHelper.AssertRadioPsSelector("autocaptionClientFile", "btnautocaptionClientFile", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L, true);
 
-            tabHelper.goToTab(1L); //General
+            tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
             checkSqlInCodeMirror("btnSQL", configFieldVo.getConfigFieldTrackorSelector().getSql());
 
