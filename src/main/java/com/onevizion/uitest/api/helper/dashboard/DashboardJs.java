@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-class DashboardJsHelper extends JsHelper {
+class DashboardJs extends JsHelper {
 
     @SuppressWarnings("unchecked")
     List<String> getDashlets() {

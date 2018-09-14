@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.WaitHelper;
 
 @Component
-class DashboardWaitHelper {
+class DashboardWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;

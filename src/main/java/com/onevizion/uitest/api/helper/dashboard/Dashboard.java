@@ -10,16 +10,16 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class DashboardHelper {
+public class Dashboard {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private DashboardWaitHelper dashboardWaitHelper;
+    private DashboardWait dashboardWait;
 
     @Resource
-    private DashboardJsHelper dashboardJsHelper;
+    private DashboardJs dashboardJs;
 
     public String getDashletXAxisLabel(int dashletIdx) {
         return seleniumSettings.getWebDriver().findElements(By.className("lm_stack")).get(dashletIdx).findElement(By.className("highcharts-xaxis")).getAttribute("textContent");
@@ -38,47 +38,47 @@ public class DashboardHelper {
     }
 
     public void waitDashboardPageLoaded() {
-        dashboardWaitHelper.waitDashboardPageLoaded();
+        dashboardWait.waitDashboardPageLoaded();
     }
 
     public void waitDashboardLoad() {
-        dashboardWaitHelper.waitDashboardLoad();
+        dashboardWait.waitDashboardLoad();
     }
 
     public List<String> getDashlets() {
-        return dashboardJsHelper.getDashlets();
+        return dashboardJs.getDashlets();
     }
 
     public Long getDashletAxesCount(String dashletId) {
-        return dashboardJsHelper.getDashletAxesCount(dashletId);
+        return dashboardJs.getDashletAxesCount(dashletId);
     }
 
     public Long getDashletAxisFieldsCount(String dashletId, int asixIdx) {
-        return dashboardJsHelper.getDashletAxisFieldsCount(dashletId, asixIdx);
+        return dashboardJs.getDashletAxisFieldsCount(dashletId, asixIdx);
     }
 
     public Long getDashletAxisFieldChartType(String dashletId, int asixIdx, int fieldIdx) {
-        return dashboardJsHelper.getDashletAxisFieldChartType(dashletId, asixIdx, fieldIdx);
+        return dashboardJs.getDashletAxisFieldChartType(dashletId, asixIdx, fieldIdx);
     }
 
     public Long getDashletAxisFieldCalcMethod(String dashletId, int asixIdx, int fieldIdx) {
-        return dashboardJsHelper.getDashletAxisFieldCalcMethod(dashletId, asixIdx, fieldIdx);
+        return dashboardJs.getDashletAxisFieldCalcMethod(dashletId, asixIdx, fieldIdx);
     }
 
     public Long getDashletSeriesCount(String dashletId) {
-        return dashboardJsHelper.getDashletSeriesCount(dashletId);
+        return dashboardJs.getDashletSeriesCount(dashletId);
     }
 
     public Long getDashletSerieDataCount(String dashletId, int serieIdx) {
-        return dashboardJsHelper.getDashletSerieDataCount(dashletId, serieIdx);
+        return dashboardJs.getDashletSerieDataCount(dashletId, serieIdx);
     }
 
     public String getDashletSerieDataX(String dashletId, int serieIdx) {
-        return dashboardJsHelper.getDashletSerieDataX(dashletId, serieIdx);
+        return dashboardJs.getDashletSerieDataX(dashletId, serieIdx);
     }
 
     public String getDashletSerieDataY(String dashletId, int serieIdx) {
-        return dashboardJsHelper.getDashletSerieDataY(dashletId, serieIdx);
+        return dashboardJs.getDashletSerieDataY(dashletId, serieIdx);
     }
 
 }
