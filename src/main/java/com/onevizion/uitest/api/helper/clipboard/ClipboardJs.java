@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-class ClipboardJsHelper extends JsHelper {
+class ClipboardJs extends JsHelper {
 
     void createTextareaForQs(String id) {
         execJs("var textArea = document.createElement('textarea');" + 

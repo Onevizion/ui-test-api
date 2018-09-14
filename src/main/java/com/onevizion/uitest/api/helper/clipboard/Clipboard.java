@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class ClipboardHelper {
+public class Clipboard {
 
     private final static String ID = "textarea for qs";
 
@@ -18,7 +18,7 @@ public class ClipboardHelper {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ClipboardJsHelper clipboardJsHelper;
+    private ClipboardJs clipboardJs;
 
     public void pasteTextToClipboard(String text) {
         createTextareaForQs();
@@ -34,11 +34,11 @@ public class ClipboardHelper {
     }
 
     private void createTextareaForQs() {
-        clipboardJsHelper.createTextareaForQs(ID);
+        clipboardJs.createTextareaForQs(ID);
     }
 
     private void deleteTextareaForQs() {
-        clipboardJsHelper.deleteTextareaForQs(ID);
+        clipboardJs.deleteTextareaForQs(ID);
     }
 
 }
