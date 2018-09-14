@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.JsHelper;
 
 @Component
-public class JqueryJsHelper extends JsHelper {
+public class JqueryJs extends JsHelper {
 
     public Boolean isJQueryNotActive() {
         //TODO firefox 59 bug

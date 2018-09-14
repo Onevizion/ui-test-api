@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
+import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.tree.TreeWait;
 
 @Component
@@ -38,14 +38,14 @@ public class NewDropDownHelper {
     private WindowHelper windowHelper;
 
     @Resource
-    private JqueryWaitHelper jqueryWaitHelper;
+    private JqueryWait jqueryWait;
 
     public void selectMenu(String name) {
         selectEntity("lbApplication", name);
         treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
-        jqueryWaitHelper.waitJQueryLoad();
+        jqueryWait.waitJQueryLoad();
         treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
-        jqueryWaitHelper.waitJQueryLoad();
+        jqueryWait.waitJQueryLoad();
     }
 
     public void selectDashboard(String name) {
@@ -114,9 +114,9 @@ public class NewDropDownHelper {
     public void deleteMenu(String name) {
         deleteEntity("lbApplication", "Application", 3, name);
         treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
-        jqueryWaitHelper.waitJQueryLoad();
+        jqueryWait.waitJQueryLoad();
         treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
-        jqueryWaitHelper.waitJQueryLoad();
+        jqueryWait.waitJQueryLoad();
     }
 
     public void deleteComponentPackage(String name) {

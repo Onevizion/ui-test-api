@@ -100,8 +100,8 @@ import com.onevizion.uitest.api.helper.entity.EntityWpDisciplineHelper;
 import com.onevizion.uitest.api.helper.export.ExportHelper;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesignerHelper;
 import com.onevizion.uitest.api.helper.grid.Grid2Helper;
-import com.onevizion.uitest.api.helper.jquery.JqueryJsHelper;
-import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
+import com.onevizion.uitest.api.helper.jquery.JqueryJs;
+import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.helper.tree.TreeJs;
@@ -211,10 +211,10 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected LogoffHelper logoffHelper;
 
     @Resource
-    protected JqueryJsHelper jqueryJsHelper;
+    protected JqueryJs jqueryJs;
 
     @Resource
-    protected JqueryWaitHelper jqueryWaitHelper;
+    protected JqueryWait jqueryWait;
 
     @Resource
     protected DocumentHelper documentHelper;

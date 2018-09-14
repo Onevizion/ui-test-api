@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.helper.NewDropDownHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
-import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
+import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.vo.entity.Menu;
 
 @Component
@@ -39,13 +39,13 @@ public class EntityMenuHelper {
     private NewDropDownHelper newDropDownHelper;
 
     @Resource
-    private JqueryWaitHelper jqueryWaitHelper;
+    private JqueryWait jqueryWait;
 
     public void testOnForm(Menu menu) {
         newDropDownHelper.openEditMenuForm(menu.getName());
         waitHelper.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         waitHelper.waitFormLoad();
-        jqueryWaitHelper.waitJQueryLoad();
+        jqueryWait.waitJQueryLoad();
 
         assertHelper.AssertText("name", menu.getName());
         assertHelper.AssertText("description", menu.getDescription());

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
+import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.view.View;
 
 @Component
@@ -44,7 +44,7 @@ public class WaitHelper {
     private HtmlSelectHelper htmlSelectHelper;
 
     @Resource //TODO bug in Grid-115098 load views/filters before load grid
-    private JqueryWaitHelper jqueryWaitHelper; //TODO bug in Grid-115098 load views/filters before load grid
+    private JqueryWait jqueryWait; //TODO bug in Grid-115098 load views/filters before load grid
 
     public void waitWebElement(final By elementLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -87,7 +87,7 @@ public class WaitHelper {
     }
 
     public void waitGridLoad(final Long gridId, final Long parentGridId) {
-        jqueryWaitHelper.waitJQueryLoad(); //TODO bug in Grid-115098 load views/filters before load grid
+        jqueryWait.waitJQueryLoad(); //TODO bug in Grid-115098 load views/filters before load grid
         waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + gridId));
         waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId));
 

@@ -23,7 +23,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
+import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
 @Component
@@ -62,7 +62,7 @@ public class TbHelper {
     private ElementJsHelper elementJsHelper;
 
     @Resource
-    private JqueryWaitHelper jqueryWaitHelper;
+    private JqueryWait jqueryWait;
 
     String getLastFieldIndex(String name, int elementPosition) {
         List<WebElement> elems = seleniumSettings.getWebDriver().findElements(By.name(name));

@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class JqueryWaitHelper {
+public class JqueryWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private JqueryJsHelper jqueryJsHelper;
+    private JqueryJs jqueryJs;
 
     public void waitJQueryLoad() {
         waitJquery();
@@ -24,7 +24,7 @@ public class JqueryWaitHelper {
             .withMessage("Waiting for JQuery loading is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jqueryJsHelper.isJQueryNotActive();
+                    return jqueryJs.isJQueryNotActive();
                 }
             });
     }
@@ -34,7 +34,7 @@ public class JqueryWaitHelper {
             .withMessage("Waiting for JQuery is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return jqueryJsHelper.isJqueryExist();
+                    return jqueryJs.isJqueryExist();
                 }
             });
     }

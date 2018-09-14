@@ -16,7 +16,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
+import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.tree.TreeJs;
 import com.onevizion.uitest.api.helper.tree.TreeWait;
 import com.onevizion.uitest.api.vo.FilterFieldType;
@@ -86,7 +86,7 @@ public class FilterHelper {
     private FilterWaitHelper filterWaitHelper;
 
     @Resource
-    private JqueryWaitHelper jqueryWaitHelper;
+    private JqueryWait jqueryWait;
 
     public void checkIsExistFilterControl(Long gridIdx, boolean isExist) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -188,9 +188,9 @@ public class FilterHelper {
             psSelectorHelper.selectMultipleSpecificValues(btnOpen, 1L, cellsValues, 1L);
         }
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        jqueryWaitHelper.waitJQueryLoad(); //wait reload filters and grid
+        jqueryWait.waitJQueryLoad(); //wait reload filters and grid
         waitHelper.waitGridLoad(gridIdx, gridIdx);
-        jqueryWaitHelper.waitJQueryLoad(); //wait reload filters and grid
+        jqueryWait.waitJQueryLoad(); //wait reload filters and grid
     }
 
     public void openSaveFilterForm(Long gridIdx) {
@@ -288,9 +288,9 @@ public class FilterHelper {
         waitHelper.waitFormLoad();
         seleniumSettings.getWebDriver().findElement(By.name(BUTTON_CLEAR)).click();
         windowHelper.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        jqueryWaitHelper.waitJQueryLoad(); //wait reload filters and grid
+        jqueryWait.waitJQueryLoad(); //wait reload filters and grid
         waitHelper.waitGridLoad(gridIdx, gridIdx);
-        jqueryWaitHelper.waitJQueryLoad(); //wait reload filters and grid
+        jqueryWait.waitJQueryLoad(); //wait reload filters and grid
 
         filterWaitHelper.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
         waitHelper.waitGridLoad(gridIdx, gridIdx);

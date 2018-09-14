@@ -21,7 +21,7 @@ import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
-import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
+import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.tree.TreeJs;
 import com.onevizion.uitest.api.helper.tree.TreeWait;
 
@@ -97,7 +97,7 @@ public class View {
     private ViewWait viewWait;
 
     @Resource
-    private JqueryWaitHelper jqueryWaitHelper;
+    private JqueryWait jqueryWait;
 
     @Resource
     private ElementHelper elementHelper;
@@ -442,35 +442,35 @@ public class View {
 
     public Select selectApplet(Select apps, Select tabs, String appletName, int cntTabs) {
         apps.selectByVisibleText(appletName);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         waitHelper.waitListBoxLoad(tabs);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         Assert.assertEquals(apps.getFirstSelectedOption().getText(), appletName);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         waitHelper.waitListBoxLoadCnt(tabs, cntTabs);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         Assert.assertEquals(tabs.getOptions().size(), cntTabs, "Tabs have wrong cnt");
         return tabs;
     }
 
     public Select selectTab(Select tabs, Select allFields, String tabName, int cntFields) {
         tabs.selectByVisibleText(tabName);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         waitHelper.waitListBoxLoad(allFields);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         waitHelper.waitListBoxLoadCnt(allFields, cntFields);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         Assert.assertEquals(allFields.getOptions().size(), cntFields, "All Fields have wrong cnt");
         return allFields;
     }
 
     public WebElement selectTab(Select tabs, WebElement allFields, String tabName, int cntFields) {
         tabs.selectByVisibleText(tabName);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         waitHelper.waitListBoxLoad(allFields);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         waitHelper.waitListBoxLoadCnt(allFields, cntFields);
-        jqueryWaitHelper.waitJQueryLoad(); //wait load tabs and fields
+        jqueryWait.waitJQueryLoad(); //wait load tabs and fields
         Assert.assertEquals(allFields.findElements(By.tagName("div")).size(), cntFields, "All Fields have wrong cnt");
         return allFields;
     }
