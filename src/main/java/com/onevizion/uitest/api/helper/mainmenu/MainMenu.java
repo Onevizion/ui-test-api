@@ -11,7 +11,7 @@ import com.onevizion.uitest.api.helper.JsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 
 @Component
-public class MainMenuHelper {
+public class MainMenu {
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -26,7 +26,7 @@ public class MainMenuHelper {
     private ElementWaitHelper elementWaitHelper;
 
     @Resource
-    private MainMenuWaitHelper mainMenuWaitHelper;
+    private MainMenuWait mainMenuWait;
 
     public final static String SHOW_MENU_BUTTON_CLASS = "showMenuBtn";
     public final static String HIDE_MENU_BUTTON_CLASS = "hideMenuBtn";
@@ -89,7 +89,7 @@ public class MainMenuHelper {
         searchField.clear();
         searchField.sendKeys(item);
 
-        mainMenuWaitHelper.waitLeftMenuSearchUpdated();
+        mainMenuWait.waitLeftMenuSearchUpdated();
 
         WebElement menuItem = seleniumSettings.getWebDriver().findElement(By.xpath(
                 "//div[contains(@class, 'newGuiMenuRowContainer') and string(@showing)='1']"
@@ -117,7 +117,7 @@ public class MainMenuHelper {
 
     private void waitPageTitle(String title) {
         waitHelper.waitWebElement(By.id("ttlPage"));
-        mainMenuWaitHelper.waitPageTitle(title);
+        mainMenuWait.waitPageTitle(title);
     }
 
 }

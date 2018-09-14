@@ -102,7 +102,7 @@ import com.onevizion.uitest.api.helper.formdesigner.FormDesignerHelper;
 import com.onevizion.uitest.api.helper.grid.Grid2Helper;
 import com.onevizion.uitest.api.helper.jquery.JqueryJsHelper;
 import com.onevizion.uitest.api.helper.jquery.JqueryWaitHelper;
-import com.onevizion.uitest.api.helper.mainmenu.MainMenuHelper;
+import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.helper.tree.TreeJs;
 import com.onevizion.uitest.api.helper.tree.TreeWait;
@@ -190,7 +190,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected CheckboxHelper checkboxHelper;
 
     @Resource
-    protected MainMenuHelper mainMenuHelper;
+    protected MainMenu mainMenu;
 
     @Resource
     protected CompAuditLogHelper compAuditLogHelper;

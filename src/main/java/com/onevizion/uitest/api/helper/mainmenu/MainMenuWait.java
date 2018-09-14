@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class MainMenuWaitHelper {
+class MainMenuWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private MainMenuJsHelper mainMenuJsHelper;
+    private MainMenuJs mainMenuJs;
 
     void waitPageTitle(String title) {
         Supplier<String> actualValueSupplier = ()-> {
@@ -44,7 +44,7 @@ class MainMenuWaitHelper {
             .withMessage("Waiting for JQuery loading is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return mainMenuJsHelper.isLeftMenuSearchUpdated();
+                    return mainMenuJs.isLeftMenuSearchUpdated();
                 }
             });
     }
