@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.vo.ApiV3ResourceType;
 
 @Component
-public class ApiV3ResourceHelper {
+public class ApiV3Resource {
 
     @Resource
     private SeleniumSettings seleniumSettings;

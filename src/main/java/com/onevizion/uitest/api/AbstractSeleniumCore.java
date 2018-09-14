@@ -68,9 +68,9 @@ import com.onevizion.uitest.api.helper.TbHelper;
 import com.onevizion.uitest.api.helper.UsersSettingsHelper;
 import com.onevizion.uitest.api.helper.WaitHelper;
 import com.onevizion.uitest.api.helper.WindowHelper;
-import com.onevizion.uitest.api.helper.api.v3.ApiV3EndpointHelper;
-import com.onevizion.uitest.api.helper.api.v3.ApiV3ParameterHelper;
-import com.onevizion.uitest.api.helper.api.v3.ApiV3ResourceHelper;
+import com.onevizion.uitest.api.helper.api.v3.ApiV3Endpoint;
+import com.onevizion.uitest.api.helper.api.v3.ApiV3Parameter;
+import com.onevizion.uitest.api.helper.api.v3.ApiV3Resource;
 import com.onevizion.uitest.api.helper.clipboard.Clipboard;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.helper.comment.Comment;
@@ -250,13 +250,13 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected WfVisualEditor wfVisualEditor;
 
     @Resource
-    protected ApiV3ResourceHelper apiV3ResourceHelper;
+    protected ApiV3Resource apiV3Resource;
 
     @Resource
-    protected ApiV3EndpointHelper apiV3EndpointHelper;
+    protected ApiV3Endpoint apiV3Endpoint;
 
     @Resource
-    protected ApiV3ParameterHelper apiV3ParameterHelper;
+    protected ApiV3Parameter apiV3Parameter;
 
     @Resource
     protected NewDropDownHelper newDropDownHelper;

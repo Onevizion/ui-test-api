@@ -20,7 +20,7 @@ import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 
 @Component
-public class ApiV3EndpointHelper {
+public class ApiV3Endpoint {
 
     @Resource
     private SeleniumSettings seleniumSettings;

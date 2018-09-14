@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementHelper;
 
 @Component
-public class ApiV3ParameterHelper {
+public class ApiV3Parameter {
 
     @Resource
     private SeleniumSettings seleniumSettings;
