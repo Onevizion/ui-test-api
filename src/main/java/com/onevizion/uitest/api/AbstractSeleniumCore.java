@@ -63,7 +63,7 @@ import com.onevizion.uitest.api.helper.QsHelper;
 import com.onevizion.uitest.api.helper.RelationSelectorHelper;
 import com.onevizion.uitest.api.helper.SortHelper;
 import com.onevizion.uitest.api.helper.TabHelper;
-import com.onevizion.uitest.api.helper.TabJsHelper;
+import com.onevizion.uitest.api.helper.TabJs;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.UsersSettings;
 import com.onevizion.uitest.api.helper.Wait;
@@ -145,7 +145,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected TabHelper tabHelper;
 
     @Resource
-    protected TabJsHelper tabJsHelper;
+    protected TabJs tabJs;
 
     @Resource
     protected Window window;

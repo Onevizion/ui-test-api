@@ -20,7 +20,7 @@ public class TabHelper {
     private JsHelper jsHelper;
 
     @Resource
-    private TabJsHelper tabJsHelper;
+    private TabJs tabJs;
 
     public void goToTab(Long tabIndex) {
         jsHelper.scrollNewDropDownTop("newFormMenu", "scrollContainer", tabIndex * 28L);
@@ -40,13 +40,13 @@ public class TabHelper {
     }
 
     public void hideTabMenu() {
-        if (!tabJsHelper.isTabMenuHidden()) {
+        if (!tabJs.isTabMenuHidden()) {
             seleniumSettings.getWebDriver().findElement(By.className("showMenuBtn")).click();
         }
     }
 
     public void showTabMenu() {
-        if (tabJsHelper.isTabMenuHidden()) {
+        if (tabJs.isTabMenuHidden()) {
             seleniumSettings.getWebDriver().findElement(By.className("showMenuBtn")).click();
         }
     }

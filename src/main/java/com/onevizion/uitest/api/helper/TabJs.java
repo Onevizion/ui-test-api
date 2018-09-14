@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
-public class TabJsHelper extends JsHelper {
+public class TabJs extends JsHelper {
 
     public boolean isTabMenuHidden() {
         String tabMenuStatus = execJs("return newGui.getHideFormMenuParam();");
