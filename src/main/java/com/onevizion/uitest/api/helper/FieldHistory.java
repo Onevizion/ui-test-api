@@ -36,7 +36,7 @@ public class FieldHistory {
     private Window window;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
     private Tb tb;
@@ -127,7 +127,7 @@ public class FieldHistory {
         }
 
         if (isShowMenu) {
-            elementHelper.moveToElementById(id + "_lbl");
+            element.moveToElementById(id + "_lbl");
             seleniumSettings.getWebDriver().findElement(By.id(id + "_lbl")).click();
             int i = 0;
             do {

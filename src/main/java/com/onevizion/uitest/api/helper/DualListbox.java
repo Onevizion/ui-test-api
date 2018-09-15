@@ -28,7 +28,7 @@ public class DualListbox {
     private HtmlSelect htmlSelect;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private View view;
@@ -56,7 +56,7 @@ public class DualListbox {
         js.scrollNewDropDownTop("rightListBox", "scrollContainer", position * 28L);
 
         WebElement entityElem = (WebElement) js.getNewDropDownElementNew("rightListBox", "record", text);
-        elementWaitHelper.waitElementVisible(entityElem);
+        elementWait.waitElementVisible(entityElem);
 
         entityElem.click();
 
@@ -173,7 +173,7 @@ public class DualListbox {
         js.scrollNewDropDownTop("leftListBox", "scrollContainer", position * 28L);
 
         WebElement entityElem = (WebElement) js.getNewDropDownElementNew("leftListBox", "record", text);
-        elementWaitHelper.waitElementVisible(entityElem);
+        elementWait.waitElementVisible(entityElem);
 
         entityElem.click();
 

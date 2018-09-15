@@ -22,17 +22,17 @@ public class Privilegies {
     private Wait wait;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public void checkAddCloneEditDelButtons(Long gridIdx, Boolean isDisplayAdd, Boolean isDisplayClone, Boolean isDisplayEdit, Boolean isDisplayDel) {
         if (isDisplayAdd != null) {
             wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx));
             if (isDisplayAdd.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(AbstractSelenium.BUTTON_ADD_ID_BASE + gridIdx, "style", "background-image: none;");
-                elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
             } else {
                 //elementWaitHelper.waitElementAttributeById(AbstractSelenium.BUTTON_ADD_ID_BASE + gridIdx, "style", "background-image: none; display: none;");
-                elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -43,10 +43,10 @@ public class Privilegies {
             wait.waitWebElement(By.id(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx));
             if (isDisplayClone.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx, "style", "background-image: none;");
-                elementWaitHelper.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
+                elementWait.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
             } else {
                 //elementWaitHelper.waitElementAttributeById(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx, "style", "background-image: none; display: none;");
-                elementWaitHelper.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
+                elementWait.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -57,10 +57,10 @@ public class Privilegies {
             wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx));
             if (isDisplayEdit.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(AbstractSelenium.BUTTON_EDIT_ID_BASE + gridIdx, "style", "background-image: none;");
-                elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
             } else {
                 //elementWaitHelper.waitElementAttributeById(AbstractSeleniumInternalPage.BUTTON_EDIT_ID_BASE + gridIdx, "style", "background-image: none; display: none;");
-                elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -71,10 +71,10 @@ public class Privilegies {
             wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx));
             if (isDisplayDel.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(AbstractSelenium.BUTTON_DELETE_ID_BASE + gridIdx, "style", "background-image: none;");
-                elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
             } else {
                 //elementWaitHelper.waitElementAttributeById(AbstractSelenium.BUTTON_DELETE_ID_BASE + gridIdx, "style", "background-image: none; display: none;");
-                elementWaitHelper.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -86,9 +86,9 @@ public class Privilegies {
     public void checkOkCancelApplyButtons(Boolean isEnabledOk, Boolean isEnabledCancel, Boolean isEnabledApply) {
         if (isEnabledOk != null) {
             if (isEnabledOk.booleanValue()) {
-                elementWaitHelper.waitElementEnabledById(AbstractSeleniumCore.BUTTON_OK_ID_BASE);
+                elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_OK_ID_BASE);
             } else {
-                elementWaitHelper.waitElementDisabledById(AbstractSeleniumCore.BUTTON_OK_ID_BASE);
+                elementWait.waitElementDisabledById(AbstractSeleniumCore.BUTTON_OK_ID_BASE);
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -97,9 +97,9 @@ public class Privilegies {
         }
         if (isEnabledCancel != null) {
             if (isEnabledCancel.booleanValue()) {
-                elementWaitHelper.waitElementEnabledById(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE);
+                elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE);
             } else {
-                elementWaitHelper.waitElementDisabledById(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE);
+                elementWait.waitElementDisabledById(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE);
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -108,9 +108,9 @@ public class Privilegies {
         }
         if (isEnabledApply != null) {
             if (isEnabledApply.booleanValue()) {
-                elementWaitHelper.waitElementEnabledById(AbstractSeleniumCore.BUTTON_APPLY_ID);
+                elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_APPLY_ID);
             } else {
-                elementWaitHelper.waitElementDisabledById(AbstractSeleniumCore.BUTTON_APPLY_ID);
+                elementWait.waitElementDisabledById(AbstractSeleniumCore.BUTTON_APPLY_ID);
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);

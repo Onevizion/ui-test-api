@@ -27,7 +27,7 @@ public class RelationSelector {
     private Js js;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private JqueryWait jqueryWait;
@@ -77,17 +77,17 @@ public class RelationSelector {
     public void openRelationSelector(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id("new_lbParentsChildren" + gridIdx)).findElement(By.className("newDropDown")).click();
 
-        elementWaitHelper.waitElementById("new_rows_lbParentsChildren" + gridIdx);
-        elementWaitHelper.waitElementVisibleById("new_rows_lbParentsChildren" + gridIdx);
-        elementWaitHelper.waitElementDisplayById("new_rows_lbParentsChildren" + gridIdx);
+        elementWait.waitElementById("new_rows_lbParentsChildren" + gridIdx);
+        elementWait.waitElementVisibleById("new_rows_lbParentsChildren" + gridIdx);
+        elementWait.waitElementDisplayById("new_rows_lbParentsChildren" + gridIdx);
     }
 
     public void closeRelationSelector(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id("new_lbParentsChildren" + gridIdx)).findElement(By.className("newDropDown")).click();
 
-        elementWaitHelper.waitElementById("new_rows_lbParentsChildren" + gridIdx);
-        elementWaitHelper.waitElementNotVisibleById("new_rows_lbParentsChildren" + gridIdx);
-        elementWaitHelper.waitElementNotDisplayById("new_rows_lbParentsChildren" + gridIdx);
+        elementWait.waitElementById("new_rows_lbParentsChildren" + gridIdx);
+        elementWait.waitElementNotVisibleById("new_rows_lbParentsChildren" + gridIdx);
+        elementWait.waitElementNotDisplayById("new_rows_lbParentsChildren" + gridIdx);
     }
 
     public void openRelationGrid(Long gridIdx) {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.ElementHelper;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.vo.TreeNode;
 import com.onevizion.uitest.api.vo.entity.MenuItem;
 import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
 public class Tree {
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
     private TreeJs treeJs;

@@ -41,9 +41,9 @@ import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.CloneButton;
 import com.onevizion.uitest.api.helper.CompAuditLog;
 import com.onevizion.uitest.api.helper.DualListbox;
-import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.ElementJsHelper;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.ElementJs;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.FieldHistory;
 import com.onevizion.uitest.api.helper.Filter;
 import com.onevizion.uitest.api.helper.FilterWait;
@@ -172,10 +172,10 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected PsSelector psSelector;
 
     @Resource
-    protected ElementHelper elementHelper;
+    protected Element element;
 
     @Resource
-    protected ElementWaitHelper elementWaitHelper;
+    protected ElementWait elementWait;
 
     @Resource
     protected Qs qs;
@@ -202,7 +202,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected UsersSettings usersSettings;
 
     @Resource
-    protected ElementJsHelper elementJsHelper;
+    protected ElementJs elementJs;
 
     @Resource
     protected Login login;

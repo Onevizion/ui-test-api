@@ -22,17 +22,17 @@ public class Login {
     private Document document;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public void login(String userName, String userPassword) {
         document.waitReadyStateComplete();
 
-        elementWaitHelper.waitElementById("username");
-        elementWaitHelper.waitElementVisibleById("username");
-        elementWaitHelper.waitElementDisplayById("username");
-        elementWaitHelper.waitElementById("password");
-        elementWaitHelper.waitElementVisibleById("password");
-        elementWaitHelper.waitElementDisplayById("password");
+        elementWait.waitElementById("username");
+        elementWait.waitElementVisibleById("username");
+        elementWait.waitElementDisplayById("username");
+        elementWait.waitElementById("password");
+        elementWait.waitElementVisibleById("password");
+        elementWait.waitElementDisplayById("password");
 
         WebElement userNameElem = seleniumSettings.getWebDriver().findElement(By.name("username"));
         userNameElem.clear();
@@ -53,12 +53,12 @@ public class Login {
     public void failLogin(String userName, String userPassword, String errorMessage) {
         document.waitReadyStateComplete();
 
-        elementWaitHelper.waitElementById("username");
-        elementWaitHelper.waitElementVisibleById("username");
-        elementWaitHelper.waitElementDisplayById("username");
-        elementWaitHelper.waitElementById("password");
-        elementWaitHelper.waitElementVisibleById("password");
-        elementWaitHelper.waitElementDisplayById("password");
+        elementWait.waitElementById("username");
+        elementWait.waitElementVisibleById("username");
+        elementWait.waitElementDisplayById("username");
+        elementWait.waitElementById("password");
+        elementWait.waitElementVisibleById("password");
+        elementWait.waitElementDisplayById("password");
 
         WebElement userNameElem = seleniumSettings.getWebDriver().findElement(By.name("username"));
         userNameElem.clear();
@@ -71,7 +71,7 @@ public class Login {
         seleniumSettings.getWebDriver().findElement(By.id("btn")).click();
 
         wait.waitWebElement(By.id("auth_message"));
-        elementWaitHelper.waitElementAttributeById("auth_message", "innerText", errorMessage);
+        elementWait.waitElementAttributeById("auth_message", "innerText", errorMessage);
     }
 
     public void loginIntoApiV3() {

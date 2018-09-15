@@ -33,10 +33,10 @@ public class GridHelper {
     private Checkbox checkbox;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public boolean isGridEmpty(Long gridId) {
         Long rowsCnt = js.getGridRowsCount(gridId);
@@ -152,8 +152,8 @@ public class GridHelper {
         if (oldCnt > 1) {
             oldCnt = oldCnt - 1L;
         }
-        elementWaitHelper.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId);
-        elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId)));
+        elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId);
+        element.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId)));
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         wait.waitGridLoad(gridId, parentGridId);

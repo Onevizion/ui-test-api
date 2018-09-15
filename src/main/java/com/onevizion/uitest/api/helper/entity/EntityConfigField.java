@@ -14,8 +14,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
@@ -52,7 +52,7 @@ public class EntityConfigField {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private ConfigField configField;
@@ -67,7 +67,7 @@ public class EntityConfigField {
     private Tab tab;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     public void add(ConfigFieldVo configFieldVo) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -86,7 +86,7 @@ public class EntityConfigField {
 
         String val = new Select(seleniumSettings.getWebDriver().findElement(By.name("TrackorTypeName"))).getFirstSelectedOption().getAttribute("value");
         String cfPrefix = val.split(";")[1].replace(":", "").replace("-", "").replace(".", "");
-        elementWaitHelper.waitElementAttributeByName("configFieldName", "value", cfPrefix + "_" + configFieldVo.getLabel().replace(" ", "_").replace("/", "").replace("-", "").toUpperCase());
+        elementWait.waitElementAttributeByName("configFieldName", "value", cfPrefix + "_" + configFieldVo.getLabel().replace(" ", "_").replace("/", "").replace("-", "").toUpperCase());
         configField.waitFieldNameUpdated();
 
         seleniumSettings.getWebDriver().findElement(By.name("configFieldName")).clear();
@@ -176,7 +176,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
-            elementHelper.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
+            element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
             wait.waitReloadForm("reloaded=1");
             wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
             wait.waitFormLoad();

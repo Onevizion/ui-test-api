@@ -22,12 +22,12 @@ public class UsersSettings {
     private Window window;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public void openUserSettings() {
-        elementWaitHelper.waitElementById("topPanelUserNameLbl");
-        elementWaitHelper.waitElementVisibleById("topPanelUserNameLbl");
-        elementWaitHelper.waitElementDisplayById("topPanelUserNameLbl");
+        elementWait.waitElementById("topPanelUserNameLbl");
+        elementWait.waitElementVisibleById("topPanelUserNameLbl");
+        elementWait.waitElementDisplayById("topPanelUserNameLbl");
 
         window.openModal(By.id("topPanelUserNameLbl"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

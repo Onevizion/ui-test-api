@@ -34,10 +34,10 @@ public class PsSelector {
     private Checkbox checkbox;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private Qs qs;
@@ -121,7 +121,7 @@ public class PsSelector {
             for (Long i = 0L; i < cnt; i++) {
                 if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
                     WebElement rb = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
-                    elementHelper.moveToElement(rb);
+                    element.moveToElement(rb);
                     rb.click();
                     break;
                 }
@@ -162,7 +162,7 @@ public class PsSelector {
                         WebElement cell = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
                         WebElement label = checkbox.findLabelByElement(cb);
-                        elementHelper.moveToElement(label);
+                        element.moveToElement(label);
                         label.click();
                         String rowId = js.getGridSelectedRowId(0L);
                         ret.add(js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));

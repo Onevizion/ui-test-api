@@ -15,8 +15,8 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
@@ -91,7 +91,7 @@ public class View {
     private Tab tab;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private ViewWait viewWait;
@@ -100,7 +100,7 @@ public class View {
     private JqueryWait jqueryWait;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     public void checkIsExistViewControl(Long gridIdx, boolean isExist) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -158,23 +158,23 @@ public class View {
     public void selectByVisibleText(Long gridIdx, String entityPrefix) {
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(VIEW_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
         WebElement viewElem = (WebElement) js.getNewDropDownElement(VIEW_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
-        elementWaitHelper.waitElementVisible(viewElem);
+        elementWait.waitElementVisible(viewElem);
         viewElem.click();
 
         wait.waitGridLoad(gridIdx, gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(VIEW_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
@@ -188,21 +188,21 @@ public class View {
 
         seleniumSettings.getWebDriver().findElement(By.id("ddExistingViews" + gridIdx)).click();
 
-        elementWaitHelper.waitElementById("ddViewFormSaveContainer" + gridIdx);
-        elementWaitHelper.waitElementVisibleById("ddViewFormSaveContainer" + gridIdx);
-        elementWaitHelper.waitElementDisplayById("ddViewFormSaveContainer" + gridIdx);
+        elementWait.waitElementById("ddViewFormSaveContainer" + gridIdx);
+        elementWait.waitElementVisibleById("ddViewFormSaveContainer" + gridIdx);
+        elementWait.waitElementDisplayById("ddViewFormSaveContainer" + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id("ddViewFormSaveSearch" + gridIdx)).sendKeys(folderName);
 
         WebElement viewElem = (WebElement) js.getNewDropDownElement("ddViewFormSaveContainer" + gridIdx, "scrollContainer", "newGenericDropDownRow", folderName);
-        elementWaitHelper.waitElementVisible(viewElem);
+        elementWait.waitElementVisible(viewElem);
         viewElem.click();
 
         seleniumSettings.getWebDriver().findElement(By.id("ddExistingViews" + gridIdx)).click();
 
-        elementWaitHelper.waitElementById("ddViewFormSaveContainer" + gridIdx);
-        elementWaitHelper.waitElementVisibleById("ddViewFormSaveContainer" + gridIdx);
-        elementWaitHelper.waitElementDisplayById("ddViewFormSaveContainer" + gridIdx);
+        elementWait.waitElementById("ddViewFormSaveContainer" + gridIdx);
+        elementWait.waitElementVisibleById("ddViewFormSaveContainer" + gridIdx);
+        elementWait.waitElementDisplayById("ddViewFormSaveContainer" + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id("ddViewFormSaveClearSearch" + gridIdx)).click();
         seleniumSettings.getWebDriver().findElement(By.id("ddExistingViews" + gridIdx)).click();
@@ -226,15 +226,15 @@ public class View {
     public void openSaveViewForm(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(VIEW_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE_NEW + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(VIEW_DIALOG_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementById(VIEW_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
 
         wait.waitWebElement(By.id("lbViewType" + gridIdx));
         wait.waitWebElement(By.id(FIELD_VIEW_NAME + gridIdx));
@@ -298,9 +298,9 @@ public class View {
 
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(VIEW_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
         treeWait.waitTreeLoad(0L);
@@ -563,63 +563,63 @@ public class View {
 
     public void switchToRootSubgroup() {
         //elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink")).get(0));
-        elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.tagName("input")));
+        element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.tagName("input")));
         waitLeftListBoxReady();
     }
 
     public void switchToParentSubgroup() {
         List<WebElement> links = seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink"));
-        elementHelper.click(links.get(links.size() - 2));
+        element.click(links.get(links.size() - 2));
         waitLeftListBoxReady();
     }
 
     public void switchToSubgroup(String subgroupName) {
-        elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.name(subgroupName)));
+        element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.name(subgroupName)));
         waitLeftListBoxReady();
     }
 
     public void switchToSubgroupInList(String text) {
-        WebElement element = null;
+        WebElement subgroupElement = null;
         List<WebElement> subgroups = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("groupRecord"));
         for (WebElement subgroup : subgroups) {
             if (subgroup.getAttribute("innerText").trim().equals(text)) {
-                if (element != null) {
+                if (subgroupElement != null) {
                     throw new SeleniumUnexpectedException("Subgroup with text[" + text + "] found many times");
                 }
-                element = subgroup;
+                subgroupElement = subgroup;
             }
         }
 
-        if (element == null) {
+        if (subgroupElement == null) {
             throw new SeleniumUnexpectedException("Subgroup with text[" + text + "] not found");
         }
 
-        elementHelper.click(element);
+        element.click(subgroupElement);
         waitLeftListBoxReady();
     }
 
     public void switchToFieldGroup() {
-        elementHelper.clickById(BUTTON_GROUP_FIELD);
+        element.clickById(BUTTON_GROUP_FIELD);
         waitLeftListBoxReady();
     }
 
     public void switchToTaskGroup() {
-        elementHelper.clickById(BUTTON_GROUP_TASK);
+        element.clickById(BUTTON_GROUP_TASK);
         waitLeftListBoxReady();
     }
 
     public void switchToDrillDownGroup() {
-        elementHelper.clickById(BUTTON_GROUP_DRILLDOWN);
+        element.clickById(BUTTON_GROUP_DRILLDOWN);
         waitLeftListBoxReady();
     }
 
     public void switchToMarkupGroup() {
-        elementHelper.clickById(BUTTON_GROUP_MARKUP);
+        element.clickById(BUTTON_GROUP_MARKUP);
         waitLeftListBoxReady();
     }
 
     public void switchToDatePairGroup() {
-        elementHelper.clickById(BUTTON_GROUP_DATE_PAIR);
+        element.clickById(BUTTON_GROUP_DATE_PAIR);
         waitLeftListBoxReady();
     }
 

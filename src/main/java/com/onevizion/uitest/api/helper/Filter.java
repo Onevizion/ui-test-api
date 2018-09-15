@@ -80,7 +80,7 @@ public class Filter {
     private Checkbox checkbox;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private FilterWait filterWait;
@@ -144,23 +144,23 @@ public class Filter {
     public void selectByVisibleText(String entityPrefix, Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
         WebElement filterElem = (WebElement) js.getNewDropDownElement(FILTER_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
-        elementWaitHelper.waitElementVisible(filterElem);
+        elementWait.waitElementVisible(filterElem);
         filterElem.click();
 
         wait.waitGridLoad(gridIdx, gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
@@ -196,15 +196,15 @@ public class Filter {
     public void openSaveFilterForm(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE_NEW + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(FILTER_DIALOG_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(FILTER_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementById(FILTER_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(FILTER_DIALOG_CONTAINER + gridIdx);
 
         wait.waitWebElement(By.id(FIELD_FILTER_NAME + gridIdx));
         wait.waitWebElement(By.id(FILTER_DIALOG_OK + gridIdx));
@@ -248,9 +248,9 @@ public class Filter {
 
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWaitHelper.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
         treeWait.waitTreeLoad(0L);

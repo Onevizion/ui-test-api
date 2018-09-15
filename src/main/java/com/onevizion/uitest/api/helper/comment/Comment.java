@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tb;
@@ -26,7 +26,7 @@ public class Comment {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
     private CommentJs commentJs;
@@ -41,7 +41,7 @@ public class Comment {
     private Js js;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public void openCommentFormFromForm(String fieldId, boolean isShowMenu, int elementPosition) {
         String id;
@@ -55,7 +55,7 @@ public class Comment {
         }
 
         if (isShowMenu) {
-            elementHelper.moveToElementById(id + "_lbl");
+            element.moveToElementById(id + "_lbl");
             seleniumSettings.getWebDriver().findElement(By.id(id + "_lbl")).click();
             int i = 0;
             do {
@@ -115,21 +115,21 @@ public class Comment {
     }
 
     public void addComment(String text) {
-        elementWaitHelper.waitElementDisabledById("btnSubmit");
-        elementWaitHelper.waitElementAttributeById("comment", "value", "");
+        elementWait.waitElementDisabledById("btnSubmit");
+        elementWait.waitElementAttributeById("comment", "value", "");
 
         Long rowsCntBefore = gridHelper.getGridRowsCount(0L);
 
         seleniumSettings.getWebDriver().findElement(By.id("comment")).sendKeys(text);
-        elementWaitHelper.waitElementEnabledById("btnSubmit");
+        elementWait.waitElementEnabledById("btnSubmit");
         seleniumSettings.getWebDriver().findElement(By.id("btnSubmit")).findElement(By.xpath("..")).click();
 
         wait.waitGridLoad(0L, 0L);
 
         wait.waitGridRowsCount(0L, rowsCntBefore + 1L);
 
-        elementWaitHelper.waitElementDisabledById("btnSubmit");
-        elementWaitHelper.waitElementAttributeById("comment", "value", "");
+        elementWait.waitElementDisabledById("btnSubmit");
+        elementWait.waitElementAttributeById("comment", "value", "");
 
         correctSleep(500L);
     }
@@ -155,9 +155,9 @@ public class Comment {
         js.selectGridRow(0L, rowIndex);
         String rowId = js.getGridRowIdByIndex(0L, rowIndex);
 
-        elementWaitHelper.waitElementById("btnDelete" + rowId);
-        elementWaitHelper.waitElementVisibleById("btnDelete" + rowId);
-        elementWaitHelper.waitElementDisplayById("btnDelete" + rowId);
+        elementWait.waitElementById("btnDelete" + rowId);
+        elementWait.waitElementVisibleById("btnDelete" + rowId);
+        elementWait.waitElementDisplayById("btnDelete" + rowId);
 
         seleniumSettings.getWebDriver().findElement(By.id("btnDelete" + rowId)).click();
 

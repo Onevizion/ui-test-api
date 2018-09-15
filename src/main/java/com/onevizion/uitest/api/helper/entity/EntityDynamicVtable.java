@@ -12,7 +12,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.ElementHelper;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
@@ -43,7 +43,7 @@ public class EntityDynamicVtable {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
     private Tab tab;
@@ -60,7 +60,7 @@ public class EntityDynamicVtable {
 
         seleniumSettings.getWebDriver().findElement(By.name("attribVtableDesc")).sendKeys(dynamicVtable.getDesc());
 
-        elementHelper.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
+        element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();

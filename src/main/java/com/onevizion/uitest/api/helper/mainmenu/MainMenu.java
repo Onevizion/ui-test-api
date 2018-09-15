@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 
@@ -23,7 +23,7 @@ public class MainMenu {
     private Js js;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private MainMenuWait mainMenuWait;
@@ -33,10 +33,10 @@ public class MainMenu {
 
     public void showMenu() {
         WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id("newGui")).findElement(By.className(SHOW_MENU_BUTTON_CLASS));
-        elementWaitHelper.waitElementVisible(menuButton);
+        elementWait.waitElementVisible(menuButton);
         menuButton.click();
 
-        elementWaitHelper.waitElementVelocityAnimatedFinishById("leftMenu");
+        elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
 
         //WebElement menu = seleniumSettings.getWebDriver().findElement(By.id("leftMenuContainer")).findElement(By.id("leftMenu"));
         //elementWaitHelper.waitElementVisible(menu);
@@ -46,10 +46,10 @@ public class MainMenu {
 
     public void hideMenu() {
         WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id("leftMenuContainer")).findElement(By.className(HIDE_MENU_BUTTON_CLASS));
-        elementWaitHelper.waitElementVisible(menuButton);
+        elementWait.waitElementVisible(menuButton);
         menuButton.click();
 
-        elementWaitHelper.waitElementVelocityAnimatedFinishById("leftMenu");
+        elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
 
         //elementWaitHelper.waitElementVisible(seleniumSettings.getWebDriver().findElement(By.id("newGui")).findElement(By.className(SHOW_MENU_BUTTON_CLASS)));
     }
@@ -59,7 +59,7 @@ public class MainMenu {
 
         WebElement menuItem = findMenuItem(item);
         menuItem.click();
-        elementWaitHelper.waitElementVelocityAnimatedFinishById("leftMenu");
+        elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
         waitPageTitle(item);
         wait.waitGridLoad(0L, 0L);
     }
@@ -72,12 +72,12 @@ public class MainMenu {
             menuItem.click();
         } else {
             menuItem.findElement(By.className("newBtnWrapper")).click();
-            elementWaitHelper.waitElementVelocityAnimatedFinishById("leftMenuTrackorTree");
+            elementWait.waitElementVelocityAnimatedFinishById("leftMenuTrackorTree");
             WebElement menuTreeItem = findMenuTreeItem(menuItem, treeItem);
             menuTreeItem.click();
-            elementWaitHelper.waitElementVelocityAnimatedFinishById("leftMenuTrackorTree");
+            elementWait.waitElementVelocityAnimatedFinishById("leftMenuTrackorTree");
         }
-        elementWaitHelper.waitElementVelocityAnimatedFinishById("leftMenu");
+        elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
         waitPageTitle(item + " - " + treeItem);
         wait.waitGridLoad(0L, 0L);
     }
@@ -85,7 +85,7 @@ public class MainMenu {
     private WebElement findMenuItem(String item) {
         WebElement searchField = seleniumSettings.getWebDriver().findElement(By.id("leftSearchMenuInput"));
 
-        elementWaitHelper.waitElementVisible(searchField);
+        elementWait.waitElementVisible(searchField);
         searchField.clear();
         searchField.sendKeys(item);
 
@@ -102,7 +102,7 @@ public class MainMenu {
     private WebElement findMenuTreeItem(WebElement item, String treeItem) {
         WebElement treeSearchField = seleniumSettings.getWebDriver().findElement(By.id("treeSearchMenuInput"));
 
-        elementWaitHelper.waitElementVisible(treeSearchField);
+        elementWait.waitElementVisible(treeSearchField);
         treeSearchField.clear();
         treeSearchField.sendKeys(treeItem);
 

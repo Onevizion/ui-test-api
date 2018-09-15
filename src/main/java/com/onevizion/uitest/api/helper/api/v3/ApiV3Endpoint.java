@@ -16,8 +16,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.ElementWait;
 
 @Component
 public class ApiV3Endpoint {
@@ -26,10 +26,10 @@ public class ApiV3Endpoint {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public int getEndpointsCount(WebElement resource) {
         List<WebElement> endpoints = resource.findElements(By.className("endpoint"));
@@ -42,7 +42,7 @@ public class ApiV3Endpoint {
 
         List<WebElement> endpoints = resource.findElements(By.className("endpoint"));
         for (WebElement endpoint : endpoints) {
-            elementHelper.moveToElement(endpoint);
+            element.moveToElement(endpoint);
             String actualMethod = endpoint.findElement(By.className("heading")).findElement(By.className("http_method")).getText();
             String actualPath = endpoint.findElement(By.className("heading")).findElement(By.className("path")).getText();
             String actualDescription = endpoint.findElement(By.className("heading")).findElement(By.tagName("li")).getText();
@@ -66,7 +66,7 @@ public class ApiV3Endpoint {
         endpoint.findElement(By.className("heading")).findElement(By.className("http_method")).findElement(By.tagName("a")).click();
 
         WebElement content = endpoint.findElement(By.className("content"));
-        elementWaitHelper.waitElementAnimatedFinish(content);
+        elementWait.waitElementAnimatedFinish(content);
     }
 
     public void submitEndpoint(WebElement endpoint) {
@@ -76,18 +76,18 @@ public class ApiV3Endpoint {
 
         if (hideButton.isDisplayed()) {
             hideButton.click();
-            elementWaitHelper.waitElementAttribute(hideButton, "style", "display: none;");
-            elementWaitHelper.waitElementAnimatedFinish(response);
+            elementWait.waitElementAttribute(hideButton, "style", "display: none;");
+            elementWait.waitElementAnimatedFinish(response);
         }
-        elementWaitHelper.waitElementVisible(submitButton);
+        elementWait.waitElementVisible(submitButton);
         submitButton.click();
-        elementWaitHelper.waitElementVisible(response);
-        elementWaitHelper.waitElementAnimatedFinish(response);
+        elementWait.waitElementVisible(response);
+        elementWait.waitElementAnimatedFinish(response);
     }
 
     public <T extends Comparable<? super T>> void checkResponse(WebElement endpoint, List<T> expectedResponse, Class<T> clazz) {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
-        elementHelper.moveToElement(responseText);
+        element.moveToElement(responseText);
         String actualResponseText = responseText.getText();
 
         List<T> actualResponse = null;
@@ -110,14 +110,14 @@ public class ApiV3Endpoint {
 
     public void checkResponseText(WebElement endpoint, String expectedResponseText) {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
-        elementHelper.moveToElement(responseText);
+        element.moveToElement(responseText);
         String actualResponseText = responseText.getText();
         Assert.assertEquals(actualResponseText, expectedResponseText);
     }
 
     public void checkResponseTextWithErrorReportId(WebElement endpoint, String expectedResponseText) {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
-        elementHelper.moveToElement(responseText);
+        element.moveToElement(responseText);
         String actualResponseText = responseText.getText();
         actualResponseText = actualResponseText.substring(0, actualResponseText.length() - 36);
         Assert.assertEquals(actualResponseText, expectedResponseText);
@@ -125,7 +125,7 @@ public class ApiV3Endpoint {
 
     public void checkResponseCode(WebElement endpoint, String expectedResponseCode) {
         WebElement responseCode = endpoint.findElement(By.className("response_code"));
-        elementHelper.moveToElement(responseCode);
+        element.moveToElement(responseCode);
         String actualResponseCode = responseCode.getText();
         Assert.assertEquals(actualResponseCode, expectedResponseCode);
     }

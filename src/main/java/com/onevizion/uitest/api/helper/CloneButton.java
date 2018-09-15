@@ -24,7 +24,7 @@ public class CloneButton {
     private Window window;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public void openCloneForm(Long gridIdx) {
         showCloneButton(gridIdx);
@@ -35,12 +35,12 @@ public class CloneButton {
     }
 
     private void showCloneButton(Long gridIdx) {
-        elementWaitHelper.waitElementById(BUTTON_LIST_ADD_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_LIST_ADD_ID_BASE + gridIdx);
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_LIST_ADD_ID_BASE + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(BUTTON_CLONE_ID_BASE + gridIdx);
-        elementWaitHelper.waitElementVisibleById(BUTTON_CLONE_ID_BASE + gridIdx);
-        elementWaitHelper.waitElementDisplayById(BUTTON_CLONE_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_CLONE_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_CLONE_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_CLONE_ID_BASE + gridIdx);
     }
 
 }

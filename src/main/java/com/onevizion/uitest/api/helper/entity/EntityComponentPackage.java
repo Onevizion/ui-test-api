@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -33,13 +33,13 @@ public class EntityComponentPackage {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public void add(ComponentPackage componentPackage) {
         seleniumSettings.getWebDriver().findElement(By.id("new_lbCompPkg0")).click();
-        elementWaitHelper.waitElementById("new_rows_lbCompPkg0");
-        elementWaitHelper.waitElementVisibleById("new_lbCompPkg0");
-        elementWaitHelper.waitElementDisplayById("new_rows_lbCompPkg0");
+        elementWait.waitElementById("new_rows_lbCompPkg0");
+        elementWait.waitElementVisibleById("new_lbCompPkg0");
+        elementWait.waitElementDisplayById("new_rows_lbCompPkg0");
 
         window.openModal(By.id("btnAddCompPkg0"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

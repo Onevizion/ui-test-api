@@ -19,8 +19,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -38,10 +38,10 @@ public class Export {
     private Wait wait;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private ExportJs exportJs;
@@ -129,11 +129,11 @@ public class Export {
         WebElement link = panel.findElement(By.className("ge_link"));
         String processId = link.getAttribute("onclick").replace("showExpDetails(", "").replace(")", "");
 
-        elementHelper.moveToElementById("drop_down_overflow_" + processId);
+        element.moveToElementById("drop_down_overflow_" + processId);
 
-        elementWaitHelper.waitElementById("ge_delete_" + processId);
-        elementWaitHelper.waitElementVisibleById("ge_delete_" + processId);
-        elementWaitHelper.waitElementDisplayById("ge_delete_" + processId);
+        elementWait.waitElementById("ge_delete_" + processId);
+        elementWait.waitElementVisibleById("ge_delete_" + processId);
+        elementWait.waitElementDisplayById("ge_delete_" + processId);
 
         seleniumSettings.getWebDriver().findElement(By.id("ge_delete_" + processId)).click();
 
@@ -179,8 +179,8 @@ public class Export {
         Assert.assertEquals(gridRows, new Long(1L), "Grid have wrong rows count");
 
         checkbox.clickById("lblcb" + processId);
-        elementWaitHelper.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx());
-        elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx())));
+        elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx());
+        element.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx())));
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());

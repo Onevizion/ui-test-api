@@ -15,21 +15,21 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
-public class ElementHelper {
+public class Element {
 
-    private final Logger logger = LoggerFactory.getLogger(ElementHelper.class);
-
-    @Resource
-    private ElementJsHelper elementJsHelper;
+    private final Logger logger = LoggerFactory.getLogger(Element.class);
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementJs elementJs;
+
+    @Resource
+    private ElementWait elementWait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     public void moveToElement(WebElement element) {
-        elementJsHelper.moveToElement(element);
+        elementJs.moveToElement(element);
 
         try {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
@@ -42,8 +42,8 @@ public class ElementHelper {
     }
 
     public void moveToElementByName(String name) {
-        elementWaitHelper.waitElementByName(name);
-        elementJsHelper.moveToElementByName(name);
+        elementWait.waitElementByName(name);
+        elementJs.moveToElementByName(name);
 
         try {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
@@ -57,8 +57,8 @@ public class ElementHelper {
     }
 
     public void moveToElementById(String id) {
-        elementWaitHelper.waitElementById(id);
-        elementJsHelper.moveToElementById(id);
+        elementWait.waitElementById(id);
+        elementJs.moveToElementById(id);
 
         try {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
@@ -71,15 +71,15 @@ public class ElementHelper {
     }
 
     public void setFocusOnElement(WebElement element) {
-        elementJsHelper.setFocusOnElement(element);
+        elementJs.setFocusOnElement(element);
     }
 
     public void setFocusOnElementByName(String name) {
-        elementJsHelper.setFocusOnElementByName(name);
+        elementJs.setFocusOnElementByName(name);
     }
 
     public void setFocusOnElementById(String id) {
-        elementJsHelper.setFocusOnElementById(id);
+        elementJs.setFocusOnElementById(id);
     }
 
     public void click(WebElement element) {
@@ -108,7 +108,7 @@ public class ElementHelper {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
             actionObject.doubleClick(element).perform();
         } else if (seleniumSettings.getBrowser().equals("firefox")) { //TODO BUG firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1430851
-            elementJsHelper.doubleClick(element);
+            elementJs.doubleClick(element);
         } else {
             throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
         }
@@ -123,7 +123,7 @@ public class ElementHelper {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
             actionObject.doubleClick(element).perform();
         } else if (seleniumSettings.getBrowser().equals("firefox")) { //TODO BUG firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1430851
-            elementJsHelper.doubleClick(element);
+            elementJs.doubleClick(element);
         } else {
             throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
         }
@@ -138,7 +138,7 @@ public class ElementHelper {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
             actionObject.doubleClick(element).perform();
         } else if (seleniumSettings.getBrowser().equals("firefox")) { //TODO BUG firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1430851
-            elementJsHelper.doubleClick(element);
+            elementJs.doubleClick(element);
         } else {
             throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
         }

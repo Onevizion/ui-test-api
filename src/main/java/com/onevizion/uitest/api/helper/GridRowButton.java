@@ -24,7 +24,7 @@ public class GridRowButton { //TODO rename to GridRow
     private Window window;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public void openGridRowForm(Long gridIdx) {
         showGridRowButton(gridIdx);
@@ -35,12 +35,12 @@ public class GridRowButton { //TODO rename to GridRow
     }
 
     private void showGridRowButton(Long gridIdx) {
-        elementWaitHelper.waitElementById(BUTTON_LIST_EDIT_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_LIST_EDIT_ID_BASE + gridIdx);
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_LIST_EDIT_ID_BASE + gridIdx)).click();
 
-        elementWaitHelper.waitElementById(BUTTON_EDIT_ROW_ID_BASE + gridIdx);
-        elementWaitHelper.waitElementVisibleById(BUTTON_EDIT_ROW_ID_BASE + gridIdx);
-        elementWaitHelper.waitElementDisplayById(BUTTON_EDIT_ROW_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_EDIT_ROW_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_EDIT_ROW_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_EDIT_ROW_ID_BASE + gridIdx);
     }
 
 }

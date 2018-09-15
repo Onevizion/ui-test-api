@@ -10,7 +10,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.ElementHelper;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.FormDesignerField;
 
@@ -32,7 +32,7 @@ public class FormDesigner {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
     private Js js;
@@ -44,46 +44,46 @@ public class FormDesigner {
     private FormDesignerJs formDesignerJs;
 
     public void fillSearch(String name) {
-        elementHelper.moveToElementById(FIELD_LIST_SEARCH);
+        element.moveToElementById(FIELD_LIST_SEARCH);
         seleniumSettings.getWebDriver().findElement(By.id(FIELD_LIST_SEARCH)).clear();
         seleniumSettings.getWebDriver().findElement(By.id(FIELD_LIST_SEARCH)).sendKeys(name);
     }
 
     public void clearSearch() {
-        elementHelper.moveToElementById(FIELD_LIST_SEARCH);
-        elementHelper.clickById(BUTTON_CLEAR_SEARCH);
+        element.moveToElementById(FIELD_LIST_SEARCH);
+        element.clickById(BUTTON_CLEAR_SEARCH);
     }
 
     public void addElementToForm(String fieldName, String elementId) {
         fillSearch(fieldName);
         WebElement listBoxfields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent"));
-        elementHelper.doubleClick(listBoxfields.findElement(By.id(elementId)));
+        element.doubleClick(listBoxfields.findElement(By.id(elementId)));
         clearSearch();
     }
 
     public void addElementsToForm(List<String> elements, String drillDownPrefix) {
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(0));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(1));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(2));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(3));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(4));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(5));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(6));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(7));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(8));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(9));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(10));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(11));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(12));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(13));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(14));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(15));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(16));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(17));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(18));
-        elementHelper.doubleClickById(drillDownPrefix + elements.get(19));
+        element.doubleClickById(drillDownPrefix + elements.get(0));
+        element.doubleClickById(drillDownPrefix + elements.get(1));
+        element.doubleClickById(drillDownPrefix + elements.get(2));
+        element.doubleClickById(drillDownPrefix + elements.get(3));
+        element.doubleClickById(drillDownPrefix + elements.get(4));
+        element.doubleClickById(drillDownPrefix + elements.get(5));
+        element.doubleClickById(drillDownPrefix + elements.get(6));
+        element.doubleClickById(drillDownPrefix + elements.get(7));
+        element.doubleClickById(drillDownPrefix + elements.get(8));
+        element.doubleClickById(drillDownPrefix + elements.get(9));
+        element.doubleClickById(drillDownPrefix + elements.get(10));
+        element.doubleClickById(drillDownPrefix + elements.get(11));
+        element.doubleClickById(drillDownPrefix + elements.get(12));
+        element.doubleClickById(drillDownPrefix + elements.get(13));
+        element.doubleClickById(drillDownPrefix + elements.get(14));
+        element.doubleClickById(drillDownPrefix + elements.get(15));
+        element.doubleClickById(drillDownPrefix + elements.get(16));
+        element.doubleClickById(drillDownPrefix + elements.get(17));
+        element.doubleClickById(drillDownPrefix + elements.get(18));
+        element.doubleClickById(drillDownPrefix + elements.get(19));
         if (elements.get(20) != null) {
-            elementHelper.doubleClickById(drillDownPrefix + elements.get(20));
+            element.doubleClickById(drillDownPrefix + elements.get(20));
         }
     }
 
@@ -93,7 +93,7 @@ public class FormDesigner {
         List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("record"));
         for (WebElement field : fields) {
             if (field.findElement(By.className("labelField")).getAttribute("innerText").trim().equals(label)) {
-                elementHelper.doubleClick(field);
+                element.doubleClick(field);
                 break;
             }
         }
@@ -106,21 +106,21 @@ public class FormDesigner {
             List<WebElement> labels = field.findElements(By.tagName("label"));
             if (labels.size() > 0) {
                 if (labels.get(0).getAttribute("innerText").trim().equals(label)) {
-                    elementHelper.click(field);
-                    elementHelper.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+                    element.click(field);
+                    element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
                     break;
                 }
             } else {
                 if (field.getAttribute("Title").equals("BlankLine")) {
                     if (field.getAttribute("innerText").trim().equals(label)) {
-                        elementHelper.click(field);
-                        elementHelper.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+                        element.click(field);
+                        element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
                         break;
                     }
                 } else if (field.getAttribute("Title").equals("Splitter")) {
                     if (field.getAttribute("Title").equals(label)) {
-                        elementHelper.click(field);
-                        elementHelper.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+                        element.click(field);
+                        element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
                         break;
                     }
                 }
@@ -131,49 +131,49 @@ public class FormDesigner {
     public void removeElementsFromForm(List<String> elements, String drillDownPrefix) {
         WebElement formfields = seleniumSettings.getWebDriver().findElement(By.id(FORM_ID));
 
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(0))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(1))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(2))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(3))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(4))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(5))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(6))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(7))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(8))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(9))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(10))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(11))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(12))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(13))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(14))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(15))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(16))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(17))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(18))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(19))));
-        elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(0))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(1))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(2))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(3))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(4))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(5))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(6))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(7))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(8))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(9))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(10))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(11))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(12))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(13))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(14))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(15))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(16))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(17))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(18))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(19))));
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
         if (elements.get(20) != null) {
-            elementHelper.click(formfields.findElement(By.id(drillDownPrefix + elements.get(20))));
-            elementHelper.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+            element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(20))));
+            element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
         }
     }
 
@@ -308,18 +308,18 @@ public class FormDesigner {
 
     public void switchToRootSubgroup() {
         //elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink")).get(0));
-        elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.tagName("input")));
+        element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.tagName("input")));
         waitListBoxReady();
     }
 
     public void switchToParentSubgroup() {
         List<WebElement> links = seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink"));
-        elementHelper.click(links.get(links.size() - 2));
+        element.click(links.get(links.size() - 2));
         waitListBoxReady();
     }
 
     public void switchToSubgroup(String subgroupName) {
-        elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.name(subgroupName)));
+        element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.name(subgroupName)));
         waitListBoxReady();
     }
 
@@ -327,7 +327,7 @@ public class FormDesigner {
         List<WebElement> subgroups = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("groupRecord"));
         for (WebElement subgroup : subgroups) {
             if (subgroup.getAttribute("innerText").trim().equals(label)) {
-                elementHelper.click(subgroup);
+                element.click(subgroup);
                 break;
             }
         }
@@ -335,22 +335,22 @@ public class FormDesigner {
     }
 
     public void switchToFieldGroup() {
-        elementHelper.clickById(BUTTON_GROUP_FIELD);
+        element.clickById(BUTTON_GROUP_FIELD);
         waitListBoxReady();
     }
 
     public void switchToTaskGroup() {
-        elementHelper.clickById(BUTTON_GROUP_TASK);
+        element.clickById(BUTTON_GROUP_TASK);
         waitListBoxReady();
     }
 
     public void switchToDrillDownGroup() {
-        elementHelper.clickById(BUTTON_GROUP_DRILLDOWN);
+        element.clickById(BUTTON_GROUP_DRILLDOWN);
         waitListBoxReady();
     }
 
     public void switchToMarkupGroup() {
-        elementHelper.clickById(BUTTON_GROUP_MARKUP);
+        element.clickById(BUTTON_GROUP_MARKUP);
         waitListBoxReady();
     }
 

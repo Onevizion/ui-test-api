@@ -29,7 +29,7 @@ public class Nav {
     private Wait wait;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public Long getAllRecordsCount(Long gridIdx) {
         wait.waitGridLoad(gridIdx, gridIdx);
@@ -122,12 +122,12 @@ public class Nav {
 
         seleniumSettings.getWebDriver().findElement(By.id("navPager" + gridIdx)).click();
 
-        elementWaitHelper.waitElementById("navSelect" + gridIdx);
-        elementWaitHelper.waitElementVisibleById("navSelect" + gridIdx);
-        elementWaitHelper.waitElementDisplayById("navSelect" + gridIdx);
+        elementWait.waitElementById("navSelect" + gridIdx);
+        elementWait.waitElementVisibleById("navSelect" + gridIdx);
+        elementWait.waitElementDisplayById("navSelect" + gridIdx);
 
         js.scrollNewDropDownTop("navSelect" + gridIdx, "scrollContainer", (nextPageNum - 1) * 24L + ((nextPageNum - 1) / 10) * 14L);
-        elementWaitHelper.waitElementVisible(navRanges.get(nextPageNum - 1));
+        elementWait.waitElementVisible(navRanges.get(nextPageNum - 1));
         navRanges.get(nextPageNum - 1).click();
     }
 
@@ -152,12 +152,12 @@ public class Nav {
 
         seleniumSettings.getWebDriver().findElement(By.id("navPager" + gridIdx)).click();
 
-        elementWaitHelper.waitElementById("navSelect" + gridIdx);
-        elementWaitHelper.waitElementVisibleById("navSelect" + gridIdx);
-        elementWaitHelper.waitElementDisplayById("navSelect" + gridIdx);
+        elementWait.waitElementById("navSelect" + gridIdx);
+        elementWait.waitElementVisibleById("navSelect" + gridIdx);
+        elementWait.waitElementDisplayById("navSelect" + gridIdx);
 
         js.scrollNewDropDownTop("navSelect" + gridIdx, "scrollContainer", (prevPageNum - 1) * 24L + ((prevPageNum - 1) / 10) * 14L);
-        elementWaitHelper.waitElementVisible(navRanges.get(prevPageNum - 1));
+        elementWait.waitElementVisible(navRanges.get(prevPageNum - 1));
         navRanges.get(prevPageNum - 1).click();
     }
 

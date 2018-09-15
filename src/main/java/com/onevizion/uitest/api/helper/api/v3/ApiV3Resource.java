@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.ElementHelper;
-import com.onevizion.uitest.api.helper.ElementWaitHelper;
+import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.vo.ApiV3ResourceType;
 
 @Component
@@ -21,10 +21,10 @@ public class ApiV3Resource {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public int getResourcesCount() {
         List<WebElement> resources = seleniumSettings.getWebDriver().findElements(By.className("resource"));
@@ -37,7 +37,7 @@ public class ApiV3Resource {
 
         List<WebElement> resources = seleniumSettings.getWebDriver().findElements(By.className("resource"));
         for (WebElement resource : resources) {
-            elementHelper.moveToElement(resource);
+            element.moveToElement(resource);
             String actualName = resource.findElement(By.tagName("h2")).getText();
 
             if (apiV3ResourceType.getName().equals(actualName)) {
@@ -59,7 +59,7 @@ public class ApiV3Resource {
         resource.findElement(By.tagName("h2")).findElement(By.tagName("a")).click();
 
         WebElement endpoints = resource.findElement(By.className("endpoints"));
-        elementWaitHelper.waitElementAnimatedFinish(endpoints);
+        elementWait.waitElementAnimatedFinish(endpoints);
     }
 
 }

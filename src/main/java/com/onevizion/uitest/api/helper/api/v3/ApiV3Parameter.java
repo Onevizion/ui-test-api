@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.ElementHelper;
+import com.onevizion.uitest.api.helper.Element;
 
 @Component
 public class ApiV3Parameter {
@@ -18,7 +18,7 @@ public class ApiV3Parameter {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     public int getParametersCount(WebElement endpoint) {
         List<WebElement> parametersSections = endpoint.findElements(By.className("operation-params"));
@@ -39,7 +39,7 @@ public class ApiV3Parameter {
 
         List<WebElement> parameters = endpoint.findElement(By.className("operation-params")).findElements(By.tagName("tr"));
         for (WebElement parameter : parameters) {
-            elementHelper.moveToElement(parameter);
+            element.moveToElement(parameter);
             String actualParam = parameter.findElement(By.className("code")).findElement(By.tagName("label")).getText();
             String actualDataType = parameter.findElement(By.className("model-signature")).getText();
 

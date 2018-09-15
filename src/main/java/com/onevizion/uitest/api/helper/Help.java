@@ -30,19 +30,19 @@ public class Help {
     private Wait wait;
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     public void checkHelp(final String name, final String number, final String type) {
-        elementWaitHelper.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
+        elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
         assertElement.AssertLink(SERIAL_NUMBER_ID, number);
 
-        elementHelper.clickById(BUTTON_OPEN);
+        element.clickById(BUTTON_OPEN);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -55,10 +55,10 @@ public class Help {
     }
 
     public void checkHelpOnFilterForm(Long gridIdx, final String name, final String number, final String type) {
-        elementWaitHelper.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
+        elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
         assertElement.AssertLink(SERIAL_NUMBER_ID, number);
 
-        elementHelper.clickById(BUTTON_OPEN_ON_FILTER_FORM + gridIdx);
+        element.clickById(BUTTON_OPEN_ON_FILTER_FORM + gridIdx);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -71,10 +71,10 @@ public class Help {
     }
 
     public void checkHelpOnViewForm(Long gridIdx, final String name, final String number, final String type) {
-        elementWaitHelper.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
+        elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
         assertElement.AssertLink(SERIAL_NUMBER_ID, number);
 
-        elementHelper.clickById(BUTTON_OPEN_ON_VIEW_FORM + gridIdx);
+        element.clickById(BUTTON_OPEN_ON_VIEW_FORM + gridIdx);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

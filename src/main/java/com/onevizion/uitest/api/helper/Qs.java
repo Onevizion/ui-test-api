@@ -30,7 +30,7 @@ public class Qs {
     private Wait wait;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -85,7 +85,7 @@ public class Qs {
     public void waitQsActive(Long gridIdx) {
         if (seleniumSettings.getWebDriver().findElement(By.id("qsValue" + gridIdx)).isDisplayed()) {
             try {
-                elementWaitHelper.waitElementAttributeById("qsContent" + gridIdx, "class", "component quickSearch active");
+                elementWait.waitElementAttributeById("qsContent" + gridIdx, "class", "component quickSearch active");
             } catch (TimeoutException e) {
                 logger.warn("Exception in waitQsActive", e);
             }
@@ -97,7 +97,7 @@ public class Qs {
         WebElement qsElem = (WebElement) js.getNewDropDownElement("qsField" + gridIdx, "customscroll", "item_select", fieldName);
         Long position = js.getNewDropDownElementPosition("qsField" + gridIdx, "customscroll", "item_select", fieldName);
         js.scrollNewDropDownTop("qsField" + gridIdx, "customscroll", position * 28L);
-        elementWaitHelper.waitElementVisible(qsElem);
+        elementWait.waitElementVisible(qsElem);
         qsElem.click();
     }
 

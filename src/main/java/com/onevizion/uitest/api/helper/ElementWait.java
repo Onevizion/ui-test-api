@@ -21,13 +21,13 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class ElementWaitHelper {
+public class ElementWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementJsHelper elementJsHelper;
+    private ElementJs elementJs;
 
     /*public void waitElement(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -345,7 +345,7 @@ public class ElementWaitHelper {
             .withMessage("Element [" + element + "] is animated.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return elementJsHelper.isElementAnimatedFinish(element);
+                    return elementJs.isElementAnimatedFinish(element);
                 }
             });
     }
@@ -357,7 +357,7 @@ public class ElementWaitHelper {
             .withMessage("Element name=[" + name + "] is animated.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return elementJsHelper.isElementAnimatedFinishByName(name);
+                    return elementJs.isElementAnimatedFinishByName(name);
                 }
             });
     }
@@ -369,7 +369,7 @@ public class ElementWaitHelper {
             .withMessage("Element id=[" + id + "] is animated.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return elementJsHelper.isElementAnimatedFinishById(id);
+                    return elementJs.isElementAnimatedFinishById(id);
                 }
             });
     }
@@ -379,7 +379,7 @@ public class ElementWaitHelper {
             .withMessage("Element [" + element + "] Velocity is animated.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return elementJsHelper.isElementVelocityAnimatedFinish(element);
+                    return elementJs.isElementVelocityAnimatedFinish(element);
                 }
             });
     }
@@ -391,7 +391,7 @@ public class ElementWaitHelper {
             .withMessage("Element name=[" + name + "] Velocity is animated.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return elementJsHelper.isElementVelocityAnimatedFinishByName(name);
+                    return elementJs.isElementVelocityAnimatedFinishByName(name);
                 }
             });
     }
@@ -403,7 +403,7 @@ public class ElementWaitHelper {
             .withMessage("Element id=[" + id + "] Velocity is animated.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return elementJsHelper.isElementVelocityAnimatedFinishById(id);
+                    return elementJs.isElementVelocityAnimatedFinishById(id);
                 }
             });
     }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.ElementHelper;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 
@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.helper.Window;
 public class WfVisualEditor {
 
     @Resource
-    private ElementHelper elementHelper;
+    private Element element;
 
     @Resource
     private Wait wait;
@@ -44,7 +44,7 @@ public class WfVisualEditor {
     public void selectStepNode(String text) {
         WebElement stepNode = getStepNode(text);
         WebElement stepNodeLabel = stepNode.findElement(By.id("lbl" + stepNode.getAttribute("id")));
-        elementHelper.click(stepNodeLabel);
+        element.click(stepNodeLabel);
     }
 
     public void openAddFormStepBefore() {
@@ -77,7 +77,7 @@ public class WfVisualEditor {
 
     public void deleteStep(String text) {
         selectStepNode(text);
-        elementHelper.clickById("btnDelete");
+        element.clickById("btnDelete");
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         wait.waitFormLoad();

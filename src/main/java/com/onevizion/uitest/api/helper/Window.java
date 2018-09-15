@@ -42,7 +42,7 @@ public class Window {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     public void openModal(final By elemenLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -64,7 +64,7 @@ public class Window {
             });
 
         final int openedWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
-        elementWaitHelper.waitElementEnabledByBy(elemenLocator);
+        elementWait.waitElementEnabledByBy(elemenLocator);
 
         try {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());

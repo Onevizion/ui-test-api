@@ -23,7 +23,7 @@ public class NewDropDown {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private ElementWaitHelper elementWaitHelper;
+    private ElementWait elementWait;
 
     @Resource
     private Js js;
@@ -70,15 +70,15 @@ public class NewDropDown {
         do {
             try {
                 seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                elementWaitHelper.waitElementById("new_rows_" + id);
-                elementWaitHelper.waitElementVisibleById("new_rows_" + id);
-                elementWaitHelper.waitElementDisplayById("new_rows_" + id);
+                elementWait.waitElementById("new_rows_" + id);
+                elementWait.waitElementVisibleById("new_rows_" + id);
+                elementWait.waitElementDisplayById("new_rows_" + id);
 
                 Long position = js.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
                 js.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
 
                 WebElement entityElem = (WebElement) js.getNewDropDownElement("new_rows_" + id, "scrollContainer", "newDropDownRowContainer", name);
-                elementWaitHelper.waitElementVisible(entityElem);
+                elementWait.waitElementVisible(entityElem);
 
                 entityElem.click();
 
@@ -130,9 +130,9 @@ public class NewDropDown {
         do {
             try {
                 seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                elementWaitHelper.waitElementById("new_rows_" + id);
-                elementWaitHelper.waitElementVisibleById("new_rows_" + id);
-                elementWaitHelper.waitElementDisplayById("new_rows_" + id);
+                elementWait.waitElementById("new_rows_" + id);
+                elementWait.waitElementVisibleById("new_rows_" + id);
+                elementWait.waitElementDisplayById("new_rows_" + id);
 
                 Long position = js.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
                 js.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
@@ -143,15 +143,15 @@ public class NewDropDown {
                 act.moveToElement(entityElem).perform();
 
                 wait.waitWebElement(By.className("newDropDownRowBtnWrapper"));
-                elementWaitHelper.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
+                elementWait.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
                 act.moveToElement(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0)).perform();
-                elementWaitHelper.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
+                elementWait.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
                 if (buttonsCnt > 1) {
-                    elementWaitHelper.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(1));
-                    elementWaitHelper.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(1));
+                    elementWait.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(1));
+                    elementWait.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(1));
                     if (buttonsCnt > 2) {
-                        elementWaitHelper.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(2));
-                        elementWaitHelper.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(2));
+                        elementWait.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(2));
+                        elementWait.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(2));
                     }
                 }
 
@@ -214,9 +214,9 @@ public class NewDropDown {
         do {
             try {
                 seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                elementWaitHelper.waitElementById("new_rows_" + id);
-                elementWaitHelper.waitElementVisibleById("new_rows_" + id);
-                elementWaitHelper.waitElementDisplayById("new_rows_" + id);
+                elementWait.waitElementById("new_rows_" + id);
+                elementWait.waitElementVisibleById("new_rows_" + id);
+                elementWait.waitElementDisplayById("new_rows_" + id);
 
                 Long position = js.getNewDropDownElementPosition("new_rows_" + id, "scrollContent", "newDropDownRowContainer", name);
                 js.scrollNewDropDownTop("new_rows_" + id, "scrollContainer", position * 28L);
@@ -227,15 +227,15 @@ public class NewDropDown {
                 act.moveToElement(entityElem).perform();
 
                 wait.waitWebElement(By.className("newDropDownRowBtnWrapper"));
-                elementWaitHelper.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
+                elementWait.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
                 act.moveToElement(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0)).perform();
-                elementWaitHelper.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
+                elementWait.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(0));
                 if (buttonsCnt > 1) {
-                    elementWaitHelper.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(1));
-                    elementWaitHelper.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(1));
+                    elementWait.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(1));
+                    elementWait.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(1));
                     if (buttonsCnt > 2) {
-                        elementWaitHelper.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(2));
-                        elementWaitHelper.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(2));
+                        elementWait.waitElementVisible(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(2));
+                        elementWait.waitElementAnimatedFinish(entityElem.findElements(By.className("newDropDownRowBtnWrapper")).get(2));
                     }
                 }
 
