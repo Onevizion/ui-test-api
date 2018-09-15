@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
-public class HelpHelper {
+public class Help {
 
     private final static String BUTTON_OPEN = "btnHelp";
     private final static String BUTTON_OPEN_ON_FILTER_FORM = "btnHelpFilter";

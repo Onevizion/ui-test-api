@@ -49,7 +49,7 @@ import com.onevizion.uitest.api.helper.FilterHelper;
 import com.onevizion.uitest.api.helper.FilterWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.GridRowButtonHelper;
-import com.onevizion.uitest.api.helper.HelpHelper;
+import com.onevizion.uitest.api.helper.Help;
 import com.onevizion.uitest.api.helper.HtmlInput;
 import com.onevizion.uitest.api.helper.HtmlSelect;
 import com.onevizion.uitest.api.helper.Js;
@@ -232,7 +232,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected TreeWait treeWait;
 
     @Resource
-    protected HelpHelper helpHelper;
+    protected Help help;
 
     @Resource
     protected Export export;
