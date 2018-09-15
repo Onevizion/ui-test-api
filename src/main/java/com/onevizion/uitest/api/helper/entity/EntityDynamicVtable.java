@@ -11,7 +11,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
@@ -31,7 +31,7 @@ public class EntityDynamicVtable {
     private Wait wait;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private GridHelper gridHelper;
@@ -130,8 +130,8 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("attribVtableName", dynamicVtable.getName());
-        assertHelper.AssertText("attribVtableDesc", dynamicVtable.getDesc());
+        assertElement.AssertText("attribVtableName", dynamicVtable.getName());
+        assertElement.AssertText("attribVtableDesc", dynamicVtable.getDesc());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

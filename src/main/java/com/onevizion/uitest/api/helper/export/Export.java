@@ -17,7 +17,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
@@ -53,7 +53,7 @@ public class Export {
     private GridHelper gridHelper;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Checkbox checkbox;
@@ -157,14 +157,14 @@ public class Export {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertHelper.AssertLink("gridPageName", exportRun.getGridPageName() + " ");
-        assertHelper.AssertLink("trackorTypeName", exportRun.getTrackorTypeName());
-        assertHelper.AssertLink("statusName", exportRun.getStatusName() + " ");
-        assertHelper.AssertLink("exportTypeName", exportRun.getMode() + " ");
-        assertHelper.AssertLink("exportDeliveryName", exportRun.getDelivery());
-        assertHelper.AssertLink("un", seleniumSettings.getTestUser());
-        assertHelper.AssertTextById("errorMessage", exportRun.getErrorMessage());
-        assertHelper.AssertTextById("comments", exportRun.getComments());
+        assertElement.AssertLink("gridPageName", exportRun.getGridPageName() + " ");
+        assertElement.AssertLink("trackorTypeName", exportRun.getTrackorTypeName());
+        assertElement.AssertLink("statusName", exportRun.getStatusName() + " ");
+        assertElement.AssertLink("exportTypeName", exportRun.getMode() + " ");
+        assertElement.AssertLink("exportDeliveryName", exportRun.getDelivery());
+        assertElement.AssertLink("un", seleniumSettings.getTestUser());
+        assertElement.AssertTextById("errorMessage", exportRun.getErrorMessage());
+        assertElement.AssertTextById("comments", exportRun.getComments());
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));

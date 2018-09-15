@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
@@ -37,7 +37,7 @@ public class EntityWpDatePair {
     private GridHelper gridHelper;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Js js;
@@ -106,9 +106,9 @@ public class EntityWpDatePair {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("wpTaskDateType", wpDatePair.getName());
-        assertHelper.AssertText("label", wpDatePair.getLabel());
-        assertHelper.AssertText("abbrLabel", wpDatePair.getShortLabel());
+        assertElement.AssertText("wpTaskDateType", wpDatePair.getName());
+        assertElement.AssertText("label", wpDatePair.getLabel());
+        assertElement.AssertText("abbrLabel", wpDatePair.getShortLabel());
 
         tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);

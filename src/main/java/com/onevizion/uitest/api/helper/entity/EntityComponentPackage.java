@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Wait;
@@ -27,7 +27,7 @@ public class EntityComponentPackage {
     private Window window;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -68,7 +68,7 @@ public class EntityComponentPackage {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("name", componentPackage.getName());
+        assertElement.AssertText("name", componentPackage.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

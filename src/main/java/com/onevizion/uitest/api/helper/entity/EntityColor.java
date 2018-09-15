@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -28,7 +28,7 @@ public class EntityColor {
     private Wait wait;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private GridHelper gridHelper;
@@ -83,9 +83,9 @@ public class EntityColor {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("colorName", color.getName());
-        assertHelper.AssertText("rgbValue", color.getValue());
-        assertHelper.AssertText("description", color.getDescription());
+        assertElement.AssertText("colorName", color.getName());
+        assertElement.AssertText("rgbValue", color.getValue());
+        assertElement.AssertText("description", color.getDescription());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

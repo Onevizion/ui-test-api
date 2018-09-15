@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
@@ -37,7 +37,7 @@ public class EntityConfigField {
     private Wait wait;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Js js;
@@ -132,11 +132,11 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDate().getDefValueSql());
         } else if (ConfigFieldType.CHECKBOX.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "1");
+            assertElement.AssertText("fieldSize", "1");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -168,11 +168,11 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "15");
+            assertElement.AssertText("fieldSize", "15");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLatitude().getDefValueSql());
         } else if (ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "15");
+            assertElement.AssertText("fieldSize", "15");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
@@ -263,7 +263,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
             if ((configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
                     || (configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
@@ -272,7 +272,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
             if ((configFieldVo.getConfigFieldTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
                     || (configFieldVo.getConfigFieldTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
@@ -387,11 +387,11 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDate().getDefValueSql());
         } else if (ConfigFieldType.CHECKBOX.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "1");
+            assertElement.AssertText("fieldSize", "1");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -423,11 +423,11 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "15");
+            assertElement.AssertText("fieldSize", "15");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLatitude().getDefValueSql());
         } else if (ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "15");
+            assertElement.AssertText("fieldSize", "15");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
@@ -511,7 +511,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
             if ((configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
                     || (configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
@@ -520,7 +520,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
             if ((configFieldVo.getConfigFieldTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
                     || (configFieldVo.getConfigFieldTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
@@ -599,54 +599,54 @@ public class EntityConfigField {
             jqueryWait.waitJQueryLoad();
         }
 
-        assertHelper.AssertSelect("TrackorTypeName", configFieldVo.getTrackorTypeLabel());
-        assertHelper.AssertSelect("dataType", configFieldVo.getConfigFieldType().getLabel());
-        assertHelper.AssertText("LabelName", configFieldVo.getLabel());
-        assertHelper.AssertText("configFieldName", configFieldVo.getName());
+        assertElement.AssertSelect("TrackorTypeName", configFieldVo.getTrackorTypeLabel());
+        assertElement.AssertSelect("dataType", configFieldVo.getConfigFieldType().getLabel());
+        assertElement.AssertText("LabelName", configFieldVo.getLabel());
+        assertElement.AssertText("configFieldName", configFieldVo.getName());
 
-        assertHelper.AssertSelect("componentsPackageId", configFieldVo.getCompPackage());
+        assertElement.AssertSelect("componentsPackageId", configFieldVo.getCompPackage());
 
-        assertHelper.AssertSelect("colorId", configFieldVo.getColor());
+        assertElement.AssertSelect("colorId", configFieldVo.getColor());
 
-        assertHelper.AssertText("fieldWidth", configFieldVo.getWidth());
+        assertElement.AssertText("fieldWidth", configFieldVo.getWidth());
 
         if (ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", configFieldVo.getConfigFieldText().getLength());
+            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldText().getLength());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldText().getDefValueSql());
         } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", configFieldVo.getConfigFieldNumber().getLength());
+            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldNumber().getLength());
 
-            assertHelper.AssertText("prefix", configFieldVo.getConfigFieldNumber().getPrefix());
-            assertHelper.AssertText("suffix", configFieldVo.getConfigFieldNumber().getSuffix());
-            assertHelper.AssertText("numDecimals", configFieldVo.getConfigFieldNumber().getDecimal());
-            assertHelper.AssertText("negativeColor", configFieldVo.getConfigFieldNumber().getNegativeColor());
-            assertHelper.AssertText("positiveColor", configFieldVo.getConfigFieldNumber().getPositiveColor());
+            assertElement.AssertText("prefix", configFieldVo.getConfigFieldNumber().getPrefix());
+            assertElement.AssertText("suffix", configFieldVo.getConfigFieldNumber().getSuffix());
+            assertElement.AssertText("numDecimals", configFieldVo.getConfigFieldNumber().getDecimal());
+            assertElement.AssertText("negativeColor", configFieldVo.getConfigFieldNumber().getNegativeColor());
+            assertElement.AssertText("positiveColor", configFieldVo.getConfigFieldNumber().getPositiveColor());
 
-            assertHelper.AssertCheckBoxNew("parensForNegative", configFieldVo.getConfigFieldNumber().getParensForNegative());
-            assertHelper.AssertCheckBoxNew("separateThousands", configFieldVo.getConfigFieldNumber().getSeparateThousands());
+            assertElement.AssertCheckBoxNew("parensForNegative", configFieldVo.getConfigFieldNumber().getParensForNegative());
+            assertElement.AssertCheckBoxNew("separateThousands", configFieldVo.getConfigFieldNumber().getSeparateThousands());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDate().getDefValueSql());
         } else if (ConfigFieldType.CHECKBOX.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "1");
+            assertElement.AssertText("fieldSize", "1");
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertRadioPsSelector("tableName", "btntableName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldDropDown().getTable(), 2L, true);
+            assertElement.AssertRadioPsSelector("tableName", "btntableName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldDropDown().getTable(), 2L, true);
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", configFieldVo.getConfigFieldMemo().getLength());
-            assertHelper.AssertText("linesQty", configFieldVo.getConfigFieldMemo().getLines());
+            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldMemo().getLength());
+            assertElement.AssertText("linesQty", configFieldVo.getConfigFieldMemo().getLines());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMemo().getDefValueSql());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", configFieldVo.getConfigFieldWiki().getLength());
-            assertHelper.AssertText("linesQty", configFieldVo.getConfigFieldWiki().getLines());
+            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldWiki().getLength());
+            assertElement.AssertText("linesQty", configFieldVo.getConfigFieldWiki().getLines());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldWiki().getDefValueSql());
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -658,95 +658,95 @@ public class EntityConfigField {
             checkSqlInCodeMirror("btnSQL", configFieldVo.getConfigFieldDbSelector().getSql());
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDbSelector().getDefValueSql());
         } else if (ConfigFieldType.SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertRadioPsSelector("tableName", "btntableName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldSelector().getTable(), 2L, true);
+            assertElement.AssertRadioPsSelector("tableName", "btntableName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldSelector().getTable(), 2L, true);
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "15");
+            assertElement.AssertText("fieldSize", "15");
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLatitude().getDefValueSql());
         } else if (ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "15");
+            assertElement.AssertText("fieldSize", "15");
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
             tab.goToTab(2L); //Image Settings
 
-            assertHelper.AssertCheckBoxNew("imageExtractMetadata", configFieldVo.getConfigFieldEfile().getExtractMetadata());
-            assertHelper.AssertSelect("imageLatConfigFieldId", configFieldVo.getConfigFieldEfile().getImageLatitude());
-            assertHelper.AssertSelect("imageLongConfigFieldId", configFieldVo.getConfigFieldEfile().getImageLongitude());
-            assertHelper.AssertSelect("imageTimeConfigFieldId", configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
-            assertHelper.AssertSelect("imageResizeMode", configFieldVo.getConfigFieldEfile().getResizeMode());
-            assertHelper.AssertText("imageWidth", configFieldVo.getConfigFieldEfile().getResizeWidth());
-            assertHelper.AssertText("imageHeight", configFieldVo.getConfigFieldEfile().getResizeHeight());
-            assertHelper.AssertCheckBoxNew("imageRotate", configFieldVo.getConfigFieldEfile().getRotate());
-            assertHelper.AssertCheckBoxNew("logBlobChanges", configFieldVo.getConfigFieldEfile().getLogBlobChanges());
-            assertHelper.AssertCheckBoxNew("uploadToS3Directly", configFieldVo.getConfigFieldEfile().getUploadToAws());
-            assertHelper.AssertRadioPsSelector("autocaptionClientFile", "btnautocaptionClientFile", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L, true);
+            assertElement.AssertCheckBoxNew("imageExtractMetadata", configFieldVo.getConfigFieldEfile().getExtractMetadata());
+            assertElement.AssertSelect("imageLatConfigFieldId", configFieldVo.getConfigFieldEfile().getImageLatitude());
+            assertElement.AssertSelect("imageLongConfigFieldId", configFieldVo.getConfigFieldEfile().getImageLongitude());
+            assertElement.AssertSelect("imageTimeConfigFieldId", configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
+            assertElement.AssertSelect("imageResizeMode", configFieldVo.getConfigFieldEfile().getResizeMode());
+            assertElement.AssertText("imageWidth", configFieldVo.getConfigFieldEfile().getResizeWidth());
+            assertElement.AssertText("imageHeight", configFieldVo.getConfigFieldEfile().getResizeHeight());
+            assertElement.AssertCheckBoxNew("imageRotate", configFieldVo.getConfigFieldEfile().getRotate());
+            assertElement.AssertCheckBoxNew("logBlobChanges", configFieldVo.getConfigFieldEfile().getLogBlobChanges());
+            assertElement.AssertCheckBoxNew("uploadToS3Directly", configFieldVo.getConfigFieldEfile().getUploadToAws());
+            assertElement.AssertRadioPsSelector("autocaptionClientFile", "btnautocaptionClientFile", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L, true);
 
             tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
             checkSqlInCodeMirror("btnSQL", configFieldVo.getConfigFieldTrackorSelector().getSql());
 
-            assertHelper.AssertSelect("ObjectTrackorType", configFieldVo.getConfigFieldTrackorSelector().getTrackorType());
-            assertHelper.AssertText("shortNameLabel", configFieldVo.getConfigFieldTrackorSelector().getShortName());
-            assertHelper.AssertCheckBoxNew("useInMyThingsFilter", configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter());
-            assertHelper.AssertCheckBoxNew("myThingsMarket", configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker());
+            assertElement.AssertSelect("ObjectTrackorType", configFieldVo.getConfigFieldTrackorSelector().getTrackorType());
+            assertElement.AssertText("shortNameLabel", configFieldVo.getConfigFieldTrackorSelector().getShortName());
+            assertElement.AssertCheckBoxNew("useInMyThingsFilter", configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter());
+            assertElement.AssertCheckBoxNew("myThingsMarket", configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker());
 
-            assertHelper.AssertRadioPsSelector("objCf", "btnobjCf", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L, true);
+            assertElement.AssertRadioPsSelector("objCf", "btnobjCf", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L, true);
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorSelector().getDefValueSql());
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
             checkSqlInCodeMirror("btnSQL", configFieldVo.getConfigFieldTrackorDropDown().getSql());
 
-            assertHelper.AssertSelect("ObjectTrackorType", configFieldVo.getConfigFieldTrackorDropDown().getTrackorType());
-            assertHelper.AssertText("shortNameLabel", configFieldVo.getConfigFieldTrackorDropDown().getShortName());
-            assertHelper.AssertCheckBoxNew("useInMyThingsFilter", configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter());
-            assertHelper.AssertCheckBoxNew("myThingsMarket", configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker());
+            assertElement.AssertSelect("ObjectTrackorType", configFieldVo.getConfigFieldTrackorDropDown().getTrackorType());
+            assertElement.AssertText("shortNameLabel", configFieldVo.getConfigFieldTrackorDropDown().getShortName());
+            assertElement.AssertCheckBoxNew("useInMyThingsFilter", configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter());
+            assertElement.AssertCheckBoxNew("myThingsMarket", configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorDropDown().getDefValueSql());
         } else if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType())) {
             checkSqlInCodeMirror("btnSQL", configFieldVo.getConfigFieldCalculated().getSql());
         } else if (ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", configFieldVo.getConfigFieldHyperlink().getLength());
+            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldHyperlink().getLength());
         } else if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             //TODO filter
 
-            assertHelper.AssertSelect("lstRollupXitorTypeID", configFieldVo.getConfigFieldRollup().getTrackorType());
+            assertElement.AssertSelect("lstRollupXitorTypeID", configFieldVo.getConfigFieldRollup().getTrackorType());
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("linesQty", configFieldVo.getConfigFieldMultiSelector().getLines());
+            assertElement.AssertText("linesQty", configFieldVo.getConfigFieldMultiSelector().getLines());
 
-            assertHelper.AssertRadioPsSelector("tableName", "btntableName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L, true);
+            assertElement.AssertRadioPsSelector("tableName", "btntableName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L, true);
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
-            assertHelper.AssertCheckBoxNew("showSeconds", configFieldVo.getConfigFieldDateTime().getShowSeconds());
+            assertElement.AssertCheckBoxNew("showSeconds", configFieldVo.getConfigFieldDateTime().getShowSeconds());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertHelper.AssertText("fieldSize", "10");
+            assertElement.AssertText("fieldSize", "10");
 
-            assertHelper.AssertCheckBoxNew("showSeconds", configFieldVo.getConfigFieldTime().getShowSeconds());
+            assertElement.AssertCheckBoxNew("showSeconds", configFieldVo.getConfigFieldTime().getShowSeconds());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTime().getDefValueSql());
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType. ConfigFieldType=" + configFieldVo.getConfigFieldType());
         }
 
-        assertHelper.AssertText("description", configFieldVo.getDescription());
-        assertHelper.AssertText("comments", configFieldVo.getComment());
+        assertElement.AssertText("description", configFieldVo.getDescription());
+        assertElement.AssertText("comments", configFieldVo.getComment());
 
-        assertHelper.AssertCheckBoxNew("mandatory", configFieldVo.getMandatory());
-        assertHelper.AssertCheckBoxNew("twoColsSpan", configFieldVo.getTwoColumns());
-        assertHelper.AssertCheckBoxNew("lockable", configFieldVo.getLockable());
-        assertHelper.AssertCheckBoxNew("multiple", configFieldVo.getMultiple());
+        assertElement.AssertCheckBoxNew("mandatory", configFieldVo.getMandatory());
+        assertElement.AssertCheckBoxNew("twoColsSpan", configFieldVo.getTwoColumns());
+        assertElement.AssertCheckBoxNew("lockable", configFieldVo.getLockable());
+        assertElement.AssertCheckBoxNew("multiple", configFieldVo.getMultiple());
 
-        assertHelper.AssertCheckBoxNew("readOnly", configFieldVo.getReadOnly());
-        assertHelper.AssertCheckBoxNew("calcTotal", configFieldVo.getCalcTotal());
-        assertHelper.AssertCheckBoxNew("notCloneFieldValue", configFieldVo.getNotCloneValue());
-        assertHelper.AssertCheckBoxNew("notCloneLocks", configFieldVo.getNotCloneLock());
+        assertElement.AssertCheckBoxNew("readOnly", configFieldVo.getReadOnly());
+        assertElement.AssertCheckBoxNew("calcTotal", configFieldVo.getCalcTotal());
+        assertElement.AssertCheckBoxNew("notCloneFieldValue", configFieldVo.getNotCloneValue());
+        assertElement.AssertCheckBoxNew("notCloneLocks", configFieldVo.getNotCloneLock());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -882,7 +882,7 @@ public class EntityConfigField {
         wait.waitFormLoad();
         wait.waitCodeMirrorLoad("SQL");
         wait.waitCodeMirrorHistorySize("SQL", 1L, 0L); //Wait until CodeMirror value is populated from window.dialogArguments['SQL'] js variable
-        assertHelper.AssertCodeMirror("SQL", sql);
+        assertElement.AssertCodeMirror("SQL", sql);
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 

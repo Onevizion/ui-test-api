@@ -13,7 +13,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
@@ -45,7 +45,7 @@ public class EntityTrackorTour {
     private GridHelper gridHelper;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Js js;
@@ -166,22 +166,22 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("label", trackorTour.getLabel());
-        assertHelper.AssertSelect("xitorTypeId", trackorTour.getTrackorType());
-        assertHelper.AssertSelect("startTourPlace", trackorTour.getStartPlace());
+        assertElement.AssertText("label", trackorTour.getLabel());
+        assertElement.AssertSelect("xitorTypeId", trackorTour.getTrackorType());
+        assertElement.AssertSelect("startTourPlace", trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            assertHelper.AssertRadioPsSelector("gridPageName", "btngridPageName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getPageName(), 1L, true);
+            assertElement.AssertRadioPsSelector("gridPageName", "btngridPageName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getPageName(), 1L, true);
         } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
-            assertHelper.AssertRadioPsSelector("configAppName", "btnconfigAppName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getAppletName(), 1L, true);
+            assertElement.AssertRadioPsSelector("configAppName", "btnconfigAppName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getAppletName(), 1L, true);
         } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
-            assertHelper.AssertRadioPsSelector("configGroupName", "btnconfigGroupName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getTabName(), 1L, true);
+            assertElement.AssertRadioPsSelector("configGroupName", "btnconfigGroupName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getTabName(), 1L, true);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
 
-        assertHelper.AssertSelect("orderNumber", trackorTour.getOrderNumber());
-        assertHelper.AssertText("description", trackorTour.getDescription());
+        assertElement.AssertSelect("orderNumber", trackorTour.getOrderNumber());
+        assertElement.AssertText("description", trackorTour.getDescription());
 
         tab.goToTab(3L); //Role Assignments
         wait.waitGridLoad(3L, 3L);

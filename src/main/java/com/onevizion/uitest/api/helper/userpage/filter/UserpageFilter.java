@@ -23,7 +23,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.OnevizionUtils;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Filter;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
@@ -56,7 +56,7 @@ public class UserpageFilter {
     private PsSelector psSelector;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private GridHelper gridHelper;
@@ -991,88 +991,88 @@ public class UserpageFilter {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertHelper.AssertRadioPsSelector("txtWPAttrib1", "btnWPAttrib1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
+        assertElement.AssertRadioPsSelector("txtWPAttrib1", "btnWPAttrib1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
         if (dateType != null) {
-            assertHelper.AssertSelect("tdWPOperator1", dateType);
+            assertElement.AssertSelect("tdWPOperator1", dateType);
         }
-        assertHelper.AssertSelect("WPOperator1", operator);
+        assertElement.AssertSelect("WPOperator1", operator);
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                assertHelper.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    assertHelper.AssertCheckboxPsSelector("trSelWPAttribValue1", "btnTrSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.AssertCheckboxPsSelector("trSelWPAttribValue1", "btnTrSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    assertHelper.AssertCheckboxPsSelector("multSelWPAttribValue1", "btnMultSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.AssertCheckboxPsSelector("multSelWPAttribValue1", "btnMultSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    assertHelper.AssertRadioPsSelector("trDropDownWPAttribValue1", "btnTrDropDownWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, value, 1L, true);
+                    assertElement.AssertRadioPsSelector("trDropDownWPAttribValue1", "btnTrDropDownWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, value, 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.SELECTOR)) {
-                    assertHelper.AssertCheckboxPsSelector("selWPAttribValue1", "btnSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.AssertCheckboxPsSelector("selWPAttribValue1", "btnSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    assertHelper.AssertText("trSelWPAttribValue1", "");
+                    assertElement.AssertText("trSelWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    assertHelper.AssertText("multSelWPAttribValue1", "");
+                    assertElement.AssertText("multSelWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    assertHelper.AssertText("trDropDownWPAttribValue1", "");
+                    assertElement.AssertText("trDropDownWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.SELECTOR)) {
-                    assertHelper.AssertText("selWPAttribValue1", "");
+                    assertElement.AssertText("selWPAttribValue1", "");
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            assertHelper.AssertSelect("ynWPAttribValue1", value);
+            assertElement.AssertSelect("ynWPAttribValue1", value);
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
             if (operator.equals("=Field") || operator.equals("<>Field")
                     || operator.equals(">Field") || operator.equals("<Field")
                     || operator.equals(">=Field") || operator.equals("<=Field")) {
-                assertHelper.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                     //&& !operator.equals("This Wk to Dt") && !operator.equals("This Mo to Dt") //TODO check those lines
                     //&& !operator.equals("This FQ to Dt") && !operator.equals("This FY to Dt")) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    assertHelper.AssertText("dateWPAttribValue1", value);
+                    assertElement.AssertText("dateWPAttribValue1", value);
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    assertHelper.AssertText("dateTimeWPAttribValue1", value);
+                    assertElement.AssertText("dateTimeWPAttribValue1", value);
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    assertHelper.AssertText("timeWPAttribValue1", value);
+                    assertElement.AssertText("timeWPAttribValue1", value);
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    assertHelper.AssertText("numWPAttribValue1", value);
+                    assertElement.AssertText("numWPAttribValue1", value);
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    assertHelper.AssertText("latlongWPAttribValue1", value);
+                    assertElement.AssertText("latlongWPAttribValue1", value);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    assertHelper.AssertText("dateWPAttribValue1", "");
+                    assertElement.AssertText("dateWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    assertHelper.AssertText("dateTimeWPAttribValue1", "");
+                    assertElement.AssertText("dateTimeWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    assertHelper.AssertText("timeWPAttribValue1", "");
+                    assertElement.AssertText("timeWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    assertHelper.AssertText("numWPAttribValue1", "");
+                    assertElement.AssertText("numWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    assertHelper.AssertText("latlongWPAttribValue1", "");
+                    assertElement.AssertText("latlongWPAttribValue1", "");
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             }
         } else {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                assertHelper.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
-                assertHelper.AssertText("txtWPAttribValue1", "*" + value + "*");
+                assertElement.AssertText("txtWPAttribValue1", "*" + value + "*");
             } else {
-                assertHelper.AssertText("txtWPAttribValue1", "");
+                assertElement.AssertText("txtWPAttribValue1", "");
             }
         }
         seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();

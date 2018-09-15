@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
@@ -38,7 +38,7 @@ public class EntityTrackorForm {
     private Checkbox checkbox;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Js js;
@@ -133,15 +133,15 @@ public class EntityTrackorForm {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("trackorFormName", trackorForm.getName());
-        assertHelper.AssertRadioPsSelector("reportName", "btnreportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getReportName(), 1L, true);
-        assertHelper.AssertRadioPsSelector("importName", "btnimportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getImportName(), 1L, true);
-        assertHelper.AssertRadioPsSelector("userName", "btnuserName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getUserName(), 1L, true);
-        assertHelper.AssertText("impScheduleInterval", trackorForm.getInterval());
-        assertHelper.AssertText("description", trackorForm.getDescription());
-        assertHelper.AssertCheckBoxNew("impEmailSubject", trackorForm.getImportEmailSubject());
-        assertHelper.AssertCheckBoxNew("impEmailBody", trackorForm.getImportEmailBody());
-        assertHelper.AssertCheckBoxNew("createImport", trackorForm.getCreateImport());
+        assertElement.AssertText("trackorFormName", trackorForm.getName());
+        assertElement.AssertRadioPsSelector("reportName", "btnreportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getReportName(), 1L, true);
+        assertElement.AssertRadioPsSelector("importName", "btnimportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getImportName(), 1L, true);
+        assertElement.AssertRadioPsSelector("userName", "btnuserName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getUserName(), 1L, true);
+        assertElement.AssertText("impScheduleInterval", trackorForm.getInterval());
+        assertElement.AssertText("description", trackorForm.getDescription());
+        assertElement.AssertCheckBoxNew("impEmailSubject", trackorForm.getImportEmailSubject());
+        assertElement.AssertCheckBoxNew("impEmailBody", trackorForm.getImportEmailBody());
+        assertElement.AssertCheckBoxNew("createImport", trackorForm.getCreateImport());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

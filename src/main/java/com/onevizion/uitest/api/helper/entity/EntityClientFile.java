@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -31,7 +31,7 @@ public class EntityClientFile {
     private Js js;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private GridHelper gridHelper;
@@ -58,7 +58,7 @@ public class EntityClientFile {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
+        assertElement.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
 
         js.showInputForFile("inputFileUploader", "FileUploader");
         seleniumSettings.getWebDriver().findElement(By.name("oldFileFileUploader")).sendKeys(seleniumSettings.getUploadFilesPath() + clientFile.getFileName());
@@ -72,8 +72,8 @@ public class EntityClientFile {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
-        assertHelper.AssertText("txtFileUploader", clientFile.getFileName());
+        assertElement.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
+        assertElement.AssertText("txtFileUploader", clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

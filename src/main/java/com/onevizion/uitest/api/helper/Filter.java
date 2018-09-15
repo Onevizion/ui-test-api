@@ -53,7 +53,7 @@ public class Filter {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Js js;
@@ -339,15 +339,15 @@ public class Filter {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
-            assertHelper.AssertText(fieldName, "");
+            assertElement.AssertText(fieldName, "");
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
-            assertHelper.AssertSelect(fieldName, "");
+            assertElement.AssertSelect(fieldName, "");
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
-            assertHelper.AssertCheckBoxNew(fieldName, "NO");
+            assertElement.AssertCheckBoxNew(fieldName, "NO");
         } else if (filterFieldType.equals(FilterFieldType.RADIO_PS_SELECTOR)) {
-            assertHelper.AssertRadioPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, "", 1L, true);
+            assertElement.AssertRadioPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, "", 1L, true);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
-            assertHelper.AssertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(""), 1L, true);
+            assertElement.AssertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(""), 1L, true);
         }
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -357,15 +357,15 @@ public class Filter {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
-            assertHelper.AssertText(fieldName, cellValue);
+            assertElement.AssertText(fieldName, cellValue);
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
-            assertHelper.AssertSelect(fieldName, cellValue);
+            assertElement.AssertSelect(fieldName, cellValue);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
-            assertHelper.AssertCheckBoxNew(fieldName, cellValue);
+            assertElement.AssertCheckBoxNew(fieldName, cellValue);
         } else if (filterFieldType.equals(FilterFieldType.RADIO_PS_SELECTOR)) {
-            assertHelper.AssertRadioPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, cellValue, 1L, true);
+            assertElement.AssertRadioPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, cellValue, 1L, true);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
-            assertHelper.AssertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(cellValue), 1L, true);
+            assertElement.AssertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(cellValue), 1L, true);
         }
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

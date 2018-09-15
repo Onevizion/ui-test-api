@@ -15,7 +15,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 @Component
-public class AssertHelper {
+public class AssertElement {
 
     @Resource
     private SeleniumSettings seleniumSettings;

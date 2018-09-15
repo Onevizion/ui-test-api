@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Tab;
@@ -27,7 +27,7 @@ public class EntityMenu {
     private Window window;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Tab tab;
@@ -47,11 +47,11 @@ public class EntityMenu {
         wait.waitFormLoad();
         jqueryWait.waitJQueryLoad();
 
-        assertHelper.AssertText("name", menu.getName());
-        assertHelper.AssertText("description", menu.getDescription());
-        assertHelper.AssertSelect("defaultMenuItemId", menu.getDefaultMenuItem());
-        assertHelper.AssertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
-        assertHelper.AssertCheckBoxNew("showTipOfTheDay", menu.getShowTipOfTheDay());
+        assertElement.AssertText("name", menu.getName());
+        assertElement.AssertText("description", menu.getDescription());
+        assertElement.AssertSelect("defaultMenuItemId", menu.getDefaultMenuItem());
+        assertElement.AssertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
+        assertElement.AssertCheckBoxNew("showTipOfTheDay", menu.getShowTipOfTheDay());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

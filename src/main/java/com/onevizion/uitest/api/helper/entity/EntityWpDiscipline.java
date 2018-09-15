@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
@@ -37,7 +37,7 @@ public class EntityWpDiscipline {
     private GridHelper gridHelper;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Js js;
@@ -85,8 +85,8 @@ public class EntityWpDiscipline {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("discpType", wpDiscipline.getName());
-        assertHelper.AssertText("description", wpDiscipline.getDescription());
+        assertElement.AssertText("discpType", wpDiscipline.getName());
+        assertElement.AssertText("description", wpDiscipline.getDescription());
 
         tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);

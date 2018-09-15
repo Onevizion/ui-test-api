@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -33,7 +33,7 @@ public class EntityConfigAppExtParam {
     private Js js;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private GridHelper gridHelper;
@@ -77,9 +77,9 @@ public class EntityConfigAppExtParam {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("paramName", configAppExtParam.getName());
-        assertHelper.AssertText("description", configAppExtParam.getDescription());
-        assertHelper.AssertCodeMirror("sqlText", configAppExtParam.getSql());
+        assertElement.AssertText("paramName", configAppExtParam.getName());
+        assertElement.AssertText("description", configAppExtParam.getDescription());
+        assertElement.AssertCodeMirror("sqlText", configAppExtParam.getSql());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

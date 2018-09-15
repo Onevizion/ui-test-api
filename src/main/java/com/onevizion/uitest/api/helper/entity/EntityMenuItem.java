@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
@@ -28,7 +28,7 @@ public class EntityMenuItem {
     private JqueryWait jqueryWait;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Tree tree;
@@ -42,43 +42,43 @@ public class EntityMenuItem {
         jqueryWait.waitJQueryLoad();
 
         if (MenuItemType.SUBGROUP.equals(menuItem.getMenuItemType())) {
-            assertHelper.AssertText("label", menuItem.getLabel());
-            assertHelper.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertText("label", menuItem.getLabel());
+            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
         } else if (MenuItemType.PORTAL.equals(menuItem.getMenuItemType())) {
-            assertHelper.AssertSelectById("OnClick", menuItem.getItemType());
-            assertHelper.AssertText("label", menuItem.getLabel());
-            assertHelper.AssertText("visibleURL", menuItem.getUrl());
-            assertHelper.AssertSelect("portalId", menuItem.getPortal());
-            assertHelper.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
+            assertElement.AssertText("label", menuItem.getLabel());
+            assertElement.AssertText("visibleURL", menuItem.getUrl());
+            assertElement.AssertSelect("portalId", menuItem.getPortal());
+            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
         } else if (MenuItemType.DASHBOURD.equals(menuItem.getMenuItemType())) {
-            assertHelper.AssertSelectById("OnClick", menuItem.getItemType());
-            assertHelper.AssertText("label", menuItem.getLabel());
-            assertHelper.AssertText("visibleURL", menuItem.getUrl());
-            assertHelper.AssertSelect("dashboardId", menuItem.getDashbourd());
-            assertHelper.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
+            assertElement.AssertText("label", menuItem.getLabel());
+            assertElement.AssertText("visibleURL", menuItem.getUrl());
+            assertElement.AssertSelect("dashboardId", menuItem.getDashbourd());
+            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
         } else if (MenuItemType.PAGE_WITHOUT_TRACKOR_TYPE.equals(menuItem.getMenuItemType())) {
-            assertHelper.AssertSelectById("OnClick", menuItem.getItemType());
-            assertHelper.AssertText("label", menuItem.getLabel());
-            assertHelper.AssertText("visibleURL", menuItem.getUrl());
-            assertHelper.AssertSelect("viewOptId", menuItem.getView());
-            assertHelper.AssertCheckBoxNew("hideView", menuItem.getHideView());
-            assertHelper.AssertSelect("filterOptId", menuItem.getFilter());
-            assertHelper.AssertCheckBoxNew("hideFilter", menuItem.getHideFilter());
-            assertHelper.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
+            assertElement.AssertText("label", menuItem.getLabel());
+            assertElement.AssertText("visibleURL", menuItem.getUrl());
+            assertElement.AssertSelect("viewOptId", menuItem.getView());
+            assertElement.AssertCheckBoxNew("hideView", menuItem.getHideView());
+            assertElement.AssertSelect("filterOptId", menuItem.getFilter());
+            assertElement.AssertCheckBoxNew("hideFilter", menuItem.getHideFilter());
+            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
         } else if (MenuItemType.PAGE_WITH_TRACKOR_TYPE.equals(menuItem.getMenuItemType())) {
-            assertHelper.AssertSelectById("OnClick", menuItem.getItemType());
-            assertHelper.AssertText("label", menuItem.getLabel());
-            assertHelper.AssertText("visibleURL", menuItem.getUrl());
-            assertHelper.AssertSelect("primaryXitorTypeId", menuItem.getTrackorType());
-            assertHelper.AssertSelect("viewOptId", menuItem.getView());
-            assertHelper.AssertCheckBoxNew("hideView", menuItem.getHideView());
-            assertHelper.AssertSelect("filterOptId", menuItem.getFilter());
-            assertHelper.AssertCheckBoxNew("hideFilter", menuItem.getHideFilter());
-            assertHelper.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
+            assertElement.AssertText("label", menuItem.getLabel());
+            assertElement.AssertText("visibleURL", menuItem.getUrl());
+            assertElement.AssertSelect("primaryXitorTypeId", menuItem.getTrackorType());
+            assertElement.AssertSelect("viewOptId", menuItem.getView());
+            assertElement.AssertCheckBoxNew("hideView", menuItem.getHideView());
+            assertElement.AssertSelect("filterOptId", menuItem.getFilter());
+            assertElement.AssertCheckBoxNew("hideFilter", menuItem.getHideFilter());
+            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
         } else if (MenuItemType.ACTION.equals(menuItem.getMenuItemType())) {
-            assertHelper.AssertSelectById("OnClick", menuItem.getItemType());
-            assertHelper.AssertText("label", menuItem.getLabel());
-            assertHelper.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
+            assertElement.AssertText("label", menuItem.getLabel());
+            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
         } else {
             throw new SeleniumUnexpectedException("Not support MenuItemType. MenuItemType=" + menuItem.getMenuItemType());
         }

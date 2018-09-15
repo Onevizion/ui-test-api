@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
@@ -29,7 +29,7 @@ public class EntityDynamicVtableValue {
     private Wait wait;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private GridHelper gridHelper;
@@ -107,11 +107,11 @@ public class EntityDynamicVtableValue {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("Value", dynamicVtableValue.getValue());
-        assertHelper.AssertText("OrderNum", dynamicVtableValue.getOrdNum());
-        assertHelper.AssertText("color", dynamicVtableValue.getColor());
-        assertHelper.AssertCheckBoxNew("display", dynamicVtableValue.getDisplay());
-        assertHelper.AssertCheckBoxNew("filterable", dynamicVtableValue.getFilterable());
+        assertElement.AssertText("Value", dynamicVtableValue.getValue());
+        assertElement.AssertText("OrderNum", dynamicVtableValue.getOrdNum());
+        assertElement.AssertText("color", dynamicVtableValue.getColor());
+        assertElement.AssertCheckBoxNew("display", dynamicVtableValue.getDisplay());
+        assertElement.AssertCheckBoxNew("filterable", dynamicVtableValue.getFilterable());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

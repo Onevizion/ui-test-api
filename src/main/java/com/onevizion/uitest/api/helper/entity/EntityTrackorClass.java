@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -30,7 +30,7 @@ public class EntityTrackorClass {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Js js;
@@ -75,9 +75,9 @@ public class EntityTrackorClass {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("trackorType", trackorClass.getTrackorType());
-        assertHelper.AssertText("className", trackorClass.getName());
-        assertHelper.AssertText("orderNumber", trackorClass.getOrderNumber());
+        assertElement.AssertText("trackorType", trackorClass.getTrackorType());
+        assertElement.AssertText("className", trackorClass.getName());
+        assertElement.AssertText("orderNumber", trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

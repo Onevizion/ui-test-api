@@ -36,7 +36,7 @@ import org.testng.ITestContext;
 import org.testng.Reporter;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.CloneButton;
 import com.onevizion.uitest.api.helper.CompAuditLog;
@@ -124,7 +124,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Tb tb;
 
     @Resource
-    protected AssertHelper assertHelper;
+    protected AssertElement assertElement;
 
     @Resource
     protected Js js;

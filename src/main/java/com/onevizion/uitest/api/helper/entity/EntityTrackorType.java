@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
@@ -31,7 +31,7 @@ public class EntityTrackorType {
     private Wait wait;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private GridHelper gridHelper;
@@ -100,34 +100,34 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("trackorType", trackorType.getName());
-        assertHelper.AssertText("appletLabel", trackorType.getLabel());
-        assertHelper.AssertText("trackoridLabel", trackorType.getLabelItemId());
-        assertHelper.AssertText("trackorClassLabel", trackorType.getLabelClass());
-        assertHelper.AssertText("prefixLabel", trackorType.getLabelPrefix());
-        assertHelper.AssertText("myTrackorsLabel", trackorType.getLabelMyItems());
-        assertHelper.AssertRadioPsSelector("objDisplayField", "btnobjDisplayField", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAliasField(), 1L, true);
-        assertHelper.AssertCheckboxPsSelector("xsFieldsStr", "btnxsFieldsStr", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAutoFilterFields(), 1L, true);
-        assertHelper.AssertSelect("wpModeId", trackorType.getLimitWp());
-        assertHelper.AssertSelect("componentsPackageId", trackorType.getCompPack());
-        assertHelper.AssertCheckBoxNew("cloningAllowed", trackorType.getClone());
-        assertHelper.AssertCheckBoxNew("template", trackorType.getTemplate());
-        assertHelper.AssertCheckBoxNew("user", trackorType.getUser());
-        assertHelper.AssertCheckBoxNew("efileContainer", trackorType.getEfileContainer());
+        assertElement.AssertText("trackorType", trackorType.getName());
+        assertElement.AssertText("appletLabel", trackorType.getLabel());
+        assertElement.AssertText("trackoridLabel", trackorType.getLabelItemId());
+        assertElement.AssertText("trackorClassLabel", trackorType.getLabelClass());
+        assertElement.AssertText("prefixLabel", trackorType.getLabelPrefix());
+        assertElement.AssertText("myTrackorsLabel", trackorType.getLabelMyItems());
+        assertElement.AssertRadioPsSelector("objDisplayField", "btnobjDisplayField", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAliasField(), 1L, true);
+        assertElement.AssertCheckboxPsSelector("xsFieldsStr", "btnxsFieldsStr", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAutoFilterFields(), 1L, true);
+        assertElement.AssertSelect("wpModeId", trackorType.getLimitWp());
+        assertElement.AssertSelect("componentsPackageId", trackorType.getCompPack());
+        assertElement.AssertCheckBoxNew("cloningAllowed", trackorType.getClone());
+        assertElement.AssertCheckBoxNew("template", trackorType.getTemplate());
+        assertElement.AssertCheckBoxNew("user", trackorType.getUser());
+        assertElement.AssertCheckBoxNew("efileContainer", trackorType.getEfileContainer());
 
         tab.goToTab(2L); // Key Generation
-        assertHelper.AssertCheckBoxNew("autokey", trackorType.getAutoKey());
-        assertHelper.AssertText("autokeyStartAt", trackorType.getAutoKeyStartAt());
-        assertHelper.AssertSelect("lbOwner1", trackorType.getOwner1());
-        assertHelper.AssertRadioPsSelector("Field1", "btnField1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField1(), 1L, true);
-        assertHelper.AssertSelect("lbSeparator1", trackorType.getSeparator1());
-        assertHelper.AssertSelect("lbOwner2", trackorType.getOwner2());
-        assertHelper.AssertRadioPsSelector("Field2", "btnField2", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField2(), 1L, true);
-        assertHelper.AssertSelect("lbSeparator2", trackorType.getSeparator2());
-        assertHelper.AssertText("staticText3", trackorType.getStaticText3());
-        assertHelper.AssertSelect("lbSeparator3", trackorType.getSeparator3());
-        assertHelper.AssertSelect("lbDigits", trackorType.getDigits4());
-        assertHelper.AssertSelect("lbUnique", trackorType.getUniqueAcross4());
+        assertElement.AssertCheckBoxNew("autokey", trackorType.getAutoKey());
+        assertElement.AssertText("autokeyStartAt", trackorType.getAutoKeyStartAt());
+        assertElement.AssertSelect("lbOwner1", trackorType.getOwner1());
+        assertElement.AssertRadioPsSelector("Field1", "btnField1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField1(), 1L, true);
+        assertElement.AssertSelect("lbSeparator1", trackorType.getSeparator1());
+        assertElement.AssertSelect("lbOwner2", trackorType.getOwner2());
+        assertElement.AssertRadioPsSelector("Field2", "btnField2", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField2(), 1L, true);
+        assertElement.AssertSelect("lbSeparator2", trackorType.getSeparator2());
+        assertElement.AssertText("staticText3", trackorType.getStaticText3());
+        assertElement.AssertSelect("lbSeparator3", trackorType.getSeparator3());
+        assertElement.AssertSelect("lbDigits", trackorType.getDigits4());
+        assertElement.AssertSelect("lbUnique", trackorType.getUniqueAcross4());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
@@ -42,7 +42,7 @@ public class EntityTrackorTourStep {
     private Js js;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     public void add(TrackorTourStep trackorTourStep) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
@@ -136,24 +136,24 @@ public class EntityTrackorTourStep {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertSelect("elementTypeId", trackorTourStep.getElementType());
+        assertElement.AssertSelect("elementTypeId", trackorTourStep.getElementType());
         if (trackorTourStep.getElementType().equals("name=")) {
-            assertHelper.AssertText("elementName", trackorTourStep.getElementName());
+            assertElement.AssertText("elementName", trackorTourStep.getElementName());
         } else if (trackorTourStep.getElementType().equals("id=")) {
-            assertHelper.AssertText("elementId", trackorTourStep.getElementId());
+            assertElement.AssertText("elementId", trackorTourStep.getElementId());
         } else {
             throw new SeleniumUnexpectedException("Not support ElementType [" + trackorTourStep.getElementType() + "]");
         }
-        assertHelper.AssertText("duration", trackorTourStep.getDuration());
-        assertHelper.AssertCheckBoxNew("orphaned", trackorTourStep.getOrphaned());
-        assertHelper.AssertCheckBoxNew("backdrop", trackorTourStep.getBackdrop());
-        assertHelper.AssertSelect("placement", trackorTourStep.getPlacement());
-        assertHelper.AssertSelect("actionId", trackorTourStep.getAction());
-        assertHelper.AssertText("formNumber", trackorTourStep.getFormNumber());
-        assertHelper.AssertText("titleLabel", trackorTourStep.getTitleLabel());
+        assertElement.AssertText("duration", trackorTourStep.getDuration());
+        assertElement.AssertCheckBoxNew("orphaned", trackorTourStep.getOrphaned());
+        assertElement.AssertCheckBoxNew("backdrop", trackorTourStep.getBackdrop());
+        assertElement.AssertSelect("placement", trackorTourStep.getPlacement());
+        assertElement.AssertSelect("actionId", trackorTourStep.getAction());
+        assertElement.AssertText("formNumber", trackorTourStep.getFormNumber());
+        assertElement.AssertText("titleLabel", trackorTourStep.getTitleLabel());
 
         wait.waitWebElement(By.id("contentLabel"));
-        assertHelper.AssertFCKEditor("contentLabel", trackorTourStep.getContentLabel());
+        assertElement.AssertFCKEditor("contentLabel", trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
@@ -31,7 +31,7 @@ public class EntitySecurityRole {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private Js js;
@@ -155,55 +155,55 @@ public class EntitySecurityRole {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("roleType", securityRole.getName());
-        assertHelper.AssertText("description", securityRole.getDescription());
+        assertElement.AssertText("roleType", securityRole.getName());
+        assertElement.AssertText("description", securityRole.getDescription());
 
-        assertHelper.AssertCheckBoxNew("cbPrivR1", securityRole.getDefaultPrivs().getAppletR());
-        assertHelper.AssertCheckBoxNew("cbPrivE1", securityRole.getDefaultPrivs().getAppletE());
-        assertHelper.AssertCheckBoxNew("cbPrivA1", securityRole.getDefaultPrivs().getAppletA());
-        assertHelper.AssertCheckBoxNew("cbPrivD1", securityRole.getDefaultPrivs().getAppletD());
+        assertElement.AssertCheckBoxNew("cbPrivR1", securityRole.getDefaultPrivs().getAppletR());
+        assertElement.AssertCheckBoxNew("cbPrivE1", securityRole.getDefaultPrivs().getAppletE());
+        assertElement.AssertCheckBoxNew("cbPrivA1", securityRole.getDefaultPrivs().getAppletA());
+        assertElement.AssertCheckBoxNew("cbPrivD1", securityRole.getDefaultPrivs().getAppletD());
 
-        assertHelper.AssertCheckBoxNew("cbPrivR2", securityRole.getDefaultPrivs().getConfigAppletR());
-        assertHelper.AssertCheckBoxNew("cbPrivE2", securityRole.getDefaultPrivs().getConfigAppletE());
+        assertElement.AssertCheckBoxNew("cbPrivR2", securityRole.getDefaultPrivs().getConfigAppletR());
+        assertElement.AssertCheckBoxNew("cbPrivE2", securityRole.getDefaultPrivs().getConfigAppletE());
 
-        assertHelper.AssertCheckBoxNew("cbPrivR3", securityRole.getDefaultPrivs().getConfigTabR());
-        assertHelper.AssertCheckBoxNew("cbPrivE3", securityRole.getDefaultPrivs().getConfigTabE());
+        assertElement.AssertCheckBoxNew("cbPrivR3", securityRole.getDefaultPrivs().getConfigTabR());
+        assertElement.AssertCheckBoxNew("cbPrivE3", securityRole.getDefaultPrivs().getConfigTabE());
 
-        assertHelper.AssertCheckBoxNew("cbPrivR12", securityRole.getDefaultPrivs().getRelationR());
-        assertHelper.AssertCheckBoxNew("cbPrivE12", securityRole.getDefaultPrivs().getRelationE());
-        assertHelper.AssertCheckBoxNew("cbPrivA12", securityRole.getDefaultPrivs().getRelationA());
-        assertHelper.AssertCheckBoxNew("cbPrivD12", securityRole.getDefaultPrivs().getRelationD());
+        assertElement.AssertCheckBoxNew("cbPrivR12", securityRole.getDefaultPrivs().getRelationR());
+        assertElement.AssertCheckBoxNew("cbPrivE12", securityRole.getDefaultPrivs().getRelationE());
+        assertElement.AssertCheckBoxNew("cbPrivA12", securityRole.getDefaultPrivs().getRelationA());
+        assertElement.AssertCheckBoxNew("cbPrivD12", securityRole.getDefaultPrivs().getRelationD());
 
-        assertHelper.AssertCheckBoxNew("cbPrivR9", securityRole.getDefaultPrivs().getSuperuserAppletR());
-        assertHelper.AssertCheckBoxNew("cbPrivE9", securityRole.getDefaultPrivs().getSuperuserAppletE());
-        assertHelper.AssertCheckBoxNew("cbPrivA9", securityRole.getDefaultPrivs().getSuperuserAppletA());
-        assertHelper.AssertCheckBoxNew("cbPrivD9", securityRole.getDefaultPrivs().getSuperuserAppletD());
+        assertElement.AssertCheckBoxNew("cbPrivR9", securityRole.getDefaultPrivs().getSuperuserAppletR());
+        assertElement.AssertCheckBoxNew("cbPrivE9", securityRole.getDefaultPrivs().getSuperuserAppletE());
+        assertElement.AssertCheckBoxNew("cbPrivA9", securityRole.getDefaultPrivs().getSuperuserAppletA());
+        assertElement.AssertCheckBoxNew("cbPrivD9", securityRole.getDefaultPrivs().getSuperuserAppletD());
 
-        assertHelper.AssertCheckBoxNew("cbPrivR15", securityRole.getDefaultPrivs().getTrackorTypeR());
-        assertHelper.AssertCheckBoxNew("cbPrivE15", securityRole.getDefaultPrivs().getTrackorTypeE());
-        assertHelper.AssertCheckBoxNew("cbPrivA15", securityRole.getDefaultPrivs().getTrackorTypeA());
-        assertHelper.AssertCheckBoxNew("cbPrivD15", securityRole.getDefaultPrivs().getTrackorTypeD());
+        assertElement.AssertCheckBoxNew("cbPrivR15", securityRole.getDefaultPrivs().getTrackorTypeR());
+        assertElement.AssertCheckBoxNew("cbPrivE15", securityRole.getDefaultPrivs().getTrackorTypeE());
+        assertElement.AssertCheckBoxNew("cbPrivA15", securityRole.getDefaultPrivs().getTrackorTypeA());
+        assertElement.AssertCheckBoxNew("cbPrivD15", securityRole.getDefaultPrivs().getTrackorTypeD());
 
-        assertHelper.AssertCheckBoxNew("cbPrivR10", securityRole.getDefaultPrivs().getWorkflowR());
-        assertHelper.AssertCheckBoxNew("cbPrivE10", securityRole.getDefaultPrivs().getWorkflowE());
-        assertHelper.AssertCheckBoxNew("cbPrivA10", securityRole.getDefaultPrivs().getWorkflowA());
+        assertElement.AssertCheckBoxNew("cbPrivR10", securityRole.getDefaultPrivs().getWorkflowR());
+        assertElement.AssertCheckBoxNew("cbPrivE10", securityRole.getDefaultPrivs().getWorkflowE());
+        assertElement.AssertCheckBoxNew("cbPrivA10", securityRole.getDefaultPrivs().getWorkflowA());
 
-        assertHelper.AssertCheckBoxNew("cbLock5", securityRole.getDefaultLockPrivs().getLockableFieldL());
-        assertHelper.AssertCheckBoxNew("cbUnlock5", securityRole.getDefaultLockPrivs().getLockableFieldU());
+        assertElement.AssertCheckBoxNew("cbLock5", securityRole.getDefaultLockPrivs().getLockableFieldL());
+        assertElement.AssertCheckBoxNew("cbUnlock5", securityRole.getDefaultLockPrivs().getLockableFieldU());
 
-        assertHelper.AssertCheckBoxNew("cbLock6", securityRole.getDefaultLockPrivs().getLockableRelationL());
-        assertHelper.AssertCheckBoxNew("cbUnlock6", securityRole.getDefaultLockPrivs().getLockableRelationU());
+        assertElement.AssertCheckBoxNew("cbLock6", securityRole.getDefaultLockPrivs().getLockableRelationL());
+        assertElement.AssertCheckBoxNew("cbUnlock6", securityRole.getDefaultLockPrivs().getLockableRelationU());
 
-        assertHelper.AssertCheckBoxNew("autoDiscpAssign", securityRole.getDefaultAssignments().getDiscipline());
-        assertHelper.AssertCheckBoxNew("autoAppAssign", securityRole.getDefaultAssignments().getMenuAppliction());
-        assertHelper.AssertCheckBoxNew("autoViewAssign", securityRole.getDefaultAssignments().getGlobalView());
-        assertHelper.AssertCheckBoxNew("autoFilterAssign", securityRole.getDefaultAssignments().getGlobalFilter());
-        assertHelper.AssertCheckBoxNew("autoPortalAssign", securityRole.getDefaultAssignments().getGlobalPortal());
-        assertHelper.AssertCheckBoxNew("autoRuleAssign", securityRole.getDefaultAssignments().getRule());
-        assertHelper.AssertCheckBoxNew("autoImportAssign", securityRole.getDefaultAssignments().getImportt());
-        assertHelper.AssertCheckBoxNew("autoReportAssign", securityRole.getDefaultAssignments().getReport());
-        assertHelper.AssertCheckBoxNew("autoNotifAssign", securityRole.getDefaultAssignments().getGlobalNotif());
-        assertHelper.AssertCheckBoxNew("autoTourAssign", securityRole.getDefaultAssignments().getTrackorTour());
+        assertElement.AssertCheckBoxNew("autoDiscpAssign", securityRole.getDefaultAssignments().getDiscipline());
+        assertElement.AssertCheckBoxNew("autoAppAssign", securityRole.getDefaultAssignments().getMenuAppliction());
+        assertElement.AssertCheckBoxNew("autoViewAssign", securityRole.getDefaultAssignments().getGlobalView());
+        assertElement.AssertCheckBoxNew("autoFilterAssign", securityRole.getDefaultAssignments().getGlobalFilter());
+        assertElement.AssertCheckBoxNew("autoPortalAssign", securityRole.getDefaultAssignments().getGlobalPortal());
+        assertElement.AssertCheckBoxNew("autoRuleAssign", securityRole.getDefaultAssignments().getRule());
+        assertElement.AssertCheckBoxNew("autoImportAssign", securityRole.getDefaultAssignments().getImportt());
+        assertElement.AssertCheckBoxNew("autoReportAssign", securityRole.getDefaultAssignments().getReport());
+        assertElement.AssertCheckBoxNew("autoNotifAssign", securityRole.getDefaultAssignments().getGlobalNotif());
+        assertElement.AssertCheckBoxNew("autoTourAssign", securityRole.getDefaultAssignments().getTrackorTour());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

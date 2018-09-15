@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.AssertHelper;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.PsSelector;
@@ -30,7 +30,7 @@ public class EntityTrackorTreeItem {
     private Wait wait;
 
     @Resource
-    private AssertHelper assertHelper;
+    private AssertElement assertElement;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -95,8 +95,8 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("treePath", trackorTreeItem.getTreePath());
-        assertHelper.AssertText("trackorType", trackorTreeItem.getTrackorType());
+        assertElement.AssertText("treePath", trackorTreeItem.getTreePath());
+        assertElement.AssertText("trackorType", trackorTreeItem.getTrackorType());
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("cardinalityId"))).selectByVisibleText(trackorTreeItem.getCardinality());
 
@@ -134,15 +134,15 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertHelper.AssertText("treePath", trackorTreeItem.getTreePath());
-        assertHelper.AssertText("trackorType", trackorTreeItem.getTrackorType());
-        assertHelper.AssertSelect("cardinalityId", trackorTreeItem.getCardinality());
-        assertHelper.AssertSelect("uniqueByTtId", trackorTreeItem.getUniqueBy());
-        assertHelper.AssertSelect("colorId", trackorTreeItem.getColor());
-        assertHelper.AssertCheckBoxNew("childRequiresParent", trackorTreeItem.getChildRequiresParent());
-        assertHelper.AssertCheckBoxNew("onParentDeleteCascade", trackorTreeItem.getOnParentDeleteCascade());
-        assertHelper.AssertCheckBoxNew("lockable", trackorTreeItem.getLockable());
-        assertHelper.AssertCheckBoxNew("showAllInTrcontainer", trackorTreeItem.getShowAll());
+        assertElement.AssertText("treePath", trackorTreeItem.getTreePath());
+        assertElement.AssertText("trackorType", trackorTreeItem.getTrackorType());
+        assertElement.AssertSelect("cardinalityId", trackorTreeItem.getCardinality());
+        assertElement.AssertSelect("uniqueByTtId", trackorTreeItem.getUniqueBy());
+        assertElement.AssertSelect("colorId", trackorTreeItem.getColor());
+        assertElement.AssertCheckBoxNew("childRequiresParent", trackorTreeItem.getChildRequiresParent());
+        assertElement.AssertCheckBoxNew("onParentDeleteCascade", trackorTreeItem.getOnParentDeleteCascade());
+        assertElement.AssertCheckBoxNew("lockable", trackorTreeItem.getLockable());
+        assertElement.AssertCheckBoxNew("showAllInTrcontainer", trackorTreeItem.getShowAll());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
