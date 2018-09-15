@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.view.View;
 
 @Component
-public class DualListboxHelper {
+public class DualListbox {
 
     @Resource
     private SeleniumSettings seleniumSettings;

@@ -40,7 +40,7 @@ import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.CloneButtonHelper;
 import com.onevizion.uitest.api.helper.CompAuditLogHelper;
-import com.onevizion.uitest.api.helper.DualListboxHelper;
+import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementJsHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
@@ -130,7 +130,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Js js;
 
     @Resource
-    protected DualListboxHelper dualListboxHelper;
+    protected DualListbox dualListbox;
 
     @Resource
     protected Filter filter;
