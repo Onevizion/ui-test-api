@@ -48,7 +48,7 @@ import com.onevizion.uitest.api.helper.FieldHistoryHelper;
 import com.onevizion.uitest.api.helper.FilterHelper;
 import com.onevizion.uitest.api.helper.FilterWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
-import com.onevizion.uitest.api.helper.GridRowButtonHelper;
+import com.onevizion.uitest.api.helper.GridRowButton;
 import com.onevizion.uitest.api.helper.Help;
 import com.onevizion.uitest.api.helper.HtmlInput;
 import com.onevizion.uitest.api.helper.HtmlSelect;
@@ -184,7 +184,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected CloneButtonHelper cloneButtonHelper;
 
     @Resource
-    protected GridRowButtonHelper gridRowButtonHelper;
+    protected GridRowButton gridRowButton;
 
     @Resource
     protected CheckboxHelper checkboxHelper;

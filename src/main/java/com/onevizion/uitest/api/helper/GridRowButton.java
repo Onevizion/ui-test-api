@@ -9,7 +9,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class GridRowButtonHelper { //TODO rename to GridRowHelper
+public class GridRowButton { //TODO rename to GridRow
 
     private final static String BUTTON_LIST_EDIT_ID_BASE = "listEdit";
     private final static String BUTTON_EDIT_ROW_ID_BASE = "btnEditRow";
