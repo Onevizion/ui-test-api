@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.CheckboxHelper;
+import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
@@ -56,7 +56,7 @@ public class Export {
     private AssertHelper assertHelper;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -178,7 +178,7 @@ public class Export {
         Long gridRows = gridHelper.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, new Long(1L), "Grid have wrong rows count");
 
-        checkboxHelper.clickById("lblcb" + processId);
+        checkbox.clickById("lblcb" + processId);
         elementWaitHelper.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx());
         elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx())));
         wait.waitAlert();

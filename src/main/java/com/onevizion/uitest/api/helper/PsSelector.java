@@ -31,7 +31,7 @@ public class PsSelector {
     private Wait wait;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private ElementHelper elementHelper;
@@ -77,7 +77,7 @@ public class PsSelector {
                 compareValue = compareValue.toUpperCase();
                 compareValue = compareValue.replaceAll("FIELD", "");
 
-                checkboxHelper.clickByElement(webElements.get(i.intValue()));
+                checkbox.clickByElement(webElements.get(i.intValue()));
                 ret.add(js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
             }
         } else {
@@ -91,7 +91,7 @@ public class PsSelector {
                     value = OnevizionUtils.removeHTMLTags(value);
                     value = StringUtils.substringBefore(value, "\n");
 
-                    checkboxHelper.clickByElement(webElements.get(i.intValue()));
+                    checkbox.clickByElement(webElements.get(i.intValue()));
                     ret.add(js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
                 }
             }
@@ -150,7 +150,7 @@ public class PsSelector {
                 } else {
                     throw new SeleniumUnexpectedException("Not support QS type");
                 }
-                checkboxHelper.findLabelsByName("cb0_0").get(0).click();
+                checkbox.findLabelsByName("cb0_0").get(0).click();
                 String rowId = js.getGridSelectedRowId(0L);
                 ret.add(js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
             }
@@ -161,7 +161,7 @@ public class PsSelector {
                     if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
                         WebElement cell = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
-                        WebElement label = checkboxHelper.findLabelByElement(cb);
+                        WebElement label = checkbox.findLabelByElement(cb);
                         elementHelper.moveToElement(label);
                         label.click();
                         String rowId = js.getGridSelectedRowId(0L);
@@ -190,7 +190,7 @@ public class PsSelector {
             } else {
                 throw new SeleniumUnexpectedException("Not support QS type");
             }
-            List<WebElement> webElements = checkboxHelper.findLabelsByName("cb0_0");
+            List<WebElement> webElements = checkbox.findLabelsByName("cb0_0");
             for (WebElement webElement : webElements) {
                 webElement.click();
                 String rowId = js.getGridSelectedRowId(0L);
@@ -250,10 +250,10 @@ public class PsSelector {
         if (qs.isExistQs(0L)) {
             for (String value : values) {
                 qs.searchValue(0L, filterFiledNum, "*" + value + "*");
-                List<WebElement> webElements = checkboxHelper.findCheckboxesByName("cb0_0");
+                List<WebElement> webElements = checkbox.findCheckboxesByName("cb0_0");
                 boolean ret = false;
                 for (Long i = 0L; i < webElements.size(); i = i + 1L) {
-                    if (checkboxHelper.isElementChecked(webElements.get(i.intValue()))) {
+                    if (checkbox.isElementChecked(webElements.get(i.intValue()))) {
                         ret = true;
                         break;
                     }
@@ -271,7 +271,7 @@ public class PsSelector {
                     if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
                         WebElement cell = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
-                        if (checkboxHelper.isElementChecked(cb)) {
+                        if (checkbox.isElementChecked(cb)) {
                             ret = true;
                         }
                         break;

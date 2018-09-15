@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.CheckboxHelper;
+import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
@@ -46,7 +46,7 @@ public class EntityTrackorType {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     public void add(TrackorType trackorType) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -63,21 +63,21 @@ public class EntityTrackorType {
         (new Select(seleniumSettings.getWebDriver().findElement(By.name("wpModeId")))).selectByVisibleText(trackorType.getLimitWp());
         (new Select(seleniumSettings.getWebDriver().findElement(By.name("componentsPackageId")))).selectByVisibleText(trackorType.getCompPack());
 
-        if ((trackorType.getClone().equals("YES") && !checkboxHelper.isCheckedByName("cloningAllowed"))
-                || (trackorType.getClone().equals("NO") && checkboxHelper.isCheckedByName("cloningAllowed"))) {
-            checkboxHelper.clickByName("cloningAllowed");
+        if ((trackorType.getClone().equals("YES") && !checkbox.isCheckedByName("cloningAllowed"))
+                || (trackorType.getClone().equals("NO") && checkbox.isCheckedByName("cloningAllowed"))) {
+            checkbox.clickByName("cloningAllowed");
         }
-        if ((trackorType.getTemplate().equals("YES") && !checkboxHelper.isCheckedByName("template"))
-                || (trackorType.getTemplate().equals("NO") && checkboxHelper.isCheckedByName("template"))) {
-            checkboxHelper.clickByName("template");
+        if ((trackorType.getTemplate().equals("YES") && !checkbox.isCheckedByName("template"))
+                || (trackorType.getTemplate().equals("NO") && checkbox.isCheckedByName("template"))) {
+            checkbox.clickByName("template");
         }
-        if ((trackorType.getUser().equals("YES") && !checkboxHelper.isCheckedByName("user"))
-                || (trackorType.getUser().equals("NO") && checkboxHelper.isCheckedByName("user"))) {
-            checkboxHelper.clickByName("user");
+        if ((trackorType.getUser().equals("YES") && !checkbox.isCheckedByName("user"))
+                || (trackorType.getUser().equals("NO") && checkbox.isCheckedByName("user"))) {
+            checkbox.clickByName("user");
         }
-        if ((trackorType.getEfileContainer().equals("YES") && !checkboxHelper.isCheckedByName("efileContainer"))
-                || (trackorType.getEfileContainer().equals("NO") && checkboxHelper.isCheckedByName("efileContainer"))) {
-            checkboxHelper.clickByName("efileContainer");
+        if ((trackorType.getEfileContainer().equals("YES") && !checkbox.isCheckedByName("efileContainer"))
+                || (trackorType.getEfileContainer().equals("NO") && checkbox.isCheckedByName("efileContainer"))) {
+            checkbox.clickByName("efileContainer");
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

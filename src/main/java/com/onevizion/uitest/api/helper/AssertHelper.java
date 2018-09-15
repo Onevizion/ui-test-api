@@ -33,7 +33,7 @@ public class AssertHelper {
     private ElementHelper elementHelper;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private Tb tb;

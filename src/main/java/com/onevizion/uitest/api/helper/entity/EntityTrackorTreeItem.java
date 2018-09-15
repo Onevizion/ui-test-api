@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.CheckboxHelper;
+import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
@@ -39,7 +39,7 @@ public class EntityTrackorTreeItem {
     private PsSelector psSelector;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private Tab tab;
@@ -65,24 +65,24 @@ public class EntityTrackorTreeItem {
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("colorId"))).selectByVisibleText(trackorTreeItem.getColor());
 
-        if ((trackorTreeItem.getChildRequiresParent().equals("YES") && !checkboxHelper.isCheckedByName("childRequiresParent"))
-                || (trackorTreeItem.getChildRequiresParent().equals("NO") && checkboxHelper.isCheckedByName("childRequiresParent"))) {
-            checkboxHelper.clickByName("childRequiresParent");
+        if ((trackorTreeItem.getChildRequiresParent().equals("YES") && !checkbox.isCheckedByName("childRequiresParent"))
+                || (trackorTreeItem.getChildRequiresParent().equals("NO") && checkbox.isCheckedByName("childRequiresParent"))) {
+            checkbox.clickByName("childRequiresParent");
         }
 
-        if ((trackorTreeItem.getOnParentDeleteCascade().equals("YES") && !checkboxHelper.isCheckedByName("onParentDeleteCascade"))
-                || (trackorTreeItem.getOnParentDeleteCascade().equals("NO") && checkboxHelper.isCheckedByName("onParentDeleteCascade"))) {
-            checkboxHelper.clickByName("onParentDeleteCascade");
+        if ((trackorTreeItem.getOnParentDeleteCascade().equals("YES") && !checkbox.isCheckedByName("onParentDeleteCascade"))
+                || (trackorTreeItem.getOnParentDeleteCascade().equals("NO") && checkbox.isCheckedByName("onParentDeleteCascade"))) {
+            checkbox.clickByName("onParentDeleteCascade");
         }
 
-        if ((trackorTreeItem.getLockable().equals("YES") && !checkboxHelper.isCheckedByName("lockable"))
-                || (trackorTreeItem.getLockable().equals("NO") && checkboxHelper.isCheckedByName("lockable"))) {
-            checkboxHelper.clickByName("lockable");
+        if ((trackorTreeItem.getLockable().equals("YES") && !checkbox.isCheckedByName("lockable"))
+                || (trackorTreeItem.getLockable().equals("NO") && checkbox.isCheckedByName("lockable"))) {
+            checkbox.clickByName("lockable");
         }
 
-        if ((trackorTreeItem.getShowAll().equals("YES") && !checkboxHelper.isCheckedByName("showAllInTrcontainer"))
-                || (trackorTreeItem.getShowAll().equals("NO") && checkboxHelper.isCheckedByName("showAllInTrcontainer"))) {
-            checkboxHelper.clickByName("showAllInTrcontainer");
+        if ((trackorTreeItem.getShowAll().equals("YES") && !checkbox.isCheckedByName("showAllInTrcontainer"))
+                || (trackorTreeItem.getShowAll().equals("NO") && checkbox.isCheckedByName("showAllInTrcontainer"))) {
+            checkbox.clickByName("showAllInTrcontainer");
         }
 
         window.closeModalAndWaitTreeLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -104,24 +104,24 @@ public class EntityTrackorTreeItem {
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("colorId"))).selectByVisibleText(trackorTreeItem.getColor());
 
-        if ((trackorTreeItem.getChildRequiresParent().equals("YES") && !checkboxHelper.isCheckedByName("childRequiresParent"))
-                || (trackorTreeItem.getChildRequiresParent().equals("NO") && checkboxHelper.isCheckedByName("childRequiresParent"))) {
-            checkboxHelper.clickByName("childRequiresParent");
+        if ((trackorTreeItem.getChildRequiresParent().equals("YES") && !checkbox.isCheckedByName("childRequiresParent"))
+                || (trackorTreeItem.getChildRequiresParent().equals("NO") && checkbox.isCheckedByName("childRequiresParent"))) {
+            checkbox.clickByName("childRequiresParent");
         }
 
-        if ((trackorTreeItem.getOnParentDeleteCascade().equals("YES") && !checkboxHelper.isCheckedByName("onParentDeleteCascade"))
-                || (trackorTreeItem.getOnParentDeleteCascade().equals("NO") && checkboxHelper.isCheckedByName("onParentDeleteCascade"))) {
-            checkboxHelper.clickByName("onParentDeleteCascade");
+        if ((trackorTreeItem.getOnParentDeleteCascade().equals("YES") && !checkbox.isCheckedByName("onParentDeleteCascade"))
+                || (trackorTreeItem.getOnParentDeleteCascade().equals("NO") && checkbox.isCheckedByName("onParentDeleteCascade"))) {
+            checkbox.clickByName("onParentDeleteCascade");
         }
 
-        if ((trackorTreeItem.getLockable().equals("YES") && !checkboxHelper.isCheckedByName("lockable"))
-                || (trackorTreeItem.getLockable().equals("NO") && checkboxHelper.isCheckedByName("lockable"))) {
-            checkboxHelper.clickByName("lockable");
+        if ((trackorTreeItem.getLockable().equals("YES") && !checkbox.isCheckedByName("lockable"))
+                || (trackorTreeItem.getLockable().equals("NO") && checkbox.isCheckedByName("lockable"))) {
+            checkbox.clickByName("lockable");
         }
 
-        if ((trackorTreeItem.getShowAll().equals("YES") && !checkboxHelper.isCheckedByName("showAllInTrcontainer"))
-                || (trackorTreeItem.getShowAll().equals("NO") && checkboxHelper.isCheckedByName("showAllInTrcontainer"))) {
-            checkboxHelper.clickByName("showAllInTrcontainer");
+        if ((trackorTreeItem.getShowAll().equals("YES") && !checkbox.isCheckedByName("showAllInTrcontainer"))
+                || (trackorTreeItem.getShowAll().equals("NO") && checkbox.isCheckedByName("showAllInTrcontainer"))) {
+            checkbox.clickByName("showAllInTrcontainer");
         }
 
         window.closeModalAndWaitTreeLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

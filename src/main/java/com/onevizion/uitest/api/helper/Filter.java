@@ -77,7 +77,7 @@ public class Filter {
     private PsSelector psSelector;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -179,7 +179,7 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(fieldName))).selectByVisibleText(cellsValues.get(0));
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
-            checkboxHelper.clickByName(fieldName);
+            checkbox.clickByName(fieldName);
         } else if (filterFieldType.equals(FilterFieldType.RADIO_PS_SELECTOR)) {
             By btnOpen = By.xpath("//*[string(@submitName)='btn" + fieldName + "'] | //*[string(@name)='btn" + fieldName + "']");
             psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, cellsValues.get(0), 1L);

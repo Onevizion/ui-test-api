@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.CheckboxHelper;
+import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.GridHelper;
@@ -58,7 +58,7 @@ public class EntityConfigField {
     private ConfigField configField;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private PsSelector psSelector;
@@ -121,13 +121,13 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
             window.closeModal(By.className("dhx_button_save"));
 
-            if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkboxHelper.isCheckedByName("parensForNegative"))
-                    || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkboxHelper.isCheckedByName("parensForNegative"))) {
-                checkboxHelper.clickByName("parensForNegative");
+            if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkbox.isCheckedByName("parensForNegative"))
+                    || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkbox.isCheckedByName("parensForNegative"))) {
+                checkbox.clickByName("parensForNegative");
             }
-            if ((configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("YES") && !checkboxHelper.isCheckedByName("separateThousands"))
-                    || (configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("NO") && checkboxHelper.isCheckedByName("separateThousands"))) {
-                checkboxHelper.clickByName("separateThousands");
+            if ((configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("YES") && !checkbox.isCheckedByName("separateThousands"))
+                    || (configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("NO") && checkbox.isCheckedByName("separateThousands"))) {
+                checkbox.clickByName("separateThousands");
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
@@ -183,9 +183,9 @@ public class EntityConfigField {
 
             tab.goToTab(2L); //Image Settings
 
-            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkboxHelper.isCheckedByName("imageExtractMetadata"))
-                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkboxHelper.isCheckedByName("imageExtractMetadata"))) {
-                checkboxHelper.clickByName("imageExtractMetadata");
+            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkbox.isCheckedByName("imageExtractMetadata"))
+                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkbox.isCheckedByName("imageExtractMetadata"))) {
+                checkbox.clickByName("imageExtractMetadata");
             }
             new Select(seleniumSettings.getWebDriver().findElement(By.name("imageLatConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLatitude());
             new Select(seleniumSettings.getWebDriver().findElement(By.name("imageLongConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLongitude());
@@ -197,17 +197,17 @@ public class EntityConfigField {
                 seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).clear();
                 seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
             }
-            if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkboxHelper.isCheckedByName("imageRotate"))
-                    || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkboxHelper.isCheckedByName("imageRotate"))) {
-                checkboxHelper.clickByName("imageRotate");
+            if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName("imageRotate"))
+                    || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName("imageRotate"))) {
+                checkbox.clickByName("imageRotate");
             }
-            if ((configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("YES") && !checkboxHelper.isCheckedByName("logBlobChanges"))
-                    || (configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("NO") && checkboxHelper.isCheckedByName("logBlobChanges"))) {
-                checkboxHelper.clickByName("logBlobChanges");
+            if ((configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("YES") && !checkbox.isCheckedByName("logBlobChanges"))
+                    || (configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("NO") && checkbox.isCheckedByName("logBlobChanges"))) {
+                checkbox.clickByName("logBlobChanges");
             }
-            if ((configFieldVo.getConfigFieldEfile().getUploadToAws().equals("YES") && !checkboxHelper.isCheckedByName("uploadToS3Directly"))
-                    || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkboxHelper.isCheckedByName("uploadToS3Directly"))) {
-                checkboxHelper.clickByName("uploadToS3Directly");
+            if ((configFieldVo.getConfigFieldEfile().getUploadToAws().equals("YES") && !checkbox.isCheckedByName("uploadToS3Directly"))
+                    || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkbox.isCheckedByName("uploadToS3Directly"))) {
+                checkbox.clickByName("uploadToS3Directly");
             }
             psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
@@ -218,13 +218,13 @@ public class EntityConfigField {
             new Select(seleniumSettings.getWebDriver().findElement(By.name("ObjectTrackorType"))).selectByVisibleText(configFieldVo.getConfigFieldTrackorSelector().getTrackorType());
             seleniumSettings.getWebDriver().findElement(By.name("shortNameLabel")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("shortNameLabel")).sendKeys(configFieldVo.getConfigFieldTrackorSelector().getShortName());
-            if ((configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter().equals("YES") && !checkboxHelper.isCheckedByName("useInMyThingsFilter"))
-                    || (configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter().equals("NO") && checkboxHelper.isCheckedByName("useInMyThingsFilter"))) {
-                checkboxHelper.clickByName("useInMyThingsFilter");
+            if ((configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter().equals("YES") && !checkbox.isCheckedByName("useInMyThingsFilter"))
+                    || (configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter().equals("NO") && checkbox.isCheckedByName("useInMyThingsFilter"))) {
+                checkbox.clickByName("useInMyThingsFilter");
             }
-            if ((configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker().equals("YES") && !checkboxHelper.isCheckedByName("myThingsMarket"))
-                    || (configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker().equals("NO") && checkboxHelper.isCheckedByName("myThingsMarket"))) {
-                checkboxHelper.clickByName("myThingsMarket");
+            if ((configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker().equals("YES") && !checkbox.isCheckedByName("myThingsMarket"))
+                    || (configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker().equals("NO") && checkbox.isCheckedByName("myThingsMarket"))) {
+                checkbox.clickByName("myThingsMarket");
             }
 
             psSelector.selectSpecificValue(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
@@ -236,13 +236,13 @@ public class EntityConfigField {
             new Select(seleniumSettings.getWebDriver().findElement(By.name("ObjectTrackorType"))).selectByVisibleText(configFieldVo.getConfigFieldTrackorDropDown().getTrackorType());
             seleniumSettings.getWebDriver().findElement(By.name("shortNameLabel")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("shortNameLabel")).sendKeys(configFieldVo.getConfigFieldTrackorDropDown().getShortName());
-            if ((configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter().equals("YES") && !checkboxHelper.isCheckedByName("useInMyThingsFilter"))
-                    || (configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter().equals("NO") && checkboxHelper.isCheckedByName("useInMyThingsFilter"))) {
-                checkboxHelper.clickByName("useInMyThingsFilter");
+            if ((configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter().equals("YES") && !checkbox.isCheckedByName("useInMyThingsFilter"))
+                    || (configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter().equals("NO") && checkbox.isCheckedByName("useInMyThingsFilter"))) {
+                checkbox.clickByName("useInMyThingsFilter");
             }
-            if ((configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker().equals("YES") && !checkboxHelper.isCheckedByName("myThingsMarket"))
-                    || (configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker().equals("NO") && checkboxHelper.isCheckedByName("myThingsMarket"))) {
-                checkboxHelper.clickByName("myThingsMarket");
+            if ((configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker().equals("YES") && !checkbox.isCheckedByName("myThingsMarket"))
+                    || (configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker().equals("NO") && checkbox.isCheckedByName("myThingsMarket"))) {
+                checkbox.clickByName("myThingsMarket");
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorDropDown().getDefValueSql());
@@ -265,18 +265,18 @@ public class EntityConfigField {
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
             assertHelper.AssertText("fieldSize", "10");
 
-            if ((configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("YES") && !checkboxHelper.isCheckedByName("showSeconds"))
-                    || (configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("NO") && checkboxHelper.isCheckedByName("showSeconds"))) {
-                checkboxHelper.clickByName("showSeconds");
+            if ((configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
+                    || (configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
+                checkbox.clickByName("showSeconds");
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
             assertHelper.AssertText("fieldSize", "10");
 
-            if ((configFieldVo.getConfigFieldTime().getShowSeconds().equals("YES") && !checkboxHelper.isCheckedByName("showSeconds"))
-                    || (configFieldVo.getConfigFieldTime().getShowSeconds().equals("NO") && checkboxHelper.isCheckedByName("showSeconds"))) {
-                checkboxHelper.clickByName("showSeconds");
+            if ((configFieldVo.getConfigFieldTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
+                    || (configFieldVo.getConfigFieldTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
+                checkbox.clickByName("showSeconds");
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTime().getDefValueSql());
@@ -288,44 +288,44 @@ public class EntityConfigField {
 
         seleniumSettings.getWebDriver().findElement(By.name("comments")).sendKeys(configFieldVo.getComment());
 
-        if ((configFieldVo.getMandatory().equals("YES") && !checkboxHelper.isCheckedByName("mandatory"))
-                || (configFieldVo.getMandatory().equals("NO") && checkboxHelper.isCheckedByName("mandatory"))) {
-            checkboxHelper.clickByName("mandatory");
+        if ((configFieldVo.getMandatory().equals("YES") && !checkbox.isCheckedByName("mandatory"))
+                || (configFieldVo.getMandatory().equals("NO") && checkbox.isCheckedByName("mandatory"))) {
+            checkbox.clickByName("mandatory");
         }
 
-        if ((configFieldVo.getTwoColumns().equals("YES") && !checkboxHelper.isCheckedByName("twoColsSpan"))
-                || (configFieldVo.getTwoColumns().equals("NO") && checkboxHelper.isCheckedByName("twoColsSpan"))) {
-            checkboxHelper.clickByName("twoColsSpan");
+        if ((configFieldVo.getTwoColumns().equals("YES") && !checkbox.isCheckedByName("twoColsSpan"))
+                || (configFieldVo.getTwoColumns().equals("NO") && checkbox.isCheckedByName("twoColsSpan"))) {
+            checkbox.clickByName("twoColsSpan");
         }
 
-        if ((configFieldVo.getLockable().equals("YES") && !checkboxHelper.isCheckedByName("lockable"))
-                || (configFieldVo.getLockable().equals("NO") && checkboxHelper.isCheckedByName("lockable"))) {
-            checkboxHelper.clickByName("lockable");
+        if ((configFieldVo.getLockable().equals("YES") && !checkbox.isCheckedByName("lockable"))
+                || (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName("lockable"))) {
+            checkbox.clickByName("lockable");
         }
 
-        if ((configFieldVo.getMultiple().equals("YES") && !checkboxHelper.isCheckedByName("multiple"))
-                || (configFieldVo.getMultiple().equals("NO") && checkboxHelper.isCheckedByName("multiple"))) {
-            checkboxHelper.clickByName("multiple");
+        if ((configFieldVo.getMultiple().equals("YES") && !checkbox.isCheckedByName("multiple"))
+                || (configFieldVo.getMultiple().equals("NO") && checkbox.isCheckedByName("multiple"))) {
+            checkbox.clickByName("multiple");
         }
 
-        if ((configFieldVo.getReadOnly().equals("YES") && !checkboxHelper.isCheckedByName("readOnly"))
-                || (configFieldVo.getReadOnly().equals("NO") && checkboxHelper.isCheckedByName("readOnly"))) {
-            checkboxHelper.clickByName("readOnly");
+        if ((configFieldVo.getReadOnly().equals("YES") && !checkbox.isCheckedByName("readOnly"))
+                || (configFieldVo.getReadOnly().equals("NO") && checkbox.isCheckedByName("readOnly"))) {
+            checkbox.clickByName("readOnly");
         }
 
-        if ((configFieldVo.getCalcTotal().equals("YES") && !checkboxHelper.isCheckedByName("calcTotal"))
-                || (configFieldVo.getCalcTotal().equals("NO") && checkboxHelper.isCheckedByName("calcTotal"))) {
-            checkboxHelper.clickByName("calcTotal");
+        if ((configFieldVo.getCalcTotal().equals("YES") && !checkbox.isCheckedByName("calcTotal"))
+                || (configFieldVo.getCalcTotal().equals("NO") && checkbox.isCheckedByName("calcTotal"))) {
+            checkbox.clickByName("calcTotal");
         }
 
-        if ((configFieldVo.getNotCloneValue().equals("YES") && !checkboxHelper.isCheckedByName("notCloneFieldValue"))
-                || (configFieldVo.getNotCloneValue().equals("NO") && checkboxHelper.isCheckedByName("notCloneFieldValue"))) {
-            checkboxHelper.clickByName("notCloneFieldValue");
+        if ((configFieldVo.getNotCloneValue().equals("YES") && !checkbox.isCheckedByName("notCloneFieldValue"))
+                || (configFieldVo.getNotCloneValue().equals("NO") && checkbox.isCheckedByName("notCloneFieldValue"))) {
+            checkbox.clickByName("notCloneFieldValue");
         }
 
-        if ((configFieldVo.getNotCloneLock().equals("YES") && !checkboxHelper.isCheckedByName("notCloneLocks"))
-                || (configFieldVo.getNotCloneLock().equals("NO") && checkboxHelper.isCheckedByName("notCloneLocks"))) {
-            checkboxHelper.clickByName("notCloneLocks");
+        if ((configFieldVo.getNotCloneLock().equals("YES") && !checkbox.isCheckedByName("notCloneLocks"))
+                || (configFieldVo.getNotCloneLock().equals("NO") && checkbox.isCheckedByName("notCloneLocks"))) {
+            checkbox.clickByName("notCloneLocks");
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -376,13 +376,13 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
             window.closeModal(By.className("dhx_button_save"));
 
-            if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkboxHelper.isCheckedByName("parensForNegative"))
-                    || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkboxHelper.isCheckedByName("parensForNegative"))) {
-                checkboxHelper.clickByName("parensForNegative");
+            if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkbox.isCheckedByName("parensForNegative"))
+                    || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkbox.isCheckedByName("parensForNegative"))) {
+                checkbox.clickByName("parensForNegative");
             }
-            if ((configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("YES") && !checkboxHelper.isCheckedByName("separateThousands"))
-                    || (configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("NO") && checkboxHelper.isCheckedByName("separateThousands"))) {
-                checkboxHelper.clickByName("separateThousands");
+            if ((configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("YES") && !checkbox.isCheckedByName("separateThousands"))
+                    || (configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("NO") && checkbox.isCheckedByName("separateThousands"))) {
+                checkbox.clickByName("separateThousands");
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
@@ -433,9 +433,9 @@ public class EntityConfigField {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
             tab.goToTab(2L); //Image Settings
 
-            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkboxHelper.isCheckedByName("imageExtractMetadata"))
-                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkboxHelper.isCheckedByName("imageExtractMetadata"))) {
-                checkboxHelper.clickByName("imageExtractMetadata");
+            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkbox.isCheckedByName("imageExtractMetadata"))
+                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkbox.isCheckedByName("imageExtractMetadata"))) {
+                checkbox.clickByName("imageExtractMetadata");
             }
             new Select(seleniumSettings.getWebDriver().findElement(By.name("imageLatConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLatitude());
             new Select(seleniumSettings.getWebDriver().findElement(By.name("imageLongConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLongitude());
@@ -445,17 +445,17 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name("imageWidth")).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
             seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
-            if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkboxHelper.isCheckedByName("imageRotate"))
-                    || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkboxHelper.isCheckedByName("imageRotate"))) {
-                checkboxHelper.clickByName("imageRotate");
+            if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName("imageRotate"))
+                    || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName("imageRotate"))) {
+                checkbox.clickByName("imageRotate");
             }
-            if ((configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("YES") && !checkboxHelper.isCheckedByName("logBlobChanges"))
-                    || (configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("NO") && checkboxHelper.isCheckedByName("logBlobChanges"))) {
-                checkboxHelper.clickByName("logBlobChanges");
+            if ((configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("YES") && !checkbox.isCheckedByName("logBlobChanges"))
+                    || (configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("NO") && checkbox.isCheckedByName("logBlobChanges"))) {
+                checkbox.clickByName("logBlobChanges");
             }
-            if ((configFieldVo.getConfigFieldEfile().getUploadToAws().equals("YES") && !checkboxHelper.isCheckedByName("uploadToS3Directly"))
-                    || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkboxHelper.isCheckedByName("uploadToS3Directly"))) {
-                checkboxHelper.clickByName("uploadToS3Directly");
+            if ((configFieldVo.getConfigFieldEfile().getUploadToAws().equals("YES") && !checkbox.isCheckedByName("uploadToS3Directly"))
+                    || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkbox.isCheckedByName("uploadToS3Directly"))) {
+                checkbox.clickByName("uploadToS3Directly");
             }
             psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
@@ -466,13 +466,13 @@ public class EntityConfigField {
             new Select(seleniumSettings.getWebDriver().findElement(By.name("ObjectTrackorType"))).selectByVisibleText(configFieldVo.getConfigFieldTrackorSelector().getTrackorType());
             seleniumSettings.getWebDriver().findElement(By.name("shortNameLabel")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("shortNameLabel")).sendKeys(configFieldVo.getConfigFieldTrackorSelector().getShortName());
-            if ((configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter().equals("YES") && !checkboxHelper.isCheckedByName("useInMyThingsFilter"))
-                    || (configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter().equals("NO") && checkboxHelper.isCheckedByName("useInMyThingsFilter"))) {
-                checkboxHelper.clickByName("useInMyThingsFilter");
+            if ((configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter().equals("YES") && !checkbox.isCheckedByName("useInMyThingsFilter"))
+                    || (configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter().equals("NO") && checkbox.isCheckedByName("useInMyThingsFilter"))) {
+                checkbox.clickByName("useInMyThingsFilter");
             }
-            if ((configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker().equals("YES") && !checkboxHelper.isCheckedByName("myThingsMarket"))
-                    || (configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker().equals("NO") && checkboxHelper.isCheckedByName("myThingsMarket"))) {
-                checkboxHelper.clickByName("myThingsMarket");
+            if ((configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker().equals("YES") && !checkbox.isCheckedByName("myThingsMarket"))
+                    || (configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker().equals("NO") && checkbox.isCheckedByName("myThingsMarket"))) {
+                checkbox.clickByName("myThingsMarket");
             }
 
             psSelector.selectSpecificValue(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
@@ -484,13 +484,13 @@ public class EntityConfigField {
             new Select(seleniumSettings.getWebDriver().findElement(By.name("ObjectTrackorType"))).selectByVisibleText(configFieldVo.getConfigFieldTrackorDropDown().getTrackorType());
             seleniumSettings.getWebDriver().findElement(By.name("shortNameLabel")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("shortNameLabel")).sendKeys(configFieldVo.getConfigFieldTrackorDropDown().getShortName());
-            if ((configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter().equals("YES") && !checkboxHelper.isCheckedByName("useInMyThingsFilter"))
-                    || (configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter().equals("NO") && checkboxHelper.isCheckedByName("useInMyThingsFilter"))) {
-                checkboxHelper.clickByName("useInMyThingsFilter");
+            if ((configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter().equals("YES") && !checkbox.isCheckedByName("useInMyThingsFilter"))
+                    || (configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter().equals("NO") && checkbox.isCheckedByName("useInMyThingsFilter"))) {
+                checkbox.clickByName("useInMyThingsFilter");
             }
-            if ((configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker().equals("YES") && !checkboxHelper.isCheckedByName("myThingsMarket"))
-                    || (configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker().equals("NO") && checkboxHelper.isCheckedByName("myThingsMarket"))) {
-                checkboxHelper.clickByName("myThingsMarket");
+            if ((configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker().equals("YES") && !checkbox.isCheckedByName("myThingsMarket"))
+                    || (configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker().equals("NO") && checkbox.isCheckedByName("myThingsMarket"))) {
+                checkbox.clickByName("myThingsMarket");
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorDropDown().getDefValueSql());
@@ -513,18 +513,18 @@ public class EntityConfigField {
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
             assertHelper.AssertText("fieldSize", "10");
 
-            if ((configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("YES") && !checkboxHelper.isCheckedByName("showSeconds"))
-                    || (configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("NO") && checkboxHelper.isCheckedByName("showSeconds"))) {
-                checkboxHelper.clickByName("showSeconds");
+            if ((configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
+                    || (configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
+                checkbox.clickByName("showSeconds");
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
             assertHelper.AssertText("fieldSize", "10");
 
-            if ((configFieldVo.getConfigFieldTime().getShowSeconds().equals("YES") && !checkboxHelper.isCheckedByName("showSeconds"))
-                    || (configFieldVo.getConfigFieldTime().getShowSeconds().equals("NO") && checkboxHelper.isCheckedByName("showSeconds"))) {
-                checkboxHelper.clickByName("showSeconds");
+            if ((configFieldVo.getConfigFieldTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
+                    || (configFieldVo.getConfigFieldTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
+                checkbox.clickByName("showSeconds");
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTime().getDefValueSql());
@@ -538,48 +538,48 @@ public class EntityConfigField {
         seleniumSettings.getWebDriver().findElement(By.name("comments")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("comments")).sendKeys(configFieldVo.getComment());
 
-        if ((configFieldVo.getMandatory().equals("YES") && !checkboxHelper.isCheckedByName("mandatory"))
-                || (configFieldVo.getMandatory().equals("NO") && checkboxHelper.isCheckedByName("mandatory"))) {
-            checkboxHelper.clickByName("mandatory");
+        if ((configFieldVo.getMandatory().equals("YES") && !checkbox.isCheckedByName("mandatory"))
+                || (configFieldVo.getMandatory().equals("NO") && checkbox.isCheckedByName("mandatory"))) {
+            checkbox.clickByName("mandatory");
         }
 
-        if ((configFieldVo.getTwoColumns().equals("YES") && !checkboxHelper.isCheckedByName("twoColsSpan"))
-                || (configFieldVo.getTwoColumns().equals("NO") && checkboxHelper.isCheckedByName("twoColsSpan"))) {
-            checkboxHelper.clickByName("twoColsSpan");
+        if ((configFieldVo.getTwoColumns().equals("YES") && !checkbox.isCheckedByName("twoColsSpan"))
+                || (configFieldVo.getTwoColumns().equals("NO") && checkbox.isCheckedByName("twoColsSpan"))) {
+            checkbox.clickByName("twoColsSpan");
         }
 
         boolean removeLockable = false;
-        if ((configFieldVo.getLockable().equals("YES") && !checkboxHelper.isCheckedByName("lockable"))
-                || (configFieldVo.getLockable().equals("NO") && checkboxHelper.isCheckedByName("lockable"))) {
-            if (configFieldVo.getLockable().equals("NO") && checkboxHelper.isCheckedByName("lockable")) {
+        if ((configFieldVo.getLockable().equals("YES") && !checkbox.isCheckedByName("lockable"))
+                || (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName("lockable"))) {
+            if (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName("lockable")) {
                 removeLockable = true;
             }
-            checkboxHelper.clickByName("lockable");
+            checkbox.clickByName("lockable");
         }
 
-        if ((configFieldVo.getMultiple().equals("YES") && !checkboxHelper.isCheckedByName("multiple"))
-                || (configFieldVo.getMultiple().equals("NO") && checkboxHelper.isCheckedByName("multiple"))) {
-            checkboxHelper.clickByName("multiple");
+        if ((configFieldVo.getMultiple().equals("YES") && !checkbox.isCheckedByName("multiple"))
+                || (configFieldVo.getMultiple().equals("NO") && checkbox.isCheckedByName("multiple"))) {
+            checkbox.clickByName("multiple");
         }
 
-        if ((configFieldVo.getReadOnly().equals("YES") && !checkboxHelper.isCheckedByName("readOnly"))
-                || (configFieldVo.getReadOnly().equals("NO") && checkboxHelper.isCheckedByName("readOnly"))) {
-            checkboxHelper.clickByName("readOnly");
+        if ((configFieldVo.getReadOnly().equals("YES") && !checkbox.isCheckedByName("readOnly"))
+                || (configFieldVo.getReadOnly().equals("NO") && checkbox.isCheckedByName("readOnly"))) {
+            checkbox.clickByName("readOnly");
         }
 
-        if ((configFieldVo.getCalcTotal().equals("YES") && !checkboxHelper.isCheckedByName("calcTotal"))
-                || (configFieldVo.getCalcTotal().equals("NO") && checkboxHelper.isCheckedByName("calcTotal"))) {
-            checkboxHelper.clickByName("calcTotal");
+        if ((configFieldVo.getCalcTotal().equals("YES") && !checkbox.isCheckedByName("calcTotal"))
+                || (configFieldVo.getCalcTotal().equals("NO") && checkbox.isCheckedByName("calcTotal"))) {
+            checkbox.clickByName("calcTotal");
         }
 
-        if ((configFieldVo.getNotCloneValue().equals("YES") && !checkboxHelper.isCheckedByName("notCloneFieldValue"))
-                || (configFieldVo.getNotCloneValue().equals("NO") && checkboxHelper.isCheckedByName("notCloneFieldValue"))) {
-            checkboxHelper.clickByName("notCloneFieldValue");
+        if ((configFieldVo.getNotCloneValue().equals("YES") && !checkbox.isCheckedByName("notCloneFieldValue"))
+                || (configFieldVo.getNotCloneValue().equals("NO") && checkbox.isCheckedByName("notCloneFieldValue"))) {
+            checkbox.clickByName("notCloneFieldValue");
         }
 
-        if ((configFieldVo.getNotCloneLock().equals("YES") && !checkboxHelper.isCheckedByName("notCloneLocks"))
-                || (configFieldVo.getNotCloneLock().equals("NO") && checkboxHelper.isCheckedByName("notCloneLocks"))) {
-            checkboxHelper.clickByName("notCloneLocks");
+        if ((configFieldVo.getNotCloneLock().equals("YES") && !checkbox.isCheckedByName("notCloneLocks"))
+                || (configFieldVo.getNotCloneLock().equals("NO") && checkbox.isCheckedByName("notCloneLocks"))) {
+            checkbox.clickByName("notCloneLocks");
         }
 
         if (removeLockable) {

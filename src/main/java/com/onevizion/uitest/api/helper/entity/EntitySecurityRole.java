@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.CheckboxHelper;
+import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -40,7 +40,7 @@ public class EntitySecurityRole {
     private GridHelper gridHelper;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     public void add(SecurityRole securityRole) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -218,9 +218,9 @@ public class EntitySecurityRole {
     }
 
     private void setCheckboxValue(String value, String checkboxName) {
-        if ((value.equals("YES") && !checkboxHelper.isCheckedByName(checkboxName))
-                || (value.equals("NO") && checkboxHelper.isCheckedByName(checkboxName))) {
-            checkboxHelper.clickByName(checkboxName);
+        if ((value.equals("YES") && !checkbox.isCheckedByName(checkboxName))
+                || (value.equals("NO") && checkbox.isCheckedByName(checkboxName))) {
+            checkbox.clickByName(checkboxName);
         }
     }
 

@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.CheckboxHelper;
+import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -33,7 +33,7 @@ public class EntityTrackorTourStep {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private GridHelper gridHelper;
@@ -61,14 +61,14 @@ public class EntityTrackorTourStep {
 
         seleniumSettings.getWebDriver().findElement(By.name("duration")).sendKeys(trackorTourStep.getDuration());
 
-        if ((trackorTourStep.getOrphaned().equals("YES") && !checkboxHelper.isCheckedByName("orphaned"))
-                || (trackorTourStep.getOrphaned().equals("NO") && checkboxHelper.isCheckedByName("orphaned"))) {
-            checkboxHelper.clickByName("orphaned");
+        if ((trackorTourStep.getOrphaned().equals("YES") && !checkbox.isCheckedByName("orphaned"))
+                || (trackorTourStep.getOrphaned().equals("NO") && checkbox.isCheckedByName("orphaned"))) {
+            checkbox.clickByName("orphaned");
         }
 
-        if ((trackorTourStep.getBackdrop().equals("YES") && !checkboxHelper.isCheckedByName("backdrop"))
-                || (trackorTourStep.getBackdrop().equals("NO") && checkboxHelper.isCheckedByName("backdrop"))) {
-            checkboxHelper.clickByName("backdrop");
+        if ((trackorTourStep.getBackdrop().equals("YES") && !checkbox.isCheckedByName("backdrop"))
+                || (trackorTourStep.getBackdrop().equals("NO") && checkbox.isCheckedByName("backdrop"))) {
+            checkbox.clickByName("backdrop");
         }
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("placement"))).selectByVisibleText(trackorTourStep.getPlacement());
@@ -104,14 +104,14 @@ public class EntityTrackorTourStep {
         seleniumSettings.getWebDriver().findElement(By.name("duration")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("duration")).sendKeys(trackorTourStep.getDuration());
 
-        if ((trackorTourStep.getOrphaned().equals("YES") && !checkboxHelper.isCheckedByName("orphaned"))
-                || (trackorTourStep.getOrphaned().equals("NO") && checkboxHelper.isCheckedByName("orphaned"))) {
-            checkboxHelper.clickByName("orphaned");
+        if ((trackorTourStep.getOrphaned().equals("YES") && !checkbox.isCheckedByName("orphaned"))
+                || (trackorTourStep.getOrphaned().equals("NO") && checkbox.isCheckedByName("orphaned"))) {
+            checkbox.clickByName("orphaned");
         }
 
-        if ((trackorTourStep.getBackdrop().equals("YES") && !checkboxHelper.isCheckedByName("backdrop"))
-                || (trackorTourStep.getBackdrop().equals("NO") && checkboxHelper.isCheckedByName("backdrop"))) {
-            checkboxHelper.clickByName("backdrop");
+        if ((trackorTourStep.getBackdrop().equals("YES") && !checkbox.isCheckedByName("backdrop"))
+                || (trackorTourStep.getBackdrop().equals("NO") && checkbox.isCheckedByName("backdrop"))) {
+            checkbox.clickByName("backdrop");
         }
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("placement"))).selectByVisibleText(trackorTourStep.getPlacement());

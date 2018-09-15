@@ -30,7 +30,7 @@ public class GridHelper {
     private Wait wait;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private ElementHelper elementHelper;
@@ -176,7 +176,7 @@ public class GridHelper {
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
             WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
-            checkboxHelper.clickByElement(element);
+            checkbox.clickByElement(element);
             ret.add(js.getGridSelectedRowId(gridId));
         }
         return ret;
@@ -193,7 +193,7 @@ public class GridHelper {
                 if (values.containsKey(names.get(i.intValue())) /*&& priv.contains(values.get(names.get(i.intValue())))*/ && values.get(names.get(i.intValue())).contains(priv)) {
                     js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
                     WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    checkboxHelper.clickByElement(element);
+                    checkbox.clickByElement(element);
                 }
             }
         }
@@ -205,7 +205,7 @@ public class GridHelper {
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
             WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
-            checkboxHelper.clickByElement(element);
+            checkbox.clickByElement(element);
             ret.add("cb" + js.getGridSelectedRowId(gridId));
         }
         return ret;
@@ -222,7 +222,7 @@ public class GridHelper {
                 if (values.contains(names.get(i.intValue()))) {
                     js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
                     WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    checkboxHelper.clickByElement(element);
+                    checkbox.clickByElement(element);
                 }
             }
         }
@@ -255,7 +255,7 @@ public class GridHelper {
                 if ("1".equals(vals.get(i.intValue()))) {
                     js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
                     WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
-                    checkboxHelper.clickByElement(element);
+                    checkbox.clickByElement(element);
                 }
             }
         }
@@ -270,7 +270,7 @@ public class GridHelper {
             List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdx));
             for (Long i = 0L; i < checkboxes.size(); i++) {
                 if (checkboxes.get(i.intValue()).isSelected() && checkboxes.get(i.intValue()).isEnabled()) {
-                    checkboxHelper.clickByElement(checkboxes.get(i.intValue()));
+                    checkbox.clickByElement(checkboxes.get(i.intValue()));
                 }
             }
         }

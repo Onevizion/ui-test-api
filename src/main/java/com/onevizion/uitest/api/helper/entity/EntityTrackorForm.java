@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.CheckboxHelper;
+import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
@@ -35,7 +35,7 @@ public class EntityTrackorForm {
     private PsSelector psSelector;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private AssertHelper assertHelper;
@@ -67,19 +67,19 @@ public class EntityTrackorForm {
 
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorForm.getDescription());
 
-        if ((trackorForm.getImportEmailSubject().equals("YES") && !checkboxHelper.isCheckedByName("impEmailSubject"))
-                || (trackorForm.getImportEmailSubject().equals("NO") && checkboxHelper.isCheckedByName("impEmailSubject"))) {
-            checkboxHelper.clickByName("impEmailSubject");
+        if ((trackorForm.getImportEmailSubject().equals("YES") && !checkbox.isCheckedByName("impEmailSubject"))
+                || (trackorForm.getImportEmailSubject().equals("NO") && checkbox.isCheckedByName("impEmailSubject"))) {
+            checkbox.clickByName("impEmailSubject");
         }
 
-        if ((trackorForm.getImportEmailBody().equals("YES") && !checkboxHelper.isCheckedByName("impEmailBody"))
-                || (trackorForm.getImportEmailBody().equals("NO") && checkboxHelper.isCheckedByName("impEmailBody"))) {
-            checkboxHelper.clickByName("impEmailBody");
+        if ((trackorForm.getImportEmailBody().equals("YES") && !checkbox.isCheckedByName("impEmailBody"))
+                || (trackorForm.getImportEmailBody().equals("NO") && checkbox.isCheckedByName("impEmailBody"))) {
+            checkbox.clickByName("impEmailBody");
         }
 
-        if ((trackorForm.getCreateImport().equals("YES") && !checkboxHelper.isCheckedByName("createImport"))
-                || (trackorForm.getCreateImport().equals("NO") && checkboxHelper.isCheckedByName("createImport"))) {
-            checkboxHelper.clickByName("createImport");
+        if ((trackorForm.getCreateImport().equals("YES") && !checkbox.isCheckedByName("createImport"))
+                || (trackorForm.getCreateImport().equals("NO") && checkbox.isCheckedByName("createImport"))) {
+            checkbox.clickByName("createImport");
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -109,19 +109,19 @@ public class EntityTrackorForm {
         seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorForm.getDescription());
 
-        if ((trackorForm.getImportEmailSubject().equals("YES") && !checkboxHelper.isCheckedByName("impEmailSubject"))
-                || (trackorForm.getImportEmailSubject().equals("NO") && checkboxHelper.isCheckedByName("impEmailSubject"))) {
-            checkboxHelper.clickByName("impEmailSubject");
+        if ((trackorForm.getImportEmailSubject().equals("YES") && !checkbox.isCheckedByName("impEmailSubject"))
+                || (trackorForm.getImportEmailSubject().equals("NO") && checkbox.isCheckedByName("impEmailSubject"))) {
+            checkbox.clickByName("impEmailSubject");
         }
 
-        if ((trackorForm.getImportEmailBody().equals("YES") && !checkboxHelper.isCheckedByName("impEmailBody"))
-                || (trackorForm.getImportEmailBody().equals("NO") && checkboxHelper.isCheckedByName("impEmailBody"))) {
-            checkboxHelper.clickByName("impEmailBody");
+        if ((trackorForm.getImportEmailBody().equals("YES") && !checkbox.isCheckedByName("impEmailBody"))
+                || (trackorForm.getImportEmailBody().equals("NO") && checkbox.isCheckedByName("impEmailBody"))) {
+            checkbox.clickByName("impEmailBody");
         }
 
-        if ((trackorForm.getCreateImport().equals("YES") && !checkboxHelper.isCheckedByName("createImport"))
-                || (trackorForm.getCreateImport().equals("NO") && checkboxHelper.isCheckedByName("createImport"))) {
-            checkboxHelper.clickByName("createImport");
+        if ((trackorForm.getCreateImport().equals("YES") && !checkbox.isCheckedByName("createImport"))
+                || (trackorForm.getCreateImport().equals("NO") && checkbox.isCheckedByName("createImport"))) {
+            checkbox.clickByName("createImport");
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

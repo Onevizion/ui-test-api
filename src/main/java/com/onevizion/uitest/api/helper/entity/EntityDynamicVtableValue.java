@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.CheckboxHelper;
+import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -44,7 +44,7 @@ public class EntityDynamicVtableValue {
     private ColorPicker colorPicker;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     public void add(DynamicVtableValue dynamicVtableValue) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
@@ -59,14 +59,14 @@ public class EntityDynamicVtableValue {
         colorPicker.setValue("#" + dynamicVtableValue.getColor());
         window.closeModal(By.className("dhx_button_save"));
 
-        if ((dynamicVtableValue.getDisplay().equals("YES") && !checkboxHelper.isCheckedByName("display"))
-                || (dynamicVtableValue.getDisplay().equals("NO") && checkboxHelper.isCheckedByName("display"))) {
-            checkboxHelper.clickByName("display");
+        if ((dynamicVtableValue.getDisplay().equals("YES") && !checkbox.isCheckedByName("display"))
+                || (dynamicVtableValue.getDisplay().equals("NO") && checkbox.isCheckedByName("display"))) {
+            checkbox.clickByName("display");
         }
 
-        if ((dynamicVtableValue.getFilterable().equals("YES") && !checkboxHelper.isCheckedByName("filterable"))
-                || (dynamicVtableValue.getFilterable().equals("NO") && checkboxHelper.isCheckedByName("filterable"))) {
-            checkboxHelper.clickByName("filterable");
+        if ((dynamicVtableValue.getFilterable().equals("YES") && !checkbox.isCheckedByName("filterable"))
+                || (dynamicVtableValue.getFilterable().equals("NO") && checkbox.isCheckedByName("filterable"))) {
+            checkbox.clickByName("filterable");
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -88,14 +88,14 @@ public class EntityDynamicVtableValue {
         colorPicker.setValue("#" + dynamicVtableValue.getColor());
         window.closeModal(By.className("dhx_button_save"));
 
-        if ((dynamicVtableValue.getDisplay().equals("YES") && !checkboxHelper.isCheckedByName("display"))
-                || (dynamicVtableValue.getDisplay().equals("NO") && checkboxHelper.isCheckedByName("display"))) {
-            checkboxHelper.clickByName("display");
+        if ((dynamicVtableValue.getDisplay().equals("YES") && !checkbox.isCheckedByName("display"))
+                || (dynamicVtableValue.getDisplay().equals("NO") && checkbox.isCheckedByName("display"))) {
+            checkbox.clickByName("display");
         }
 
-        if ((dynamicVtableValue.getFilterable().equals("YES") && !checkboxHelper.isCheckedByName("filterable"))
-                || (dynamicVtableValue.getFilterable().equals("NO") && checkboxHelper.isCheckedByName("filterable"))) {
-            checkboxHelper.clickByName("filterable");
+        if ((dynamicVtableValue.getFilterable().equals("YES") && !checkbox.isCheckedByName("filterable"))
+                || (dynamicVtableValue.getFilterable().equals("NO") && checkbox.isCheckedByName("filterable"))) {
+            checkbox.clickByName("filterable");
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

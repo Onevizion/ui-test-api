@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class CheckboxHelper {
+public class Checkbox {
 
     @Resource
     private Js js;

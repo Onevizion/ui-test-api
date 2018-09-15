@@ -53,7 +53,7 @@ public class Tb {
     private ElementHelper elementHelper;
 
     @Resource
-    private CheckboxHelper checkboxHelper;
+    private Checkbox checkbox;
 
     @Resource
     private ElementWaitHelper elementWaitHelper;
@@ -143,15 +143,15 @@ public class Tb {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).isSelected() == true ? "YES" : "NO";
                 if (actualVal != value) {
-                    WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
-                    WebElement newCheckbox = checkboxHelper.findLabelByElement(checkbox);
+                    WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
+                    WebElement newCheckbox = checkbox.findLabelByElement(checkboxElement);
                     elementHelper.click(newCheckbox);
                 }
             } else {
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).isSelected() == true ? "YES" : "NO";
                 if (actualVal != value) {
-                    WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']"));
-                    WebElement newCheckbox = checkboxHelper.findLabelByElement(checkbox);
+                    WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']"));
+                    WebElement newCheckbox = checkbox.findLabelByElement(checkboxElement);
                     elementHelper.click(newCheckbox);
                 }
             }
@@ -468,8 +468,8 @@ public class Tb {
             } else {
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.name(field)).isSelected() == true ? "YES" : "NO";
                 if (actualVal != "NO") {
-                    WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + field + "'] | //*[string(@name)='" + field + "']"));
-                    WebElement newCheckbox = checkboxHelper.findLabelByElement(checkbox);
+                    WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + field + "'] | //*[string(@name)='" + field + "']"));
+                    WebElement newCheckbox = checkbox.findLabelByElement(checkboxElement);
                     elementHelper.click(newCheckbox);
                 }
             }
@@ -618,9 +618,9 @@ public class Tb {
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             WebElement elem = gridCell.findElement(By.tagName("input"));
-            String val = (checkboxHelper.isElementChecked(elem)) ? "YES" : "NO";
+            String val = (checkbox.isElementChecked(elem)) ? "YES" : "NO";
             if (!val.equals(value)) {
-                checkboxHelper.clickByElement(elem);
+                checkbox.clickByElement(elem);
             }
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
@@ -815,9 +815,9 @@ public class Tb {
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             WebElement elem = gridCell.findElement(By.tagName("input"));
-            String val = (checkboxHelper.isElementChecked(elem)) ? "YES" : "NO";
+            String val = (checkbox.isElementChecked(elem)) ? "YES" : "NO";
             if (!val.equals("NO")) {
-                checkboxHelper.clickByElement(elem);
+                checkbox.clickByElement(elem);
             }
             gridExpVals.put(gridColumnId, "NO");
             if (fieldName != null) {
