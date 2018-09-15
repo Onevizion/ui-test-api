@@ -44,7 +44,7 @@ public class Tb {
     private Wait wait;
 
     @Resource
-    private FieldHistoryHelper fieldHistoryHelper;
+    private FieldHistory fieldHistory;
 
     @Resource
     private PsSelector psSelector;

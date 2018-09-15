@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class FieldHistoryHelper {
+public class FieldHistory {
 
     private static Pattern regexTdContent = Pattern.compile("<TD class.+?>(.+?)</td>", Pattern.DOTALL | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 

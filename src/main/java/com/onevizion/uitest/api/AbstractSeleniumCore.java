@@ -44,7 +44,7 @@ import com.onevizion.uitest.api.helper.DualListboxHelper;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementJsHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
-import com.onevizion.uitest.api.helper.FieldHistoryHelper;
+import com.onevizion.uitest.api.helper.FieldHistory;
 import com.onevizion.uitest.api.helper.Filter;
 import com.onevizion.uitest.api.helper.FilterWait;
 import com.onevizion.uitest.api.helper.GridHelper;
@@ -166,7 +166,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Privilegies privilegies;
 
     @Resource
-    protected FieldHistoryHelper fieldHistoryHelper;
+    protected FieldHistory fieldHistory;
 
     @Resource
     protected PsSelector psSelector;
