@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class CompAuditLogHelper {
+public class CompAuditLog {
 
     private final static String COLUMN_ID_USER = "3";
     private final static String COLUMN_ID_ACTION = "5";

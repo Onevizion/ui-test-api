@@ -39,7 +39,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
 import com.onevizion.uitest.api.helper.CloneButtonHelper;
-import com.onevizion.uitest.api.helper.CompAuditLogHelper;
+import com.onevizion.uitest.api.helper.CompAuditLog;
 import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementJsHelper;
@@ -193,7 +193,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected MainMenu mainMenu;
 
     @Resource
-    protected CompAuditLogHelper compAuditLogHelper;
+    protected CompAuditLog compAuditLog;
 
     @Resource
     protected HtmlSelect htmlSelect;
