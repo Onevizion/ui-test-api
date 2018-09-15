@@ -23,7 +23,7 @@ import com.onevizion.uitest.api.vo.FilterFieldType;
 import com.onevizion.uitest.api.vo.SortType;
 
 @Component
-public class FilterHelper {
+public class Filter {
 
     public final static String UNSAVED_FILTER_NAME = "Unsaved Filter";
     public final static String ALL_FILTER_NAME = "G:All";
@@ -83,7 +83,7 @@ public class FilterHelper {
     private ElementWaitHelper elementWaitHelper;
 
     @Resource
-    private FilterWaitHelper filterWaitHelper;
+    private FilterWait filterWait;
 
     @Resource
     private JqueryWait jqueryWait;
@@ -239,7 +239,7 @@ public class FilterHelper {
         seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
         Assert.assertEquals(isSavedFilter, true, "Filter " + AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME + " isn't saved");
 
-        filterWaitHelper.waitCurrentFilterName(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME);
+        filterWait.waitCurrentFilterName(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME);
         wait.waitGridLoad(gridIdx, gridIdx);
     }
 
@@ -278,7 +278,7 @@ public class FilterHelper {
         }
         Assert.assertEquals(isDeletedFilter, false, "Filter " + AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME + " isn't deleted");
 
-        filterWaitHelper.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
+        filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
         wait.waitGridLoad(gridIdx, gridIdx);
     }
 
@@ -292,7 +292,7 @@ public class FilterHelper {
         wait.waitGridLoad(gridIdx, gridIdx);
         jqueryWait.waitJQueryLoad(); //wait reload filters and grid
 
-        filterWaitHelper.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
+        filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
         wait.waitGridLoad(gridIdx, gridIdx);
     }
 
@@ -397,7 +397,7 @@ public class FilterHelper {
     }
 
     public void waitCurrentFilterName(Long gridIdx, String filterName) {
-        filterWaitHelper.waitCurrentFilterName(gridIdx, filterName);
+        filterWait.waitCurrentFilterName(gridIdx, filterName);
     }
 
 }

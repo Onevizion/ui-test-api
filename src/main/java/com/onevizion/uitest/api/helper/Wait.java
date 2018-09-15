@@ -35,7 +35,7 @@ public class Wait {
     private GridHelper gridHelper;
 
     @Resource
-    private FilterHelper filterHelper;
+    private Filter filter;
 
     @Resource
     private View view;
@@ -147,7 +147,7 @@ public class Wait {
             .withMessage("Waiting filters count=[" + filtersCount + "] for grid with idx=[" + gridIdx + "] is failed")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return filtersCount == filterHelper.getFiltersCount(gridIdx);
+                    return filtersCount == filter.getFiltersCount(gridIdx);
                 }
             });
     }

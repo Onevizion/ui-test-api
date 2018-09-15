@@ -45,8 +45,8 @@ import com.onevizion.uitest.api.helper.ElementHelper;
 import com.onevizion.uitest.api.helper.ElementJsHelper;
 import com.onevizion.uitest.api.helper.ElementWaitHelper;
 import com.onevizion.uitest.api.helper.FieldHistoryHelper;
-import com.onevizion.uitest.api.helper.FilterHelper;
-import com.onevizion.uitest.api.helper.FilterWaitHelper;
+import com.onevizion.uitest.api.helper.Filter;
+import com.onevizion.uitest.api.helper.FilterWait;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.GridRowButton;
 import com.onevizion.uitest.api.helper.Help;
@@ -133,10 +133,10 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected DualListboxHelper dualListboxHelper;
 
     @Resource
-    protected FilterHelper filterHelper;
+    protected Filter filter;
 
     @Resource
-    protected FilterWaitHelper filterWaitHelper;
+    protected FilterWait filterWait;
 
     @Resource
     protected Wait wait;

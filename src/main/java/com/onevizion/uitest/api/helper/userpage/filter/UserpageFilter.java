@@ -24,7 +24,7 @@ import com.onevizion.uitest.api.OnevizionUtils;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
-import com.onevizion.uitest.api.helper.FilterHelper;
+import com.onevizion.uitest.api.helper.Filter;
 import com.onevizion.uitest.api.helper.GridHelper;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
@@ -62,7 +62,7 @@ public class UserpageFilter {
     private GridHelper gridHelper;
 
     @Resource
-    private FilterHelper filterHelper;
+    private Filter filter;
 
     @Resource
     private Tb tb;
@@ -102,11 +102,11 @@ public class UserpageFilter {
             selectFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, dateType, operator, fieldDataType);
         } else if (randomIndex == 0) {
             if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
-                filterHelper.selectByVisibleText("G:" + fieldName + " " + operator + " " + value, 0L);
+                filter.selectByVisibleText("G:" + fieldName + " " + operator + " " + value, 0L);
             } else if (dateType != null) {
-                filterHelper.selectByVisibleText("G:" + fieldName + " " + operator + " " + dateType, 0L);
+                filter.selectByVisibleText("G:" + fieldName + " " + operator + " " + dateType, 0L);
             } else {
-                filterHelper.selectByVisibleText("G:" + fieldName + " " + operator, 0L);
+                filter.selectByVisibleText("G:" + fieldName + " " + operator, 0L);
             }
         } else {
             throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
@@ -899,7 +899,7 @@ public class UserpageFilter {
         if (randomIndex == 1) {
             clearFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, dateType, operator, fieldDataType);
         } else if (randomIndex == 0) {
-            filterHelper.selectByVisibleText("Unsaved Filter", 0L);
+            filter.selectByVisibleText("Unsaved Filter", 0L);
         } else {
             throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
         }

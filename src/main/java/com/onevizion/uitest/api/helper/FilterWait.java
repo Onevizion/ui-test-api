@@ -12,17 +12,17 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class FilterWaitHelper {
+public class FilterWait {
 
     @Resource
-    private FilterHelper filterHelper;
+    private Filter filter;
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     public void waitCurrentFilterName(Long gridIdx, String filterName) {
         Supplier<String> actualValueSupplier = ()-> {
-            return filterHelper.getCurrentFilterName(gridIdx);
+            return filter.getCurrentFilterName(gridIdx);
         };
 
         Supplier<String> messageSupplier = ()-> {
