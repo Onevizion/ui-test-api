@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -32,7 +32,7 @@ public class EntityDynamicVtableValue {
     private AssertElement assertElement;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Js js;
@@ -125,7 +125,7 @@ public class EntityDynamicVtableValue {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Display?"), dynamicVtableValue.getDisplay());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Filterable?"), dynamicVtableValue.getFilterable());
 
-        gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
 
 }

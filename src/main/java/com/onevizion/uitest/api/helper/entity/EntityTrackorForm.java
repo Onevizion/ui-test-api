@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
@@ -44,7 +44,7 @@ public class EntityTrackorForm {
     private Js js;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     public void add(TrackorForm trackorForm) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -154,7 +154,7 @@ public class EntityTrackorForm {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Import Name"), trackorForm.getImportName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), trackorForm.getDescription());
 
-        gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
 
 }

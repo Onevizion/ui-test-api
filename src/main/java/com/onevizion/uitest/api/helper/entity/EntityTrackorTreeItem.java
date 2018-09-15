@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
@@ -45,7 +45,7 @@ public class EntityTrackorTreeItem {
     private Tab tab;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Tree tree;
@@ -154,11 +154,11 @@ public class EntityTrackorTreeItem {
 
         tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);
-        gridHelper.checkAssignmentGridColumn(2L, 1L, rolePrivsRead);
-        gridHelper.checkAssignmentGridColumn(2L, 2L, rolePrivsEdit);
-        gridHelper.checkAssignmentGridColumn(2L, 3L, rolePrivsAdd);
-        gridHelper.checkAssignmentGridColumn(2L, 4L, rolePrivsDelete);
-        gridHelper.checkAssignmentGridColumn(2L, 5L, rolePrivsNone);
+        grid.checkAssignmentGridColumn(2L, 1L, rolePrivsRead);
+        grid.checkAssignmentGridColumn(2L, 2L, rolePrivsEdit);
+        grid.checkAssignmentGridColumn(2L, 3L, rolePrivsAdd);
+        grid.checkAssignmentGridColumn(2L, 4L, rolePrivsDelete);
+        grid.checkAssignmentGridColumn(2L, 5L, rolePrivsNone);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -170,9 +170,9 @@ public class EntityTrackorTreeItem {
 
         tab.goToTab(3L); //Role Lock Privs
         wait.waitGridLoad(3L, 3L);
-        gridHelper.checkAssignmentGridColumn(3L, 1L, roleLockPrivsLock);
-        gridHelper.checkAssignmentGridColumn(3L, 2L, roleLockPrivsUnlock);
-        gridHelper.checkAssignmentGridColumn(3L, 3L, roleLockPrivsNone);
+        grid.checkAssignmentGridColumn(3L, 1L, roleLockPrivsLock);
+        grid.checkAssignmentGridColumn(3L, 2L, roleLockPrivsUnlock);
+        grid.checkAssignmentGridColumn(3L, 3L, roleLockPrivsNone);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

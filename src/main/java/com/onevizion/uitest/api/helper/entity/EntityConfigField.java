@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
@@ -43,7 +43,7 @@ public class EntityConfigField {
     private Js js;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private JqueryWait jqueryWait;
@@ -863,7 +863,7 @@ public class EntityConfigField {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Comments"), configFieldVo.getComment());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Don't Clone Field Value"), configFieldVo.getNotCloneValue());
 
-        gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
 
     private void setSqlToCodeMirror(String btnId, String sql) {

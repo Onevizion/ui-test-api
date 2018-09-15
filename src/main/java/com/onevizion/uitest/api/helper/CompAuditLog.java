@@ -20,7 +20,7 @@ public class CompAuditLog {
     private final static String COLUMN_ID_OLD_VAL = "10";
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -32,7 +32,7 @@ public class CompAuditLog {
         gridVals.put(COLUMN_ID_ACTION, action);
         gridVals.put(COLUMN_ID_TABLE, table);
 
-        gridHelper.checkGridRowsByRowIndex(gridId, rowIndexStart, rowIndexEnd, gridVals);
+        grid.checkGridRowsByRowIndex(gridId, rowIndexStart, rowIndexEnd, gridVals);
     }
 
     public Long checkGridRowByRowIndex(Long gridId, Long rowIndex, String action, String table, String field, String newVal, String oldVal) {
@@ -45,7 +45,7 @@ public class CompAuditLog {
         gridVals.put(COLUMN_ID_NEW_VAL, newVal);
         gridVals.put(COLUMN_ID_OLD_VAL, oldVal);
 
-        gridHelper.checkGridRowByRowIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndex(gridId, rowIndex, gridVals);
 
         rowIndex = rowIndex + 1L;
 

@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
@@ -18,7 +18,7 @@ public class TbTaskDate {
     private Js js;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private UserpageFilter userpageFilter;
@@ -32,7 +32,7 @@ public class TbTaskDate {
             columnIndex = columnIndex + 1L;
         }
 
-        Long rowsCnt = gridHelper.getGridRowsCount(0L);
+        Long rowsCnt = grid.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         userpageFilter.checkFilterOperators(fieldName, Arrays.asList("S", "F"), Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",

@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tab;
@@ -42,7 +42,7 @@ public class EntityTrackorTour {
     private Tab tab;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private AssertElement assertElement;
@@ -97,8 +97,8 @@ public class EntityTrackorTour {
 
         tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);
-        gridHelper.clearAssignmentGridColumn2(2L, 0L);
-        gridHelper.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
+        grid.clearAssignmentGridColumn2(2L, 0L);
+        grid.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -133,8 +133,8 @@ public class EntityTrackorTour {
 
         tab.goToTab(3L);//Role Assignments
         wait.waitGridLoad(3L, 3L);
-        gridHelper.clearAssignmentGridColumn2(3L, 0L);
-        gridHelper.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
+        grid.clearAssignmentGridColumn2(3L, 0L);
+        grid.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -151,7 +151,7 @@ public class EntityTrackorTour {
         tab.goToTab(2L); //Tour Steps
         wait.waitGridLoad(2L, 2L);
 
-        Assert.assertEquals(gridHelper.getGridRowsCount(2L), new Long(trackorTour.getSteps().size()));
+        Assert.assertEquals(grid.getGridRowsCount(2L), new Long(trackorTour.getSteps().size()));
         for (int i = 0; i < trackorTour.getSteps().size(); i++) {
             js.selectGridRow(2L, new Long(i));
             entityTrackorTourStep.testInGrid(2L, new Long(i), trackorTour.getSteps().get(i));
@@ -185,7 +185,7 @@ public class EntityTrackorTour {
 
         tab.goToTab(3L); //Role Assignments
         wait.waitGridLoad(3L, 3L);
-        gridHelper.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
+        grid.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -201,7 +201,7 @@ public class EntityTrackorTour {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Order Number"), trackorTour.getOrderNumber());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), trackorTour.getDescription());
 
-        gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
 
 }

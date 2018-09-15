@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -36,7 +36,7 @@ public class EntityConfigAppExtParam {
     private AssertElement assertElement;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     public void add(ConfigAppExtParam configAppExtParam) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -91,7 +91,7 @@ public class EntityConfigAppExtParam {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), configAppExtParam.getDescription());
         gridVals.put(js.getColumnIndexByLabel(gridId, "SQL Statement"), configAppExtParam.getSql());
 
-        gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
 
 }

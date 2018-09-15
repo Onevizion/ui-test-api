@@ -25,7 +25,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Filter;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tb;
@@ -59,7 +59,7 @@ public class UserpageFilter {
     private AssertElement assertElement;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Filter filter;
@@ -97,7 +97,7 @@ public class UserpageFilter {
         Random generator = new Random();
         int randomIndex = generator.nextInt(2);
 
-        Long rowsCntBefore = gridHelper.getGridRowsCount(0L);
+        Long rowsCntBefore = grid.getGridRowsCount(0L);
         if (randomIndex == 1) {
             selectFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, dateType, operator, fieldDataType);
         } else if (randomIndex == 0) {
@@ -118,7 +118,7 @@ public class UserpageFilter {
                 || fieldName.equals("FR:Rollup") || fieldName.equals("FRP:Rollup") || fieldName.equals("FRC:Rollup")) && operator.equals("Is Null")) {
             
         } else {
-            Long rowsCntAfter = gridHelper.getGridRowsCount(0L);
+            Long rowsCntAfter = grid.getGridRowsCount(0L);
             if (rowsCntAfter.equals(new Long(0L))) {
                 throw new SeleniumUnexpectedException("Grid have wrong rows count");
             }
@@ -137,7 +137,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEquals(0L, columnIndex, Arrays.asList(value));
             } else if (operator.equals("(+)=")) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
@@ -174,7 +174,7 @@ public class UserpageFilter {
                     }
                 }
 
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEqualsOrNull(0L, columnIndex, value);
             } else if (operator.equals("<>")) {
                 for (String cellVal : cellVals) {
@@ -182,7 +182,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEquals(0L, columnIndex, value);
             } else if (operator.equals("(+)<>")) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
@@ -231,7 +231,7 @@ public class UserpageFilter {
                     }
                 }
 
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEqualsOrNull(0L, columnIndex, value);
             } else if (operator.equals("Is Null")) {
                 for (String cellVal : cellVals) {
@@ -239,7 +239,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnIsNull(0L, columnIndex);
             } else if (operator.equals("Is Not Null")) {
                 for (String cellVal : cellVals) {
@@ -247,7 +247,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnIsNotNull(0L, columnIndex);
             } else if (operator.equals("=Field")) {
                 for (int i = 0; i < cellVals.size(); i++) {
@@ -255,7 +255,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnEqualsField(0L, columnIndex, columnIndex2);
             } else if (operator.equals("<>Field")) {
                 for (int i = 0; i < cellVals.size(); i++) {
@@ -263,7 +263,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnNotEqualsField(0L, columnIndex, columnIndex2);
             } else {
                 throw new SeleniumUnexpectedException("Not support operation");
@@ -281,7 +281,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridBooleanColumnEquals(0L, columnIndex, Arrays.asList(value.toUpperCase()));
             } else if (operator.equals("(+)=")) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
@@ -318,7 +318,7 @@ public class UserpageFilter {
                     }
                 }
 
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridBooleanColumnEqualsOrNull(0L, columnIndex, value.toUpperCase());
             } else {
                 throw new SeleniumUnexpectedException("Not support operation");
@@ -332,7 +332,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEquals(0L, columnIndex, Arrays.asList(value));
             } else if (operator.equals("(+)=")) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
@@ -369,7 +369,7 @@ public class UserpageFilter {
                     }
                 }
 
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEqualsOrNull(0L, columnIndex, value);
             } else if (operator.equals(">")) {
                 for (String cellVal : cellVals) {
@@ -395,7 +395,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMore(0L, columnIndex, value, fieldDataType);
             } else if (operator.equals("<")) {
                 for (String cellVal : cellVals) {
@@ -421,7 +421,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLess(0L, columnIndex, value, fieldDataType);
             } else if (operator.equals(">=")) {
                 for (String cellVal : cellVals) {
@@ -447,7 +447,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMoreEquals(0L, columnIndex, value, fieldDataType);
             } else if (operator.equals("<=")) {
                 for (String cellVal : cellVals) {
@@ -473,7 +473,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLessEquals(0L, columnIndex, value, fieldDataType);
             } else if (operator.equals("<>")) {
                 for (String cellVal : cellVals) {
@@ -481,7 +481,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEquals(0L, columnIndex, value);
             } else if (operator.equals("(+)<>")) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
@@ -530,7 +530,7 @@ public class UserpageFilter {
                     }
                 }
 
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEqualsOrNull(0L, columnIndex, value);
             } else if (operator.equals("Is Null")) {
                 for (String cellVal : cellVals) {
@@ -538,7 +538,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnIsNull(0L, columnIndex);
             } else if (operator.equals("Is Not Null")) {
                 for (String cellVal : cellVals) {
@@ -546,7 +546,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnIsNotNull(0L, columnIndex);
             } else if (operator.equals("=Field")) {
                 for (int i = 0; i < cellVals.size(); i++) {
@@ -554,7 +554,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnEqualsField(0L, columnIndex, columnIndex2);
             } else if (operator.equals("<>Field")) {
                 for (int i = 0; i < cellVals.size(); i++) {
@@ -562,7 +562,7 @@ public class UserpageFilter {
                         cnt = cnt + 1L;
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnNotEqualsField(0L, columnIndex, columnIndex2);
             } else if (operator.equals(">Field")) {
                 for (int i = 0; i < cellVals.size(); i++) {
@@ -588,7 +588,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMoreField(0L, columnIndex, columnIndex2, fieldDataType);
             } else if (operator.equals("<Field")) {
                 for (int i = 0; i < cellVals.size(); i++) {
@@ -614,7 +614,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLessField(0L, columnIndex, columnIndex2, fieldDataType);
             } else if (operator.equals(">=Field")) {
                 for (int i = 0; i < cellVals.size(); i++) {
@@ -640,7 +640,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMoreEqualsField(0L, columnIndex, columnIndex2, fieldDataType);
             } else if (operator.equals("<=Field")) {
                 for (int i = 0; i < cellVals.size(); i++) {
@@ -666,7 +666,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLessEqualsField(0L, columnIndex, columnIndex2, fieldDataType);
             } else if (operator.equals(">=Today")) {
                 for (String cellVal : cellVals) {
@@ -686,7 +686,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMoreEqualsToday(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ", "")), fieldDataType);
             } else if (operator.equals("<=Today")) {
                 for (String cellVal : cellVals) {
@@ -706,7 +706,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLessEqualsToday(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ", "")), fieldDataType);
             } else if (operator.equals("Within")) {
                 for (String cellVal : cellVals) {
@@ -723,7 +723,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnWithin(0L, columnIndex, Integer.parseInt(cellValsKeys[0].get(0)), Integer.parseInt(cellValsKeys[0].get(1)), fieldDataType);
             } else if (operator.equals("This Wk")) {
                 for (String cellVal : cellVals) {
@@ -747,7 +747,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisWk(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ","")), fieldDataType);
             } else if (operator.equals("This Mo")) {
                 for (String cellVal : cellVals) {
@@ -771,7 +771,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisMo(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ","")), fieldDataType);
             } else if (operator.equals("This FQ")) {
                 for (String cellVal : cellVals) {
@@ -795,7 +795,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisFQ(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ","")), fieldDataType);
             } else if (operator.equals("This FY")) {
                 for (String cellVal : cellVals) {
@@ -819,7 +819,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisFY(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ","")), fieldDataType);
             } else if (operator.equals("This Wk to Dt")) {
                 for (String cellVal : cellVals) {
@@ -836,7 +836,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisWkToDt(0L, columnIndex, fieldDataType);
             } else if (operator.equals("This Mo to Dt")) {
                 for (String cellVal : cellVals) {
@@ -853,7 +853,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisMoToDt(0L, columnIndex, fieldDataType);
             } else if (operator.equals("This FQ to Dt")) {
                 for (String cellVal : cellVals) {
@@ -870,7 +870,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisFQToDt(0L, columnIndex, fieldDataType);
             } else if (operator.equals("This FY to Dt")) {
                 for (String cellVal : cellVals) {
@@ -887,7 +887,7 @@ public class UserpageFilter {
                         }
                     }
                 }
-                Assert.assertEquals(gridHelper.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
+                Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisFYToDt(0L, columnIndex, fieldDataType);
             } else {
                 throw new SeleniumUnexpectedException("Not support operation");

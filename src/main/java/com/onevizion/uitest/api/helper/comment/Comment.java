@@ -11,7 +11,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
@@ -35,7 +35,7 @@ public class Comment {
     private Wait wait;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Js js;
@@ -118,7 +118,7 @@ public class Comment {
         elementWait.waitElementDisabledById("btnSubmit");
         elementWait.waitElementAttributeById("comment", "value", "");
 
-        Long rowsCntBefore = gridHelper.getGridRowsCount(0L);
+        Long rowsCntBefore = grid.getGridRowsCount(0L);
 
         seleniumSettings.getWebDriver().findElement(By.id("comment")).sendKeys(text);
         elementWait.waitElementEnabledById("btnSubmit");
@@ -135,7 +135,7 @@ public class Comment {
     }
 
     public void deleteComment(String text) {
-        Long rowsCntBefore = gridHelper.getGridRowsCount(0L);
+        Long rowsCntBefore = grid.getGridRowsCount(0L);
 
         Long rowIndex = null;
         for (Long i = 0L; i < rowsCntBefore; i++) {

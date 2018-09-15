@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
@@ -34,7 +34,7 @@ public class EntityTrackorType {
     private AssertElement assertElement;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Js js;
@@ -139,11 +139,11 @@ public class EntityTrackorType {
 
         tab.goToTab(3L); //Role Privs
         wait.waitGridLoad(3L, 3L);
-        gridHelper.checkAssignmentGridColumn(3L, 1L, secGroupsRead);
-        gridHelper.checkAssignmentGridColumn(3L, 2L, secGroupsEdit);
-        gridHelper.checkAssignmentGridColumn(3L, 3L, secGroupsAdd);
-        gridHelper.checkAssignmentGridColumn(3L, 4L, secGroupsDelete);
-        gridHelper.checkAssignmentGridColumn(3L, 5L, secGroupsNone);
+        grid.checkAssignmentGridColumn(3L, 1L, secGroupsRead);
+        grid.checkAssignmentGridColumn(3L, 2L, secGroupsEdit);
+        grid.checkAssignmentGridColumn(3L, 3L, secGroupsAdd);
+        grid.checkAssignmentGridColumn(3L, 4L, secGroupsDelete);
+        grid.checkAssignmentGridColumn(3L, 5L, secGroupsNone);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -155,7 +155,7 @@ public class EntityTrackorType {
 
         tab.goToTab(4L); //Role Restrictions
         wait.waitGridLoad(4L, 4L);
-        gridHelper.checkPrivilegieGridColumn(4L, 1L, rolesRest, roleRest);
+        grid.checkPrivilegieGridColumn(4L, 1L, rolesRest, roleRest);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -172,7 +172,7 @@ public class EntityTrackorType {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Is ePM User?"), trackorType.getUser());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Can be a Template"), trackorType.getTemplate());
 
-        gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
 
 }

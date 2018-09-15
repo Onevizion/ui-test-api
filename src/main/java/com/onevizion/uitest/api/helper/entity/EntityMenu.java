@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
@@ -33,7 +33,7 @@ public class EntityMenu {
     private Tab tab;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private NewDropDown newDropDown;
@@ -63,7 +63,7 @@ public class EntityMenu {
 
         tab.goToTab(2L); // Roles
         wait.waitGridLoad(2L, 2L);
-        gridHelper.checkAssignmentGridColumn2(2L, 0L, roles);
+        grid.checkAssignmentGridColumn2(2L, 0L, roles);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

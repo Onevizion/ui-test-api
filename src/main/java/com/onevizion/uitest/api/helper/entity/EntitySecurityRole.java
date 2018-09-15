@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -37,7 +37,7 @@ public class EntitySecurityRole {
     private Js js;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Checkbox checkbox;
@@ -214,7 +214,7 @@ public class EntitySecurityRole {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Role Name"), securityRole.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), securityRole.getDescription());
 
-        gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
 
     private void setCheckboxValue(String value, String checkboxName) {

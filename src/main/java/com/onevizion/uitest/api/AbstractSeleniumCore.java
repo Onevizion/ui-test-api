@@ -47,7 +47,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.FieldHistory;
 import com.onevizion.uitest.api.helper.Filter;
 import com.onevizion.uitest.api.helper.FilterWait;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.GridRowButton;
 import com.onevizion.uitest.api.helper.Help;
 import com.onevizion.uitest.api.helper.HtmlInput;
@@ -151,7 +151,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Window window;
 
     @Resource
-    protected GridHelper gridHelper;
+    protected Grid grid;
 
     @Resource
     protected Sort sort;

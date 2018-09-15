@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Element;
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
@@ -34,7 +34,7 @@ public class EntityDynamicVtable {
     private AssertElement assertElement;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Js js;
@@ -115,7 +115,7 @@ public class EntityDynamicVtable {
         tab.goToTab(2L); //Values
         wait.waitGridLoad(2L, 2L);
 
-        Assert.assertEquals(gridHelper.getGridRowsCount(2L), new Long(dynamicVtable.getValues().size()));
+        Assert.assertEquals(grid.getGridRowsCount(2L), new Long(dynamicVtable.getValues().size()));
         for (int i = 0; i < dynamicVtable.getValues().size(); i++) {
             js.selectGridRow(2L, new Long(i));
             entityDynamicVtableValue.testInGrid(2L, new Long(i), dynamicVtable.getValues().get(i));
@@ -142,7 +142,7 @@ public class EntityDynamicVtable {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Table Name"), dynamicVtable.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), dynamicVtable.getDesc());
 
-        gridHelper.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
+        grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
 
 }

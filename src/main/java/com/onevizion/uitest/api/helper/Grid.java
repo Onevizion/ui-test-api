@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class GridHelper {
+public class Grid {
 
     @Resource
     private Js js;

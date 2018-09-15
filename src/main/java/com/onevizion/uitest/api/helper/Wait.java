@@ -32,7 +32,7 @@ public class Wait {
     private Js js;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Filter filter;
@@ -126,7 +126,7 @@ public class Wait {
 
     public void waitGridRowsCount(final Long gridId, final Long rowsCount) {
         Supplier<Long> actualValueSupplier = ()-> {
-            return gridHelper.getGridRowsCount(gridId);
+            return grid.getGridRowsCount(gridId);
         };
 
         Supplier<String> messageSupplier = ()-> {

@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.helper.GridHelper;
+import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
@@ -18,7 +18,7 @@ public class TbDropDownField {
     private Js js;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private UserpageFilter userpageFilter;
@@ -37,7 +37,7 @@ public class TbDropDownField {
             fieldName2 = js.getGridColumnLabelByColIndex(0L, columnIndex2, 0L);
         }
 
-        Long rowsCnt = gridHelper.getGridRowsCount(0L);
+        Long rowsCnt = grid.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
         List<String> cellVals2 = null;
         if (supportFieldOperations) {

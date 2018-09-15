@@ -30,7 +30,7 @@ public class FieldHistory {
     private Wait wait;
 
     @Resource
-    private GridHelper gridHelper;
+    private Grid grid;
 
     @Resource
     private Window window;
@@ -73,7 +73,7 @@ public class FieldHistory {
     public void checkFieldHistory(boolean isTaskDate, String fieldId, List<String> vals, boolean isShowMenu, int elementPosition) {
         openFieldHistoryForm(fieldId, isShowMenu, elementPosition);
 
-        Long rowsCnt = gridHelper.getGridRowsCount(1L);
+        Long rowsCnt = grid.getGridRowsCount(1L);
         Assert.assertEquals(rowsCnt.intValue(), vals.size(), "Field History wrong");
 
         Long i = rowsCnt - 1L;
