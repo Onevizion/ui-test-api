@@ -40,17 +40,17 @@ public class Privilegies {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         if (isDisplayClone != null) {
-            wait.waitWebElement(By.id(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx));
+            wait.waitWebElement(By.id(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx));
             if (isDisplayClone.booleanValue()) {
                 //elementWaitHelper.waitElementAttributeById(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx, "style", "background-image: none;");
-                elementWaitHelper.waitElementAttributeById(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
+                elementWaitHelper.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"));
             } else {
                 //elementWaitHelper.waitElementAttributeById(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx, "style", "background-image: none; display: none;");
-                elementWaitHelper.waitElementAttributeById(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
+                elementWaitHelper.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"));
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.id(CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx)).size(), 0, CloneButtonHelper.BUTTON_CLONE_ID_BASE + gridIdx + " found");
+            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.id(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx)).size(), 0, CloneButton.BUTTON_CLONE_ID_BASE + gridIdx + " found");
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         if (isDisplayEdit != null) {

@@ -9,7 +9,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class CloneButtonHelper {
+public class CloneButton {
 
     private final static String BUTTON_LIST_ADD_ID_BASE = "listAdd";
     final static String BUTTON_CLONE_ID_BASE = "btnClone";

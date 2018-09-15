@@ -38,7 +38,7 @@ import org.testng.Reporter;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertHelper;
 import com.onevizion.uitest.api.helper.CheckboxHelper;
-import com.onevizion.uitest.api.helper.CloneButtonHelper;
+import com.onevizion.uitest.api.helper.CloneButton;
 import com.onevizion.uitest.api.helper.CompAuditLog;
 import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.ElementHelper;
@@ -181,7 +181,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Qs qs;
 
     @Resource
-    protected CloneButtonHelper cloneButtonHelper;
+    protected CloneButton cloneButton;
 
     @Resource
     protected GridRowButton gridRowButton;
