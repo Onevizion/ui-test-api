@@ -24,13 +24,13 @@ import com.onevizion.uitest.api.OnevizionUtils;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.Filter;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
 @Component

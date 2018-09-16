@@ -1,4 +1,4 @@
-package com.onevizion.uitest.api.helper;
+package com.onevizion.uitest.api.helper.filter;
 
 import java.util.function.Supplier;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class FilterWait {
+class FilterWait {
 
     @Resource
     private Filter filter;
@@ -20,7 +20,7 @@ public class FilterWait {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void waitCurrentFilterName(Long gridIdx, String filterName) {
+    void waitCurrentFilterName(Long gridIdx, String filterName) {
         Supplier<String> actualValueSupplier = ()-> {
             return filter.getCurrentFilterName(gridIdx);
         };

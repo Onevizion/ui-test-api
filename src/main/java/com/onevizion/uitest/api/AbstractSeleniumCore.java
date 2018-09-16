@@ -45,8 +45,6 @@ import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.FieldHistory;
-import com.onevizion.uitest.api.helper.Filter;
-import com.onevizion.uitest.api.helper.FilterWait;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.GridRowButton;
 import com.onevizion.uitest.api.helper.Help;
@@ -98,6 +96,7 @@ import com.onevizion.uitest.api.helper.entity.EntityTrackorType;
 import com.onevizion.uitest.api.helper.entity.EntityWpDatePair;
 import com.onevizion.uitest.api.helper.entity.EntityWpDiscipline;
 import com.onevizion.uitest.api.helper.export.Export;
+import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesigner;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.JqueryJs;
@@ -134,9 +133,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected Filter filter;
-
-    @Resource
-    protected FilterWait filterWait;
 
     @Resource
     protected Wait wait;

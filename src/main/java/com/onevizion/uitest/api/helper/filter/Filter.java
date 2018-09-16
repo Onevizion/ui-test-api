@@ -1,4 +1,4 @@
-package com.onevizion.uitest.api.helper;
+package com.onevizion.uitest.api.helper.filter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +16,14 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.AssertElement;
+import com.onevizion.uitest.api.helper.Checkbox;
+import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.helper.Js;
+import com.onevizion.uitest.api.helper.PsSelector;
+import com.onevizion.uitest.api.helper.Sort;
+import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.tree.TreeJs;
 import com.onevizion.uitest.api.helper.tree.TreeWait;
