@@ -52,6 +52,7 @@ public class Filter {
     public final static String BUTTON_OPEN = "btnFilter";
     public final static String BUTTON_CLEAR = "btnClear";
     public final static String BUTTON_CB_TEMPLATE = "cbShowTemplates";
+    public final static String UNSAVED_FILTER = "unsavedFilterId";
 
     public final static String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
     public final static String FILTER_DIALOG_OK = "filterDialogOk";
@@ -156,22 +157,27 @@ public class Filter {
         elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
         elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
+        if (entityPrefix.equals(UNSAVED_FILTER_NAME)) {
+            seleniumSettings.getWebDriver().findElement(By.id(FILTER_CONTAINER + gridIdx)).findElement(By.id(UNSAVED_FILTER + gridIdx)).click();
+            wait.waitGridLoad(gridIdx, gridIdx);
+        } else {
+            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
-        WebElement filterElem = (WebElement) js.getNewDropDownElement(FILTER_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
-        elementWait.waitElementVisible(filterElem);
-        filterElem.click();
+            WebElement filterElem = (WebElement) js.getNewDropDownElement(FILTER_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
+            elementWait.waitElementVisible(filterElem);
+            filterElem.click();
 
-        wait.waitGridLoad(gridIdx, gridIdx);
+            wait.waitGridLoad(gridIdx, gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
 
-        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
+            elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
+            elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
+            elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+        }
     }
 
     public void saveFilterField(String fieldName, FilterFieldType filterFieldType, String cellValue, Long gridIdx) {
