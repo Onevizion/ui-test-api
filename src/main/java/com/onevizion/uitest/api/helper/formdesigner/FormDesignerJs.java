@@ -31,12 +31,12 @@ class FormDesignerJs extends Js {
                 "result = result + \"[\";" + 
                 "for (var key in  formDesigner.selectedValues) {" + 
                 "    result = result + \"{\";" + 
-                "    result = result + \"\\\"id\\\": \\\"\" + formDesigner.selectedValues[key].id + \"\\\", \";" + 
-                "    result = result + \"\\\"name\\\": \\\"\" + formDesigner.selectedValues[key].name + \"\\\", \";" + 
-                "    result = result + \"\\\"label\\\": \\\"\" + formDesigner.selectedValues[key].lbl + \"\\\", \";" + 
-                "    result = result + \"\\\"prefix\\\": \\\"\" + formDesigner.selectedValues[key].prefLbl + \"\\\", \";" + 
-                "    result = result + \"\\\"row\\\": \\\"\" + formDesigner.selectedValues[key].row + \"\\\", \";" + 
-                "    result = result + \"\\\"col\\\": \\\"\" + formDesigner.selectedValues[key].col + \"\\\"\";" + 
+                "    result = result + \"\\\"id\\\": \\\"\" + formDesigner.selectedValues[key].getId() + \"\\\", \";" + 
+                "    result = result + \"\\\"name\\\": \\\"\" + formDesigner.selectedValues[key].getName() + \"\\\", \";" + 
+                "    result = result + \"\\\"label\\\": \\\"\" + formDesigner.selectedValues[key].getLbl() + \"\\\", \";" + 
+                "    result = result + \"\\\"prefix\\\": \\\"\" + formDesigner.selectedValues[key].getPrefLbl() + \"\\\", \";" + 
+                "    result = result + \"\\\"row\\\": \\\"\" + formDesigner.selectedValues[key].getRow() + \"\\\", \";" + 
+                "    result = result + \"\\\"col\\\": \\\"\" + formDesigner.selectedValues[key].getCol() + \"\\\"\";" + 
                 "    result = result + \"},\";" + 
                 "}" + 
                 "result = result.substring(0, result.length - 1);" + 

@@ -94,10 +94,11 @@ public class HtmlSelect {
     }
 
     public String getOptionTextNew(final WebElement option) {
-        if (StringUtils.isNotEmpty(option.getAttribute("innerText"))) {
-            return option.getAttribute("innerText").trim();
+        WebElement label = option.findElement(By.className("labelField"));
+        if (StringUtils.isNotEmpty(label.getAttribute("innerText"))) {
+            return label.getAttribute("innerText").trim();
         } else {
-            return option.getAttribute("textContent").trim();
+            return label.getAttribute("textContent").trim();
         }
     }
 
