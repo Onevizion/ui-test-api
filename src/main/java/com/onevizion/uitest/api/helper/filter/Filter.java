@@ -52,7 +52,7 @@ public class Filter {
     public final static String BUTTON_OPEN = "btnFilter";
     public final static String BUTTON_CLEAR = "btnClear";
     public final static String BUTTON_CB_TEMPLATE = "cbShowTemplates";
-    public final static String UNSAVED_FILTER = "unsavedFilterId";
+    private final static String UNSAVED_FILTER = "unsavedFilterId";
 
     public final static String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
     public final static String FILTER_DIALOG_OK = "filterDialogOk";
@@ -158,7 +158,7 @@ public class Filter {
         elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
         if (entityPrefix.equals(UNSAVED_FILTER_NAME)) {
-            seleniumSettings.getWebDriver().findElement(By.id(FILTER_CONTAINER + gridIdx)).findElement(By.id(UNSAVED_FILTER + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_FILTER + gridIdx)).click();
             wait.waitGridLoad(gridIdx, gridIdx);
         } else {
             seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);

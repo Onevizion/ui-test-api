@@ -45,7 +45,7 @@ public class View {
     public static final String BUTTON_DELETE = "btnDeleteView";
     public static final String BUTTON_SAVE = "btnSaveView";
     public static final String BUTTON_SAVE_NEW = "unsavedViewIcon";
-    public static final String UNSAVED_VIEW = "unsavedViewId";
+    private static final String UNSAVED_VIEW = "unsavedViewId";
 
     public static final String VIEW_DIALOG_CONTAINER = "dialogViewDialogContainer";
     public static final String VIEW_DIALOG_OK = "viewDialogOk";
@@ -164,7 +164,7 @@ public class View {
         elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
         if (entityPrefix.equals(UNSAVED_VIEW_NAME)) {
-            seleniumSettings.getWebDriver().findElement(By.id(VIEW_CONTAINER + gridIdx)).findElement(By.id(UNSAVED_VIEW + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_VIEW + gridIdx)).click();
             wait.waitGridLoad(gridIdx, gridIdx);
         } else {
             seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
