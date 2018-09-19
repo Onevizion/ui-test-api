@@ -26,7 +26,6 @@ class FormDesignerJs extends Js {
 
     List<FormDesignerField> getElementsOnForm() {
         String resultStr = (String) execJs2("" + 
-                "var formDesigner = getFormDesigner();" + 
                 "var result = \"\";" + 
                 "result = result + \"[\";" + 
                 "for (var key in  formDesigner.selectedValues) {" + 
