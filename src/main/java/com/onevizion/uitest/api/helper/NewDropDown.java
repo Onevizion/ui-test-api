@@ -42,9 +42,9 @@ public class NewDropDown {
 
     public void selectMenu(String name) {
         selectEntity("lbApplication", name);
-        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         jqueryWait.waitJQueryLoad();
-        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         jqueryWait.waitJQueryLoad();
     }
 
@@ -113,9 +113,9 @@ public class NewDropDown {
 
     public void deleteMenu(String name) {
         deleteEntity("lbApplication", "Application", 3, name);
-        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         jqueryWait.waitJQueryLoad();
-        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         jqueryWait.waitJQueryLoad();
     }
 

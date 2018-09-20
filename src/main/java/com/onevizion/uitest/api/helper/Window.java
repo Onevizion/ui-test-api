@@ -326,7 +326,7 @@ public class Window {
 
     public void closeModalAndWaitTreeLoad(By elementClick) {
         closeModal(elementClick);
-        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
     public void closeModalFormButtonRule(final By elementClick, final String message,

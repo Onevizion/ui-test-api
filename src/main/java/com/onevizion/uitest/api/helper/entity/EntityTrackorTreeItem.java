@@ -51,7 +51,7 @@ public class EntityTrackorTreeItem {
     private Tree tree;
 
     public void add(TrackorTreeItem trackorTreeItem) {
-        tree.selectParentTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
+        tree.selectParentItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -89,7 +89,7 @@ public class EntityTrackorTreeItem {
     }
 
     public void edit(TrackorTreeItem trackorTreeItem) {
-        tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
+        tree.selectItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -128,7 +128,7 @@ public class EntityTrackorTreeItem {
     }
 
     public void testOnForm(TrackorTreeItem trackorTreeItem) {
-        tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
+        tree.selectItem(AbstractSeleniumCore.getTreeIdx(), "-1", trackorTreeItem);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

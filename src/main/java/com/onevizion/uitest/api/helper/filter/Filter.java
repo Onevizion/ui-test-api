@@ -123,21 +123,21 @@ public class Filter {
     public void selectFilterInOrganize(String filterName) {
         boolean filterFound = false;
 
-        String globalItemsStr = tree.getTreeAllSubItems(0L, "-1");
+        String globalItemsStr = tree.getAllSubItems(0L, "-1");
         String[] globalItems = globalItemsStr.split(",");
         for (String globalItem : globalItems) {
-            if (filterName.equals(tree.getItemTextInTreeById(0L, globalItem))) {
+            if (filterName.equals(tree.getItemTextById(0L, globalItem))) {
                 filterFound = true;
-                tree.selectItemInTree(0L, globalItem);
+                tree.selectItem(0L, globalItem);
             }
         }
 
-        String localItemsStr = tree.getTreeAllSubItems(0L, "-2");
+        String localItemsStr = tree.getAllSubItems(0L, "-2");
         String[] localItems = localItemsStr.split(",");
         for (String localItem : localItems) {
-            if (filterName.equals(tree.getItemTextInTreeById(0L, localItem))) {
+            if (filterName.equals(tree.getItemTextById(0L, localItem))) {
                 filterFound = true;
-                tree.selectItemInTree(0L, localItem);
+                tree.selectItem(0L, localItem);
             }
         }
 
@@ -263,7 +263,7 @@ public class Filter {
         elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
-        tree.waitTreeLoad(0L);
+        tree.waitLoad(0L);
         wait.waitFormLoad();
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
@@ -272,7 +272,7 @@ public class Filter {
         seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        tree.waitTreeLoad(0L);
+        tree.waitLoad(0L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitGridLoad(gridIdx, gridIdx);

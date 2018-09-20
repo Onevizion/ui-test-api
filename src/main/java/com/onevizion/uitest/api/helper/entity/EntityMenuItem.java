@@ -34,7 +34,7 @@ public class EntityMenuItem {
     private Tree tree;
 
     public void testOnForm(MenuItem menuItem) {
-        tree.selectTreeItem(AbstractSeleniumCore.getTreeIdx(), "-1", menuItem);
+        tree.selectItem(AbstractSeleniumCore.getTreeIdx(), "-1", menuItem);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

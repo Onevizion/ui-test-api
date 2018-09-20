@@ -25,11 +25,11 @@ class TreeWait {
     @Resource
     private Wait wait;
 
-    void waitTreeLoad(Long treeId) {
-        waitTreeLoad(treeId.toString());
+    void waitLoad(Long treeId) {
+        waitLoad(treeId.toString());
     }
 
-    void waitTreeLoad(String treeId) {
+    void waitLoad(String treeId) {
         wait.waitWebElement(By.id(AbstractSeleniumCore.TREE_ID_BASE + treeId));
         wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + treeId));
 
@@ -48,7 +48,7 @@ class TreeWait {
             .withMessage("Waiting for PageLoaded with id=[" + treeId + "] is failed.")
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
-                    return treeJs.isTreeLoaded(treeId).equals("1");
+                    return treeJs.isLoaded(treeId).equals("1");
                 }
             });
     }

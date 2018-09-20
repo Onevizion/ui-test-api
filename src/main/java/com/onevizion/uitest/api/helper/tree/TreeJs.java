@@ -7,7 +7,7 @@ import com.onevizion.uitest.api.helper.Js;
 @Component
 class TreeJs extends Js {
 
-    String isTreeLoaded(String treeId) {
+    String isLoaded(String treeId) {
         return execJs("return treeArr['" + treeId + "'].PageLoaded;");
     }
 
@@ -18,27 +18,27 @@ class TreeJs extends Js {
         return Boolean.valueOf(execJs("return typeof window.treeArr !== 'undefined';"));
     }
 
-    String getTreeAllSubItems(Long treeId, String itemId) {
+    String getAllSubItems(Long treeId, String itemId) {
         return execJs("return treeArr[" + treeId + "].tree.getAllSubItems('" + itemId + "');");
     }
 
-    String getTreeSubItems(Long treeId, String itemId) {
+    String getSubItems(Long treeId, String itemId) {
         return execJs("return treeArr[" + treeId + "].tree.getSubItems('" + itemId + "');");
     }
 
-    void selectItemInTree(Long treeId, String itemId) {
+    void selectItem(Long treeId, String itemId) {
         execJs("treeArr[" + treeId + "].tree.selectItem('" + itemId + "', true, false);");
     }
 
-    String getItemTextInTreeById(Long treeId, String itemId) {
+    String getItemTextById(Long treeId, String itemId) {
         return execJs("return treeArr[" + treeId + "].tree.getItemText('" + itemId + "');");
     }
 
-    String getSelectedItemInTree(Long treeId) {
+    String getSelectedItem(Long treeId) {
         return execJs("return treeArr[" + treeId + "].tree.getSelectedItemId();");
     }
 
-    void selectItemInTree(Long treeId, String rootItemId, String treePath) {
+    void selectItem(Long treeId, String rootItemId, String treePath) {
         execJs(""
                 + "var treeId = '" + treeId + "';"
                 + "var rootItemId = '" + rootItemId + "';"
@@ -86,7 +86,7 @@ class TreeJs extends Js {
                 + "}");
     }
 
-    void selectParentItemInTree(Long treeId, String rootItemId, String treePath) {
+    void selectParentItem(Long treeId, String rootItemId, String treePath) {
         execJs(""
                 + "var treeId = '" + treeId + "';"
                 + "var rootItemId = '" + rootItemId + "';"

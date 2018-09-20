@@ -26,63 +26,63 @@ public class Tree {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void selectTreeItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {
-        treeJs.selectItemInTree(treeId, rootItemId, trackorTreeItem.getTreePath());
+    public void selectItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {
+        treeJs.selectItem(treeId, rootItemId, trackorTreeItem.getTreePath());
     }
 
-    public void selectTreeItem(Long treeId, String rootItemId, MenuItem menuItem) {
-        treeJs.selectItemInTree(treeId, rootItemId, menuItem.getMenuPath());
+    public void selectItem(Long treeId, String rootItemId, MenuItem menuItem) {
+        treeJs.selectItem(treeId, rootItemId, menuItem.getMenuPath());
     }
 
-    public void selectParentTreeItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {
-        treeJs.selectParentItemInTree(treeId, rootItemId, trackorTreeItem.getTreePath());
+    public void selectParentItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {
+        treeJs.selectParentItem(treeId, rootItemId, trackorTreeItem.getTreePath());
     }
 
-    public TreeNode getTree(Long treeId) {
-        return getTreeNode(treeId, "-1");
+    public TreeNode get(Long treeId) {
+        return getNode(treeId, "-1");
     }
 
-    private TreeNode getTreeNode(Long treeId, String itemId) {
-        String name = treeJs.getItemTextInTreeById(treeId, itemId);
+    private TreeNode getNode(Long treeId, String itemId) {
+        String name = treeJs.getItemTextById(treeId, itemId);
         name = name.replaceAll("^<[lL][aA][bB][eE][lL].*?>", "").replaceAll("</[lL][aA][bB][eE][lL]>$", "");
 
         TreeNode tree = new TreeNode(name);
 
-        String subItemsStr = treeJs.getTreeSubItems(treeId, itemId);
+        String subItemsStr = treeJs.getSubItems(treeId, itemId);
         if (StringUtils.isEmpty(subItemsStr)) {
             return tree;
         }
 
         String[] subItems = subItemsStr.split(",");
         for (String subItem : subItems) {
-            tree.addNode(getTreeNode(treeId, subItem));
+            tree.addNode(getNode(treeId, subItem));
         }
 
         return tree;
     }
 
-    public void waitTreeLoad(Long treeId) {
-        treeWait.waitTreeLoad(treeId);
+    public void waitLoad(Long treeId) {
+        treeWait.waitLoad(treeId);
     }
 
-    public void waitTreeLoad(String treeId) {
-        treeWait.waitTreeLoad(treeId);
+    public void waitLoad(String treeId) {
+        treeWait.waitLoad(treeId);
     }
 
-    public String getTreeAllSubItems(Long treeId, String itemId) {
-        return treeJs.getTreeAllSubItems(treeId, itemId);
+    public String getAllSubItems(Long treeId, String itemId) {
+        return treeJs.getAllSubItems(treeId, itemId);
     }
 
-    public void selectItemInTree(Long treeId, String itemId) {
-        treeJs.selectItemInTree(treeId, itemId);
+    public void selectItem(Long treeId, String itemId) {
+        treeJs.selectItem(treeId, itemId);
     }
 
-    public String getItemTextInTreeById(Long treeId, String itemId) {
-        return treeJs.getItemTextInTreeById(treeId, itemId);
+    public String getItemTextById(Long treeId, String itemId) {
+        return treeJs.getItemTextById(treeId, itemId);
     }
 
-    public String getSelectedItemInTree(Long treeId) {
-        return treeJs.getSelectedItemInTree(treeId);
+    public String getSelectedItem(Long treeId) {
+        return treeJs.getSelectedItem(treeId);
     }
 
 }
