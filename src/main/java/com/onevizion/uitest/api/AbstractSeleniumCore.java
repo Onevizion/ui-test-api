@@ -103,8 +103,6 @@ import com.onevizion.uitest.api.helper.jquery.JqueryJs;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.tree.Tree;
-import com.onevizion.uitest.api.helper.tree.TreeJs;
-import com.onevizion.uitest.api.helper.tree.TreeWait;
 import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
 import com.onevizion.uitest.api.helper.view.View;
 import com.onevizion.uitest.api.helper.wfvisualeditor.WfVisualEditor;
@@ -220,12 +218,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected Tree tree;
-
-    @Resource
-    protected TreeJs treeJs;
-
-    @Resource
-    protected TreeWait treeWait;
 
     @Resource
     protected Help help;

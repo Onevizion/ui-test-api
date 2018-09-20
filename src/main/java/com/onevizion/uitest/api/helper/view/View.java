@@ -22,8 +22,7 @@ import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
-import com.onevizion.uitest.api.helper.tree.TreeJs;
-import com.onevizion.uitest.api.helper.tree.TreeWait;
+import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
 public class View {
@@ -77,16 +76,13 @@ public class View {
     private Wait wait;
 
     @Resource
-    private TreeWait treeWait;
-
-    @Resource
     private AssertElement assertElement;
 
     @Resource
-    private Js js;
+    private Tree tree;
 
     @Resource
-    private TreeJs treeJs;
+    private Js js;
 
     @Resource
     private Tab tab;
@@ -133,21 +129,21 @@ public class View {
     public void selectViewInOrganize(String viewName) {
         boolean viewFound = false;
 
-        String globalItemsStr = treeJs.getTreeAllSubItems(0L, "-1");
+        String globalItemsStr = tree.getTreeAllSubItems(0L, "-1");
         String[] globalItems = globalItemsStr.split(",");
         for (String globalItem : globalItems) {
-            if (viewName.equals(treeJs.getItemTextInTreeById(0L, globalItem))) {
+            if (viewName.equals(tree.getItemTextInTreeById(0L, globalItem))) {
                 viewFound = true;
-                treeJs.selectItemInTree(0L, globalItem);
+                tree.selectItemInTree(0L, globalItem);
             }
         }
 
-        String localItemsStr = treeJs.getTreeAllSubItems(0L, "-2");
+        String localItemsStr = tree.getTreeAllSubItems(0L, "-2");
         String[] localItems = localItemsStr.split(",");
         for (String localItem : localItems) {
-            if (viewName.equals(treeJs.getItemTextInTreeById(0L, localItem))) {
+            if (viewName.equals(tree.getItemTextInTreeById(0L, localItem))) {
                 viewFound = true;
-                treeJs.selectItemInTree(0L, localItem);
+                tree.selectItemInTree(0L, localItem);
             }
         }
 
@@ -309,7 +305,7 @@ public class View {
         elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
-        treeWait.waitTreeLoad(0L);
+        tree.waitTreeLoad(0L);
         wait.waitFormLoad();
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
@@ -318,7 +314,7 @@ public class View {
         seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        treeWait.waitTreeLoad(0L);
+        tree.waitTreeLoad(0L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitGridLoad(gridIdx, gridIdx);

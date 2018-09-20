@@ -22,6 +22,9 @@ public class Tree {
     private TreeJs treeJs;
 
     @Resource
+    private TreeWait treeWait;
+
+    @Resource
     private SeleniumSettings seleniumSettings;
 
     public void selectTreeItem(String itemText) {
@@ -75,6 +78,58 @@ public class Tree {
         }
 
         return tree;
+    }
+
+    public void waitTreeLoad(Long treeId) {
+        treeWait.waitTreeLoad(treeId);
+    }
+
+    public void waitTreeLoad(String treeId) {
+        treeWait.waitTreeLoad(treeId);
+    }
+
+    public void waitTreeLoadCnt(int cnt) {
+        treeWait.waitTreeLoadCnt(cnt);
+    }
+
+    public Boolean isTreeArrExist() {
+        return treeJs.isTreeArrExist();
+    }
+
+    public String getTreeAllSubItems(Long treeId, String itemId) {
+        return treeJs.getTreeAllSubItems(treeId, itemId);
+    }
+
+    public String getTreeSubItems(Long treeId, String itemId) {
+        return treeJs.getTreeSubItems(treeId, itemId);
+    }
+
+    public void selectItemInTree(Long treeId, String itemId) {
+        treeJs.selectItemInTree(treeId, itemId);
+    }
+
+    public String getItemTextInTreeById(Long treeId, String itemId) {
+        return treeJs.getItemTextInTreeById(treeId, itemId);
+    }
+
+    public String getSelectedItemInTree(Long treeId) {
+        return treeJs.getSelectedItemInTree(treeId);
+    }
+
+    public String getItemParentId(Long treeId, String itemId) {
+        return treeJs.getItemParentId(treeId, itemId);
+    }
+
+    public String getItemIdInTreeByText(Long treeId, String itemText) {
+        return treeJs.getItemIdInTreeByText(treeId, itemText);
+    }
+
+    public void selectItemInTree(Long treeId, String rootItemId, String treePath) {
+        treeJs.selectItemInTree(treeId, rootItemId, treePath);
+    }
+
+    public void selectParentItemInTree(Long treeId, String rootItemId, String treePath) {
+        treeJs.selectParentItemInTree(treeId, rootItemId, treePath);
     }
 
 }

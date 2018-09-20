@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
-import com.onevizion.uitest.api.helper.tree.TreeWait;
+import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
 public class NewDropDown {
@@ -29,7 +29,7 @@ public class NewDropDown {
     private Js js;
 
     @Resource
-    private TreeWait treeWait;
+    private Tree tree;
 
     @Resource
     private Wait wait;
@@ -42,9 +42,9 @@ public class NewDropDown {
 
     public void selectMenu(String name) {
         selectEntity("lbApplication", name);
-        treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
         jqueryWait.waitJQueryLoad();
-        treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
         jqueryWait.waitJQueryLoad();
     }
 
@@ -113,9 +113,9 @@ public class NewDropDown {
 
     public void deleteMenu(String name) {
         deleteEntity("lbApplication", "Application", 3, name);
-        treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
         jqueryWait.waitJQueryLoad();
-        treeWait.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
+        tree.waitTreeLoad(AbstractSeleniumCore.getTreeIdx());
         jqueryWait.waitJQueryLoad();
     }
 

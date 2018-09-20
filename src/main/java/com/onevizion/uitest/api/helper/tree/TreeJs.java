@@ -5,44 +5,48 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.Js;
 
 @Component
-public class TreeJs extends Js {
+class TreeJs extends Js {
 
-    public Boolean isTreeArrExist() {
+    String isTreeLoaded(String treeId) {
+        return execJs("return treeArr['" + treeId + "'].PageLoaded;");
+    }
+
+    Boolean isTreeArrExist() {
         //TODO firefox 59 bug
         //https://github.com/mozilla/geckodriver/issues/1067
         //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
         return Boolean.valueOf(execJs("return typeof window.treeArr !== 'undefined';"));
     }
 
-    public String getTreeAllSubItems(Long treeId, String itemId) {
+    String getTreeAllSubItems(Long treeId, String itemId) {
         return execJs("return treeArr[" + treeId + "].tree.getAllSubItems('" + itemId + "');");
     }
 
-    public String getTreeSubItems(Long treeId, String itemId) {
+    String getTreeSubItems(Long treeId, String itemId) {
         return execJs("return treeArr[" + treeId + "].tree.getSubItems('" + itemId + "');");
     }
 
-    public void selectItemInTree(Long treeId, String itemId) {
+    void selectItemInTree(Long treeId, String itemId) {
         execJs("treeArr[" + treeId + "].tree.selectItem('" + itemId + "', true, false);");
     }
 
-    public String getItemTextInTreeById(Long treeId, String itemId) {
+    String getItemTextInTreeById(Long treeId, String itemId) {
         return execJs("return treeArr[" + treeId + "].tree.getItemText('" + itemId + "');");
     }
 
-    public String getSelectedItemInTree(Long treeId) {
+    String getSelectedItemInTree(Long treeId) {
         return execJs("return treeArr[" + treeId + "].tree.getSelectedItemId();");
     }
 
-    public String getItemParentId(Long treeId, String itemId) {
+    String getItemParentId(Long treeId, String itemId) {
         return execJs("return treeArr[" + treeId + "].tree.getParentId('" + itemId + "');");
     }
 
-    public String getItemIdInTreeByText(Long treeId, String itemText) {
+    String getItemIdInTreeByText(Long treeId, String itemText) {
         return execJs("return treeArr[" + treeId + "].tree.findItem('" + itemText + "', false, false);");
     }
 
-    public void selectItemInTree(Long treeId, String rootItemId, String treePath) {
+    void selectItemInTree(Long treeId, String rootItemId, String treePath) {
         execJs(""
                 + "var treeId = '" + treeId + "';"
                 + "var rootItemId = '" + rootItemId + "';"
@@ -90,7 +94,7 @@ public class TreeJs extends Js {
                 + "}");
     }
 
-    public void selectParentItemInTree(Long treeId, String rootItemId, String treePath) {
+    void selectParentItemInTree(Long treeId, String rootItemId, String treePath) {
         execJs(""
                 + "var treeId = '" + treeId + "';"
                 + "var rootItemId = '" + rootItemId + "';"

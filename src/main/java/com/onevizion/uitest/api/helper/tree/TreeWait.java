@@ -16,7 +16,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.Wait;
 
 @Component
-public class TreeWait {
+class TreeWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -27,11 +27,11 @@ public class TreeWait {
     @Resource
     private Wait wait;
 
-    public void waitTreeLoad(final Long treeId) {
+    void waitTreeLoad(Long treeId) {
         waitTreeLoad(treeId.toString());
     }
 
-    public void waitTreeLoad(String treeId) {
+    void waitTreeLoad(String treeId) {
         wait.waitWebElement(By.id(AbstractSeleniumCore.TREE_ID_BASE + treeId));
         wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + treeId));
 
@@ -55,7 +55,7 @@ public class TreeWait {
             });
     }
 
-    public void waitTreeLoadCnt(final int cnt) {
+    void waitTreeLoadCnt(int cnt) {
         Supplier<String> supplier = ()-> "Waiting for count items in tree id=[" + AbstractSeleniumCore.getTreeIdx() + "] expectedVal=[" + cnt + "] actualVal=[" + Long.valueOf(treeJs.getTreeAllSubItems(AbstractSeleniumCore.getTreeIdx(), "-1").split(",").length) + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())

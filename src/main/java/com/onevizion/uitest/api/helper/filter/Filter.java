@@ -25,8 +25,7 @@ import com.onevizion.uitest.api.helper.Sort;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
-import com.onevizion.uitest.api.helper.tree.TreeJs;
-import com.onevizion.uitest.api.helper.tree.TreeWait;
+import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.FilterFieldType;
 import com.onevizion.uitest.api.vo.SortType;
 
@@ -68,13 +67,10 @@ public class Filter {
     private Js js;
 
     @Resource
-    private TreeJs treeJs;
+    private Tree tree;
 
     @Resource
     private Wait wait;
-
-    @Resource
-    private TreeWait treeWait;
 
     @Resource
     private Window window;
@@ -127,21 +123,21 @@ public class Filter {
     public void selectFilterInOrganize(String filterName) {
         boolean filterFound = false;
 
-        String globalItemsStr = treeJs.getTreeAllSubItems(0L, "-1");
+        String globalItemsStr = tree.getTreeAllSubItems(0L, "-1");
         String[] globalItems = globalItemsStr.split(",");
         for (String globalItem : globalItems) {
-            if (filterName.equals(treeJs.getItemTextInTreeById(0L, globalItem))) {
+            if (filterName.equals(tree.getItemTextInTreeById(0L, globalItem))) {
                 filterFound = true;
-                treeJs.selectItemInTree(0L, globalItem);
+                tree.selectItemInTree(0L, globalItem);
             }
         }
 
-        String localItemsStr = treeJs.getTreeAllSubItems(0L, "-2");
+        String localItemsStr = tree.getTreeAllSubItems(0L, "-2");
         String[] localItems = localItemsStr.split(",");
         for (String localItem : localItems) {
-            if (filterName.equals(treeJs.getItemTextInTreeById(0L, localItem))) {
+            if (filterName.equals(tree.getItemTextInTreeById(0L, localItem))) {
                 filterFound = true;
-                treeJs.selectItemInTree(0L, localItem);
+                tree.selectItemInTree(0L, localItem);
             }
         }
 
@@ -267,7 +263,7 @@ public class Filter {
         elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
-        treeWait.waitTreeLoad(0L);
+        tree.waitTreeLoad(0L);
         wait.waitFormLoad();
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
@@ -276,7 +272,7 @@ public class Filter {
         seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        treeWait.waitTreeLoad(0L);
+        tree.waitTreeLoad(0L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitGridLoad(gridIdx, gridIdx);

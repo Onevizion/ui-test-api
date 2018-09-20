@@ -268,14 +268,6 @@ public class Js {
         return Boolean.valueOf(execJs("return gridArr[" + gridId + "].gridDataLoaded;"));
     }
 
-    public String isTreeLoaded(Long treeId) {
-        return execJs("return treeArr[" + treeId + "].PageLoaded;");
-    }
-
-    public String isTreeLoaded(String treeId) {
-        return execJs("return treeArr['" + treeId + "'].PageLoaded;");
-    }
-
     public Boolean isCodeMirrorLoaded(String name) {
         return Boolean.valueOf(execJs("return sqlEditorArr.hasOwnProperty('" + name + "') && sqlEditorArr['" + name + "'][1].getTextArea() == document.getElementById('" + name + "');"));
     }
