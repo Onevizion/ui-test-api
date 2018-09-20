@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.vo.TreeNode;
@@ -26,24 +25,6 @@ public class Tree {
 
     @Resource
     private SeleniumSettings seleniumSettings;
-
-    public void selectTreeItem(String itemText) {
-        String itemId = "";
-        String curText = "";
-        while((!curText.equals(itemText)) && (itemId != null)) {
-            itemId = treeJs.getItemIdInTreeByText(AbstractSeleniumCore.getTreeIdx(), itemText);
-            curText = treeJs.getItemTextInTreeById(AbstractSeleniumCore.getTreeIdx(), itemId).replaceAll("^<.*?>", "").replaceAll("</.*?>$", "");
-        } 
-    }
-
-    public String getTreeItemParentText(String itemText) {
-        selectTreeItem(itemText);
-        String itemId = treeJs.getSelectedItemInTree(AbstractSeleniumCore.getTreeIdx());
-        String parentId = treeJs.getItemParentId(AbstractSeleniumCore.getTreeIdx(), itemId);
-        String parentText = treeJs.getItemTextInTreeById(AbstractSeleniumCore.getTreeIdx(), parentId);
-        parentText = parentText.replaceAll("^<.*?>", "").replaceAll("</.*?>$", "");
-        return parentText;
-    }
 
     public void selectTreeItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {
         treeJs.selectItemInTree(treeId, rootItemId, trackorTreeItem.getTreePath());
@@ -88,20 +69,8 @@ public class Tree {
         treeWait.waitTreeLoad(treeId);
     }
 
-    public void waitTreeLoadCnt(int cnt) {
-        treeWait.waitTreeLoadCnt(cnt);
-    }
-
-    public Boolean isTreeArrExist() {
-        return treeJs.isTreeArrExist();
-    }
-
     public String getTreeAllSubItems(Long treeId, String itemId) {
         return treeJs.getTreeAllSubItems(treeId, itemId);
-    }
-
-    public String getTreeSubItems(Long treeId, String itemId) {
-        return treeJs.getTreeSubItems(treeId, itemId);
     }
 
     public void selectItemInTree(Long treeId, String itemId) {
@@ -114,22 +83,6 @@ public class Tree {
 
     public String getSelectedItemInTree(Long treeId) {
         return treeJs.getSelectedItemInTree(treeId);
-    }
-
-    public String getItemParentId(Long treeId, String itemId) {
-        return treeJs.getItemParentId(treeId, itemId);
-    }
-
-    public String getItemIdInTreeByText(Long treeId, String itemText) {
-        return treeJs.getItemIdInTreeByText(treeId, itemText);
-    }
-
-    public void selectItemInTree(Long treeId, String rootItemId, String treePath) {
-        treeJs.selectItemInTree(treeId, rootItemId, treePath);
-    }
-
-    public void selectParentItemInTree(Long treeId, String rootItemId, String treePath) {
-        treeJs.selectParentItemInTree(treeId, rootItemId, treePath);
     }
 
 }

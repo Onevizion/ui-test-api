@@ -1,7 +1,5 @@
 package com.onevizion.uitest.api.helper.tree;
 
-import java.util.function.Supplier;
-
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
@@ -51,19 +49,6 @@ class TreeWait {
             .until(new ExpectedCondition<Boolean>() {
                 public Boolean apply(WebDriver webdriver) {
                     return treeJs.isTreeLoaded(treeId).equals("1");
-                }
-            });
-    }
-
-    void waitTreeLoadCnt(int cnt) {
-        Supplier<String> supplier = ()-> "Waiting for count items in tree id=[" + AbstractSeleniumCore.getTreeIdx() + "] expectedVal=[" + cnt + "] actualVal=[" + Long.valueOf(treeJs.getTreeAllSubItems(AbstractSeleniumCore.getTreeIdx(), "-1").split(",").length) + "] is failed";
-
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage(supplier)
-            .ignoring(StaleElementReferenceException.class)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return Long.valueOf(treeJs.getTreeAllSubItems(AbstractSeleniumCore.getTreeIdx(), "-1").split(",").length) == cnt;
                 }
             });
     }

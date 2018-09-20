@@ -38,14 +38,6 @@ class TreeJs extends Js {
         return execJs("return treeArr[" + treeId + "].tree.getSelectedItemId();");
     }
 
-    String getItemParentId(Long treeId, String itemId) {
-        return execJs("return treeArr[" + treeId + "].tree.getParentId('" + itemId + "');");
-    }
-
-    String getItemIdInTreeByText(Long treeId, String itemText) {
-        return execJs("return treeArr[" + treeId + "].tree.findItem('" + itemText + "', false, false);");
-    }
-
     void selectItemInTree(Long treeId, String rootItemId, String treePath) {
         execJs(""
                 + "var treeId = '" + treeId + "';"
