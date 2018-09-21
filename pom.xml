@@ -6,7 +6,7 @@
     <groupId>com.onevizion</groupId>
     <artifactId>ui-test-api</artifactId>
     <packaging>jar</packaging>
-    <version>8.92-SNAPSHOT</version>
+    <version>8.93-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
