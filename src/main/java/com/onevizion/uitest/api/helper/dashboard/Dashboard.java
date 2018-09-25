@@ -5,9 +5,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
+import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.ElementJs;
 
 @Component
 public class Dashboard {
@@ -20,6 +23,9 @@ public class Dashboard {
 
     @Resource
     private DashboardJs dashboardJs;
+
+    @Resource
+    private ElementJs elementJs;
 
     public String getDashletXAxisLabel(int dashletIdx) {
         return seleniumSettings.getWebDriver().findElements(By.className("lm_stack")).get(dashletIdx).findElement(By.className("highcharts-xaxis")).getAttribute("textContent");
@@ -79,6 +85,31 @@ public class Dashboard {
 
     public String getDashletSerieDataY(String dashletId, int serieIdx) {
         return dashboardJs.getDashletSerieDataY(dashletId, serieIdx);
+    }
+
+    public void moveColumnToAxis(String sourceClass, String targetClass) {
+        WebElement source = seleniumSettings.getWebDriver().findElements(By.className(sourceClass)).get(0);
+        WebElement target = seleniumSettings.getWebDriver().findElements(By.className(targetClass)).get(0);
+
+        elementJs.dragAndDropPrepare();
+
+        elementJs.dragAndDropDragStart(source);
+        AbstractSeleniumCore.sleep(100L);
+
+        //in all elements except source and target
+        //dragenter
+        //dragover
+        //dragleave
+
+        elementJs.dragAndDropDragEnter(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragOver(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDrop(target);
+        AbstractSeleniumCore.sleep(100L);
+
+        elementJs.dragAndDropDragEnd(source);
+        AbstractSeleniumCore.sleep(100L);
     }
 
 }

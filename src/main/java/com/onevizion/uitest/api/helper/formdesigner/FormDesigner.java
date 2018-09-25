@@ -8,9 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
+import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.FormDesignerField;
 
@@ -42,6 +44,9 @@ public class FormDesigner {
 
     @Resource
     private FormDesignerJs formDesignerJs;
+
+    @Resource
+    private ElementJs elementJs;
 
     public void fillSearch(String name) {
         element.moveToElementById(FIELD_LIST_SEARCH);
@@ -368,6 +373,39 @@ public class FormDesigner {
 
     public void waitFormDesignerLoad() {
         formDesignerWait.waitFormDesignerLoad();
+    }
+
+    public void moveFieldToEndForm1(String sourceId) {
+        moveFieldToEndForm(sourceId, "locatOption1");
+    }
+
+    public void moveFieldToEndForm2(String sourceId) {
+        moveFieldToEndForm(sourceId, "locatOption2");
+    }
+
+    private void moveFieldToEndForm(String sourceId, String targetId) {
+        WebElement source = seleniumSettings.getWebDriver().findElement(By.id(sourceId));
+        WebElement target = seleniumSettings.getWebDriver().findElement(By.id(targetId));
+
+        elementJs.dragAndDropPrepare();
+
+        elementJs.dragAndDropDragStart(source);
+        AbstractSeleniumCore.sleep(100L);
+
+        //in all elements except source and target
+        //dragenter
+        //dragover
+        //dragleave
+
+        elementJs.dragAndDropDragEnter(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragOver(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDrop(target);
+        AbstractSeleniumCore.sleep(100L);
+
+        elementJs.dragAndDropDragEnd(source);
+        AbstractSeleniumCore.sleep(100L);
     }
 
 }
