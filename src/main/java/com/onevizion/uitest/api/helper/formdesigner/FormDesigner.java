@@ -20,7 +20,7 @@ import com.onevizion.uitest.api.vo.FormDesignerField;
 public class FormDesigner {
 
     private final static String FIELD_LIST_SEARCH = "searchField";
-    private final static String BUTTON_CLEAR_SEARCH = "btnClearSearch";
+    private final static String BUTTON_CLEAR_SEARCH = "wrapperClearSearch";
     private final static String BUTTON_DELETE_ELEMENT = "btnDelElem";
 
     private final static String BUTTON_GROUP_FIELD = "cfg";
