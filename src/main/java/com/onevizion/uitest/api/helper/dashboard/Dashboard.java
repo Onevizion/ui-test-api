@@ -10,7 +10,11 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementJs;
+import com.onevizion.uitest.api.vo.DashAxisType;
+import com.onevizion.uitest.api.vo.DashColumnCalcMethodType;
+import com.onevizion.uitest.api.vo.DashColumnChartType;
 
 @Component
 public class Dashboard {
@@ -87,9 +91,75 @@ public class Dashboard {
         return dashboardJs.getDashletSerieDataY(dashletId, serieIdx);
     }
 
-    public void moveColumnToAxis(String sourceClass, String targetClass) {
-        WebElement source = seleniumSettings.getWebDriver().findElements(By.className(sourceClass)).get(0);
-        WebElement target = seleniumSettings.getWebDriver().findElements(By.className(targetClass)).get(0);
+    public void changeDashletName(String name) {
+        seleniumSettings.getWebDriver().findElement(By.id("ed_edit_title_")).click();
+
+        seleniumSettings.getWebDriver().findElement(By.id("ed_title_editor_")).findElement(By.className("tet_input")).clear();
+        seleniumSettings.getWebDriver().findElement(By.id("ed_title_editor_")).findElement(By.className("tet_input")).sendKeys(name);
+
+        seleniumSettings.getWebDriver().findElement(By.id("ed_title_editor_")).findElement(By.className("btn_label")).click();
+    }
+
+    public void changeAxisName(String oldName, String newName) {
+        WebElement axis = getAxis(oldName);
+        String axisType = axis.findElement(By.className("tet_subtitle")).getText();
+        if (DashAxisType.X.getName().equals(axisType)) {
+            axis.findElement(By.id("btn_edit0")).click();
+            axis.findElement(By.className("tet_input")).clear();
+            axis.findElement(By.className("tet_input")).sendKeys(newName);
+            axis.findElement(By.className("btn_label")).click();
+        } else if (DashAxisType.Y.getName().equals(axisType)) {
+            axis.findElement(By.className("pc_buttons")).findElement(By.className("btn_input")).click();
+            List<WebElement> allMenu = seleniumSettings.getWebDriver().findElements(By.className("context_menu"));
+            for (WebElement menu : allMenu) {
+                if (menu.isDisplayed()) {
+                    List<WebElement> menuButtons = menu.findElements(By.className("ic_container"));
+                    for (WebElement menuButton : menuButtons) {
+                        if ("Edit".equals(menuButton.getText())) {
+                            menuButton.click();
+                            axis.findElement(By.className("tet_input")).clear();
+                            axis.findElement(By.className("tet_input")).sendKeys(newName);
+                            axis.findElement(By.className("btn_label")).click();
+                        }
+                    }
+                }
+            }
+        } else {
+            throw new SeleniumUnexpectedException("Not support DashAxisType [" + axisType + "]");
+        }
+    }
+
+    public void changeColumnChartType(String axisName, String columnName, DashColumnChartType dashColumnChartType) {
+        WebElement axis = getAxis(axisName);
+        WebElement column = getColumnFromAxis(axis, columnName);
+        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+        //column.findElement(By.className("ia_edit")).click(); //Element <div class="ia_edit">...</div> is not clickable at point (340, 355). Other element would receive the click: <div class="item_placeholder_bottom"></div>
+        //column.findElement(By.className("ia_edit")).findElement(By.className("button")).click();
+        //column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")).click();
+        column.findElements(By.className("tg_buttons")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
+        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+    }
+
+    public void changeColumnCalculationMethod(String axisName, String columnName, DashColumnCalcMethodType dashColumnCalcMethodType) {
+        WebElement axis = getAxis(axisName);
+        WebElement column = getColumnFromAxis(axis, columnName);
+        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+        //column.findElement(By.className("ia_edit")).click(); //Element <div class="ia_edit">...</div> is not clickable at point (340, 355). Other element would receive the click: <div class="item_placeholder_bottom"></div>
+        //column.findElement(By.className("ia_edit")).findElement(By.className("button")).click();
+        //column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")).click();
+        column.findElements(By.className("tg_buttons")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
+        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+    }
+
+    public void saveDashlet() {
+        seleniumSettings.getWebDriver().findElement(By.id("ed_ok_")).click();
+        AbstractSeleniumCore.sleep(2000L);
+        waitDashboardPageLoaded();
+        waitDashboardLoad();
+    }
+
+    public void moveColumnToAxisX(String columnName) {
+        WebElement source = getColumnFromDatasource(columnName);
 
         elementJs.dragAndDropPrepare();
 
@@ -101,6 +171,8 @@ public class Dashboard {
         //dragover
         //dragleave
 
+        WebElement target = seleniumSettings.getWebDriver().findElement(By.className("placeholder_column"));
+
         elementJs.dragAndDropDragEnter(target);
         AbstractSeleniumCore.sleep(100L);
         elementJs.dragAndDropDragOver(target);
@@ -110,6 +182,94 @@ public class Dashboard {
 
         elementJs.dragAndDropDragEnd(source);
         AbstractSeleniumCore.sleep(100L);
+    }
+
+    public void createNewAxisY(String columnName) {
+        WebElement source = getColumnFromDatasource(columnName);
+
+        elementJs.dragAndDropPrepare();
+
+        elementJs.dragAndDropDragStart(source);
+        AbstractSeleniumCore.sleep(100L);
+
+        //in all elements except source and target
+        //dragenter
+        //dragover
+        //dragleave
+
+        WebElement target = seleniumSettings.getWebDriver().findElement(By.className("ed_placeholder"));
+
+        elementJs.dragAndDropDragEnter(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragOver(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDrop(target);
+        AbstractSeleniumCore.sleep(100L);
+
+        elementJs.dragAndDropDragEnd(source);
+        AbstractSeleniumCore.sleep(100L);
+    }
+
+    private WebElement getColumnFromDatasource(String columnName) {
+        WebElement result = null;
+
+        List<WebElement> columns = seleniumSettings.getWebDriver().findElement(By.className("ed_datasource")).findElements(By.className("item_axis"));
+        for (WebElement column : columns) {
+            if (columnName.equals(column.getText())) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Column [" + columnName + "] found many times");
+                }
+                result = column;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Column [" + columnName + "] not found");
+        }
+
+        return result;
+    }
+
+    private WebElement getColumnFromAxis(WebElement axis, String columnName) {
+        WebElement result = null;
+
+        List<WebElement> columns = axis.findElements(By.className("dashlet_field"));
+        for (WebElement column : columns) {
+            WebElement columnTitle = column.findElement(By.className("ia_title"));
+            if (columnName.equals(columnTitle.getText())) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Column [" + columnName + "] found many times");
+                }
+                result = column;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Column [" + columnName + "] not found");
+        }
+
+        return result;
+    }
+
+    private WebElement getAxis(String axisName) {
+        WebElement result = null;
+
+        List<WebElement> allAxis = seleniumSettings.getWebDriver().findElement(By.className("ed_axes")).findElements(By.className("entity_component"));
+        for (WebElement axis : allAxis) {
+            WebElement axisTitle = axis.findElement(By.className("tet_title"));
+            if (axisName.equals(axisTitle.getText())) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Axis [" + axisName + "] found many times");
+                }
+                result = axis;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Axis [" + axisName + "] not found");
+        }
+
+        return result;
     }
 
 }

@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ElementJs extends Js {
 
+    //TODO remove method ASAP
+    @Deprecated
+    public void click(WebElement element) {
+        execJs3("arguments[0].click();", element);
+    }
+
     public void moveToElement(WebElement element) {
         execJs3("arguments[0].scrollIntoView();", element);
     }
