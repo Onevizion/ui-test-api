@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -30,15 +31,24 @@ public class WfVisualEditor {
     private SeleniumSettings seleniumSettings;
 
     private WebElement getStepNode(String text) {
-        List<WebElement> stepNodes = seleniumSettings.getWebDriver().findElements(By.className("node"));
+        WebElement result = null;
 
-        for (WebElement stepNode:stepNodes) {
+        List<WebElement> stepNodes = seleniumSettings.getWebDriver().findElements(By.className("node"));
+        for (WebElement stepNode : stepNodes) {
             String innerText = stepNode.findElement(By.id("lbl" + stepNode.getAttribute("id"))).getAttribute("innerText");
-            if (innerText.equals(text)) {
-                return stepNode;
+            if (text.equals(innerText)) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Step [" + text + "] found many times");
+                }
+                result = stepNode;
             }
         }
-        return null;
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Step [" + text + "] not found");
+        }
+
+        return result;
     }
 
     public void selectStepNode(String text) {
