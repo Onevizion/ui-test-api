@@ -1,5 +1,6 @@
 package com.onevizion.uitest.api.helper.userpage.filter;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -8,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -94,7 +94,7 @@ public class UserpageFilter {
     public void checkFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType,
             String operator, ConfigFieldType fieldDataType, Long columnIndex, Long columnIndex2,
             List<String> cellVals, List<String> cellVals2, List<String> ... cellValsKeys) {
-        Random generator = new Random();
+        SecureRandom generator = new SecureRandom();
         int randomIndex = generator.nextInt(2);
 
         Long rowsCntBefore = grid.getGridRowsCount(0L);
