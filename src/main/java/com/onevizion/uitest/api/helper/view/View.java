@@ -30,7 +30,7 @@ public class View {
     public static final String UNSAVED_VIEW_NAME = "Unsaved View";
     public static final String GENERAL_INFO_VIEW_NAME = "G:General Info";
 
-    private final static String VIEW = "newDropdownView";
+    private static final String VIEW = "newDropdownView";
 
     public static final String SELECT_VIEW = "ddView"; //TODO change from SELECT_FILTER to FILTER
     public static final String VIEW_CONTAINER = "ddViewContainer";
@@ -60,11 +60,11 @@ public class View {
 
     public static final Long COLUMN_DIV_HEIGHT = 28L;
 
-    private final static String BUTTON_GROUP_FIELD = "cfg";
-    private final static String BUTTON_GROUP_TASK = "tsg";
-    private final static String BUTTON_GROUP_DRILLDOWN = "ddg";
-    private final static String BUTTON_GROUP_MARKUP = "mug";
-    private final static String BUTTON_GROUP_DATE_PAIR = "dp";
+    private static final String BUTTON_GROUP_FIELD = "cfg";
+    private static final String BUTTON_GROUP_TASK = "tsg";
+    private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
+    private static final String BUTTON_GROUP_MARKUP = "mug";
+    private static final String BUTTON_GROUP_DATE_PAIR = "dp";
 
     @Resource
     private SeleniumSettings seleniumSettings;

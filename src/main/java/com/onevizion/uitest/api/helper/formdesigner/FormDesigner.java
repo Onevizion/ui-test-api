@@ -28,7 +28,7 @@ public class FormDesigner {
     private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
     private static final String BUTTON_GROUP_MARKUP= "mug";
 
-    private final static String FORM_ID = "formContent";
+    private static final String FORM_ID = "formContent";
 
     @Resource
     private SeleniumSettings seleniumSettings;

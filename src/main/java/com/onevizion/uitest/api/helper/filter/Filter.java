@@ -32,30 +32,30 @@ import com.onevizion.uitest.api.vo.SortType;
 @Component
 public class Filter {
 
-    public final static String UNSAVED_FILTER_NAME = "Unsaved Filter";
-    public final static String ALL_FILTER_NAME = "G:All";
+    public static final String UNSAVED_FILTER_NAME = "Unsaved Filter";
+    public static final String ALL_FILTER_NAME = "G:All";
 
-    private final static String FILTER = "newDropdownFilter";
+    private static final String FILTER = "newDropdownFilter";
 
-    public final static String SELECT_FILTER = "ddFilter"; //TODO change from SELECT_FILTER to FILTER
-    public final static String FILTER_CONTAINER = "ddFilterContainer";
-    public final static String FILTER_SEARCH = "ddFilterSearch";
-    public final static String BUTTON_CLEAR_SEARCH = "ddFilterClearSearch";
-    public final static String BUTTON_ORGANIZE = "ddFilterBtnOrganize";
+    public static final String SELECT_FILTER = "ddFilter"; //TODO change from SELECT_FILTER to FILTER
+    public static final String FILTER_CONTAINER = "ddFilterContainer";
+    public static final String FILTER_SEARCH = "ddFilterSearch";
+    public static final String BUTTON_CLEAR_SEARCH = "ddFilterClearSearch";
+    public static final String BUTTON_ORGANIZE = "ddFilterBtnOrganize";
 
-    public final static String FILTER_NAME = "TestFilter";
-    public final static String BUTTON_SAVE = "btnSaveFilter";
-    public final static String BUTTON_SAVE_NEW = "unsavedFilterIcon";
-    public final static String BUTTON_DELETE = "btnDeleteFilter";
-    public final static String FIELD_FILTER_NAME = "txtFilterName";
-    public final static String BUTTON_OPEN = "btnFilter";
-    public final static String BUTTON_CLEAR = "btnClear";
-    public final static String BUTTON_CB_TEMPLATE = "cbShowTemplates";
-    private final static String UNSAVED_FILTER = "unsavedFilterId";
+    public static final String FILTER_NAME = "TestFilter";
+    public static final String BUTTON_SAVE = "btnSaveFilter";
+    public static final String BUTTON_SAVE_NEW = "unsavedFilterIcon";
+    public static final String BUTTON_DELETE = "btnDeleteFilter";
+    public static final String FIELD_FILTER_NAME = "txtFilterName";
+    public static final String BUTTON_OPEN = "btnFilter";
+    public static final String BUTTON_CLEAR = "btnClear";
+    public static final String BUTTON_CB_TEMPLATE = "cbShowTemplates";
+    private static final String UNSAVED_FILTER = "unsavedFilterId";
 
-    public final static String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
-    public final static String FILTER_DIALOG_OK = "filterDialogOk";
-    public final static String FILTER_DIALOG_CANCEL = "filterDialogCancel";
+    public static final String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
+    public static final String FILTER_DIALOG_OK = "filterDialogOk";
+    public static final String FILTER_DIALOG_CANCEL = "filterDialogCancel";
 
     @Resource
     private SeleniumSettings seleniumSettings;

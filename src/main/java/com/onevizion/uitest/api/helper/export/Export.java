@@ -29,7 +29,7 @@ import com.onevizion.uitest.api.vo.entity.ExportRun;
 @Component
 public class Export {
 
-    private final static Logger logger = LoggerFactory.getLogger(Export.class);
+    private static final Logger logger = LoggerFactory.getLogger(Export.class);
 
     @Resource
     private Window window;

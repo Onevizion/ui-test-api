@@ -15,10 +15,10 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 @Component
 public class Help {
 
-    private final static String BUTTON_OPEN = "btnHelp";
-    private final static String BUTTON_OPEN_ON_FILTER_FORM = "btnHelpFilter";
-    private final static String BUTTON_OPEN_ON_VIEW_FORM = "btnHelpView";
-    private final static String SERIAL_NUMBER_ID = "SerialNumber";
+    private static final String BUTTON_OPEN = "btnHelp";
+    private static final String BUTTON_OPEN_ON_FILTER_FORM = "btnHelpFilter";
+    private static final String BUTTON_OPEN_ON_VIEW_FORM = "btnHelpView";
+    private static final String SERIAL_NUMBER_ID = "SerialNumber";
 
     @Resource
     private AssertElement assertElement;

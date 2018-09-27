@@ -35,8 +35,8 @@ public class RelationSelector {
     @Resource
     private Window window;
 
-    public final static String RELATION_ID_BASE = "lbParentsChildren";
-    public final static String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
+    public static final String RELATION_ID_BASE = "lbParentsChildren";
+    public static final String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
 
     public void checkRelationSelectorValuesCount(int count) {
         List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id("new_rows_lbParentsChildren0")).findElements(By.className("newDropDownRowContainer"));

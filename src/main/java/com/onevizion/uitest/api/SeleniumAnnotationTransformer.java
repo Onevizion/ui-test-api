@@ -19,7 +19,7 @@ import javassist.NotFoundException;
 
 public class SeleniumAnnotationTransformer implements IAnnotationTransformer {
 
-    private final static ClassPool pool = ClassPool.getDefault();
+    private static final ClassPool pool = ClassPool.getDefault();
 
     @Override
     public void transform(ITestAnnotation annotation, @SuppressWarnings("rawtypes") Class testClass, @SuppressWarnings("rawtypes") Constructor testConstructor, Method testMethod) {

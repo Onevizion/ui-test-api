@@ -36,12 +36,12 @@ import com.onevizion.uitest.api.vo.ConfigFieldType;
 @Component
 public class UserpageFilter {
 
-    public final static String BUTTON_OPEN = "btnFilter";
-    public final static String BUTTON_CLEAR = "btnClear";
-    public final static String BUTTON_ADD = "btnAdd";
-    public final static String BUTTON_OK_ID_BASE = "btnOK";
+    public static final String BUTTON_OPEN = "btnFilter";
+    public static final String BUTTON_CLEAR = "btnClear";
+    public static final String BUTTON_ADD = "btnAdd";
+    public static final String BUTTON_OK_ID_BASE = "btnOK";
 
-    public final static int FIRST_MONTH_OF_FISCAL_YEAR = 1;
+    public static final int FIRST_MONTH_OF_FISCAL_YEAR = 1;
 
     @Resource
     private Js js;

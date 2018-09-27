@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 @Component
 public class CreateTest {
 
-    private final static String TRACKOR_TYPE_NAME = "SELENIUM_TEST";
+    private static final String TRACKOR_TYPE_NAME = "SELENIUM_TEST";
 
     @Resource
     private SeleniumSettings seleniumSettings;

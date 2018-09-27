@@ -12,12 +12,12 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class CompAuditLog {
 
-    private final static String COLUMN_ID_USER = "3";
-    private final static String COLUMN_ID_ACTION = "5";
-    private final static String COLUMN_ID_TABLE = "7";
-    private final static String COLUMN_ID_FIELD = "8";
-    private final static String COLUMN_ID_NEW_VAL = "9";
-    private final static String COLUMN_ID_OLD_VAL = "10";
+    private static final String COLUMN_ID_USER = "3";
+    private static final String COLUMN_ID_ACTION = "5";
+    private static final String COLUMN_ID_TABLE = "7";
+    private static final String COLUMN_ID_FIELD = "8";
+    private static final String COLUMN_ID_NEW_VAL = "9";
+    private static final String COLUMN_ID_OLD_VAL = "10";
 
     @Resource
     private Grid grid;

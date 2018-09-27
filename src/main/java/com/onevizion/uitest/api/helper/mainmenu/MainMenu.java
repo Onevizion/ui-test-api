@@ -28,8 +28,8 @@ public class MainMenu {
     @Resource
     private MainMenuWait mainMenuWait;
 
-    public final static String SHOW_MENU_BUTTON_CLASS = "showMenuBtn";
-    public final static String HIDE_MENU_BUTTON_CLASS = "hideMenuBtn";
+    public static final String SHOW_MENU_BUTTON_CLASS = "showMenuBtn";
+    public static final String HIDE_MENU_BUTTON_CLASS = "hideMenuBtn";
 
     public void showMenu() {
         WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id("newGui")).findElement(By.className(SHOW_MENU_BUTTON_CLASS));

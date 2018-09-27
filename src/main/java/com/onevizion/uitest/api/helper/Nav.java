@@ -16,8 +16,8 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 @Component
 public class Nav {
 
-    private final static String BUTTON_NEXT = "navNext";
-    private final static String BUTTON_PREV = "navPrev";
+    private static final String BUTTON_NEXT = "navNext";
+    private static final String BUTTON_PREV = "navPrev";
 
     @Resource
     private SeleniumSettings seleniumSettings;

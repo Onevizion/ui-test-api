@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class Clipboard {
 
-    private final static String ID = "textarea for qs";
+    private static final String ID = "textarea for qs";
 
     @Resource
     private SeleniumSettings seleniumSettings;

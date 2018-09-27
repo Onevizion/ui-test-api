@@ -344,61 +344,61 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     private Date startDate;
     private Date finishDate;
 
-    public final static String GRID_ID_BASE = "gridbox";
-    public final static String TREE_ID_BASE = "treeBox";
-    public final static String LOADING_ID_BASE = "loading";
-    public final static String LOADING_SPLIT_GRID_RIGHT_ID_BASE = "loadingSplitGridRight";
-    public final static String SAVING_ID_BASE = "saving";
+    public static final String GRID_ID_BASE = "gridbox";
+    public static final String TREE_ID_BASE = "treeBox";
+    public static final String LOADING_ID_BASE = "loading";
+    public static final String LOADING_SPLIT_GRID_RIGHT_ID_BASE = "loadingSplitGridRight";
+    public static final String SAVING_ID_BASE = "saving";
 
-    public final static String BUTTON_EDIT_ID_BASE = "btnEdit";
-    public final static String BUTTON_DELETE_ID_BASE = "btnDelete";
-    public final static String BUTTON_ADD_ID_BASE = "btnAdd";
-    public final static String BUTTON_OK_ID_BASE = "btnOK";
-    public final static String BUTTON_START_ID_BASE = "btnStartAt";
-    public final static String BUTTON_CANCEL_ID_BASE = "btnCancel";
-    public final static String BUTTON_CLOSE_ID_BASE = "btnClose";
-    public final static String BUTTON_NEXT_ID_BASE = "btnNext";
-    public final static String BUTTON_PRIOR_ID_BASE = "btnPrior";
-    public final static String BUTTON_SAVE_GRID_ID_BASE = "btnSaveGrid";
-    public final static String BUTTON_EXPORT_ID_BASE = "btnExport";
-    public final static String BUTTON_REPORT_WIZARD_ID_BASE = "btnReportWizard";
-    public final static String BUTTON_REORDER_ID_BASE = "btnReorder";
+    public static final String BUTTON_EDIT_ID_BASE = "btnEdit";
+    public static final String BUTTON_DELETE_ID_BASE = "btnDelete";
+    public static final String BUTTON_ADD_ID_BASE = "btnAdd";
+    public static final String BUTTON_OK_ID_BASE = "btnOK";
+    public static final String BUTTON_START_ID_BASE = "btnStartAt";
+    public static final String BUTTON_CANCEL_ID_BASE = "btnCancel";
+    public static final String BUTTON_CLOSE_ID_BASE = "btnClose";
+    public static final String BUTTON_NEXT_ID_BASE = "btnNext";
+    public static final String BUTTON_PRIOR_ID_BASE = "btnPrior";
+    public static final String BUTTON_SAVE_GRID_ID_BASE = "btnSaveGrid";
+    public static final String BUTTON_EXPORT_ID_BASE = "btnExport";
+    public static final String BUTTON_REPORT_WIZARD_ID_BASE = "btnReportWizard";
+    public static final String BUTTON_REORDER_ID_BASE = "btnReorder";
 
-    public final static String BUTTON_ADD_TREE_ID_BASE = "btnAddTree";
-    public final static String BUTTON_EDIT_TREE_ID_BASE = "btnEditTree";
-    public final static String BUTTON_DELETE_TREE_ID_BASE = "btnDeleteTree";
-    public final static String BUTTON_UP_TREE_ID_BASE = "btnUpTree";
-    public final static String BUTTON_DOWN_TREE_ID_BASE = "btnDownTree";
+    public static final String BUTTON_ADD_TREE_ID_BASE = "btnAddTree";
+    public static final String BUTTON_EDIT_TREE_ID_BASE = "btnEditTree";
+    public static final String BUTTON_DELETE_TREE_ID_BASE = "btnDeleteTree";
+    public static final String BUTTON_UP_TREE_ID_BASE = "btnUpTree";
+    public static final String BUTTON_DOWN_TREE_ID_BASE = "btnDownTree";
 
-    public final static String PREFIX_LOCAL = "L:";
-    public final static String PREFIX_GLOBAL = "G:";
+    public static final String PREFIX_LOCAL = "L:";
+    public static final String PREFIX_GLOBAL = "G:";
 
-    public final static String MESSAGE_WF_NEXT_STEP = "Are you sure you want to move to the Next Step?";
-    public final static String MESSAGE_WF_PREV_STEP = "Are you sure you want to move back to the Previous Step?";
-    public final static String MESSAGE_APPLY_SUCCESS = "Data successfully submitted.";
-    public final static String MESSAGE_DELETE_LOCKABLE = "Warning! You are going to remove \"Lockable\" flag, all existing locks for this field will be removed also. Are you sure you want to proceed?";
-    public final static String BUTTON_APPLY_ID = "btnApply";
-    public final static String CHECKBOX_SELECT_ALL_ID = "SelectCheckboxes";
+    public static final String MESSAGE_WF_NEXT_STEP = "Are you sure you want to move to the Next Step?";
+    public static final String MESSAGE_WF_PREV_STEP = "Are you sure you want to move back to the Previous Step?";
+    public static final String MESSAGE_APPLY_SUCCESS = "Data successfully submitted.";
+    public static final String MESSAGE_DELETE_LOCKABLE = "Warning! You are going to remove \"Lockable\" flag, all existing locks for this field will be removed also. Are you sure you want to proceed?";
+    public static final String BUTTON_APPLY_ID = "btnApply";
+    public static final String CHECKBOX_SELECT_ALL_ID = "SelectCheckboxes";
 
-    public final static String BUTTON_RULES_ID_BASE = "btnRules";
+    public static final String BUTTON_RULES_ID_BASE = "btnRules";
 
-    public final static String RELATION_ID_BASE = "lbParentsChildren";
-    public final static String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
+    public static final String RELATION_ID_BASE = "lbParentsChildren";
+    public static final String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
 
-    public final static String BUTTON_TASKS_ID_BASE = "btnTasks";
-    public final static String BUTTON_WF_ID_BASE = "btnWF";
+    public static final String BUTTON_TASKS_ID_BASE = "btnTasks";
+    public static final String BUTTON_WF_ID_BASE = "btnWF";
 
-    public final static String SPECIAL_CHARACTERS_1 = "<";
-    public final static String SPECIAL_CHARACTERS_2 = ">";
-    public final static String SPECIAL_CHARACTERS_3 = "&";
-    public final static String SPECIAL_CHARACTERS_4 = "\"";
+    public static final String SPECIAL_CHARACTERS_1 = "<";
+    public static final String SPECIAL_CHARACTERS_2 = ">";
+    public static final String SPECIAL_CHARACTERS_3 = "&";
+    public static final String SPECIAL_CHARACTERS_4 = "\"";
 
-    public final static String SPECIAL_CHARACTERS = SPECIAL_CHARACTERS_1 + " " + SPECIAL_CHARACTERS_2 + " " + SPECIAL_CHARACTERS_3 + " " + SPECIAL_CHARACTERS_4;
+    public static final String SPECIAL_CHARACTERS = SPECIAL_CHARACTERS_1 + " " + SPECIAL_CHARACTERS_2 + " " + SPECIAL_CHARACTERS_3 + " " + SPECIAL_CHARACTERS_4;
 
-    public final static String SPECIAL_CHARACTERS_ENCODED_1 = "&lt;";
-    public final static String SPECIAL_CHARACTERS_ENCODED_2 = "&gt;";
-    public final static String SPECIAL_CHARACTERS_ENCODED_3 = "&amp;";
-    public final static String SPECIAL_CHARACTERS_ENCODED_4 = "&quot;";
+    public static final String SPECIAL_CHARACTERS_ENCODED_1 = "&lt;";
+    public static final String SPECIAL_CHARACTERS_ENCODED_2 = "&gt;";
+    public static final String SPECIAL_CHARACTERS_ENCODED_3 = "&amp;";
+    public static final String SPECIAL_CHARACTERS_ENCODED_4 = "&quot;";
 
     public AbstractSeleniumCore() {
         super();

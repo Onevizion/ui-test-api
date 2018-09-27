@@ -21,7 +21,7 @@ import com.onevizion.uitest.api.helper.Wait;
 @Component
 public class Comment {
 
-    private final static Logger logger = LoggerFactory.getLogger(Comment.class);
+    private static final Logger logger = LoggerFactory.getLogger(Comment.class);
 
     @Resource
     private Tb tb;
