@@ -116,7 +116,9 @@ public class SeleniumListener extends TestListenerAdapter {
         //because webDriver.quit() not wait for all windows are closed
         try {
             while (test.seleniumSettings.getWindows().size() > 1) {
-                while (true) {
+                int maxAlertsCount = 100; //protection from the endless cycle
+                while (maxAlertsCount > 0) {
+                    maxAlertsCount = maxAlertsCount - 1;
                     try {
                         Alert alert = test.seleniumSettings.getWebDriver().switchTo().alert();
                         logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
@@ -127,6 +129,11 @@ public class SeleniumListener extends TestListenerAdapter {
                     } catch (WebDriverException e) {
                         break;
                     }
+                }
+
+                if (maxAlertsCount == 0) {
+                    logger.error(getTestName(tr) + " Window with title: " + test.seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
+                    Reporter.log(getTestName(tr) + " Window with title: " + test.seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
                 }
 
                 final int currentWindowsCount = test.seleniumSettings.getWebDriver().getWindowHandles().size();

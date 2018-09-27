@@ -576,7 +576,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         try {
             if (seleniumSettings.getWebDriver() != null) {
                 //TODO following code can throw exception if alert present. remove this code after remove firefox 59 bug
-                while (true) {
+                int maxAlertsCount = 100; //protection from the endless cycle
+                while (maxAlertsCount > 0) {
+                    maxAlertsCount = maxAlertsCount - 1;
                     try {
                         Alert alert = seleniumSettings.getWebDriver().switchTo().alert();
                         logger.error(seleniumSettings.getTestName() + " closeBrowser There is alert with error message: " + alert.getText());
@@ -588,6 +590,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                         break;
                     }
                 }
+
+                if (maxAlertsCount == 0) {
+                    logger.error(seleniumSettings.getTestName() + " Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
+                    Reporter.log(seleniumSettings.getTestName() + " Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
+                }
+
                 //TODO firefox 59 bug
                 //https://github.com/mozilla/geckodriver/issues/1151
                 //https://bugzilla.mozilla.org/show_bug.cgi?id=1434872
