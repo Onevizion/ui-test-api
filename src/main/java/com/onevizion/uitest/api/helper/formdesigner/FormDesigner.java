@@ -19,14 +19,14 @@ import com.onevizion.uitest.api.vo.FormDesignerField;
 @Component
 public class FormDesigner {
 
-    private final static String FIELD_LIST_SEARCH = "searchField";
-    private final static String BUTTON_CLEAR_SEARCH = "wrapperClearSearch";
-    private final static String BUTTON_DELETE_ELEMENT = "btnDelElem";
+    private static final String FIELD_LIST_SEARCH = "searchField";
+    private static final String BUTTON_CLEAR_SEARCH = "wrapperClearSearch";
+    private static final String BUTTON_DELETE_ELEMENT = "btnDelElem";
 
-    private final static String BUTTON_GROUP_FIELD = "cfg";
-    private final static String BUTTON_GROUP_TASK = "tsg";
-    private final static String BUTTON_GROUP_DRILLDOWN = "ddg";
-    private final static String BUTTON_GROUP_MARKUP= "mug";
+    private static final String BUTTON_GROUP_FIELD = "cfg";
+    private static final String BUTTON_GROUP_TASK = "tsg";
+    private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
+    private static final String BUTTON_GROUP_MARKUP= "mug";
 
     private final static String FORM_ID = "formContent";
 
