@@ -70,7 +70,7 @@ public class SeleniumListener extends TestListenerAdapter {
             if (test.seleniumSettings.getWebDriver() instanceof TakesScreenshot) {
                 String browserName;
                 if (isRemoteWebDriver) {
-                    browserName = test.capability.getBrowserName();
+                    browserName = test.seleniumSettings.getBrowser();
                 } else {
                     browserName = test.seleniumSettings.getWebDriver().getClass().getName();
                     browserName = browserName.substring(browserName.lastIndexOf('.') + 1);

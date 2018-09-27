@@ -333,7 +333,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     @Resource
     private CreateTestResult createTestResult;
 
-    public DesiredCapabilities capability;
+    private DesiredCapabilities capability;
 
     @Resource
     public SeleniumSettings seleniumSettings;
