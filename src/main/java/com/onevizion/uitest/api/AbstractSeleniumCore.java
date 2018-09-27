@@ -579,12 +579,10 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 while (true) {
                     try {
                         Alert alert = seleniumSettings.getWebDriver().switchTo().alert();
-                        if (!alert.getText().equals(null)) {
-                            logger.error(seleniumSettings.getTestName() + " closeBrowser There is alert with error message: " + alert.getText());
-                            Reporter.log(seleniumSettings.getTestName() + " closeBrowser There is alert with error message: " + alert.getText());
-                            alert.accept();
-                        }
-                    } catch (NoAlertPresentException e){ // Check is alert present
+                        logger.error(seleniumSettings.getTestName() + " closeBrowser There is alert with error message: " + alert.getText());
+                        Reporter.log(seleniumSettings.getTestName() + " closeBrowser There is alert with error message: " + alert.getText());
+                        alert.accept();
+                    } catch (NoAlertPresentException e) { // Check is alert present
                         break;
                     } catch (WebDriverException e) {
                         break;
