@@ -45,13 +45,10 @@ public class SeleniumScreenshot {
                 Date date = new Date();
 
                 byte[] screen = ((TakesScreenshot) seleniumSettings.getWebDriver()).getScreenshotAs(OutputType.BYTES);
+                String screenFileName = String.format("%s_%s_%s.jpg", browserName, seleniumSettings.getTestName(), dateFormat.format(date));
 
-                try {
-                    String screenFileName = String.format("%s_%s_%s.jpg", browserName, seleniumSettings.getTestName(), dateFormat.format(date));
-                    new File(screensDirectory).mkdirs();
-                    BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(String.format("%s/%s", screensDirectory, screenFileName))));
+                try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(String.format("%s/%s", screensDirectory, screenFileName))))) {
                     out.write(screen);
-                    out.close();
                     String screenAddr;
                     if (isRemoteWebDriver) {
                         screenAddr = ciAddress + screenFileName;
