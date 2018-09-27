@@ -58,12 +58,10 @@ public class SeleniumListener extends TestListenerAdapter {
 
             try {
                 Alert alert = test.seleniumSettings.getWebDriver().switchTo().alert();
-                if (!alert.getText().equals(null)) {
-                    logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
-                    Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
-                    alert.accept();
-                }
-            } catch (NoAlertPresentException e){ // Check is alert present
+                logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
+                Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
+                alert.accept();
+            } catch (NoAlertPresentException e) { // Check is alert present
                 
             } catch (WebDriverException e) {
                 
@@ -121,12 +119,10 @@ public class SeleniumListener extends TestListenerAdapter {
                 while (true) {
                     try {
                         Alert alert = test.seleniumSettings.getWebDriver().switchTo().alert();
-                        if (!alert.getText().equals(null)) {
-                            logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
-                            Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
-                            alert.accept();
-                        }
-                    } catch (NoAlertPresentException e){ // Check is alert present
+                        logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
+                        Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
+                        alert.accept();
+                    } catch (NoAlertPresentException e) { // Check is alert present
                         break;
                     } catch (WebDriverException e) {
                         break;
