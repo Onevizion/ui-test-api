@@ -3,19 +3,15 @@ package com.onevizion.uitest.api.helper;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,19 +44,15 @@ public class Window {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Can't find button " + elemenLocator.toString() + " to open modal window.")
             .ignoring(NoSuchElementException.class)
-            .until(new ExpectedCondition<WebElement>() {
-                public WebElement apply(WebDriver webdriver) {
-                    return seleniumSettings.getWebDriver().findElement(elemenLocator);
-                }
+            .until(webDriver -> {
+                return webDriver.findElement(elemenLocator);
             });
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Button " + elemenLocator.toString() + " is disabled to open new modal window.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    WebElement webElement = seleniumSettings.getWebDriver().findElement(elemenLocator);
-                    return !webElement.getAttribute("class").toLowerCase().contains("disable") && StringUtils.isEmpty(webElement.getAttribute("disabled"));
-                }
+            .until(webdriver -> {
+                WebElement webElement = webdriver.findElement(elemenLocator);
+                return !webElement.getAttribute("class").toLowerCase().contains("disable") && StringUtils.isEmpty(webElement.getAttribute("disabled"));
             });
 
         final int openedWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
@@ -80,10 +72,8 @@ public class Window {
                 seleniumSettings.getWebDriver().findElement(elemenLocator).click();
                 new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
                     .withMessage("Waiting new modal window opened by [" + elemenLocator.toString() + "] is failed.")
-                    .until(new ExpectedCondition<Boolean>() {
-                        public Boolean apply(WebDriver webdriver) {
-                            return seleniumSettings.getWebDriver().getWindowHandles().size() == openedWindowsCount + 1;
-                        }
+                    .until(webdriver -> {
+                        return webdriver.getWindowHandles().size() == openedWindowsCount + 1;
                     });
                 failOpenWindow = false;
             } catch (TimeoutException e) {
@@ -100,17 +90,15 @@ public class Window {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting new modal window opened by [" + elemenLocator.toString() + "] is failed.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    Boolean hasNulls = false;
-                    for (String handle : seleniumSettings.getWebDriver().getWindowHandles()) {
-                        if (handle == null || handle.length() == 0) {
-                            hasNulls = true;
-                            break;
-                        }
+            .until(webdriver -> {
+                Boolean hasNulls = false;
+                for (String handle : webdriver.getWindowHandles()) {
+                    if (handle == null || handle.length() == 0) {
+                        hasNulls = true;
+                        break;
                     }
-                    return !hasNulls;
                 }
+                return !hasNulls;
             });
 
         for (String windowHandle : seleniumSettings.getWebDriver().getWindowHandles()) {
@@ -127,18 +115,14 @@ public class Window {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Can't find button " + element.toString() + " to open modal window.")
             .ignoring(NoSuchElementException.class)
-            .until(new ExpectedCondition<WebElement>() {
-                public WebElement apply(WebDriver webdriver) {
-                    return element;
-                }
+            .until(webdriver -> {
+                return element;
             });
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Button " + element.toString() + " is disabled to open new modal window.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return !element.getAttribute("class").toLowerCase().contains("disable") && StringUtils.isEmpty(element.getAttribute("disabled"));
-                }
+            .until(webdriver -> {
+                return !element.getAttribute("class").toLowerCase().contains("disable") && StringUtils.isEmpty(element.getAttribute("disabled"));
             });
 
         final int openedWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
@@ -150,10 +134,8 @@ public class Window {
                 element.click();
                 new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
                     .withMessage("Waiting new modal window opened by [" + element.toString() + "] is failed.")
-                    .until(new ExpectedCondition<Boolean>() {
-                        public Boolean apply(WebDriver webdriver) {
-                            return seleniumSettings.getWebDriver().getWindowHandles().size() == openedWindowsCount + 1;
-                        }
+                    .until(webdriver -> {
+                        return webdriver.getWindowHandles().size() == openedWindowsCount + 1;
                     });
                 failOpenWindow = false;
             } catch (TimeoutException e) {
@@ -170,17 +152,15 @@ public class Window {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting new modal window opened by [" + element.toString() + "] is failed.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    Boolean hasNulls = false;
-                    for (String handle : seleniumSettings.getWebDriver().getWindowHandles()) {
-                        if (handle == null || handle.length() == 0) {
-                            hasNulls = true;
-                            break;
-                        }
+            .until(webdriver -> {
+                Boolean hasNulls = false;
+                for (String handle : webdriver.getWindowHandles()) {
+                    if (handle == null || handle.length() == 0) {
+                        hasNulls = true;
+                        break;
                     }
-                    return !hasNulls;
                 }
+                return !hasNulls;
             });
 
         for (String windowHandle : seleniumSettings.getWebDriver().getWindowHandles()) {
@@ -202,10 +182,8 @@ public class Window {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return seleniumSettings.getWebDriver().getWindowHandles().size() == currentWindowsCount - 1;
-                }
+            .until(webdriver -> {
+                return webdriver.getWindowHandles().size() == currentWindowsCount - 1;
             });
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
@@ -235,14 +213,11 @@ public class Window {
             seleniumSettings.getWebDriver().close();
         }
 
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout()).withMessage(
-                "Waiting for closing modal window with title=[" + title + "] failed.")
-                .until(
-                        new ExpectedCondition<Boolean>() {
-                            public Boolean apply(WebDriver webdriver) {
-                                return seleniumSettings.getWebDriver().getWindowHandles().size() == currentWindowsCount - 1;
-                            }
-                        });
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
+            .until(webdriver -> {
+                return webdriver.getWindowHandles().size() == currentWindowsCount - 1;
+            });
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
@@ -267,14 +242,11 @@ public class Window {
             seleniumSettings.getWebDriver().close();
         }
 
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout()).withMessage(
-                "Waiting for closing modal window with title=[" + title + "] failed.")
-                .until(
-                        new ExpectedCondition<Boolean>() {
-                            public Boolean apply(WebDriver webdriver) {
-                                return seleniumSettings.getWebDriver().getWindowHandles().size() == currentWindowsCount - 1;
-                            }
-                        });
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
+            .until(webdriver -> {
+                return webdriver.getWindowHandles().size() == currentWindowsCount - 1;
+            });
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
@@ -310,14 +282,11 @@ public class Window {
             
         }
 
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout()).withMessage(
-                "Waiting for closing modal window with title=[" + title + "] failed.")
-                .until(
-                        new ExpectedCondition<Boolean>() {
-                            public Boolean apply(WebDriver webdriver) {
-                                return seleniumSettings.getWebDriver().getWindowHandles().size() == currentWindowsCount - 1;
-                            }
-                        });
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
+            .until(webdriver -> {
+                return webdriver.getWindowHandles().size() == currentWindowsCount - 1;
+            });
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
@@ -329,8 +298,7 @@ public class Window {
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
-    public void closeModalFormButtonRule(final By elementClick, final String message,
-            final String message2) {
+    public void closeModalFormButtonRule(final By elementClick, final String message, final String message2) {
         final int currentWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
         wait.waitWebElement(elementClick);
         String title = seleniumSettings.getWebDriver().getTitle();
@@ -361,14 +329,11 @@ public class Window {
             
         }
 
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout()).withMessage(
-                "Waiting for closing modal window with title=[" + title + "] failed.")
-                .until(
-                        new ExpectedCondition<Boolean>() {
-                            public Boolean apply(WebDriver webdriver) {
-                                return seleniumSettings.getWebDriver().getWindowHandles().size() == currentWindowsCount - 1;
-                            }
-                        });
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
+            .until(webdriver -> {
+                return webdriver.getWindowHandles().size() == currentWindowsCount - 1;
+            });
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
@@ -386,14 +351,11 @@ public class Window {
             logger.warn("Exception in closeModalFormButtonRuleMassAssign", e);
         }
 
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout()).withMessage(
-                "Waiting for closing modal window with title=[" + title + "] failed.")
-                .until(
-                        new ExpectedCondition<Boolean>() {
-                            public Boolean apply(WebDriver webdriver) {
-                                return seleniumSettings.getWebDriver().getWindowHandles().size() == currentWindowsCount - 2;
-                            }
-                        });
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
+            .until(webdriver -> {
+                return webdriver.getWindowHandles().size() == currentWindowsCount - 2;
+            });
 
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
