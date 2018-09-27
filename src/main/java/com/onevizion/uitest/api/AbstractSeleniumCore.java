@@ -655,8 +655,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Interrupted!", e);
+            Thread.currentThread().interrupt();
         }
     }
 

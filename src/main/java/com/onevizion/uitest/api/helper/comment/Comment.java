@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -18,6 +20,8 @@ import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 public class Comment {
+
+    private final static Logger logger = LoggerFactory.getLogger(Comment.class);
 
     @Resource
     private Tb tb;
@@ -179,8 +183,8 @@ public class Comment {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error(seleniumSettings.getTestName() + " Interrupted!", e);
+            Thread.currentThread().interrupt();
         }
     }
 
