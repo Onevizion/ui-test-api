@@ -65,54 +65,16 @@ public class TbDateField {
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
 
         //TODO >=Today
-        /*for (Integer i = 0; i < 3; i++) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=Today", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" - ", i.toString()));
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=Today", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" + ", i.toString()));
-        }*/
-
         //TODO <=Today
-        /*for (Integer i = 0; i < 3; i++) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=Today", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" - ", i.toString()));
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=Today", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" + ", i.toString()));
-        }*/
-
         //TODO Within
-        /*for (Integer i = 1; i < 3; i++) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Within", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(i.toString(), i.toString()));
-        }*/
-
         //TODO This Wk
-        /*for (Integer i = 0; i < 3; i++) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This Wk", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" - ", i.toString()));
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This Wk", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" + ", i.toString()));
-        }*/
-
         //TODO This Mo
-        /*for (Integer i = 0; i < 3; i++) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This Mo", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" - ", i.toString()));
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This Mo", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" + ", i.toString()));
-        }*/
-
         //TODO This FQ
-        /*for (Integer i = 0; i < 3; i++) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This FQ", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" - ", i.toString()));
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This FQ", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" + ", i.toString()));
-        }*/
-
         //TODO This FY
-        /*for (Integer i = 0; i < 2; i++) {
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This FY", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" - ", i.toString()));
-            userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This FY", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, Arrays.asList(" + ", i.toString()));
-        }*/
-
         //TODO This Wk to Dt
-        //userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This Wk to Dt", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         //TODO This Mo to Dt
-        //userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This Mo to Dt", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         //TODO This FQ to Dt
-        //userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This FQ to Dt", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         //TODO This FY to Dt
-        //userFilterHelper.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "This FY to Dt", FieldDataType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
 
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Null", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
@@ -130,20 +92,6 @@ public class TbDateField {
         if (supportOuterOperations) {
             userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
             userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)<>", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    public void createTrackorsForDateTest(String columnId, String columnId2){
-        Long columnIndex = js.getGridColIndexById(0L, columnId);
-        Long columnIndex2 = js.getGridColIndexById(0L, columnId2);
-
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
-        String fieldName2 = js.getGridColumnLabelByColIndex(0L, columnIndex2, 0L);
-
-        for (Integer i = 0; i < 3; i++) {
-            userpageFilter.createTrackorForDateTest(fieldName, fieldName2, ">=Today", Arrays.asList(" - ", i.toString()));
-            userpageFilter.createTrackorForDateTest(fieldName, fieldName2, ">=Today", Arrays.asList(" + ", i.toString()));
         }
     }
 
