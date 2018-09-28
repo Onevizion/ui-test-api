@@ -45,9 +45,9 @@ public class TbNumberField {
 
         if (supportOuterOperations && supportFieldOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", ">", "<", ">=", "<=", "<>", "(+)<>", "Is Null", "Is Not Null", "=Field", "<>Field", ">Field", "<Field", ">=Field", "<=Field"));
-        } else if (supportOuterOperations && !supportFieldOperations) {
+        } else if (supportOuterOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", ">", "<", ">=", "<=", "<>", "(+)<>", "Is Null", "Is Not Null"));
-        } else if (!supportOuterOperations && supportFieldOperations) {
+        } else if (supportFieldOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", "<>", "Is Null", "Is Not Null", "=Field", "<>Field", ">Field", "<Field", ">=Field", "<=Field"));
         } else {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", "<>", "Is Null", "Is Not Null"));

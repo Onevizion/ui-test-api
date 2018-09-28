@@ -46,9 +46,9 @@ public class TbPsTrackorSelectorField {
 
         if (supportOuterOperations && supportFieldOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", "<>", "(+)<>", "Is Null", "Is Not Null", "=Field", "<>Field", "Is New", "Is Not New"));
-        } else if (supportOuterOperations && !supportFieldOperations) {
+        } else if (supportOuterOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", "<>", "(+)<>", "Is Null", "Is Not Null", "Is New", "Is Not New"));
-        } else if (!supportOuterOperations && supportFieldOperations) {
+        } else if (supportFieldOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "<>", "Is Null", "Is Not Null", "=Field", "<>Field", "Is New", "Is Not New"));
         } else {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "<>", "Is Null", "Is Not Null", "Is New", "Is Not New"));

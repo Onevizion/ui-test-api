@@ -47,10 +47,10 @@ public class TbDateField {
         if (supportOuterOperations && supportFieldOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                     "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "(+)<>", "Is Null", "Is Not Null", "=Field", "<>Field", ">Field", "<Field", ">=Field", "<=Field"));
-        } else if (supportOuterOperations && !supportFieldOperations) {
+        } else if (supportOuterOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                     "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "(+)<>", "Is Null", "Is Not Null"));
-        } else if (!supportOuterOperations && supportFieldOperations) {
+        } else if (supportFieldOperations) {
             userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
                     "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "Is Null", "Is Not Null", "=Field", "<>Field", ">Field", "<Field", ">=Field", "<=Field"));
         } else {
