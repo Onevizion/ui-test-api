@@ -440,7 +440,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     capability.setBrowserName(seleniumSettings.getBrowser());
                     capability.merge(options);
                 } else if (seleniumSettings.getBrowser().equals("chrome")) {
-                    HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+                    HashMap<String, Object> chromePrefs = new HashMap<>();
                     chromePrefs.put("profile.default_content_settings.popups", 0);
                     chromePrefs.put("safebrowsing.enabled", "true");
                     chromePrefs.put("download.default_directory", seleniumSettings.getUploadFilesPath());
@@ -508,7 +508,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
                     seleniumSettings.setWebDriver(new FirefoxDriver(options));
                 } else if (seleniumSettings.getBrowser().equals("chrome")) {
-                    HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+                    HashMap<String, Object> chromePrefs = new HashMap<>();
                     chromePrefs.put("profile.default_content_settings.popups", 0);
                     chromePrefs.put("safebrowsing.enabled", "true");
                     chromePrefs.put("download.default_directory", seleniumSettings.getUploadFilesPath());

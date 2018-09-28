@@ -209,7 +209,7 @@ public class EntitySecurityRole {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, SecurityRole securityRole) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Role Name"), securityRole.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), securityRole.getDescription());

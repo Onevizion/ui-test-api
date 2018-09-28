@@ -79,7 +79,7 @@ public class EntityClientFile {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, ClientFile clientFile) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "File Group"), clientFile.getFileGroup());
         gridVals.put(js.getColumnIndexByLabel(gridId, "File Name"), clientFile.getFileName());

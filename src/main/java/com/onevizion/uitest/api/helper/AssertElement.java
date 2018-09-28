@@ -144,7 +144,7 @@ public class AssertElement {
             Assert.assertEquals(actualVal.contains(expectedVal.trim()), true, "Element with name=[" + fieldName + "] has wrong value");
         }
         if (isOpenSelector) {
-            List<String> val = new ArrayList<String>();
+            List<String> val = new ArrayList<>();
             for (String expectedVal : expectedVals) {
                 if (!"".equals(expectedVal)) {
                     val.add(expectedVal);
@@ -162,7 +162,7 @@ public class AssertElement {
             Assert.assertEquals(actualVal.contains(expectedVal.trim()), true, "Element with id=[" + fieldId + "] has wrong value");
         }
         if (isOpenSelector) {
-            List<String> val = new ArrayList<String>();
+            List<String> val = new ArrayList<>();
             for (String expectedVal : expectedVals) {
                 if (!"".equals(expectedVal)) {
                     val.add(expectedVal);

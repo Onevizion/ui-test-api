@@ -162,7 +162,7 @@ public class Grid {
     }
 
     public List<String> selectPrivilegieGridColumn(Long gridId, Long colIdx, Long firstRowIndex, Long lastRowIndex, String val) {
-        List<String> ret = new ArrayList<String>();
+        List<String> ret = new ArrayList<>();
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
             new Select(seleniumSettings.getWebDriver().findElement(By.id("lbpriv"))).selectByVisibleText(val);
@@ -172,7 +172,7 @@ public class Grid {
     }
 
     public List<String> selectAssignmentGridColumn(Long gridId, Long colIdx, Long firstRowIndex, Long lastRowIndex) {
-        List<String> ret = new ArrayList<String>();
+        List<String> ret = new ArrayList<>();
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
             WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
@@ -201,7 +201,7 @@ public class Grid {
 
     //TODO remove when getValue will be return 1 and 0 instead of html
     public List<String> selectAssignmentGridColumn2(Long gridId, Long colIdx, Long firstRowIndex, Long lastRowIndex) {
-        List<String> ret = new ArrayList<String>();
+        List<String> ret = new ArrayList<>();
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
             WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);

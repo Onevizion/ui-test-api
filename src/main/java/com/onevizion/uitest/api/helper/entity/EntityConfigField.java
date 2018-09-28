@@ -752,7 +752,7 @@ public class EntityConfigField {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, ConfigFieldVo configFieldVo) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Field Name"), configFieldVo.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Field Label"), configFieldVo.getLabel());

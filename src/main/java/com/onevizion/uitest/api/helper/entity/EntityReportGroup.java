@@ -73,7 +73,7 @@ public class EntityReportGroup {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, ReportGroup reportGroup) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Report Group Name"), reportGroup.getName());
 

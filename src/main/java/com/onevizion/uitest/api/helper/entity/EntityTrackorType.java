@@ -161,7 +161,7 @@ public class EntityTrackorType {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorType trackorType) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor-type Name"), trackorType.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Label"), trackorType.getLabel());

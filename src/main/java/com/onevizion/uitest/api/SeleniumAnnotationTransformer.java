@@ -22,7 +22,7 @@ public class SeleniumAnnotationTransformer implements IAnnotationTransformer {
 
     @Override
     public void transform(ITestAnnotation annotation, @SuppressWarnings("rawtypes") Class testClass, @SuppressWarnings("rawtypes") Constructor testConstructor, Method testMethod) {
-        List<TestNgMethod> testNgMethods = new ArrayList<TestNgMethod>();
+        List<TestNgMethod> testNgMethods = new ArrayList<>();
         for (int i = 0; i < testClass.getDeclaredMethods().length; i++) {
             if (testClass.getDeclaredMethods()[i].isAnnotationPresent(Test.class)) {
                 testNgMethods.add(new TestNgMethod(testClass.getDeclaredMethods()[i].getName(), getMethodLineNumber(testClass, testClass.getDeclaredMethods()[i])));

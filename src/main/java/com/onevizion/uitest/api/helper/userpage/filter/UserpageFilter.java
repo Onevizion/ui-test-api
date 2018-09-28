@@ -140,7 +140,7 @@ public class UserpageFilter {
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEquals(0L, columnIndex, Arrays.asList(value));
             } else if (operator.equals("(+)=")) {
-                Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
+                Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
                     String str = "";
@@ -151,7 +151,7 @@ public class UserpageFilter {
                     if (equalsKeyMap.containsKey(str)) {
                         equalsKeyMap.get(str).add(new Long(i));
                     } else {
-                        List<Long> vals = new ArrayList<Long>();
+                        List<Long> vals = new ArrayList<>();
                         vals.add(new Long(i));
                         equalsKeyMap.put(str, vals);
                     }
@@ -185,7 +185,7 @@ public class UserpageFilter {
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEquals(0L, columnIndex, value);
             } else if (operator.equals("(+)<>")) {
-                Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
+                Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
                     String str = "";
@@ -196,7 +196,7 @@ public class UserpageFilter {
                     if (equalsKeyMap.containsKey(str)) {
                         equalsKeyMap.get(str).add(new Long(i));
                     } else {
-                        List<Long> vals = new ArrayList<Long>();
+                        List<Long> vals = new ArrayList<>();
                         vals.add(new Long(i));
                         equalsKeyMap.put(str, vals);
                     }
@@ -284,7 +284,7 @@ public class UserpageFilter {
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridBooleanColumnEquals(0L, columnIndex, Arrays.asList(value.toUpperCase()));
             } else if (operator.equals("(+)=")) {
-                Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
+                Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
                     String str = "";
@@ -295,7 +295,7 @@ public class UserpageFilter {
                     if (equalsKeyMap.containsKey(str)) {
                         equalsKeyMap.get(str).add(new Long(i));
                     } else {
-                        List<Long> vals = new ArrayList<Long>();
+                        List<Long> vals = new ArrayList<>();
                         vals.add(new Long(i));
                         equalsKeyMap.put(str, vals);
                     }
@@ -335,7 +335,7 @@ public class UserpageFilter {
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEquals(0L, columnIndex, Arrays.asList(value));
             } else if (operator.equals("(+)=")) {
-                Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
+                Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
                     String str = "";
@@ -346,7 +346,7 @@ public class UserpageFilter {
                     if (equalsKeyMap.containsKey(str)) {
                         equalsKeyMap.get(str).add(new Long(i));
                     } else {
-                        List<Long> vals = new ArrayList<Long>();
+                        List<Long> vals = new ArrayList<>();
                         vals.add(new Long(i));
                         equalsKeyMap.put(str, vals);
                     }
@@ -484,7 +484,7 @@ public class UserpageFilter {
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEquals(0L, columnIndex, value);
             } else if (operator.equals("(+)<>")) {
-                Map<String, List<Long>> equalsKeyMap = new HashMap<String, List<Long>>();
+                Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
                     String str = "";
@@ -495,7 +495,7 @@ public class UserpageFilter {
                     if (equalsKeyMap.containsKey(str)) {
                         equalsKeyMap.get(str).add(new Long(i));
                     } else {
-                        List<Long> vals = new ArrayList<Long>();
+                        List<Long> vals = new ArrayList<>();
                         vals.add(new Long(i));
                         equalsKeyMap.put(str, vals);
                     }

@@ -65,7 +65,7 @@ public class Tb {
 
     String getLastFieldIndex(String name, int elementPosition) {
         List<WebElement> elems = seleniumSettings.getWebDriver().findElements(By.name(name));
-        List<Integer> idx = new ArrayList<Integer>();
+        List<Integer> idx = new ArrayList<>();
         String suffix = "";
         if (name.contains("_start")) {
             suffix = "_start";

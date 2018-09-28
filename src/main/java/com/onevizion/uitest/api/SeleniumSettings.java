@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class SeleniumSettings {
 
-    private ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
+    private ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
-    private ThreadLocal<UserProperties> userProperties = new ThreadLocal<UserProperties>();
+    private ThreadLocal<UserProperties> userProperties = new ThreadLocal<>();
 
-    private ThreadLocal<List<String>> windows = new ThreadLocal<List<String>>();
+    private ThreadLocal<List<String>> windows = new ThreadLocal<>();
 
-    private ThreadLocal<String> testUser = new ThreadLocal<String>();
+    private ThreadLocal<String> testUser = new ThreadLocal<>();
 
-    private ThreadLocal<String> testStatus = new ThreadLocal<String>();
+    private ThreadLocal<String> testStatus = new ThreadLocal<>();
 
-    private ThreadLocal<String> testName = new ThreadLocal<String>();
+    private ThreadLocal<String> testName = new ThreadLocal<>();
 
     @Resource
     private Long defaultTimeout;

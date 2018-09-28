@@ -159,7 +159,7 @@ public class EntityTrackorTourStep {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorTourStep trackorTourStep) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Step Title Label"), trackorTourStep.getTitleLabel());
         if (trackorTourStep.getElementType().equals("name=")) {

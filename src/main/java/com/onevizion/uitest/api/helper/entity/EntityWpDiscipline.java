@@ -96,7 +96,7 @@ public class EntityWpDiscipline {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, WpDiscipline wpDiscipline) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Discipline"), wpDiscipline.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), wpDiscipline.getDescription());

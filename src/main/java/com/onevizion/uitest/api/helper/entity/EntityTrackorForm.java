@@ -141,7 +141,7 @@ public class EntityTrackorForm {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorForm trackorForm) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Form Name"), trackorForm.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Report Name"), trackorForm.getReportName());

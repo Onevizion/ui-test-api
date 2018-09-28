@@ -51,7 +51,7 @@ public class Checkbox {
 
     public List<WebElement> findLabelsByName(String checkboxname) {
         List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name(checkboxname));
-        List<WebElement> labels = new ArrayList<WebElement>();
+        List<WebElement> labels = new ArrayList<>();
         for (WebElement checkbox : checkboxes) {
             WebElement label = js.getParentElement(checkbox);
             labels.add(label);

@@ -122,7 +122,7 @@ public class EntityWpDatePair {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, WpDatePair wpDatePair) {
-        Map<Long, String> gridVals = new HashMap<Long, String>();
+        Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Date Pair Name"), wpDatePair.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Label"), wpDatePair.getLabel());

@@ -64,7 +64,7 @@ public class PsSelector {
     }
 
     public List<String> selectMultipleValues(String buttonName, Long firstRowNum, Long lastRowNum, Long colNum) {
-        List<String> ret = new ArrayList<String>();
+        List<String> ret = new ArrayList<>();
         window.openModal(By.name(buttonName));
         wait.waitGridLoad(0L, 0L);
         List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("cb0_0"));
@@ -135,7 +135,7 @@ public class PsSelector {
     }
 
     public List<String> selectMultipleSpecificValues(By btnOpen, Long colNum, List<String> values, Long filterFiledNum) {
-        List<String> ret = new ArrayList<String>();
+        List<String> ret = new ArrayList<>();
         window.openModal(btnOpen);
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         wait.waitGridLoad(0L, 0L);
@@ -178,7 +178,7 @@ public class PsSelector {
     }
 
     public List<String> selectMultipleSpecificValues2(String buttonName, Long colNum, List<String> values, Long filterFiledNum) {
-        List<String> ret = new ArrayList<String>();
+        List<String> ret = new ArrayList<>();
         window.openModal(By.name(buttonName));
         wait.waitGridLoad(0L, 0L);
 

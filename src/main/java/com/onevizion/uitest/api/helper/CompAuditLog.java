@@ -26,7 +26,7 @@ public class CompAuditLog {
     private SeleniumSettings seleniumSettings;
 
     public void checkGridRowsByRowIndex(Long gridId, Long rowIndexStart, Long rowIndexEnd, String action, String table) {
-        Map<String, String> gridVals = new HashMap<String, String>();
+        Map<String, String> gridVals = new HashMap<>();
 
         gridVals.put(COLUMN_ID_USER, seleniumSettings.getTestUser());
         gridVals.put(COLUMN_ID_ACTION, action);
@@ -36,7 +36,7 @@ public class CompAuditLog {
     }
 
     public Long checkGridRowByRowIndex(Long gridId, Long rowIndex, String action, String table, String field, String newVal, String oldVal) {
-        Map<String, String> gridVals = new HashMap<String, String>();
+        Map<String, String> gridVals = new HashMap<>();
 
         gridVals.put(COLUMN_ID_USER, seleniumSettings.getTestUser());
         gridVals.put(COLUMN_ID_ACTION, action);
