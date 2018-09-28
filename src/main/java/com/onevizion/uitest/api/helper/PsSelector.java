@@ -258,7 +258,7 @@ public class PsSelector {
                         break;
                     }
                 }
-                if (ret == false) {
+                if (!ret) {
                     window.closeModal(By.name(btnCloseName));
                     return ret;
                 }
@@ -277,7 +277,7 @@ public class PsSelector {
                         break;
                     }
                 }
-                if (ret == false) {
+                if (!ret) {
                     window.closeModal(By.name(btnCloseName));
                     return ret;
                 }

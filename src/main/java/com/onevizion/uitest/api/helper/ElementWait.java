@@ -207,7 +207,7 @@ public class ElementWait {
     public void waitElementDisabled(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] is enabled")
-            .until(webdriver -> element.isEnabled() == false);
+            .until(webdriver -> !element.isEnabled());
     }
 
     public void waitElementDisabledByName(String name) {
@@ -215,7 +215,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] is enabled")
-            .until(webdriver -> webdriver.findElement(By.name(name)).isEnabled() == false);
+            .until(webdriver -> !webdriver.findElement(By.name(name)).isEnabled());
     }
 
     public void waitElementDisabledById(String id) {
@@ -223,13 +223,13 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] is enabled")
-            .until(webdriver -> webdriver.findElement(By.id(id)).isEnabled() == false);
+            .until(webdriver -> !webdriver.findElement(By.id(id)).isEnabled());
     }
 
     public void waitElementEnabled(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] is disabled.")
-            .until(webdriver -> element.isEnabled() == true);
+            .until(webdriver -> element.isEnabled());
     }
 
     public void waitElementEnabledByName(String name) {
@@ -237,7 +237,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] is disabled.")
-            .until(webdriver -> webdriver.findElement(By.name(name)).isEnabled() == true);
+            .until(webdriver -> webdriver.findElement(By.name(name)).isEnabled());
     }
 
     public void waitElementEnabledById(String id) {
@@ -245,7 +245,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] is disabled.")
-            .until(webdriver -> webdriver.findElement(By.id(id)).isEnabled() == true);
+            .until(webdriver -> webdriver.findElement(By.id(id)).isEnabled());
     }
 
     @Deprecated
@@ -254,7 +254,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element by=[" + by + "] is disabled.")
-            .until(webdriver -> webdriver.findElement(by).isEnabled() == true);
+            .until(webdriver -> webdriver.findElement(by).isEnabled());
     }
 
     public void waitElementAnimatedFinish(WebElement element) {

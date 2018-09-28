@@ -68,13 +68,13 @@ public class AssertElement {
     @Deprecated
     public void AssertCheckBox(String name, String expectedVal) {
         element.moveToElementByName(name);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() == true ? "YES" : "NO";
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
     public void AssertCheckBoxNew(String name, String expectedVal) {
         element.moveToElementByName("lbl" + name);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() == true ? "YES" : "NO";
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
@@ -84,13 +84,13 @@ public class AssertElement {
     @Deprecated
     public void AssertCheckBoxById(String id, String expectedVal) {
         element.moveToElementById(id);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).isSelected() == true ? "YES" : "NO";
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
     }
 
     public void AssertCheckBoxByIdNew(String id, String expectedVal) {
         element.moveToElementById("lbl" + id);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).isSelected() == true ? "YES" : "NO";
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
     }
 

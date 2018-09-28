@@ -229,7 +229,7 @@ public class FormDesigner {
         List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("record"));
         for (WebElement field : fields) {
             if (field.findElement(By.className("labelField")).getAttribute("innerText").trim().equals(text)) {
-                if (isExist == true) {
+                if (isExist) {
                     throw new SeleniumUnexpectedException("Element with text[" + text + "] found many times");
                 }
                 isExist = true;
@@ -244,7 +244,7 @@ public class FormDesigner {
         List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("rightListBox")).findElement(By.id("listBoxContent")).findElements(By.className("record"));
         for (WebElement field : fields) {
             if (field.findElement(By.className("labelField")).getAttribute("innerText").trim().equals(text)) {
-                if (isExist == true) {
+                if (isExist) {
                     throw new SeleniumUnexpectedException("Element with text[" + text + "] found many times");
                 }
                 isExist = true;
@@ -286,7 +286,7 @@ public class FormDesigner {
         List<WebElement> subgroups = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("groupRecord"));
         for (WebElement subgroup : subgroups) {
             if (subgroup.getAttribute("innerText").trim().equals(text)) {
-                if (isExist == true) {
+                if (isExist) {
                     throw new SeleniumUnexpectedException("Subgroup with text[" + text + "] found many times");
                 }
                 isExist = true;
