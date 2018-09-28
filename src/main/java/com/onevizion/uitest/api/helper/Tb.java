@@ -3,7 +3,6 @@ package com.onevizion.uitest.api.helper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -81,14 +80,11 @@ public class Tb {
             id = id.replace("_start", "").replace("_finish", ""); //for task date
             idx.add(Integer.parseInt(id.substring(3)));
         }
-        Collections.sort(idx, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                if (o1.compareTo(o2) < 0) {
-                    return -1;
-                } else {
-                    return 1;
-                }
+        Collections.sort(idx, (Integer o1, Integer o2) -> {
+            if (o1.compareTo(o2) < 0) {
+                return -1;
+            } else {
+                return 1;
             }
         });
         return idx.get(elementPosition - 1) + suffix;

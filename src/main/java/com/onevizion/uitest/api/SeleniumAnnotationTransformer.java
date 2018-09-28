@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.testng.IAnnotationTransformer;
@@ -30,11 +29,8 @@ public class SeleniumAnnotationTransformer implements IAnnotationTransformer {
             }
         }
 
-        Collections.sort(testNgMethods, new Comparator<TestNgMethod>() {
-            @Override
-            public int compare(TestNgMethod arg0, TestNgMethod arg1) {
-                return Integer.compare(arg0.getLineNumber(), arg1.getLineNumber());
-            }
+        Collections.sort(testNgMethods, (TestNgMethod arg0, TestNgMethod arg1) -> {
+            return Integer.compare(arg0.getLineNumber(), arg1.getLineNumber());
         });
 
         int methodNumber = 0;
