@@ -4,8 +4,6 @@ import java.util.function.Supplier;
 
 import javax.annotation.Resource;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
@@ -34,30 +32,24 @@ class ViewWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return viewName.equals(actualValueSupplier.get());
-                }
+            .until(webdriver -> {
+                return viewName.equals(actualValueSupplier.get());
             });
     }
 
     void waitLeftListBoxReady() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for leftListBox loading is failed")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return viewJs.isReadyLeftListBox();
-                }
+            .until(webdriver -> {
+                return viewJs.isReadyLeftListBox();
             });
     }
 
     void waitRightListBoxReady() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for rightListBox loading is failed")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return viewJs.isReadyRightListBox();
-                }
+            .until(webdriver -> {
+                return viewJs.isReadyRightListBox();
             });
     }
 

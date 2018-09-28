@@ -4,8 +4,6 @@ import java.util.function.Supplier;
 
 import javax.annotation.Resource;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
@@ -31,10 +29,8 @@ class Grid2Wait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return actualValueSupplier.get();
-                }
+            .until(webdriver -> {
+                return actualValueSupplier.get();
             });
     }
 

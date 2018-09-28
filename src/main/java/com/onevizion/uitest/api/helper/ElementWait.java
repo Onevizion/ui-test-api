@@ -10,10 +10,8 @@ import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
@@ -35,10 +33,8 @@ public class ElementWait {
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .ignoring(WebDriverException.class)
-            .until(new ExpectedCondition<WebElement>() {
-                public WebElement apply(WebDriver webdriver) {
-                    return element;
-                }
+            .until(webdriver -> {
+                return element;
             });
     }*/
 
@@ -48,11 +44,9 @@ public class ElementWait {
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .ignoring(WebDriverException.class)
-            .until(new ExpectedCondition<WebElement>() {
-                public WebElement apply(WebDriver webdriver) {
-                    //return seleniumSettings.getWebDriver().findElement(By.name(name));
-                    return seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']"));
-                }
+            .until(webdriver -> {
+                //return webdriver.findElement(By.name(name));
+                return webdriver.findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']"));
             });
     }
 
@@ -62,12 +56,9 @@ public class ElementWait {
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .ignoring(WebDriverException.class)
-            .until(
-                new ExpectedCondition<WebElement>() {
-                    public WebElement apply(WebDriver webdriver) {
-                        return seleniumSettings.getWebDriver().findElement(By.id(id));
-                    }
-                });
+            .until(webdriver -> {
+                return webdriver.findElement(By.id(id));
+            });
     }
 
     @Deprecated
@@ -77,12 +68,9 @@ public class ElementWait {
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .ignoring(WebDriverException.class)
-            .until(
-                new ExpectedCondition<WebElement>() {
-                    public WebElement apply(WebDriver webdriver) {
-                        return seleniumSettings.getWebDriver().findElement(by);
-                    }
-                });
+            .until(webdriver -> {
+                return webdriver.findElement(by);
+            });
     }
 
     public void waitElementVisible(WebElement element) {
@@ -149,10 +137,8 @@ public class ElementWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] not displayed")
             .ignoring(StaleElementReferenceException.class)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return element.isDisplayed();
-                }
+            .until(webdriver -> {
+                return element.isDisplayed();
             });
     }
 
@@ -162,11 +148,9 @@ public class ElementWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] not displayed")
             .ignoring(StaleElementReferenceException.class)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    //return seleniumSettings.getWebDriver().findElement(By.name(name)).isDisplayed();
-                    return seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isDisplayed();
-                }
+            .until(webdriver -> {
+                //return webdriver.findElement(By.name(name)).isDisplayed();
+                return webdriver.findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isDisplayed();
             });
     }
 
@@ -176,10 +160,8 @@ public class ElementWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] not displayed")
             .ignoring(StaleElementReferenceException.class)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return seleniumSettings.getWebDriver().findElement(By.id(id)).isDisplayed();
-                }
+            .until(webdriver -> {
+                return webdriver.findElement(By.id(id)).isDisplayed();
             });
     }
 
@@ -189,20 +171,16 @@ public class ElementWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] displayed")
             .ignoring(StaleElementReferenceException.class)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return !seleniumSettings.getWebDriver().findElement(By.id(id)).isDisplayed();
-                }
+            .until(webdriver -> {
+                return !webdriver.findElement(By.id(id)).isDisplayed();
             });
     }
 
     public void waitElementAttribute(WebElement element, String attribute, String attributeValue) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element [" + element + "] attribute [" + attribute + "] value [" + attributeValue + "] is failed")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return element.getAttribute(attribute).equals(attributeValue);
-                }
+            .until(webdriver -> {
+                return element.getAttribute(attribute).equals(attributeValue);
             });
     }
 
@@ -215,10 +193,8 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return actualValueSupplier.get().equals(attributeValue);
-                }
+            .until(webdriver -> {
+                return actualValueSupplier.get().equals(attributeValue);
             });
     }
 
@@ -230,10 +206,8 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return actualValueSupplier.get().equals(attributeValue);
-                }
+            .until(webdriver -> {
+                return actualValueSupplier.get().equals(attributeValue);
             });
     }
 
@@ -244,26 +218,22 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(supplier)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    List<String> actualAttributeValue = Arrays.asList(seleniumSettings.getWebDriver().findElement(By.id(id)).getAttribute(attribute).split(";"));
-                    for (int i = 0; i < actualAttributeValue.size(); i++) {
-                        actualAttributeValue.set(i, actualAttributeValue.get(i).trim());
-                    }
-                    Collections.sort(attributeValue);
-                    Collections.sort(actualAttributeValue);
-                    return attributeValue.equals(actualAttributeValue);
+            .until(webdriver -> {
+                List<String> actualAttributeValue = Arrays.asList(webdriver.findElement(By.id(id)).getAttribute(attribute).split(";"));
+                for (int i = 0; i < actualAttributeValue.size(); i++) {
+                    actualAttributeValue.set(i, actualAttributeValue.get(i).trim());
                 }
+                Collections.sort(attributeValue);
+                Collections.sort(actualAttributeValue);
+                return attributeValue.equals(actualAttributeValue);
             });
     }
 
     public void waitElementDisabled(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] is enabled")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return element.isEnabled() == false;
-                }
+            .until(webdriver -> {
+                return element.isEnabled() == false;
             });
     }
 
@@ -272,11 +242,9 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] is enabled")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    //return seleniumSettings.getWebDriver().findElement(By.name(name)).isEnabled() == false;
-                    return seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isEnabled() == false;
-                }
+            .until(webdriver -> {
+                //return webdriver.findElement(By.name(name)).isEnabled() == false;
+                return webdriver.findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isEnabled() == false;
             });
     }
 
@@ -285,20 +253,16 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] is enabled")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return seleniumSettings.getWebDriver().findElement(By.id(id)).isEnabled() == false;
-                }
+            .until(webdriver -> {
+                return webdriver.findElement(By.id(id)).isEnabled() == false;
             });
     }
 
     public void waitElementEnabled(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] is disabled.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return element.isEnabled() == true;
-                }
+            .until(webdriver -> {
+                return element.isEnabled() == true;
             });
     }
 
@@ -307,11 +271,9 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] is disabled.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    //return seleniumSettings.getWebDriver().findElement(By.name(name)).isEnabled() == true;
-                    return seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isEnabled() == true;
-                }
+            .until(webdriver -> {
+                //return webdriver.findElement(By.name(name)).isEnabled() == true;
+                return webdriver.findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isEnabled() == true;
             });
     }
 
@@ -320,10 +282,8 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] is disabled.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return seleniumSettings.getWebDriver().findElement(By.id(id)).isEnabled() == true;
-                }
+            .until(webdriver -> {
+                return webdriver.findElement(By.id(id)).isEnabled() == true;
             });
     }
 
@@ -333,20 +293,16 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element by=[" + by + "] is disabled.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return seleniumSettings.getWebDriver().findElement(by).isEnabled() == true;
-                }
+            .until(webdriver -> {
+                return webdriver.findElement(by).isEnabled() == true;
             });
     }
 
     public void waitElementAnimatedFinish(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] is animated.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return elementJs.isElementAnimatedFinish(element);
-                }
+            .until(webdriver -> {
+                return elementJs.isElementAnimatedFinish(element);
             });
     }
 
@@ -355,10 +311,8 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] is animated.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return elementJs.isElementAnimatedFinishByName(name);
-                }
+            .until(webdriver -> {
+                return elementJs.isElementAnimatedFinishByName(name);
             });
     }
 
@@ -367,20 +321,16 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] is animated.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return elementJs.isElementAnimatedFinishById(id);
-                }
+            .until(webdriver -> {
+                return elementJs.isElementAnimatedFinishById(id);
             });
     }
 
     public void waitElementVelocityAnimatedFinish(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] Velocity is animated.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return elementJs.isElementVelocityAnimatedFinish(element);
-                }
+            .until(webdriver -> {
+                return elementJs.isElementVelocityAnimatedFinish(element);
             });
     }
 
@@ -389,10 +339,8 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] Velocity is animated.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return elementJs.isElementVelocityAnimatedFinishByName(name);
-                }
+            .until(webdriver -> {
+                return elementJs.isElementVelocityAnimatedFinishByName(name);
             });
     }
 
@@ -401,10 +349,8 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] Velocity is animated.")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return elementJs.isElementVelocityAnimatedFinishById(id);
-                }
+            .until(webdriver -> {
+                return elementJs.isElementVelocityAnimatedFinishById(id);
             });
     }
 

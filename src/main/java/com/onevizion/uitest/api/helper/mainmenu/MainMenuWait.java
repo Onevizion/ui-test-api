@@ -5,8 +5,6 @@ import java.util.function.Supplier;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
@@ -32,20 +30,16 @@ class MainMenuWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return title.equals(actualValueSupplier.get());
-                }
+            .until(webdriver -> {
+                return title.equals(actualValueSupplier.get());
             });
     }
 
     void waitLeftMenuSearchUpdated() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for JQuery loading is failed")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return mainMenuJs.isLeftMenuSearchUpdated();
-                }
+            .until(webdriver -> {
+                return mainMenuJs.isLeftMenuSearchUpdated();
             });
     }
 

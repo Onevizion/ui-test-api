@@ -12,9 +12,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -151,10 +149,8 @@ public class SeleniumListener extends TestListenerAdapter {
 
                 new WebDriverWait(test.seleniumSettings.getWebDriver(), test.seleniumSettings.getDefaultTimeout())
                     .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
-                    .until(new ExpectedCondition<Boolean>() {
-                        public Boolean apply(WebDriver webdriver) {
-                            return test.seleniumSettings.getWebDriver().getWindowHandles().size() == currentWindowsCount - 1;
-                        }
+                    .until(webdriver -> {
+                        return webdriver.getWindowHandles().size() == currentWindowsCount - 1;
                     });
 
                 test.seleniumSettings.getWindows().remove(test.seleniumSettings.getWindows().size() - 1);
@@ -162,10 +158,8 @@ public class SeleniumListener extends TestListenerAdapter {
 
                 new WebDriverWait(test.seleniumSettings.getWebDriver(), test.seleniumSettings.getDefaultTimeout())
                     .withMessage("Waiting for closing modal window.")
-                    .until(new ExpectedCondition<Boolean>() {
-                        public Boolean apply(WebDriver webdriver) {
-                            return !js.isWindowClosed(test);
-                        }
+                    .until(webdriver -> {
+                        return !js.isWindowClosed(test);
                     });
             }
         } catch (Exception e) {

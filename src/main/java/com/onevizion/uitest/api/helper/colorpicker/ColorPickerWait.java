@@ -2,8 +2,6 @@ package com.onevizion.uitest.api.helper.colorpicker;
 
 import javax.annotation.Resource;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
@@ -21,10 +19,8 @@ class ColorPickerWait {
     void waitColorPicker() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for ColorPicke is failed")
-            .until(new ExpectedCondition<Boolean>() {
-                public Boolean apply(WebDriver webdriver) {
-                    return colorPickerJs.isColorPickerExist();
-                }
+            .until(webdriver -> {
+                return colorPickerJs.isColorPickerExist();
             });
     }
 
