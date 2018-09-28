@@ -115,10 +115,10 @@ public class EntityDynamicVtable {
         tab.goToTab(2L); //Values
         wait.waitGridLoad(2L, 2L);
 
-        Assert.assertEquals(grid.getGridRowsCount(2L), new Long(dynamicVtable.getValues().size()));
+        Assert.assertEquals(grid.getGridRowsCount(2L), Long.valueOf(dynamicVtable.getValues().size()));
         for (int i = 0; i < dynamicVtable.getValues().size(); i++) {
-            js.selectGridRow(2L, new Long(i));
-            entityDynamicVtableValue.testInGrid(2L, new Long(i), dynamicVtable.getValues().get(i));
+            js.selectGridRow(2L, Long.valueOf(i));
+            entityDynamicVtableValue.testInGrid(2L, Long.valueOf(i), dynamicVtable.getValues().get(i));
             entityDynamicVtableValue.testOnForm(dynamicVtable.getValues().get(i));
         }
 

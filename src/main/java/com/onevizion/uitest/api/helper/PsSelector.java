@@ -82,7 +82,7 @@ public class PsSelector {
             }
         } else {
             Long cnt = js.getGridRowsCount(0L);
-            if (cnt.compareTo(new Long(5L)) > 0) {
+            if (cnt.compareTo(Long.valueOf(5L)) > 0) {
                 cnt = 5L;
             }
             if (webElements.size() > 0) {

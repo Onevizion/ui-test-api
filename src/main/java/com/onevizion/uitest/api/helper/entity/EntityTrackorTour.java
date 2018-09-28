@@ -151,10 +151,10 @@ public class EntityTrackorTour {
         tab.goToTab(2L); //Tour Steps
         wait.waitGridLoad(2L, 2L);
 
-        Assert.assertEquals(grid.getGridRowsCount(2L), new Long(trackorTour.getSteps().size()));
+        Assert.assertEquals(grid.getGridRowsCount(2L), Long.valueOf(trackorTour.getSteps().size()));
         for (int i = 0; i < trackorTour.getSteps().size(); i++) {
-            js.selectGridRow(2L, new Long(i));
-            entityTrackorTourStep.testInGrid(2L, new Long(i), trackorTour.getSteps().get(i));
+            js.selectGridRow(2L, Long.valueOf(i));
+            entityTrackorTourStep.testInGrid(2L, Long.valueOf(i), trackorTour.getSteps().get(i));
             entityTrackorTourStep.testOnForm(trackorTour.getSteps().get(i));
         }
 

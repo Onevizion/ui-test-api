@@ -65,20 +65,20 @@ public class Nav {
 
         int countPages = (int) Math.ceil(allRecordsCount.doubleValue() / actualVisibleRecordsCount.doubleValue());
 
-        Assert.assertEquals(getFirstRowNum(gridIdx), new Long(1L), "First num row in grid is wrong");
+        Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1L), "First num row in grid is wrong");
         Assert.assertEquals(getLastRowNum(gridIdx), actualVisibleRecordsCount, "Last num row in grid is wrong");
         checkCountRowsOnPage(gridIdx);
 
         for (int pageNum = 1; pageNum < countPages; pageNum++) {
-            Assert.assertEquals(getFirstRowNum(gridIdx), new Long(1 + (pageNum - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
-            Assert.assertEquals(getLastRowNum(gridIdx), new Long(pageNum * actualVisibleRecordsCount), "Last num row in grid is wrong");
+            Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1 + (pageNum - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
+            Assert.assertEquals(getLastRowNum(gridIdx), Long.valueOf(pageNum * actualVisibleRecordsCount), "Last num row in grid is wrong");
             checkCountRowsOnPage(gridIdx);
 
             goToNextPage(gridIdx, pageNum + 1);
             wait.waitGridLoad(gridIdx, gridIdx);
         }
 
-        Assert.assertEquals(getFirstRowNum(gridIdx), new Long(1 + (countPages - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
+        Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1 + (countPages - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
         Assert.assertEquals(getLastRowNum(gridIdx), allRecordsCount, "Last num row in grid is wrong");
         checkCountRowsOnPage(gridIdx);
 
@@ -86,12 +86,12 @@ public class Nav {
             goToPrevPage(gridIdx, pageNum - 1);
             wait.waitGridLoad(gridIdx, gridIdx);
 
-            Assert.assertEquals(getFirstRowNum(gridIdx), new Long((pageNum - 2) * actualVisibleRecordsCount + 1), "First num row in grid is wrong");
-            Assert.assertEquals(getLastRowNum(gridIdx), new Long((pageNum - 1) * actualVisibleRecordsCount), "Last num row in grid is wrong");
+            Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf((pageNum - 2) * actualVisibleRecordsCount + 1), "First num row in grid is wrong");
+            Assert.assertEquals(getLastRowNum(gridIdx), Long.valueOf((pageNum - 1) * actualVisibleRecordsCount), "Last num row in grid is wrong");
             checkCountRowsOnPage(gridIdx);
         }
 
-        Assert.assertEquals(getFirstRowNum(gridIdx), new Long(1L), "First num row in grid is wrong");
+        Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1L), "First num row in grid is wrong");
         Assert.assertEquals(getLastRowNum(gridIdx), actualVisibleRecordsCount, "Last num row in grid is wrong");
         checkCountRowsOnPage(gridIdx);
     }

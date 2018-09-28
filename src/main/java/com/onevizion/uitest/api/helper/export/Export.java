@@ -152,7 +152,7 @@ public class Export {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-        Assert.assertEquals(gridRows, new Long(1L), "Grid have wrong rows count");
+        Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -176,7 +176,7 @@ public class Export {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-        Assert.assertEquals(gridRows, new Long(1L), "Grid have wrong rows count");
+        Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
         checkbox.clickById("lblcb" + processId);
         elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx());
@@ -185,7 +185,7 @@ public class Export {
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
         gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-        Assert.assertEquals(gridRows, new Long(0L), "Grid have wrong rows count");
+        Assert.assertEquals(gridRows, Long.valueOf(0L), "Grid have wrong rows count");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
     }
