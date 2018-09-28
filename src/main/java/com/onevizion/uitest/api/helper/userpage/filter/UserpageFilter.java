@@ -119,7 +119,7 @@ public class UserpageFilter {
             
         } else {
             Long rowsCntAfter = grid.getGridRowsCount(0L);
-            if (rowsCntAfter.equals(new Long(0L))) {
+            if (rowsCntAfter.equals(Long.valueOf(0L))) {
                 throw new SeleniumUnexpectedException("Grid have wrong rows count");
             }
         }
@@ -149,10 +149,10 @@ public class UserpageFilter {
                     }
 
                     if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(new Long(i));
+                        equalsKeyMap.get(str).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
-                        vals.add(new Long(i));
+                        vals.add(Long.valueOf(i));
                         equalsKeyMap.put(str, vals);
                     }
                 }
@@ -194,10 +194,10 @@ public class UserpageFilter {
                     }
 
                     if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(new Long(i));
+                        equalsKeyMap.get(str).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
-                        vals.add(new Long(i));
+                        vals.add(Long.valueOf(i));
                         equalsKeyMap.put(str, vals);
                     }
                 }
@@ -293,10 +293,10 @@ public class UserpageFilter {
                     }
 
                     if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(new Long(i));
+                        equalsKeyMap.get(str).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
-                        vals.add(new Long(i));
+                        vals.add(Long.valueOf(i));
                         equalsKeyMap.put(str, vals);
                     }
                 }
@@ -344,10 +344,10 @@ public class UserpageFilter {
                     }
 
                     if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(new Long(i));
+                        equalsKeyMap.get(str).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
-                        vals.add(new Long(i));
+                        vals.add(Long.valueOf(i));
                         equalsKeyMap.put(str, vals);
                     }
                 }
@@ -493,10 +493,10 @@ public class UserpageFilter {
                     }
 
                     if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(new Long(i));
+                        equalsKeyMap.get(str).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
-                        vals.add(new Long(i));
+                        vals.add(Long.valueOf(i));
                         equalsKeyMap.put(str, vals);
                     }
                 }
