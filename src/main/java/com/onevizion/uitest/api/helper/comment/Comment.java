@@ -54,7 +54,7 @@ public class Comment {
             id = "";
             id = "idx" + id;
         } else {
-            id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldId + "'] | //*[string(@name)='" + fieldId + "']")).getAttribute("id");
+            id = seleniumSettings.getWebDriver().findElement(By.name(fieldId)).getAttribute("id");
             id = id.replace("_disp", ""); //for efile field
         }
 

@@ -921,17 +921,13 @@ public class UserpageFilter {
                 psSelector.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    By btnOpen = By.xpath("//*[string(@submitName)='btnTrSelWPAttribValue1'] | //*[string(@name)='btnTrSelWPAttribValue1']");
-                    psSelector.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(By.name("btnTrSelWPAttribValue1"), 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    By btnOpen = By.xpath("//*[string(@submitName)='btnMultSelWPAttribValue1'] | //*[string(@name)='btnMultSelWPAttribValue1']");
-                    psSelector.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(By.name("btnMultSelWPAttribValue1"), 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    By btnOpen = By.xpath("//*[string(@submitName)='btnTrDropDownWPAttribValue1'] | //*[string(@name)='btnTrDropDownWPAttribValue1']");
-                    psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 0L, value, 1L);
+                    psSelector.selectSpecificValue(By.name("btnTrDropDownWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 0L, value, 1L);
                 } else {
-                    By btnOpen = By.xpath("//*[string(@submitName)='btnSelWPAttribValue1'] | //*[string(@name)='btnSelWPAttribValue1']");
-                    psSelector.selectMultipleSpecificValues(btnOpen, 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(By.name("btnSelWPAttribValue1"), 0L, Arrays.asList(value), 1L);
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {

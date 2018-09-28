@@ -53,14 +53,11 @@ public class EntityTrackorForm {
 
         seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).sendKeys(trackorForm.getName());
 
-        By btnOpenReport = By.xpath("//*[string(@submitName)='btnreportName'] | //*[string(@name)='btnreportName']");
-        psSelector.selectSpecificValue(btnOpenReport, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
+        psSelector.selectSpecificValue(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
 
-        By btnOpenImport = By.xpath("//*[string(@submitName)='btnimportName'] | //*[string(@name)='btnimportName']");
-        psSelector.selectSpecificValue(btnOpenImport, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
+        psSelector.selectSpecificValue(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
 
-        By btnOpenUser = By.xpath("//*[string(@submitName)='btnuserName'] | //*[string(@name)='btnuserName']");
-        psSelector.selectSpecificValue(btnOpenUser, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
+        psSelector.selectSpecificValue(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
 
         seleniumSettings.getWebDriver().findElement(By.name("impScheduleInterval")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("impScheduleInterval")).sendKeys(trackorForm.getInterval());
@@ -94,14 +91,11 @@ public class EntityTrackorForm {
         seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).sendKeys(trackorForm.getName());
 
-        By btnOpenReport = By.xpath("//*[string(@submitName)='btnreportName'] | //*[string(@name)='btnreportName']");
-        psSelector.selectSpecificValue(btnOpenReport, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
+        psSelector.selectSpecificValue(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
 
-        By btnOpenImport = By.xpath("//*[string(@submitName)='btnimportName'] | //*[string(@name)='btnimportName']");
-        psSelector.selectSpecificValue(btnOpenImport, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
+        psSelector.selectSpecificValue(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
 
-        By btnOpenUser = By.xpath("//*[string(@submitName)='btnuserName'] | //*[string(@name)='btnuserName']");
-        psSelector.selectSpecificValue(btnOpenUser, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
+        psSelector.selectSpecificValue(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
 
         seleniumSettings.getWebDriver().findElement(By.name("impScheduleInterval")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("impScheduleInterval")).sendKeys(trackorForm.getInterval());

@@ -144,9 +144,9 @@ public class Tb {
                     element.click(newCheckbox);
                 }
             } else {
-                String actualVal = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).isSelected() == true ? "YES" : "NO";
+                String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).isSelected() == true ? "YES" : "NO";
                 if (actualVal != value) {
-                    WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']"));
+                    WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
                     WebElement newCheckbox = checkbox.findLabelByElement(checkboxElement);
                     element.click(newCheckbox);
                 }
@@ -162,7 +162,7 @@ public class Tb {
                 new Select(seleniumSettings.getWebDriver().findElement(By.id("idx" + getLastFieldIndex(fieldName, elementPosition)))).selectByVisibleText(value);
             } else {
                 element.moveToElementByName(fieldName);
-                new Select(seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']"))).selectByVisibleText(value);
+                new Select(seleniumSettings.getWebDriver().findElement(By.name(fieldName))).selectByVisibleText(value);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -179,8 +179,8 @@ public class Tb {
                 seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).sendKeys(value);
             } else {
                 element.moveToElementByName(fieldName);
-                seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).clear();
-                seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).sendKeys(value);
+                seleniumSettings.getWebDriver().findElement(By.name(fieldName)).clear();
+                seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(value);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -208,8 +208,8 @@ public class Tb {
             } else {
                 element.clickByName(fieldName);
                 if (seleniumSettings.getBrowser().equals("chrome")) {
-                    seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).clear();
-                    seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).sendKeys(value);
+                    seleniumSettings.getWebDriver().findElement(By.name(fieldName)).clear();
+                    seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(value);
                 } else if (seleniumSettings.getBrowser().equals("firefox")) {
                     Actions actionObject = new Actions(seleniumSettings.getWebDriver());
                     actionObject.sendKeys(Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT,
@@ -233,9 +233,8 @@ public class Tb {
                 element.moveToElementById("idx" + getLastFieldIndex(fieldName, elementPosition) + "_but");
                 psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             } else {
-                By btnOpen = By.xpath("//*[string(@submitName)='" + fieldName + "_but'] | //*[string(@name)='" + fieldName + "_but']");
                 element.moveToElementByName(fieldName + "_but");
-                psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                psSelector.selectSpecificValue(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -281,9 +280,8 @@ public class Tb {
                 psSelector.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
             } else {
                 element.moveToElementByName(fieldName + "_disp");
-                action.moveToElement(seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "_disp'] | //*[string(@name)='" + fieldName + "_disp']"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-                By btnOpen = By.xpath("//*[string(@submitName)='" + fieldName + "_but'] | //*[string(@name)='" + fieldName + "_but']");
-                psSelector.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
+                action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(fieldName + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
+                psSelector.selectMultipleSpecificValues(By.name(fieldName + "_but"), 1L, Arrays.asList(value.split(",")), 1L);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -292,8 +290,8 @@ public class Tb {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             js.showInputForFileTb(fieldName);
             seleniumSettings.getWebDriver().switchTo().frame("ifrmHideForm");
-            seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).clear();
-            seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).sendKeys(seleniumSettings.getUploadFilesPath() + value);
+            seleniumSettings.getWebDriver().findElement(By.name(fieldName)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
             //webDriver.switchTo().window((String) webDriver.getWindowHandles().toArray()[webDriver.getWindowHandles().size() - 1]);
             seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
             js.hideInputForFileTb(fieldName);
@@ -307,7 +305,7 @@ public class Tb {
                 wait.waitWebElement(By.id("idx" + idx));
                 js.setValueToFCKEditor("idx" + idx, value);
             } else {
-                String id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).getAttribute("id");
+                String id = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("id");
                 wait.waitWebElement(By.id(id));
                 js.setValueToFCKEditor(id, value);
             }
@@ -402,7 +400,7 @@ public class Tb {
                     Assert.assertEquals(actualVal, vals.get(field), "Element with name=[" + field + "] has wrong value");
                     seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
                 } else {
-                    String id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + field + "'] | //*[string(@name)='" + field + "']")).getAttribute("id");
+                    String id = seleniumSettings.getWebDriver().findElement(By.name(field)).getAttribute("id");
                     wait.waitWebElement(By.id(id));
                     assertElement.AssertFCKEditor(id, vals.get(field));
                 }
@@ -464,7 +462,7 @@ public class Tb {
             } else {
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.name(field)).isSelected() == true ? "YES" : "NO";
                 if (actualVal != "NO") {
-                    WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + field + "'] | //*[string(@name)='" + field + "']"));
+                    WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.name(field));
                     WebElement newCheckbox = checkbox.findLabelByElement(checkboxElement);
                     element.click(newCheckbox);
                 }
@@ -549,7 +547,7 @@ public class Tb {
                 wait.waitWebElement(By.id("idx" + idx));
                 js.setValueToFCKEditor("idx" + idx, "");
             } else {
-                String id = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + field + "'] | //*[string(@name)='" + field + "']")).getAttribute("id");
+                String id = seleniumSettings.getWebDriver().findElement(By.name(field)).getAttribute("id");
                 wait.waitWebElement(By.id(id));
                 js.setValueToFCKEditor(id, "");
             }
@@ -621,8 +619,7 @@ public class Tb {
                 expVals.put(fieldName, value);
             }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
-            By btnOpen = By.xpath("//*[string(@submitName)='btn1'] | //*[string(@name)='btn1']");
-            psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+            psSelector.selectSpecificValue(By.name("btn1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
@@ -630,8 +627,7 @@ public class Tb {
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)) {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("epmSelector1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-            By btnOpen = By.xpath("//*[string(@submitName)='btn1'] | //*[string(@name)='btn1']");
-            psSelector.selectMultipleSpecificValues(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
+            psSelector.selectMultipleSpecificValues(By.name("btn1"), 1L, Arrays.asList(value.split(",")), 1L);
             gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
             if (fieldName != null) {
                 expVals.put(fieldName, value);

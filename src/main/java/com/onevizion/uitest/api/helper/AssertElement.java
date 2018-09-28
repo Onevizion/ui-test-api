@@ -52,7 +52,7 @@ public class AssertElement {
 
     public void AssertText(String name, String expectedVal) {
         element.moveToElementByName(name);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).getAttribute("value");
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
@@ -68,13 +68,13 @@ public class AssertElement {
     @Deprecated
     public void AssertCheckBox(String name, String expectedVal) {
         element.moveToElementByName(name);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isSelected() == true ? "YES" : "NO";
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() == true ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
     public void AssertCheckBoxNew(String name, String expectedVal) {
         element.moveToElementByName("lbl" + name);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isSelected() == true ? "YES" : "NO";
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() == true ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
@@ -96,13 +96,13 @@ public class AssertElement {
 
     public void AssertSelect(String name, String expectedVal) {
         element.moveToElementByName(name);
-        String actualVal = new Select(seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']"))).getFirstSelectedOption().getText();
+        String actualVal = new Select(seleniumSettings.getWebDriver().findElement(By.name(name))).getFirstSelectedOption().getText();
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
     public void AssertSelectWithFolder(String name, String expectedVal) {
         element.moveToElementByName(name);
-        String actualVal = new Select(seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']"))).getFirstSelectedOption().getText();
+        String actualVal = new Select(seleniumSettings.getWebDriver().findElement(By.name(name))).getFirstSelectedOption().getText();
         Assert.assertTrue(actualVal.contains(expectedVal), "Element with name=[" + name + "] has wrong value");
     }
 
@@ -114,12 +114,11 @@ public class AssertElement {
 
     public void AssertRadioPsSelector(String fieldName, String btnOpenName, String btnCloseName, String expectedVal, Long filterFieldNum, boolean isOpenSelector) {
         element.moveToElementByName(fieldName);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).getAttribute("value");
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + fieldName + "] has wrong value");
         if (isOpenSelector) {
             if (!"".equals(expectedVal)) {
-                By btnOpen = By.xpath("//*[string(@submitName)='" + btnOpenName + "'] | //*[string(@name)='" + btnOpenName + "']");
-                boolean isChecked = psSelector.checkValue(btnOpen, btnCloseName, expectedVal, filterFieldNum);
+                boolean isChecked = psSelector.checkValue(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
                 Assert.assertEquals(isChecked, true, "Radiobutton not selected");
             }
         }
@@ -140,7 +139,7 @@ public class AssertElement {
 
     public void AssertCheckboxPsSelector(String fieldName, String btnOpenName, String btnCloseName, List<String> expectedVals, Long filterFieldNum, boolean isOpenSelector) {
         element.moveToElementByName(fieldName);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + fieldName + "'] | //*[string(@name)='" + fieldName + "']")).getAttribute("value");
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
         for (String expectedVal : expectedVals) {
             Assert.assertEquals(actualVal.contains(expectedVal.trim()), true, "Element with name=[" + fieldName + "] has wrong value");
         }
@@ -151,8 +150,7 @@ public class AssertElement {
                     val.add(expectedVal);
                 }
             }
-            By btnOpen = By.xpath("//*[string(@submitName)='" + btnOpenName + "'] | //*[string(@name)='" + btnOpenName + "']");
-            boolean isChecked = psSelector.checkMultipleValues(btnOpen, btnCloseName, val, filterFieldNum);
+            boolean isChecked = psSelector.checkMultipleValues(By.name(btnOpenName), btnCloseName, val, filterFieldNum);
             Assert.assertEquals(isChecked, true, "Radiobutton not selected");
         }
     }

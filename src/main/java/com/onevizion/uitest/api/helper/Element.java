@@ -47,8 +47,7 @@ public class Element {
 
         try {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
-            //actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(name))).perform();
-            actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']"))).perform();
+            actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(name))).perform();
         } catch (MoveTargetOutOfBoundsException e) {
             logger.warn("Exception in moveToElementByName", e);
         } catch (WebDriverException e) { //TODO firefox 59 throw WebDriverException instead of MoveTargetOutOfBoundsException or instead success execution
@@ -91,8 +90,7 @@ public class Element {
     public void clickByName(String name) {
         moveToElementByName(name);
 
-        //seleniumSettings.getWebDriver().findElement(By.name(name)).click();
-        seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).click();
+        seleniumSettings.getWebDriver().findElement(By.name(name)).click();
     }
 
     public void clickById(String id) {

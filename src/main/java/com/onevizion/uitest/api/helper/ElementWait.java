@@ -44,10 +44,7 @@ public class ElementWait {
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .ignoring(WebDriverException.class)
-            .until(webdriver -> {
-                //return webdriver.findElement(By.name(name));
-                return webdriver.findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']"));
-            });
+            .until(webdriver -> webdriver.findElement(By.name(name)));
     }
 
     public void waitElementById(String id) {
@@ -79,8 +76,7 @@ public class ElementWait {
     public void waitElementVisibleByName(String name) {
         waitElementByName(name);
 
-        //WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
-        WebElement element = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']"));
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] visibility failed")
@@ -109,8 +105,7 @@ public class ElementWait {
     public void waitElementNotVisibleByNName(String name) {
         waitElementByName(name);
 
-        //WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
-        WebElement element = seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']"));
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] invisibility failed")
@@ -142,10 +137,7 @@ public class ElementWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] not displayed")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                //return webdriver.findElement(By.name(name)).isDisplayed();
-                return webdriver.findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isDisplayed();
-            });
+            .until(webdriver -> webdriver.findElement(By.name(name)).isDisplayed());
     }
 
     public void waitElementDisplayById(String id) {
@@ -175,8 +167,7 @@ public class ElementWait {
     public void waitElementAttributeByName(String name, String attribute, String attributeValue) {
         waitElementByName(name);
 
-        //Supplier<String> actualValueSupplier = ()-> seleniumSettings.getWebDriver().findElement(By.name(name)).getAttribute(attribute);
-        Supplier<String> actualValueSupplier = ()-> seleniumSettings.getWebDriver().findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).getAttribute(attribute);
+        Supplier<String> actualValueSupplier = ()-> seleniumSettings.getWebDriver().findElement(By.name(name)).getAttribute(attribute);
         Supplier<String> messageSupplier = ()-> "Waiting for Element name=[" + name + "] attribute=[" + attribute + "] expectedVal=[" + attributeValue + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -224,10 +215,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] is enabled")
-            .until(webdriver -> {
-                //return webdriver.findElement(By.name(name)).isEnabled() == false;
-                return webdriver.findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isEnabled() == false;
-            });
+            .until(webdriver -> webdriver.findElement(By.name(name)).isEnabled() == false);
     }
 
     public void waitElementDisabledById(String id) {
@@ -249,10 +237,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] is disabled.")
-            .until(webdriver -> {
-                //return webdriver.findElement(By.name(name)).isEnabled() == true;
-                return webdriver.findElement(By.xpath("//*[string(@submitName)='" + name + "'] | //*[string(@name)='" + name + "']")).isEnabled() == true;
-            });
+            .until(webdriver -> webdriver.findElement(By.name(name)).isEnabled() == true);
     }
 
     public void waitElementEnabledById(String id) {
