@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.vo.LockType;
 
 @Component
 class Grid2Wait {
@@ -26,6 +27,16 @@ class Grid2Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
             .until(webdriver -> actualValueSupplier.get());
+    }
+
+    void waitGridCellLockType(Long gridId, Long columnIndex, Long rowIndex, LockType lockType) {
+        Supplier<LockType> actualValueSupplier = ()-> grid2Js.getGridCellLockTypeByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
+
+        Supplier<String> messageSupplier = ()-> "Waiting for Grid Cell LockType gridId=[" + gridId + "] columnIndex=[" + columnIndex + "] rowIndex=[" + rowIndex + "] expectedVal=[" + lockType + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage(messageSupplier)
+            .until(webdriver -> lockType.equals(actualValueSupplier.get()));
     }
 
 }
