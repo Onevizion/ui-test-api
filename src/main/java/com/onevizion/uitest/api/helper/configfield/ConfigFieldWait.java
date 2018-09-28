@@ -19,9 +19,7 @@ class ConfigFieldWait {
     void waitFieldNameUpdated() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for JQuery loading is failed")
-            .until(webdriver -> {
-                return configFieldJs.isFieldNameUpdated();
-            });
+            .until(webdriver -> configFieldJs.isFieldNameUpdated());
     }
 
 }

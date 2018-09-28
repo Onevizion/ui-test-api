@@ -149,18 +149,14 @@ public class SeleniumListener extends TestListenerAdapter {
 
                 new WebDriverWait(test.seleniumSettings.getWebDriver(), test.seleniumSettings.getDefaultTimeout())
                     .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
-                    .until(webdriver -> {
-                        return webdriver.getWindowHandles().size() == currentWindowsCount - 1;
-                    });
+                    .until(webdriver -> webdriver.getWindowHandles().size() == currentWindowsCount - 1);
 
                 test.seleniumSettings.getWindows().remove(test.seleniumSettings.getWindows().size() - 1);
                 test.seleniumSettings.getWebDriver().switchTo().window(test.seleniumSettings.getWindows().get(test.seleniumSettings.getWindows().size() - 1));
 
                 new WebDriverWait(test.seleniumSettings.getWebDriver(), test.seleniumSettings.getDefaultTimeout())
                     .withMessage("Waiting for closing modal window.")
-                    .until(webdriver -> {
-                        return !js.isWindowClosed(test);
-                    });
+                    .until(webdriver -> !js.isWindowClosed(test));
             }
         } catch (Exception e) {
             logger.error(getTestName(tr) + " Unexpected exception: " + e.getMessage());

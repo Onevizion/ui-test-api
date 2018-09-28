@@ -19,9 +19,7 @@ class DocumentWait {
     void waitReadyStateComplete() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for ReadyState complete is failed")
-            .until(webdriver -> {
-                return documentJs.isReadyStateComplete();
-            });
+            .until(webdriver -> documentJs.isReadyStateComplete());
     }
 
 }

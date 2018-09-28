@@ -19,19 +19,13 @@ class FilterWait {
     private SeleniumSettings seleniumSettings;
 
     void waitCurrentFilterName(Long gridIdx, String filterName) {
-        Supplier<String> actualValueSupplier = ()-> {
-            return filter.getCurrentFilterName(gridIdx);
-        };
+        Supplier<String> actualValueSupplier = ()-> filter.getCurrentFilterName(gridIdx);
 
-        Supplier<String> messageSupplier = ()-> {
-            return "Waiting for Current Filter Name gridIdx=[" + gridIdx + "] expectedVal=[" + filterName + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
-        };
+        Supplier<String> messageSupplier = ()-> "Waiting for Current Filter Name gridIdx=[" + gridIdx + "] expectedVal=[" + filterName + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> {
-                return filterName.equals(actualValueSupplier.get());
-            });
+            .until(webdriver -> filterName.equals(actualValueSupplier.get()));
     }
 
 }

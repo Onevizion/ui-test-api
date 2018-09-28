@@ -29,9 +29,7 @@ public class SeleniumAnnotationTransformer implements IAnnotationTransformer {
             }
         }
 
-        Collections.sort(testNgMethods, (TestNgMethod arg0, TestNgMethod arg1) -> {
-            return Integer.compare(arg0.getLineNumber(), arg1.getLineNumber());
-        });
+        Collections.sort(testNgMethods, (TestNgMethod arg0, TestNgMethod arg1) -> Integer.compare(arg0.getLineNumber(), arg1.getLineNumber()));
 
         int methodNumber = 0;
 

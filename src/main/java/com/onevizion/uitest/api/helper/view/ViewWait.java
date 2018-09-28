@@ -22,35 +22,25 @@ class ViewWait {
     private ViewJs viewJs;
 
     void waitCurrentViewName(Long gridIdx, String viewName) {
-        Supplier<String> actualValueSupplier = ()-> {
-            return view.getCurrentViewName(gridIdx);
-        };
+        Supplier<String> actualValueSupplier = ()-> view.getCurrentViewName(gridIdx);
 
-        Supplier<String> messageSupplier = ()-> {
-            return "Waiting for Current View Name gridIdx=[" + gridIdx + "] expectedVal=[" + viewName + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
-        };
+        Supplier<String> messageSupplier = ()-> "Waiting for Current View Name gridIdx=[" + gridIdx + "] expectedVal=[" + viewName + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> {
-                return viewName.equals(actualValueSupplier.get());
-            });
+            .until(webdriver -> viewName.equals(actualValueSupplier.get()));
     }
 
     void waitLeftListBoxReady() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for leftListBox loading is failed")
-            .until(webdriver -> {
-                return viewJs.isReadyLeftListBox();
-            });
+            .until(webdriver -> viewJs.isReadyLeftListBox());
     }
 
     void waitRightListBoxReady() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for rightListBox loading is failed")
-            .until(webdriver -> {
-                return viewJs.isReadyRightListBox();
-            });
+            .until(webdriver -> viewJs.isReadyRightListBox());
     }
 
 }

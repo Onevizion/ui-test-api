@@ -34,25 +34,19 @@ class TreeWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tree with id=[" + treeId + "] is failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + treeId)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + treeId)).isDisplayed());
 
         waitTreeArr();
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for PageLoaded with id=[" + treeId + "] is failed.")
-            .until(webdriver -> {
-                return treeJs.isLoaded(treeId).equals("1");
-            });
+            .until(webdriver -> treeJs.isLoaded(treeId).equals("1"));
     }
 
     private void waitTreeArr() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for treeArr is failed")
-            .until(webdriver -> {
-                return treeJs.isTreeArrExist();
-            });
+            .until(webdriver -> treeJs.isTreeArrExist());
     }
 
 }

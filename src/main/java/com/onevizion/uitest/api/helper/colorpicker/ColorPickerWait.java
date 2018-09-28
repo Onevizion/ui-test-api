@@ -19,9 +19,7 @@ class ColorPickerWait {
     void waitColorPicker() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for ColorPicke is failed")
-            .until(webdriver -> {
-                return colorPickerJs.isColorPickerExist();
-            });
+            .until(webdriver -> colorPickerJs.isColorPickerExist());
     }
 
 }

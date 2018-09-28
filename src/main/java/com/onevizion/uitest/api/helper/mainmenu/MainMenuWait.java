@@ -20,27 +20,19 @@ class MainMenuWait {
     private MainMenuJs mainMenuJs;
 
     void waitPageTitle(String title) {
-        Supplier<String> actualValueSupplier = ()-> {
-            return seleniumSettings.getWebDriver().findElement(By.id("ttlPage")).getText();
-        };
+        Supplier<String> actualValueSupplier = ()-> seleniumSettings.getWebDriver().findElement(By.id("ttlPage")).getText();
 
-        Supplier<String> messageSupplier = ()-> {
-            return "Waiting for Page Title expectedVal=[" + title + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
-        };
+        Supplier<String> messageSupplier = ()-> "Waiting for Page Title expectedVal=[" + title + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> {
-                return title.equals(actualValueSupplier.get());
-            });
+            .until(webdriver -> title.equals(actualValueSupplier.get()));
     }
 
     void waitLeftMenuSearchUpdated() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for JQuery loading is failed")
-            .until(webdriver -> {
-                return mainMenuJs.isLeftMenuSearchUpdated();
-            });
+            .until(webdriver -> mainMenuJs.isLeftMenuSearchUpdated());
     }
 
 }

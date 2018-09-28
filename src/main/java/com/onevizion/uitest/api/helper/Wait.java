@@ -51,9 +51,7 @@ public class Wait {
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .ignoring(WebDriverException.class)
-            .until(webdriver -> {
-                return webdriver.findElement(elementLocator);
-            });
+            .until(webdriver -> webdriver.findElement(elementLocator));
     }
 
     public void waitIframeGridLoad(final Long gridId) {
@@ -61,19 +59,13 @@ public class Wait {
         waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId)).isDisplayed());
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> {
-                return js.isGridLoaded(gridId).equals("1");
-            });
+            .until(webdriver -> js.isGridLoaded(gridId).equals("1"));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> {
-                return js.isGridDataLoaded(gridId);
-            });
+            .until(webdriver -> js.isGridDataLoaded(gridId));
     }
 
     public void waitGridLoad(final Long gridId, final Long parentGridId) {
@@ -93,59 +85,39 @@ public class Wait {
         waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + parentGridIdNew));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + parentGridIdNew + "] is failed")
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + parentGridIdNew)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + parentGridIdNew)).isDisplayed());
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> {
-                return js.isGridLoaded(gridId).equals("1");
-            });
+            .until(webdriver -> js.isGridLoaded(gridId).equals("1"));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> {
-                return js.isGridDataLoaded(gridId);
-            });
+            .until(webdriver -> js.isGridDataLoaded(gridId));
     }
 
     public void waitGridRowsCount(final Long gridId, final Long rowsCount) {
-        Supplier<Long> actualValueSupplier = ()-> {
-            return grid.getGridRowsCount(gridId);
-        };
+        Supplier<Long> actualValueSupplier = ()-> grid.getGridRowsCount(gridId);
 
-        Supplier<String> messageSupplier = ()-> {
-            return "Waiting rows count for grid with id=[" + gridId + "] expectedVal=[" + rowsCount + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
-        };
+        Supplier<String> messageSupplier = ()-> "Waiting rows count for grid with id=[" + gridId + "] expectedVal=[" + rowsCount + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> {
-                return rowsCount.equals(actualValueSupplier.get());
-            });
+            .until(webdriver -> rowsCount.equals(actualValueSupplier.get()));
     }
 
     public void waitFiltersCount(final Long gridIdx, final int filtersCount) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting filters count=[" + filtersCount + "] for grid with idx=[" + gridIdx + "] is failed")
-            .until(webdriver -> {
-                return filtersCount == filter.getFiltersCount(gridIdx);
-            });
+            .until(webdriver -> filtersCount == filter.getFiltersCount(gridIdx));
     }
 
     public void waitViewsCount(final Long gridIdx, final int viewsCount) {
-        Supplier<Integer> actualValueSupplier = ()-> {
-            return view.getViewsCount(gridIdx);
-        };
+        Supplier<Integer> actualValueSupplier = ()-> view.getViewsCount(gridIdx);
 
-        Supplier<String> messageSupplier = ()-> {
-            return "Waiting views count for grid with idx=[" + gridIdx + "] expectedVal=[" + viewsCount + "] actualVal=[" + actualValueSupplier.get().intValue() + "] is failed";
-        };
+        Supplier<String> messageSupplier = ()-> "Waiting views count for grid with idx=[" + gridIdx + "] expectedVal=[" + viewsCount + "] actualVal=[" + actualValueSupplier.get().intValue() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> {
-                return viewsCount == actualValueSupplier.get().intValue();
-            });
+            .until(webdriver -> viewsCount == actualValueSupplier.get().intValue());
     }
 
     public void waitNewDropDownCount(final By elemenLocator, final int afterCount) {
@@ -165,17 +137,13 @@ public class Wait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("DropDown=[" + elemenLocator.toString() + "] have wrong count. Expected count=[" + afterCount + "]" + " but Actual count=[" + new Select(seleniumSettings.getWebDriver().findElement(elemenLocator)).getOptions().size() + "]")
-            .until(webdriver -> {
-                return new Select(webdriver.findElement(elemenLocator)).getOptions().size() == afterCount;
-            });
+            .until(webdriver -> new Select(webdriver.findElement(elemenLocator)).getOptions().size() == afterCount);
     }
 
     public void waitIsWindowClosed() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for closing modal window.")
-            .until(webdriver -> {
-                return !js.isWindowClosed();
-            });
+            .until(webdriver -> !js.isWindowClosed());
     }
 
     public void waitFormLoad() {
@@ -183,26 +151,20 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for form is failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed());
     }
 
     public void waitAlert() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Timed out after " + seleniumSettings.getDefaultTimeout() + " seconds waiting for alert.")
-            .until(webdriver -> {
-                return webdriver.switchTo().alert().getText() != null;
-            });
+            .until(webdriver -> webdriver.switchTo().alert().getText() != null);
     }
 
     public void waitGridCurrentTid(final Long gridIndex, final Long previosTid) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !previosTid.equals(js.getGridCurTid(gridIndex));
-            });
+            .until(webdriver -> !previosTid.equals(js.getGridCurTid(gridIndex)));
     }
 
     public void waitBpDocHelpLoad(final String expectedValue, final boolean isPresent) {
@@ -220,26 +182,20 @@ public class Wait {
     public void waitElemsArrCount(final Long afterCount) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("ElemsArr have wrong count. Expected count=[" + afterCount + "] but Actual count=[" + js.getElemsArrLength() + "]")
-            .until(webdriver -> {
-                return afterCount.equals(js.getElemsArrLength());
-            });
+            .until(webdriver -> afterCount.equals(js.getElemsArrLength()));
     }
 
     public void waitInputLoad(final WebElement webElement) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading input failed.")
-            .until(webdriver -> {
-                return !webElement.getAttribute("value").equals("loading...");
-            });
+            .until(webdriver -> !webElement.getAttribute("value").equals("loading..."));
     }
 
     public void waitListBoxLoadCnt(final Select select, final int cnt) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed. Expected count=[" + cnt + "] but Actual count=[" + select.getOptions().size() + "]")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return select.getOptions().size() == cnt;
-            });
+            .until(webdriver -> select.getOptions().size() == cnt);
     }
 
     /*new void to support new duallist box*/
@@ -249,18 +205,14 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(supplier)
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return select.findElements(By.tagName("div")).size() == cnt;
-            });
+            .until(webdriver -> select.findElements(By.tagName("div")).size() == cnt);
     }
 
     public void waitListBoxLoad(final Select select) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !select.getOptions().get(0).getText().equals("loading...");
-            });
+            .until(webdriver -> !select.getOptions().get(0).getText().equals("loading..."));
     }
 
     /*new void to support new duallist box*/
@@ -268,27 +220,21 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !select.findElements(By.tagName("div")).get(0).getText().equals("<span style=\"color:\">loading...</span>");
-            });
+            .until(webdriver -> !select.findElements(By.tagName("div")).get(0).getText().equals("<span style=\"color:\">loading...</span>"));
     }
 
     public void waitListBoxLoad2(final Select select) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return select.getOptions().size() > 1;
-            });
+            .until(webdriver -> select.getOptions().size() > 1);
     }
 
     public void waitListBoxLoad3(final Select select) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return select.getOptions().size() > 0;
-            });
+            .until(webdriver -> select.getOptions().size() > 0);
     }
 
     /*new void to support new duallist box*/
@@ -296,9 +242,7 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return select.findElements(By.tagName("div")).size() > 0;
-            });
+            .until(webdriver -> select.findElements(By.tagName("div")).size() > 0);
     }
 
     public void waitListBoxLoad4(final Select select, final String text) {
@@ -319,45 +263,33 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for form is failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return webdriver.getCurrentUrl().contains(str);
-            });
+            .until(webdriver -> webdriver.getCurrentUrl().contains(str));
     }
 
     public void waitTabLoad(final Long tabIndex) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0");
-            });
+            .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0"));
     }
 
     public void waitConfigTabLoad(final Long tabIndex) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("innerHTML").contains("Loading Tab. Please wait...");
-            });
+            .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("innerHTML").contains("Loading Tab. Please wait..."));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0");
-            });
+            .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0"));
     }
 
     public void waitGridRowEditorLoad() {
         waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Grid Row Editor is failed")
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed());
         waitWebElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Grid Row Editor is failed")
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE)).isDisplayed());
     }
 
     public void waitLoadingLoad() {
@@ -365,9 +297,7 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting loading is failed")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed());
     }
 
     public void waitLoadingLoad(final Long gridId) {
@@ -375,9 +305,7 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting loading is failed")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId)).isDisplayed());
     }
 
     public void waitSavingLoad() {
@@ -385,9 +313,7 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting saving is failed")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE)).isDisplayed());
     }
 
     public void waitSavingLoad(final Long gridId) {
@@ -395,18 +321,14 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting saving is failed")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE + gridId)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE + gridId)).isDisplayed());
     }
 
     public void waitSplitGridRightLoad(final Long gridId) {
         waitWebElement(By.id(AbstractSeleniumCore.LOADING_SPLIT_GRID_RIGHT_ID_BASE + gridId));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for split grid right with id=[" + gridId + "] is failed")
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_SPLIT_GRID_RIGHT_ID_BASE + gridId)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_SPLIT_GRID_RIGHT_ID_BASE + gridId)).isDisplayed());
     }
 
     public void waitGridCellValue(final Long gridId, final Long columnIndex, final Long rowIndex, final String val) {
@@ -427,16 +349,12 @@ public class Wait {
             return value;
         };
 
-        Supplier<String> messageSupplier = ()-> {
-            return "Waiting for Grid Cell gridId=[" + gridId + "] columnIndex=[" + columnIndex + "] rowIndex=[" + rowIndex + "] expectedVal=[" + val + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
-        };
+        Supplier<String> messageSupplier = ()-> "Waiting for Grid Cell gridId=[" + gridId + "] columnIndex=[" + columnIndex + "] rowIndex=[" + rowIndex + "] expectedVal=[" + val + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
             .ignoring(SeleniumUnexpectedException.class)
-            .until(webdriver -> {
-                return val.equals(actualValueSupplier.get());
-            });
+            .until(webdriver -> val.equals(actualValueSupplier.get()));
     }
 
     public void waitGridCellTxtValue(final Long gridId, final Long columnIndex, final Long rowIndex, final String val) {
@@ -458,32 +376,24 @@ public class Wait {
             return value;
         };
 
-        Supplier<String> messageSupplier = ()-> {
-            return "Waiting for Grid Cell gridId=[" + gridId + "] columnIndex=[" + columnIndex + "] rowIndex=[" + rowIndex + "] expectedVal=[" + val + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
-        };
+        Supplier<String> messageSupplier = ()-> "Waiting for Grid Cell gridId=[" + gridId + "] columnIndex=[" + columnIndex + "] rowIndex=[" + rowIndex + "] expectedVal=[" + val + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
             .ignoring(SeleniumUnexpectedException.class)
-            .until(webdriver -> {
-                return val.equals(actualValueSupplier.get());
-            });
+            .until(webdriver -> val.equals(actualValueSupplier.get()));
     }
 
     public void waitDxtmlxWindowOpened(final String windowName) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("")
-            .until(webdriver -> {
-                return js.isDxtmlxWindowOpened(windowName);
-             });
+            .until(webdriver -> js.isDxtmlxWindowOpened(windowName));
     }
 
     public void waitCodeMirrorLoad(final String elementId) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Code Mirror for element with id=["+elementId+"] is failed")
-            .until(webdriver -> {
-                return js.isCodeMirrorLoaded(elementId);
-            });
+            .until(webdriver -> js.isCodeMirrorLoaded(elementId));
     }
 
     public void waitCodeMirrorHistorySize(final String elementId, final Long undo, final Long redo) {
@@ -499,25 +409,19 @@ public class Wait {
     public void waitFCKEditorValue(final String name, final String value) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for FCK Editor name=[" + name + "] value=[" + value + "] is failed")
-            .until(webdriver -> {
-                return value.equals(js.getValueFromFCKEditor(name));
-            });
+            .until(webdriver -> value.equals(js.getValueFromFCKEditor(name)));
     }
 
     public void waitDropGridVerificationFinish() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for DropGrid Verification is failed")
-            .until(webdriver -> {
-                return js.isDropGridVerificationFinish();
-            });
+            .until(webdriver -> js.isDropGridVerificationFinish());
     }
 
     public void waitBplImportFileSubmitDone() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for DropGrid Verification is failed")
-            .until(webdriver -> {
-                return js.bplImportFileSubmitDone();
-            });
+            .until(webdriver -> js.bplImportFileSubmitDone());
     }
 
 }

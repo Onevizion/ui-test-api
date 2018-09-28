@@ -56,9 +56,7 @@ public class ElementWait {
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .ignoring(WebDriverException.class)
-            .until(webdriver -> {
-                return webdriver.findElement(By.id(id));
-            });
+            .until(webdriver -> webdriver.findElement(By.id(id)));
     }
 
     @Deprecated
@@ -68,9 +66,7 @@ public class ElementWait {
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .ignoring(WebDriverException.class)
-            .until(webdriver -> {
-                return webdriver.findElement(by);
-            });
+            .until(webdriver -> webdriver.findElement(by));
     }
 
     public void waitElementVisible(WebElement element) {
@@ -137,9 +133,7 @@ public class ElementWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] not displayed")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return element.isDisplayed();
-            });
+            .until(webdriver -> element.isDisplayed());
     }
 
     public void waitElementDisplayByName(String name) {
@@ -160,9 +154,7 @@ public class ElementWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] not displayed")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return webdriver.findElement(By.id(id)).isDisplayed();
-            });
+            .until(webdriver -> webdriver.findElement(By.id(id)).isDisplayed());
     }
 
     public void waitElementNotDisplayById(String id) {
@@ -171,17 +163,13 @@ public class ElementWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] displayed")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(id)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(id)).isDisplayed());
     }
 
     public void waitElementAttribute(WebElement element, String attribute, String attributeValue) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element [" + element + "] attribute [" + attribute + "] value [" + attributeValue + "] is failed")
-            .until(webdriver -> {
-                return element.getAttribute(attribute).equals(attributeValue);
-            });
+            .until(webdriver -> element.getAttribute(attribute).equals(attributeValue));
     }
 
     public void waitElementAttributeByName(String name, String attribute, String attributeValue) {
@@ -193,9 +181,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> {
-                return actualValueSupplier.get().equals(attributeValue);
-            });
+            .until(webdriver -> actualValueSupplier.get().equals(attributeValue));
     }
 
     public void waitElementAttributeById(String id, String attribute, String attributeValue) {
@@ -206,9 +192,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> {
-                return actualValueSupplier.get().equals(attributeValue);
-            });
+            .until(webdriver -> actualValueSupplier.get().equals(attributeValue));
     }
 
     public void waitElementAttributeById(String id, String attribute, List<String> attributeValue) {
@@ -232,9 +216,7 @@ public class ElementWait {
     public void waitElementDisabled(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] is enabled")
-            .until(webdriver -> {
-                return element.isEnabled() == false;
-            });
+            .until(webdriver -> element.isEnabled() == false);
     }
 
     public void waitElementDisabledByName(String name) {
@@ -253,17 +235,13 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] is enabled")
-            .until(webdriver -> {
-                return webdriver.findElement(By.id(id)).isEnabled() == false;
-            });
+            .until(webdriver -> webdriver.findElement(By.id(id)).isEnabled() == false);
     }
 
     public void waitElementEnabled(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] is disabled.")
-            .until(webdriver -> {
-                return element.isEnabled() == true;
-            });
+            .until(webdriver -> element.isEnabled() == true);
     }
 
     public void waitElementEnabledByName(String name) {
@@ -282,9 +260,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] is disabled.")
-            .until(webdriver -> {
-                return webdriver.findElement(By.id(id)).isEnabled() == true;
-            });
+            .until(webdriver -> webdriver.findElement(By.id(id)).isEnabled() == true);
     }
 
     @Deprecated
@@ -293,17 +269,13 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element by=[" + by + "] is disabled.")
-            .until(webdriver -> {
-                return webdriver.findElement(by).isEnabled() == true;
-            });
+            .until(webdriver -> webdriver.findElement(by).isEnabled() == true);
     }
 
     public void waitElementAnimatedFinish(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] is animated.")
-            .until(webdriver -> {
-                return elementJs.isElementAnimatedFinish(element);
-            });
+            .until(webdriver -> elementJs.isElementAnimatedFinish(element));
     }
 
     public void waitElementAnimatedFinishByName(String name) {
@@ -311,9 +283,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] is animated.")
-            .until(webdriver -> {
-                return elementJs.isElementAnimatedFinishByName(name);
-            });
+            .until(webdriver -> elementJs.isElementAnimatedFinishByName(name));
     }
 
     public void waitElementAnimatedFinishById(String id) {
@@ -321,17 +291,13 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] is animated.")
-            .until(webdriver -> {
-                return elementJs.isElementAnimatedFinishById(id);
-            });
+            .until(webdriver -> elementJs.isElementAnimatedFinishById(id));
     }
 
     public void waitElementVelocityAnimatedFinish(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] Velocity is animated.")
-            .until(webdriver -> {
-                return elementJs.isElementVelocityAnimatedFinish(element);
-            });
+            .until(webdriver -> elementJs.isElementVelocityAnimatedFinish(element));
     }
 
     public void waitElementVelocityAnimatedFinishByName(String name) {
@@ -339,9 +305,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element name=[" + name + "] Velocity is animated.")
-            .until(webdriver -> {
-                return elementJs.isElementVelocityAnimatedFinishByName(name);
-            });
+            .until(webdriver -> elementJs.isElementVelocityAnimatedFinishByName(name));
     }
 
     public void waitElementVelocityAnimatedFinishById(String id) {
@@ -349,9 +313,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element id=[" + id + "] Velocity is animated.")
-            .until(webdriver -> {
-                return elementJs.isElementVelocityAnimatedFinishById(id);
-            });
+            .until(webdriver -> elementJs.isElementVelocityAnimatedFinishById(id));
     }
 
 }

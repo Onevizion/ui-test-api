@@ -27,9 +27,7 @@ class DashboardWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for dashboard is failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + 0L)).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + 0L)).isDisplayed());
     }
 
     void waitDashboardLoad() {
@@ -38,9 +36,7 @@ class DashboardWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for dashboard is failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                return !webdriver.findElement(By.id("loaderDashboard")).isDisplayed();
-            });
+            .until(webdriver -> !webdriver.findElement(By.id("loaderDashboard")).isDisplayed());
     }
 
 }

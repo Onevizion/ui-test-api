@@ -19,19 +19,13 @@ class Grid2Wait {
     private Grid2Js grid2Js;
 
     void waitLoadAllRows(Long gridIdx) {
-        Supplier<Boolean> actualValueSupplier = ()-> {
-            return grid2Js.isLoadAllRowsDone(gridIdx);
-        };
+        Supplier<Boolean> actualValueSupplier = ()-> grid2Js.isLoadAllRowsDone(gridIdx);
 
-        Supplier<String> messageSupplier = ()-> {
-            return "Waiting for load all rows is failed";
-        };
+        Supplier<String> messageSupplier = ()-> "Waiting for load all rows is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> {
-                return actualValueSupplier.get();
-            });
+            .until(webdriver -> actualValueSupplier.get());
     }
 
 }
