@@ -6,6 +6,10 @@ import java.util.Date;
 
 public class OnevizionUtils {
 
+    private OnevizionUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static String removeHTMLTags(String str) {
         if (str == null) {
             return null;

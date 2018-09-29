@@ -342,7 +342,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     public SeleniumScreenshot seleniumScreenshot;
 
     private Date startDate;
-    private Date finishDate;
 
     public static final String GRID_ID_BASE = "gridbox";
     public static final String TREE_ID_BASE = "treeBox";
@@ -606,7 +605,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             }
 
             Calendar cal = Calendar.getInstance();
-            finishDate = cal.getTime();
+            Date finishDate = cal.getTime();
             long duration = finishDate.getTime() - startDate.getTime();
             long durationMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
             String durationMinutesStr = Long.toString(durationMinutes);
@@ -620,7 +619,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             logger.error(seleniumSettings.getTestName() + " closeBrowser Unexpected exception: " + e.getMessage());
 
             Calendar cal = Calendar.getInstance();
-            finishDate = cal.getTime();
+            Date finishDate = cal.getTime();
             long duration = finishDate.getTime() - startDate.getTime();
             long durationMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
             String durationMinutesStr = Long.toString(durationMinutes);

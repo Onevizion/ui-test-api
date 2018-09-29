@@ -313,7 +313,7 @@ public class Filter {
             return "YES";
         } else {
             for (Long i = 0L; i < js.getGridRowsCount(gridId); i = i + 1L) {
-                String value = (String) js.getGridCellValueByRowIndexAndColIndex(gridId, i, columnIndex);
+                String value = js.getGridCellValueByRowIndexAndColIndex(gridId, i, columnIndex);
                 if (StringUtils.isNotBlank(value)) {
                     value = value.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", ""); /*Example: condition for link*/
                     value = StringUtils.substringBefore(value, "\n"); /*Example: condition for pl/sql block where value may have character of new line*/

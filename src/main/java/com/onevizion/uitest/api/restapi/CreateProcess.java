@@ -8,6 +8,10 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 public class CreateProcess {
 
+    private CreateProcess() {
+        throw new IllegalStateException("Utility class");
+    }
+
     private static final String TRACKOR_TYPE_NAME = "Selenium_Process";
 
     public static void create(String restApiUrl, String restApiCredential, String browserName, String date, String duration, int testsCount) {

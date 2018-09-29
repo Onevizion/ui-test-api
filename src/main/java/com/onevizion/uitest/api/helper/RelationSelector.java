@@ -49,15 +49,16 @@ public class RelationSelector {
         List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id("new_rows_lbParentsChildren0")).findElements(By.className("newDropDownRowContainer"));
         for (WebElement rowName : rowNames) {
             String actualRowName = rowName.findElement(By.className("newDropDownRow")).getText();
+
             if (actualRowName.equals("Relations:") || actualRowName.equals("-------------------------------------------")) {
                 continue;
-            } else {
-                String actualCount = rowName.findElement(By.className("newDropDownCount")).getText();
-                int intActualCount = Integer.parseInt(actualCount);
+            }
 
-                if (trackorType.equals(actualRowName) && count == intActualCount) {
-                    cnt = cnt + 1;
-                }
+            String actualCount = rowName.findElement(By.className("newDropDownCount")).getText();
+            int intActualCount = Integer.parseInt(actualCount);
+
+            if (trackorType.equals(actualRowName) && count == intActualCount) {
+                cnt = cnt + 1;
             }
         }
 
