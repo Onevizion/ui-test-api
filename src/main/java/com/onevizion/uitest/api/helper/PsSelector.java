@@ -43,60 +43,34 @@ public class PsSelector {
     private Qs qs;
 
     public String selectValue(String buttonName, Long romNum, Long colNum) {
-        window.openModal(By.name(buttonName));
-        wait.waitGridLoad(0L, 0L);
         String ret = null;
 
+        window.openModal(By.name(buttonName));
+        wait.waitGridLoad(0L, 0L);
         for (Long i = romNum; i <= romNum; i++) {
             String value = js.getGridCellValueByRowIndexAndColIndex(0L, romNum, colNum);
             value = OnevizionUtils.removeHTMLTags(value);
             value = StringUtils.substringBefore(value, "\n");
-            String compareValue = value;
-            compareValue = compareValue.toUpperCase();
-            compareValue = compareValue.replaceAll("FIELD", "");
-
             seleniumSettings.getWebDriver().findElements(By.name("rb0")).get(romNum.intValue()).click();
             ret = value;
         }
-
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
+
         return ret;
     }
 
     public List<String> selectMultipleValues(String buttonName, Long firstRowNum, Long lastRowNum, Long colNum) {
         List<String> ret = new ArrayList<>();
+
         window.openModal(By.name(buttonName));
         wait.waitGridLoad(0L, 0L);
         List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("cb0_0"));
-        if (firstRowNum != null && lastRowNum != null) {
-            for (Long i = firstRowNum; i <= lastRowNum; i++) {
-                String value = js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum);
-                value = OnevizionUtils.removeHTMLTags(value);
-                value = StringUtils.substringBefore(value, "\n");
-                String compareValue = value;
-                compareValue = compareValue.toUpperCase();
-                compareValue = compareValue.replaceAll("FIELD", "");
-
-                checkbox.clickByElement(webElements.get(i.intValue()));
-                ret.add(js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
-            }
-        } else {
-            Long cnt = js.getGridRowsCount(0L);
-            if (cnt.compareTo(Long.valueOf(5L)) > 0) {
-                cnt = 5L;
-            }
-            if (webElements.size() > 0) {
-                for (Long i = 0L; i < cnt; i++) {
-                    String value = js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum);
-                    value = OnevizionUtils.removeHTMLTags(value);
-                    value = StringUtils.substringBefore(value, "\n");
-
-                    checkbox.clickByElement(webElements.get(i.intValue()));
-                    ret.add(js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
-                }
-            }
+        for (Long i = firstRowNum; i <= lastRowNum; i++) {
+            checkbox.clickByElement(webElements.get(i.intValue()));
+            ret.add(js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
         }
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
+
         return ret;
     }
 

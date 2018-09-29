@@ -122,9 +122,7 @@ public class SeleniumListener extends TestListenerAdapter {
                         logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
                         Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
                         alert.accept();
-                    } catch (NoAlertPresentException e) { // Check is alert present
-                        break;
-                    } catch (WebDriverException e) {
+                    } catch (WebDriverException e) { // Check is alert present
                         break;
                     }
                 }

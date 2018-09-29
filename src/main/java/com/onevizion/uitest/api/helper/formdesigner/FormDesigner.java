@@ -106,6 +106,8 @@ public class FormDesigner {
     }
 
     public void removeElementFromForm(String label) {
+        boolean isElementRemoved = false;
+
         List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id(FORM_ID)).findElements(By.xpath("div[contains(@class, 'cf')]"));
         for (WebElement field : fields) {
             List<WebElement> labels = field.findElements(By.tagName("label"));
@@ -113,23 +115,31 @@ public class FormDesigner {
                 if (labels.get(0).getAttribute("innerText").trim().equals(label)) {
                     element.click(field);
                     element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-                    break;
+                    isElementRemoved = true;
                 }
             } else {
                 if (field.getAttribute("Title").equals("BlankLine")) {
                     if (field.getAttribute("innerText").trim().equals(label)) {
                         element.click(field);
                         element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-                        break;
+                        isElementRemoved = true;
                     }
                 } else if (field.getAttribute("Title").equals("Splitter")) {
                     if (field.getAttribute("Title").equals(label)) {
                         element.click(field);
                         element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-                        break;
+                        isElementRemoved = true;
                     }
                 }
             }
+
+            if (isElementRemoved) {
+                break;
+            }
+        }
+
+        if (!isElementRemoved) {
+            throw new SeleniumUnexpectedException("Element [" + label + "] not removed");
         }
     }
 
