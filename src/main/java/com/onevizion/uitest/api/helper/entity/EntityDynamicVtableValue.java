@@ -22,6 +22,11 @@ import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 @Component
 public class EntityDynamicVtableValue {
 
+    private static final String VALUE = "Value";
+    private static final String ORD_NUM = "OrderNum";
+    private static final String DISPLAY = "display";
+    private static final String FILTERABLE = "filterable";
+
     @Resource
     private Window window;
 
@@ -51,22 +56,22 @@ public class EntityDynamicVtableValue {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("Value")).sendKeys(dynamicVtableValue.getValue());
+        seleniumSettings.getWebDriver().findElement(By.name(VALUE)).sendKeys(dynamicVtableValue.getValue());
 
-        seleniumSettings.getWebDriver().findElement(By.name("OrderNum")).sendKeys(dynamicVtableValue.getOrdNum());
+        seleniumSettings.getWebDriver().findElement(By.name(ORD_NUM)).sendKeys(dynamicVtableValue.getOrdNum());
 
         window.openModal(By.name("btncolorDisplayed"));
         colorPicker.setValue("#" + dynamicVtableValue.getColor());
         window.closeModal(By.className("dhx_button_save"));
 
-        if ((dynamicVtableValue.getDisplay().equals("YES") && !checkbox.isCheckedByName("display"))
-                || (dynamicVtableValue.getDisplay().equals("NO") && checkbox.isCheckedByName("display"))) {
-            checkbox.clickByName("display");
+        if ((dynamicVtableValue.getDisplay().equals("YES") && !checkbox.isCheckedByName(DISPLAY))
+                || (dynamicVtableValue.getDisplay().equals("NO") && checkbox.isCheckedByName(DISPLAY))) {
+            checkbox.clickByName(DISPLAY);
         }
 
-        if ((dynamicVtableValue.getFilterable().equals("YES") && !checkbox.isCheckedByName("filterable"))
-                || (dynamicVtableValue.getFilterable().equals("NO") && checkbox.isCheckedByName("filterable"))) {
-            checkbox.clickByName("filterable");
+        if ((dynamicVtableValue.getFilterable().equals("YES") && !checkbox.isCheckedByName(FILTERABLE))
+                || (dynamicVtableValue.getFilterable().equals("NO") && checkbox.isCheckedByName(FILTERABLE))) {
+            checkbox.clickByName(FILTERABLE);
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -78,24 +83,24 @@ public class EntityDynamicVtableValue {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("Value")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("Value")).sendKeys(dynamicVtableValue.getValue());
+        seleniumSettings.getWebDriver().findElement(By.name(VALUE)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(VALUE)).sendKeys(dynamicVtableValue.getValue());
 
-        seleniumSettings.getWebDriver().findElement(By.name("OrderNum")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("OrderNum")).sendKeys(dynamicVtableValue.getOrdNum());
+        seleniumSettings.getWebDriver().findElement(By.name(ORD_NUM)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(ORD_NUM)).sendKeys(dynamicVtableValue.getOrdNum());
 
         window.openModal(By.name("btncolorDisplayed"));
         colorPicker.setValue("#" + dynamicVtableValue.getColor());
         window.closeModal(By.className("dhx_button_save"));
 
-        if ((dynamicVtableValue.getDisplay().equals("YES") && !checkbox.isCheckedByName("display"))
-                || (dynamicVtableValue.getDisplay().equals("NO") && checkbox.isCheckedByName("display"))) {
-            checkbox.clickByName("display");
+        if ((dynamicVtableValue.getDisplay().equals("YES") && !checkbox.isCheckedByName(DISPLAY))
+                || (dynamicVtableValue.getDisplay().equals("NO") && checkbox.isCheckedByName(DISPLAY))) {
+            checkbox.clickByName(DISPLAY);
         }
 
-        if ((dynamicVtableValue.getFilterable().equals("YES") && !checkbox.isCheckedByName("filterable"))
-                || (dynamicVtableValue.getFilterable().equals("NO") && checkbox.isCheckedByName("filterable"))) {
-            checkbox.clickByName("filterable");
+        if ((dynamicVtableValue.getFilterable().equals("YES") && !checkbox.isCheckedByName(FILTERABLE))
+                || (dynamicVtableValue.getFilterable().equals("NO") && checkbox.isCheckedByName(FILTERABLE))) {
+            checkbox.clickByName(FILTERABLE);
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -107,11 +112,11 @@ public class EntityDynamicVtableValue {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("Value", dynamicVtableValue.getValue());
-        assertElement.AssertText("OrderNum", dynamicVtableValue.getOrdNum());
+        assertElement.AssertText(VALUE, dynamicVtableValue.getValue());
+        assertElement.AssertText(ORD_NUM, dynamicVtableValue.getOrdNum());
         assertElement.AssertText("color", dynamicVtableValue.getColor());
-        assertElement.AssertCheckBoxNew("display", dynamicVtableValue.getDisplay());
-        assertElement.AssertCheckBoxNew("filterable", dynamicVtableValue.getFilterable());
+        assertElement.AssertCheckBoxNew(DISPLAY, dynamicVtableValue.getDisplay());
+        assertElement.AssertCheckBoxNew(FILTERABLE, dynamicVtableValue.getFilterable());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

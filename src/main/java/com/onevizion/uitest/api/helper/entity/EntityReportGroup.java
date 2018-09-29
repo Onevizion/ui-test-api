@@ -20,6 +20,8 @@ import com.onevizion.uitest.api.vo.entity.ReportGroup;
 @Component
 public class EntityReportGroup {
 
+    private static final String NAME = "reportGroup";
+
     @Resource
     private Window window;
 
@@ -43,8 +45,8 @@ public class EntityReportGroup {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("reportGroup")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("reportGroup")).sendKeys(reportGroup.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(reportGroup.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -55,8 +57,8 @@ public class EntityReportGroup {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("reportGroup")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("reportGroup")).sendKeys(reportGroup.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(reportGroup.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -67,7 +69,7 @@ public class EntityReportGroup {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("reportGroup", reportGroup.getName());
+        assertElement.AssertText(NAME, reportGroup.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

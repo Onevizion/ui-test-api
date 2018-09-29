@@ -18,6 +18,18 @@ import com.onevizion.uitest.api.vo.entity.MenuItem;
 @Component
 public class EntityMenuItem {
 
+    private static final String LABEL = "label";
+    private static final String VISIBLE = "visible";
+    private static final String URL = "visibleURL";
+    private static final String ITEM_TYPE = "OnClick";
+    private static final String VIEW = "viewOptId";
+    private static final String HIDE_VIEW = "hideView";
+    private static final String FILTER = "filterOptId";
+    private static final String HIDE_FILTER = "hideFilter";
+    private static final String PORTAL = "portalId";
+    private static final String DASHBOARD = "dashboardId";
+    private static final String TRACKOR_TYPE = "primaryXitorTypeId";
+
     @Resource
     private Window window;
 
@@ -42,43 +54,43 @@ public class EntityMenuItem {
         jqueryWait.waitJQueryLoad();
 
         if (MenuItemType.SUBGROUP.equals(menuItem.getMenuItemType())) {
-            assertElement.AssertText("label", menuItem.getLabel());
-            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertText(LABEL, menuItem.getLabel());
+            assertElement.AssertCheckBoxNew(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.PORTAL.equals(menuItem.getMenuItemType())) {
-            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
-            assertElement.AssertText("label", menuItem.getLabel());
-            assertElement.AssertText("visibleURL", menuItem.getUrl());
-            assertElement.AssertSelect("portalId", menuItem.getPortal());
-            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById(ITEM_TYPE, menuItem.getItemType());
+            assertElement.AssertText(LABEL, menuItem.getLabel());
+            assertElement.AssertText(URL, menuItem.getUrl());
+            assertElement.AssertSelect(PORTAL, menuItem.getPortal());
+            assertElement.AssertCheckBoxNew(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.DASHBOURD.equals(menuItem.getMenuItemType())) {
-            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
-            assertElement.AssertText("label", menuItem.getLabel());
-            assertElement.AssertText("visibleURL", menuItem.getUrl());
-            assertElement.AssertSelect("dashboardId", menuItem.getDashbourd());
-            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById(ITEM_TYPE, menuItem.getItemType());
+            assertElement.AssertText(LABEL, menuItem.getLabel());
+            assertElement.AssertText(URL, menuItem.getUrl());
+            assertElement.AssertSelect(DASHBOARD, menuItem.getDashbourd());
+            assertElement.AssertCheckBoxNew(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.PAGE_WITHOUT_TRACKOR_TYPE.equals(menuItem.getMenuItemType())) {
-            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
-            assertElement.AssertText("label", menuItem.getLabel());
-            assertElement.AssertText("visibleURL", menuItem.getUrl());
-            assertElement.AssertSelect("viewOptId", menuItem.getView());
-            assertElement.AssertCheckBoxNew("hideView", menuItem.getHideView());
-            assertElement.AssertSelect("filterOptId", menuItem.getFilter());
-            assertElement.AssertCheckBoxNew("hideFilter", menuItem.getHideFilter());
-            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById(ITEM_TYPE, menuItem.getItemType());
+            assertElement.AssertText(LABEL, menuItem.getLabel());
+            assertElement.AssertText(URL, menuItem.getUrl());
+            assertElement.AssertSelect(VIEW, menuItem.getView());
+            assertElement.AssertCheckBoxNew(HIDE_VIEW, menuItem.getHideView());
+            assertElement.AssertSelect(FILTER, menuItem.getFilter());
+            assertElement.AssertCheckBoxNew(HIDE_FILTER, menuItem.getHideFilter());
+            assertElement.AssertCheckBoxNew(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.PAGE_WITH_TRACKOR_TYPE.equals(menuItem.getMenuItemType())) {
-            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
-            assertElement.AssertText("label", menuItem.getLabel());
-            assertElement.AssertText("visibleURL", menuItem.getUrl());
-            assertElement.AssertSelect("primaryXitorTypeId", menuItem.getTrackorType());
-            assertElement.AssertSelect("viewOptId", menuItem.getView());
-            assertElement.AssertCheckBoxNew("hideView", menuItem.getHideView());
-            assertElement.AssertSelect("filterOptId", menuItem.getFilter());
-            assertElement.AssertCheckBoxNew("hideFilter", menuItem.getHideFilter());
-            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById(ITEM_TYPE, menuItem.getItemType());
+            assertElement.AssertText(LABEL, menuItem.getLabel());
+            assertElement.AssertText(URL, menuItem.getUrl());
+            assertElement.AssertSelect(TRACKOR_TYPE, menuItem.getTrackorType());
+            assertElement.AssertSelect(VIEW, menuItem.getView());
+            assertElement.AssertCheckBoxNew(HIDE_VIEW, menuItem.getHideView());
+            assertElement.AssertSelect(FILTER, menuItem.getFilter());
+            assertElement.AssertCheckBoxNew(HIDE_FILTER, menuItem.getHideFilter());
+            assertElement.AssertCheckBoxNew(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.ACTION.equals(menuItem.getMenuItemType())) {
-            assertElement.AssertSelectById("OnClick", menuItem.getItemType());
-            assertElement.AssertText("label", menuItem.getLabel());
-            assertElement.AssertCheckBoxNew("visible", menuItem.getVisible());
+            assertElement.AssertSelectById(ITEM_TYPE, menuItem.getItemType());
+            assertElement.AssertText(LABEL, menuItem.getLabel());
+            assertElement.AssertCheckBoxNew(VISIBLE, menuItem.getVisible());
         } else {
             throw new SeleniumUnexpectedException("Not support MenuItemType. MenuItemType=" + menuItem.getMenuItemType());
         }

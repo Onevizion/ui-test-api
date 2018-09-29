@@ -21,6 +21,49 @@ import com.onevizion.uitest.api.vo.entity.SecurityRole;
 @Component
 public class EntitySecurityRole {
 
+    private static final String NAME = "roleType";
+    private static final String DESCRIPTION = "description";
+
+    private static final String DEF_PRIV_APPLET_R = "cbPrivR1";
+    private static final String DEF_PRIV_APPLET_E = "cbPrivE1";
+    private static final String DEF_PRIV_APPLET_A = "cbPrivA1";
+    private static final String DEF_PRIV_APPLET_D = "cbPrivD1";
+    private static final String DEF_PRIV_CONFIG_APPLET_R = "cbPrivR2";
+    private static final String DEF_PRIV_CONFIG_APPLET_E = "cbPrivE2";
+    private static final String DEF_PRIV_CONFIG_TAB_R = "cbPrivR3";
+    private static final String DEF_PRIV_CONFIG_TAB_E = "cbPrivE3";
+    private static final String DEF_PRIV_RELATION_R = "cbPrivR12";
+    private static final String DEF_PRIV_RELATION_E = "cbPrivE12";
+    private static final String DEF_PRIV_RELATION_A = "cbPrivA12";
+    private static final String DEF_PRIV_RELATION_D = "cbPrivD12";
+    private static final String DEF_PRIV_SUPERUSER_APPLET_R = "cbPrivR9";
+    private static final String DEF_PRIV_SUPERUSER_APPLET_E = "cbPrivE9";
+    private static final String DEF_PRIV_SUPERUSER_APPLET_A = "cbPrivA9";
+    private static final String DEF_PRIV_SUPERUSER_APPLET_D = "cbPrivD9";
+    private static final String DEF_PRIV_TRACKOR_TYPE_R = "cbPrivR15";
+    private static final String DEF_PRIV_TRACKOR_TYPE_E = "cbPrivE15";
+    private static final String DEF_PRIV_TRACKOR_TYPE_A = "cbPrivA15";
+    private static final String DEF_PRIV_TRACKOR_TYPE_D = "cbPrivD15";
+    private static final String DEF_PRIV_WORKFLOW_R = "cbPrivR10";
+    private static final String DEF_PRIV_WORKFLOW_E = "cbPrivE10";
+    private static final String DEF_PRIV_WORKFLOW_A = "cbPrivA10";
+
+    private static final String DEF_LOCK_PRIV_FIELD_L = "cbLock5";
+    private static final String DEF_LOCK_PRIV_FIELD_U = "cbUnlock5";
+    private static final String DEF_LOCK_PRIV_RELATION_L = "cbLock6";
+    private static final String DEF_LOCK_PRIV_RELATION_U = "cbUnlock6";
+
+    private static final String DEF_ASSIGN_DISCIPLINE = "autoDiscpAssign";
+    private static final String DEF_ASSIGN_MENU = "autoAppAssign";
+    private static final String DEF_ASSIGN_GLOBAL_VIEW = "autoViewAssign";
+    private static final String DEF_ASSIGN_GLOBAL_FILTER = "autoFilterAssign";
+    private static final String DEF_ASSIGN_GLOBAL_PORTAL = "autoPortalAssign";
+    private static final String DEF_ASSIGN_RULE = "autoRuleAssign";
+    private static final String DEF_ASSIGN_IMPORT = "autoImportAssign";
+    private static final String DEF_ASSIGN_REPORT = "autoReportAssign";
+    private static final String DEF_ASSIGN_GLOBAL_NOTIF = "autoNotifAssign";
+    private static final String DEF_ASSIGN_TRACKOR_TOUR = "autoTourAssign";
+
     @Resource
     private Window window;
 
@@ -47,49 +90,49 @@ public class EntitySecurityRole {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("roleType")).sendKeys(securityRole.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(securityRole.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(securityRole.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(securityRole.getDescription());
 
-        setCheckboxValue(securityRole.getDefaultPrivs().getAppletR(), "cbPrivR1");
-        setCheckboxValue(securityRole.getDefaultPrivs().getAppletE(), "cbPrivE1");
-        setCheckboxValue(securityRole.getDefaultPrivs().getAppletA(), "cbPrivA1");
-        setCheckboxValue(securityRole.getDefaultPrivs().getAppletD(), "cbPrivD1");
-        setCheckboxValue(securityRole.getDefaultPrivs().getConfigAppletR(), "cbPrivR2");
-        setCheckboxValue(securityRole.getDefaultPrivs().getConfigAppletE(), "cbPrivE2");
-        setCheckboxValue(securityRole.getDefaultPrivs().getConfigTabR(), "cbPrivR3");
-        setCheckboxValue(securityRole.getDefaultPrivs().getConfigTabE(), "cbPrivE3");
-        setCheckboxValue(securityRole.getDefaultPrivs().getRelationR(), "cbPrivR12");
-        setCheckboxValue(securityRole.getDefaultPrivs().getRelationE(), "cbPrivE12");
-        setCheckboxValue(securityRole.getDefaultPrivs().getRelationA(), "cbPrivA12");
-        setCheckboxValue(securityRole.getDefaultPrivs().getRelationD(), "cbPrivD12");
-        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletR(), "cbPrivR9");
-        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletE(), "cbPrivE9");
-        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletA(), "cbPrivA9");
-        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletD(), "cbPrivD9");
-        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeR(), "cbPrivR15");
-        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeE(), "cbPrivE15");
-        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeA(), "cbPrivA15");
-        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeD(), "cbPrivD15");
-        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowR(), "cbPrivR10");
-        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowE(), "cbPrivE10");
-        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowA(), "cbPrivA10");
+        setCheckboxValue(securityRole.getDefaultPrivs().getAppletR(), DEF_PRIV_APPLET_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getAppletE(), DEF_PRIV_APPLET_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getAppletA(), DEF_PRIV_APPLET_A);
+        setCheckboxValue(securityRole.getDefaultPrivs().getAppletD(), DEF_PRIV_APPLET_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getConfigAppletR(), DEF_PRIV_CONFIG_APPLET_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getConfigAppletE(), DEF_PRIV_CONFIG_APPLET_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getConfigTabR(), DEF_PRIV_CONFIG_TAB_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getConfigTabE(), DEF_PRIV_CONFIG_TAB_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getRelationR(), DEF_PRIV_RELATION_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getRelationE(), DEF_PRIV_RELATION_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getRelationA(), DEF_PRIV_RELATION_A);
+        setCheckboxValue(securityRole.getDefaultPrivs().getRelationD(), DEF_PRIV_RELATION_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletR(), DEF_PRIV_SUPERUSER_APPLET_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletE(), DEF_PRIV_SUPERUSER_APPLET_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletA(), DEF_PRIV_SUPERUSER_APPLET_A);
+        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletD(), DEF_PRIV_SUPERUSER_APPLET_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeR(), DEF_PRIV_TRACKOR_TYPE_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeE(), DEF_PRIV_TRACKOR_TYPE_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeA(), DEF_PRIV_TRACKOR_TYPE_A);
+        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeD(), DEF_PRIV_TRACKOR_TYPE_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowR(), DEF_PRIV_WORKFLOW_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowE(), DEF_PRIV_WORKFLOW_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowA(), DEF_PRIV_WORKFLOW_A);
 
-        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableFieldL(), "cbLock5");
-        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableFieldU(), "cbUnlock5");
-        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableRelationL(), "cbLock6");
-        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableRelationU(), "cbUnlock6");
+        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableFieldL(), DEF_LOCK_PRIV_FIELD_L);
+        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableFieldU(), DEF_LOCK_PRIV_FIELD_U);
+        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableRelationL(), DEF_LOCK_PRIV_RELATION_L);
+        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableRelationU(), DEF_LOCK_PRIV_RELATION_U);
 
-        setCheckboxValue(securityRole.getDefaultAssignments().getDiscipline(), "autoDiscpAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getMenuAppliction(), "autoAppAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalView(), "autoViewAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalFilter(), "autoFilterAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalPortal(), "autoPortalAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getRule(), "autoRuleAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getImportt(), "autoImportAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getReport(), "autoReportAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), "autoNotifAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), "autoTourAssign");
+        setCheckboxValue(securityRole.getDefaultAssignments().getDiscipline(), DEF_ASSIGN_DISCIPLINE);
+        setCheckboxValue(securityRole.getDefaultAssignments().getMenuAppliction(), DEF_ASSIGN_MENU);
+        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalView(), DEF_ASSIGN_GLOBAL_VIEW);
+        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalFilter(), DEF_ASSIGN_GLOBAL_FILTER);
+        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalPortal(), DEF_ASSIGN_GLOBAL_PORTAL);
+        setCheckboxValue(securityRole.getDefaultAssignments().getRule(), DEF_ASSIGN_RULE);
+        setCheckboxValue(securityRole.getDefaultAssignments().getImportt(), DEF_ASSIGN_IMPORT);
+        setCheckboxValue(securityRole.getDefaultAssignments().getReport(), DEF_ASSIGN_REPORT);
+        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), DEF_ASSIGN_GLOBAL_NOTIF);
+        setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -100,51 +143,51 @@ public class EntitySecurityRole {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("roleType")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("roleType")).sendKeys(securityRole.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(securityRole.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(securityRole.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(securityRole.getDescription());
 
-        setCheckboxValue(securityRole.getDefaultPrivs().getAppletR(), "cbPrivR1");
-        setCheckboxValue(securityRole.getDefaultPrivs().getAppletE(), "cbPrivE1");
-        setCheckboxValue(securityRole.getDefaultPrivs().getAppletA(), "cbPrivA1");
-        setCheckboxValue(securityRole.getDefaultPrivs().getAppletD(), "cbPrivD1");
-        setCheckboxValue(securityRole.getDefaultPrivs().getConfigAppletR(), "cbPrivR2");
-        setCheckboxValue(securityRole.getDefaultPrivs().getConfigAppletE(), "cbPrivE2");
-        setCheckboxValue(securityRole.getDefaultPrivs().getConfigTabR(), "cbPrivR3");
-        setCheckboxValue(securityRole.getDefaultPrivs().getConfigTabE(), "cbPrivE3");
-        setCheckboxValue(securityRole.getDefaultPrivs().getRelationR(), "cbPrivR12");
-        setCheckboxValue(securityRole.getDefaultPrivs().getRelationE(), "cbPrivE12");
-        setCheckboxValue(securityRole.getDefaultPrivs().getRelationA(), "cbPrivA12");
-        setCheckboxValue(securityRole.getDefaultPrivs().getRelationD(), "cbPrivD12");
-        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletR(), "cbPrivR9");
-        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletE(), "cbPrivE9");
-        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletA(), "cbPrivA9");
-        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletD(), "cbPrivD9");
-        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeR(), "cbPrivR15");
-        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeE(), "cbPrivE15");
-        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeA(), "cbPrivA15");
-        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeD(), "cbPrivD15");
-        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowR(), "cbPrivR10");
-        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowE(), "cbPrivE10");
-        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowA(), "cbPrivA10");
+        setCheckboxValue(securityRole.getDefaultPrivs().getAppletR(), DEF_PRIV_APPLET_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getAppletE(), DEF_PRIV_APPLET_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getAppletA(), DEF_PRIV_APPLET_A);
+        setCheckboxValue(securityRole.getDefaultPrivs().getAppletD(), DEF_PRIV_APPLET_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getConfigAppletR(), DEF_PRIV_CONFIG_APPLET_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getConfigAppletE(), DEF_PRIV_CONFIG_APPLET_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getConfigTabR(), DEF_PRIV_CONFIG_TAB_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getConfigTabE(), DEF_PRIV_CONFIG_TAB_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getRelationR(), DEF_PRIV_RELATION_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getRelationE(), DEF_PRIV_RELATION_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getRelationA(), DEF_PRIV_RELATION_A);
+        setCheckboxValue(securityRole.getDefaultPrivs().getRelationD(), DEF_PRIV_RELATION_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletR(), DEF_PRIV_SUPERUSER_APPLET_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletE(), DEF_PRIV_SUPERUSER_APPLET_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletA(), DEF_PRIV_SUPERUSER_APPLET_A);
+        setCheckboxValue(securityRole.getDefaultPrivs().getSuperuserAppletD(), DEF_PRIV_SUPERUSER_APPLET_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeR(), DEF_PRIV_TRACKOR_TYPE_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeE(), DEF_PRIV_TRACKOR_TYPE_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeA(), DEF_PRIV_TRACKOR_TYPE_A);
+        setCheckboxValue(securityRole.getDefaultPrivs().getTrackorTypeD(), DEF_PRIV_TRACKOR_TYPE_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowR(), DEF_PRIV_WORKFLOW_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowE(), DEF_PRIV_WORKFLOW_E);
+        setCheckboxValue(securityRole.getDefaultPrivs().getWorkflowA(), DEF_PRIV_WORKFLOW_A);
 
-        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableFieldL(), "cbLock5");
-        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableFieldU(), "cbUnlock5");
-        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableRelationL(), "cbLock6");
-        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableRelationU(), "cbUnlock6");
+        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableFieldL(), DEF_LOCK_PRIV_FIELD_L);
+        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableFieldU(), DEF_LOCK_PRIV_FIELD_U);
+        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableRelationL(), DEF_LOCK_PRIV_RELATION_L);
+        setCheckboxValue(securityRole.getDefaultLockPrivs().getLockableRelationU(), DEF_LOCK_PRIV_RELATION_U);
 
-        setCheckboxValue(securityRole.getDefaultAssignments().getDiscipline(), "autoDiscpAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getMenuAppliction(), "autoAppAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalView(), "autoViewAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalFilter(), "autoFilterAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalPortal(), "autoPortalAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getRule(), "autoRuleAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getImportt(), "autoImportAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getReport(), "autoReportAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), "autoNotifAssign");
-        setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), "autoTourAssign");
+        setCheckboxValue(securityRole.getDefaultAssignments().getDiscipline(), DEF_ASSIGN_DISCIPLINE);
+        setCheckboxValue(securityRole.getDefaultAssignments().getMenuAppliction(), DEF_ASSIGN_MENU);
+        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalView(), DEF_ASSIGN_GLOBAL_VIEW);
+        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalFilter(), DEF_ASSIGN_GLOBAL_FILTER);
+        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalPortal(), DEF_ASSIGN_GLOBAL_PORTAL);
+        setCheckboxValue(securityRole.getDefaultAssignments().getRule(), DEF_ASSIGN_RULE);
+        setCheckboxValue(securityRole.getDefaultAssignments().getImportt(), DEF_ASSIGN_IMPORT);
+        setCheckboxValue(securityRole.getDefaultAssignments().getReport(), DEF_ASSIGN_REPORT);
+        setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), DEF_ASSIGN_GLOBAL_NOTIF);
+        setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -155,55 +198,55 @@ public class EntitySecurityRole {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("roleType", securityRole.getName());
-        assertElement.AssertText("description", securityRole.getDescription());
+        assertElement.AssertText(NAME, securityRole.getName());
+        assertElement.AssertText(DESCRIPTION, securityRole.getDescription());
 
-        assertElement.AssertCheckBoxNew("cbPrivR1", securityRole.getDefaultPrivs().getAppletR());
-        assertElement.AssertCheckBoxNew("cbPrivE1", securityRole.getDefaultPrivs().getAppletE());
-        assertElement.AssertCheckBoxNew("cbPrivA1", securityRole.getDefaultPrivs().getAppletA());
-        assertElement.AssertCheckBoxNew("cbPrivD1", securityRole.getDefaultPrivs().getAppletD());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_APPLET_R, securityRole.getDefaultPrivs().getAppletR());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_APPLET_E, securityRole.getDefaultPrivs().getAppletE());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_APPLET_A, securityRole.getDefaultPrivs().getAppletA());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_APPLET_D, securityRole.getDefaultPrivs().getAppletD());
 
-        assertElement.AssertCheckBoxNew("cbPrivR2", securityRole.getDefaultPrivs().getConfigAppletR());
-        assertElement.AssertCheckBoxNew("cbPrivE2", securityRole.getDefaultPrivs().getConfigAppletE());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_CONFIG_APPLET_R, securityRole.getDefaultPrivs().getConfigAppletR());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_CONFIG_APPLET_E, securityRole.getDefaultPrivs().getConfigAppletE());
 
-        assertElement.AssertCheckBoxNew("cbPrivR3", securityRole.getDefaultPrivs().getConfigTabR());
-        assertElement.AssertCheckBoxNew("cbPrivE3", securityRole.getDefaultPrivs().getConfigTabE());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_CONFIG_TAB_R, securityRole.getDefaultPrivs().getConfigTabR());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_CONFIG_TAB_E, securityRole.getDefaultPrivs().getConfigTabE());
 
-        assertElement.AssertCheckBoxNew("cbPrivR12", securityRole.getDefaultPrivs().getRelationR());
-        assertElement.AssertCheckBoxNew("cbPrivE12", securityRole.getDefaultPrivs().getRelationE());
-        assertElement.AssertCheckBoxNew("cbPrivA12", securityRole.getDefaultPrivs().getRelationA());
-        assertElement.AssertCheckBoxNew("cbPrivD12", securityRole.getDefaultPrivs().getRelationD());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_RELATION_R, securityRole.getDefaultPrivs().getRelationR());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_RELATION_E, securityRole.getDefaultPrivs().getRelationE());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_RELATION_A, securityRole.getDefaultPrivs().getRelationA());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_RELATION_D, securityRole.getDefaultPrivs().getRelationD());
 
-        assertElement.AssertCheckBoxNew("cbPrivR9", securityRole.getDefaultPrivs().getSuperuserAppletR());
-        assertElement.AssertCheckBoxNew("cbPrivE9", securityRole.getDefaultPrivs().getSuperuserAppletE());
-        assertElement.AssertCheckBoxNew("cbPrivA9", securityRole.getDefaultPrivs().getSuperuserAppletA());
-        assertElement.AssertCheckBoxNew("cbPrivD9", securityRole.getDefaultPrivs().getSuperuserAppletD());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_SUPERUSER_APPLET_R, securityRole.getDefaultPrivs().getSuperuserAppletR());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_SUPERUSER_APPLET_E, securityRole.getDefaultPrivs().getSuperuserAppletE());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_SUPERUSER_APPLET_A, securityRole.getDefaultPrivs().getSuperuserAppletA());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_SUPERUSER_APPLET_D, securityRole.getDefaultPrivs().getSuperuserAppletD());
 
-        assertElement.AssertCheckBoxNew("cbPrivR15", securityRole.getDefaultPrivs().getTrackorTypeR());
-        assertElement.AssertCheckBoxNew("cbPrivE15", securityRole.getDefaultPrivs().getTrackorTypeE());
-        assertElement.AssertCheckBoxNew("cbPrivA15", securityRole.getDefaultPrivs().getTrackorTypeA());
-        assertElement.AssertCheckBoxNew("cbPrivD15", securityRole.getDefaultPrivs().getTrackorTypeD());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_TRACKOR_TYPE_R, securityRole.getDefaultPrivs().getTrackorTypeR());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_TRACKOR_TYPE_E, securityRole.getDefaultPrivs().getTrackorTypeE());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_TRACKOR_TYPE_A, securityRole.getDefaultPrivs().getTrackorTypeA());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_TRACKOR_TYPE_D, securityRole.getDefaultPrivs().getTrackorTypeD());
 
-        assertElement.AssertCheckBoxNew("cbPrivR10", securityRole.getDefaultPrivs().getWorkflowR());
-        assertElement.AssertCheckBoxNew("cbPrivE10", securityRole.getDefaultPrivs().getWorkflowE());
-        assertElement.AssertCheckBoxNew("cbPrivA10", securityRole.getDefaultPrivs().getWorkflowA());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_WORKFLOW_R, securityRole.getDefaultPrivs().getWorkflowR());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_WORKFLOW_E, securityRole.getDefaultPrivs().getWorkflowE());
+        assertElement.AssertCheckBoxNew(DEF_PRIV_WORKFLOW_A, securityRole.getDefaultPrivs().getWorkflowA());
 
-        assertElement.AssertCheckBoxNew("cbLock5", securityRole.getDefaultLockPrivs().getLockableFieldL());
-        assertElement.AssertCheckBoxNew("cbUnlock5", securityRole.getDefaultLockPrivs().getLockableFieldU());
+        assertElement.AssertCheckBoxNew(DEF_LOCK_PRIV_FIELD_L, securityRole.getDefaultLockPrivs().getLockableFieldL());
+        assertElement.AssertCheckBoxNew(DEF_LOCK_PRIV_FIELD_U, securityRole.getDefaultLockPrivs().getLockableFieldU());
 
-        assertElement.AssertCheckBoxNew("cbLock6", securityRole.getDefaultLockPrivs().getLockableRelationL());
-        assertElement.AssertCheckBoxNew("cbUnlock6", securityRole.getDefaultLockPrivs().getLockableRelationU());
+        assertElement.AssertCheckBoxNew(DEF_LOCK_PRIV_RELATION_L, securityRole.getDefaultLockPrivs().getLockableRelationL());
+        assertElement.AssertCheckBoxNew(DEF_LOCK_PRIV_RELATION_U, securityRole.getDefaultLockPrivs().getLockableRelationU());
 
-        assertElement.AssertCheckBoxNew("autoDiscpAssign", securityRole.getDefaultAssignments().getDiscipline());
-        assertElement.AssertCheckBoxNew("autoAppAssign", securityRole.getDefaultAssignments().getMenuAppliction());
-        assertElement.AssertCheckBoxNew("autoViewAssign", securityRole.getDefaultAssignments().getGlobalView());
-        assertElement.AssertCheckBoxNew("autoFilterAssign", securityRole.getDefaultAssignments().getGlobalFilter());
-        assertElement.AssertCheckBoxNew("autoPortalAssign", securityRole.getDefaultAssignments().getGlobalPortal());
-        assertElement.AssertCheckBoxNew("autoRuleAssign", securityRole.getDefaultAssignments().getRule());
-        assertElement.AssertCheckBoxNew("autoImportAssign", securityRole.getDefaultAssignments().getImportt());
-        assertElement.AssertCheckBoxNew("autoReportAssign", securityRole.getDefaultAssignments().getReport());
-        assertElement.AssertCheckBoxNew("autoNotifAssign", securityRole.getDefaultAssignments().getGlobalNotif());
-        assertElement.AssertCheckBoxNew("autoTourAssign", securityRole.getDefaultAssignments().getTrackorTour());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_DISCIPLINE, securityRole.getDefaultAssignments().getDiscipline());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_MENU, securityRole.getDefaultAssignments().getMenuAppliction());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_GLOBAL_VIEW, securityRole.getDefaultAssignments().getGlobalView());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_GLOBAL_FILTER, securityRole.getDefaultAssignments().getGlobalFilter());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_GLOBAL_PORTAL, securityRole.getDefaultAssignments().getGlobalPortal());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_RULE, securityRole.getDefaultAssignments().getRule());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_IMPORT, securityRole.getDefaultAssignments().getImportt());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_REPORT, securityRole.getDefaultAssignments().getReport());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_GLOBAL_NOTIF, securityRole.getDefaultAssignments().getGlobalNotif());
+        assertElement.AssertCheckBoxNew(DEF_ASSIGN_TRACKOR_TOUR, securityRole.getDefaultAssignments().getTrackorTour());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
