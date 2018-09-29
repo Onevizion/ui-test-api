@@ -30,7 +30,7 @@ public class View {
     public static final String UNSAVED_VIEW_NAME = "Unsaved View";
     public static final String GENERAL_INFO_VIEW_NAME = "G:General Info";
 
-    private static final String VIEW = "newDropdownView";
+    private static final String VIEW_MAIN_ELEMENT_ID_BASE = "newDropdownView";
 
     public static final String SELECT_VIEW = "ddView"; //TODO change from SELECT_FILTER to FILTER
     public static final String VIEW_CONTAINER = "ddViewContainer";
@@ -101,7 +101,7 @@ public class View {
 
     public void checkIsExistViewControl(Long gridIdx, boolean isExist) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id(VIEW + gridIdx)).size();
+        int count = seleniumSettings.getWebDriver().findElements(By.id(VIEW_MAIN_ELEMENT_ID_BASE + gridIdx)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         boolean actualIsExist;

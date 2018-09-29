@@ -271,7 +271,7 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
             if (operator.equals("=")) {
                 for (String cellVal : cellVals) {
-                    if ("YES".equals(value.toUpperCase())) {
+                    if ("YES".equalsIgnoreCase(value)) {
                         if (cellVal.equals("YES")) {
                             cnt = cnt + 1L;
                         }
@@ -1137,7 +1137,7 @@ public class UserpageFilter {
             }
             gridValue = OnevizionUtils.removeHTMLTags(gridValue);
             for (String value : values) {
-                if (!gridValue.toLowerCase().equals(value.toLowerCase())) {
+                if (!gridValue.equalsIgnoreCase(value)) {
                     isError = true;
                 }
             }

@@ -35,7 +35,7 @@ public class Filter {
     public static final String UNSAVED_FILTER_NAME = "Unsaved Filter";
     public static final String ALL_FILTER_NAME = "G:All";
 
-    private static final String FILTER = "newDropdownFilter";
+    private static final String FILTER_MAIN_ELEMENT_ID_BASE = "newDropdownFilter";
 
     public static final String SELECT_FILTER = "ddFilter"; //TODO change from SELECT_FILTER to FILTER
     public static final String FILTER_CONTAINER = "ddFilterContainer";
@@ -95,7 +95,7 @@ public class Filter {
 
     public void checkIsExistFilterControl(Long gridIdx, boolean isExist) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id(FILTER + gridIdx)).size();
+        int count = seleniumSettings.getWebDriver().findElements(By.id(FILTER_MAIN_ELEMENT_ID_BASE + gridIdx)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         boolean actualIsExist;

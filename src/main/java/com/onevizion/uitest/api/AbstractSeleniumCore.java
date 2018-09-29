@@ -559,7 +559,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.setWindows(new LinkedList<String>());
             seleniumSettings.getWindows().add(seleniumSettings.getWebDriver().getWindowHandle());
 
-        } catch (Throwable e) {
+        } catch (Exception e) {
             seleniumSettings.setTestStatus("fail");
 
             logger.error(seleniumSettings.getTestName() + " openBrowserAndLogin fail");
@@ -612,7 +612,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             logger.info(seleniumSettings.getTestName() + " executed in " + durationMinutesStr + " minutes");
 
             saveTestResult(durationMinutesStr);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             seleniumSettings.setTestStatus("fail");
 
             logger.error(seleniumSettings.getTestName() + " closeBrowser fail");

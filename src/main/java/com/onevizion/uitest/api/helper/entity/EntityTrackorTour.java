@@ -109,7 +109,7 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("label")).clear();;
+        seleniumSettings.getWebDriver().findElement(By.name("label")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("label")).sendKeys(trackorTour.getLabel());
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("xitorTypeId"))).selectByVisibleText(trackorTour.getTrackorType());
@@ -128,7 +128,7 @@ public class EntityTrackorTour {
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("orderNumber"))).selectByVisibleText(trackorTour.getOrderNumber());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();;
+        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorTour.getDescription());
 
         tab.goToTab(3L);//Role Assignments
