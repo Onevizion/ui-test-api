@@ -116,11 +116,9 @@ public class AssertElement {
         element.moveToElementByName(fieldName);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + fieldName + "] has wrong value");
-        if (isOpenSelector) {
-            if (!"".equals(expectedVal)) {
-                boolean isChecked = psSelector.checkValue(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
-                Assert.assertEquals(isChecked, true, "Radiobutton not selected");
-            }
+        if (isOpenSelector && !"".equals(expectedVal)) {
+            boolean isChecked = psSelector.checkValue(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
+            Assert.assertEquals(isChecked, true, "Radiobutton not selected");
         }
     }
 
@@ -128,12 +126,9 @@ public class AssertElement {
         element.moveToElementById(fieldId);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(fieldId)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + fieldId + "] has wrong value");
-        if (isOpenSelector) {
-            if (!"".equals(expectedVal)) {
-                By btnOpen = By.id(btnOpenId);
-                boolean isChecked = psSelector.checkValue(btnOpen, btnCloseName, expectedVal, filterFieldNum);
-                Assert.assertEquals(isChecked, true, "Radiobutton not selected");
-            }
+        if (isOpenSelector && !"".equals(expectedVal)) {
+            boolean isChecked = psSelector.checkValue(By.id(btnOpenId), btnCloseName, expectedVal, filterFieldNum);
+            Assert.assertEquals(isChecked, true, "Radiobutton not selected");
         }
     }
 

@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

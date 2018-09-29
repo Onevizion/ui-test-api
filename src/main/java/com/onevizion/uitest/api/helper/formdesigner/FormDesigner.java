@@ -118,18 +118,11 @@ public class FormDesigner {
                     isElementRemoved = true;
                 }
             } else {
-                if (field.getAttribute("Title").equals("BlankLine")) {
-                    if (field.getAttribute("innerText").trim().equals(label)) {
-                        element.click(field);
-                        element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-                        isElementRemoved = true;
-                    }
-                } else if (field.getAttribute("Title").equals("Splitter")) {
-                    if (field.getAttribute("Title").equals(label)) {
-                        element.click(field);
-                        element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-                        isElementRemoved = true;
-                    }
+                if ((field.getAttribute("Title").equals("BlankLine") && field.getAttribute("innerText").trim().equals(label)) ||
+                        (field.getAttribute("Title").equals("Splitter") && "Splitter".equals(label))) {
+                    element.click(field);
+                    element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+                    isElementRemoved = true;
                 }
             }
 

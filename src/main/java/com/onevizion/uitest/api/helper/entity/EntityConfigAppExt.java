@@ -10,19 +10,19 @@ public class EntityConfigAppExt {
     
 
     public void add(ConfigAppExt configAppExt) {
-        
+        throw new UnsupportedOperationException();
     }
 
     public void edit(ConfigAppExt configAppExt) {
-        
+        throw new UnsupportedOperationException();
     }
 
     public void testOnForm(ConfigAppExt configAppExt) {
-        
+        throw new UnsupportedOperationException();
     }
 
     public void testInGrid(Long gridId, Long rowIndex, ConfigAppExt configAppExt) {
-        
+        throw new UnsupportedOperationException();
     }
 
 }
