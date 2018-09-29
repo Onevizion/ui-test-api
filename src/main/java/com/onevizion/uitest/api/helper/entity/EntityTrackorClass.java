@@ -20,6 +20,9 @@ import com.onevizion.uitest.api.vo.entity.TrackorClass;
 @Component
 public class EntityTrackorClass {
 
+    private static final String NAME = "className";
+    private static final String ORDER_NUMBER = "orderNumber";
+
     @Resource
     private Window window;
 
@@ -45,9 +48,9 @@ public class EntityTrackorClass {
 
         //trackorType disabled
 
-        seleniumSettings.getWebDriver().findElement(By.name("className")).sendKeys(trackorClass.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorClass.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("orderNumber")).sendKeys(trackorClass.getOrderNumber());
+        seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER)).sendKeys(trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -60,11 +63,11 @@ public class EntityTrackorClass {
 
         //trackorType disabled
 
-        seleniumSettings.getWebDriver().findElement(By.name("className")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("className")).sendKeys(trackorClass.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorClass.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("orderNumber")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("orderNumber")).sendKeys(trackorClass.getOrderNumber());
+        seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER)).sendKeys(trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -76,8 +79,8 @@ public class EntityTrackorClass {
         wait.waitFormLoad();
 
         assertElement.AssertText("trackorType", trackorClass.getTrackorType());
-        assertElement.AssertText("className", trackorClass.getName());
-        assertElement.AssertText("orderNumber", trackorClass.getOrderNumber());
+        assertElement.AssertText(NAME, trackorClass.getName());
+        assertElement.AssertText(ORDER_NUMBER, trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -23,6 +23,18 @@ import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
 @Component
 public class EntityTrackorTourStep {
 
+    private static final String ELEMENT_TYPE = "elementTypeId";
+    private static final String ELEMENT_NAME = "elementName";
+    private static final String ELEMENT_ID = "elementId";
+    private static final String DURATION = "duration";
+    private static final String ORPHANED = "orphaned";
+    private static final String BACKDROP = "backdrop";
+    private static final String PLACEMENT = "placement";
+    private static final String ACTION = "actionId";
+    private static final String FORM_NUMBER = "formNumber";
+    private static final String TITLE_LABEL = "titleLabel";
+    private static final String CONTENT_LABEL = "contentLabel";
+
     @Resource
     private Window window;
 
@@ -49,38 +61,38 @@ public class EntityTrackorTourStep {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("elementTypeId"))).selectByVisibleText(trackorTourStep.getElementType());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(ELEMENT_TYPE))).selectByVisibleText(trackorTourStep.getElementType());
 
         if (trackorTourStep.getElementType().equals("name=")) {
-            seleniumSettings.getWebDriver().findElement(By.name("elementName")).sendKeys(trackorTourStep.getElementName());
+            seleniumSettings.getWebDriver().findElement(By.name(ELEMENT_NAME)).sendKeys(trackorTourStep.getElementName());
         } else if (trackorTourStep.getElementType().equals("id=")) {
-            seleniumSettings.getWebDriver().findElement(By.name("elementId")).sendKeys(trackorTourStep.getElementId());
+            seleniumSettings.getWebDriver().findElement(By.name(ELEMENT_ID)).sendKeys(trackorTourStep.getElementId());
         } else {
             throw new SeleniumUnexpectedException("Not support ElementType [" + trackorTourStep.getElementType() + "]");
         }
 
-        seleniumSettings.getWebDriver().findElement(By.name("duration")).sendKeys(trackorTourStep.getDuration());
+        seleniumSettings.getWebDriver().findElement(By.name(DURATION)).sendKeys(trackorTourStep.getDuration());
 
-        if ((trackorTourStep.getOrphaned().equals("YES") && !checkbox.isCheckedByName("orphaned"))
-                || (trackorTourStep.getOrphaned().equals("NO") && checkbox.isCheckedByName("orphaned"))) {
-            checkbox.clickByName("orphaned");
+        if ((trackorTourStep.getOrphaned().equals("YES") && !checkbox.isCheckedByName(ORPHANED))
+                || (trackorTourStep.getOrphaned().equals("NO") && checkbox.isCheckedByName(ORPHANED))) {
+            checkbox.clickByName(ORPHANED);
         }
 
-        if ((trackorTourStep.getBackdrop().equals("YES") && !checkbox.isCheckedByName("backdrop"))
-                || (trackorTourStep.getBackdrop().equals("NO") && checkbox.isCheckedByName("backdrop"))) {
-            checkbox.clickByName("backdrop");
+        if ((trackorTourStep.getBackdrop().equals("YES") && !checkbox.isCheckedByName(BACKDROP))
+                || (trackorTourStep.getBackdrop().equals("NO") && checkbox.isCheckedByName(BACKDROP))) {
+            checkbox.clickByName(BACKDROP);
         }
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("placement"))).selectByVisibleText(trackorTourStep.getPlacement());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(PLACEMENT))).selectByVisibleText(trackorTourStep.getPlacement());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("actionId"))).selectByVisibleText(trackorTourStep.getAction());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(ACTION))).selectByVisibleText(trackorTourStep.getAction());
 
-        seleniumSettings.getWebDriver().findElement(By.name("formNumber")).sendKeys(trackorTourStep.getFormNumber());
+        seleniumSettings.getWebDriver().findElement(By.name(FORM_NUMBER)).sendKeys(trackorTourStep.getFormNumber());
 
-        seleniumSettings.getWebDriver().findElement(By.name("titleLabel")).sendKeys(trackorTourStep.getTitleLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(TITLE_LABEL)).sendKeys(trackorTourStep.getTitleLabel());
 
-        wait.waitWebElement(By.id("contentLabel"));
-        js.setValueToFCKEditor("contentLabel", trackorTourStep.getContentLabel());
+        wait.waitWebElement(By.id(CONTENT_LABEL));
+        js.setValueToFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(2L, 2L);
@@ -91,41 +103,41 @@ public class EntityTrackorTourStep {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("elementTypeId"))).selectByVisibleText(trackorTourStep.getElementType());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(ELEMENT_TYPE))).selectByVisibleText(trackorTourStep.getElementType());
 
         if (trackorTourStep.getElementType().equals("name=")) {
-            seleniumSettings.getWebDriver().findElement(By.name("elementName")).sendKeys(trackorTourStep.getElementName());
+            seleniumSettings.getWebDriver().findElement(By.name(ELEMENT_NAME)).sendKeys(trackorTourStep.getElementName());
         } else if (trackorTourStep.getElementType().equals("id=")) {
-            seleniumSettings.getWebDriver().findElement(By.name("elementId")).sendKeys(trackorTourStep.getElementId());
+            seleniumSettings.getWebDriver().findElement(By.name(ELEMENT_ID)).sendKeys(trackorTourStep.getElementId());
         } else {
             throw new SeleniumUnexpectedException("Not support ElementType [" + trackorTourStep.getElementType() + "]");
         }
 
-        seleniumSettings.getWebDriver().findElement(By.name("duration")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("duration")).sendKeys(trackorTourStep.getDuration());
+        seleniumSettings.getWebDriver().findElement(By.name(DURATION)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(DURATION)).sendKeys(trackorTourStep.getDuration());
 
-        if ((trackorTourStep.getOrphaned().equals("YES") && !checkbox.isCheckedByName("orphaned"))
-                || (trackorTourStep.getOrphaned().equals("NO") && checkbox.isCheckedByName("orphaned"))) {
-            checkbox.clickByName("orphaned");
+        if ((trackorTourStep.getOrphaned().equals("YES") && !checkbox.isCheckedByName(ORPHANED))
+                || (trackorTourStep.getOrphaned().equals("NO") && checkbox.isCheckedByName(ORPHANED))) {
+            checkbox.clickByName(ORPHANED);
         }
 
-        if ((trackorTourStep.getBackdrop().equals("YES") && !checkbox.isCheckedByName("backdrop"))
-                || (trackorTourStep.getBackdrop().equals("NO") && checkbox.isCheckedByName("backdrop"))) {
-            checkbox.clickByName("backdrop");
+        if ((trackorTourStep.getBackdrop().equals("YES") && !checkbox.isCheckedByName(BACKDROP))
+                || (trackorTourStep.getBackdrop().equals("NO") && checkbox.isCheckedByName(BACKDROP))) {
+            checkbox.clickByName(BACKDROP);
         }
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("placement"))).selectByVisibleText(trackorTourStep.getPlacement());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(PLACEMENT))).selectByVisibleText(trackorTourStep.getPlacement());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("actionId"))).selectByVisibleText(trackorTourStep.getAction());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(ACTION))).selectByVisibleText(trackorTourStep.getAction());
 
-        seleniumSettings.getWebDriver().findElement(By.name("formNumber")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("formNumber")).sendKeys(trackorTourStep.getFormNumber());
+        seleniumSettings.getWebDriver().findElement(By.name(FORM_NUMBER)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(FORM_NUMBER)).sendKeys(trackorTourStep.getFormNumber());
 
-        seleniumSettings.getWebDriver().findElement(By.name("titleLabel")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("titleLabel")).sendKeys(trackorTourStep.getTitleLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(TITLE_LABEL)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(TITLE_LABEL)).sendKeys(trackorTourStep.getTitleLabel());
 
-        wait.waitWebElement(By.id("contentLabel"));
-        js.setValueToFCKEditor("contentLabel", trackorTourStep.getContentLabel());
+        wait.waitWebElement(By.id(CONTENT_LABEL));
+        js.setValueToFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(2L, 2L);
@@ -136,24 +148,24 @@ public class EntityTrackorTourStep {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertSelect("elementTypeId", trackorTourStep.getElementType());
+        assertElement.AssertSelect(ELEMENT_TYPE, trackorTourStep.getElementType());
         if (trackorTourStep.getElementType().equals("name=")) {
-            assertElement.AssertText("elementName", trackorTourStep.getElementName());
+            assertElement.AssertText(ELEMENT_NAME, trackorTourStep.getElementName());
         } else if (trackorTourStep.getElementType().equals("id=")) {
-            assertElement.AssertText("elementId", trackorTourStep.getElementId());
+            assertElement.AssertText(ELEMENT_ID, trackorTourStep.getElementId());
         } else {
             throw new SeleniumUnexpectedException("Not support ElementType [" + trackorTourStep.getElementType() + "]");
         }
-        assertElement.AssertText("duration", trackorTourStep.getDuration());
-        assertElement.AssertCheckBoxNew("orphaned", trackorTourStep.getOrphaned());
-        assertElement.AssertCheckBoxNew("backdrop", trackorTourStep.getBackdrop());
-        assertElement.AssertSelect("placement", trackorTourStep.getPlacement());
-        assertElement.AssertSelect("actionId", trackorTourStep.getAction());
-        assertElement.AssertText("formNumber", trackorTourStep.getFormNumber());
-        assertElement.AssertText("titleLabel", trackorTourStep.getTitleLabel());
+        assertElement.AssertText(DURATION, trackorTourStep.getDuration());
+        assertElement.AssertCheckBoxNew(ORPHANED, trackorTourStep.getOrphaned());
+        assertElement.AssertCheckBoxNew(BACKDROP, trackorTourStep.getBackdrop());
+        assertElement.AssertSelect(PLACEMENT, trackorTourStep.getPlacement());
+        assertElement.AssertSelect(ACTION, trackorTourStep.getAction());
+        assertElement.AssertText(FORM_NUMBER, trackorTourStep.getFormNumber());
+        assertElement.AssertText(TITLE_LABEL, trackorTourStep.getTitleLabel());
 
-        wait.waitWebElement(By.id("contentLabel"));
-        assertElement.AssertFCKEditor("contentLabel", trackorTourStep.getContentLabel());
+        wait.waitWebElement(By.id(CONTENT_LABEL));
+        assertElement.AssertFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

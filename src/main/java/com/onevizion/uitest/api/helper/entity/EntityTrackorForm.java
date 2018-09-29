@@ -22,6 +22,13 @@ import com.onevizion.uitest.api.vo.entity.TrackorForm;
 @Component
 public class EntityTrackorForm {
 
+    private static final String NAME = "trackorFormName";
+    private static final String INTERVAL = "impScheduleInterval";
+    private static final String DESCRIPTION = "description";
+    private static final String IMPORT_EMAIL_SUBJECT = "impEmailSubject";
+    private static final String IMPORT_EMAIL_BODY = "impEmailBody";
+    private static final String CREATE_IMPORT = "createImport";
+
     @Resource
     private Window window;
 
@@ -51,7 +58,7 @@ public class EntityTrackorForm {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).sendKeys(trackorForm.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorForm.getName());
 
         psSelector.selectSpecificValue(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
 
@@ -59,24 +66,24 @@ public class EntityTrackorForm {
 
         psSelector.selectSpecificValue(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
 
-        seleniumSettings.getWebDriver().findElement(By.name("impScheduleInterval")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("impScheduleInterval")).sendKeys(trackorForm.getInterval());
+        seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).sendKeys(trackorForm.getInterval());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorForm.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(trackorForm.getDescription());
 
-        if ((trackorForm.getImportEmailSubject().equals("YES") && !checkbox.isCheckedByName("impEmailSubject"))
-                || (trackorForm.getImportEmailSubject().equals("NO") && checkbox.isCheckedByName("impEmailSubject"))) {
-            checkbox.clickByName("impEmailSubject");
+        if ((trackorForm.getImportEmailSubject().equals("YES") && !checkbox.isCheckedByName(IMPORT_EMAIL_SUBJECT))
+                || (trackorForm.getImportEmailSubject().equals("NO") && checkbox.isCheckedByName(IMPORT_EMAIL_SUBJECT))) {
+            checkbox.clickByName(IMPORT_EMAIL_SUBJECT);
         }
 
-        if ((trackorForm.getImportEmailBody().equals("YES") && !checkbox.isCheckedByName("impEmailBody"))
-                || (trackorForm.getImportEmailBody().equals("NO") && checkbox.isCheckedByName("impEmailBody"))) {
-            checkbox.clickByName("impEmailBody");
+        if ((trackorForm.getImportEmailBody().equals("YES") && !checkbox.isCheckedByName(IMPORT_EMAIL_BODY))
+                || (trackorForm.getImportEmailBody().equals("NO") && checkbox.isCheckedByName(IMPORT_EMAIL_BODY))) {
+            checkbox.clickByName(IMPORT_EMAIL_BODY);
         }
 
-        if ((trackorForm.getCreateImport().equals("YES") && !checkbox.isCheckedByName("createImport"))
-                || (trackorForm.getCreateImport().equals("NO") && checkbox.isCheckedByName("createImport"))) {
-            checkbox.clickByName("createImport");
+        if ((trackorForm.getCreateImport().equals("YES") && !checkbox.isCheckedByName(CREATE_IMPORT))
+                || (trackorForm.getCreateImport().equals("NO") && checkbox.isCheckedByName(CREATE_IMPORT))) {
+            checkbox.clickByName(CREATE_IMPORT);
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -88,8 +95,8 @@ public class EntityTrackorForm {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("trackorFormName")).sendKeys(trackorForm.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorForm.getName());
 
         psSelector.selectSpecificValue(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
 
@@ -97,25 +104,25 @@ public class EntityTrackorForm {
 
         psSelector.selectSpecificValue(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
 
-        seleniumSettings.getWebDriver().findElement(By.name("impScheduleInterval")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("impScheduleInterval")).sendKeys(trackorForm.getInterval());
+        seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).sendKeys(trackorForm.getInterval());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorForm.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(trackorForm.getDescription());
 
-        if ((trackorForm.getImportEmailSubject().equals("YES") && !checkbox.isCheckedByName("impEmailSubject"))
-                || (trackorForm.getImportEmailSubject().equals("NO") && checkbox.isCheckedByName("impEmailSubject"))) {
-            checkbox.clickByName("impEmailSubject");
+        if ((trackorForm.getImportEmailSubject().equals("YES") && !checkbox.isCheckedByName(IMPORT_EMAIL_SUBJECT))
+                || (trackorForm.getImportEmailSubject().equals("NO") && checkbox.isCheckedByName(IMPORT_EMAIL_SUBJECT))) {
+            checkbox.clickByName(IMPORT_EMAIL_SUBJECT);
         }
 
-        if ((trackorForm.getImportEmailBody().equals("YES") && !checkbox.isCheckedByName("impEmailBody"))
-                || (trackorForm.getImportEmailBody().equals("NO") && checkbox.isCheckedByName("impEmailBody"))) {
-            checkbox.clickByName("impEmailBody");
+        if ((trackorForm.getImportEmailBody().equals("YES") && !checkbox.isCheckedByName(IMPORT_EMAIL_BODY))
+                || (trackorForm.getImportEmailBody().equals("NO") && checkbox.isCheckedByName(IMPORT_EMAIL_BODY))) {
+            checkbox.clickByName(IMPORT_EMAIL_BODY);
         }
 
-        if ((trackorForm.getCreateImport().equals("YES") && !checkbox.isCheckedByName("createImport"))
-                || (trackorForm.getCreateImport().equals("NO") && checkbox.isCheckedByName("createImport"))) {
-            checkbox.clickByName("createImport");
+        if ((trackorForm.getCreateImport().equals("YES") && !checkbox.isCheckedByName(CREATE_IMPORT))
+                || (trackorForm.getCreateImport().equals("NO") && checkbox.isCheckedByName(CREATE_IMPORT))) {
+            checkbox.clickByName(CREATE_IMPORT);
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -127,15 +134,15 @@ public class EntityTrackorForm {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("trackorFormName", trackorForm.getName());
+        assertElement.AssertText(NAME, trackorForm.getName());
         assertElement.AssertRadioPsSelector("reportName", "btnreportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getReportName(), 1L, true);
         assertElement.AssertRadioPsSelector("importName", "btnimportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getImportName(), 1L, true);
         assertElement.AssertRadioPsSelector("userName", "btnuserName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getUserName(), 1L, true);
-        assertElement.AssertText("impScheduleInterval", trackorForm.getInterval());
-        assertElement.AssertText("description", trackorForm.getDescription());
-        assertElement.AssertCheckBoxNew("impEmailSubject", trackorForm.getImportEmailSubject());
-        assertElement.AssertCheckBoxNew("impEmailBody", trackorForm.getImportEmailBody());
-        assertElement.AssertCheckBoxNew("createImport", trackorForm.getCreateImport());
+        assertElement.AssertText(INTERVAL, trackorForm.getInterval());
+        assertElement.AssertText(DESCRIPTION, trackorForm.getDescription());
+        assertElement.AssertCheckBoxNew(IMPORT_EMAIL_SUBJECT, trackorForm.getImportEmailSubject());
+        assertElement.AssertCheckBoxNew(IMPORT_EMAIL_BODY, trackorForm.getImportEmailBody());
+        assertElement.AssertCheckBoxNew(CREATE_IMPORT, trackorForm.getCreateImport());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

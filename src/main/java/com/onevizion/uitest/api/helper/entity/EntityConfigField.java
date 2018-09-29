@@ -41,6 +41,20 @@ public class EntityConfigField {
     private static final String SIZE = "fieldSize";
     private static final String PREFIX = "prefix";
     private static final String SUFFIX = "suffix";
+    private static final String DECIMAL = "numDecimals";
+    private static final String PARENS_FOR_NEGATIVE = "parensForNegative";
+    private static final String SEPARATE_THOUSANDS = "separateThousands";
+    private static final String LINES = "linesQty";
+    private static final String EXTRACT_METADATA = "imageExtractMetadata";
+    private static final String IMAGE_LATITUDE = "imageLatConfigFieldId";
+    private static final String IMAGE_LONGITUDE = "imageLongConfigFieldId";
+    private static final String IMAGE_TIME_SNAPSHOT = "imageTimeConfigFieldId";
+    private static final String RESIZE_MODE = "imageResizeMode";
+    private static final String RESIZE_WIDTH = "imageWidth";
+    private static final String RESIZE_HEIGHT = "imageHeight";
+    private static final String ROTATE = "imageRotate";
+    private static final String LOG_BLOB_CHANGES = "logBlobChanges";
+    private static final String UPLOAD_TO_AWS = "uploadToS3Directly";
 
     private static final String DESCRIPTION = "description";
     private static final String COMMENT = "comments";
@@ -135,8 +149,8 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name(PREFIX)).sendKeys(configFieldVo.getConfigFieldNumber().getPrefix());
             seleniumSettings.getWebDriver().findElement(By.name(SUFFIX)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(SUFFIX)).sendKeys(configFieldVo.getConfigFieldNumber().getSuffix());
-            seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).sendKeys(configFieldVo.getConfigFieldNumber().getDecimal());
+            seleniumSettings.getWebDriver().findElement(By.name(DECIMAL)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(DECIMAL)).sendKeys(configFieldVo.getConfigFieldNumber().getDecimal());
             window.openModal(By.name("btnrgbNegColor"));
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
             window.closeModal(By.className("dhx_button_save"));
@@ -144,13 +158,13 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
             window.closeModal(By.className("dhx_button_save"));
 
-            if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkbox.isCheckedByName("parensForNegative"))
-                    || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkbox.isCheckedByName("parensForNegative"))) {
-                checkbox.clickByName("parensForNegative");
+            if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkbox.isCheckedByName(PARENS_FOR_NEGATIVE))
+                    || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkbox.isCheckedByName(PARENS_FOR_NEGATIVE))) {
+                checkbox.clickByName(PARENS_FOR_NEGATIVE);
             }
-            if ((configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("YES") && !checkbox.isCheckedByName("separateThousands"))
-                    || (configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("NO") && checkbox.isCheckedByName("separateThousands"))) {
-                checkbox.clickByName("separateThousands");
+            if ((configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("YES") && !checkbox.isCheckedByName(SEPARATE_THOUSANDS))
+                    || (configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("NO") && checkbox.isCheckedByName(SEPARATE_THOUSANDS))) {
+                checkbox.clickByName(SEPARATE_THOUSANDS);
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
@@ -169,15 +183,15 @@ public class EntityConfigField {
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
             seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldMemo().getLength());
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldMemo().getLines());
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldMemo().getLines());
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMemo().getDefValueSql());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
             seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldWiki().getLength());
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldWiki().getLines());
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldWiki().getLines());
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldWiki().getDefValueSql());
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -206,31 +220,31 @@ public class EntityConfigField {
 
             tab.goToTab(2L); //Image Settings
 
-            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkbox.isCheckedByName("imageExtractMetadata"))
-                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkbox.isCheckedByName("imageExtractMetadata"))) {
-                checkbox.clickByName("imageExtractMetadata");
+            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkbox.isCheckedByName(EXTRACT_METADATA))
+                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkbox.isCheckedByName(EXTRACT_METADATA))) {
+                checkbox.clickByName(EXTRACT_METADATA);
             }
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("imageLatConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLatitude());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("imageLongConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLongitude());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("imageTimeConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("imageResizeMode"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getResizeMode());
-            seleniumSettings.getWebDriver().findElement(By.name("imageWidth")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("imageWidth")).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
-            if (!configFieldVo.getConfigFieldEfile().getResizeHeight().equals(seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).getAttribute("value"))) {
-                seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).clear();
-                seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_LATITUDE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLatitude());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_LONGITUDE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLongitude());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_TIME_SNAPSHOT))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_MODE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getResizeMode());
+            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
+            if (!configFieldVo.getConfigFieldEfile().getResizeHeight().equals(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).getAttribute("value"))) {
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).clear();
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
             }
-            if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName("imageRotate"))
-                    || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName("imageRotate"))) {
-                checkbox.clickByName("imageRotate");
+            if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName(ROTATE))
+                    || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName(ROTATE))) {
+                checkbox.clickByName(ROTATE);
             }
-            if ((configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("YES") && !checkbox.isCheckedByName("logBlobChanges"))
-                    || (configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("NO") && checkbox.isCheckedByName("logBlobChanges"))) {
-                checkbox.clickByName("logBlobChanges");
+            if ((configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("YES") && !checkbox.isCheckedByName(LOG_BLOB_CHANGES))
+                    || (configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("NO") && checkbox.isCheckedByName(LOG_BLOB_CHANGES))) {
+                checkbox.clickByName(LOG_BLOB_CHANGES);
             }
-            if ((configFieldVo.getConfigFieldEfile().getUploadToAws().equals("YES") && !checkbox.isCheckedByName("uploadToS3Directly"))
-                    || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkbox.isCheckedByName("uploadToS3Directly"))) {
-                checkbox.clickByName("uploadToS3Directly");
+            if ((configFieldVo.getConfigFieldEfile().getUploadToAws().equals("YES") && !checkbox.isCheckedByName(UPLOAD_TO_AWS))
+                    || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkbox.isCheckedByName(UPLOAD_TO_AWS))) {
+                checkbox.clickByName(UPLOAD_TO_AWS);
             }
             psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
@@ -279,8 +293,8 @@ public class EntityConfigField {
 
             new Select(seleniumSettings.getWebDriver().findElement(By.name("lstRollupXitorTypeID"))).selectByVisibleText(configFieldVo.getConfigFieldRollup().getTrackorType());
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldMultiSelector().getLines());
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldMultiSelector().getLines());
 
             psSelector.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
 
@@ -390,8 +404,8 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name(PREFIX)).sendKeys(configFieldVo.getConfigFieldNumber().getPrefix());
             seleniumSettings.getWebDriver().findElement(By.name(SUFFIX)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(SUFFIX)).sendKeys(configFieldVo.getConfigFieldNumber().getSuffix());
-            seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).sendKeys(configFieldVo.getConfigFieldNumber().getDecimal());
+            seleniumSettings.getWebDriver().findElement(By.name(DECIMAL)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(DECIMAL)).sendKeys(configFieldVo.getConfigFieldNumber().getDecimal());
             window.openModal(By.name("btnrgbNegColor"));
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
             window.closeModal(By.className("dhx_button_save"));
@@ -399,13 +413,13 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.className("dhxcp_color_selector")).click();
             window.closeModal(By.className("dhx_button_save"));
 
-            if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkbox.isCheckedByName("parensForNegative"))
-                    || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkbox.isCheckedByName("parensForNegative"))) {
-                checkbox.clickByName("parensForNegative");
+            if ((configFieldVo.getConfigFieldNumber().getParensForNegative().equals("YES") && !checkbox.isCheckedByName(PARENS_FOR_NEGATIVE))
+                    || (configFieldVo.getConfigFieldNumber().getParensForNegative().equals("NO") && checkbox.isCheckedByName(PARENS_FOR_NEGATIVE))) {
+                checkbox.clickByName(PARENS_FOR_NEGATIVE);
             }
-            if ((configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("YES") && !checkbox.isCheckedByName("separateThousands"))
-                    || (configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("NO") && checkbox.isCheckedByName("separateThousands"))) {
-                checkbox.clickByName("separateThousands");
+            if ((configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("YES") && !checkbox.isCheckedByName(SEPARATE_THOUSANDS))
+                    || (configFieldVo.getConfigFieldNumber().getSeparateThousands().equals("NO") && checkbox.isCheckedByName(SEPARATE_THOUSANDS))) {
+                checkbox.clickByName(SEPARATE_THOUSANDS);
             }
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
@@ -424,15 +438,15 @@ public class EntityConfigField {
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
             seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldMemo().getLength());
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldMemo().getLines());
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldMemo().getLines());
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMemo().getDefValueSql());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
             seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldWiki().getLength());
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldWiki().getLines());
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldWiki().getLines());
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldWiki().getDefValueSql());
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -456,29 +470,29 @@ public class EntityConfigField {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
             tab.goToTab(2L); //Image Settings
 
-            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkbox.isCheckedByName("imageExtractMetadata"))
-                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkbox.isCheckedByName("imageExtractMetadata"))) {
-                checkbox.clickByName("imageExtractMetadata");
+            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkbox.isCheckedByName(EXTRACT_METADATA))
+                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkbox.isCheckedByName(EXTRACT_METADATA))) {
+                checkbox.clickByName(EXTRACT_METADATA);
             }
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("imageLatConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLatitude());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("imageLongConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLongitude());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("imageTimeConfigFieldId"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("imageResizeMode"))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getResizeMode());
-            seleniumSettings.getWebDriver().findElement(By.name("imageWidth")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("imageWidth")).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
-            seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("imageHeight")).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
-            if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName("imageRotate"))
-                    || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName("imageRotate"))) {
-                checkbox.clickByName("imageRotate");
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_LATITUDE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLatitude());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_LONGITUDE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLongitude());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_TIME_SNAPSHOT))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_MODE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getResizeMode());
+            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
+            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
+            if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName(ROTATE))
+                    || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName(ROTATE))) {
+                checkbox.clickByName(ROTATE);
             }
-            if ((configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("YES") && !checkbox.isCheckedByName("logBlobChanges"))
-                    || (configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("NO") && checkbox.isCheckedByName("logBlobChanges"))) {
-                checkbox.clickByName("logBlobChanges");
+            if ((configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("YES") && !checkbox.isCheckedByName(LOG_BLOB_CHANGES))
+                    || (configFieldVo.getConfigFieldEfile().getLogBlobChanges().equals("NO") && checkbox.isCheckedByName(LOG_BLOB_CHANGES))) {
+                checkbox.clickByName(LOG_BLOB_CHANGES);
             }
-            if ((configFieldVo.getConfigFieldEfile().getUploadToAws().equals("YES") && !checkbox.isCheckedByName("uploadToS3Directly"))
-                    || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkbox.isCheckedByName("uploadToS3Directly"))) {
-                checkbox.clickByName("uploadToS3Directly");
+            if ((configFieldVo.getConfigFieldEfile().getUploadToAws().equals("YES") && !checkbox.isCheckedByName(UPLOAD_TO_AWS))
+                    || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkbox.isCheckedByName(UPLOAD_TO_AWS))) {
+                checkbox.clickByName(UPLOAD_TO_AWS);
             }
             psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
@@ -527,8 +541,8 @@ public class EntityConfigField {
 
             new Select(seleniumSettings.getWebDriver().findElement(By.name("lstRollupXitorTypeID"))).selectByVisibleText(configFieldVo.getConfigFieldRollup().getTrackorType());
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldMultiSelector().getLines());
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldMultiSelector().getLines());
 
             psSelector.selectSpecificValue(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
 
@@ -642,12 +656,12 @@ public class EntityConfigField {
 
             assertElement.AssertText(PREFIX, configFieldVo.getConfigFieldNumber().getPrefix());
             assertElement.AssertText(SUFFIX, configFieldVo.getConfigFieldNumber().getSuffix());
-            assertElement.AssertText("numDecimals", configFieldVo.getConfigFieldNumber().getDecimal());
+            assertElement.AssertText(DECIMAL, configFieldVo.getConfigFieldNumber().getDecimal());
             assertElement.AssertText("negativeColor", configFieldVo.getConfigFieldNumber().getNegativeColor());
             assertElement.AssertText("positiveColor", configFieldVo.getConfigFieldNumber().getPositiveColor());
 
-            assertElement.AssertCheckBoxNew("parensForNegative", configFieldVo.getConfigFieldNumber().getParensForNegative());
-            assertElement.AssertCheckBoxNew("separateThousands", configFieldVo.getConfigFieldNumber().getSeparateThousands());
+            assertElement.AssertCheckBoxNew(PARENS_FOR_NEGATIVE, configFieldVo.getConfigFieldNumber().getParensForNegative());
+            assertElement.AssertCheckBoxNew(SEPARATE_THOUSANDS, configFieldVo.getConfigFieldNumber().getSeparateThousands());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
@@ -664,12 +678,12 @@ public class EntityConfigField {
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
             assertElement.AssertText(SIZE, configFieldVo.getConfigFieldMemo().getLength());
-            assertElement.AssertText("linesQty", configFieldVo.getConfigFieldMemo().getLines());
+            assertElement.AssertText(LINES, configFieldVo.getConfigFieldMemo().getLines());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMemo().getDefValueSql());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
             assertElement.AssertText(SIZE, configFieldVo.getConfigFieldWiki().getLength());
-            assertElement.AssertText("linesQty", configFieldVo.getConfigFieldWiki().getLines());
+            assertElement.AssertText(LINES, configFieldVo.getConfigFieldWiki().getLines());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldWiki().getDefValueSql());
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -695,16 +709,16 @@ public class EntityConfigField {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
             tab.goToTab(2L); //Image Settings
 
-            assertElement.AssertCheckBoxNew("imageExtractMetadata", configFieldVo.getConfigFieldEfile().getExtractMetadata());
-            assertElement.AssertSelect("imageLatConfigFieldId", configFieldVo.getConfigFieldEfile().getImageLatitude());
-            assertElement.AssertSelect("imageLongConfigFieldId", configFieldVo.getConfigFieldEfile().getImageLongitude());
-            assertElement.AssertSelect("imageTimeConfigFieldId", configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
-            assertElement.AssertSelect("imageResizeMode", configFieldVo.getConfigFieldEfile().getResizeMode());
-            assertElement.AssertText("imageWidth", configFieldVo.getConfigFieldEfile().getResizeWidth());
-            assertElement.AssertText("imageHeight", configFieldVo.getConfigFieldEfile().getResizeHeight());
-            assertElement.AssertCheckBoxNew("imageRotate", configFieldVo.getConfigFieldEfile().getRotate());
-            assertElement.AssertCheckBoxNew("logBlobChanges", configFieldVo.getConfigFieldEfile().getLogBlobChanges());
-            assertElement.AssertCheckBoxNew("uploadToS3Directly", configFieldVo.getConfigFieldEfile().getUploadToAws());
+            assertElement.AssertCheckBoxNew(EXTRACT_METADATA, configFieldVo.getConfigFieldEfile().getExtractMetadata());
+            assertElement.AssertSelect(IMAGE_LATITUDE, configFieldVo.getConfigFieldEfile().getImageLatitude());
+            assertElement.AssertSelect(IMAGE_LONGITUDE, configFieldVo.getConfigFieldEfile().getImageLongitude());
+            assertElement.AssertSelect(IMAGE_TIME_SNAPSHOT, configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
+            assertElement.AssertSelect(RESIZE_MODE, configFieldVo.getConfigFieldEfile().getResizeMode());
+            assertElement.AssertText(RESIZE_WIDTH, configFieldVo.getConfigFieldEfile().getResizeWidth());
+            assertElement.AssertText(RESIZE_HEIGHT, configFieldVo.getConfigFieldEfile().getResizeHeight());
+            assertElement.AssertCheckBoxNew(ROTATE, configFieldVo.getConfigFieldEfile().getRotate());
+            assertElement.AssertCheckBoxNew(LOG_BLOB_CHANGES, configFieldVo.getConfigFieldEfile().getLogBlobChanges());
+            assertElement.AssertCheckBoxNew(UPLOAD_TO_AWS, configFieldVo.getConfigFieldEfile().getUploadToAws());
             assertElement.AssertRadioPsSelector("autocaptionClientFile", "btnautocaptionClientFile", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L, true);
 
             tab.goToTab(1L); //General
@@ -737,7 +751,7 @@ public class EntityConfigField {
 
             assertElement.AssertSelect("lstRollupXitorTypeID", configFieldVo.getConfigFieldRollup().getTrackorType());
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("linesQty", configFieldVo.getConfigFieldMultiSelector().getLines());
+            assertElement.AssertText(LINES, configFieldVo.getConfigFieldMultiSelector().getLines());
 
             assertElement.AssertRadioPsSelector("tableName", "btntableName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L, true);
 

@@ -26,6 +26,12 @@ import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
 @Component
 public class EntityTrackorTour {
 
+    private static final String LABEL = "label";
+    private static final String TRACKOR_TYPE = "xitorTypeId";
+    private static final String START_PLACE = "startTourPlace";
+    private static final String ORDER_NUMBER = "orderNumber";
+    private static final String DESCRIPTION = "description";
+
     @Resource
     private Window window;
 
@@ -75,11 +81,11 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("label")).sendKeys(trackorTour.getLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(trackorTour.getLabel());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("xitorTypeId"))).selectByVisibleText(trackorTour.getTrackorType());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(TRACKOR_TYPE))).selectByVisibleText(trackorTour.getTrackorType());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("startTourPlace"))).selectByVisibleText(trackorTour.getStartPlace());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(START_PLACE))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
             psSelector.selectSpecificValue(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
@@ -91,9 +97,9 @@ public class EntityTrackorTour {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("orderNumber"))).selectByVisibleText(trackorTour.getOrderNumber());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER))).selectByVisibleText(trackorTour.getOrderNumber());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorTour.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(trackorTour.getDescription());
 
         tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);
@@ -109,12 +115,12 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("label")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("label")).sendKeys(trackorTour.getLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(trackorTour.getLabel());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("xitorTypeId"))).selectByVisibleText(trackorTour.getTrackorType());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(TRACKOR_TYPE))).selectByVisibleText(trackorTour.getTrackorType());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("startTourPlace"))).selectByVisibleText(trackorTour.getStartPlace());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(START_PLACE))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
             psSelector.selectSpecificValue(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
@@ -126,10 +132,10 @@ public class EntityTrackorTour {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("orderNumber"))).selectByVisibleText(trackorTour.getOrderNumber());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER))).selectByVisibleText(trackorTour.getOrderNumber());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(trackorTour.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(trackorTour.getDescription());
 
         tab.goToTab(3L);//Role Assignments
         wait.waitGridLoad(3L, 3L);
@@ -166,9 +172,9 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("label", trackorTour.getLabel());
-        assertElement.AssertSelect("xitorTypeId", trackorTour.getTrackorType());
-        assertElement.AssertSelect("startTourPlace", trackorTour.getStartPlace());
+        assertElement.AssertText(LABEL, trackorTour.getLabel());
+        assertElement.AssertSelect(TRACKOR_TYPE, trackorTour.getTrackorType());
+        assertElement.AssertSelect(START_PLACE, trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
             assertElement.AssertRadioPsSelector("gridPageName", "btngridPageName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getPageName(), 1L, true);
@@ -180,8 +186,8 @@ public class EntityTrackorTour {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
 
-        assertElement.AssertSelect("orderNumber", trackorTour.getOrderNumber());
-        assertElement.AssertText("description", trackorTour.getDescription());
+        assertElement.AssertSelect(ORDER_NUMBER, trackorTour.getOrderNumber());
+        assertElement.AssertText(DESCRIPTION, trackorTour.getDescription());
 
         tab.goToTab(3L); //Role Assignments
         wait.waitGridLoad(3L, 3L);
