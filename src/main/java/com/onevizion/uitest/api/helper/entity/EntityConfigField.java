@@ -30,6 +30,29 @@ import com.onevizion.uitest.api.vo.entity.ConfigFieldVo;
 @Component
 public class EntityConfigField {
 
+    private static final String TT_NAME = "TrackorTypeName";
+    private static final String DATA_TYPE = "dataType";
+    private static final String LABEL = "LabelName";
+    private static final String NAME = "configFieldName";
+    private static final String COMP_PACKAGE = "componentsPackageId";
+    private static final String COLOR = "colorId";
+    private static final String WIDTH = "fieldWidth";
+
+    private static final String SIZE = "fieldSize";
+    private static final String PREFIX = "prefix";
+    private static final String SUFFIX = "suffix";
+
+    private static final String DESCRIPTION = "description";
+    private static final String COMMENT = "comments";
+    private static final String MANDATORY = "mandatory";
+    private static final String TWO_COLUMNS = "twoColsSpan";
+    private static final String LOCKABLE = "lockable";
+    private static final String MULTIPLE = "multiple";
+    private static final String READ_ONLY = "readOnly";
+    private static final String CALC_TOTAL = "calcTotal";
+    private static final String NOT_CLONE_VALUE = "notCloneFieldValue";
+    private static final String NOT_CLONE_LOCK = "notCloneLocks";
+
     @Resource
     private Window window;
 
@@ -78,40 +101,40 @@ public class EntityConfigField {
             jqueryWait.waitJQueryLoad();
         }
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("TrackorTypeName"))).selectByVisibleText(configFieldVo.getTrackorTypeLabel());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(TT_NAME))).selectByVisibleText(configFieldVo.getTrackorTypeLabel());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("dataType"))).selectByVisibleText(configFieldVo.getConfigFieldType().getLabel());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(DATA_TYPE))).selectByVisibleText(configFieldVo.getConfigFieldType().getLabel());
 
-        seleniumSettings.getWebDriver().findElement(By.name("LabelName")).sendKeys(configFieldVo.getLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(configFieldVo.getLabel());
 
-        String val = new Select(seleniumSettings.getWebDriver().findElement(By.name("TrackorTypeName"))).getFirstSelectedOption().getAttribute("value");
+        String val = new Select(seleniumSettings.getWebDriver().findElement(By.name(TT_NAME))).getFirstSelectedOption().getAttribute("value");
         String cfPrefix = val.split(";")[1].replace(":", "").replace("-", "").replace(".", "");
-        elementWait.waitElementAttributeByName("configFieldName", "value", cfPrefix + "_" + configFieldVo.getLabel().replace(" ", "_").replace("/", "").replace("-", "").toUpperCase());
+        elementWait.waitElementAttributeByName(NAME, "value", cfPrefix + "_" + configFieldVo.getLabel().replace(" ", "_").replace("/", "").replace("-", "").toUpperCase());
         configField.waitFieldNameUpdated();
 
-        seleniumSettings.getWebDriver().findElement(By.name("configFieldName")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("configFieldName")).sendKeys(configFieldVo.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(configFieldVo.getName());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("componentsPackageId"))).selectByVisibleText(configFieldVo.getCompPackage());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(COMP_PACKAGE))).selectByVisibleText(configFieldVo.getCompPackage());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("colorId"))).selectByVisibleText(configFieldVo.getColor());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(COLOR))).selectByVisibleText(configFieldVo.getColor());
 
-        seleniumSettings.getWebDriver().findElement(By.name("fieldWidth")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("fieldWidth")).sendKeys(configFieldVo.getWidth());
+        seleniumSettings.getWebDriver().findElement(By.name(WIDTH)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(WIDTH)).sendKeys(configFieldVo.getWidth());
 
         if (ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldText().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldText().getLength());
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldText().getDefValueSql());
         } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldNumber().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldNumber().getLength());
 
-            seleniumSettings.getWebDriver().findElement(By.name("prefix")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("prefix")).sendKeys(configFieldVo.getConfigFieldNumber().getPrefix());
-            seleniumSettings.getWebDriver().findElement(By.name("suffix")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("suffix")).sendKeys(configFieldVo.getConfigFieldNumber().getSuffix());
+            seleniumSettings.getWebDriver().findElement(By.name(PREFIX)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(PREFIX)).sendKeys(configFieldVo.getConfigFieldNumber().getPrefix());
+            seleniumSettings.getWebDriver().findElement(By.name(SUFFIX)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SUFFIX)).sendKeys(configFieldVo.getConfigFieldNumber().getSuffix());
             seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).sendKeys(configFieldVo.getConfigFieldNumber().getDecimal());
             window.openModal(By.name("btnrgbNegColor"));
@@ -132,11 +155,11 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDate().getDefValueSql());
         } else if (ConfigFieldType.CHECKBOX.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "1");
+            assertElement.AssertText(SIZE, "1");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -144,15 +167,15 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldMemo().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldMemo().getLength());
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldMemo().getLines());
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMemo().getDefValueSql());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldWiki().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldWiki().getLength());
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldWiki().getLines());
 
@@ -168,11 +191,11 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "15");
+            assertElement.AssertText(SIZE, "15");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLatitude().getDefValueSql());
         } else if (ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "15");
+            assertElement.AssertText(SIZE, "15");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
@@ -249,8 +272,8 @@ public class EntityConfigField {
         } else if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType())) {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldCalculated().getSql());
         } else if (ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldHyperlink().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldHyperlink().getLength());
         } else if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             //TODO filter
 
@@ -263,7 +286,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             if ((configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
                     || (configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
@@ -272,7 +295,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             if ((configFieldVo.getConfigFieldTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
                     || (configFieldVo.getConfigFieldTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
@@ -284,48 +307,48 @@ public class EntityConfigField {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType. ConfigFieldType=" + configFieldVo.getConfigFieldType());
         }
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(configFieldVo.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(configFieldVo.getDescription());
 
-        seleniumSettings.getWebDriver().findElement(By.name("comments")).sendKeys(configFieldVo.getComment());
+        seleniumSettings.getWebDriver().findElement(By.name(COMMENT)).sendKeys(configFieldVo.getComment());
 
-        if ((configFieldVo.getMandatory().equals("YES") && !checkbox.isCheckedByName("mandatory"))
-                || (configFieldVo.getMandatory().equals("NO") && checkbox.isCheckedByName("mandatory"))) {
-            checkbox.clickByName("mandatory");
+        if ((configFieldVo.getMandatory().equals("YES") && !checkbox.isCheckedByName(MANDATORY))
+                || (configFieldVo.getMandatory().equals("NO") && checkbox.isCheckedByName(MANDATORY))) {
+            checkbox.clickByName(MANDATORY);
         }
 
-        if ((configFieldVo.getTwoColumns().equals("YES") && !checkbox.isCheckedByName("twoColsSpan"))
-                || (configFieldVo.getTwoColumns().equals("NO") && checkbox.isCheckedByName("twoColsSpan"))) {
-            checkbox.clickByName("twoColsSpan");
+        if ((configFieldVo.getTwoColumns().equals("YES") && !checkbox.isCheckedByName(TWO_COLUMNS))
+                || (configFieldVo.getTwoColumns().equals("NO") && checkbox.isCheckedByName(TWO_COLUMNS))) {
+            checkbox.clickByName(TWO_COLUMNS);
         }
 
-        if ((configFieldVo.getLockable().equals("YES") && !checkbox.isCheckedByName("lockable"))
-                || (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName("lockable"))) {
-            checkbox.clickByName("lockable");
+        if ((configFieldVo.getLockable().equals("YES") && !checkbox.isCheckedByName(LOCKABLE))
+                || (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName(LOCKABLE))) {
+            checkbox.clickByName(LOCKABLE);
         }
 
-        if ((configFieldVo.getMultiple().equals("YES") && !checkbox.isCheckedByName("multiple"))
-                || (configFieldVo.getMultiple().equals("NO") && checkbox.isCheckedByName("multiple"))) {
-            checkbox.clickByName("multiple");
+        if ((configFieldVo.getMultiple().equals("YES") && !checkbox.isCheckedByName(MULTIPLE))
+                || (configFieldVo.getMultiple().equals("NO") && checkbox.isCheckedByName(MULTIPLE))) {
+            checkbox.clickByName(MULTIPLE);
         }
 
-        if ((configFieldVo.getReadOnly().equals("YES") && !checkbox.isCheckedByName("readOnly"))
-                || (configFieldVo.getReadOnly().equals("NO") && checkbox.isCheckedByName("readOnly"))) {
-            checkbox.clickByName("readOnly");
+        if ((configFieldVo.getReadOnly().equals("YES") && !checkbox.isCheckedByName(READ_ONLY))
+                || (configFieldVo.getReadOnly().equals("NO") && checkbox.isCheckedByName(READ_ONLY))) {
+            checkbox.clickByName(READ_ONLY);
         }
 
-        if ((configFieldVo.getCalcTotal().equals("YES") && !checkbox.isCheckedByName("calcTotal"))
-                || (configFieldVo.getCalcTotal().equals("NO") && checkbox.isCheckedByName("calcTotal"))) {
-            checkbox.clickByName("calcTotal");
+        if ((configFieldVo.getCalcTotal().equals("YES") && !checkbox.isCheckedByName(CALC_TOTAL))
+                || (configFieldVo.getCalcTotal().equals("NO") && checkbox.isCheckedByName(CALC_TOTAL))) {
+            checkbox.clickByName(CALC_TOTAL);
         }
 
-        if ((configFieldVo.getNotCloneValue().equals("YES") && !checkbox.isCheckedByName("notCloneFieldValue"))
-                || (configFieldVo.getNotCloneValue().equals("NO") && checkbox.isCheckedByName("notCloneFieldValue"))) {
-            checkbox.clickByName("notCloneFieldValue");
+        if ((configFieldVo.getNotCloneValue().equals("YES") && !checkbox.isCheckedByName(NOT_CLONE_VALUE))
+                || (configFieldVo.getNotCloneValue().equals("NO") && checkbox.isCheckedByName(NOT_CLONE_VALUE))) {
+            checkbox.clickByName(NOT_CLONE_VALUE);
         }
 
-        if ((configFieldVo.getNotCloneLock().equals("YES") && !checkbox.isCheckedByName("notCloneLocks"))
-                || (configFieldVo.getNotCloneLock().equals("NO") && checkbox.isCheckedByName("notCloneLocks"))) {
-            checkbox.clickByName("notCloneLocks");
+        if ((configFieldVo.getNotCloneLock().equals("YES") && !checkbox.isCheckedByName(NOT_CLONE_LOCK))
+                || (configFieldVo.getNotCloneLock().equals("NO") && checkbox.isCheckedByName(NOT_CLONE_LOCK))) {
+            checkbox.clickByName(NOT_CLONE_LOCK);
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -341,32 +364,32 @@ public class EntityConfigField {
             jqueryWait.waitJQueryLoad();
         }
 
-        seleniumSettings.getWebDriver().findElement(By.name("LabelName")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("LabelName")).sendKeys(configFieldVo.getLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(configFieldVo.getLabel());
 
-        seleniumSettings.getWebDriver().findElement(By.name("configFieldName")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("configFieldName")).sendKeys(configFieldVo.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(configFieldVo.getName());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("componentsPackageId"))).selectByVisibleText(configFieldVo.getCompPackage());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(COMP_PACKAGE))).selectByVisibleText(configFieldVo.getCompPackage());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("colorId"))).selectByVisibleText(configFieldVo.getColor());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(COLOR))).selectByVisibleText(configFieldVo.getColor());
 
-        seleniumSettings.getWebDriver().findElement(By.name("fieldWidth")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("fieldWidth")).sendKeys(configFieldVo.getWidth());
+        seleniumSettings.getWebDriver().findElement(By.name(WIDTH)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(WIDTH)).sendKeys(configFieldVo.getWidth());
 
         if (ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldText().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldText().getLength());
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldText().getDefValueSql());
         } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldNumber().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldNumber().getLength());
 
-            seleniumSettings.getWebDriver().findElement(By.name("prefix")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("prefix")).sendKeys(configFieldVo.getConfigFieldNumber().getPrefix());
-            seleniumSettings.getWebDriver().findElement(By.name("suffix")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("suffix")).sendKeys(configFieldVo.getConfigFieldNumber().getSuffix());
+            seleniumSettings.getWebDriver().findElement(By.name(PREFIX)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(PREFIX)).sendKeys(configFieldVo.getConfigFieldNumber().getPrefix());
+            seleniumSettings.getWebDriver().findElement(By.name(SUFFIX)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SUFFIX)).sendKeys(configFieldVo.getConfigFieldNumber().getSuffix());
             seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("numDecimals")).sendKeys(configFieldVo.getConfigFieldNumber().getDecimal());
             window.openModal(By.name("btnrgbNegColor"));
@@ -387,11 +410,11 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDate().getDefValueSql());
         } else if (ConfigFieldType.CHECKBOX.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "1");
+            assertElement.AssertText(SIZE, "1");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -399,15 +422,15 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldMemo().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldMemo().getLength());
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldMemo().getLines());
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMemo().getDefValueSql());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldWiki().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldWiki().getLength());
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("linesQty")).sendKeys(configFieldVo.getConfigFieldWiki().getLines());
 
@@ -423,11 +446,11 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "15");
+            assertElement.AssertText(SIZE, "15");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLatitude().getDefValueSql());
         } else if (ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "15");
+            assertElement.AssertText(SIZE, "15");
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
@@ -497,8 +520,8 @@ public class EntityConfigField {
         } else if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType())) {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldCalculated().getSql());
         } else if (ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType())) {
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("fieldSize")).sendKeys(configFieldVo.getConfigFieldHyperlink().getLength());
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(SIZE)).sendKeys(configFieldVo.getConfigFieldHyperlink().getLength());
         } else if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             //TODO filter
 
@@ -511,7 +534,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             if ((configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
                     || (configFieldVo.getConfigFieldDateTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
@@ -520,7 +543,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             if ((configFieldVo.getConfigFieldTime().getShowSeconds().equals("YES") && !checkbox.isCheckedByName("showSeconds"))
                     || (configFieldVo.getConfigFieldTime().getShowSeconds().equals("NO") && checkbox.isCheckedByName("showSeconds"))) {
@@ -532,54 +555,54 @@ public class EntityConfigField {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType. ConfigFieldType=" + configFieldVo.getConfigFieldType());
         }
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(configFieldVo.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(configFieldVo.getDescription());
 
-        seleniumSettings.getWebDriver().findElement(By.name("comments")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("comments")).sendKeys(configFieldVo.getComment());
+        seleniumSettings.getWebDriver().findElement(By.name(COMMENT)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(COMMENT)).sendKeys(configFieldVo.getComment());
 
-        if ((configFieldVo.getMandatory().equals("YES") && !checkbox.isCheckedByName("mandatory"))
-                || (configFieldVo.getMandatory().equals("NO") && checkbox.isCheckedByName("mandatory"))) {
-            checkbox.clickByName("mandatory");
+        if ((configFieldVo.getMandatory().equals("YES") && !checkbox.isCheckedByName(MANDATORY))
+                || (configFieldVo.getMandatory().equals("NO") && checkbox.isCheckedByName(MANDATORY))) {
+            checkbox.clickByName(MANDATORY);
         }
 
-        if ((configFieldVo.getTwoColumns().equals("YES") && !checkbox.isCheckedByName("twoColsSpan"))
-                || (configFieldVo.getTwoColumns().equals("NO") && checkbox.isCheckedByName("twoColsSpan"))) {
-            checkbox.clickByName("twoColsSpan");
+        if ((configFieldVo.getTwoColumns().equals("YES") && !checkbox.isCheckedByName(TWO_COLUMNS))
+                || (configFieldVo.getTwoColumns().equals("NO") && checkbox.isCheckedByName(TWO_COLUMNS))) {
+            checkbox.clickByName(TWO_COLUMNS);
         }
 
         boolean removeLockable = false;
-        if ((configFieldVo.getLockable().equals("YES") && !checkbox.isCheckedByName("lockable"))
-                || (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName("lockable"))) {
-            if (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName("lockable")) {
+        if ((configFieldVo.getLockable().equals("YES") && !checkbox.isCheckedByName(LOCKABLE))
+                || (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName(LOCKABLE))) {
+            if (configFieldVo.getLockable().equals("NO") && checkbox.isCheckedByName(LOCKABLE)) {
                 removeLockable = true;
             }
-            checkbox.clickByName("lockable");
+            checkbox.clickByName(LOCKABLE);
         }
 
-        if ((configFieldVo.getMultiple().equals("YES") && !checkbox.isCheckedByName("multiple"))
-                || (configFieldVo.getMultiple().equals("NO") && checkbox.isCheckedByName("multiple"))) {
-            checkbox.clickByName("multiple");
+        if ((configFieldVo.getMultiple().equals("YES") && !checkbox.isCheckedByName(MULTIPLE))
+                || (configFieldVo.getMultiple().equals("NO") && checkbox.isCheckedByName(MULTIPLE))) {
+            checkbox.clickByName(MULTIPLE);
         }
 
-        if ((configFieldVo.getReadOnly().equals("YES") && !checkbox.isCheckedByName("readOnly"))
-                || (configFieldVo.getReadOnly().equals("NO") && checkbox.isCheckedByName("readOnly"))) {
-            checkbox.clickByName("readOnly");
+        if ((configFieldVo.getReadOnly().equals("YES") && !checkbox.isCheckedByName(READ_ONLY))
+                || (configFieldVo.getReadOnly().equals("NO") && checkbox.isCheckedByName(READ_ONLY))) {
+            checkbox.clickByName(READ_ONLY);
         }
 
-        if ((configFieldVo.getCalcTotal().equals("YES") && !checkbox.isCheckedByName("calcTotal"))
-                || (configFieldVo.getCalcTotal().equals("NO") && checkbox.isCheckedByName("calcTotal"))) {
-            checkbox.clickByName("calcTotal");
+        if ((configFieldVo.getCalcTotal().equals("YES") && !checkbox.isCheckedByName(CALC_TOTAL))
+                || (configFieldVo.getCalcTotal().equals("NO") && checkbox.isCheckedByName(CALC_TOTAL))) {
+            checkbox.clickByName(CALC_TOTAL);
         }
 
-        if ((configFieldVo.getNotCloneValue().equals("YES") && !checkbox.isCheckedByName("notCloneFieldValue"))
-                || (configFieldVo.getNotCloneValue().equals("NO") && checkbox.isCheckedByName("notCloneFieldValue"))) {
-            checkbox.clickByName("notCloneFieldValue");
+        if ((configFieldVo.getNotCloneValue().equals("YES") && !checkbox.isCheckedByName(NOT_CLONE_VALUE))
+                || (configFieldVo.getNotCloneValue().equals("NO") && checkbox.isCheckedByName(NOT_CLONE_VALUE))) {
+            checkbox.clickByName(NOT_CLONE_VALUE);
         }
 
-        if ((configFieldVo.getNotCloneLock().equals("YES") && !checkbox.isCheckedByName("notCloneLocks"))
-                || (configFieldVo.getNotCloneLock().equals("NO") && checkbox.isCheckedByName("notCloneLocks"))) {
-            checkbox.clickByName("notCloneLocks");
+        if ((configFieldVo.getNotCloneLock().equals("YES") && !checkbox.isCheckedByName(NOT_CLONE_LOCK))
+                || (configFieldVo.getNotCloneLock().equals("NO") && checkbox.isCheckedByName(NOT_CLONE_LOCK))) {
+            checkbox.clickByName(NOT_CLONE_LOCK);
         }
 
         if (removeLockable) {
@@ -599,26 +622,26 @@ public class EntityConfigField {
             jqueryWait.waitJQueryLoad();
         }
 
-        assertElement.AssertSelect("TrackorTypeName", configFieldVo.getTrackorTypeLabel());
-        assertElement.AssertSelect("dataType", configFieldVo.getConfigFieldType().getLabel());
-        assertElement.AssertText("LabelName", configFieldVo.getLabel());
-        assertElement.AssertText("configFieldName", configFieldVo.getName());
+        assertElement.AssertSelect(TT_NAME, configFieldVo.getTrackorTypeLabel());
+        assertElement.AssertSelect(DATA_TYPE, configFieldVo.getConfigFieldType().getLabel());
+        assertElement.AssertText(LABEL, configFieldVo.getLabel());
+        assertElement.AssertText(NAME, configFieldVo.getName());
 
-        assertElement.AssertSelect("componentsPackageId", configFieldVo.getCompPackage());
+        assertElement.AssertSelect(COMP_PACKAGE, configFieldVo.getCompPackage());
 
-        assertElement.AssertSelect("colorId", configFieldVo.getColor());
+        assertElement.AssertSelect(COLOR, configFieldVo.getColor());
 
-        assertElement.AssertText("fieldWidth", configFieldVo.getWidth());
+        assertElement.AssertText(WIDTH, configFieldVo.getWidth());
 
         if (ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldText().getLength());
+            assertElement.AssertText(SIZE, configFieldVo.getConfigFieldText().getLength());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldText().getDefValueSql());
         } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldNumber().getLength());
+            assertElement.AssertText(SIZE, configFieldVo.getConfigFieldNumber().getLength());
 
-            assertElement.AssertText("prefix", configFieldVo.getConfigFieldNumber().getPrefix());
-            assertElement.AssertText("suffix", configFieldVo.getConfigFieldNumber().getSuffix());
+            assertElement.AssertText(PREFIX, configFieldVo.getConfigFieldNumber().getPrefix());
+            assertElement.AssertText(SUFFIX, configFieldVo.getConfigFieldNumber().getSuffix());
             assertElement.AssertText("numDecimals", configFieldVo.getConfigFieldNumber().getDecimal());
             assertElement.AssertText("negativeColor", configFieldVo.getConfigFieldNumber().getNegativeColor());
             assertElement.AssertText("positiveColor", configFieldVo.getConfigFieldNumber().getPositiveColor());
@@ -628,11 +651,11 @@ public class EntityConfigField {
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDate().getDefValueSql());
         } else if (ConfigFieldType.CHECKBOX.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "1");
+            assertElement.AssertText(SIZE, "1");
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
@@ -640,12 +663,12 @@ public class EntityConfigField {
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldMemo().getLength());
+            assertElement.AssertText(SIZE, configFieldVo.getConfigFieldMemo().getLength());
             assertElement.AssertText("linesQty", configFieldVo.getConfigFieldMemo().getLines());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMemo().getDefValueSql());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldWiki().getLength());
+            assertElement.AssertText(SIZE, configFieldVo.getConfigFieldWiki().getLength());
             assertElement.AssertText("linesQty", configFieldVo.getConfigFieldWiki().getLines());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldWiki().getDefValueSql());
@@ -662,11 +685,11 @@ public class EntityConfigField {
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "15");
+            assertElement.AssertText(SIZE, "15");
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLatitude().getDefValueSql());
         } else if (ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "15");
+            assertElement.AssertText(SIZE, "15");
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldLongitude().getDefValueSql());
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
@@ -708,7 +731,7 @@ public class EntityConfigField {
         } else if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType())) {
             checkSqlInCodeMirror("btnSQL", configFieldVo.getConfigFieldCalculated().getSql());
         } else if (ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", configFieldVo.getConfigFieldHyperlink().getLength());
+            assertElement.AssertText(SIZE, configFieldVo.getConfigFieldHyperlink().getLength());
         } else if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             //TODO filter
 
@@ -720,13 +743,13 @@ public class EntityConfigField {
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             assertElement.AssertCheckBoxNew("showSeconds", configFieldVo.getConfigFieldDateTime().getShowSeconds());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
-            assertElement.AssertText("fieldSize", "10");
+            assertElement.AssertText(SIZE, "10");
 
             assertElement.AssertCheckBoxNew("showSeconds", configFieldVo.getConfigFieldTime().getShowSeconds());
 
@@ -735,18 +758,18 @@ public class EntityConfigField {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType. ConfigFieldType=" + configFieldVo.getConfigFieldType());
         }
 
-        assertElement.AssertText("description", configFieldVo.getDescription());
-        assertElement.AssertText("comments", configFieldVo.getComment());
+        assertElement.AssertText(DESCRIPTION, configFieldVo.getDescription());
+        assertElement.AssertText(COMMENT, configFieldVo.getComment());
 
-        assertElement.AssertCheckBoxNew("mandatory", configFieldVo.getMandatory());
-        assertElement.AssertCheckBoxNew("twoColsSpan", configFieldVo.getTwoColumns());
-        assertElement.AssertCheckBoxNew("lockable", configFieldVo.getLockable());
-        assertElement.AssertCheckBoxNew("multiple", configFieldVo.getMultiple());
+        assertElement.AssertCheckBoxNew(MANDATORY, configFieldVo.getMandatory());
+        assertElement.AssertCheckBoxNew(TWO_COLUMNS, configFieldVo.getTwoColumns());
+        assertElement.AssertCheckBoxNew(LOCKABLE, configFieldVo.getLockable());
+        assertElement.AssertCheckBoxNew(MULTIPLE, configFieldVo.getMultiple());
 
-        assertElement.AssertCheckBoxNew("readOnly", configFieldVo.getReadOnly());
-        assertElement.AssertCheckBoxNew("calcTotal", configFieldVo.getCalcTotal());
-        assertElement.AssertCheckBoxNew("notCloneFieldValue", configFieldVo.getNotCloneValue());
-        assertElement.AssertCheckBoxNew("notCloneLocks", configFieldVo.getNotCloneLock());
+        assertElement.AssertCheckBoxNew(READ_ONLY, configFieldVo.getReadOnly());
+        assertElement.AssertCheckBoxNew(CALC_TOTAL, configFieldVo.getCalcTotal());
+        assertElement.AssertCheckBoxNew(NOT_CLONE_VALUE, configFieldVo.getNotCloneValue());
+        assertElement.AssertCheckBoxNew(NOT_CLONE_LOCK, configFieldVo.getNotCloneLock());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -20,6 +20,10 @@ import com.onevizion.uitest.api.vo.entity.ConfigAppExtParam;
 @Component
 public class EntityConfigAppExtParam {
 
+    private static final String NAME = "paramName";
+    private static final String DESCRIPTION = "description";
+    private static final String SQL = "sqlText";
+
     @Resource
     private Window window;
 
@@ -43,12 +47,12 @@ public class EntityConfigAppExtParam {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("paramName")).sendKeys("param1");
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys("param1");
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys("desc param1");
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys("desc param1");
 
-        wait.waitCodeMirrorLoad("sqlText");
-        js.setValueToCodeMirror("sqlText", "select 1 from dual");
+        wait.waitCodeMirrorLoad(SQL);
+        js.setValueToCodeMirror(SQL, "select 1 from dual");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -59,14 +63,14 @@ public class EntityConfigAppExtParam {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("paramName")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("paramName")).sendKeys("param1edit");
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys("param1edit");
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys("desc param1 edit");
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys("desc param1 edit");
 
-        wait.waitCodeMirrorLoad("sqlText");
-        js.setValueToCodeMirror("sqlText", "select 11 from dual");
+        wait.waitCodeMirrorLoad(SQL);
+        js.setValueToCodeMirror(SQL, "select 11 from dual");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -77,9 +81,9 @@ public class EntityConfigAppExtParam {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("paramName", configAppExtParam.getName());
-        assertElement.AssertText("description", configAppExtParam.getDescription());
-        assertElement.AssertCodeMirror("sqlText", configAppExtParam.getSql());
+        assertElement.AssertText(NAME, configAppExtParam.getName());
+        assertElement.AssertText(DESCRIPTION, configAppExtParam.getDescription());
+        assertElement.AssertCodeMirror(SQL, configAppExtParam.getSql());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
