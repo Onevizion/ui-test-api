@@ -24,6 +24,19 @@ import com.onevizion.uitest.api.vo.entity.TrackorType;
 @Component
 public class EntityTrackorType {
 
+    private static final String NAME = "trackorType";
+    private static final String LABEL = "appletLabel";
+    private static final String LABEL_ITEM = "trackoridLabel";
+    private static final String LABEL_CLASS = "trackorClassLabel";
+    private static final String LABEL_PREFIX = "prefixLabel";
+    private static final String LABEL_MY_ITEMS = "myTrackorsLabel";
+    private static final String LIMIT_WP = "wpModeId";
+    private static final String COMP_PACKAGE = "componentsPackageId";
+    private static final String CLONE = "cloningAllowed";
+    private static final String TEMPLATE = "template";
+    private static final String USER = "user";
+    private static final String EFILE_CONTAINER = "efileContainer";
+
     @Resource
     private Window window;
 
@@ -53,31 +66,31 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("trackorType")).sendKeys(trackorType.getName());
-        seleniumSettings.getWebDriver().findElement(By.name("appletLabel")).sendKeys(trackorType.getLabel());
-        seleniumSettings.getWebDriver().findElement(By.name("trackoridLabel")).sendKeys(trackorType.getLabelItemId());
-        seleniumSettings.getWebDriver().findElement(By.name("trackorClassLabel")).sendKeys(trackorType.getLabelClass());
-        seleniumSettings.getWebDriver().findElement(By.name("prefixLabel")).sendKeys(trackorType.getLabelPrefix());
-        seleniumSettings.getWebDriver().findElement(By.name("myTrackorsLabel")).sendKeys(trackorType.getLabelMyItems());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorType.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(trackorType.getLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL_ITEM)).sendKeys(trackorType.getLabelItemId());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL_CLASS)).sendKeys(trackorType.getLabelClass());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL_PREFIX)).sendKeys(trackorType.getLabelPrefix());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL_MY_ITEMS)).sendKeys(trackorType.getLabelMyItems());
 
-        (new Select(seleniumSettings.getWebDriver().findElement(By.name("wpModeId")))).selectByVisibleText(trackorType.getLimitWp());
-        (new Select(seleniumSettings.getWebDriver().findElement(By.name("componentsPackageId")))).selectByVisibleText(trackorType.getCompPack());
+        (new Select(seleniumSettings.getWebDriver().findElement(By.name(LIMIT_WP)))).selectByVisibleText(trackorType.getLimitWp());
+        (new Select(seleniumSettings.getWebDriver().findElement(By.name(COMP_PACKAGE)))).selectByVisibleText(trackorType.getCompPack());
 
-        if ((trackorType.getClone().equals("YES") && !checkbox.isCheckedByName("cloningAllowed"))
-                || (trackorType.getClone().equals("NO") && checkbox.isCheckedByName("cloningAllowed"))) {
-            checkbox.clickByName("cloningAllowed");
+        if ((trackorType.getClone().equals("YES") && !checkbox.isCheckedByName(CLONE))
+                || (trackorType.getClone().equals("NO") && checkbox.isCheckedByName(CLONE))) {
+            checkbox.clickByName(CLONE);
         }
-        if ((trackorType.getTemplate().equals("YES") && !checkbox.isCheckedByName("template"))
-                || (trackorType.getTemplate().equals("NO") && checkbox.isCheckedByName("template"))) {
-            checkbox.clickByName("template");
+        if ((trackorType.getTemplate().equals("YES") && !checkbox.isCheckedByName(TEMPLATE))
+                || (trackorType.getTemplate().equals("NO") && checkbox.isCheckedByName(TEMPLATE))) {
+            checkbox.clickByName(TEMPLATE);
         }
-        if ((trackorType.getUser().equals("YES") && !checkbox.isCheckedByName("user"))
-                || (trackorType.getUser().equals("NO") && checkbox.isCheckedByName("user"))) {
-            checkbox.clickByName("user");
+        if ((trackorType.getUser().equals("YES") && !checkbox.isCheckedByName(USER))
+                || (trackorType.getUser().equals("NO") && checkbox.isCheckedByName(USER))) {
+            checkbox.clickByName(USER);
         }
-        if ((trackorType.getEfileContainer().equals("YES") && !checkbox.isCheckedByName("efileContainer"))
-                || (trackorType.getEfileContainer().equals("NO") && checkbox.isCheckedByName("efileContainer"))) {
-            checkbox.clickByName("efileContainer");
+        if ((trackorType.getEfileContainer().equals("YES") && !checkbox.isCheckedByName(EFILE_CONTAINER))
+                || (trackorType.getEfileContainer().equals("NO") && checkbox.isCheckedByName(EFILE_CONTAINER))) {
+            checkbox.clickByName(EFILE_CONTAINER);
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -100,20 +113,20 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("trackorType", trackorType.getName());
-        assertElement.AssertText("appletLabel", trackorType.getLabel());
-        assertElement.AssertText("trackoridLabel", trackorType.getLabelItemId());
-        assertElement.AssertText("trackorClassLabel", trackorType.getLabelClass());
-        assertElement.AssertText("prefixLabel", trackorType.getLabelPrefix());
-        assertElement.AssertText("myTrackorsLabel", trackorType.getLabelMyItems());
+        assertElement.AssertText(NAME, trackorType.getName());
+        assertElement.AssertText(LABEL, trackorType.getLabel());
+        assertElement.AssertText(LABEL_ITEM, trackorType.getLabelItemId());
+        assertElement.AssertText(LABEL_CLASS, trackorType.getLabelClass());
+        assertElement.AssertText(LABEL_PREFIX, trackorType.getLabelPrefix());
+        assertElement.AssertText(LABEL_MY_ITEMS, trackorType.getLabelMyItems());
         assertElement.AssertRadioPsSelector("objDisplayField", "btnobjDisplayField", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAliasField(), 1L, true);
         assertElement.AssertCheckboxPsSelector("xsFieldsStr", "btnxsFieldsStr", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAutoFilterFields(), 1L, true);
-        assertElement.AssertSelect("wpModeId", trackorType.getLimitWp());
-        assertElement.AssertSelect("componentsPackageId", trackorType.getCompPack());
-        assertElement.AssertCheckBoxNew("cloningAllowed", trackorType.getClone());
-        assertElement.AssertCheckBoxNew("template", trackorType.getTemplate());
-        assertElement.AssertCheckBoxNew("user", trackorType.getUser());
-        assertElement.AssertCheckBoxNew("efileContainer", trackorType.getEfileContainer());
+        assertElement.AssertSelect(LIMIT_WP, trackorType.getLimitWp());
+        assertElement.AssertSelect(COMP_PACKAGE, trackorType.getCompPack());
+        assertElement.AssertCheckBoxNew(CLONE, trackorType.getClone());
+        assertElement.AssertCheckBoxNew(TEMPLATE, trackorType.getTemplate());
+        assertElement.AssertCheckBoxNew(USER, trackorType.getUser());
+        assertElement.AssertCheckBoxNew(EFILE_CONTAINER, trackorType.getEfileContainer());
 
         tab.goToTab(2L); // Key Generation
         assertElement.AssertCheckBoxNew("autokey", trackorType.getAutoKey());

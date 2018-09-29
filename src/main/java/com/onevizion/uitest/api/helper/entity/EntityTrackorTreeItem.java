@@ -23,6 +23,16 @@ import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
 @Component
 public class EntityTrackorTreeItem {
 
+    private static final String TREE_PATH = "treePath";
+    private static final String TRACKOR_TYPE = "trackorType";
+    private static final String CARDINALITY = "cardinalityId";
+    private static final String UNIQUE_BY = "uniqueByTtId";
+    private static final String COLOR = "colorId";
+    private static final String CHILD_REQUIRES_PARENT = "childRequiresParent";
+    private static final String ON_PARENT_DELETE_CASCADE = "onParentDeleteCascade";
+    private static final String LOCKABLE = "lockable";
+    private static final String SHOW_ALL = "showAllInTrcontainer";
+
     @Resource
     private Window window;
 
@@ -59,30 +69,30 @@ public class EntityTrackorTreeItem {
 
         psSelector.selectSpecificValue(By.name("btntrackorType"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, trackorTreeItem.getTrackorType(), 1L);
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("cardinalityId"))).selectByVisibleText(trackorTreeItem.getCardinality());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(CARDINALITY))).selectByVisibleText(trackorTreeItem.getCardinality());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("uniqueByTtId"))).selectByVisibleText(trackorTreeItem.getUniqueBy());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(UNIQUE_BY))).selectByVisibleText(trackorTreeItem.getUniqueBy());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("colorId"))).selectByVisibleText(trackorTreeItem.getColor());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(COLOR))).selectByVisibleText(trackorTreeItem.getColor());
 
-        if ((trackorTreeItem.getChildRequiresParent().equals("YES") && !checkbox.isCheckedByName("childRequiresParent"))
-                || (trackorTreeItem.getChildRequiresParent().equals("NO") && checkbox.isCheckedByName("childRequiresParent"))) {
-            checkbox.clickByName("childRequiresParent");
+        if ((trackorTreeItem.getChildRequiresParent().equals("YES") && !checkbox.isCheckedByName(CHILD_REQUIRES_PARENT))
+                || (trackorTreeItem.getChildRequiresParent().equals("NO") && checkbox.isCheckedByName(CHILD_REQUIRES_PARENT))) {
+            checkbox.clickByName(CHILD_REQUIRES_PARENT);
         }
 
-        if ((trackorTreeItem.getOnParentDeleteCascade().equals("YES") && !checkbox.isCheckedByName("onParentDeleteCascade"))
-                || (trackorTreeItem.getOnParentDeleteCascade().equals("NO") && checkbox.isCheckedByName("onParentDeleteCascade"))) {
-            checkbox.clickByName("onParentDeleteCascade");
+        if ((trackorTreeItem.getOnParentDeleteCascade().equals("YES") && !checkbox.isCheckedByName(ON_PARENT_DELETE_CASCADE))
+                || (trackorTreeItem.getOnParentDeleteCascade().equals("NO") && checkbox.isCheckedByName(ON_PARENT_DELETE_CASCADE))) {
+            checkbox.clickByName(ON_PARENT_DELETE_CASCADE);
         }
 
-        if ((trackorTreeItem.getLockable().equals("YES") && !checkbox.isCheckedByName("lockable"))
-                || (trackorTreeItem.getLockable().equals("NO") && checkbox.isCheckedByName("lockable"))) {
-            checkbox.clickByName("lockable");
+        if ((trackorTreeItem.getLockable().equals("YES") && !checkbox.isCheckedByName(LOCKABLE))
+                || (trackorTreeItem.getLockable().equals("NO") && checkbox.isCheckedByName(LOCKABLE))) {
+            checkbox.clickByName(LOCKABLE);
         }
 
-        if ((trackorTreeItem.getShowAll().equals("YES") && !checkbox.isCheckedByName("showAllInTrcontainer"))
-                || (trackorTreeItem.getShowAll().equals("NO") && checkbox.isCheckedByName("showAllInTrcontainer"))) {
-            checkbox.clickByName("showAllInTrcontainer");
+        if ((trackorTreeItem.getShowAll().equals("YES") && !checkbox.isCheckedByName(SHOW_ALL))
+                || (trackorTreeItem.getShowAll().equals("NO") && checkbox.isCheckedByName(SHOW_ALL))) {
+            checkbox.clickByName(SHOW_ALL);
         }
 
         window.closeModalAndWaitTreeLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -95,33 +105,33 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("treePath", trackorTreeItem.getTreePath());
-        assertElement.AssertText("trackorType", trackorTreeItem.getTrackorType());
+        assertElement.AssertText(TREE_PATH, trackorTreeItem.getTreePath());
+        assertElement.AssertText(TRACKOR_TYPE, trackorTreeItem.getTrackorType());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("cardinalityId"))).selectByVisibleText(trackorTreeItem.getCardinality());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(CARDINALITY))).selectByVisibleText(trackorTreeItem.getCardinality());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("uniqueByTtId"))).selectByVisibleText(trackorTreeItem.getUniqueBy());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(UNIQUE_BY))).selectByVisibleText(trackorTreeItem.getUniqueBy());
 
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("colorId"))).selectByVisibleText(trackorTreeItem.getColor());
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(COLOR))).selectByVisibleText(trackorTreeItem.getColor());
 
-        if ((trackorTreeItem.getChildRequiresParent().equals("YES") && !checkbox.isCheckedByName("childRequiresParent"))
-                || (trackorTreeItem.getChildRequiresParent().equals("NO") && checkbox.isCheckedByName("childRequiresParent"))) {
-            checkbox.clickByName("childRequiresParent");
+        if ((trackorTreeItem.getChildRequiresParent().equals("YES") && !checkbox.isCheckedByName(CHILD_REQUIRES_PARENT))
+                || (trackorTreeItem.getChildRequiresParent().equals("NO") && checkbox.isCheckedByName(CHILD_REQUIRES_PARENT))) {
+            checkbox.clickByName(CHILD_REQUIRES_PARENT);
         }
 
-        if ((trackorTreeItem.getOnParentDeleteCascade().equals("YES") && !checkbox.isCheckedByName("onParentDeleteCascade"))
-                || (trackorTreeItem.getOnParentDeleteCascade().equals("NO") && checkbox.isCheckedByName("onParentDeleteCascade"))) {
-            checkbox.clickByName("onParentDeleteCascade");
+        if ((trackorTreeItem.getOnParentDeleteCascade().equals("YES") && !checkbox.isCheckedByName(ON_PARENT_DELETE_CASCADE))
+                || (trackorTreeItem.getOnParentDeleteCascade().equals("NO") && checkbox.isCheckedByName(ON_PARENT_DELETE_CASCADE))) {
+            checkbox.clickByName(ON_PARENT_DELETE_CASCADE);
         }
 
-        if ((trackorTreeItem.getLockable().equals("YES") && !checkbox.isCheckedByName("lockable"))
-                || (trackorTreeItem.getLockable().equals("NO") && checkbox.isCheckedByName("lockable"))) {
-            checkbox.clickByName("lockable");
+        if ((trackorTreeItem.getLockable().equals("YES") && !checkbox.isCheckedByName(LOCKABLE))
+                || (trackorTreeItem.getLockable().equals("NO") && checkbox.isCheckedByName(LOCKABLE))) {
+            checkbox.clickByName(LOCKABLE);
         }
 
-        if ((trackorTreeItem.getShowAll().equals("YES") && !checkbox.isCheckedByName("showAllInTrcontainer"))
-                || (trackorTreeItem.getShowAll().equals("NO") && checkbox.isCheckedByName("showAllInTrcontainer"))) {
-            checkbox.clickByName("showAllInTrcontainer");
+        if ((trackorTreeItem.getShowAll().equals("YES") && !checkbox.isCheckedByName(SHOW_ALL))
+                || (trackorTreeItem.getShowAll().equals("NO") && checkbox.isCheckedByName(SHOW_ALL))) {
+            checkbox.clickByName(SHOW_ALL);
         }
 
         window.closeModalAndWaitTreeLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -134,15 +144,15 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("treePath", trackorTreeItem.getTreePath());
-        assertElement.AssertText("trackorType", trackorTreeItem.getTrackorType());
-        assertElement.AssertSelect("cardinalityId", trackorTreeItem.getCardinality());
-        assertElement.AssertSelect("uniqueByTtId", trackorTreeItem.getUniqueBy());
-        assertElement.AssertSelect("colorId", trackorTreeItem.getColor());
-        assertElement.AssertCheckBoxNew("childRequiresParent", trackorTreeItem.getChildRequiresParent());
-        assertElement.AssertCheckBoxNew("onParentDeleteCascade", trackorTreeItem.getOnParentDeleteCascade());
-        assertElement.AssertCheckBoxNew("lockable", trackorTreeItem.getLockable());
-        assertElement.AssertCheckBoxNew("showAllInTrcontainer", trackorTreeItem.getShowAll());
+        assertElement.AssertText(TREE_PATH, trackorTreeItem.getTreePath());
+        assertElement.AssertText(TRACKOR_TYPE, trackorTreeItem.getTrackorType());
+        assertElement.AssertSelect(CARDINALITY, trackorTreeItem.getCardinality());
+        assertElement.AssertSelect(UNIQUE_BY, trackorTreeItem.getUniqueBy());
+        assertElement.AssertSelect(COLOR, trackorTreeItem.getColor());
+        assertElement.AssertCheckBoxNew(CHILD_REQUIRES_PARENT, trackorTreeItem.getChildRequiresParent());
+        assertElement.AssertCheckBoxNew(ON_PARENT_DELETE_CASCADE, trackorTreeItem.getOnParentDeleteCascade());
+        assertElement.AssertCheckBoxNew(LOCKABLE, trackorTreeItem.getLockable());
+        assertElement.AssertCheckBoxNew(SHOW_ALL, trackorTreeItem.getShowAll());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
