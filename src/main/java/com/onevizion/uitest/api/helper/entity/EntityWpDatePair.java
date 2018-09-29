@@ -21,6 +21,10 @@ import com.onevizion.uitest.api.vo.entity.WpDatePair;
 @Component
 public class EntityWpDatePair {
 
+    private static final String NAME = "wpTaskDateType";
+    private static final String LABEL = "label";
+    private static final String SHORT_LABEL = "abbrLabel";
+
     @Resource
     private Window window;
 
@@ -47,11 +51,11 @@ public class EntityWpDatePair {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("wpTaskDateType")).sendKeys(wpDatePair.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(wpDatePair.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("label")).sendKeys(wpDatePair.getLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(wpDatePair.getLabel());
 
-        seleniumSettings.getWebDriver().findElement(By.name("abbrLabel")).sendKeys(wpDatePair.getShortLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).sendKeys(wpDatePair.getShortLabel());
 
         tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);
@@ -75,14 +79,14 @@ public class EntityWpDatePair {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("wpTaskDateType")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("wpTaskDateType")).sendKeys(wpDatePair.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(wpDatePair.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("label")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("label")).sendKeys(wpDatePair.getLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(wpDatePair.getLabel());
 
-        seleniumSettings.getWebDriver().findElement(By.name("abbrLabel")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("abbrLabel")).sendKeys(wpDatePair.getShortLabel());
+        seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).sendKeys(wpDatePair.getShortLabel());
 
         tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);
@@ -106,9 +110,9 @@ public class EntityWpDatePair {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("wpTaskDateType", wpDatePair.getName());
-        assertElement.AssertText("label", wpDatePair.getLabel());
-        assertElement.AssertText("abbrLabel", wpDatePair.getShortLabel());
+        assertElement.AssertText(NAME, wpDatePair.getName());
+        assertElement.AssertText(LABEL, wpDatePair.getLabel());
+        assertElement.AssertText(SHORT_LABEL, wpDatePair.getShortLabel());
 
         tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);

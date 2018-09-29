@@ -21,6 +21,9 @@ import com.onevizion.uitest.api.vo.entity.WpDiscipline;
 @Component
 public class EntityWpDiscipline {
 
+    private static final String NAME = "discpType";
+    private static final String DESCRIPTION = "description";
+
     @Resource
     private Window window;
 
@@ -47,9 +50,9 @@ public class EntityWpDiscipline {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("discpType")).sendKeys(wpDiscipline.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(wpDiscipline.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(wpDiscipline.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(wpDiscipline.getDescription());
 
         tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);
@@ -65,11 +68,11 @@ public class EntityWpDiscipline {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("discpType")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("discpType")).sendKeys(wpDiscipline.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(wpDiscipline.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("description")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(wpDiscipline.getDescription());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(wpDiscipline.getDescription());
 
         tab.goToTab(2L);//Role Assignments
         wait.waitGridLoad(2L, 2L);
@@ -85,8 +88,8 @@ public class EntityWpDiscipline {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("discpType", wpDiscipline.getName());
-        assertElement.AssertText("description", wpDiscipline.getDescription());
+        assertElement.AssertText(NAME, wpDiscipline.getName());
+        assertElement.AssertText(DESCRIPTION, wpDiscipline.getDescription());
 
         tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);

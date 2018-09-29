@@ -24,6 +24,9 @@ import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 @Component
 public class EntityDynamicVtable {
 
+    private static final String NAME = "attribVtableName";
+    private static final String DESCRIPTION = "attribVtableDesc";
+
     @Resource
     private Window window;
 
@@ -56,9 +59,9 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("attribVtableName")).sendKeys(dynamicVtable.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(dynamicVtable.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("attribVtableDesc")).sendKeys(dynamicVtable.getDesc());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
 
         element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");
@@ -81,9 +84,9 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("attribVtableName")).sendKeys(dynamicVtable.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(dynamicVtable.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("attribVtableDesc")).sendKeys(dynamicVtable.getDesc());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -94,11 +97,11 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        seleniumSettings.getWebDriver().findElement(By.name("attribVtableName")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("attribVtableName")).sendKeys(dynamicVtable.getName());
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(dynamicVtable.getName());
 
-        seleniumSettings.getWebDriver().findElement(By.name("attribVtableDesc")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("attribVtableDesc")).sendKeys(dynamicVtable.getDesc());
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -130,8 +133,8 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("attribVtableName", dynamicVtable.getName());
-        assertElement.AssertText("attribVtableDesc", dynamicVtable.getDesc());
+        assertElement.AssertText(NAME, dynamicVtable.getName());
+        assertElement.AssertText(DESCRIPTION, dynamicVtable.getDesc());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
