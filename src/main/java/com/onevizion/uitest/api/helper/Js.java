@@ -608,19 +608,7 @@ public class Js {
                 + "return j;"));
     }
 
-    @Deprecated
     public Object getElementsValuesFromDualListBox(String selectId) {
-        return execJs2("var array = [];"
-                + "var j = 0;"
-                + "var elements = document.getElementById('" + selectId + "').getElementsByTagName('div');"
-                + "for (var i = 0; i < elements.length; i++) {"
-                + "    array[j] = elements[i].getAttribute('dhx_f_id');"
-                + "    j++;"
-                + "}"
-                + "return array;");
-    }
-
-    public Object getElementsValuesFromDualListBoxNew(String selectId) {
         return execJs2("var array = [];"
                 + "var j = 0;"
                 + "var elements = document.getElementById('" + selectId + "').getElementsByClassName('listBoxContent')[0].getElementsByClassName('record');"
