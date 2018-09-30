@@ -111,7 +111,7 @@ public class FormDesigner {
         List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id(FORM_ID)).findElements(By.xpath("div[contains(@class, 'cf')]"));
         for (WebElement field : fields) {
             List<WebElement> labels = field.findElements(By.tagName("label"));
-            if (labels.size() > 0) {
+            if (!labels.isEmpty()) {
                 if (labels.get(0).getAttribute("innerText").trim().equals(label)) {
                     element.click(field);
                     element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));

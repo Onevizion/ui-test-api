@@ -155,7 +155,7 @@ public class FieldHistory {
         List<String> result = new ArrayList<>();
         for (List<String> val : vals) {
             if (val.get(position) != null) {
-                if (result.size() == 0) {
+                if (result.isEmpty()) {
                     result.add(val.get(position));
                 } else {
                     if (!result.get(result.size() - 1).equals(val.get(position))) {
@@ -180,7 +180,7 @@ public class FieldHistory {
     private List<String> getHistoryValsCheckbox(int position, @SuppressWarnings("unchecked") List<String> ... vals) {
         List<String> result = new ArrayList<>();
         for (List<String> val : vals) {
-            if (result.size() == 0) {
+            if (result.isEmpty()) {
                 if (val.get(position).equals("YES")) {
                     result.add(val.get(position));
                 }
@@ -196,7 +196,7 @@ public class FieldHistory {
     private List<String> getHistoryValsMultiSelector(int position, @SuppressWarnings("unchecked") List<String> ... vals) {
         List<String> result = new ArrayList<>();
         for (List<String> val : vals) {
-            if (result.size() == 0) {
+            if (result.isEmpty()) {
                 result.add(val.get(position).replaceAll(", ", ",").replaceAll(",", ", "));
             } else {
                 if (!result.get(result.size() - 1).equals(val.get(position).replaceAll(", ", ",").replaceAll(",", ", "))) {

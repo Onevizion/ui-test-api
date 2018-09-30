@@ -172,7 +172,7 @@ public class PsSelector {
             }
         }
 
-        if (ret.size() > 0) { 
+        if (!ret.isEmpty()) { 
             window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         } else {
             window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L));

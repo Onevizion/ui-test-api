@@ -234,7 +234,7 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> select.getOptions().size() > 0);
+            .until(webdriver -> !select.getOptions().isEmpty());
     }
 
     /*new void to support new duallist box*/
@@ -242,7 +242,7 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Loading items in ListBox failed.")
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> select.findElements(By.tagName("div")).size() > 0);
+            .until(webdriver -> !select.findElements(By.tagName("div")).isEmpty());
     }
 
     public void waitListBoxLoad4(final Select select, final String text) {

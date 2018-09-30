@@ -22,7 +22,7 @@ public class ApiV3Parameter {
 
     public int getParametersCount(WebElement endpoint) {
         List<WebElement> parametersSections = endpoint.findElements(By.className("operation-params"));
-        if (parametersSections.size() == 0) {
+        if (parametersSections.isEmpty()) {
             return 0;
         } else if (parametersSections.size() == 1) {
             WebElement parametersSection = parametersSections.get(0);
