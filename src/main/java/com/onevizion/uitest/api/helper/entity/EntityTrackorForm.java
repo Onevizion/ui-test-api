@@ -140,9 +140,9 @@ public class EntityTrackorForm {
         assertElement.assertRadioPsSelector("userName", "btnuserName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getUserName(), 1L, true);
         assertElement.assertText(INTERVAL, trackorForm.getInterval());
         assertElement.assertText(DESCRIPTION, trackorForm.getDescription());
-        assertElement.assertCheckBoxNew(IMPORT_EMAIL_SUBJECT, trackorForm.getImportEmailSubject());
-        assertElement.assertCheckBoxNew(IMPORT_EMAIL_BODY, trackorForm.getImportEmailBody());
-        assertElement.assertCheckBoxNew(CREATE_IMPORT, trackorForm.getCreateImport());
+        assertElement.assertCheckbox(IMPORT_EMAIL_SUBJECT, trackorForm.getImportEmailSubject());
+        assertElement.assertCheckbox(IMPORT_EMAIL_BODY, trackorForm.getImportEmailBody());
+        assertElement.assertCheckbox(CREATE_IMPORT, trackorForm.getCreateImport());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

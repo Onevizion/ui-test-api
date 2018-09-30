@@ -51,7 +51,7 @@ public class EntityMenu {
         assertElement.assertText("description", menu.getDescription());
         assertElement.assertSelect("defaultMenuItemId", menu.getDefaultMenuItem());
         assertElement.assertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
-        assertElement.assertCheckBoxNew("showTipOfTheDay", menu.getShowTipOfTheDay());
+        assertElement.assertCheckbox("showTipOfTheDay", menu.getShowTipOfTheDay());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

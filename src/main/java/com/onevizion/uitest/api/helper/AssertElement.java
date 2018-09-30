@@ -62,33 +62,13 @@ public class AssertElement {
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
     }
 
-    /*firefox throw org.openqa.selenium.WebDriverException: TypeError: rect is undefined*/
-    /*from elementHelper.moveToElementByName(name)*/
-    /*if element is hidden*/
-    @Deprecated
-    public void assertCheckBox(String name, String expectedVal) {
-        element.moveToElementByName(name);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() ? "YES" : "NO";
-        Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
-    }
-
-    public void assertCheckBoxNew(String name, String expectedVal) {
+    public void assertCheckbox(String name, String expectedVal) {
         element.moveToElementByName("lbl" + name);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
-    /*firefox throw org.openqa.selenium.WebDriverException: TypeError: rect is undefined*/
-    /*from elementHelper.moveToElementById(id)*/
-    /*if element is hidden*/
-    @Deprecated
-    public void assertCheckBoxById(String id, String expectedVal) {
-        element.moveToElementById(id);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).isSelected() ? "YES" : "NO";
-        Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
-    }
-
-    public void assertCheckBoxByIdNew(String id, String expectedVal) {
+    public void assertCheckboxById(String id, String expectedVal) {
         element.moveToElementById("lbl" + id);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");

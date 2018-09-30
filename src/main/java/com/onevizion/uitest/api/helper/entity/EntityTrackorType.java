@@ -123,13 +123,13 @@ public class EntityTrackorType {
         assertElement.assertCheckboxPsSelector("xsFieldsStr", "btnxsFieldsStr", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAutoFilterFields(), 1L, true);
         assertElement.assertSelect(LIMIT_WP, trackorType.getLimitWp());
         assertElement.assertSelect(COMP_PACKAGE, trackorType.getCompPack());
-        assertElement.assertCheckBoxNew(CLONE, trackorType.getClone());
-        assertElement.assertCheckBoxNew(TEMPLATE, trackorType.getTemplate());
-        assertElement.assertCheckBoxNew(USER, trackorType.getUser());
-        assertElement.assertCheckBoxNew(EFILE_CONTAINER, trackorType.getEfileContainer());
+        assertElement.assertCheckbox(CLONE, trackorType.getClone());
+        assertElement.assertCheckbox(TEMPLATE, trackorType.getTemplate());
+        assertElement.assertCheckbox(USER, trackorType.getUser());
+        assertElement.assertCheckbox(EFILE_CONTAINER, trackorType.getEfileContainer());
 
         tab.goToTab(2L); // Key Generation
-        assertElement.assertCheckBoxNew("autokey", trackorType.getAutoKey());
+        assertElement.assertCheckbox("autokey", trackorType.getAutoKey());
         assertElement.assertText("autokeyStartAt", trackorType.getAutoKeyStartAt());
         assertElement.assertSelect("lbOwner1", trackorType.getOwner1());
         assertElement.assertRadioPsSelector("Field1", "btnField1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField1(), 1L, true);

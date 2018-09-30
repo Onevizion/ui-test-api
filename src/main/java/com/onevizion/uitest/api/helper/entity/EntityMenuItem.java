@@ -55,42 +55,42 @@ public class EntityMenuItem {
 
         if (MenuItemType.SUBGROUP.equals(menuItem.getMenuItemType())) {
             assertElement.assertText(LABEL, menuItem.getLabel());
-            assertElement.assertCheckBoxNew(VISIBLE, menuItem.getVisible());
+            assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.PORTAL.equals(menuItem.getMenuItemType())) {
             assertElement.assertSelectById(ITEM_TYPE, menuItem.getItemType());
             assertElement.assertText(LABEL, menuItem.getLabel());
             assertElement.assertText(URL, menuItem.getUrl());
             assertElement.assertSelect(PORTAL, menuItem.getPortal());
-            assertElement.assertCheckBoxNew(VISIBLE, menuItem.getVisible());
+            assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.DASHBOURD.equals(menuItem.getMenuItemType())) {
             assertElement.assertSelectById(ITEM_TYPE, menuItem.getItemType());
             assertElement.assertText(LABEL, menuItem.getLabel());
             assertElement.assertText(URL, menuItem.getUrl());
             assertElement.assertSelect(DASHBOARD, menuItem.getDashbourd());
-            assertElement.assertCheckBoxNew(VISIBLE, menuItem.getVisible());
+            assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.PAGE_WITHOUT_TRACKOR_TYPE.equals(menuItem.getMenuItemType())) {
             assertElement.assertSelectById(ITEM_TYPE, menuItem.getItemType());
             assertElement.assertText(LABEL, menuItem.getLabel());
             assertElement.assertText(URL, menuItem.getUrl());
             assertElement.assertSelect(VIEW, menuItem.getView());
-            assertElement.assertCheckBoxNew(HIDE_VIEW, menuItem.getHideView());
+            assertElement.assertCheckbox(HIDE_VIEW, menuItem.getHideView());
             assertElement.assertSelect(FILTER, menuItem.getFilter());
-            assertElement.assertCheckBoxNew(HIDE_FILTER, menuItem.getHideFilter());
-            assertElement.assertCheckBoxNew(VISIBLE, menuItem.getVisible());
+            assertElement.assertCheckbox(HIDE_FILTER, menuItem.getHideFilter());
+            assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.PAGE_WITH_TRACKOR_TYPE.equals(menuItem.getMenuItemType())) {
             assertElement.assertSelectById(ITEM_TYPE, menuItem.getItemType());
             assertElement.assertText(LABEL, menuItem.getLabel());
             assertElement.assertText(URL, menuItem.getUrl());
             assertElement.assertSelect(TRACKOR_TYPE, menuItem.getTrackorType());
             assertElement.assertSelect(VIEW, menuItem.getView());
-            assertElement.assertCheckBoxNew(HIDE_VIEW, menuItem.getHideView());
+            assertElement.assertCheckbox(HIDE_VIEW, menuItem.getHideView());
             assertElement.assertSelect(FILTER, menuItem.getFilter());
-            assertElement.assertCheckBoxNew(HIDE_FILTER, menuItem.getHideFilter());
-            assertElement.assertCheckBoxNew(VISIBLE, menuItem.getVisible());
+            assertElement.assertCheckbox(HIDE_FILTER, menuItem.getHideFilter());
+            assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
         } else if (MenuItemType.ACTION.equals(menuItem.getMenuItemType())) {
             assertElement.assertSelectById(ITEM_TYPE, menuItem.getItemType());
             assertElement.assertText(LABEL, menuItem.getLabel());
-            assertElement.assertCheckBoxNew(VISIBLE, menuItem.getVisible());
+            assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
         } else {
             throw new SeleniumUnexpectedException("Not support MenuItemType. MenuItemType=" + menuItem.getMenuItemType());
         }

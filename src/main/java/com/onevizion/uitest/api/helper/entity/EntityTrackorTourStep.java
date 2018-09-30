@@ -157,8 +157,8 @@ public class EntityTrackorTourStep {
             throw new SeleniumUnexpectedException("Not support ElementType [" + trackorTourStep.getElementType() + "]");
         }
         assertElement.assertText(DURATION, trackorTourStep.getDuration());
-        assertElement.assertCheckBoxNew(ORPHANED, trackorTourStep.getOrphaned());
-        assertElement.assertCheckBoxNew(BACKDROP, trackorTourStep.getBackdrop());
+        assertElement.assertCheckbox(ORPHANED, trackorTourStep.getOrphaned());
+        assertElement.assertCheckbox(BACKDROP, trackorTourStep.getBackdrop());
         assertElement.assertSelect(PLACEMENT, trackorTourStep.getPlacement());
         assertElement.assertSelect(ACTION, trackorTourStep.getAction());
         assertElement.assertText(FORM_NUMBER, trackorTourStep.getFormNumber());

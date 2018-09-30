@@ -660,8 +660,8 @@ public class EntityConfigField {
             assertElement.assertText("negativeColor", configFieldVo.getConfigFieldNumber().getNegativeColor());
             assertElement.assertText("positiveColor", configFieldVo.getConfigFieldNumber().getPositiveColor());
 
-            assertElement.assertCheckBoxNew(PARENS_FOR_NEGATIVE, configFieldVo.getConfigFieldNumber().getParensForNegative());
-            assertElement.assertCheckBoxNew(SEPARATE_THOUSANDS, configFieldVo.getConfigFieldNumber().getSeparateThousands());
+            assertElement.assertCheckbox(PARENS_FOR_NEGATIVE, configFieldVo.getConfigFieldNumber().getParensForNegative());
+            assertElement.assertCheckbox(SEPARATE_THOUSANDS, configFieldVo.getConfigFieldNumber().getSeparateThousands());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldNumber().getDefValueSql());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
@@ -709,16 +709,16 @@ public class EntityConfigField {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
             tab.goToTab(2L); //Image Settings
 
-            assertElement.assertCheckBoxNew(EXTRACT_METADATA, configFieldVo.getConfigFieldEfile().getExtractMetadata());
+            assertElement.assertCheckbox(EXTRACT_METADATA, configFieldVo.getConfigFieldEfile().getExtractMetadata());
             assertElement.assertSelect(IMAGE_LATITUDE, configFieldVo.getConfigFieldEfile().getImageLatitude());
             assertElement.assertSelect(IMAGE_LONGITUDE, configFieldVo.getConfigFieldEfile().getImageLongitude());
             assertElement.assertSelect(IMAGE_TIME_SNAPSHOT, configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
             assertElement.assertSelect(RESIZE_MODE, configFieldVo.getConfigFieldEfile().getResizeMode());
             assertElement.assertText(RESIZE_WIDTH, configFieldVo.getConfigFieldEfile().getResizeWidth());
             assertElement.assertText(RESIZE_HEIGHT, configFieldVo.getConfigFieldEfile().getResizeHeight());
-            assertElement.assertCheckBoxNew(ROTATE, configFieldVo.getConfigFieldEfile().getRotate());
-            assertElement.assertCheckBoxNew(LOG_BLOB_CHANGES, configFieldVo.getConfigFieldEfile().getLogBlobChanges());
-            assertElement.assertCheckBoxNew(UPLOAD_TO_AWS, configFieldVo.getConfigFieldEfile().getUploadToAws());
+            assertElement.assertCheckbox(ROTATE, configFieldVo.getConfigFieldEfile().getRotate());
+            assertElement.assertCheckbox(LOG_BLOB_CHANGES, configFieldVo.getConfigFieldEfile().getLogBlobChanges());
+            assertElement.assertCheckbox(UPLOAD_TO_AWS, configFieldVo.getConfigFieldEfile().getUploadToAws());
             assertElement.assertRadioPsSelector("autocaptionClientFile", "btnautocaptionClientFile", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L, true);
 
             tab.goToTab(1L); //General
@@ -727,8 +727,8 @@ public class EntityConfigField {
 
             assertElement.assertSelect("ObjectTrackorType", configFieldVo.getConfigFieldTrackorSelector().getTrackorType());
             assertElement.assertText("shortNameLabel", configFieldVo.getConfigFieldTrackorSelector().getShortName());
-            assertElement.assertCheckBoxNew("useInMyThingsFilter", configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter());
-            assertElement.assertCheckBoxNew("myThingsMarket", configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker());
+            assertElement.assertCheckbox("useInMyThingsFilter", configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter());
+            assertElement.assertCheckbox("myThingsMarket", configFieldVo.getConfigFieldTrackorSelector().getMyThingsMarker());
 
             assertElement.assertRadioPsSelector("objCf", "btnobjCf", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L, true);
 
@@ -738,8 +738,8 @@ public class EntityConfigField {
 
             assertElement.assertSelect("ObjectTrackorType", configFieldVo.getConfigFieldTrackorDropDown().getTrackorType());
             assertElement.assertText("shortNameLabel", configFieldVo.getConfigFieldTrackorDropDown().getShortName());
-            assertElement.assertCheckBoxNew("useInMyThingsFilter", configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter());
-            assertElement.assertCheckBoxNew("myThingsMarket", configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker());
+            assertElement.assertCheckbox("useInMyThingsFilter", configFieldVo.getConfigFieldTrackorDropDown().getMyThingsFilter());
+            assertElement.assertCheckbox("myThingsMarket", configFieldVo.getConfigFieldTrackorDropDown().getMyThingsMarker());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorDropDown().getDefValueSql());
         } else if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType())) {
@@ -759,13 +759,13 @@ public class EntityConfigField {
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
             assertElement.assertText(SIZE, "10");
 
-            assertElement.assertCheckBoxNew("showSeconds", configFieldVo.getConfigFieldDateTime().getShowSeconds());
+            assertElement.assertCheckbox("showSeconds", configFieldVo.getConfigFieldDateTime().getShowSeconds());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDateTime().getDefValueSql());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
             assertElement.assertText(SIZE, "10");
 
-            assertElement.assertCheckBoxNew("showSeconds", configFieldVo.getConfigFieldTime().getShowSeconds());
+            assertElement.assertCheckbox("showSeconds", configFieldVo.getConfigFieldTime().getShowSeconds());
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTime().getDefValueSql());
         } else {
@@ -775,15 +775,15 @@ public class EntityConfigField {
         assertElement.assertText(DESCRIPTION, configFieldVo.getDescription());
         assertElement.assertText(COMMENT, configFieldVo.getComment());
 
-        assertElement.assertCheckBoxNew(MANDATORY, configFieldVo.getMandatory());
-        assertElement.assertCheckBoxNew(TWO_COLUMNS, configFieldVo.getTwoColumns());
-        assertElement.assertCheckBoxNew(LOCKABLE, configFieldVo.getLockable());
-        assertElement.assertCheckBoxNew(MULTIPLE, configFieldVo.getMultiple());
+        assertElement.assertCheckbox(MANDATORY, configFieldVo.getMandatory());
+        assertElement.assertCheckbox(TWO_COLUMNS, configFieldVo.getTwoColumns());
+        assertElement.assertCheckbox(LOCKABLE, configFieldVo.getLockable());
+        assertElement.assertCheckbox(MULTIPLE, configFieldVo.getMultiple());
 
-        assertElement.assertCheckBoxNew(READ_ONLY, configFieldVo.getReadOnly());
-        assertElement.assertCheckBoxNew(CALC_TOTAL, configFieldVo.getCalcTotal());
-        assertElement.assertCheckBoxNew(NOT_CLONE_VALUE, configFieldVo.getNotCloneValue());
-        assertElement.assertCheckBoxNew(NOT_CLONE_LOCK, configFieldVo.getNotCloneLock());
+        assertElement.assertCheckbox(READ_ONLY, configFieldVo.getReadOnly());
+        assertElement.assertCheckbox(CALC_TOTAL, configFieldVo.getCalcTotal());
+        assertElement.assertCheckbox(NOT_CLONE_VALUE, configFieldVo.getNotCloneValue());
+        assertElement.assertCheckbox(NOT_CLONE_LOCK, configFieldVo.getNotCloneLock());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

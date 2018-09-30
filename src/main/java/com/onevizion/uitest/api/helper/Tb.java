@@ -345,9 +345,9 @@ public class Tb {
     public void checkField(ConfigFieldType fieldDataType, String field, Map<String, String> vals, int elementPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.assertCheckBoxByIdNew("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
+                assertElement.assertCheckboxById("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
             } else {
-                assertElement.assertCheckBoxNew(field, vals.get(field));
+                assertElement.assertCheckbox(field, vals.get(field));
             }
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.HYPERLINK.equals(fieldDataType)
                 || ConfigFieldType.LATITUDE.equals(fieldDataType) || ConfigFieldType.LONGITUDE.equals(fieldDataType)

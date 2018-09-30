@@ -115,8 +115,8 @@ public class EntityDynamicVtableValue {
         assertElement.assertText(VALUE, dynamicVtableValue.getValue());
         assertElement.assertText(ORD_NUM, dynamicVtableValue.getOrdNum());
         assertElement.assertText("color", dynamicVtableValue.getColor());
-        assertElement.assertCheckBoxNew(DISPLAY, dynamicVtableValue.getDisplay());
-        assertElement.assertCheckBoxNew(FILTERABLE, dynamicVtableValue.getFilterable());
+        assertElement.assertCheckbox(DISPLAY, dynamicVtableValue.getDisplay());
+        assertElement.assertCheckbox(FILTERABLE, dynamicVtableValue.getFilterable());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

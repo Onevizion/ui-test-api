@@ -149,10 +149,10 @@ public class EntityTrackorTreeItem {
         assertElement.assertSelect(CARDINALITY, trackorTreeItem.getCardinality());
         assertElement.assertSelect(UNIQUE_BY, trackorTreeItem.getUniqueBy());
         assertElement.assertSelect(COLOR, trackorTreeItem.getColor());
-        assertElement.assertCheckBoxNew(CHILD_REQUIRES_PARENT, trackorTreeItem.getChildRequiresParent());
-        assertElement.assertCheckBoxNew(ON_PARENT_DELETE_CASCADE, trackorTreeItem.getOnParentDeleteCascade());
-        assertElement.assertCheckBoxNew(LOCKABLE, trackorTreeItem.getLockable());
-        assertElement.assertCheckBoxNew(SHOW_ALL, trackorTreeItem.getShowAll());
+        assertElement.assertCheckbox(CHILD_REQUIRES_PARENT, trackorTreeItem.getChildRequiresParent());
+        assertElement.assertCheckbox(ON_PARENT_DELETE_CASCADE, trackorTreeItem.getOnParentDeleteCascade());
+        assertElement.assertCheckbox(LOCKABLE, trackorTreeItem.getLockable());
+        assertElement.assertCheckbox(SHOW_ALL, trackorTreeItem.getShowAll());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

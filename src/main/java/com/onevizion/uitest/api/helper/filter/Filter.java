@@ -351,7 +351,7 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
             assertElement.assertSelect(fieldName, "");
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
-            assertElement.assertCheckBoxNew(fieldName, "NO");
+            assertElement.assertCheckbox(fieldName, "NO");
         } else if (filterFieldType.equals(FilterFieldType.RADIO_PS_SELECTOR)) {
             assertElement.assertRadioPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, "", 1L, true);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
@@ -369,7 +369,7 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
             assertElement.assertSelect(fieldName, cellValue);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
-            assertElement.assertCheckBoxNew(fieldName, cellValue);
+            assertElement.assertCheckbox(fieldName, cellValue);
         } else if (filterFieldType.equals(FilterFieldType.RADIO_PS_SELECTOR)) {
             assertElement.assertRadioPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, cellValue, 1L, true);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
