@@ -70,18 +70,20 @@ public class TreeNode {
 
     private String toStringNode(int level, TreeNode tree) {
         String indent = "    ";
-        String result = System.lineSeparator();
+
+        StringBuilder bld = new StringBuilder();
+        bld.append(System.lineSeparator());
 
         for (int i = 0; i < level; i++) {
-            result = result + indent;
+            bld.append(indent);
         }
 
-        result = result + tree.getName();
+        bld.append(tree.getName());
         for (TreeNode node : tree.nodes) {
-            result = result + toStringNode(level + 1, node);
+            bld.append(toStringNode(level + 1, node));
         }
 
-        return result;
+        return bld.toString();
     }
 
 }

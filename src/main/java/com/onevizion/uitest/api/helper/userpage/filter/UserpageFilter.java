@@ -143,17 +143,17 @@ public class UserpageFilter {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
-                    String str = "";
+                    StringBuilder bld = new StringBuilder("");
                     for (List<String> cellValsKey : cellValsKeys) {
-                        str = str + cellValsKey.get(i);
+                        bld.append(cellValsKey.get(i));
                     }
 
-                    if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(Long.valueOf(i));
+                    if (equalsKeyMap.containsKey(bld.toString())) {
+                        equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
                         vals.add(Long.valueOf(i));
-                        equalsKeyMap.put(str, vals);
+                        equalsKeyMap.put(bld.toString(), vals);
                     }
                 }
 
@@ -188,17 +188,17 @@ public class UserpageFilter {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
-                    String str = "";
+                    StringBuilder bld = new StringBuilder("");
                     for (List<String> cellValsKey : cellValsKeys) {
-                        str = str + cellValsKey.get(i);
+                        bld.append(cellValsKey.get(i));
                     }
 
-                    if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(Long.valueOf(i));
+                    if (equalsKeyMap.containsKey(bld.toString())) {
+                        equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
                         vals.add(Long.valueOf(i));
-                        equalsKeyMap.put(str, vals);
+                        equalsKeyMap.put(bld.toString(), vals);
                     }
                 }
 
@@ -287,17 +287,17 @@ public class UserpageFilter {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
-                    String str = "";
+                    StringBuilder bld = new StringBuilder("");
                     for (List<String> cellValsKey : cellValsKeys) {
-                        str = str + cellValsKey.get(i);
+                        bld.append(cellValsKey.get(i));
                     }
 
-                    if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(Long.valueOf(i));
+                    if (equalsKeyMap.containsKey(bld.toString())) {
+                        equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
                         vals.add(Long.valueOf(i));
-                        equalsKeyMap.put(str, vals);
+                        equalsKeyMap.put(bld.toString(), vals);
                     }
                 }
 
@@ -338,17 +338,17 @@ public class UserpageFilter {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
-                    String str = "";
+                    StringBuilder bld = new StringBuilder("");
                     for (List<String> cellValsKey : cellValsKeys) {
-                        str = str + cellValsKey.get(i);
+                        bld.append(cellValsKey.get(i));
                     }
 
-                    if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(Long.valueOf(i));
+                    if (equalsKeyMap.containsKey(bld.toString())) {
+                        equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
                         vals.add(Long.valueOf(i));
-                        equalsKeyMap.put(str, vals);
+                        equalsKeyMap.put(bld.toString(), vals);
                     }
                 }
 
@@ -487,17 +487,17 @@ public class UserpageFilter {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
-                    String str = "";
+                    StringBuilder bld = new StringBuilder("");
                     for (List<String> cellValsKey : cellValsKeys) {
-                        str = str + cellValsKey.get(i);
+                        bld.append(cellValsKey.get(i));
                     }
 
-                    if (equalsKeyMap.containsKey(str)) {
-                        equalsKeyMap.get(str).add(Long.valueOf(i));
+                    if (equalsKeyMap.containsKey(bld.toString())) {
+                        equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
                     } else {
                         List<Long> vals = new ArrayList<>();
                         vals.add(Long.valueOf(i));
-                        equalsKeyMap.put(str, vals);
+                        equalsKeyMap.put(bld.toString(), vals);
                     }
                 }
 
