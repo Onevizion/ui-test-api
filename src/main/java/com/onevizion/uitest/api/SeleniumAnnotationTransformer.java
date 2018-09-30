@@ -10,6 +10,8 @@ import org.testng.IAnnotationTransformer;
 import org.testng.annotations.ITestAnnotation;
 import org.testng.annotations.Test;
 
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+
 import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -54,14 +56,14 @@ public class SeleniumAnnotationTransformer implements IAnnotationTransformer {
         try {
             classX = pool.get(testClass.getName());
         } catch (NotFoundException e) {
-            throw new RuntimeException("Class " + testClass.getName() + " not found", e);
+            throw new SeleniumUnexpectedException("Class " + testClass.getName() + " not found", e);
         }
 
         CtMethod methodX = null;
         try {
             methodX = classX.getDeclaredMethod(testMethod.getName());
         } catch (NotFoundException e) {
-            throw new RuntimeException("Method " + testMethod.getName() + " not found", e);
+            throw new SeleniumUnexpectedException("Method " + testMethod.getName() + " not found", e);
         }
 
         classX.detach();

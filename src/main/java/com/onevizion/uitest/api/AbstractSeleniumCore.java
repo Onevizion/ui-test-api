@@ -402,7 +402,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         super();
     }
 
-    protected void seleniumOpenBrowserAndLogin(ITestContext context) throws Exception {
+    protected void seleniumOpenBrowserAndLogin(ITestContext context) throws SeleniumUnexpectedException {
         Calendar cal = Calendar.getInstance();
         startDate = cal.getTime();
 
@@ -570,7 +570,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         }
     }
 
-    protected void seleniumCloseBrowser() throws Exception {
+    protected void seleniumCloseBrowser() throws SeleniumUnexpectedException {
         try {
             if (seleniumSettings.getWebDriver() != null) {
                 //TODO following code can throw exception if alert present. remove this code after remove firefox 59 bug
@@ -628,7 +628,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         }
 
         if (seleniumSettings.getBrowser().equals("internet explorer 11") || seleniumSettings.getBrowser().equals("internet explorer 8")) {
-            Thread.sleep(60000);
+            try {
+                Thread.sleep(60000);
+            } catch (InterruptedException e) {
+                logger.error("Interrupted!", e);
+                Thread.currentThread().interrupt();
+            }
         }
     }
 
