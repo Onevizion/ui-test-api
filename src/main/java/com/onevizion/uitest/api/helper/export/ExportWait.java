@@ -26,11 +26,7 @@ class ExportWait {
                 WebElement panel = webdriver.findElement(By.id("processEventList"));
 
                 List<WebElement> processes = panel.findElements(By.className("group_event"));
-                if (!processes.isEmpty()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return !processes.isEmpty();
             });
     }
 

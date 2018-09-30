@@ -72,25 +72,16 @@ public class Checkbox {
 
     public boolean isElementChecked(WebElement webElement) {
         String checked = webElement.getAttribute("checked");
-        if (checked != null && checked.equals("true")) {
-            return true;
-        }
-        return false;
+        return checked != null && checked.equals("true");
     }
 
     public boolean isCheckedByName(String checkboxName) {
         String checked = seleniumSettings.getWebDriver().findElement(By.name(checkboxName)).getAttribute("checked");
-        if (checked != null && checked.equals("true")) {
-            return true;
-        }
-        return false;
+        return checked != null && checked.equals("true");
     }
 
     public boolean isCheckedById(String checkboxId) {
         String checked = seleniumSettings.getWebDriver().findElement(By.id(checkboxId)).getAttribute("checked");
-        if (checked != null && checked.equals("true")) {
-            return true;
-        }
-        return false;
+        return checked != null && checked.equals("true");
     }
 }

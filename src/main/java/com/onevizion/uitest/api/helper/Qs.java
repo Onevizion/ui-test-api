@@ -60,26 +60,15 @@ public class Qs {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         int count = seleniumSettings.getWebDriver().findElements(By.id("qsContent" + gridIdx)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        if (count > 0) {
-            return true;
-        }
-
-        return false;
+        return count > 0;
     }
 
     public boolean isTextQs(Long gridIdx) {
-        if (seleniumSettings.getWebDriver().findElement(By.id("qsValue" + gridIdx)).isDisplayed()) {
-            return true;
-        }
-        return false;
+        return seleniumSettings.getWebDriver().findElement(By.id("qsValue" + gridIdx)).isDisplayed();
     }
 
     public boolean isBooleanQs(Long gridIdx) {
-        if (seleniumSettings.getWebDriver().findElement(By.id("qsBooleanValue" + gridIdx)).isDisplayed()) {
-            return true;
-        }
-        return false;
+        return seleniumSettings.getWebDriver().findElement(By.id("qsBooleanValue" + gridIdx)).isDisplayed();
     }
 
     public void waitQsActive(Long gridIdx) {
