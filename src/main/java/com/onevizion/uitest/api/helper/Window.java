@@ -72,9 +72,7 @@ public class Window {
                     .withMessage("Waiting new modal window opened by [" + elemenLocator.toString() + "] is failed.")
                     .until(webdriver -> webdriver.getWindowHandles().size() == openedWindowsCount + 1);
                 failOpenWindow = false;
-            } catch (TimeoutException e) {
-                logger.warn("", e);
-            } catch (ElementNotVisibleException e) {
+            } catch (TimeoutException | ElementNotVisibleException e) {
                 logger.warn("", e);
             }
             attemptsCnt = attemptsCnt + 1;
@@ -128,9 +126,7 @@ public class Window {
                     .withMessage("Waiting new modal window opened by [" + element.toString() + "] is failed.")
                     .until(webdriver -> webdriver.getWindowHandles().size() == openedWindowsCount + 1);
                 failOpenWindow = false;
-            } catch (TimeoutException e) {
-                logger.warn("", e);
-            } catch (ElementNotVisibleException e) {
+            } catch (TimeoutException | ElementNotVisibleException e) {
                 logger.warn("", e);
             }
             attemptsCnt = attemptsCnt + 1;

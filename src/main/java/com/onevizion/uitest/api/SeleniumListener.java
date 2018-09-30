@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
@@ -59,9 +58,7 @@ public class SeleniumListener extends TestListenerAdapter {
                 logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
                 Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
                 alert.accept();
-            } catch (NoAlertPresentException e) { // Check is alert present
-                
-            } catch (WebDriverException e) {
+            } catch (WebDriverException e) { // should be NoAlertPresentException
                 
             }
 
@@ -122,7 +119,7 @@ public class SeleniumListener extends TestListenerAdapter {
                         logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
                         Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
                         alert.accept();
-                    } catch (WebDriverException e) { // Check is alert present
+                    } catch (WebDriverException e) { // should be NoAlertPresentException
                         break;
                     }
                 }

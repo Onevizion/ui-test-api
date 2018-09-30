@@ -83,22 +83,7 @@ public class NewDropDown {
                 entityElem.click();
 
                 failOpenWindow = false;
-            } catch (ElementNotVisibleException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (StaleElementReferenceException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (IndexOutOfBoundsException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (TimeoutException e) {
+            } catch (ElementNotVisibleException | StaleElementReferenceException | IndexOutOfBoundsException | TimeoutException e) {
                 failOpenWindowCnt++;
                 if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
                     seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
@@ -160,22 +145,7 @@ public class NewDropDown {
                 seleniumSettings.getWebDriver().switchTo().alert().accept();
 
                 failOpenWindow = false;
-            } catch (ElementNotVisibleException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (StaleElementReferenceException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (IndexOutOfBoundsException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (TimeoutException e) {
+            } catch (ElementNotVisibleException | StaleElementReferenceException | IndexOutOfBoundsException | TimeoutException e) {
                 failOpenWindowCnt++;
                 if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
                     seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
@@ -242,22 +212,7 @@ public class NewDropDown {
                 window.openModal(By.id(buttonId));
 
                 failOpenWindow = false;
-            } catch (ElementNotVisibleException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (StaleElementReferenceException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (IndexOutOfBoundsException e) {
-                failOpenWindowCnt++;
-                if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
-                }
-            } catch (TimeoutException e) {
+            } catch (ElementNotVisibleException | StaleElementReferenceException | IndexOutOfBoundsException | TimeoutException e) {
                 failOpenWindowCnt++;
                 if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
                     seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();

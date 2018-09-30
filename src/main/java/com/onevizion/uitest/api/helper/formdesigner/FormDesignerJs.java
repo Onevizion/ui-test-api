@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Js;
@@ -47,10 +45,6 @@ class FormDesignerJs extends Js {
         ObjectMapper mapper = new ObjectMapper();
         try {
             result = mapper.readValue(resultStr, new TypeReference<List<FormDesignerField>>(){});
-        } catch (JsonParseException e) {
-            throw new SeleniumUnexpectedException(e);
-        } catch (JsonMappingException e) {
-            throw new SeleniumUnexpectedException(e);
         } catch (IOException e) {
             throw new SeleniumUnexpectedException(e);
         }

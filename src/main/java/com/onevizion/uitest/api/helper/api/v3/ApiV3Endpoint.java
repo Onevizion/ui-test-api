@@ -11,8 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
@@ -94,10 +92,6 @@ public class ApiV3Endpoint {
         ObjectMapper mapper = new ObjectMapper();
         try {
             actualResponse = mapper.readValue(actualResponseText, mapper.getTypeFactory().constructCollectionType(List.class, clazz));
-        } catch (JsonParseException e) {
-            throw new SeleniumUnexpectedException(e);
-        } catch (JsonMappingException e) {
-            throw new SeleniumUnexpectedException(e);
         } catch (IOException e) {
             throw new SeleniumUnexpectedException(e);
         }
