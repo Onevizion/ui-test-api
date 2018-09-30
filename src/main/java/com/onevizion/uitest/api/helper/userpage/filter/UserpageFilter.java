@@ -1788,8 +1788,7 @@ public class UserpageFilter {
         cal.clear(Calendar.SECOND);
         cal.clear(Calendar.MILLISECOND);
         cal.add(Calendar.DAY_OF_WEEK, daysCount);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
     private Date getFirstDayOfThisWeek(int weeksCount){
@@ -1800,8 +1799,7 @@ public class UserpageFilter {
         cal.clear(Calendar.MILLISECOND);
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
         cal.add(Calendar.WEEK_OF_YEAR, weeksCount);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
     private Date getLastDayOfThisWeek(int weeksCount){
@@ -1813,8 +1811,7 @@ public class UserpageFilter {
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
         cal.add(Calendar.WEEK_OF_YEAR, weeksCount + 1);
         cal.add(Calendar.DAY_OF_MONTH, -1);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
     private Date getFirstDayOfThisMo(int moCount){
@@ -1825,8 +1822,7 @@ public class UserpageFilter {
         cal.clear(Calendar.MILLISECOND);
         cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.add(Calendar.MONTH, moCount);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
     private Date getLastDayOfThisMo(int moCount){
@@ -1838,8 +1834,7 @@ public class UserpageFilter {
         cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.add(Calendar.MONTH, moCount + 1);
         cal.add(Calendar.DAY_OF_MONTH, -1);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
     private Date getFirstDayOfThisFQ(int fqCount){
@@ -1852,8 +1847,7 @@ public class UserpageFilter {
         int quarter = cal.get(Calendar.MONTH) / 3;
         cal.set(Calendar.MONTH, quarter * 3);
         cal.add(Calendar.MONTH, fqCount * 3 + FIRST_MONTH_OF_FISCAL_YEAR - 1);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
     private Date getLastDayOfThisFQ(int fqCount){
@@ -1867,8 +1861,7 @@ public class UserpageFilter {
         cal.set(Calendar.MONTH, quarter * 3);
         cal.add(Calendar.MONTH, (fqCount + 1) * 3 + FIRST_MONTH_OF_FISCAL_YEAR - 1);
         cal.add(Calendar.DAY_OF_MONTH, -1);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
     private Date getFirstDayOfThisFY(int fyCount){
@@ -1880,8 +1873,7 @@ public class UserpageFilter {
         cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.set(Calendar.MONTH, FIRST_MONTH_OF_FISCAL_YEAR - 1);
         cal.add(Calendar.YEAR, fyCount);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
     private Date getLastDayOfThisFY(int fyCount){
@@ -1894,8 +1886,7 @@ public class UserpageFilter {
         cal.set(Calendar.MONTH, FIRST_MONTH_OF_FISCAL_YEAR - 1);
         cal.add(Calendar.YEAR, fyCount + 1);
         cal.add(Calendar.DAY_OF_MONTH, -1);
-        Date desiredDate = cal.getTime();
-        return desiredDate;
+        return cal.getTime();
     }
 
 }

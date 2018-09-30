@@ -91,12 +91,11 @@ public class MainMenu {
 
         mainMenuWait.waitLeftMenuSearchUpdated();
 
-        WebElement menuItem = seleniumSettings.getWebDriver().findElement(By.xpath(
+        return seleniumSettings.getWebDriver().findElement(By.xpath(
                 "//div[contains(@class, 'newGuiMenuRowContainer') and string(@showing)='1']"
               + "//a[contains(@class, 'aMenu')]"
               + "//span[contains(@class, 'menuItemWidthWrapper') and text()='" + item + "']"
               + "/ancestor::*[contains(@class, 'newGuiMenuRowContainer')]"));
-        return menuItem;
     }
 
     private WebElement findMenuTreeItem(WebElement item, String treeItem) {
@@ -108,11 +107,10 @@ public class MainMenu {
 
         
 
-        WebElement treeMenuItem = seleniumSettings.getWebDriver().findElement(By.xpath(
+        return seleniumSettings.getWebDriver().findElement(By.xpath(
                 "//div[@id='leftMenuTrackorTree' and @menurowid='" + item.getAttribute("rowid") + "']"
               + "//span[contains(@class, 'standartTreeRow') and not(contains(@class, 'disabled'))]"
               + "//label[text()='" + treeItem + "']"));
-        return treeMenuItem;
     }
 
     private void waitPageTitle(String title) {

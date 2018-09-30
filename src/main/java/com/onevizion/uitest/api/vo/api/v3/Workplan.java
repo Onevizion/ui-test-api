@@ -105,8 +105,7 @@ public class Workplan implements Comparable<Workplan> {
         if (val7 != 0) {
             return val7;
         }
-        int val8 = this.active.compareTo(o.active);
-        return val8;
+        return this.active.compareTo(o.active);
     }
 
     @Override

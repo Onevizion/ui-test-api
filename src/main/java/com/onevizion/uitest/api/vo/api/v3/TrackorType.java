@@ -53,8 +53,7 @@ public class TrackorType implements Comparable<TrackorType> {
         if (val3 != 0) {
             return val3;
         }
-        int val4 = this.prefix.compareTo(o.prefix);
-        return val4;
+        return this.prefix.compareTo(o.prefix);
     }
 
     @Override

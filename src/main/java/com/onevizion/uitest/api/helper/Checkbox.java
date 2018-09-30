@@ -61,13 +61,11 @@ public class Checkbox {
 
     public WebElement findLabelByName(String checkboxname) {
         WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.name(checkboxname));
-        WebElement label = js.getParentElement(checkbox);
-        return label;
+        return js.getParentElement(checkbox);
     }
 
     public WebElement findLabelByElement(WebElement checkbox) {
-        WebElement label = js.getParentElement(checkbox);
-        return label;
+        return js.getParentElement(checkbox);
     }
 
     public boolean isElementChecked(WebElement webElement) {
