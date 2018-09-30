@@ -110,7 +110,7 @@ import com.onevizion.uitest.api.restapi.CreateTestResult;
 
 public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTests {
 
-    protected final static Logger logger = LoggerFactory.getLogger(AbstractSeleniumCore.class);
+    protected static final Logger logger = LoggerFactory.getLogger(AbstractSeleniumCore.class);
 
     /* Helpers Begin */
     @Resource
@@ -637,13 +637,13 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         }
     }
 
-    abstract protected void fillGlobalSettings();
+    protected abstract void fillGlobalSettings();
 
-    abstract protected void login(String user, String password);
+    protected abstract void login(String user, String password);
 
-    abstract protected void dataPreparation();
+    protected abstract void dataPreparation();
 
-    abstract protected void openInternalPage();
+    protected abstract void openInternalPage();
 
     private String getTestName() {
         String testName = getClass().getName();

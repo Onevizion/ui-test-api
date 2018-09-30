@@ -12,7 +12,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 public class CloneButton {
 
     private static final String BUTTON_LIST_ADD_ID_BASE = "listAdd";
-    final static String BUTTON_CLONE_ID_BASE = "btnClone";
+    static final String BUTTON_CLONE_ID_BASE = "btnClone";
 
     @Resource
     private SeleniumSettings seleniumSettings;
