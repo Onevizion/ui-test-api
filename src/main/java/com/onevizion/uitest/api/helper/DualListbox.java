@@ -63,21 +63,7 @@ public class DualListbox {
         seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
     }
 
-    /*new void to support new duallist box*/
-    @Deprecated
-    public void removeValueByValue(WebElement select, String btnId, String value) {
-        //deselectSelectOptions(select);
-        for (WebElement option :select.findElements(By.tagName("div"))) {
-            if (value.equals(option.getAttribute("dhx_f_id"))) {
-                option.click();
-                break;
-            }
-        }
-        //select.selectByValue(value);
-        seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
-    }
-
-    public void removeValueByValueNew(String btnId, String value) {
+    public void removeValueByValue(String btnId, String value) {
         
 
         List<WebElement> rightColumns = view.getRightColumns();
@@ -91,57 +77,29 @@ public class DualListbox {
         seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
     }
 
-    /*new void to support new duallist box*/
-    @Deprecated
-    public void removeValues(WebElement select, String btnId, List<String> columnNames) {
-        removeValueByValue(select, btnId, columnNames.get(0)); //CHECKBOX
-        removeValueByValue(select, btnId, columnNames.get(1)); //DATE
-        removeValueByValue(select, btnId, columnNames.get(2)); //DB_DROP_DOWN
-        removeValueByValue(select, btnId, columnNames.get(3)); //DB_SELECTOR
-        removeValueByValue(select, btnId, columnNames.get(4)); //DROP_DOWN
-        removeValueByValue(select, btnId, columnNames.get(5)); //ELECTRONIC_FILE
-        removeValueByValue(select, btnId, columnNames.get(6)); //HYPERLINK
-        removeValueByValue(select, btnId, columnNames.get(7)); //LATITUDE
-        removeValueByValue(select, btnId, columnNames.get(8)); //LONGITUDE
-        removeValueByValue(select, btnId, columnNames.get(9)); //MEMO
-        removeValueByValue(select, btnId, columnNames.get(10)); //NUMBER
-        removeValueByValue(select, btnId, columnNames.get(11)); //SELECTOR
-        removeValueByValue(select, btnId, columnNames.get(12)); //TEXT
-        removeValueByValue(select, btnId, columnNames.get(13)); //TRACKOR_SELECTOR
-        removeValueByValue(select, btnId, columnNames.get(14)); //WIKI
-        removeValueByValue(select, btnId, columnNames.get(15)); //MULTI_SELECTOR
-        removeValueByValue(select, btnId, columnNames.get(16)); //DATE_TIME
-        removeValueByValue(select, btnId, columnNames.get(17)); //TIME
-        removeValueByValue(select, btnId, columnNames.get(18)); //TRACKOR_DROPDOWN
-        removeValueByValue(select, btnId, columnNames.get(19)); //CALCULATED
+    public void removeValues(String btnId, List<String> columnNames) {
+        removeValueByValue(btnId, columnNames.get(0)); //CHECKBOX
+        removeValueByValue(btnId, columnNames.get(1)); //DATE
+        removeValueByValue(btnId, columnNames.get(2)); //DB_DROP_DOWN
+        removeValueByValue(btnId, columnNames.get(3)); //DB_SELECTOR
+        removeValueByValue(btnId, columnNames.get(4)); //DROP_DOWN
+        removeValueByValue(btnId, columnNames.get(5)); //ELECTRONIC_FILE
+        removeValueByValue(btnId, columnNames.get(6)); //HYPERLINK
+        removeValueByValue(btnId, columnNames.get(7)); //LATITUDE
+        removeValueByValue(btnId, columnNames.get(8)); //LONGITUDE
+        removeValueByValue(btnId, columnNames.get(9)); //MEMO
+        removeValueByValue(btnId, columnNames.get(10)); //NUMBER
+        removeValueByValue(btnId, columnNames.get(11)); //SELECTOR
+        removeValueByValue(btnId, columnNames.get(12)); //TEXT
+        removeValueByValue(btnId, columnNames.get(13)); //TRACKOR_SELECTOR
+        removeValueByValue(btnId, columnNames.get(14)); //WIKI
+        removeValueByValue(btnId, columnNames.get(15)); //MULTI_SELECTOR
+        removeValueByValue(btnId, columnNames.get(16)); //DATE_TIME
+        removeValueByValue(btnId, columnNames.get(17)); //TIME
+        removeValueByValue(btnId, columnNames.get(18)); //TRACKOR_DROPDOWN
+        removeValueByValue(btnId, columnNames.get(19)); //CALCULATED
         if (columnNames.get(20) != null) { //Workplan and Tasks trackor types not support
-            removeValueByValue(select, btnId, columnNames.get(20)); //ROLLUP
-        }
-    }
-
-    public void removeValuesNew(String btnId, List<String> columnNames) {
-        removeValueByValueNew(btnId, columnNames.get(0)); //CHECKBOX
-        removeValueByValueNew(btnId, columnNames.get(1)); //DATE
-        removeValueByValueNew(btnId, columnNames.get(2)); //DB_DROP_DOWN
-        removeValueByValueNew(btnId, columnNames.get(3)); //DB_SELECTOR
-        removeValueByValueNew(btnId, columnNames.get(4)); //DROP_DOWN
-        removeValueByValueNew(btnId, columnNames.get(5)); //ELECTRONIC_FILE
-        removeValueByValueNew(btnId, columnNames.get(6)); //HYPERLINK
-        removeValueByValueNew(btnId, columnNames.get(7)); //LATITUDE
-        removeValueByValueNew(btnId, columnNames.get(8)); //LONGITUDE
-        removeValueByValueNew(btnId, columnNames.get(9)); //MEMO
-        removeValueByValueNew(btnId, columnNames.get(10)); //NUMBER
-        removeValueByValueNew(btnId, columnNames.get(11)); //SELECTOR
-        removeValueByValueNew(btnId, columnNames.get(12)); //TEXT
-        removeValueByValueNew(btnId, columnNames.get(13)); //TRACKOR_SELECTOR
-        removeValueByValueNew(btnId, columnNames.get(14)); //WIKI
-        removeValueByValueNew(btnId, columnNames.get(15)); //MULTI_SELECTOR
-        removeValueByValueNew(btnId, columnNames.get(16)); //DATE_TIME
-        removeValueByValueNew(btnId, columnNames.get(17)); //TIME
-        removeValueByValueNew(btnId, columnNames.get(18)); //TRACKOR_DROPDOWN
-        removeValueByValueNew(btnId, columnNames.get(19)); //CALCULATED
-        if (columnNames.get(20) != null) { //Workplan and Tasks trackor types not support
-            removeValueByValueNew(btnId, columnNames.get(20)); //ROLLUP
+            removeValueByValue(btnId, columnNames.get(20)); //ROLLUP
         }
     }
 
@@ -271,22 +229,7 @@ public class DualListbox {
         }
     }
 
-    /*new void to support new duallist box*/
-    @Deprecated
-    public void addValueByValue(WebElement select, String btnId, String value) {
-        checkValueByValueIsPresent(select, value);
-        //deselectSelectOptions(select);
-        for (WebElement option :select.findElements(By.tagName("div"))) {
-            if (value.equals(option.getAttribute("dhx_f_id"))) {
-                option.click();
-                break;
-            }
-        }
-        //select.selectByValue(value);
-        seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
-    }
-
-    public void addValueByValueNew(String btnId, String value) {
+    public void addValueByValue(String btnId, String value) {
         
 
         List<WebElement> leftColumns = view.getLeftColumns();
@@ -301,60 +244,7 @@ public class DualListbox {
         seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
     }
 
-    /*new void to support new duallist box*/
-    @Deprecated
-    private void checkValueByValueIsPresent(WebElement select, String value) {
-        int attemptsCnt = 0; //protection from the endless cycle
-        int i = 0;
-        do {
-            try{
-                for (WebElement option : select.findElements(By.tagName("div"))) {
-                    if (value.equals(option.getAttribute("dhx_f_id"))) {
-                        i = i + 1;
-                        break;
-                    }
-                }
-            } catch (StaleElementReferenceException e) {
-                i = 0;
-            }
-            attemptsCnt = attemptsCnt + 1;
-        } while (i < 1 && attemptsCnt <= 10);
-
-        if (i < 1 && attemptsCnt > 10) {
-            throw new SeleniumUnexpectedException("Value not found in duallist box");
-        }
-    }
-
-    /*new void to support new duallist box*/
-    @Deprecated
-    private void checkValuesByValueIsPresent(WebElement select, List<String> columnNames) {
-        int attemptsCnt = 0; //protection from the endless cycle
-        int i = 0;
-        do {
-            if (i == 20 && columnNames.get(i) == null) { //Workplan and Tasks trackor types not support
-                i = i + 1;
-            } else {
-                try {
-                    for (WebElement option : select.findElements(By.tagName("div"))) {
-                        //System.out.println(columnNames.get(i) + " " + option.getAttribute("dhx_f_id"));
-                        if (columnNames.get(i).equals(option.getAttribute("dhx_f_id"))) {
-                            i = i + 1;
-                            break;
-                        }
-                    }
-                } catch (StaleElementReferenceException e) {
-                    i = 0;
-                    attemptsCnt = attemptsCnt + 1;
-                }
-            }
-        } while (i < columnNames.size() && attemptsCnt <= 10);
-
-        if (i < columnNames.size() && attemptsCnt > 10) {
-            throw new SeleniumUnexpectedException("Value not found in duallist box");
-        }
-    }
-
-    private void checkValuesByValueIsPresentNew(List<String> columnNames) {
+    private void checkValuesByValueIsPresent(List<String> columnNames) {
         int attemptsCnt = 0; //protection from the endless cycle
         int i = 0;
         do {
@@ -381,60 +271,31 @@ public class DualListbox {
         }
     }
 
-    @Deprecated
-    public void addValues(WebElement select, String btnId, List<String> columnNames) {
-        checkValuesByValueIsPresent(select, columnNames);
+    public void addValues(String btnId, List<String> columnNames) {
+        checkValuesByValueIsPresent(columnNames);
 
-        addValueByValue(select, btnId, columnNames.get(0)); //CHECKBOX
-        addValueByValue(select, btnId, columnNames.get(1)); //DATE
-        addValueByValue(select, btnId, columnNames.get(2)); //DB_DROP_DOWN
-        addValueByValue(select, btnId, columnNames.get(3)); //DB_SELECTOR
-        addValueByValue(select, btnId, columnNames.get(4)); //DROP_DOWN
-        addValueByValue(select, btnId, columnNames.get(5)); //ELECTRONIC_FILE
-        addValueByValue(select, btnId, columnNames.get(6)); //HYPERLINK
-        addValueByValue(select, btnId, columnNames.get(7)); //LATITUDE
-        addValueByValue(select, btnId, columnNames.get(8)); //LONGITUDE
-        addValueByValue(select, btnId, columnNames.get(9)); //MEMO
-        addValueByValue(select, btnId, columnNames.get(10)); //NUMBER
-        addValueByValue(select, btnId, columnNames.get(11)); //SELECTOR
-        addValueByValue(select, btnId, columnNames.get(12)); //TEXT
-        addValueByValue(select, btnId, columnNames.get(13)); //TRACKOR_SELECTOR
-        addValueByValue(select, btnId, columnNames.get(14)); //WIKI
-        addValueByValue(select, btnId, columnNames.get(15)); //MULTI_SELECTOR
-        addValueByValue(select, btnId, columnNames.get(16)); //DATE_TIME
-        addValueByValue(select, btnId, columnNames.get(17)); //TIME
-        addValueByValue(select, btnId, columnNames.get(18)); //TRACKOR_DROPDOWN
-        addValueByValue(select, btnId, columnNames.get(19)); //CALCULATED
+        addValueByValue(btnId, columnNames.get(0)); //CHECKBOX
+        addValueByValue(btnId, columnNames.get(1)); //DATE
+        addValueByValue(btnId, columnNames.get(2)); //DB_DROP_DOWN
+        addValueByValue(btnId, columnNames.get(3)); //DB_SELECTOR
+        addValueByValue(btnId, columnNames.get(4)); //DROP_DOWN
+        addValueByValue(btnId, columnNames.get(5)); //ELECTRONIC_FILE
+        addValueByValue(btnId, columnNames.get(6)); //HYPERLINK
+        addValueByValue(btnId, columnNames.get(7)); //LATITUDE
+        addValueByValue(btnId, columnNames.get(8)); //LONGITUDE
+        addValueByValue(btnId, columnNames.get(9)); //MEMO
+        addValueByValue(btnId, columnNames.get(10)); //NUMBER
+        addValueByValue(btnId, columnNames.get(11)); //SELECTOR
+        addValueByValue(btnId, columnNames.get(12)); //TEXT
+        addValueByValue(btnId, columnNames.get(13)); //TRACKOR_SELECTOR
+        addValueByValue(btnId, columnNames.get(14)); //WIKI
+        addValueByValue(btnId, columnNames.get(15)); //MULTI_SELECTOR
+        addValueByValue(btnId, columnNames.get(16)); //DATE_TIME
+        addValueByValue(btnId, columnNames.get(17)); //TIME
+        addValueByValue(btnId, columnNames.get(18)); //TRACKOR_DROPDOWN
+        addValueByValue(btnId, columnNames.get(19)); //CALCULATED
         if (columnNames.get(20) != null) { //Workplan and Tasks trackor types not support
-            addValueByValue(select, btnId, columnNames.get(20)); //ROLLUP
-        }
-    }
-
-    public void addValuesNew(String btnId, List<String> columnNames) {
-        checkValuesByValueIsPresentNew(columnNames);
-
-        addValueByValueNew(btnId, columnNames.get(0)); //CHECKBOX
-        addValueByValueNew(btnId, columnNames.get(1)); //DATE
-        addValueByValueNew(btnId, columnNames.get(2)); //DB_DROP_DOWN
-        addValueByValueNew(btnId, columnNames.get(3)); //DB_SELECTOR
-        addValueByValueNew(btnId, columnNames.get(4)); //DROP_DOWN
-        addValueByValueNew(btnId, columnNames.get(5)); //ELECTRONIC_FILE
-        addValueByValueNew(btnId, columnNames.get(6)); //HYPERLINK
-        addValueByValueNew(btnId, columnNames.get(7)); //LATITUDE
-        addValueByValueNew(btnId, columnNames.get(8)); //LONGITUDE
-        addValueByValueNew(btnId, columnNames.get(9)); //MEMO
-        addValueByValueNew(btnId, columnNames.get(10)); //NUMBER
-        addValueByValueNew(btnId, columnNames.get(11)); //SELECTOR
-        addValueByValueNew(btnId, columnNames.get(12)); //TEXT
-        addValueByValueNew(btnId, columnNames.get(13)); //TRACKOR_SELECTOR
-        addValueByValueNew(btnId, columnNames.get(14)); //WIKI
-        addValueByValueNew(btnId, columnNames.get(15)); //MULTI_SELECTOR
-        addValueByValueNew(btnId, columnNames.get(16)); //DATE_TIME
-        addValueByValueNew(btnId, columnNames.get(17)); //TIME
-        addValueByValueNew(btnId, columnNames.get(18)); //TRACKOR_DROPDOWN
-        addValueByValueNew(btnId, columnNames.get(19)); //CALCULATED
-        if (columnNames.get(20) != null) { //Workplan and Tasks trackor types not support
-            addValueByValueNew(btnId, columnNames.get(20)); //ROLLUP
+            addValueByValue(btnId, columnNames.get(20)); //ROLLUP
         }
     }
 
