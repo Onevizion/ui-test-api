@@ -157,14 +157,14 @@ public class Export {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertElement.AssertLink("gridPageName", exportRun.getGridPageName() + " ");
-        assertElement.AssertLink("trackorTypeName", exportRun.getTrackorTypeName());
-        assertElement.AssertLink("statusName", exportRun.getStatusName() + " ");
-        assertElement.AssertLink("exportTypeName", exportRun.getMode() + " ");
-        assertElement.AssertLink("exportDeliveryName", exportRun.getDelivery());
-        assertElement.AssertLink("un", seleniumSettings.getTestUser());
-        assertElement.AssertTextById("errorMessage", exportRun.getErrorMessage());
-        assertElement.AssertTextById("comments", exportRun.getComments());
+        assertElement.assertLink("gridPageName", exportRun.getGridPageName() + " ");
+        assertElement.assertLink("trackorTypeName", exportRun.getTrackorTypeName());
+        assertElement.assertLink("statusName", exportRun.getStatusName() + " ");
+        assertElement.assertLink("exportTypeName", exportRun.getMode() + " ");
+        assertElement.assertLink("exportDeliveryName", exportRun.getDelivery());
+        assertElement.assertLink("un", seleniumSettings.getTestUser());
+        assertElement.assertTextById("errorMessage", exportRun.getErrorMessage());
+        assertElement.assertTextById("comments", exportRun.getComments());
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));

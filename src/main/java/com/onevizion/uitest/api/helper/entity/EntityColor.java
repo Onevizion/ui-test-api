@@ -83,9 +83,9 @@ public class EntityColor {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("colorName", color.getName());
-        assertElement.AssertText("rgbValue", color.getValue());
-        assertElement.AssertText("description", color.getDescription());
+        assertElement.assertText("colorName", color.getName());
+        assertElement.assertText("rgbValue", color.getValue());
+        assertElement.assertText("description", color.getDescription());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

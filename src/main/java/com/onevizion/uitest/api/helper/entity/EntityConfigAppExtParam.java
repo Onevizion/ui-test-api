@@ -81,9 +81,9 @@ public class EntityConfigAppExtParam {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(NAME, configAppExtParam.getName());
-        assertElement.AssertText(DESCRIPTION, configAppExtParam.getDescription());
-        assertElement.AssertCodeMirror(SQL, configAppExtParam.getSql());
+        assertElement.assertText(NAME, configAppExtParam.getName());
+        assertElement.assertText(DESCRIPTION, configAppExtParam.getDescription());
+        assertElement.assertCodeMirror(SQL, configAppExtParam.getSql());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

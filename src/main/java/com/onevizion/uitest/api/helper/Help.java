@@ -40,49 +40,49 @@ public class Help {
 
     public void checkHelp(final String name, final String number, final String type) {
         elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
-        assertElement.AssertLink(SERIAL_NUMBER_ID, number);
+        assertElement.assertLink(SERIAL_NUMBER_ID, number);
 
         element.clickById(BUTTON_OPEN);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertElement.AssertText("name", name);
-        assertElement.AssertText("formNumber", number);
-        assertElement.AssertText("formNumber", number);
-        assertElement.AssertSelect("itemTypeId", type);
+        assertElement.assertText("name", name);
+        assertElement.assertText("formNumber", number);
+        assertElement.assertText("formNumber", number);
+        assertElement.assertSelect("itemTypeId", type);
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void checkHelpOnFilterForm(Long gridIdx, final String name, final String number, final String type) {
         elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
-        assertElement.AssertLink(SERIAL_NUMBER_ID, number);
+        assertElement.assertLink(SERIAL_NUMBER_ID, number);
 
         element.clickById(BUTTON_OPEN_ON_FILTER_FORM + gridIdx);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertElement.AssertText("name", name);
-        assertElement.AssertText("formNumber", number);
-        assertElement.AssertText("formNumber", number);
-        assertElement.AssertSelect("itemTypeId", type);
+        assertElement.assertText("name", name);
+        assertElement.assertText("formNumber", number);
+        assertElement.assertText("formNumber", number);
+        assertElement.assertSelect("itemTypeId", type);
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void checkHelpOnViewForm(Long gridIdx, final String name, final String number, final String type) {
         elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, "innerText", number);
-        assertElement.AssertLink(SERIAL_NUMBER_ID, number);
+        assertElement.assertLink(SERIAL_NUMBER_ID, number);
 
         element.clickById(BUTTON_OPEN_ON_VIEW_FORM + gridIdx);
 
         window.openModal(getHelpContainerItem("BPD Help Editor for current Tab"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertElement.AssertText("name", name);
-        assertElement.AssertText("formNumber", number);
-        assertElement.AssertText("formNumber", number);
-        assertElement.AssertSelect("itemTypeId", type);
+        assertElement.assertText("name", name);
+        assertElement.assertText("formNumber", number);
+        assertElement.assertText("formNumber", number);
+        assertElement.assertSelect("itemTypeId", type);
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 

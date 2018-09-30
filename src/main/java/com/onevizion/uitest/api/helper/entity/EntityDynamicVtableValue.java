@@ -112,11 +112,11 @@ public class EntityDynamicVtableValue {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(VALUE, dynamicVtableValue.getValue());
-        assertElement.AssertText(ORD_NUM, dynamicVtableValue.getOrdNum());
-        assertElement.AssertText("color", dynamicVtableValue.getColor());
-        assertElement.AssertCheckBoxNew(DISPLAY, dynamicVtableValue.getDisplay());
-        assertElement.AssertCheckBoxNew(FILTERABLE, dynamicVtableValue.getFilterable());
+        assertElement.assertText(VALUE, dynamicVtableValue.getValue());
+        assertElement.assertText(ORD_NUM, dynamicVtableValue.getOrdNum());
+        assertElement.assertText("color", dynamicVtableValue.getColor());
+        assertElement.assertCheckBoxNew(DISPLAY, dynamicVtableValue.getDisplay());
+        assertElement.assertCheckBoxNew(FILTERABLE, dynamicVtableValue.getFilterable());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -47,11 +47,11 @@ public class EntityMenu {
         wait.waitFormLoad();
         jqueryWait.waitJQueryLoad();
 
-        assertElement.AssertText("name", menu.getName());
-        assertElement.AssertText("description", menu.getDescription());
-        assertElement.AssertSelect("defaultMenuItemId", menu.getDefaultMenuItem());
-        assertElement.AssertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
-        assertElement.AssertCheckBoxNew("showTipOfTheDay", menu.getShowTipOfTheDay());
+        assertElement.assertText("name", menu.getName());
+        assertElement.assertText("description", menu.getDescription());
+        assertElement.assertSelect("defaultMenuItemId", menu.getDefaultMenuItem());
+        assertElement.assertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
+        assertElement.assertCheckBoxNew("showTipOfTheDay", menu.getShowTipOfTheDay());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

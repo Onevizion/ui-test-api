@@ -88,8 +88,8 @@ public class EntityWpDiscipline {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(NAME, wpDiscipline.getName());
-        assertElement.AssertText(DESCRIPTION, wpDiscipline.getDescription());
+        assertElement.assertText(NAME, wpDiscipline.getName());
+        assertElement.assertText(DESCRIPTION, wpDiscipline.getDescription());
 
         tab.goToTab(2L); //Role Assignments
         wait.waitGridLoad(2L, 2L);

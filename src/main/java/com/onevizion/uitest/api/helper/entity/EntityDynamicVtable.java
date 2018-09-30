@@ -133,8 +133,8 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(NAME, dynamicVtable.getName());
-        assertElement.AssertText(DESCRIPTION, dynamicVtable.getDesc());
+        assertElement.assertText(NAME, dynamicVtable.getName());
+        assertElement.assertText(DESCRIPTION, dynamicVtable.getDesc());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -68,7 +68,7 @@ public class EntityComponentPackage {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("name", componentPackage.getName());
+        assertElement.assertText("name", componentPackage.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

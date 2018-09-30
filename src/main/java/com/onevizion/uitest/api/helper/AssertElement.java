@@ -38,25 +38,25 @@ public class AssertElement {
     @Resource
     private Tb tb;
 
-    public void AssertLink(String id, String expectedVal) {
+    public void assertLink(String id, String expectedVal) {
         element.moveToElementById(id);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).getText();
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
     }
 
-    public void AssertText(WebElement webElement, String expectedVal) {
+    public void assertText(WebElement webElement, String expectedVal) {
         element.moveToElement(webElement);
         String actualVal = webElement.getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element=[" + webElement + "] has wrong value");
     }
 
-    public void AssertText(String name, String expectedVal) {
+    public void assertText(String name, String expectedVal) {
         element.moveToElementByName(name);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
-    public void AssertTextById(String id, String expectedVal) {
+    public void assertTextById(String id, String expectedVal) {
         element.moveToElementById(id);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
@@ -66,13 +66,13 @@ public class AssertElement {
     /*from elementHelper.moveToElementByName(name)*/
     /*if element is hidden*/
     @Deprecated
-    public void AssertCheckBox(String name, String expectedVal) {
+    public void assertCheckBox(String name, String expectedVal) {
         element.moveToElementByName(name);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
-    public void AssertCheckBoxNew(String name, String expectedVal) {
+    public void assertCheckBoxNew(String name, String expectedVal) {
         element.moveToElementByName("lbl" + name);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
@@ -82,37 +82,37 @@ public class AssertElement {
     /*from elementHelper.moveToElementById(id)*/
     /*if element is hidden*/
     @Deprecated
-    public void AssertCheckBoxById(String id, String expectedVal) {
+    public void assertCheckBoxById(String id, String expectedVal) {
         element.moveToElementById(id);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
     }
 
-    public void AssertCheckBoxByIdNew(String id, String expectedVal) {
+    public void assertCheckBoxByIdNew(String id, String expectedVal) {
         element.moveToElementById("lbl" + id);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).isSelected() ? "YES" : "NO";
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
     }
 
-    public void AssertSelect(String name, String expectedVal) {
+    public void assertSelect(String name, String expectedVal) {
         element.moveToElementByName(name);
         String actualVal = new Select(seleniumSettings.getWebDriver().findElement(By.name(name))).getFirstSelectedOption().getText();
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
-    public void AssertSelectWithFolder(String name, String expectedVal) {
+    public void assertSelectWithFolder(String name, String expectedVal) {
         element.moveToElementByName(name);
         String actualVal = new Select(seleniumSettings.getWebDriver().findElement(By.name(name))).getFirstSelectedOption().getText();
         Assert.assertTrue(actualVal.contains(expectedVal), "Element with name=[" + name + "] has wrong value");
     }
 
-    public void AssertSelectById(String id, String expectedVal) {
+    public void assertSelectById(String id, String expectedVal) {
         element.moveToElementById(id);
         String actualVal = new Select(seleniumSettings.getWebDriver().findElement(By.id(id))).getFirstSelectedOption().getText();
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
     }
 
-    public void AssertRadioPsSelector(String fieldName, String btnOpenName, String btnCloseName, String expectedVal, Long filterFieldNum, boolean isOpenSelector) {
+    public void assertRadioPsSelector(String fieldName, String btnOpenName, String btnCloseName, String expectedVal, Long filterFieldNum, boolean isOpenSelector) {
         element.moveToElementByName(fieldName);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + fieldName + "] has wrong value");
@@ -122,7 +122,7 @@ public class AssertElement {
         }
     }
 
-    public void AssertRadioPsSelectorById(String fieldId, String btnOpenId, String btnCloseName, String expectedVal, Long filterFieldNum, boolean isOpenSelector) {
+    public void assertRadioPsSelectorById(String fieldId, String btnOpenId, String btnCloseName, String expectedVal, Long filterFieldNum, boolean isOpenSelector) {
         element.moveToElementById(fieldId);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(fieldId)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + fieldId + "] has wrong value");
@@ -132,7 +132,7 @@ public class AssertElement {
         }
     }
 
-    public void AssertCheckboxPsSelector(String fieldName, String btnOpenName, String btnCloseName, List<String> expectedVals, Long filterFieldNum, boolean isOpenSelector) {
+    public void assertCheckboxPsSelector(String fieldName, String btnOpenName, String btnCloseName, List<String> expectedVals, Long filterFieldNum, boolean isOpenSelector) {
         element.moveToElementByName(fieldName);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
         for (String expectedVal : expectedVals) {
@@ -150,7 +150,7 @@ public class AssertElement {
         }
     }
 
-    public void AssertCheckboxPsSelectorById(String fieldId, String btnOpenId, String btnCloseName, List<String> expectedVals, Long filterFieldNum, boolean isOpenSelector) {
+    public void assertCheckboxPsSelectorById(String fieldId, String btnOpenId, String btnCloseName, List<String> expectedVals, Long filterFieldNum, boolean isOpenSelector) {
         element.moveToElementById(fieldId);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(fieldId)).getAttribute("value");
         for (String expectedVal : expectedVals) {
@@ -169,7 +169,7 @@ public class AssertElement {
         }
     }
 
-    public void AssertFCKEditor(String name, String expectedVal) {
+    public void assertFCKEditor(String name, String expectedVal) {
         String actualVal = js.getValueFromFCKEditor(name);
         actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_1, AbstractSeleniumCore.SPECIAL_CHARACTERS_1);
         actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_2, AbstractSeleniumCore.SPECIAL_CHARACTERS_2);
@@ -178,13 +178,13 @@ public class AssertElement {
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
-    public void AssertCodeMirror(String elementId, String expectedVal) {
+    public void assertCodeMirror(String elementId, String expectedVal) {
         wait.waitCodeMirrorLoad(elementId);
         String actualVal = js.getValueFromCodeMirror(elementId);
         Assert.assertEquals(actualVal, expectedVal, "CodeMirror editor for element with id=[" + elementId + "] has wrong value");
     }
 
-    public void AssertElementEnabled(WebElement element, boolean expectedIsEnabled) {
+    public void assertElementEnabled(WebElement element, boolean expectedIsEnabled) {
         boolean actualIsEnabled;
         String errorMessage = "Element with name=[" + element.getAttribute("name") + "] should be " + (expectedIsEnabled ? "enabled" : "disabled");
         if ("textarea".equals(element.getTagName())) {
@@ -197,7 +197,7 @@ public class AssertElement {
         Assert.assertEquals(actualIsEnabled, expectedIsEnabled, errorMessage);
     }
 
-    public void AssertFieldEnabled(String fieldName, int elementPosition) {
+    public void assertFieldEnabled(String fieldName, int elementPosition) {
         WebElement webElement;
         String errorMessage;
         if (elementPosition > 1) {
@@ -223,7 +223,7 @@ public class AssertElement {
         Assert.assertEquals(isEnabled, true, errorMessage);
     }
 
-    public void AssertFieldDisabled(String fieldName, int elementPosition) {
+    public void assertFieldDisabled(String fieldName, int elementPosition) {
         WebElement webElement;
         String errorMessage;
         if (elementPosition > 1) {

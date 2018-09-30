@@ -105,8 +105,8 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(TREE_PATH, trackorTreeItem.getTreePath());
-        assertElement.AssertText(TRACKOR_TYPE, trackorTreeItem.getTrackorType());
+        assertElement.assertText(TREE_PATH, trackorTreeItem.getTreePath());
+        assertElement.assertText(TRACKOR_TYPE, trackorTreeItem.getTrackorType());
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(CARDINALITY))).selectByVisibleText(trackorTreeItem.getCardinality());
 
@@ -144,15 +144,15 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(TREE_PATH, trackorTreeItem.getTreePath());
-        assertElement.AssertText(TRACKOR_TYPE, trackorTreeItem.getTrackorType());
-        assertElement.AssertSelect(CARDINALITY, trackorTreeItem.getCardinality());
-        assertElement.AssertSelect(UNIQUE_BY, trackorTreeItem.getUniqueBy());
-        assertElement.AssertSelect(COLOR, trackorTreeItem.getColor());
-        assertElement.AssertCheckBoxNew(CHILD_REQUIRES_PARENT, trackorTreeItem.getChildRequiresParent());
-        assertElement.AssertCheckBoxNew(ON_PARENT_DELETE_CASCADE, trackorTreeItem.getOnParentDeleteCascade());
-        assertElement.AssertCheckBoxNew(LOCKABLE, trackorTreeItem.getLockable());
-        assertElement.AssertCheckBoxNew(SHOW_ALL, trackorTreeItem.getShowAll());
+        assertElement.assertText(TREE_PATH, trackorTreeItem.getTreePath());
+        assertElement.assertText(TRACKOR_TYPE, trackorTreeItem.getTrackorType());
+        assertElement.assertSelect(CARDINALITY, trackorTreeItem.getCardinality());
+        assertElement.assertSelect(UNIQUE_BY, trackorTreeItem.getUniqueBy());
+        assertElement.assertSelect(COLOR, trackorTreeItem.getColor());
+        assertElement.assertCheckBoxNew(CHILD_REQUIRES_PARENT, trackorTreeItem.getChildRequiresParent());
+        assertElement.assertCheckBoxNew(ON_PARENT_DELETE_CASCADE, trackorTreeItem.getOnParentDeleteCascade());
+        assertElement.assertCheckBoxNew(LOCKABLE, trackorTreeItem.getLockable());
+        assertElement.assertCheckBoxNew(SHOW_ALL, trackorTreeItem.getShowAll());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

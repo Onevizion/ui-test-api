@@ -69,7 +69,7 @@ public class EntityReportGroup {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(NAME, reportGroup.getName());
+        assertElement.assertText(NAME, reportGroup.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

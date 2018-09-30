@@ -172,22 +172,22 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(LABEL, trackorTour.getLabel());
-        assertElement.AssertSelect(TRACKOR_TYPE, trackorTour.getTrackorType());
-        assertElement.AssertSelect(START_PLACE, trackorTour.getStartPlace());
+        assertElement.assertText(LABEL, trackorTour.getLabel());
+        assertElement.assertSelect(TRACKOR_TYPE, trackorTour.getTrackorType());
+        assertElement.assertSelect(START_PLACE, trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            assertElement.AssertRadioPsSelector("gridPageName", "btngridPageName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getPageName(), 1L, true);
+            assertElement.assertRadioPsSelector("gridPageName", "btngridPageName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getPageName(), 1L, true);
         } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
-            assertElement.AssertRadioPsSelector("configAppName", "btnconfigAppName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getAppletName(), 1L, true);
+            assertElement.assertRadioPsSelector("configAppName", "btnconfigAppName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getAppletName(), 1L, true);
         } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
-            assertElement.AssertRadioPsSelector("configGroupName", "btnconfigGroupName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getTabName(), 1L, true);
+            assertElement.assertRadioPsSelector("configGroupName", "btnconfigGroupName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getTabName(), 1L, true);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
 
-        assertElement.AssertSelect(ORDER_NUMBER, trackorTour.getOrderNumber());
-        assertElement.AssertText(DESCRIPTION, trackorTour.getDescription());
+        assertElement.assertSelect(ORDER_NUMBER, trackorTour.getOrderNumber());
+        assertElement.assertText(DESCRIPTION, trackorTour.getDescription());
 
         tab.goToTab(3L); //Role Assignments
         wait.waitGridLoad(3L, 3L);

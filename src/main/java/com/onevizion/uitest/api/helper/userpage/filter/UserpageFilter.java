@@ -987,88 +987,88 @@ public class UserpageFilter {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertElement.AssertRadioPsSelector("txtWPAttrib1", "btnWPAttrib1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
+        assertElement.assertRadioPsSelector("txtWPAttrib1", "btnWPAttrib1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
         if (dateType != null) {
-            assertElement.AssertSelect("tdWPOperator1", dateType);
+            assertElement.assertSelect("tdWPOperator1", dateType);
         }
-        assertElement.AssertSelect("WPOperator1", operator);
+        assertElement.assertSelect("WPOperator1", operator);
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                assertElement.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    assertElement.AssertCheckboxPsSelector("trSelWPAttribValue1", "btnTrSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector("trSelWPAttribValue1", "btnTrSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    assertElement.AssertCheckboxPsSelector("multSelWPAttribValue1", "btnMultSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector("multSelWPAttribValue1", "btnMultSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    assertElement.AssertRadioPsSelector("trDropDownWPAttribValue1", "btnTrDropDownWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, value, 1L, true);
+                    assertElement.assertRadioPsSelector("trDropDownWPAttribValue1", "btnTrDropDownWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, value, 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.SELECTOR)) {
-                    assertElement.AssertCheckboxPsSelector("selWPAttribValue1", "btnSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector("selWPAttribValue1", "btnSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    assertElement.AssertText("trSelWPAttribValue1", "");
+                    assertElement.assertText("trSelWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    assertElement.AssertText("multSelWPAttribValue1", "");
+                    assertElement.assertText("multSelWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    assertElement.AssertText("trDropDownWPAttribValue1", "");
+                    assertElement.assertText("trDropDownWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.SELECTOR)) {
-                    assertElement.AssertText("selWPAttribValue1", "");
+                    assertElement.assertText("selWPAttribValue1", "");
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            assertElement.AssertSelect("ynWPAttribValue1", value);
+            assertElement.assertSelect("ynWPAttribValue1", value);
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
             if (operator.equals("=Field") || operator.equals("<>Field")
                     || operator.equals(">Field") || operator.equals("<Field")
                     || operator.equals(">=Field") || operator.equals("<=Field")) {
-                assertElement.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                     //&& !operator.equals("This Wk to Dt") && !operator.equals("This Mo to Dt") //TODO check those lines
                     //&& !operator.equals("This FQ to Dt") && !operator.equals("This FY to Dt")) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    assertElement.AssertText("dateWPAttribValue1", value);
+                    assertElement.assertText("dateWPAttribValue1", value);
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    assertElement.AssertText("dateTimeWPAttribValue1", value);
+                    assertElement.assertText("dateTimeWPAttribValue1", value);
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    assertElement.AssertText("timeWPAttribValue1", value);
+                    assertElement.assertText("timeWPAttribValue1", value);
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    assertElement.AssertText("numWPAttribValue1", value);
+                    assertElement.assertText("numWPAttribValue1", value);
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    assertElement.AssertText("latlongWPAttribValue1", value);
+                    assertElement.assertText("latlongWPAttribValue1", value);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    assertElement.AssertText("dateWPAttribValue1", "");
+                    assertElement.assertText("dateWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    assertElement.AssertText("dateTimeWPAttribValue1", "");
+                    assertElement.assertText("dateTimeWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    assertElement.AssertText("timeWPAttribValue1", "");
+                    assertElement.assertText("timeWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    assertElement.AssertText("numWPAttribValue1", "");
+                    assertElement.assertText("numWPAttribValue1", "");
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    assertElement.AssertText("latlongWPAttribValue1", "");
+                    assertElement.assertText("latlongWPAttribValue1", "");
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             }
         } else {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                assertElement.AssertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
-                assertElement.AssertText("txtWPAttribValue1", "*" + value + "*");
+                assertElement.assertText("txtWPAttribValue1", "*" + value + "*");
             } else {
-                assertElement.AssertText("txtWPAttribValue1", "");
+                assertElement.assertText("txtWPAttribValue1", "");
             }
         }
         seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();

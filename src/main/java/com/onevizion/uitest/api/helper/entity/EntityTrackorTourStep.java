@@ -148,24 +148,24 @@ public class EntityTrackorTourStep {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertSelect(ELEMENT_TYPE, trackorTourStep.getElementType());
+        assertElement.assertSelect(ELEMENT_TYPE, trackorTourStep.getElementType());
         if (trackorTourStep.getElementType().equals("name=")) {
-            assertElement.AssertText(ELEMENT_NAME, trackorTourStep.getElementName());
+            assertElement.assertText(ELEMENT_NAME, trackorTourStep.getElementName());
         } else if (trackorTourStep.getElementType().equals("id=")) {
-            assertElement.AssertText(ELEMENT_ID, trackorTourStep.getElementId());
+            assertElement.assertText(ELEMENT_ID, trackorTourStep.getElementId());
         } else {
             throw new SeleniumUnexpectedException("Not support ElementType [" + trackorTourStep.getElementType() + "]");
         }
-        assertElement.AssertText(DURATION, trackorTourStep.getDuration());
-        assertElement.AssertCheckBoxNew(ORPHANED, trackorTourStep.getOrphaned());
-        assertElement.AssertCheckBoxNew(BACKDROP, trackorTourStep.getBackdrop());
-        assertElement.AssertSelect(PLACEMENT, trackorTourStep.getPlacement());
-        assertElement.AssertSelect(ACTION, trackorTourStep.getAction());
-        assertElement.AssertText(FORM_NUMBER, trackorTourStep.getFormNumber());
-        assertElement.AssertText(TITLE_LABEL, trackorTourStep.getTitleLabel());
+        assertElement.assertText(DURATION, trackorTourStep.getDuration());
+        assertElement.assertCheckBoxNew(ORPHANED, trackorTourStep.getOrphaned());
+        assertElement.assertCheckBoxNew(BACKDROP, trackorTourStep.getBackdrop());
+        assertElement.assertSelect(PLACEMENT, trackorTourStep.getPlacement());
+        assertElement.assertSelect(ACTION, trackorTourStep.getAction());
+        assertElement.assertText(FORM_NUMBER, trackorTourStep.getFormNumber());
+        assertElement.assertText(TITLE_LABEL, trackorTourStep.getTitleLabel());
 
         wait.waitWebElement(By.id(CONTENT_LABEL));
-        assertElement.AssertFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
+        assertElement.assertFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

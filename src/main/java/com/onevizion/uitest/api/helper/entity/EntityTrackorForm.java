@@ -134,15 +134,15 @@ public class EntityTrackorForm {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(NAME, trackorForm.getName());
-        assertElement.AssertRadioPsSelector("reportName", "btnreportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getReportName(), 1L, true);
-        assertElement.AssertRadioPsSelector("importName", "btnimportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getImportName(), 1L, true);
-        assertElement.AssertRadioPsSelector("userName", "btnuserName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getUserName(), 1L, true);
-        assertElement.AssertText(INTERVAL, trackorForm.getInterval());
-        assertElement.AssertText(DESCRIPTION, trackorForm.getDescription());
-        assertElement.AssertCheckBoxNew(IMPORT_EMAIL_SUBJECT, trackorForm.getImportEmailSubject());
-        assertElement.AssertCheckBoxNew(IMPORT_EMAIL_BODY, trackorForm.getImportEmailBody());
-        assertElement.AssertCheckBoxNew(CREATE_IMPORT, trackorForm.getCreateImport());
+        assertElement.assertText(NAME, trackorForm.getName());
+        assertElement.assertRadioPsSelector("reportName", "btnreportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getReportName(), 1L, true);
+        assertElement.assertRadioPsSelector("importName", "btnimportName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getImportName(), 1L, true);
+        assertElement.assertRadioPsSelector("userName", "btnuserName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorForm.getUserName(), 1L, true);
+        assertElement.assertText(INTERVAL, trackorForm.getInterval());
+        assertElement.assertText(DESCRIPTION, trackorForm.getDescription());
+        assertElement.assertCheckBoxNew(IMPORT_EMAIL_SUBJECT, trackorForm.getImportEmailSubject());
+        assertElement.assertCheckBoxNew(IMPORT_EMAIL_BODY, trackorForm.getImportEmailBody());
+        assertElement.assertCheckBoxNew(CREATE_IMPORT, trackorForm.getCreateImport());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

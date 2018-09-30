@@ -58,7 +58,7 @@ public class EntityClientFile {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
+        assertElement.assertSelect("clientFileGroupId", clientFile.getFileGroup());
 
         js.showInputForFile("inputFileUploader", "FileUploader");
         seleniumSettings.getWebDriver().findElement(By.name("oldFileFileUploader")).sendKeys(seleniumSettings.getUploadFilesPath() + clientFile.getFileName());
@@ -72,8 +72,8 @@ public class EntityClientFile {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertSelect("clientFileGroupId", clientFile.getFileGroup());
-        assertElement.AssertText("txtFileUploader", clientFile.getFileName());
+        assertElement.assertSelect("clientFileGroupId", clientFile.getFileGroup());
+        assertElement.assertText("txtFileUploader", clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

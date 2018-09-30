@@ -113,34 +113,34 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(NAME, trackorType.getName());
-        assertElement.AssertText(LABEL, trackorType.getLabel());
-        assertElement.AssertText(LABEL_ITEM, trackorType.getLabelItemId());
-        assertElement.AssertText(LABEL_CLASS, trackorType.getLabelClass());
-        assertElement.AssertText(LABEL_PREFIX, trackorType.getLabelPrefix());
-        assertElement.AssertText(LABEL_MY_ITEMS, trackorType.getLabelMyItems());
-        assertElement.AssertRadioPsSelector("objDisplayField", "btnobjDisplayField", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAliasField(), 1L, true);
-        assertElement.AssertCheckboxPsSelector("xsFieldsStr", "btnxsFieldsStr", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAutoFilterFields(), 1L, true);
-        assertElement.AssertSelect(LIMIT_WP, trackorType.getLimitWp());
-        assertElement.AssertSelect(COMP_PACKAGE, trackorType.getCompPack());
-        assertElement.AssertCheckBoxNew(CLONE, trackorType.getClone());
-        assertElement.AssertCheckBoxNew(TEMPLATE, trackorType.getTemplate());
-        assertElement.AssertCheckBoxNew(USER, trackorType.getUser());
-        assertElement.AssertCheckBoxNew(EFILE_CONTAINER, trackorType.getEfileContainer());
+        assertElement.assertText(NAME, trackorType.getName());
+        assertElement.assertText(LABEL, trackorType.getLabel());
+        assertElement.assertText(LABEL_ITEM, trackorType.getLabelItemId());
+        assertElement.assertText(LABEL_CLASS, trackorType.getLabelClass());
+        assertElement.assertText(LABEL_PREFIX, trackorType.getLabelPrefix());
+        assertElement.assertText(LABEL_MY_ITEMS, trackorType.getLabelMyItems());
+        assertElement.assertRadioPsSelector("objDisplayField", "btnobjDisplayField", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAliasField(), 1L, true);
+        assertElement.assertCheckboxPsSelector("xsFieldsStr", "btnxsFieldsStr", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAutoFilterFields(), 1L, true);
+        assertElement.assertSelect(LIMIT_WP, trackorType.getLimitWp());
+        assertElement.assertSelect(COMP_PACKAGE, trackorType.getCompPack());
+        assertElement.assertCheckBoxNew(CLONE, trackorType.getClone());
+        assertElement.assertCheckBoxNew(TEMPLATE, trackorType.getTemplate());
+        assertElement.assertCheckBoxNew(USER, trackorType.getUser());
+        assertElement.assertCheckBoxNew(EFILE_CONTAINER, trackorType.getEfileContainer());
 
         tab.goToTab(2L); // Key Generation
-        assertElement.AssertCheckBoxNew("autokey", trackorType.getAutoKey());
-        assertElement.AssertText("autokeyStartAt", trackorType.getAutoKeyStartAt());
-        assertElement.AssertSelect("lbOwner1", trackorType.getOwner1());
-        assertElement.AssertRadioPsSelector("Field1", "btnField1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField1(), 1L, true);
-        assertElement.AssertSelect("lbSeparator1", trackorType.getSeparator1());
-        assertElement.AssertSelect("lbOwner2", trackorType.getOwner2());
-        assertElement.AssertRadioPsSelector("Field2", "btnField2", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField2(), 1L, true);
-        assertElement.AssertSelect("lbSeparator2", trackorType.getSeparator2());
-        assertElement.AssertText("staticText3", trackorType.getStaticText3());
-        assertElement.AssertSelect("lbSeparator3", trackorType.getSeparator3());
-        assertElement.AssertSelect("lbDigits", trackorType.getDigits4());
-        assertElement.AssertSelect("lbUnique", trackorType.getUniqueAcross4());
+        assertElement.assertCheckBoxNew("autokey", trackorType.getAutoKey());
+        assertElement.assertText("autokeyStartAt", trackorType.getAutoKeyStartAt());
+        assertElement.assertSelect("lbOwner1", trackorType.getOwner1());
+        assertElement.assertRadioPsSelector("Field1", "btnField1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField1(), 1L, true);
+        assertElement.assertSelect("lbSeparator1", trackorType.getSeparator1());
+        assertElement.assertSelect("lbOwner2", trackorType.getOwner2());
+        assertElement.assertRadioPsSelector("Field2", "btnField2", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField2(), 1L, true);
+        assertElement.assertSelect("lbSeparator2", trackorType.getSeparator2());
+        assertElement.assertText("staticText3", trackorType.getStaticText3());
+        assertElement.assertSelect("lbSeparator3", trackorType.getSeparator3());
+        assertElement.assertSelect("lbDigits", trackorType.getDigits4());
+        assertElement.assertSelect("lbUnique", trackorType.getUniqueAcross4());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

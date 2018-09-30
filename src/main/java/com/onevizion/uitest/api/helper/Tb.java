@@ -345,9 +345,9 @@ public class Tb {
     public void checkField(ConfigFieldType fieldDataType, String field, Map<String, String> vals, int elementPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.AssertCheckBoxByIdNew("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
+                assertElement.assertCheckBoxByIdNew("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
             } else {
-                assertElement.AssertCheckBoxNew(field, vals.get(field));
+                assertElement.assertCheckBoxNew(field, vals.get(field));
             }
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.HYPERLINK.equals(fieldDataType)
                 || ConfigFieldType.LATITUDE.equals(fieldDataType) || ConfigFieldType.LONGITUDE.equals(fieldDataType)
@@ -355,23 +355,23 @@ public class Tb {
                 || ConfigFieldType.TEXT.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType)
                 || ConfigFieldType.TIME.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.AssertTextById("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
+                assertElement.assertTextById("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
             } else {
-                assertElement.AssertText(field, vals.get(field));
+                assertElement.assertText(field, vals.get(field));
             }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.AssertSelectById("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
+                assertElement.assertSelectById("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
             } else {
-                assertElement.AssertSelect(field, vals.get(field));
+                assertElement.assertSelect(field, vals.get(field));
             }
         } else if (ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType) || ConfigFieldType.DB_SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                assertElement.AssertRadioPsSelectorById("idx" + idx + "_disp", "idx" + idx + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, vals.get(field), 1L, isOpenSelector);
+                assertElement.assertRadioPsSelectorById("idx" + idx + "_disp", "idx" + idx + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, vals.get(field), 1L, isOpenSelector);
             } else {
-                assertElement.AssertRadioPsSelector(field + "_disp", field + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, vals.get(field), 1L, isOpenSelector);
+                assertElement.assertRadioPsSelector(field + "_disp", field + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, vals.get(field), 1L, isOpenSelector);
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -387,7 +387,7 @@ public class Tb {
                     seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
                 } else {
                     wait.waitWebElement(By.id("idx" + idx));
-                    assertElement.AssertFCKEditor("idx" + idx, vals.get(field));
+                    assertElement.assertFCKEditor("idx" + idx, vals.get(field));
                 }
             } else {
                 if (isWikiReadOnly) {
@@ -402,21 +402,21 @@ public class Tb {
                 } else {
                     String id = seleniumSettings.getWebDriver().findElement(By.name(field)).getAttribute("id");
                     wait.waitWebElement(By.id(id));
-                    assertElement.AssertFCKEditor(id, vals.get(field));
+                    assertElement.assertFCKEditor(id, vals.get(field));
                 }
             }
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                assertElement.AssertCheckboxPsSelectorById("idx" + idx + "_disp", "idx" + idx + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(vals.get(field).split(",")), 1L, isOpenSelector);
+                assertElement.assertCheckboxPsSelectorById("idx" + idx + "_disp", "idx" + idx + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(vals.get(field).split(",")), 1L, isOpenSelector);
             } else {
-                assertElement.AssertCheckboxPsSelector(field + "_disp", field + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(vals.get(field).split(",")), 1L, isOpenSelector);
+                assertElement.assertCheckboxPsSelector(field + "_disp", field + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(vals.get(field).split(",")), 1L, isOpenSelector);
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.AssertTextById("idx" + getLastFieldIndex(field + "_disp", elementPosition) + "_disp", vals.get(field));
+                assertElement.assertTextById("idx" + getLastFieldIndex(field + "_disp", elementPosition) + "_disp", vals.get(field));
             } else {
-                assertElement.AssertText(field + "_disp", vals.get(field));
+                assertElement.assertText(field + "_disp", vals.get(field));
             }
         }
     }
@@ -936,7 +936,7 @@ public class Tb {
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             WebElement elem = gridCell.findElement(By.tagName("input"));
-            assertElement.AssertElementEnabled(elem, true);
+            assertElement.assertElementEnabled(elem, true);
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType) 
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDd1")).size(), 1);
@@ -1005,7 +1005,7 @@ public class Tb {
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             WebElement elem = gridCell.findElement(By.tagName("input"));
-            assertElement.AssertElementEnabled(elem, false);
+            assertElement.assertElementEnabled(elem, false);
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType) 
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDd1")).size(), 0);
@@ -1152,28 +1152,28 @@ public class Tb {
     }
 
     public void assertFieldsDisabled(List<String> fieldIds) {//TODO elementPosition
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(0))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(1))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(2))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(3) + "_disp")), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(4))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(5) + "_disp")), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(0))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(1))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(2))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(3) + "_disp")), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(4))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(5) + "_disp")), false);
         if (fieldIds.get(6) != null) {
-            assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(6))), false);
+            assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(6))), false);
         }
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(7))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(8))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(9))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(7))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(8))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(9))), false);
         if (fieldIds.get(15) != null) {
-            assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(15) + "_disp")), false);
+            assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(15) + "_disp")), false);
         }
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(10))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(11) + "_disp")), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(12))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(13) + "_disp")), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(16))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(17))), false);
-        assertElement.AssertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(18))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(10))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(11) + "_disp")), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(12))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(13) + "_disp")), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(16))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(17))), false);
+        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(18))), false);
     }
 
     public void checkFieldsEnabled(List<String> fieldIds, int elementPosition) {
@@ -1199,7 +1199,7 @@ public class Tb {
     }
 
     public void checkFieldEnabled(String fieldId, int elementPosition) {
-        assertElement.AssertFieldEnabled(fieldId, elementPosition);
+        assertElement.assertFieldEnabled(fieldId, elementPosition);
     }
 
     public void checkFieldsDisabled(List<String> fieldIds, int elementPosition) {
@@ -1225,7 +1225,7 @@ public class Tb {
     }
 
     public void checkFieldDisabled(String fieldId, int elementPosition) {
-        assertElement.AssertFieldDisabled(fieldId, elementPosition);
+        assertElement.assertFieldDisabled(fieldId, elementPosition);
     }
 
     private boolean isAlertPresent() {

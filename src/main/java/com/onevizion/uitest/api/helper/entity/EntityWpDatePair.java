@@ -110,9 +110,9 @@ public class EntityWpDatePair {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText(NAME, wpDatePair.getName());
-        assertElement.AssertText(LABEL, wpDatePair.getLabel());
-        assertElement.AssertText(SHORT_LABEL, wpDatePair.getShortLabel());
+        assertElement.assertText(NAME, wpDatePair.getName());
+        assertElement.assertText(LABEL, wpDatePair.getLabel());
+        assertElement.assertText(SHORT_LABEL, wpDatePair.getShortLabel());
 
         tab.goToTab(2L); //Role Privs
         wait.waitGridLoad(2L, 2L);

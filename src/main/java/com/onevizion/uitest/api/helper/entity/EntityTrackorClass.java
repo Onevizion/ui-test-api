@@ -78,9 +78,9 @@ public class EntityTrackorClass {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        assertElement.AssertText("trackorType", trackorClass.getTrackorType());
-        assertElement.AssertText(NAME, trackorClass.getName());
-        assertElement.AssertText(ORDER_NUMBER, trackorClass.getOrderNumber());
+        assertElement.assertText("trackorType", trackorClass.getTrackorType());
+        assertElement.assertText(NAME, trackorClass.getName());
+        assertElement.assertText(ORDER_NUMBER, trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
