@@ -29,19 +29,19 @@ public class SeleniumListener extends TestListenerAdapter {
 
     @Override
     public void onTestStart(ITestResult tr) {
-        logger.info(getTestName(tr) + " method " + tr.getName() + " start");
+        logger.info("{} method {} start", getTestName(tr), tr.getName());
         Reporter.log(getTestName(tr) + " method " + tr.getName() + " start");
     }
 
     @Override
     public void onTestSuccess(ITestResult tr) {
-        logger.info(getTestName(tr) + " method " + tr.getName() + " success");
+        logger.info("{} method {} success", getTestName(tr), tr.getName());
         Reporter.log(getTestName(tr) + " method " + tr.getName() + " success");
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        logger.error(getTestName(tr) + " method " + tr.getName() + " fail");
+        logger.error("{} method {} fail", getTestName(tr), tr.getName());
         Reporter.log(getTestName(tr) + " method " + tr.getName() + " fail");
 
         AbstractSeleniumCore test = ((AbstractSeleniumCore) tr.getTestClass().getInstances(false)[0]);
@@ -55,7 +55,7 @@ public class SeleniumListener extends TestListenerAdapter {
 
             try {
                 Alert alert = test.seleniumSettings.getWebDriver().switchTo().alert();
-                logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
+                logger.error("{} There is alert with error message: {}", getTestName(tr), alert.getText());
                 Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
                 alert.accept();
             } catch (WebDriverException e) { // should be NoAlertPresentException
@@ -89,20 +89,20 @@ public class SeleniumListener extends TestListenerAdapter {
                     } else {
                         screenAddr = screensDirectory + screenFileName;
                     }
-                    logger.error(getTestName(tr) + " " + screenAddr);
+                    logger.error("{} {}", getTestName(tr), screenAddr);
                     Reporter.log(getTestName(tr) + " " + screenAddr);
                 } catch (IOException e) {
-                    logger.error(getTestName(tr) + " Can't save screenshot because of: " + e.getMessage());
+                    logger.error("{} Can't save screenshot because of: {}", getTestName(tr), e.getMessage());
                     Reporter.log(getTestName(tr) + " Can't save screenshot because of: " + e.getMessage());
                 }
             } else {
-                logger.error(getTestName(tr) + " Current web browser dont't supports getting screenshots");
+                logger.error("{} Current web browser dont't supports getting screenshots", getTestName(tr));
                 Reporter.log(getTestName(tr) + " Current web browser dont't supports getting screenshots");
             }
-            logger.error(getTestName(tr) + " Unexpected exception: " + tr.getThrowable().getMessage());
+            logger.error("{} Unexpected exception: {}", getTestName(tr), tr.getThrowable().getMessage());
             Reporter.log(getTestName(tr) + " Unexpected exception: " + tr.getThrowable().getMessage());
         } catch (Exception e) {
-            logger.error(getTestName(tr) + " Unexpected exception: " + e.getMessage());
+            logger.error("{} Unexpected exception: {}", getTestName(tr), e.getMessage());
             Reporter.log(getTestName(tr) + " Unexpected exception: " + e.getMessage());
         }
 
@@ -116,7 +116,7 @@ public class SeleniumListener extends TestListenerAdapter {
                     maxAlertsCount = maxAlertsCount - 1;
                     try {
                         Alert alert = test.seleniumSettings.getWebDriver().switchTo().alert();
-                        logger.error(getTestName(tr) + " There is alert with error message: " + alert.getText());
+                        logger.error("{} There is alert with error message: {}", getTestName(tr), alert.getText());
                         Reporter.log(getTestName(tr) + " There is alert with error message: " + alert.getText());
                         alert.accept();
                     } catch (WebDriverException e) { // should be NoAlertPresentException
@@ -125,14 +125,14 @@ public class SeleniumListener extends TestListenerAdapter {
                 }
 
                 if (maxAlertsCount == 0) {
-                    logger.error(getTestName(tr) + " Window with title: " + test.seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
+                    logger.error("{} Window with title: {} have endless alerts", getTestName(tr), test.seleniumSettings.getWebDriver().getTitle());
                     Reporter.log(getTestName(tr) + " Window with title: " + test.seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
                 }
 
                 final int currentWindowsCount = test.seleniumSettings.getWebDriver().getWindowHandles().size();
                 String title = test.seleniumSettings.getWebDriver().getTitle();
 
-                logger.error(getTestName(tr) + " There is window with title: " + test.seleniumSettings.getWebDriver().getTitle());
+                logger.error("{} There is window with title: {}", getTestName(tr), test.seleniumSettings.getWebDriver().getTitle());
                 Reporter.log(getTestName(tr) + " There is window with title: " + test.seleniumSettings.getWebDriver().getTitle());
 
                 //TODO firefox 59 bug
@@ -154,7 +154,7 @@ public class SeleniumListener extends TestListenerAdapter {
                     .until(webdriver -> !js.isWindowClosed(test));
             }
         } catch (Exception e) {
-            logger.error(getTestName(tr) + " Unexpected exception: " + e.getMessage());
+            logger.error("{} Unexpected exception: {}", getTestName(tr), e.getMessage());
             Reporter.log(getTestName(tr) + " Unexpected exception: " + e.getMessage());
         }
     }

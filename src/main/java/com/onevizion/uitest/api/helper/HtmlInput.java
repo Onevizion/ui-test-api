@@ -27,7 +27,7 @@ public class HtmlInput {
             if (value.equals(actualValue)) {
                 isException = false;
             } else {
-                logger.warn(seleniumSettings.getTestName() + " setValue works wrong. value[" + value + "] actualValue[" + actualValue + "]");
+                logger.warn("{} setValue works wrong. value[{}] actualValue[{}]", seleniumSettings.getTestName(), value, actualValue);
             }
         }
     }
