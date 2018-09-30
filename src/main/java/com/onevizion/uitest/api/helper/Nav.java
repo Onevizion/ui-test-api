@@ -1,7 +1,7 @@
 package com.onevizion.uitest.api.helper;
 
+import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
 
 import javax.annotation.Resource;
 
@@ -102,7 +102,7 @@ public class Nav {
     }
 
     private void goToNextPage(Long gridIdx, int nextPageNum) {
-        int randomIndex = new Random().nextInt(2);
+        int randomIndex = new SecureRandom().nextInt(2);
 
         if (randomIndex == 0) {
             goToNextPageButton(gridIdx);
@@ -132,7 +132,7 @@ public class Nav {
     }
 
     private void goToPrevPage(Long gridIdx, int prevPageNum) {
-        int randomIndex = new Random().nextInt(2);
+        int randomIndex = new SecureRandom().nextInt(2);
 
         if (randomIndex == 0) {
             goToPrevPageButton(gridIdx);
