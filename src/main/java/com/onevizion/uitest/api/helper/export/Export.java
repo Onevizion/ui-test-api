@@ -196,10 +196,10 @@ public class Export {
         int i = 0;
         do {
             try {
-                List<WebElement> elements = seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"));
-                for (WebElement element : elements) {
-                    if ("Run Export".equals(element.getText())) {
-                        runExportElement = element;
+                List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"));
+                for (WebElement webElement : webElements) {
+                    if ("Run Export".equals(webElement.getText())) {
+                        runExportElement = webElement;
                     }
                 }
             } catch (StaleElementReferenceException e) {
@@ -218,10 +218,10 @@ public class Export {
         int i = 0;
         do {
             try {
-                List<WebElement> elements = seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"));
-                for (WebElement element : elements) {
-                    if ("Export History".equals(element.getText())) {
-                        exportHistoryElement = element;
+                List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"));
+                for (WebElement webElement : webElements) {
+                    if ("Export History".equals(webElement.getText())) {
+                        exportHistoryElement = webElement;
                     }
                 }
             } catch (StaleElementReferenceException e) {

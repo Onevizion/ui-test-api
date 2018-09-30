@@ -198,52 +198,52 @@ public class AssertElement {
     }
 
     public void AssertFieldEnabled(String fieldName, int elementPosition) {
-        WebElement element;
+        WebElement webElement;
         String errorMessage;
         if (elementPosition > 1) {
             String idx = tb.getLastFieldIndex(fieldName, elementPosition);
-            element = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
+            webElement = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
             errorMessage = "Element with id=[idx" + idx + "] should be enabled";
         } else {
-            element = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
-            errorMessage = "Element with name=[" + element.getAttribute("name") + "] should be enabled";
+            webElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
+            errorMessage = "Element with name=[" + webElement.getAttribute("name") + "] should be enabled";
         }
 
         boolean isEnabled;
-        if ("textarea".equals(element.getTagName())) {
-            isEnabled = !"true".equals(element.getAttribute("readonly"));
-        } else if ("iframe".equals(element.getTagName())) {
+        if ("textarea".equals(webElement.getTagName())) {
+            isEnabled = !"true".equals(webElement.getAttribute("readonly"));
+        } else if ("iframe".equals(webElement.getTagName())) {
             isEnabled = false;
-        } else if ("input".equals(element.getTagName()) && ("text".equals(element.getAttribute("type")) || "hidden".equals(element.getAttribute("type")) )) {
-            isEnabled = !"true".equals(element.getAttribute("readonly"));
+        } else if ("input".equals(webElement.getTagName()) && ("text".equals(webElement.getAttribute("type")) || "hidden".equals(webElement.getAttribute("type")) )) {
+            isEnabled = !"true".equals(webElement.getAttribute("readonly"));
         } else {
-            isEnabled = element.isEnabled();
+            isEnabled = webElement.isEnabled();
         }
 
         Assert.assertEquals(isEnabled, true, errorMessage);
     }
 
     public void AssertFieldDisabled(String fieldName, int elementPosition) {
-        WebElement element;
+        WebElement webElement;
         String errorMessage;
         if (elementPosition > 1) {
             String idx = tb.getLastFieldIndex(fieldName, elementPosition);
-            element = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
+            webElement = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
             errorMessage = "Element with id=[idx" + idx + "] should be disabled";
         } else {
-            element = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
-            errorMessage = "Element with name=[" + element.getAttribute("name") + "] should be disabled";
+            webElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
+            errorMessage = "Element with name=[" + webElement.getAttribute("name") + "] should be disabled";
         }
 
         boolean isDisabled;
-        if ("textarea".equals(element.getTagName())) {
-            isDisabled = "true".equals(element.getAttribute("readonly"));
-        } else if ("iframe".equals(element.getTagName())) {
+        if ("textarea".equals(webElement.getTagName())) {
+            isDisabled = "true".equals(webElement.getAttribute("readonly"));
+        } else if ("iframe".equals(webElement.getTagName())) {
             isDisabled = true;
-        } else if ("input".equals(element.getTagName()) && ("text".equals(element.getAttribute("type")) || "hidden".equals(element.getAttribute("type")))) {
-            isDisabled = "true".equals(element.getAttribute("readonly"));
+        } else if ("input".equals(webElement.getTagName()) && ("text".equals(webElement.getAttribute("type")) || "hidden".equals(webElement.getAttribute("type")))) {
+            isDisabled = "true".equals(webElement.getAttribute("readonly"));
         } else {
-            isDisabled = !element.isEnabled();
+            isDisabled = !webElement.isEnabled();
         }
 
         Assert.assertEquals(isDisabled, true, errorMessage);

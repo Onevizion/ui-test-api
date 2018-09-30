@@ -64,10 +64,10 @@ public class Comment {
             int i = 0;
             do {
                 try {
-                    for (WebElement element : seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"))) {
-                        if ("Comments".equals(element.getText())) {
+                    for (WebElement webElement : seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"))) {
+                        if ("Comments".equals(webElement.getText())) {
                             //windowHelper.openModal(element);
-                            openCommentForm(element);
+                            openCommentForm(webElement);
                             break;
                         }
                     }
@@ -90,10 +90,10 @@ public class Comment {
         int i = 0;
         do {
             try {
-                for (WebElement element : seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"))) {
-                    if ("Comments".equals(element.getText())) {
+                for (WebElement webElement : seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"))) {
+                    if ("Comments".equals(webElement.getText())) {
                         //windowHelper.openModal(element);
-                        openCommentForm(element);
+                        openCommentForm(webElement);
                         break;
                     }
                 }

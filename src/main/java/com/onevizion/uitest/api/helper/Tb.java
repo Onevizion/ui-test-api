@@ -455,8 +455,8 @@ public class Tb {
                 String idx = getLastFieldIndex(field, elementPosition);
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).isSelected() ? "YES" : "NO";
                 if (actualVal != "NO") {
-                    WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
-                    WebElement newCheckbox = checkbox.findElement(By.xpath("./.."));
+                    WebElement webCheckbox = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
+                    WebElement newCheckbox = webCheckbox.findElement(By.xpath("./.."));
                     element.click(newCheckbox);
                 }
             } else {

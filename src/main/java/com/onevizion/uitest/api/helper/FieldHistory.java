@@ -132,9 +132,9 @@ public class FieldHistory {
             int i = 0;
             do {
                 try {
-                    for (WebElement element : seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"))) {
-                        if ("Field History".equals(element.getText())) {
-                            window.openModal(element);
+                    for (WebElement webElement : seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"))) {
+                        if ("Field History".equals(webElement.getText())) {
+                            window.openModal(webElement);
                             break;
                         }
                     }

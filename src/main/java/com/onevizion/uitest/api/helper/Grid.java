@@ -175,8 +175,8 @@ public class Grid {
         List<String> ret = new ArrayList<>();
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
-            WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
-            checkbox.clickByElement(element);
+            WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
+            checkbox.clickByElement(webElement);
             ret.add(js.getGridSelectedRowId(gridId));
         }
         return ret;
@@ -192,8 +192,8 @@ public class Grid {
             for (Long i = 0L; i < cnt; i++) {
                 if (values.containsKey(names.get(i.intValue())) /*&& priv.contains(values.get(names.get(i.intValue())))*/ && values.get(names.get(i.intValue())).contains(priv)) {
                     js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    checkbox.clickByElement(element);
+                    WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
+                    checkbox.clickByElement(webElement);
                 }
             }
         }
@@ -204,8 +204,8 @@ public class Grid {
         List<String> ret = new ArrayList<>();
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
-            WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
-            checkbox.clickByElement(element);
+            WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
+            checkbox.clickByElement(webElement);
             ret.add("cb" + js.getGridSelectedRowId(gridId));
         }
         return ret;
@@ -221,8 +221,8 @@ public class Grid {
             for (Long i = 0L; i < cnt; i++) {
                 if (values.contains(names.get(i.intValue()))) {
                     js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    checkbox.clickByElement(element);
+                    WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
+                    checkbox.clickByElement(webElement);
                 }
             }
         }
@@ -254,8 +254,8 @@ public class Grid {
             for (Long i = 0L; i < cnt; i++) {
                 if ("1".equals(vals.get(i.intValue()))) {
                     js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
-                    WebElement element = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
-                    checkbox.clickByElement(element);
+                    WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
+                    checkbox.clickByElement(webElement);
                 }
             }
         }
