@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
@@ -11,7 +9,7 @@
     <groupId>com.onevizion</groupId>
     <artifactId>ui-test-api</artifactId>
     <packaging>jar</packaging>
-    <version>8.92-SNAPSHOT</version>
+    <version>8.92.1</version>
 
     <name>ui-test-api</name>
     <description>An API for easily write tests for OneVizion platform</description>
