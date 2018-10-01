@@ -1,12 +1,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.onevizion</groupId>
     <artifactId>ui-test-api</artifactId>
     <packaging>jar</packaging>
     <version>8.92-SNAPSHOT</version>
+
+    <name>ui-test-api</name>
+    <description>An API for easily write tests for OneVizion platform</description>
+    <url>https://github.com/Onevizion/ui-test-api</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>George Kovalev</name>
+            <email>george.kovalev@onevizion.com</email>
+            <organization>OneVizion, Inc.</organization>
+            <organizationUrl>https://onevizion.com</organizationUrl>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -146,49 +170,46 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <configuration>
+                    <passphrase>${gpg.passphrase}</passphrase>
+                </configuration>
             </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.4.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>releases</name>
-            <url>${mvn.repo.addr}/archiva/repository/releases/</url>
-            <layout>default</layout>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>snapshots</name>
-            <url>${mvn.repo.addr}/archiva/repository/snapshots/</url>
-            <layout>default</layout>
-        </snapshotRepository>
+        <downloadUrl>https://github.com/Onevizion/ui-test-api/releases</downloadUrl>
     </distributionManagement>
 
     <scm>
-        <developerConnection>scm:git:https://github.com/IKAMTeam/ui-test-api.git</developerConnection>
+        <connection>scm:git:git://github.com/Onevizion/ui-test-api.git</connection>
+        <developerConnection>scm:git:https://github.com/Onevizion/ui-test-api.git</developerConnection>
+        <url>http://github.com/Onevizion/ui-test-api/tree/master</url>
     </scm>
 </project>
