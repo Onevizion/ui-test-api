@@ -205,7 +205,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/Onevizion/ui-test-api.git</connection>
-        <developerConnection>scm:git:https://github.com/Onevizion/ui-test-api.git</developerConnection>
+        <developerConnection>scm:git:ssh://github.com/Onevizion/ui-test-api.git</developerConnection>
         <url>http://github.com/Onevizion/ui-test-api/tree/master</url>
     </scm>
 </project>
