@@ -417,6 +417,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             if (seleniumSettings.getRemoteWebDriver()) {
                 if (seleniumSettings.getBrowser().equals("firefox")) {
                     FirefoxProfile profile = new FirefoxProfile();
+                    profile.setPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294
                     profile.setPreference("dom.successive_dialog_time_limit", 0);
                     profile.setPreference("dom.max_script_run_time", 1000);
                     profile.setPreference("browser.download.folderList", 2);
@@ -487,7 +488,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             } else {
                 if (seleniumSettings.getBrowser().equals("firefox")) {
                     FirefoxProfile profile = new FirefoxProfile();
-                    //profile.setPreference("dom.disable_beforeunload", false); //https://github.com/w3c/webdriver/issues/1294
+                    profile.setPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294
                     profile.setPreference("dom.successive_dialog_time_limit", 0);
                     profile.setPreference("dom.max_script_run_time", 100);
                     profile.setPreference("browser.download.folderList", 2);
