@@ -1,16 +1,19 @@
 package com.onevizion.uitest.api.vo.api.v3;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Workplan implements Comparable<Workplan> {
 
     private String id;
     private String name;
-    private String template_id;
-    private String template_name;
-    private String proj_start_date;
-    private String proj_finish_date;
-    private String trackor_id;
+    private String templateId;
+    private String templateName;
+    private String projStartDate;
+    private String projFinishDate;
+    private String trackorId;
     private String active;
 
+    @JsonProperty("id")
     public String getId() {
         return id;
     }
@@ -19,6 +22,7 @@ public class Workplan implements Comparable<Workplan> {
         this.id = id;
     }
 
+    @JsonProperty("name")
     public String getName() {
         return name;
     }
@@ -27,46 +31,52 @@ public class Workplan implements Comparable<Workplan> {
         this.name = name;
     }
 
-    public String getTemplate_id() {
-        return template_id;
+    @JsonProperty("template_id")
+    public String getTemplateId() {
+        return templateId;
     }
 
-    public void setTemplate_id(String template_id) {
-        this.template_id = template_id;
+    public void setTemplateId(String templateId) {
+        this.templateId = templateId;
     }
 
-    public String getTemplate_name() {
-        return template_name;
+    @JsonProperty("template_name")
+    public String getTemplateName() {
+        return templateName;
     }
 
-    public void setTemplate_name(String template_name) {
-        this.template_name = template_name;
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
     }
 
-    public String getProj_start_date() {
-        return proj_start_date;
+    @JsonProperty("proj_start_date")
+    public String getProjStartDate() {
+        return projStartDate;
     }
 
-    public void setProj_start_date(String proj_start_date) {
-        this.proj_start_date = proj_start_date;
+    public void setProjStartDate(String projStartDate) {
+        this.projStartDate = projStartDate;
     }
 
-    public String getProj_finish_date() {
-        return proj_finish_date;
+    @JsonProperty("proj_finish_date")
+    public String getProjFinishDate() {
+        return projFinishDate;
     }
 
-    public void setProj_finish_date(String proj_finish_date) {
-        this.proj_finish_date = proj_finish_date;
+    public void setProjFinishDate(String projFinishDate) {
+        this.projFinishDate = projFinishDate;
     }
 
-    public String getTrackor_id() {
-        return trackor_id;
+    @JsonProperty("trackor_id")
+    public String getTrackorId() {
+        return trackorId;
     }
 
-    public void setTrackor_id(String trackor_id) {
-        this.trackor_id = trackor_id;
+    public void setTrackorId(String trackorId) {
+        this.trackorId = trackorId;
     }
 
+    @JsonProperty("active")
     public String getActive() {
         return active;
     }
@@ -85,23 +95,23 @@ public class Workplan implements Comparable<Workplan> {
         if (val2 != 0) {
             return val2;
         }
-        int val3 = this.template_id.compareTo(o.template_id);
+        int val3 = this.templateId.compareTo(o.templateId);
         if (val3 != 0) {
             return val3;
         }
-        int val4 = this.template_name.compareTo(o.template_name);
+        int val4 = this.templateName.compareTo(o.templateName);
         if (val4 != 0) {
             return val4;
         }
-        int val5 = this.proj_start_date.compareTo(o.proj_start_date);
+        int val5 = this.projStartDate.compareTo(o.projStartDate);
         if (val5 != 0) {
             return val5;
         }
-        int val6 = this.proj_finish_date.compareTo(o.proj_finish_date);
+        int val6 = this.projFinishDate.compareTo(o.projFinishDate);
         if (val6 != 0) {
             return val6;
         }
-        int val7 = this.trackor_id.compareTo(o.trackor_id);
+        int val7 = this.trackorId.compareTo(o.trackorId);
         if (val7 != 0) {
             return val7;
         }
@@ -115,11 +125,11 @@ public class Workplan implements Comparable<Workplan> {
         result = prime * result + ((active == null) ? 0 : active.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((proj_finish_date == null) ? 0 : proj_finish_date.hashCode());
-        result = prime * result + ((proj_start_date == null) ? 0 : proj_start_date.hashCode());
-        result = prime * result + ((template_id == null) ? 0 : template_id.hashCode());
-        result = prime * result + ((template_name == null) ? 0 : template_name.hashCode());
-        result = prime * result + ((trackor_id == null) ? 0 : trackor_id.hashCode());
+        result = prime * result + ((projFinishDate == null) ? 0 : projFinishDate.hashCode());
+        result = prime * result + ((projStartDate == null) ? 0 : projStartDate.hashCode());
+        result = prime * result + ((templateId == null) ? 0 : templateId.hashCode());
+        result = prime * result + ((templateName == null) ? 0 : templateName.hashCode());
+        result = prime * result + ((trackorId == null) ? 0 : trackorId.hashCode());
         return result;
     }
 
@@ -147,39 +157,39 @@ public class Workplan implements Comparable<Workplan> {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (proj_finish_date == null) {
-            if (other.proj_finish_date != null)
+        if (projFinishDate == null) {
+            if (other.projFinishDate != null)
                 return false;
-        } else if (!proj_finish_date.equals(other.proj_finish_date))
+        } else if (!projFinishDate.equals(other.projFinishDate))
             return false;
-        if (proj_start_date == null) {
-            if (other.proj_start_date != null)
+        if (projStartDate == null) {
+            if (other.projStartDate != null)
                 return false;
-        } else if (!proj_start_date.equals(other.proj_start_date))
+        } else if (!projStartDate.equals(other.projStartDate))
             return false;
-        if (template_id == null) {
-            if (other.template_id != null)
+        if (templateId == null) {
+            if (other.templateId != null)
                 return false;
-        } else if (!template_id.equals(other.template_id))
+        } else if (!templateId.equals(other.templateId))
             return false;
-        if (template_name == null) {
-            if (other.template_name != null)
+        if (templateName == null) {
+            if (other.templateName != null)
                 return false;
-        } else if (!template_name.equals(other.template_name))
+        } else if (!templateName.equals(other.templateName))
             return false;
-        if (trackor_id == null) {
-            if (other.trackor_id != null)
+        if (trackorId == null) {
+            if (other.trackorId != null)
                 return false;
-        } else if (!trackor_id.equals(other.trackor_id))
+        } else if (!trackorId.equals(other.trackorId))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Workplan [id=" + id + ", name=" + name + ", template_id=" + template_id + ", template_name="
-                + template_name + ", proj_start_date=" + proj_start_date + ", proj_finish_date=" + proj_finish_date
-                + ", trackor_id=" + trackor_id + ", active=" + active + "]";
+        return "Workplan [id=" + id + ", name=" + name + ", templateId=" + templateId + ", templateName="
+                + templateName + ", projStartDate=" + projStartDate + ", projFinishDate=" + projFinishDate
+                + ", trackorId=" + trackorId + ", active=" + active + "]";
     }
 
 }
