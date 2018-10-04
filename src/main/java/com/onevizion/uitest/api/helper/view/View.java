@@ -32,26 +32,24 @@ public class View {
 
     private static final String VIEW_MAIN_ELEMENT_ID_BASE = "newDropdownView";
 
-    public static final String SELECT_VIEW = "ddView"; //TODO change from SELECT_FILTER to FILTER
-    public static final String VIEW_CONTAINER = "ddViewContainer";
-    public static final String VIEW_SEARCH = "ddViewSearch";
-    public static final String BUTTON_CLEAR_SEARCH = "ddViewClearSearch";
-    public static final String BUTTON_ORGANIZE = "ddViewBtnOrganize";
+    private static final String VIEW_SELECT = "ddView";
+    private static final String VIEW_CONTAINER = "ddViewContainer";
+    private static final String VIEW_SEARCH = "ddViewSearch";
+    private static final String BUTTON_CLEAR_SEARCH = "ddViewClearSearch";
+    private static final String BUTTON_ORGANIZE = "ddViewBtnOrganize";
 
     public static final String BUTTON_OPEN = "btnView";
-    public static final String FIELD_VIEW_NAME = "txtViewName";
+    private static final String FIELD_VIEW_NAME = "txtViewName";
     public static final String VIEW_NAME = "TestViewOption";
-    public static final String BUTTON_DELETE = "btnDeleteView";
-    public static final String BUTTON_SAVE = "btnSaveView";
-    public static final String BUTTON_SAVE_NEW = "unsavedViewIcon";
+    private static final String BUTTON_SAVE = "unsavedViewIcon";
     private static final String UNSAVED_VIEW = "unsavedViewId";
 
-    public static final String VIEW_DIALOG_CONTAINER = "dialogViewDialogContainer";
-    public static final String VIEW_DIALOG_OK = "viewDialogOk";
-    public static final String VIEW_DIALOG_CANCEL = "viewDialogCancel";
+    private static final String VIEW_DIALOG_CONTAINER = "dialogViewDialogContainer";
+    private static final String VIEW_DIALOG_OK = "viewDialogOk";
+    private static final String VIEW_DIALOG_CANCEL = "viewDialogCancel";
 
-    public static final String FOLDER_LOCAL = "Local Views";
-    public static final String FOLDER_GLOBAL = "Global Views";
+    private static final String FOLDER_LOCAL = "Local Views";
+    private static final String FOLDER_GLOBAL = "Global Views";
 
     private static final String LEFT_COLUMNS_DIV_ID = "leftListBox";
     public static final String RIGHT_COLUMNS_DIV_ID = "rightListBox";
@@ -65,6 +63,13 @@ public class View {
     private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
     private static final String BUTTON_GROUP_MARKUP = "mug";
     private static final String BUTTON_GROUP_DATE_PAIR = "dp";
+
+    private static final String SCROLL_CONTAINER = "scrollContainer";
+    private static final String EXISTING_VIEWS = "ddExistingViews";
+    private static final String SAVE_CONTAINER = "ddViewFormSaveContainer";
+    private static final String VIEW_TYPE = "lbViewType";
+    private static final String COLUMN_LABEL = "labelField";
+    private static final String NAV_PANEL = "navPanel";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -115,15 +120,15 @@ public class View {
     }
 
     public int getViewsCount(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).findElements(By.className("leaf")).size();
+        return seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).findElements(By.className("leaf")).size();
     }
 
     public List<WebElement> getViews(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).findElements(By.className("leaf"));
+        return seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).findElements(By.className("leaf"));
     }
 
     public String getCurrentViewName(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
+        return seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
     }
 
     public void selectViewInOrganize(String viewName) {
@@ -153,7 +158,7 @@ public class View {
     }
 
     public void selectByVisibleText(Long gridIdx, String entityPrefix) {
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
 
         elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
@@ -165,60 +170,60 @@ public class View {
         } else {
             seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
-            WebElement viewElem = (WebElement) js.getNewDropDownElement(VIEW_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
+            WebElement viewElem = (WebElement) js.getNewDropDownElement(VIEW_CONTAINER + gridIdx, SCROLL_CONTAINER, "newGenericDropDownRow", entityPrefix);
             elementWait.waitElementVisible(viewElem);
             viewElem.click();
 
             wait.waitGridLoad(gridIdx, gridIdx);
 
-            seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
 
             elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
             elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
             elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
             seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
-            seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
         }
     }
 
     public void selectFolderForSaveViewByVisibleText(Long gridIdx, String folderName) {
-        String currentFolderName = seleniumSettings.getWebDriver().findElement(By.id("ddExistingViews"  + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
+        String currentFolderName = seleniumSettings.getWebDriver().findElement(By.id(EXISTING_VIEWS + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
         if (folderName.equals(currentFolderName)) {
             return;
         }
 
-        seleniumSettings.getWebDriver().findElement(By.id("ddExistingViews" + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(EXISTING_VIEWS + gridIdx)).click();
 
-        elementWait.waitElementById("ddViewFormSaveContainer" + gridIdx);
-        elementWait.waitElementVisibleById("ddViewFormSaveContainer" + gridIdx);
-        elementWait.waitElementDisplayById("ddViewFormSaveContainer" + gridIdx);
+        elementWait.waitElementById(SAVE_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(SAVE_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(SAVE_CONTAINER + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id("ddViewFormSaveSearch" + gridIdx)).sendKeys(folderName);
 
-        WebElement viewElem = (WebElement) js.getNewDropDownElement("ddViewFormSaveContainer" + gridIdx, "scrollContainer", "newGenericDropDownRow", folderName);
+        WebElement viewElem = (WebElement) js.getNewDropDownElement(SAVE_CONTAINER + gridIdx, SCROLL_CONTAINER, "newGenericDropDownRow", folderName);
         elementWait.waitElementVisible(viewElem);
         viewElem.click();
 
-        seleniumSettings.getWebDriver().findElement(By.id("ddExistingViews" + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(EXISTING_VIEWS + gridIdx)).click();
 
-        elementWait.waitElementById("ddViewFormSaveContainer" + gridIdx);
-        elementWait.waitElementVisibleById("ddViewFormSaveContainer" + gridIdx);
-        elementWait.waitElementDisplayById("ddViewFormSaveContainer" + gridIdx);
+        elementWait.waitElementById(SAVE_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(SAVE_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(SAVE_CONTAINER + gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id("ddViewFormSaveClearSearch" + gridIdx)).click();
-        seleniumSettings.getWebDriver().findElement(By.id("ddExistingViews" + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(EXISTING_VIEWS + gridIdx)).click();
     }
 
     public void isExistAndSelectedView(Long gridIdx, String entityPrefix) {
         boolean isSavedView = false;
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
         for (WebElement view : getViews(gridIdx)) {
             if (view.getText().equals(entityPrefix)) {
                 isSavedView = true;
             }
         }
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
         Assert.assertEquals(isSavedView, true, "View " + entityPrefix + " isn't saved");
 
         viewWait.waitCurrentViewName(gridIdx, entityPrefix);
@@ -226,19 +231,19 @@ public class View {
     }
 
     public void openSaveViewForm(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
 
         elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
         elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE_NEW + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE + gridIdx)).click();
 
         elementWait.waitElementById(VIEW_DIALOG_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
         elementWait.waitElementDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
 
-        wait.waitWebElement(By.id("lbViewType" + gridIdx));
+        wait.waitWebElement(By.id(VIEW_TYPE + gridIdx));
         wait.waitWebElement(By.id(FIELD_VIEW_NAME + gridIdx));
         wait.waitWebElement(By.id(VIEW_DIALOG_OK + gridIdx));
 
@@ -259,9 +264,9 @@ public class View {
         openSaveViewForm(gridIdx);
 
         if (isNew) {
-            new Select(seleniumSettings.getWebDriver().findElement(By.id("lbViewType" + gridIdx))).selectByVisibleText("New");
+            new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("New");
         } else {
-            new Select(seleniumSettings.getWebDriver().findElement(By.id("lbViewType" + gridIdx))).selectByVisibleText("Existing");
+            new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("Existing");
         }
         if (isLocal) {
             selectFolderForSaveViewByVisibleText(gridIdx, FOLDER_LOCAL);
@@ -298,7 +303,7 @@ public class View {
 
         int beforeDeleteSize = getViewsCount(gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
 
         elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
@@ -322,7 +327,7 @@ public class View {
         wait.waitViewsCount(gridIdx, beforeDeleteSize - 1);
 
         boolean isDeletedView = false;
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_VIEW + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
         for (WebElement view : getViews(gridIdx)) {
             if (view.getText().equals(entityPrefix)) {
                 isDeletedView = true;
@@ -360,7 +365,7 @@ public class View {
             Long gridColumnsLocalView2, List<String> leftColumnsLocalView2, List<String> rightColumnsLocalView2,
             Long gridColumnsGlobalView2, List<String> leftColumnsGlobalView2, List<String> rightColumnsGlobalView2) {
         //Save Local View 1
-        selectColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
+        selectColumns(gridIdx, rightColumnsLocalView1);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
         saveView(gridIdx, entityPrefix + View.VIEW_NAME + "1", true, true);
@@ -368,7 +373,7 @@ public class View {
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
 
         //Save Global View 1
-        selectColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
+        selectColumns(gridIdx, rightColumnsGlobalView1);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
         saveView(gridIdx, entityPrefix + View.VIEW_NAME + "1", false, true);
@@ -376,7 +381,7 @@ public class View {
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
 
         //Save Local View 2
-        selectColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
+        selectColumns(gridIdx, rightColumnsLocalView2);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
         saveView(gridIdx, entityPrefix + View.VIEW_NAME + "2", true, true);
@@ -384,7 +389,7 @@ public class View {
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
 
         //Save Global View 2
-        selectColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
+        selectColumns(gridIdx, rightColumnsGlobalView2);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
         saveView(gridIdx, entityPrefix + View.VIEW_NAME + "2", false, true);
@@ -392,7 +397,7 @@ public class View {
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Unsaved View
-        selectColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
+        selectColumns(gridIdx, rightColumnsUnsavedView);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsUnsavedView);
         checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
 
@@ -483,7 +488,7 @@ public class View {
         wait.waitFormLoad();
 
         List<WebElement> actualRightColumns = getRightColumns();
-        js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, "scrollContainer", (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
+        js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, SCROLL_CONTAINER, (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
         actualRightColumns.get(actualRightColumns.size() - 1).click();
 
         while (seleniumSettings.getWebDriver().findElement(By.id(ADD_BUTTON_ID)).isEnabled()) {
@@ -498,12 +503,12 @@ public class View {
     }
 
     public void selectAndCheckColumns(Long gridIdx, Long gridColumns, List<String> leftColumns, List<String> rightColumns) {
-        selectColumns(gridIdx, leftColumns, rightColumns);
+        selectColumns(gridIdx, rightColumns);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumns);
         checkColumns(gridIdx, leftColumns, rightColumns);
     }
 
-    private void selectColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
+    private void selectColumns(Long gridIdx, List<String> rightColumns) {
         window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
@@ -512,7 +517,7 @@ public class View {
         waitRightListBoxReady();
 
         List<WebElement> actualRightColumns = getRightColumns();
-        js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, "scrollContainer", (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
+        js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, SCROLL_CONTAINER, (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
         actualRightColumns.get(actualRightColumns.size() - 1).click();
 
         while (seleniumSettings.getWebDriver().findElement(By.id(REMOVE_BUTTON_ID)).isEnabled()) {
@@ -522,8 +527,8 @@ public class View {
         for (String rightColumn : rightColumns) {
             List<WebElement> actualLeftColumns = getLeftColumns();
             for (int i = 0; i < actualLeftColumns.size(); i++) {
-                js.scrollNewDropDownTop(LEFT_COLUMNS_DIV_ID, "scrollContainer", i * COLUMN_DIV_HEIGHT);
-                if (actualLeftColumns.get(i).findElements(By.className("labelField")).get(0).getText().equals(rightColumn)) {
+                js.scrollNewDropDownTop(LEFT_COLUMNS_DIV_ID, SCROLL_CONTAINER, i * COLUMN_DIV_HEIGHT);
+                if (actualLeftColumns.get(i).findElements(By.className(COLUMN_LABEL)).get(0).getText().equals(rightColumn)) {
                     actualLeftColumns.get(i).click();
                     seleniumSettings.getWebDriver().findElement(By.id(ADD_BUTTON_ID)).click();
                     break;
@@ -549,34 +554,33 @@ public class View {
         List<WebElement> actualLeftColumns = getLeftColumns();
         Assert.assertEquals(actualLeftColumns.size(), leftColumns.size());
         for (int i = 0; i < actualLeftColumns.size(); i++) {
-            js.scrollNewDropDownTop(LEFT_COLUMNS_DIV_ID, "scrollContainer", i * COLUMN_DIV_HEIGHT);
-            Assert.assertEquals(actualLeftColumns.get(i).findElements(By.className("labelField")).get(0).getText(), leftColumns.get(i));
+            js.scrollNewDropDownTop(LEFT_COLUMNS_DIV_ID, SCROLL_CONTAINER, i * COLUMN_DIV_HEIGHT);
+            Assert.assertEquals(actualLeftColumns.get(i).findElements(By.className(COLUMN_LABEL)).get(0).getText(), leftColumns.get(i));
         }
 
         List<WebElement> actualRightColumns = getRightColumns();
         Assert.assertEquals(actualRightColumns.size(), rightColumns.size());
         for (int i = 0; i < actualRightColumns.size(); i++) {
-            js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, "scrollContainer", i * COLUMN_DIV_HEIGHT);
-            Assert.assertEquals(actualRightColumns.get(i).findElements(By.className("labelField")).get(0).getText(), rightColumns.get(i));
+            js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, SCROLL_CONTAINER, i * COLUMN_DIV_HEIGHT);
+            Assert.assertEquals(actualRightColumns.get(i).findElements(By.className(COLUMN_LABEL)).get(0).getText(), rightColumns.get(i));
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void switchToRootSubgroup() {
-        //elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink")).get(0));
-        element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.tagName("input")));
+        element.click(seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElement(By.tagName("input")));
         waitLeftListBoxReady();
     }
 
     public void switchToParentSubgroup() {
-        List<WebElement> links = seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink"));
+        List<WebElement> links = seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElements(By.className("navLink"));
         element.click(links.get(links.size() - 2));
         waitLeftListBoxReady();
     }
 
     public void switchToSubgroup(String subgroupName) {
-        element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.name(subgroupName)));
+        element.click(seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElement(By.name(subgroupName)));
         waitLeftListBoxReady();
     }
 
