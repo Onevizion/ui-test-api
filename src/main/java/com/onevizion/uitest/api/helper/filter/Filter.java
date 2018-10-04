@@ -37,25 +37,22 @@ public class Filter {
 
     private static final String FILTER_MAIN_ELEMENT_ID_BASE = "newDropdownFilter";
 
-    public static final String SELECT_FILTER = "ddFilter"; //TODO change from SELECT_FILTER to FILTER
-    public static final String FILTER_CONTAINER = "ddFilterContainer";
-    public static final String FILTER_SEARCH = "ddFilterSearch";
-    public static final String BUTTON_CLEAR_SEARCH = "ddFilterClearSearch";
-    public static final String BUTTON_ORGANIZE = "ddFilterBtnOrganize";
+    private static final String FILTER_SELECT = "ddFilter";
+    private static final String FILTER_CONTAINER = "ddFilterContainer";
+    private static final String FILTER_SEARCH = "ddFilterSearch";
+    private static final String BUTTON_CLEAR_SEARCH = "ddFilterClearSearch";
+    private static final String BUTTON_ORGANIZE = "ddFilterBtnOrganize";
 
     public static final String FILTER_NAME = "TestFilter";
-    public static final String BUTTON_SAVE = "btnSaveFilter";
-    public static final String BUTTON_SAVE_NEW = "unsavedFilterIcon";
-    public static final String BUTTON_DELETE = "btnDeleteFilter";
-    public static final String FIELD_FILTER_NAME = "txtFilterName";
+    private static final String BUTTON_SAVE = "unsavedFilterIcon";
+    private static final String FIELD_FILTER_NAME = "txtFilterName";
     public static final String BUTTON_OPEN = "btnFilter";
     public static final String BUTTON_CLEAR = "btnClear";
-    public static final String BUTTON_CB_TEMPLATE = "cbShowTemplates";
     private static final String UNSAVED_FILTER = "unsavedFilterId";
 
-    public static final String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
-    public static final String FILTER_DIALOG_OK = "filterDialogOk";
-    public static final String FILTER_DIALOG_CANCEL = "filterDialogCancel";
+    private static final String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
+    private static final String FILTER_DIALOG_OK = "filterDialogOk";
+    private static final String FILTER_DIALOG_CANCEL = "filterDialogCancel";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -109,15 +106,15 @@ public class Filter {
     }
 
     public int getFiltersCount(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).findElements(By.className("leaf")).size();
+        return seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).findElements(By.className("leaf")).size();
     }
 
     public List<WebElement> getFilters(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).findElements(By.className("leaf"));
+        return seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).findElements(By.className("leaf"));
     }
 
     public String getCurrentFilterName(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
+        return seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
     }
 
     public void selectFilterInOrganize(String filterName) {
@@ -147,7 +144,7 @@ public class Filter {
     }
 
     public void selectByVisibleText(String entityPrefix, Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
 
         elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
@@ -165,14 +162,14 @@ public class Filter {
 
             wait.waitGridLoad(gridIdx, gridIdx);
 
-            seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
 
             elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
             elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
             elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
             seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
-            seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
         }
     }
 
@@ -202,13 +199,13 @@ public class Filter {
     }
 
     public void openSaveFilterForm(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
 
         elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
         elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE_NEW + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE + gridIdx)).click();
 
         elementWait.waitElementById(FILTER_DIALOG_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);
@@ -238,13 +235,13 @@ public class Filter {
         wait.waitFiltersCount(gridIdx, beforeSaveSize + 1);
 
         boolean isSavedFilter = false;
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
         for (WebElement filter : getFilters(gridIdx)) {
             if (filter.getText().equals(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME)) {
                 isSavedFilter = true;
             }
         }
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
         Assert.assertEquals(isSavedFilter, true, "Filter " + AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME + " isn't saved");
 
         filterWait.waitCurrentFilterName(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME);
@@ -254,7 +251,7 @@ public class Filter {
     public void deleteFilter(Long gridIdx, String entityPrefix) {
         int beforeDeleteSize = getFiltersCount(gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
 
         elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
@@ -278,7 +275,7 @@ public class Filter {
         wait.waitFiltersCount(gridIdx, beforeDeleteSize - 1);
 
         boolean isDeletedFilter = false;
-        seleniumSettings.getWebDriver().findElement(By.id(SELECT_FILTER + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
         for (WebElement filter : getFilters(gridIdx)) {
             if (filter.getText().equals(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME)) {
                 isDeletedFilter = true;
