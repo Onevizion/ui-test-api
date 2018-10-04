@@ -1,6 +1,5 @@
 package com.onevizion.uitest.api.helper.userpage.filter;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
+import com.onevizion.uitest.api.vo.FilterOperatorType;
 
 @Component
 public class TbMemoField {
@@ -31,11 +31,8 @@ public class TbMemoField {
         Long rowsCnt = grid.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
-        if (supportOuterOperations) {
-            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", "<>", "(+)<>", "Is Null", "Is Not Null"));
-        } else {
-            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "<>", "Is Null", "Is Not Null"));
-        }
+        List<FilterOperatorType> operators = FilterOperatorType.getMemoOperators(supportOuterOperations);
+        userpageFilter.checkFilterOperators(fieldName, null, operators);
 
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.MEMO, columnIndex, null, cellVals, null);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "<>", ConfigFieldType.MEMO, columnIndex, null, cellVals, null);

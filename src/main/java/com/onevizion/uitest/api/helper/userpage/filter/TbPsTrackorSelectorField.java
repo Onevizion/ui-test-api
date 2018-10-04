@@ -1,6 +1,5 @@
 package com.onevizion.uitest.api.helper.userpage.filter;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
+import com.onevizion.uitest.api.vo.FilterOperatorType;
 
 @Component
 public class TbPsTrackorSelectorField {
@@ -44,15 +44,8 @@ public class TbPsTrackorSelectorField {
             cellVals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex2);
         }
 
-        if (supportOuterOperations && supportFieldOperations) {
-            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", "<>", "(+)<>", "Is Null", "Is Not Null", "=Field", "<>Field", "Is New", "Is Not New"));
-        } else if (supportOuterOperations) {
-            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "(+)=", "<>", "(+)<>", "Is Null", "Is Not Null", "Is New", "Is Not New"));
-        } else if (supportFieldOperations) {
-            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "<>", "Is Null", "Is Not Null", "=Field", "<>Field", "Is New", "Is Not New"));
-        } else {
-            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", "<>", "Is Null", "Is Not Null", "Is New", "Is Not New"));
-        }
+        List<FilterOperatorType> operators = FilterOperatorType.getPsTrackorSelectorOperators(supportOuterOperations, supportFieldOperations);
+        userpageFilter.checkFilterOperators(fieldName, null, operators);
 
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);

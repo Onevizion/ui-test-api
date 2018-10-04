@@ -32,6 +32,7 @@ import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
+import com.onevizion.uitest.api.vo.FilterOperatorType;
 
 @Component
 public class UserpageFilter {
@@ -70,7 +71,7 @@ public class UserpageFilter {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void checkFilterOperators(String fieldName, List<String> dateTypes, List<String> operators) {
+    public void checkFilterOperators(String fieldName, List<String> dateTypes, List<FilterOperatorType> operators) {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
@@ -85,7 +86,7 @@ public class UserpageFilter {
         List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name("WPOperator1"))).getOptions();
         Assert.assertEquals(options.size(), operators.size());
         for (int i = 0; i < operators.size(); i++) {
-            Assert.assertEquals(options.get(i).getText(), operators.get(i));
+            Assert.assertEquals(options.get(i).getText(), operators.get(i).getValue());
         }
         window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE), null);
     }

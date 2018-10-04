@@ -1,6 +1,5 @@
 package com.onevizion.uitest.api.helper.userpage.filter;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
+import com.onevizion.uitest.api.vo.FilterOperatorType;
 
 @Component
 public class TbDateTimeField {
@@ -44,13 +44,8 @@ public class TbDateTimeField {
             cellVals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex2);
         }
 
-        if (supportFieldOperations) {
-            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
-                    "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "Is Null", "Is Not Null", "=Field", "<>Field", ">Field", "<Field", ">=Field", "<=Field"));
-        } else {
-            userpageFilter.checkFilterOperators(fieldName, null, Arrays.asList("=", ">", "<", ">=", "<=", ">=Today", "<=Today", "Within", "This Wk",
-                    "This Wk to Dt", "This Mo", "This Mo to Dt", "This FQ", "This FQ to Dt", "This FY", "This FY to Dt", "<>", "Is Null", "Is Not Null"));
-        }
+        List<FilterOperatorType> operators = FilterOperatorType.getDateTimeOperators(supportFieldOperations);
+        userpageFilter.checkFilterOperators(fieldName, null, operators);
 
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
