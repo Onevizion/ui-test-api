@@ -58,6 +58,13 @@ public class UserpageFilter {
     private static final String FILTER_ROW_1_VALUE_TRACKOR_DROP_DOWN_BUTTON = "btnTrDropDownWPAttribValue1";
     private static final String FILTER_ROW_1_VALUE_SELECTOR_TEXT = "selWPAttribValue1";
     private static final String FILTER_ROW_1_VALUE_SELECTOR_BUTTON = "btnSelWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_DATE_TEXT = "dateWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_DATETIME_TEXT = "dateTimeWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_TIME_TEXT = "timeWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_NUMBER_TEXT = "numWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_LATLONG_TEXT = "latlongWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_CHECKBOX_TEXT = "ynWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_TEXT_TEXT = "txtWPAttribValue1";
 
     @Resource
     private Js js;
@@ -947,7 +954,7 @@ public class UserpageFilter {
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("ynWPAttribValue1"))).selectByVisibleText(value);
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_CHECKBOX_TEXT))).selectByVisibleText(value);
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
@@ -976,15 +983,15 @@ public class UserpageFilter {
                     //&& !operator.equals("This Wk to Dt") && !operator.equals("This Mo to Dt") //TODO check those lines
                     //&& !operator.equals("This FQ to Dt") && !operator.equals("This FY to Dt")) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    seleniumSettings.getWebDriver().findElement(By.name("dateWPAttribValue1")).sendKeys(value);
+                    seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_DATE_TEXT)).sendKeys(value);
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    seleniumSettings.getWebDriver().findElement(By.name("dateTimeWPAttribValue1")).sendKeys(value);
+                    seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_DATETIME_TEXT)).sendKeys(value);
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    seleniumSettings.getWebDriver().findElement(By.name("timeWPAttribValue1")).sendKeys(value);
+                    seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_TIME_TEXT)).sendKeys(value);
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    seleniumSettings.getWebDriver().findElement(By.name("numWPAttribValue1")).sendKeys(value);
+                    seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_NUMBER_TEXT)).sendKeys(value);
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    seleniumSettings.getWebDriver().findElement(By.name("latlongWPAttribValue1")).sendKeys(value);
+                    seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_LATLONG_TEXT)).sendKeys(value);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
@@ -993,7 +1000,7 @@ public class UserpageFilter {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
                 psSelector.selectSpecificValue(By.name(FILTER_ROW_1_VALUE_FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
-                seleniumSettings.getWebDriver().findElement(By.name("txtWPAttribValue1")).sendKeys("*" + value + "*");
+                seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_TEXT_TEXT)).sendKeys("*" + value + "*");
             }
         }
         window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -1039,7 +1046,7 @@ public class UserpageFilter {
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            assertElement.assertSelect("ynWPAttribValue1", value);
+            assertElement.assertSelect(FILTER_ROW_1_VALUE_CHECKBOX_TEXT, value);
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
@@ -1051,29 +1058,29 @@ public class UserpageFilter {
                     //&& !operator.equals("This Wk to Dt") && !operator.equals("This Mo to Dt") //TODO check those lines
                     //&& !operator.equals("This FQ to Dt") && !operator.equals("This FY to Dt")) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    assertElement.assertText("dateWPAttribValue1", value);
+                    assertElement.assertText(FILTER_ROW_1_VALUE_DATE_TEXT, value);
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    assertElement.assertText("dateTimeWPAttribValue1", value);
+                    assertElement.assertText(FILTER_ROW_1_VALUE_DATETIME_TEXT, value);
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    assertElement.assertText("timeWPAttribValue1", value);
+                    assertElement.assertText(FILTER_ROW_1_VALUE_TIME_TEXT, value);
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    assertElement.assertText("numWPAttribValue1", value);
+                    assertElement.assertText(FILTER_ROW_1_VALUE_NUMBER_TEXT, value);
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    assertElement.assertText("latlongWPAttribValue1", value);
+                    assertElement.assertText(FILTER_ROW_1_VALUE_LATLONG_TEXT, value);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    assertElement.assertText("dateWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_DATE_TEXT, "");
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    assertElement.assertText("dateTimeWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_DATETIME_TEXT, "");
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    assertElement.assertText("timeWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_TIME_TEXT, "");
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    assertElement.assertText("numWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_NUMBER_TEXT, "");
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    assertElement.assertText("latlongWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_LATLONG_TEXT, "");
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
@@ -1082,9 +1089,9 @@ public class UserpageFilter {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
                 assertElement.assertRadioPsSelector(FILTER_ROW_1_VALUE_FIELD_TEXT, FILTER_ROW_1_VALUE_FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
-                assertElement.assertText("txtWPAttribValue1", "*" + value + "*");
+                assertElement.assertText(FILTER_ROW_1_VALUE_TEXT_TEXT, "*" + value + "*");
             } else {
-                assertElement.assertText("txtWPAttribValue1", "");
+                assertElement.assertText(FILTER_ROW_1_VALUE_TEXT_TEXT, "");
             }
         }
         seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();
