@@ -52,19 +52,18 @@ public class TbDateField {
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-
-        //TODO >=Today
-        //TODO <=Today
-        //TODO Within
-        //TODO This Wk
-        //TODO This Mo
-        //TODO This FQ
-        //TODO This FY
-        //TODO This Wk to Dt
-        //TODO This Mo to Dt
-        //TODO This FQ to Dt
-        //TODO This FY to Dt
-
+        //TODO
+        //>=Today
+        //<=Today
+        //Within
+        //This Wk
+        //This Mo
+        //This FQ
+        //This FY
+        //This Wk to Dt
+        //This Mo to Dt
+        //This FQ to Dt
+        //This FY to Dt
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Null", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Not Null", ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);

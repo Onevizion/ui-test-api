@@ -44,6 +44,21 @@ public class UserpageFilter {
 
     public static final int FIRST_MONTH_OF_FISCAL_YEAR = 1;
 
+    private static final String FILTER_ROW_1_ATTRIB_TEXT = "txtWPAttrib1";
+    private static final String FILTER_ROW_1_ATTRIB_BUTTON = "btnWPAttrib1";
+    private static final String FILTER_ROW_1_OPER_TASK = "tdWPOperator1";
+    private static final String FILTER_ROW_1_OPER = "WPOperator1";
+    private static final String FILTER_ROW_1_VALUE_FIELD_TEXT = "fSelWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_FIELD_BUTTON = "btnFSelWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_TEXT = "trSelWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_BUTTON = "btnTrSelWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_MULTI_SELECTOR_TEXT = "multSelWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_MULTI_SELECTOR_BUTTON = "btnMultSelWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_TRACKOR_DROP_DOWN_TEXT = "trDropDownWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_TRACKOR_DROP_DOWN_BUTTON = "btnTrDropDownWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_SELECTOR_TEXT = "selWPAttribValue1";
+    private static final String FILTER_ROW_1_VALUE_SELECTOR_BUTTON = "btnSelWPAttribValue1";
+
     @Resource
     private Js js;
 
@@ -75,15 +90,15 @@ public class UserpageFilter {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        psSelector.selectSpecificValue(By.name("btnWPAttrib1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+        psSelector.selectSpecificValue(By.name(FILTER_ROW_1_ATTRIB_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
         if (dateTypes != null) {
-            List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name("tdWPOperator1"))).getOptions();
+            List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_OPER_TASK))).getOptions();
             Assert.assertEquals(options.size(), dateTypes.size());
             for (int i = 0; i < dateTypes.size(); i++) {
                 Assert.assertEquals(options.get(i).getText(), dateTypes.get(i));
             }
         }
-        List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name("WPOperator1"))).getOptions();
+        List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_OPER))).getOptions();
         Assert.assertEquals(options.size(), operators.size());
         for (int i = 0; i < operators.size(); i++) {
             Assert.assertEquals(options.get(i).getText(), operators.get(i).getValue());
@@ -910,25 +925,25 @@ public class UserpageFilter {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        psSelector.selectSpecificValue(By.name("btnWPAttrib1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+        psSelector.selectSpecificValue(By.name(FILTER_ROW_1_ATTRIB_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
         if (dateType != null) {
-            new Select(seleniumSettings.getWebDriver().findElement(By.name("tdWPOperator1"))).selectByVisibleText(dateType);
+            new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_OPER_TASK))).selectByVisibleText(dateType);
         }
-        new Select(seleniumSettings.getWebDriver().findElement(By.name("WPOperator1"))).selectByVisibleText(operator);
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_OPER))).selectByVisibleText(operator);
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                psSelector.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                psSelector.selectSpecificValue(By.name(FILTER_ROW_1_VALUE_FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    psSelector.selectMultipleSpecificValues(By.name("btnTrSelWPAttribValue1"), 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(By.name(FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_BUTTON), 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    psSelector.selectMultipleSpecificValues(By.name("btnMultSelWPAttribValue1"), 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(By.name(FILTER_ROW_1_VALUE_MULTI_SELECTOR_BUTTON), 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    psSelector.selectSpecificValue(By.name("btnTrDropDownWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 0L, value, 1L);
+                    psSelector.selectSpecificValue(By.name(FILTER_ROW_1_VALUE_TRACKOR_DROP_DOWN_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 0L, value, 1L);
                 } else {
-                    psSelector.selectMultipleSpecificValues(By.name("btnSelWPAttribValue1"), 0L, Arrays.asList(value), 1L);
+                    psSelector.selectMultipleSpecificValues(By.name(FILTER_ROW_1_VALUE_SELECTOR_BUTTON), 0L, Arrays.asList(value), 1L);
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
@@ -939,7 +954,7 @@ public class UserpageFilter {
             if (operator.equals("=Field") || operator.equals("<>Field")
                     || operator.equals(">Field") || operator.equals("<Field")
                     || operator.equals(">=Field") || operator.equals("<=Field")) {
-                psSelector.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                psSelector.selectSpecificValue(By.name(FILTER_ROW_1_VALUE_FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             //} else if (operator.equals(">=Today") || operator.equals("<=Today") //TODO check those lines
             //        || operator.equals("This Wk") || operator.equals("This Mo")
             //        || operator.equals("This FQ") || operator.equals("This FY")) {
@@ -976,7 +991,7 @@ public class UserpageFilter {
             }
         } else {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                psSelector.selectSpecificValue(By.name("btnFSelWPAttribValue1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                psSelector.selectSpecificValue(By.name(FILTER_ROW_1_VALUE_FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 seleniumSettings.getWebDriver().findElement(By.name("txtWPAttribValue1")).sendKeys("*" + value + "*");
             }
@@ -988,37 +1003,37 @@ public class UserpageFilter {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertElement.assertRadioPsSelector("txtWPAttrib1", "btnWPAttrib1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
+        assertElement.assertRadioPsSelector(FILTER_ROW_1_ATTRIB_TEXT, FILTER_ROW_1_ATTRIB_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
         if (dateType != null) {
-            assertElement.assertSelect("tdWPOperator1", dateType);
+            assertElement.assertSelect(FILTER_ROW_1_OPER_TASK, dateType);
         }
-        assertElement.assertSelect("WPOperator1", operator);
+        assertElement.assertSelect(FILTER_ROW_1_OPER, operator);
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                assertElement.assertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector(FILTER_ROW_1_VALUE_FIELD_TEXT, FILTER_ROW_1_VALUE_FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    assertElement.assertCheckboxPsSelector("trSelWPAttribValue1", "btnTrSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector(FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_TEXT, FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    assertElement.assertCheckboxPsSelector("multSelWPAttribValue1", "btnMultSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector(FILTER_ROW_1_VALUE_MULTI_SELECTOR_TEXT, FILTER_ROW_1_VALUE_MULTI_SELECTOR_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    assertElement.assertRadioPsSelector("trDropDownWPAttribValue1", "btnTrDropDownWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, value, 1L, true);
+                    assertElement.assertRadioPsSelector(FILTER_ROW_1_VALUE_TRACKOR_DROP_DOWN_TEXT, FILTER_ROW_1_VALUE_TRACKOR_DROP_DOWN_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, value, 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.SELECTOR)) {
-                    assertElement.assertCheckboxPsSelector("selWPAttribValue1", "btnSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector(FILTER_ROW_1_VALUE_SELECTOR_TEXT, FILTER_ROW_1_VALUE_SELECTOR_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    assertElement.assertText("trSelWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_TEXT, "");
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    assertElement.assertText("multSelWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_MULTI_SELECTOR_TEXT, "");
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    assertElement.assertText("trDropDownWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_TRACKOR_DROP_DOWN_TEXT, "");
                 } else if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.SELECTOR)) {
-                    assertElement.assertText("selWPAttribValue1", "");
+                    assertElement.assertText(FILTER_ROW_1_VALUE_SELECTOR_TEXT, "");
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
@@ -1031,7 +1046,7 @@ public class UserpageFilter {
             if (operator.equals("=Field") || operator.equals("<>Field")
                     || operator.equals(">Field") || operator.equals("<Field")
                     || operator.equals(">=Field") || operator.equals("<=Field")) {
-                assertElement.assertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector(FILTER_ROW_1_VALUE_FIELD_TEXT, FILTER_ROW_1_VALUE_FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                     //&& !operator.equals("This Wk to Dt") && !operator.equals("This Mo to Dt") //TODO check those lines
                     //&& !operator.equals("This FQ to Dt") && !operator.equals("This FY to Dt")) {
@@ -1065,7 +1080,7 @@ public class UserpageFilter {
             }
         } else {
             if (operator.equals("=Field") || operator.equals("<>Field")) {
-                assertElement.assertRadioPsSelector("fSelWPAttribValue1", "btnFSelWPAttribValue1", AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector(FILTER_ROW_1_VALUE_FIELD_TEXT, FILTER_ROW_1_VALUE_FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
                 assertElement.assertText("txtWPAttribValue1", "*" + value + "*");
             } else {
