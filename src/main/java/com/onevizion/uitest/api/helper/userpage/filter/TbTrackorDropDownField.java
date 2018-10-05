@@ -35,12 +35,13 @@ public class TbTrackorDropDownField {
         List<FilterOperatorType> operators = FilterOperatorType.getTrackorDropDownOperators();
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "<>", ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Null", ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Not Null", ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
-        //TODO Is New
-        //TODO Is Not New
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
+        //TODO
+        //Is New
+        //Is Not New
     }
 
 }

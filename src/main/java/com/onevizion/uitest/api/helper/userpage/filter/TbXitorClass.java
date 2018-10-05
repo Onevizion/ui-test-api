@@ -35,14 +35,14 @@ public class TbXitorClass {
         List<FilterOperatorType> operators = FilterOperatorType.getXitorClassOperators(supportOuterOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "<>", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Null", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Not Null", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
 
         if (supportOuterOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "(+)=", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "(+)<>", ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
         }
     }
 

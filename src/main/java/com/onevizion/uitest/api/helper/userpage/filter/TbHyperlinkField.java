@@ -35,10 +35,10 @@ public class TbHyperlinkField {
         List<FilterOperatorType> operators = FilterOperatorType.getHyperlinkOperators();
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.HYPERLINK, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "<>", ConfigFieldType.HYPERLINK, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Null", ConfigFieldType.HYPERLINK, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Not Null", ConfigFieldType.HYPERLINK, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.HYPERLINK, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.HYPERLINK, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.HYPERLINK, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.HYPERLINK, columnIndex, null, cellVals, null);
     }
 
 }

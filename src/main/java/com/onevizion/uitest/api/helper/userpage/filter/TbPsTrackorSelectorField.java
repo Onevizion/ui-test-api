@@ -47,23 +47,24 @@ public class TbPsTrackorSelectorField {
         List<FilterOperatorType> operators = FilterOperatorType.getPsTrackorSelectorOperators(supportOuterOperations, supportFieldOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Null", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Not Null", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NULL, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
 
         if (supportFieldOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=Field", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>Field", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL_FIELD, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL_FIELD, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2);
         }
 
         if (supportOuterOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)=", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)<>", ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
         }
 
-        //TODO Is New
-        //TODO Is Not New
+        //TODO
+        //Is New
+        //Is Not New
     }
 
 }

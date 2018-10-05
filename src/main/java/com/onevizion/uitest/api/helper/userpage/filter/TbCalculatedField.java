@@ -35,10 +35,10 @@ public class TbCalculatedField {
         List<FilterOperatorType> operators = FilterOperatorType.getCalculatedOperators(supportOuterOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "<>", ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Null", ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "Is Not Null", ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
 
         if (supportOuterOperations) {
             //TODO null pointer exception

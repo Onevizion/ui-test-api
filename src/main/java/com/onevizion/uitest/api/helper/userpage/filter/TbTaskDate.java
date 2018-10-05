@@ -39,11 +39,11 @@ public class TbTaskDate {
         List<FilterOperatorType> operators = FilterOperatorType.getTaskDateOperators();
         userpageFilter.checkFilterOperators(fieldName, Arrays.asList("S", "F"), operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, ">", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, ">=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<=", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, FilterOperatorType.EQUAL, ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, FilterOperatorType.MORE, ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, FilterOperatorType.LESS, ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, FilterOperatorType.MORE_AND_EQUAL, ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, FilterOperatorType.LESS_AND_EQUAL, ConfigFieldType.DATE, columnIndex, null, cellVals, null);
         //TODO
         //>=Today
         //<=Today
@@ -56,9 +56,9 @@ public class TbTaskDate {
         //This FQ to Dt
         //This FY
         //This FY to Dt
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "<>", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "Is Null", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, "Is Not Null", ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, FilterOperatorType.NOT_EQUAL, ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, FilterOperatorType.NULL, ConfigFieldType.DATE, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, startFinish, FilterOperatorType.NOT_NULL, ConfigFieldType.DATE, columnIndex, null, cellVals, null);
     }
 
 }

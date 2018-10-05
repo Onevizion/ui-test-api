@@ -47,27 +47,27 @@ public class TbLatitudeField {
         List<FilterOperatorType> operators = FilterOperatorType.getLatitudeOperators(supportOuterOperations, supportFieldOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Null", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Not Null", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.MORE, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.LESS, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.MORE_AND_EQUAL, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.LESS_AND_EQUAL, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NULL, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
 
         if (supportFieldOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=Field", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>Field", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">Field", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<Field", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=Field", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=Field", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL_FIELD, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL_FIELD, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.MORE_FIELD, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.LESS_FIELD, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.MORE_AND_EQUAL_FIELD, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.LESS_AND_EQUAL_FIELD, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2);
         }
 
         if (supportOuterOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)=", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)<>", ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.LATITUDE, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
         }
     }
 

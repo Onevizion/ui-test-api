@@ -47,11 +47,11 @@ public class TbDateTimeField {
         List<FilterOperatorType> operators = FilterOperatorType.getDateTimeOperators(supportFieldOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.MORE, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.LESS, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.MORE_AND_EQUAL, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.LESS_AND_EQUAL, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
         //TODO
         //>=Today
         //<=Today
@@ -64,17 +64,17 @@ public class TbDateTimeField {
         //This FQ to Dt
         //This FY
         //This FY to Dt
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Null", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Not Null", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NULL, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
 
         if (supportFieldOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=Field", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>Field", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">Field", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<Field", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, ">=Field", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<=Field", ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL_FIELD, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL_FIELD, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.MORE_FIELD, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.LESS_FIELD, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.MORE_AND_EQUAL_FIELD, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.LESS_AND_EQUAL_FIELD, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);
         }
     }
 

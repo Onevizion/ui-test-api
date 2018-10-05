@@ -35,7 +35,7 @@ public class TbWpName {
         List<FilterOperatorType> operators = FilterOperatorType.getWpNameOperators();
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, "=", ConfigFieldType.TEXT, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.TEXT, columnIndex, null, cellVals, null);
     }
 
 }

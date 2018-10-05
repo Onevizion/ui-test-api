@@ -47,19 +47,19 @@ public class TbTextField {
         List<FilterOperatorType> operators = FilterOperatorType.getTextOperators(supportOuterOperations, supportFieldOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=", ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>", ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Null", ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "Is Not Null", ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL, ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NULL, ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
 
         if (supportFieldOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "=Field", ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "<>Field", ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL_FIELD, ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL_FIELD, ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2);
         }
 
         if (supportOuterOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)=", ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, "(+)<>", ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
+            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.TEXT, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
         }
     }
 

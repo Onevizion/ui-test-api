@@ -115,7 +115,7 @@ public class UserpageFilter {
 
     @SuppressWarnings("unchecked")
     public void checkFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType,
-            String operator, ConfigFieldType fieldDataType, Long columnIndex, Long columnIndex2,
+            FilterOperatorType operator, ConfigFieldType fieldDataType, Long columnIndex, Long columnIndex2,
             List<String> cellVals, List<String> cellVals2, List<String> ... cellValsKeys) {
         SecureRandom generator = new SecureRandom();
         int randomIndex = generator.nextInt(2);
@@ -125,11 +125,11 @@ public class UserpageFilter {
             selectFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, dateType, operator, fieldDataType);
         } else if (randomIndex == 0) {
             if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
-                filter.selectByVisibleText("G:" + fieldName + " " + operator + " " + value, 0L);
+                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue() + " " + value, 0L);
             } else if (dateType != null) {
-                filter.selectByVisibleText("G:" + fieldName + " " + operator + " " + dateType, 0L);
+                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue() + " " + dateType, 0L);
             } else {
-                filter.selectByVisibleText("G:" + fieldName + " " + operator, 0L);
+                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue(), 0L);
             }
         } else {
             throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
@@ -138,7 +138,7 @@ public class UserpageFilter {
         if ((fieldName.equals("FTB:FTB ID") || fieldName.equals("FT:FT ID") || fieldName.equals("FR:FR ID")
                 || fieldName.equals("FTB:Rollup") || fieldName.equals("FTBP:Rollup") || fieldName.equals("FTBC:Rollup")
                 || fieldName.equals("FT:Rollup") || fieldName.equals("FTP:Rollup") || fieldName.equals("FTC:Rollup")
-                || fieldName.equals("FR:Rollup") || fieldName.equals("FRP:Rollup") || fieldName.equals("FRC:Rollup")) && operator.equals("Is Null")) {
+                || fieldName.equals("FR:Rollup") || fieldName.equals("FRP:Rollup") || fieldName.equals("FRC:Rollup")) && operator.equals(FilterOperatorType.NULL)) {
             
         } else {
             Long rowsCntAfter = grid.getGridRowsCount(0L);
@@ -154,7 +154,7 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-            if (operator.equals("=")) {
+            if (operator.equals(FilterOperatorType.EQUAL)) {
                 for (String cellVal : cellVals) {
                     if (cellVal.contains(value)) {
                         cnt = cnt + 1L;
@@ -162,7 +162,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEquals(0L, columnIndex, Arrays.asList(value));
-            } else if (operator.equals("(+)=")) {
+            } else if (operator.equals(FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER)) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
@@ -199,7 +199,7 @@ public class UserpageFilter {
 
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEqualsOrNull(0L, columnIndex, value);
-            } else if (operator.equals("<>")) {
+            } else if (operator.equals(FilterOperatorType.NOT_EQUAL)) {
                 for (String cellVal : cellVals) {
                     if (!cellVal.contains(value)) {
                         cnt = cnt + 1L;
@@ -207,7 +207,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEquals(0L, columnIndex, value);
-            } else if (operator.equals("(+)<>")) {
+            } else if (operator.equals(FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER)) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
@@ -256,7 +256,7 @@ public class UserpageFilter {
 
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEqualsOrNull(0L, columnIndex, value);
-            } else if (operator.equals("Is Null")) {
+            } else if (operator.equals(FilterOperatorType.NULL)) {
                 for (String cellVal : cellVals) {
                     if ("&nbsp;".equals(cellVal) || "".equals(cellVal)) {
                         cnt = cnt + 1L;
@@ -264,7 +264,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnIsNull(0L, columnIndex);
-            } else if (operator.equals("Is Not Null")) {
+            } else if (operator.equals(FilterOperatorType.NOT_NULL)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal)) {
                         cnt = cnt + 1L;
@@ -272,7 +272,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnIsNotNull(0L, columnIndex);
-            } else if (operator.equals("=Field")) {
+            } else if (operator.equals(FilterOperatorType.EQUAL_FIELD)) {
                 for (int i = 0; i < cellVals.size(); i++) {
                     if (cellVals.get(i).equals(cellVals2.get(i))) {
                         cnt = cnt + 1L;
@@ -280,7 +280,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnEqualsField(0L, columnIndex, columnIndex2);
-            } else if (operator.equals("<>Field")) {
+            } else if (operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
                 for (int i = 0; i < cellVals.size(); i++) {
                     if (!cellVals.get(i).equals(cellVals2.get(i))) {
                         cnt = cnt + 1L;
@@ -292,7 +292,7 @@ public class UserpageFilter {
                 throw new SeleniumUnexpectedException("Not support operation");
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            if (operator.equals("=")) {
+            if (operator.equals(FilterOperatorType.EQUAL)) {
                 for (String cellVal : cellVals) {
                     if ("YES".equalsIgnoreCase(value)) {
                         if (cellVal.equals("YES")) {
@@ -306,7 +306,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridBooleanColumnEquals(0L, columnIndex, Arrays.asList(value.toUpperCase()));
-            } else if (operator.equals("(+)=")) {
+            } else if (operator.equals(FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER)) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
@@ -349,7 +349,7 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            if (operator.equals("=")) {
+            if (operator.equals(FilterOperatorType.EQUAL)) {
                 for (String cellVal : cellVals) {
                     if (cellVal.equals(value)) {
                         cnt = cnt + 1L;
@@ -357,7 +357,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEquals(0L, columnIndex, Arrays.asList(value));
-            } else if (operator.equals("(+)=")) {
+            } else if (operator.equals(FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER)) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
@@ -394,7 +394,7 @@ public class UserpageFilter {
 
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnEqualsOrNull(0L, columnIndex, value);
-            } else if (operator.equals(">")) {
+            } else if (operator.equals(FilterOperatorType.MORE)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -420,7 +420,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMore(0L, columnIndex, value, fieldDataType);
-            } else if (operator.equals("<")) {
+            } else if (operator.equals(FilterOperatorType.LESS)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -446,7 +446,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLess(0L, columnIndex, value, fieldDataType);
-            } else if (operator.equals(">=")) {
+            } else if (operator.equals(FilterOperatorType.MORE_AND_EQUAL)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -472,7 +472,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMoreEquals(0L, columnIndex, value, fieldDataType);
-            } else if (operator.equals("<=")) {
+            } else if (operator.equals(FilterOperatorType.LESS_AND_EQUAL)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -498,7 +498,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLessEquals(0L, columnIndex, value, fieldDataType);
-            } else if (operator.equals("<>")) {
+            } else if (operator.equals(FilterOperatorType.NOT_EQUAL)) {
                 for (String cellVal : cellVals) {
                     if (!cellVal.equals(value)) {
                         cnt = cnt + 1L;
@@ -506,7 +506,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEquals(0L, columnIndex, value);
-            } else if (operator.equals("(+)<>")) {
+            } else if (operator.equals(FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER)) {
                 Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
                 for (int i = 0; i < rowsCntBefore ;i++) {
@@ -555,7 +555,7 @@ public class UserpageFilter {
 
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridTextColumnNotEqualsOrNull(0L, columnIndex, value);
-            } else if (operator.equals("Is Null")) {
+            } else if (operator.equals(FilterOperatorType.NULL)) {
                 for (String cellVal : cellVals) {
                     if ("&nbsp;".equals(cellVal) || "".equals(cellVal) || "Not Exist".equals(cellVal)) {
                         cnt = cnt + 1L;
@@ -563,7 +563,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnIsNull(0L, columnIndex);
-            } else if (operator.equals("Is Not Null")) {
+            } else if (operator.equals(FilterOperatorType.NOT_NULL)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         cnt = cnt + 1L;
@@ -571,7 +571,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnIsNotNull(0L, columnIndex);
-            } else if (operator.equals("=Field")) {
+            } else if (operator.equals(FilterOperatorType.EQUAL_FIELD)) {
                 for (int i = 0; i < cellVals.size(); i++) {
                     if (cellVals.get(i).equals(cellVals2.get(i))) {
                         cnt = cnt + 1L;
@@ -579,7 +579,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnEqualsField(0L, columnIndex, columnIndex2);
-            } else if (operator.equals("<>Field")) {
+            } else if (operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
                 for (int i = 0; i < cellVals.size(); i++) {
                     if (!cellVals.get(i).equals(cellVals2.get(i))) {
                         cnt = cnt + 1L;
@@ -587,7 +587,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnNotEqualsField(0L, columnIndex, columnIndex2);
-            } else if (operator.equals(">Field")) {
+            } else if (operator.equals(FilterOperatorType.MORE_FIELD)) {
                 for (int i = 0; i < cellVals.size(); i++) {
                     if (!"&nbsp;".equals(cellVals.get(i)) && !"".equals(cellVals.get(i)) && !"&nbsp;".equals(cellVals2.get(i)) && !"".equals(cellVals2.get(i))) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -613,7 +613,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMoreField(0L, columnIndex, columnIndex2, fieldDataType);
-            } else if (operator.equals("<Field")) {
+            } else if (operator.equals(FilterOperatorType.LESS_FIELD)) {
                 for (int i = 0; i < cellVals.size(); i++) {
                     if (!"&nbsp;".equals(cellVals.get(i)) && !"".equals(cellVals.get(i)) && !"&nbsp;".equals(cellVals2.get(i)) && !"".equals(cellVals2.get(i))) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -639,7 +639,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLessField(0L, columnIndex, columnIndex2, fieldDataType);
-            } else if (operator.equals(">=Field")) {
+            } else if (operator.equals(FilterOperatorType.MORE_AND_EQUAL_FIELD)) {
                 for (int i = 0; i < cellVals.size(); i++) {
                     if (!"&nbsp;".equals(cellVals.get(i)) && !"".equals(cellVals.get(i)) && !"&nbsp;".equals(cellVals2.get(i)) && !"".equals(cellVals2.get(i))) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -665,7 +665,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMoreEqualsField(0L, columnIndex, columnIndex2, fieldDataType);
-            } else if (operator.equals("<=Field")) {
+            } else if (operator.equals(FilterOperatorType.LESS_AND_EQUAL_FIELD)) {
                 for (int i = 0; i < cellVals.size(); i++) {
                     if (!"&nbsp;".equals(cellVals.get(i)) && !"".equals(cellVals.get(i)) && !"&nbsp;".equals(cellVals2.get(i)) && !"".equals(cellVals2.get(i))) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -691,7 +691,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLessEqualsField(0L, columnIndex, columnIndex2, fieldDataType);
-            } else if (operator.equals(">=Today")) {
+            } else if (operator.equals(FilterOperatorType.MORE_AND_EQUAL_TODAY)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -711,7 +711,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnMoreEqualsToday(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ", "")), fieldDataType);
-            } else if (operator.equals("<=Today")) {
+            } else if (operator.equals(FilterOperatorType.LESS_AND_EQUAL_TODAY)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -731,7 +731,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnLessEqualsToday(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ", "")), fieldDataType);
-            } else if (operator.equals("Within")) {
+            } else if (operator.equals(FilterOperatorType.WITHIN)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -748,7 +748,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnWithin(0L, columnIndex, Integer.parseInt(cellValsKeys[0].get(0)), Integer.parseInt(cellValsKeys[0].get(1)), fieldDataType);
-            } else if (operator.equals("This Wk")) {
+            } else if (operator.equals(FilterOperatorType.THIS_WK)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -772,7 +772,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisWk(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ","")), fieldDataType);
-            } else if (operator.equals("This Mo")) {
+            } else if (operator.equals(FilterOperatorType.THIS_MO)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -796,7 +796,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisMo(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ","")), fieldDataType);
-            } else if (operator.equals("This FQ")) {
+            } else if (operator.equals(FilterOperatorType.THIS_FQ)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -820,7 +820,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisFQ(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ","")), fieldDataType);
-            } else if (operator.equals("This FY")) {
+            } else if (operator.equals(FilterOperatorType.THIS_FY)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -844,7 +844,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisFY(0L, columnIndex, Integer.parseInt((cellValsKeys[0].get(0) + cellValsKeys[0].get(1)).replace(" ","")), fieldDataType);
-            } else if (operator.equals("This Wk to Dt")) {
+            } else if (operator.equals(FilterOperatorType.THIS_WK_TO_DT)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -861,7 +861,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisWkToDt(0L, columnIndex, fieldDataType);
-            } else if (operator.equals("This Mo to Dt")) {
+            } else if (operator.equals(FilterOperatorType.THIS_MO_TO_DT)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -878,7 +878,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisMoToDt(0L, columnIndex, fieldDataType);
-            } else if (operator.equals("This FQ to Dt")) {
+            } else if (operator.equals(FilterOperatorType.THIS_FQ_TO_DT)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -895,7 +895,7 @@ public class UserpageFilter {
                 }
                 Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
                 checkGridColumnThisFQToDt(0L, columnIndex, fieldDataType);
-            } else if (operator.equals("This FY to Dt")) {
+            } else if (operator.equals(FilterOperatorType.THIS_FY_TO_DT)) {
                 for (String cellVal : cellVals) {
                     if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                         if (fieldDataType.equals(ConfigFieldType.DATE)) {
@@ -928,7 +928,7 @@ public class UserpageFilter {
         }
     }
 
-    private void selectFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, String operator, ConfigFieldType fieldDataType) {
+    private void selectFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
@@ -936,13 +936,13 @@ public class UserpageFilter {
         if (dateType != null) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_OPER_TASK))).selectByVisibleText(dateType);
         }
-        new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_OPER))).selectByVisibleText(operator);
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_OPER))).selectByVisibleText(operator.getValue());
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-            if (operator.equals("=Field") || operator.equals("<>Field")) {
+            if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
                 psSelector.selectSpecificValue(By.name(FILTER_ROW_1_VALUE_FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
-            } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
+            } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
                     psSelector.selectMultipleSpecificValues(By.name(FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_BUTTON), 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
@@ -958,13 +958,13 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            if (operator.equals("=Field") || operator.equals("<>Field")
-                    || operator.equals(">Field") || operator.equals("<Field")
-                    || operator.equals(">=Field") || operator.equals("<=Field")) {
+            if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)
+                    || operator.equals(FilterOperatorType.MORE_FIELD) || operator.equals(FilterOperatorType.LESS_FIELD)
+                    || operator.equals(FilterOperatorType.MORE_AND_EQUAL_FIELD) || operator.equals(FilterOperatorType.LESS_AND_EQUAL_FIELD)) {
                 psSelector.selectSpecificValue(By.name(FILTER_ROW_1_VALUE_FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
-            //} else if (operator.equals(">=Today") || operator.equals("<=Today") //TODO check those lines
-            //        || operator.equals("This Wk") || operator.equals("This Mo")
-            //        || operator.equals("This FQ") || operator.equals("This FY")) {
+            //} else if (operator.equals(FilterOperatorType.MORE_AND_EQUAL_TODAY) || operator.equals(FilterOperatorType.LESS_AND_EQUAL_TODAY) //TODO check those lines
+            //        || operator.equals(FilterOperatorType.THIS_WK) || operator.equals(FilterOperatorType.THIS_MO)
+            //        || operator.equals(FilterOperatorType.THIS_FQ) || operator.equals(FilterOperatorType.THIS_FY)) {
             //    if (cellValsKeys != null) {
             //        new Select(seleniumSettings.getWebDriver().findElement(By.name("todayDirWPAttribValue1"))).selectByVisibleText(cellValsKeys[0].get(0));
             //        if (!"0".equals(cellValsKeys[0].get(1))) {
@@ -972,16 +972,16 @@ public class UserpageFilter {
             //            seleniumSettings.getWebDriver().findElement(By.name("todayValWPAttribValue1")).sendKeys(cellValsKeys[0].get(1));
             //        }
             //    }
-            //} else if (operator.equals("Within")) {
+            //} else if (operator.equals(FilterOperatorType.WITHIN)) {
             //    if ((cellValsKeys != null) && ((!"0".equals(cellValsKeys[0].get(0)))||(!"0".equals(cellValsKeys[0].get(1))))) {
             //        seleniumSettings.getWebDriver().findElement(By.name("withinBeforeWPAttribValue1")).clear();
             //        seleniumSettings.getWebDriver().findElement(By.name("withinBeforeWPAttribValue1")).sendKeys(cellValsKeys[0].get(0));
             //        seleniumSettings.getWebDriver().findElement(By.name("withinAfterWPAttribValue1")).clear();
             //        seleniumSettings.getWebDriver().findElement(By.name("withinAfterWPAttribValue1")).sendKeys(cellValsKeys[0].get(1));
             //    }
-            } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
-                    //&& !operator.equals("This Wk to Dt") && !operator.equals("This Mo to Dt") //TODO check those lines
-                    //&& !operator.equals("This FQ to Dt") && !operator.equals("This FY to Dt")) {
+            } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
+                    //&& !operator.equals(FilterOperatorType.THIS_WK_TO_DT) && !operator.equals(FilterOperatorType.THIS_MO_TO_DT) //TODO check those lines
+                    //&& !operator.equals(FilterOperatorType.THIS_FQ_TO_DT) && !operator.equals(FilterOperatorType.THIS_FY_TO_DT)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_DATE_TEXT)).sendKeys(value);
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
@@ -997,16 +997,16 @@ public class UserpageFilter {
                 }
             }
         } else {
-            if (operator.equals("=Field") || operator.equals("<>Field")) {
+            if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
                 psSelector.selectSpecificValue(By.name(FILTER_ROW_1_VALUE_FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
-            } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
+            } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
                 seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_TEXT_TEXT)).sendKeys("*" + value + "*");
             }
         }
         window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
-    private void clearFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, String operator, ConfigFieldType fieldDataType) {
+    private void clearFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
@@ -1014,13 +1014,13 @@ public class UserpageFilter {
         if (dateType != null) {
             assertElement.assertSelect(FILTER_ROW_1_OPER_TASK, dateType);
         }
-        assertElement.assertSelect(FILTER_ROW_1_OPER, operator);
+        assertElement.assertSelect(FILTER_ROW_1_OPER, operator.getValue());
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-            if (operator.equals("=Field") || operator.equals("<>Field")) {
+            if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
                 assertElement.assertRadioPsSelector(FILTER_ROW_1_VALUE_FIELD_TEXT, FILTER_ROW_1_VALUE_FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
-            } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
+            } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
                     assertElement.assertCheckboxPsSelector(FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_TEXT, FILTER_ROW_1_VALUE_TRACKOR_SELECTOR_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
@@ -1050,13 +1050,13 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            if (operator.equals("=Field") || operator.equals("<>Field")
-                    || operator.equals(">Field") || operator.equals("<Field")
-                    || operator.equals(">=Field") || operator.equals("<=Field")) {
+            if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)
+                    || operator.equals(FilterOperatorType.MORE_FIELD) || operator.equals(FilterOperatorType.LESS_FIELD)
+                    || operator.equals(FilterOperatorType.MORE_AND_EQUAL_FIELD) || operator.equals(FilterOperatorType.LESS_AND_EQUAL_FIELD)) {
                 assertElement.assertRadioPsSelector(FILTER_ROW_1_VALUE_FIELD_TEXT, FILTER_ROW_1_VALUE_FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
-            } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
-                    //&& !operator.equals("This Wk to Dt") && !operator.equals("This Mo to Dt") //TODO check those lines
-                    //&& !operator.equals("This FQ to Dt") && !operator.equals("This FY to Dt")) {
+            } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
+                    //&& !operator.equals(FilterOperatorType.THIS_WK_TO_DT) && !operator.equals(FilterOperatorType.THIS_MO_TO_DT) //TODO check those lines
+                    //&& !operator.equals(FilterOperatorType.THIS_FQ_TO_DT) && !operator.equals(FilterOperatorType.THIS_FY_TO_DT)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     assertElement.assertText(FILTER_ROW_1_VALUE_DATE_TEXT, value);
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
@@ -1086,9 +1086,9 @@ public class UserpageFilter {
                 }
             }
         } else {
-            if (operator.equals("=Field") || operator.equals("<>Field")) {
+            if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
                 assertElement.assertRadioPsSelector(FILTER_ROW_1_VALUE_FIELD_TEXT, FILTER_ROW_1_VALUE_FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
-            } else if (!operator.equals("Is Null") && !operator.equals("Is Not Null")) {
+            } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
                 assertElement.assertText(FILTER_ROW_1_VALUE_TEXT_TEXT, "*" + value + "*");
             } else {
                 assertElement.assertText(FILTER_ROW_1_VALUE_TEXT_TEXT, "");
