@@ -161,6 +161,7 @@ public class ElementWait {
     public void waitElementAttribute(WebElement element, String attribute, String attributeValue) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element [" + element + "] attribute [" + attribute + "] value [" + attributeValue + "] is failed")
+            .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> element.getAttribute(attribute).equals(attributeValue));
     }
 
@@ -172,6 +173,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
+            .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> actualValueSupplier.get().equals(attributeValue));
     }
 
@@ -183,6 +185,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
+            .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> actualValueSupplier.get().equals(attributeValue));
     }
 
@@ -193,6 +196,7 @@ public class ElementWait {
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(supplier)
+            .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> {
                 List<String> actualAttributeValue = Arrays.asList(webdriver.findElement(By.id(id)).getAttribute(attribute).split(";"));
                 for (int i = 0; i < actualAttributeValue.size(); i++) {
