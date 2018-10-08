@@ -499,6 +499,14 @@ public class Js {
                 + "return array;");
     }
 
+    public Object getGridCellsValuesHTMLForColumnByColIndex(Long gridId, Long rowsCnt, Long columnIndex) {
+        return execJs2("var array = [];"
+                + "for (var i = 0; i < " + rowsCnt + "; i++) {"
+                + "    array[i] = gridArr[" + gridId + "].grid.cellByIndex(i, " + columnIndex + ").cell.innerHTML;"
+                + "}"
+                + "return array;");
+    }
+
     public Object getGridSort(Long gridId) {
         return execJs2("return gridArr[" + gridId + "].grid.getSortingState();");
     }
