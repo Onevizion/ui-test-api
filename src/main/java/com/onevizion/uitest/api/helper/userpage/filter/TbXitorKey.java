@@ -39,6 +39,7 @@ public class TbXitorKey {
 
         Long rowsCnt = grid.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
+        List<String> cellValsHTML = (List<String>) js.getGridCellsValuesHTMLForColumnByColIndex(0L, rowsCnt, columnIndex);
         List<String> cellVals2 = null;
         if (supportFieldOperations) {
             cellVals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex2);
@@ -62,9 +63,8 @@ public class TbXitorKey {
             userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, null, cellVals, null, cellValsKeys);
         }
 
-        //TODO
-        //Is New
-        //Is Not New
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NEW, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, null, cellValsHTML, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_NEW, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, null, cellValsHTML, null);
     }
 
 }

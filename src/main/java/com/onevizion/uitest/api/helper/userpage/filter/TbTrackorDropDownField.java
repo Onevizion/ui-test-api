@@ -31,6 +31,7 @@ public class TbTrackorDropDownField {
 
         Long rowsCnt = grid.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
+        List<String> cellValsHTML = (List<String>) js.getGridCellsValuesHTMLForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         List<FilterOperatorType> operators = FilterOperatorType.getTrackorDropDownOperators();
         userpageFilter.checkFilterOperators(fieldName, null, operators);
@@ -39,9 +40,8 @@ public class TbTrackorDropDownField {
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
         userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
-        //TODO
-        //Is New
-        //Is Not New
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NEW, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellValsHTML, null);
+        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_NEW, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellValsHTML, null);
     }
 
 }
