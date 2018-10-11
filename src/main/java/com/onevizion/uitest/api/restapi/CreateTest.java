@@ -44,7 +44,7 @@ public class CreateTest {
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
 
-            String input = "equal(XITOR_KEY, \"\"" + testName + "\"\")";
+            String input = "equal(XITOR_KEY, \"\\\"" + testName + "\\\"\")";
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
