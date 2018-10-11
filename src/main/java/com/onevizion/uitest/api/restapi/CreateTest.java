@@ -100,7 +100,7 @@ public class CreateTest {
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                throw new SeleniumUnexpectedException("Failed : HTTP error code : " + conn.getResponseCode());
+                throw new SeleniumUnexpectedException("Create Test Failed : HTTP error code : " + conn.getResponseCode());
             }
 
             conn.disconnect();
