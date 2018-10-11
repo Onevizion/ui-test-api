@@ -41,7 +41,7 @@ public class CreateTestResult {
                     "     { " + 
                     "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME + "\", " + 
                     "       \"filter\": { " + 
-                    "         \"XITOR_KEY\": \"" + testName + "\" " + 
+                    "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
                     "       } " + 
                     "     } " + 
                     "   ] " + 
