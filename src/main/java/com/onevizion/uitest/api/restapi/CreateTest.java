@@ -44,7 +44,7 @@ public class CreateTest {
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
 
-            String input = "equal(XITOR_KEY, \"" + testName + "\")";
+            String input = "equal(XITOR_KEY, \"\"" + testName + "\"\")";
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
@@ -65,10 +65,10 @@ public class CreateTest {
                 } else if (jsonNode.size() == 1) {
                     isExist = true;
                 } else {
-                    throw new SeleniumUnexpectedException("");
+                    throw new SeleniumUnexpectedException("Found many tests");
                 }
             } else {
-                throw new SeleniumUnexpectedException("");
+                throw new SeleniumUnexpectedException("Result not array");
             }
 
             conn.disconnect();
