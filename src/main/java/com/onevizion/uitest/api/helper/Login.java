@@ -70,8 +70,20 @@ public class Login {
 
         seleniumSettings.getWebDriver().findElement(By.id("btn")).click();
 
-        wait.waitWebElement(By.id("auth_message"));
+        elementWait.waitElementById("auth_message");
+        elementWait.waitElementVisibleById("auth_message");
+        elementWait.waitElementDisplayById("auth_message");
+        elementWait.waitElementById("auth_close");
+        elementWait.waitElementVisibleById("auth_close");
+        elementWait.waitElementDisplayById("auth_close");
+
         elementWait.waitElementAttributeById("auth_message", "innerText", errorMessage);
+        seleniumSettings.getWebDriver().findElement(By.id("auth_close")).click();
+
+        elementWait.waitElementNotVisibleById("auth_message");
+        elementWait.waitElementNotDisplayById("auth_message");
+        elementWait.waitElementNotVisibleById("auth_close");
+        elementWait.waitElementNotDisplayById("auth_close");
     }
 
     public void loginIntoApiV3() {

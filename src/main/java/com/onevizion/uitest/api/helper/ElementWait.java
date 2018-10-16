@@ -102,7 +102,7 @@ public class ElementWait {
             .until(ExpectedConditions.invisibilityOf(element));
     }
 
-    public void waitElementNotVisibleByNName(String name) {
+    public void waitElementNotVisibleByName(String name) {
         waitElementByName(name);
 
         WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
