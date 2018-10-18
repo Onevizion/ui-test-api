@@ -8,7 +8,7 @@ import com.onevizion.uitest.api.helper.Js;
 class HtmlInputFileJs extends Js {
 
     void showOnBplImport(String id) {
-        execJs("document.getElementById('" + id + "').style.display = '';");
+        execJs("document.getElementById('" + id + "').style.display = 'inline';");
     }
 
     void hideOnBplImport(String id) {
