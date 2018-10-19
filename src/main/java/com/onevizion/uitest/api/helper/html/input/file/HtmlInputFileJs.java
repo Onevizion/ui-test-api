@@ -23,28 +23,20 @@ class HtmlInputFileJs extends Js {
                 + "document.getElementById('" + id + "').style.transform = 'none';");
     }
 
-    void showInputForFile2(String id) {
-        execJs("document.getElementById('" + id + "').style.visibility = 'visible';"
-                + "document.getElementById('" + id + "').style.borderWidth = '0';"
-                + "document.getElementById('" + id + "').style.transform = 'none';");
+    void showInputForFileTb(String frameId, String inputId) {
+        execJs("document.getElementById('" + frameId + "').parentNode.style.visibility = 'visible';"
+                + "document.getElementById('" + frameId + "').parentNode.style.zIndex = 1000000;"
+                + "document.getElementById('" + frameId + "').parentNode.style.top = '0px';"
+                + "document.getElementById('" + frameId + "').parentNode.style.left = '0px';"
+                + "document.getElementById('" + frameId + "').contentWindow.document.getElementById('" + inputId + "').style.top = '0px';");
     }
 
-    void showInputForFileTb(String inputId) {
-        execJs("document.getElementById('ifrmHideForm').parentNode.style.visibility = 'visible';"
-                + "document.getElementById('ifrmHideForm').parentNode.style.zIndex = 1000000;"
-                + "document.getElementById('ifrmHideForm').parentNode.style.top = '0px';"
-                + "document.getElementById('ifrmHideForm').parentNode.style.left = '0px';"
-                // + "document.getElementById('ifrmHideForm').parentNode.style.position = 'absolute';"
-                + "document.getElementById('ifrmHideForm').contentWindow.document.getElementById('" + inputId + "').style.top = '0px';");
-    }
-
-    void hideInputForFileTb(String inputId) {
-        execJs("document.getElementById('ifrmHideForm').parentNode.style.visibility = 'hidden';"
-                + "document.getElementById('ifrmHideForm').parentNode.style.zIndex = -100000;"
-                + "document.getElementById('ifrmHideForm').parentNode.style.top = null;"
-                + "document.getElementById('ifrmHideForm').parentNode.style.left = null;"
-                // + "document.getElementById('ifrmHideForm').parentNode.style.position = null;"
-                + "document.getElementById('ifrmHideForm').contentWindow.document.getElementById('" + inputId + "').style.top = '-100px';");
+    void hideInputForFileTb(String frameId, String inputId) {
+        execJs("document.getElementById('" + frameId + "').parentNode.style.visibility = 'hidden';"
+                + "document.getElementById('" + frameId + "').parentNode.style.zIndex = -100000;"
+                + "document.getElementById('" + frameId + "').parentNode.style.top = null;"
+                + "document.getElementById('" + frameId + "').parentNode.style.left = null;"
+                + "document.getElementById('" + frameId + "').contentWindow.document.getElementById('" + inputId + "').style.top = '-100px';");
     }
 
     Object getFrameForFileTbGrid(Long gridIndex) {
@@ -59,7 +51,7 @@ class HtmlInputFileJs extends Js {
                 + "return elem;");
     }
 
-    void showInputForFileTbGrid2(Long gridIndex, WebElement element, String inputId) {
+    void showInputForFileTbGrid(Long gridIndex, WebElement element, String inputId) {
         execJs3("arguments[0].parentNode.style.visibility = 'visible';"
                 + "arguments[0].parentNode.style.zIndex = 100000;"
                 + "arguments[0].parentNode.style.top = '0px';"
@@ -69,7 +61,7 @@ class HtmlInputFileJs extends Js {
                 + "arguments[0].contentWindow.document.getElementById('" + inputId + "').style.top = '0px';", element);
     }
 
-    void hideInputForFileTbGrid2(Long gridIndex, WebElement element, String inputId) {
+    void hideInputForFileTbGrid(Long gridIndex, WebElement element, String inputId) {
         execJs3("arguments[0].parentNode.style.visibility = 'hidden';"
                 + "arguments[0].parentNode.style.zIndex = -100000;"
                 + "arguments[0].parentNode.style.top = null;"

@@ -23,6 +23,8 @@ public class HtmlInputFile {
     private static final String INPUT_FILE_ID_ON_DROP_GRID = "excelFile";
     private static final String INPUT_FILE_ID_ON_CASCADE_FIELD = "txtFile";
 
+    private static final String FRAME_ID_ON_FORM = "ifrmHideForm";
+
     @Resource
     private SeleniumSettings seleniumSettings;
 
@@ -39,68 +41,96 @@ public class HtmlInputFile {
     }
 
     private void showOnBplImport() {
+        elementWait.waitElementById(INPUT_FILE_ID_ON_BPL_IMPORT);
         htmlInputFileJs.showOnBplImport(INPUT_FILE_ID_ON_BPL_IMPORT);
         elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_BPL_IMPORT);
         elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_BPL_IMPORT);
     }
 
     private void hideOnBplImport() {
+        elementWait.waitElementById(INPUT_FILE_ID_ON_BPL_IMPORT);
         htmlInputFileJs.hideOnBplImport(INPUT_FILE_ID_ON_BPL_IMPORT);
         elementWait.waitElementNotVisibleById(INPUT_FILE_ID_ON_BPL_IMPORT);
         elementWait.waitElementNotDisplayById(INPUT_FILE_ID_ON_BPL_IMPORT);
     }
 
     public void uploadOnRunImport(String value) {
+        elementWait.waitElementById(INPUT_FILE_ID_ON_RUN_IMPORT);
+        elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_RUN_IMPORT);
+        elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_RUN_IMPORT);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_RUN_IMPORT)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
     }
 
     public void uploadOnAdminReport(String value) {
+        elementWait.waitElementById(PARENT_ID_ON_ADMIN_REPORT);
+        elementWait.waitElementById(INPUT_FILE_ID_ON_ADMIN_REPORT);
         htmlInputFileJs.showInputForFile(PARENT_ID_ON_ADMIN_REPORT, INPUT_FILE_ID_ON_ADMIN_REPORT);
+        elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_ADMIN_REPORT);
+        elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_ADMIN_REPORT);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_ADMIN_REPORT)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
     }
 
     public void uploadOnBpdItem(String value) {
+        elementWait.waitElementById(PARENT_ID_ON_BPD_ITEM);
+        elementWait.waitElementById(INPUT_FILE_ID_ON_BPD_ITEM);
         htmlInputFileJs.showInputForFile(PARENT_ID_ON_BPD_ITEM, INPUT_FILE_ID_ON_BPD_ITEM);
+        elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_BPD_ITEM);
+        elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_BPD_ITEM);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_BPD_ITEM)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
     }
 
     public void uploadOnDropGrid(String value) {
         elementWait.waitElementById(INPUT_FILE_ID_ON_DROP_GRID);
+        elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_DROP_GRID);
+        elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_DROP_GRID);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_DROP_GRID)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
     }
 
     public void uploadOnAdminClientFile(String value) {
+        elementWait.waitElementById(PARENT_ID_ON_ADMIN_CLIENT_FILE);
+        elementWait.waitElementById(INPUT_FILE_ID_ON_ADMIN_CLIENT_FILE);
         htmlInputFileJs.showInputForFile(PARENT_ID_ON_ADMIN_CLIENT_FILE, INPUT_FILE_ID_ON_ADMIN_CLIENT_FILE);
+        elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_ADMIN_CLIENT_FILE);
+        elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_ADMIN_CLIENT_FILE);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_ADMIN_CLIENT_FILE)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
     }
 
     public void uploadOnCascadeField(String value) {
-        //htmlInputFileJs.showInputForFile2(INPUT_FILE_ID_ON_CASCADE_FIELD);
+        elementWait.waitElementById(INPUT_FILE_ID_ON_CASCADE_FIELD);
+        elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_CASCADE_FIELD);
+        elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_CASCADE_FIELD);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_CASCADE_FIELD)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
     }
 
     public void uploadOnForm(String fieldName, String value) {
-        htmlInputFileJs.showInputForFileTb(fieldName);
-        seleniumSettings.getWebDriver().switchTo().frame("ifrmHideForm");
+        elementWait.waitElementById(FRAME_ID_ON_FORM);
+
+        
+
+        htmlInputFileJs.showInputForFileTb(FRAME_ID_ON_FORM, fieldName);
+        seleniumSettings.getWebDriver().switchTo().frame(FRAME_ID_ON_FORM);
+        elementWait.waitElementVisibleByName(fieldName);
+        elementWait.waitElementDisplayByName(fieldName);
         seleniumSettings.getWebDriver().findElement(By.name(fieldName)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
-        //webDriver.switchTo().window((String) webDriver.getWindowHandles().toArray()[webDriver.getWindowHandles().size() - 1]);
-        seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
-        htmlInputFileJs.hideInputForFileTb(fieldName);
+        seleniumSettings.getWebDriver().switchTo().parentFrame();
+        htmlInputFileJs.hideInputForFileTb(FRAME_ID_ON_FORM, fieldName);
     }
 
     public void uploadOnGrid(Long gridIndex, String fieldName, String value) {
         WebElement frame = (WebElement) htmlInputFileJs.getFrameForFileTbGrid(gridIndex);
+
         seleniumSettings.getWebDriver().switchTo().frame(frame);
         elementWait.waitElementByName(fieldName);
         seleniumSettings.getWebDriver().switchTo().parentFrame();
-        htmlInputFileJs.showInputForFileTbGrid2(gridIndex, frame, fieldName);
+
+        htmlInputFileJs.showInputForFileTbGrid(gridIndex, frame, fieldName);
         seleniumSettings.getWebDriver().switchTo().frame(frame);
         elementWait.waitElementVisibleByName(fieldName);
         elementWait.waitElementDisplayByName(fieldName);
         seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
         seleniumSettings.getWebDriver().switchTo().parentFrame();
-        htmlInputFileJs.hideInputForFileTbGrid2(gridIndex, frame, fieldName);
+        htmlInputFileJs.hideInputForFileTbGrid(gridIndex, frame, fieldName);
     }
 
 }
