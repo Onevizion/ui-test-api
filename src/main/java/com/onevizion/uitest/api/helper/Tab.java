@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
@@ -56,4 +57,17 @@ public class Tab {
         return tabs.size();
     }
 
+    public void goToTab (String tabLabel) {
+        Boolean isFind = false;
+        for(long i=1; i<=getTabsCnt();i++){
+            if(getTabLabel(i).equals(tabLabel))
+            {
+                goToTab(i);
+                isFind = true;
+                break;
+            }
+        }
+        if(!isFind)
+            throw new SeleniumUnexpectedException("Tab not found");
+    }
 }
