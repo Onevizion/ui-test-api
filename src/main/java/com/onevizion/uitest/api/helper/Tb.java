@@ -22,6 +22,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
@@ -62,6 +63,9 @@ public class Tb {
 
     @Resource
     private JqueryWait jqueryWait;
+
+    @Resource
+    private HtmlInputFile htmlInputFile;
 
     String getLastFieldIndex(String name, int elementPosition) {
         List<WebElement> elems = seleniumSettings.getWebDriver().findElements(By.name(name));
@@ -288,13 +292,7 @@ public class Tb {
                 gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
-            js.showInputForFileTb(fieldName);
-            seleniumSettings.getWebDriver().switchTo().frame("ifrmHideForm");
-            seleniumSettings.getWebDriver().findElement(By.name(fieldName)).clear();
-            seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
-            //webDriver.switchTo().window((String) webDriver.getWindowHandles().toArray()[webDriver.getWindowHandles().size() - 1]);
-            seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
-            js.hideInputForFileTb(fieldName);
+            htmlInputFile.uploadOnForm(fieldName, value);
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
                 gridExpVals.put("fName" + gridColumnId, value);
@@ -699,41 +697,16 @@ public class Tb {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             wait.waitWebElement(By.id("txtEfile1"));
 
-//            if (seleniumSettings.getBrowser().equals("chrome")) {
-//                WebElement frame = (WebElement) jsHelper.getFrameForFileTbGrid(gridIndex);
-//                seleniumSettings.getWebDriver().switchTo().frame(frame);
-//                waitHelper.waitWebElement(By.name("eFile_" + fieldId + "_" + tid));
-//                seleniumSettings.getWebDriver().switchTo().parentFrame();
-//                jsHelper.showInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
-//                seleniumSettings.getWebDriver().switchTo().frame(frame);
-//                seleniumSettings.getWebDriver().findElement(By.name("eFile_" + fieldId + "_" + tid)).clear();
-//                seleniumSettings.getWebDriver().findElement(By.name("eFile_" + fieldId + "_" + tid)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
-//                seleniumSettings.getWebDriver().switchTo().parentFrame();
-//                jsHelper.hideInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
-//            } else if (seleniumSettings.getBrowser().equals("firefox")) {
-                Actions action = new Actions(seleniumSettings.getWebDriver());
-                action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("txtEfile1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
+            Actions action = new Actions(seleniumSettings.getWebDriver());
+            action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("txtEfile1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
 
-                element.doubleClick(gridCell);
+            element.doubleClick(gridCell);
 
-                AbstractSeleniumCore.sleep(500L);
+            AbstractSeleniumCore.sleep(500L);
 
-                wait.waitWebElement(By.id("txtEfile1"));
+            wait.waitWebElement(By.id("txtEfile1"));
 
-                WebElement frame = (WebElement) js.getFrameForFileTbGrid(gridIndex);
-                seleniumSettings.getWebDriver().switchTo().frame(frame);
-                wait.waitWebElement(By.name("eFile_" + fieldId + "_" + tid));
-                seleniumSettings.getWebDriver().switchTo().parentFrame();
-                js.showInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
-                seleniumSettings.getWebDriver().switchTo().frame(frame);
-                elementWait.waitElementVisibleByName("eFile_" + fieldId + "_" + tid);
-                elementWait.waitElementDisplayByName("eFile_" + fieldId + "_" + tid);
-                seleniumSettings.getWebDriver().findElement(By.name("eFile_" + fieldId + "_" + tid)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
-                seleniumSettings.getWebDriver().switchTo().parentFrame();
-                js.hideInputForFileTbGrid2(gridIndex, frame, "eFile_" + fieldId + "_" + tid);
-//            } else {
-//                throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
-//            }
+            htmlInputFile.uploadOnGrid(gridIndex, "eFile_" + fieldId + "_" + tid, value);
 
             gridExpVals.put("fName" + gridColumnId, value);
             if (fieldName != null) {

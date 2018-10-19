@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.vo.entity.ClientFile;
 
 @Component
@@ -39,6 +40,9 @@ public class EntityClientFile {
     @Resource
     private SeleniumSettings seleniumSettings;
 
+    @Resource
+    private HtmlInputFile htmlInputFile;
+
     public void add(ClientFile clientFile) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -46,8 +50,7 @@ public class EntityClientFile {
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name("clientFileGroupId"))).selectByVisibleText(clientFile.getFileGroup());
 
-        js.showInputForFile("inputFileUploader", "FileUploader");
-        seleniumSettings.getWebDriver().findElement(By.name("oldFileFileUploader")).sendKeys(seleniumSettings.getUploadFilesPath() + clientFile.getFileName());
+        htmlInputFile.uploadOnAdminClientFile(clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -60,8 +63,7 @@ public class EntityClientFile {
 
         assertElement.assertSelect("clientFileGroupId", clientFile.getFileGroup());
 
-        js.showInputForFile("inputFileUploader", "FileUploader");
-        seleniumSettings.getWebDriver().findElement(By.name("oldFileFileUploader")).sendKeys(seleniumSettings.getUploadFilesPath() + clientFile.getFileName());
+        htmlInputFile.uploadOnAdminClientFile(clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
