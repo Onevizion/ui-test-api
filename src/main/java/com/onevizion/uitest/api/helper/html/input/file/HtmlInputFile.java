@@ -81,6 +81,7 @@ public class HtmlInputFile {
 
     public void uploadOnDropGrid(String value) {
         elementWait.waitElementById(INPUT_FILE_ID_ON_DROP_GRID);
+        htmlInputFileJs.showOnDropGrid(INPUT_FILE_ID_ON_DROP_GRID);
         elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_DROP_GRID);
         elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_DROP_GRID);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_DROP_GRID)).sendKeys(seleniumSettings.getUploadFilesPath() + value);

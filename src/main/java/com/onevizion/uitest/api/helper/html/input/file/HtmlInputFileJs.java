@@ -16,6 +16,10 @@ class HtmlInputFileJs extends Js {
         execJs("document.getElementById('" + id + "').style.display = 'none';");
     }
 
+    void showOnDropGrid(String id) {
+        execJs("document.getElementById('" + id + "').style.opacity = 1;");
+    }
+
     void showInputForFile(String parentId, String id) {
         execJs("document.getElementById('" + parentId + "').style.overflow = 'visible';"
                 + "document.getElementById('" + id + "').style.opacity = 1;"
