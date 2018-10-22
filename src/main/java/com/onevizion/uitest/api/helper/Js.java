@@ -577,6 +577,68 @@ public class Js {
                 + "return columnIdx;"));
     }
 
+    public Long getColumnIndexByLabel(Long gridId, String columnLabel, String columnLabel2) {
+        columnLabel = columnLabel.replaceAll("'", "\\\\'");
+
+        return NumberUtils.createLong(execJs(""
+                + "var columnIdx;"
+                + "var columnsCount = gridArr['" + gridId + "'].grid.getColumnsNum();"
+                + "for (var i = 0; i < columnsCount; i++) {"
+                + "    var columnLabel1 = gridArr['" + gridId + "'].grid.getColLabel(i, 0);"
+                + "    var columnLabel2 = gridArr['" + gridId + "'].grid.getColLabel(i, 1);"
+                + "    if ('" + columnLabel + "' == columnLabel1) {"
+                + "        columnIdx = i;"
+                + "        break;"
+                + "    }"
+                + "}"
+                + "if (!columnLabel2.includes('" + columnLabel2 + "')) {"
+                + "    columnIdx = columnIdx + 1;"
+                + "}"
+                + "return columnIdx;"));
+    }
+
+    public Long getColumnFirstRowIndex(Long gridId, String columnLabel) {
+        columnLabel = columnLabel.replaceAll("'", "\\\\'");
+
+        return NumberUtils.createLong(execJs(""
+                + "var columnIdx = 0;"
+                + "var columnsCount = gridArr['" + gridId + "'].grid.getColumnsNum();"
+                + "for (var i = 0; i < columnsCount; i++) {"
+                + "    var columnLabel = gridArr['" + gridId + "'].grid.getColLabel(i);"
+                + "    if ('' == columnLabel) {"
+                + "        continue;"
+                + "    }"
+                + "    if ('" + columnLabel + "' == columnLabel) {"
+                + "        break;"
+                + "    }"
+                + "    columnIdx = columnIdx + 1;"
+                + "}"
+                + "return columnIdx;"));
+    }
+
+    public Long getColumnSecondRowIndex(Long gridId, String columnLabel, String columnLabel2) {
+        columnLabel = columnLabel.replaceAll("'", "\\\\'");
+
+        return NumberUtils.createLong(execJs(""
+                + "var columnIdx = 0;"
+                + "var columnsCount = gridArr['" + gridId + "'].grid.getColumnsNum();"
+                + "for (var i = 0; i < columnsCount; i++) {"
+                + "    var columnLabel1 = gridArr['" + gridId + "'].grid.getColLabel(i, 0);"
+                + "    var columnLabel2 = gridArr['" + gridId + "'].grid.getColLabel(i, 1);"
+                + "    if ('' == columnLabel2) {"
+                + "        continue;"
+                + "    }"
+                + "    if ('" + columnLabel + "' == columnLabel1) {"
+                + "        break;"
+                + "    }"
+                + "    columnIdx = columnIdx + 1;"
+                + "}"
+                + "if (!columnLabel2.includes('" + columnLabel2 + "')) {"
+                + "    columnIdx = columnIdx + 1;"
+                + "}"
+                + "return columnIdx;"));
+    }
+
     public void resetFormChange() {
         //TODO firefox 59 bug
         //https://github.com/mozilla/geckodriver/issues/1067
