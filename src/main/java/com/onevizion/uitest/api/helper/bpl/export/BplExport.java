@@ -69,9 +69,7 @@ public class BplExport {
         Long rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
 
         js.selectGridRow(gridIdx, rowIndex);
-        Long subGridId = NumberUtils.createLong(js.getGridSelectedRowId(gridIdx));
-
-        return subGridId;
+        return NumberUtils.createLong(js.getGridSelectedRowId(gridIdx));
     }
 
     @SuppressWarnings("unchecked")
@@ -82,7 +80,7 @@ public class BplExport {
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridIdx, rowsCount, columnIndex);
         for (int i = 0; i < rowsCount; i++) {
             if (bplComponentType.getName().equals(vals.get(i))) {
-                rowIndex = new Long(i);
+                rowIndex = Long.valueOf(i);
             }
         }
 
