@@ -68,6 +68,7 @@ import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3Endpoint;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3Parameter;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3Resource;
+import com.onevizion.uitest.api.helper.bpl.export.BplExport;
 import com.onevizion.uitest.api.helper.clipboard.Clipboard;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.helper.comment.Comment;
@@ -266,6 +267,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected HtmlInputFile htmlInputFile;
+
+    @Resource
+    protected BplExport bplExport;
     /* Helpers End */
 
     /* Entity Helpers Begin */
@@ -435,6 +439,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     //options.setLegacy(true);
                     options.setProfile(profile);
                     //TODO https://github.com/mozilla/geckodriver/issues/617
+                    //https://bugzilla.mozilla.org/show_bug.cgi?id=1264259
                     //options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
                     //options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
                     //options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
@@ -505,6 +510,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     //options.setLegacy(true);
                     options.setProfile(profile);
                     //TODO https://github.com/mozilla/geckodriver/issues/617
+                    //https://bugzilla.mozilla.org/show_bug.cgi?id=1264259
                     //options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
                     //options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
                     //options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
