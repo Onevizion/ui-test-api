@@ -79,7 +79,7 @@ public class BplExport {
         Long columnIndex = js.getColumnIndexByLabel(gridIdx, COLUMN_LABEL);
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridIdx, rowsCount, columnIndex);
         for (int i = 0; i < rowsCount; i++) {
-            if (bplComponentType.getName().equals(vals.get(i))) {
+            if (vals.get(i).contains(bplComponentType.getName())) {
                 rowIndex = Long.valueOf(i);
             }
         }
