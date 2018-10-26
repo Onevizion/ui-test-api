@@ -23,7 +23,7 @@ import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.configfield.ConfigField;
-import com.onevizion.uitest.api.helper.jquery.JqueryWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 import com.onevizion.uitest.api.vo.entity.ConfigFieldVo;
 
@@ -83,7 +83,7 @@ public class EntityConfigField {
     private Grid grid;
 
     @Resource
-    private JqueryWait jqueryWait;
+    private Jquery jquery;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -112,7 +112,7 @@ public class EntityConfigField {
         wait.waitFormLoad();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
-            jqueryWait.waitJQueryLoad();
+            jquery.waitLoad();
         }
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(TT_NAME))).selectByVisibleText(configFieldVo.getTrackorTypeLabel());
@@ -375,7 +375,7 @@ public class EntityConfigField {
         wait.waitFormLoad();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
-            jqueryWait.waitJQueryLoad();
+            jquery.waitLoad();
         }
 
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).clear();
@@ -633,7 +633,7 @@ public class EntityConfigField {
         wait.waitFormLoad();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
-            jqueryWait.waitJQueryLoad();
+            jquery.waitLoad();
         }
 
         assertElement.assertSelect(TT_NAME, configFieldVo.getTrackorTypeLabel());

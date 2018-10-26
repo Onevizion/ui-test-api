@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.filter.Filter;
-import com.onevizion.uitest.api.helper.jquery.JqueryWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.view.View;
 
 @Component
@@ -43,7 +43,7 @@ public class Wait {
     private HtmlSelect htmlSelect;
 
     @Resource //TODO bug in Grid-115098 load views/filters before load grid
-    private JqueryWait jqueryWait; //TODO bug in Grid-115098 load views/filters before load grid
+    private Jquery jquery; //TODO bug in Grid-115098 load views/filters before load grid
 
     public void waitWebElement(final By elementLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -69,7 +69,7 @@ public class Wait {
     }
 
     public void waitGridLoad(final Long gridId, final Long parentGridId) {
-        jqueryWait.waitJQueryLoad(); //TODO bug in Grid-115098 load views/filters before load grid
+        jquery.waitLoad(); //TODO bug in Grid-115098 load views/filters before load grid
         waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + gridId));
         waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId));
 

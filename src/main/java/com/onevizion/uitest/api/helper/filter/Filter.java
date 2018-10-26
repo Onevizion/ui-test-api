@@ -24,7 +24,7 @@ import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Sort;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
-import com.onevizion.uitest.api.helper.jquery.JqueryWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.FilterFieldType;
 import com.onevizion.uitest.api.vo.SortType;
@@ -88,7 +88,7 @@ public class Filter {
     private FilterWait filterWait;
 
     @Resource
-    private JqueryWait jqueryWait;
+    private Jquery jquery;
 
     public void checkIsExistFilterControl(Long gridIdx, boolean isExist) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -193,9 +193,9 @@ public class Filter {
             psSelector.selectMultipleSpecificValues(By.name("btn" + fieldName), 1L, cellsValues, 1L);
         }
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        jqueryWait.waitJQueryLoad(); //wait reload filters and grid
+        jquery.waitLoad(); //wait reload filters and grid
         wait.waitGridLoad(gridIdx, gridIdx);
-        jqueryWait.waitJQueryLoad(); //wait reload filters and grid
+        jquery.waitLoad(); //wait reload filters and grid
     }
 
     public void openSaveFilterForm(Long gridIdx) {
@@ -293,9 +293,9 @@ public class Filter {
         wait.waitFormLoad();
         seleniumSettings.getWebDriver().findElement(By.name(BUTTON_CLEAR)).click();
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        jqueryWait.waitJQueryLoad(); //wait reload filters and grid
+        jquery.waitLoad(); //wait reload filters and grid
         wait.waitGridLoad(gridIdx, gridIdx);
-        jqueryWait.waitJQueryLoad(); //wait reload filters and grid
+        jquery.waitLoad(); //wait reload filters and grid
 
         filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
         wait.waitGridLoad(gridIdx, gridIdx);

@@ -100,8 +100,7 @@ import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesigner;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
-import com.onevizion.uitest.api.helper.jquery.JqueryJs;
-import com.onevizion.uitest.api.helper.jquery.JqueryWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
@@ -206,10 +205,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Logoff logoff;
 
     @Resource
-    protected JqueryJs jqueryJs;
-
-    @Resource
-    protected JqueryWait jqueryWait;
+    protected Jquery jquery;
 
     @Resource
     protected Document document;

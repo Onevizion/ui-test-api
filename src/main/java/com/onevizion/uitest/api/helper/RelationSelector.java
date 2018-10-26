@@ -12,7 +12,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.jquery.JqueryWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 
 @Component
 public class RelationSelector {
@@ -30,7 +30,7 @@ public class RelationSelector {
     private ElementWait elementWait;
 
     @Resource
-    private JqueryWait jqueryWait;
+    private Jquery jquery;
 
     @Resource
     private Window window;
@@ -72,7 +72,7 @@ public class RelationSelector {
     public void selectGridRow(Long gridIdx, Long rowIndex) {
         js.selectGridRow(gridIdx, rowIndex);
         AbstractSeleniumCore.sleep(1000L);
-        jqueryWait.waitJQueryLoad(); //wait reload relations
+        jquery.waitLoad(); //wait reload relations
     }
 
     public void openRelationSelector(Long gridIdx) {
@@ -93,7 +93,7 @@ public class RelationSelector {
 
     public void openRelationGrid(Long gridIdx) {
         wait.waitGridLoad(gridIdx, gridIdx);
-        jqueryWait.waitJQueryLoad(); //wait reload relations
+        jquery.waitLoad(); //wait reload relations
         window.openModal(By.id(BUTTON_RELATION_ID_BASE + gridIdx));
         wait.waitGridLoad(gridIdx, gridIdx);
     }
@@ -101,7 +101,7 @@ public class RelationSelector {
     public void closeRelationGrid(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + gridIdx));
         wait.waitGridLoad(gridIdx, gridIdx);
-        jqueryWait.waitJQueryLoad(); //wait reload relations
+        jquery.waitLoad(); //wait reload relations
     }
 
     public void chooseParentChildTrackorType(String trackorType) {

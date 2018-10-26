@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.jquery.JqueryWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
@@ -38,14 +38,14 @@ public class NewDropDown {
     private Window window;
 
     @Resource
-    private JqueryWait jqueryWait;
+    private Jquery jquery;
 
     public void selectMenu(String name) {
         selectEntity("lbApplication", name);
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jqueryWait.waitJQueryLoad();
+        jquery.waitLoad();
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jqueryWait.waitJQueryLoad();
+        jquery.waitLoad();
     }
 
     public void selectDashboard(String name) {
@@ -99,9 +99,9 @@ public class NewDropDown {
     public void deleteMenu(String name) {
         deleteEntity("lbApplication", "Application", 3, name);
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jqueryWait.waitJQueryLoad();
+        jquery.waitLoad();
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jqueryWait.waitJQueryLoad();
+        jquery.waitLoad();
     }
 
     public void deleteComponentPackage(String name) {

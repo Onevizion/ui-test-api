@@ -10,7 +10,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
-import com.onevizion.uitest.api.helper.jquery.JqueryWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.MenuItemType;
 import com.onevizion.uitest.api.vo.entity.MenuItem;
@@ -37,7 +37,7 @@ public class EntityMenuItem {
     private Wait wait;
 
     @Resource
-    private JqueryWait jqueryWait;
+    private Jquery jquery;
 
     @Resource
     private AssertElement assertElement;
@@ -51,7 +51,7 @@ public class EntityMenuItem {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        jqueryWait.waitJQueryLoad();
+        jquery.waitLoad();
 
         if (MenuItemType.SUBGROUP.equals(menuItem.getMenuItemType())) {
             assertElement.assertText(LABEL, menuItem.getLabel());

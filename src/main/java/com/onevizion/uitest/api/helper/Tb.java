@@ -23,7 +23,6 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
-import com.onevizion.uitest.api.helper.jquery.JqueryWait;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
 @Component
@@ -60,9 +59,6 @@ public class Tb {
 
     @Resource
     private ElementJs elementJs;
-
-    @Resource
-    private JqueryWait jqueryWait;
 
     @Resource
     private HtmlInputFile htmlInputFile;
