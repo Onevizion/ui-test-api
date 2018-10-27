@@ -24,7 +24,7 @@ public class TbPsTrackorSelectorField {
     private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
-    public void test(String columnId, String columnId2, String value, boolean supportOuterOperations, boolean supportFieldOperations, List<String> ... cellValsKeys) {
+    public void test(String columnId, String columnId2, String value, boolean supportOuterOperations, boolean supportFieldOperations, List<String> newTrackors, List<String> ... cellValsKeys) {
         Long columnIndex = js.getGridColIndexById(0L, columnId);
         Long columnIndex2 = null;
         if (supportFieldOperations) {
@@ -39,7 +39,6 @@ public class TbPsTrackorSelectorField {
 
         Long rowsCnt = grid.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
-        List<String> cellValsHTML = (List<String>) js.getGridCellsValuesHTMLForColumnByColIndex(0L, rowsCnt, columnIndex);
         List<String> cellVals2 = null;
         if (supportFieldOperations) {
             cellVals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex2);
@@ -63,8 +62,8 @@ public class TbPsTrackorSelectorField {
             userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, columnIndex2, cellVals, cellVals2, cellValsKeys);
         }
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NEW, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, null, cellValsHTML, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, value, null, FilterOperatorType.NOT_NEW, ConfigFieldType.TRACKOR_SELECTOR, columnIndex, null, cellValsHTML, null);
+        userpageFilter.checkFilterIsNew(fieldName, cellVals, newTrackors);
+        userpageFilter.checkFilterIsNotNew(fieldName, cellVals, newTrackors);
     }
 
 }

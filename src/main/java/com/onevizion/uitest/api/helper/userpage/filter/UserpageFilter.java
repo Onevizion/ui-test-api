@@ -113,14 +113,43 @@ public class UserpageFilter {
         window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE), null);
     }
 
-    @SuppressWarnings("unchecked")
-    public void checkFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType,
-            FilterOperatorType operator, ConfigFieldType fieldDataType, Long columnIndex, Long columnIndex2,
-            List<String> cellVals, List<String> cellVals2, List<String> ... cellValsKeys) {
+    public void checkFilterIsNew(String fieldName, List<String> cellVals, List<String> newTrackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NEW);
+
+        checkGridRowsCountIsNew(cellVals, newTrackors);
+        checkGridColumnIsNew(0L, fieldName, newTrackors);
+
+        clearFilter(fieldName, FilterOperatorType.NEW, randomIndex);
+    }
+
+    public void checkFilterIsNotNew(String fieldName, List<String> cellVals, List<String> newTrackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_NEW);
+
+        checkGridRowsCountIsNotNew(cellVals, newTrackors);
+        checkGridColumnIsNotNew(0L, fieldName, newTrackors);
+
+        clearFilter(fieldName, FilterOperatorType.NOT_NEW, randomIndex);
+    }
+
+    private int fillFilter(String fieldName, FilterOperatorType operator) {
         SecureRandom generator = new SecureRandom();
         int randomIndex = generator.nextInt(2);
 
-        Long rowsCntBefore = grid.getGridRowsCount(0L);
+        if (randomIndex == 1) {
+            selectFilterAttributeAndOperatorAndValue(fieldName, operator);
+        } else if (randomIndex == 0) {
+            filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue(), 0L);
+        } else {
+            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
+        }
+
+        return randomIndex;
+    }
+
+    private int fillFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
+        SecureRandom generator = new SecureRandom();
+        int randomIndex = generator.nextInt(2);
+
         if (randomIndex == 1) {
             selectFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, dateType, operator, fieldDataType);
         } else if (randomIndex == 0) {
@@ -134,6 +163,37 @@ public class UserpageFilter {
         } else {
             throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
         }
+
+        return randomIndex;
+    }
+
+    private void clearFilter(String fieldName, FilterOperatorType operator, int randomIndex) {
+        if (randomIndex == 1) {
+            clearFilterAttributeAndOperatorAndValue(fieldName, operator);
+        } else if (randomIndex == 0) {
+            filter.selectByVisibleText("Unsaved Filter", 0L);
+        } else {
+            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
+        }
+    }
+
+    private void clearFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType, int randomIndex) {
+        if (randomIndex == 1) {
+            clearFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, dateType, operator, fieldDataType);
+        } else if (randomIndex == 0) {
+            filter.selectByVisibleText("Unsaved Filter", 0L);
+        } else {
+            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void checkFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType,
+            FilterOperatorType operator, ConfigFieldType fieldDataType, Long columnIndex, Long columnIndex2,
+            List<String> cellVals, List<String> cellVals2, List<String> ... cellValsKeys) {
+        Long rowsCntBefore = grid.getGridRowsCount(0L);
+
+        int randomIndex = fillFilter(fieldName, fieldName2, value, dateType, operator, fieldDataType);
 
         if ((fieldName.equals("FTB:FTB ID") || fieldName.equals("FT:FT ID") || fieldName.equals("FR:FR ID")
                 || fieldName.equals("FTB:Rollup") || fieldName.equals("FTBP:Rollup") || fieldName.equals("FTBC:Rollup")
@@ -172,12 +232,6 @@ public class UserpageFilter {
             } else if (operator.equals(FilterOperatorType.NOT_NULL)) {
                 checkGridRowsCountIsNotNull(fieldDataType, cellVals);
                 checkGridColumnIsNotNull(0L, columnIndex);
-            } else if (operator.equals(FilterOperatorType.NEW)) {
-                checkGridRowsCountIsNew(cellVals);
-                checkGridColumnIsNew(0L, columnIndex);
-            } else if (operator.equals(FilterOperatorType.NOT_NEW)) {
-                checkGridRowsCountIsNotNew(cellVals);
-                checkGridColumnIsNotNew(0L, columnIndex);
             } else if (operator.equals(FilterOperatorType.EQUAL_FIELD)) {
                 checkGridRowsCountEqualsField(cellVals, cellVals2);
                 checkGridColumnEqualsField(0L, columnIndex, columnIndex2);
@@ -288,13 +342,19 @@ public class UserpageFilter {
             throw new SeleniumUnexpectedException("Not support field data type");
         }
 
-        if (randomIndex == 1) {
-            clearFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, dateType, operator, fieldDataType);
-        } else if (randomIndex == 0) {
-            filter.selectByVisibleText("Unsaved Filter", 0L);
-        } else {
-            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
-        }
+        clearFilter(fieldName, fieldName2, value, dateType, operator, fieldDataType, randomIndex);
+    }
+
+    private void selectFilterAttributeAndOperatorAndValue(String fieldName, FilterOperatorType operator) {
+        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+
+        psSelector.selectSpecificValue(By.name(FILTER_ROW_1_ATTRIB_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+
+        new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_OPER))).selectByVisibleText(operator.getValue());
+
+        window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
     private void selectFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
@@ -373,6 +433,20 @@ public class UserpageFilter {
                 seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_1_VALUE_TEXT_TEXT)).sendKeys("*" + value + "*");
             }
         }
+        window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+    }
+
+    private void clearFilterAttributeAndOperatorAndValue(String fieldName, FilterOperatorType operator) {
+        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+
+        assertElement.assertRadioPsSelector(FILTER_ROW_1_ATTRIB_TEXT, FILTER_ROW_1_ATTRIB_BUTTON, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
+
+        assertElement.assertSelect(FILTER_ROW_1_OPER, operator.getValue());
+
+        seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();
+
         window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
@@ -638,31 +712,33 @@ public class UserpageFilter {
         }
     }
 
-    private void checkGridColumnIsNew(Long gridId, Long columnIndex) {
+    private void checkGridColumnIsNew(Long gridId, String columnLabel, List<String> newTrackors) {
+        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
         Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) js.getGridCellsValuesHTMLForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
         for (int i = 0; i < rowsCnt; i++) {
             gridValue = vals.get(i);
-            failMessage = String.format("Check fails at column [%s] row [%s]. Cell value in grid [%s]. Value in filter [Is New]", columnIndex, i, gridValue);
-            Assert.assertTrue(gridValue.contains("<img src=\"/img/new.gif\""), failMessage);
+            failMessage = String.format("Check fails at column [%s] row [%s]. Cell value in grid [%s]. NewTrackors[%s]. Value in filter [Is New]", columnIndex, i, gridValue, newTrackors);
+            Assert.assertTrue(newTrackors.contains(gridValue), failMessage);
         }
     }
 
-    private void checkGridColumnIsNotNew(Long gridId, Long columnIndex) {
+    private void checkGridColumnIsNotNew(Long gridId, String columnLabel, List<String> newTrackors) {
+        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
         Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
-        List<String> vals = (List<String>) js.getGridCellsValuesHTMLForColumnByColIndex(gridId, rowsCnt, columnIndex);
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
         String gridValue = null;
         for (int i = 0; i < rowsCnt; i++) {
             gridValue = vals.get(i);
-            failMessage = String.format("Check fails at column [%s] row [%s]. Cell value in grid [%s]. Value in filter [Is Not New]", columnIndex, i, gridValue);
-            Assert.assertTrue(!gridValue.contains("<img src=\"/img/new.gif\""), failMessage);
+            failMessage = String.format("Check fails at column [%s] row [%s]. Cell value in grid [%s]. NewTrackors[%s]. Value in filter [Is Not New]", columnIndex, i, gridValue, newTrackors);
+            Assert.assertTrue(!newTrackors.contains(gridValue), failMessage);
         }
     }
 
@@ -1544,22 +1620,22 @@ public class UserpageFilter {
         }
     }
 
-    private void checkGridRowsCountIsNew(List<String> cellVals) {
+    private void checkGridRowsCountIsNew(List<String> cellVals, List<String> newTrackors) {
         Long cnt = 0L;
         for (String cellVal : cellVals) {
-            if ((!"&nbsp;".equals(cellVal) && !"".equals(cellVal)) &&
-                    cellVal.contains("<img src=\"/img/new.gif\"")) {
+            if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
+                    newTrackors.contains(cellVal)) {
                 cnt = cnt + 1L;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(0L), cnt, "Grid have wrong rows count");
     }
 
-    private void checkGridRowsCountIsNotNew(List<String> cellVals) {
+    private void checkGridRowsCountIsNotNew(List<String> cellVals, List<String> newTrackors) {
         Long cnt = 0L;
         for (String cellVal : cellVals) {
-            if ((!"&nbsp;".equals(cellVal) && !"".equals(cellVal)) &&
-                    !cellVal.contains("<img src=\"/img/new.gif\"")) {
+            if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
+                    !newTrackors.contains(cellVal)) {
                 cnt = cnt + 1L;
             }
         }
