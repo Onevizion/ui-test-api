@@ -223,10 +223,14 @@ public class EntityConfigField {
             tab.goToTab(2L); //Image Settings
 
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_MODE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getResizeMode());
-            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).clear();
-            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
-            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).clear();
-            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
+            if (!configFieldVo.getConfigFieldEfile().getResizeWidth().equals(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).getAttribute("value"))) {
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).clear();
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
+            }
+            if (!configFieldVo.getConfigFieldEfile().getResizeHeight().equals(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).getAttribute("value"))) {
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).clear();
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
+            }
             if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName(ROTATE))
                     || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName(ROTATE))) {
                 checkbox.clickByName(ROTATE);
@@ -472,10 +476,14 @@ public class EntityConfigField {
             tab.goToTab(2L); //Image Settings
 
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_MODE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getResizeMode());
-            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).clear();
-            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
-            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).clear();
-            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
+            if (!configFieldVo.getConfigFieldEfile().getResizeWidth().equals(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).getAttribute("value"))) {
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).clear();
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
+            }
+            if (!configFieldVo.getConfigFieldEfile().getResizeHeight().equals(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).getAttribute("value"))) {
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).clear();
+                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
+            }
             if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName(ROTATE))
                     || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName(ROTATE))) {
                 checkbox.clickByName(ROTATE);
