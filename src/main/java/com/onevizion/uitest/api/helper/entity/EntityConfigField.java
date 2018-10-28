@@ -1,6 +1,7 @@
 package com.onevizion.uitest.api.helper.entity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -26,6 +28,7 @@ import com.onevizion.uitest.api.helper.configfield.ConfigField;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 import com.onevizion.uitest.api.vo.entity.ConfigFieldVo;
+import com.onevizion.uitest.api.vo.entity.ConfigFieldVoEfileMetadata;
 
 @Component
 public class EntityConfigField {
@@ -45,10 +48,6 @@ public class EntityConfigField {
     private static final String PARENS_FOR_NEGATIVE = "parensForNegative";
     private static final String SEPARATE_THOUSANDS = "separateThousands";
     private static final String LINES = "linesQty";
-    private static final String EXTRACT_METADATA = "imageExtractMetadata";
-    private static final String IMAGE_LATITUDE = "imageLatConfigFieldId";
-    private static final String IMAGE_LONGITUDE = "imageLongConfigFieldId";
-    private static final String IMAGE_TIME_SNAPSHOT = "imageTimeConfigFieldId";
     private static final String RESIZE_MODE = "imageResizeMode";
     private static final String RESIZE_WIDTH = "imageWidth";
     private static final String RESIZE_HEIGHT = "imageHeight";
@@ -105,6 +104,9 @@ public class EntityConfigField {
 
     @Resource
     private Element element;
+
+    @Resource
+    private EntityConfigFieldEfileMetadata entityConfigFieldEfileMetadata;
 
     public void add(ConfigFieldVo configFieldVo) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -220,20 +222,11 @@ public class EntityConfigField {
 
             tab.goToTab(2L); //Image Settings
 
-            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkbox.isCheckedByName(EXTRACT_METADATA))
-                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkbox.isCheckedByName(EXTRACT_METADATA))) {
-                checkbox.clickByName(EXTRACT_METADATA);
-            }
-            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_LATITUDE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLatitude());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_LONGITUDE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLongitude());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_TIME_SNAPSHOT))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_MODE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getResizeMode());
             seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
-            if (!configFieldVo.getConfigFieldEfile().getResizeHeight().equals(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).getAttribute("value"))) {
-                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).clear();
-                seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
-            }
+            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(RESIZE_HEIGHT)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeHeight());
             if ((configFieldVo.getConfigFieldEfile().getRotate().equals("YES") && !checkbox.isCheckedByName(ROTATE))
                     || (configFieldVo.getConfigFieldEfile().getRotate().equals("NO") && checkbox.isCheckedByName(ROTATE))) {
                 checkbox.clickByName(ROTATE);
@@ -247,6 +240,14 @@ public class EntityConfigField {
                 checkbox.clickByName(UPLOAD_TO_AWS);
             }
             psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
+
+            tab.goToTab(3L); //File Metadata
+            wait.waitGridLoad(3L, 3L);
+
+            List<ConfigFieldVoEfileMetadata> metadatas = configFieldVo.getConfigFieldEfile().getMetadatas();
+            for (ConfigFieldVoEfileMetadata metadata : metadatas) {
+                entityConfigFieldEfileMetadata.add(metadata);
+            }
 
             tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
@@ -470,13 +471,6 @@ public class EntityConfigField {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
             tab.goToTab(2L); //Image Settings
 
-            if ((configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("YES") && !checkbox.isCheckedByName(EXTRACT_METADATA))
-                    || (configFieldVo.getConfigFieldEfile().getExtractMetadata().equals("NO") && checkbox.isCheckedByName(EXTRACT_METADATA))) {
-                checkbox.clickByName(EXTRACT_METADATA);
-            }
-            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_LATITUDE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLatitude());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_LONGITUDE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageLongitude());
-            new Select(seleniumSettings.getWebDriver().findElement(By.name(IMAGE_TIME_SNAPSHOT))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RESIZE_MODE))).selectByVisibleText(configFieldVo.getConfigFieldEfile().getResizeMode());
             seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(RESIZE_WIDTH)).sendKeys(configFieldVo.getConfigFieldEfile().getResizeWidth());
@@ -495,6 +489,16 @@ public class EntityConfigField {
                 checkbox.clickByName(UPLOAD_TO_AWS);
             }
             psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
+
+            tab.goToTab(3L); //File Metadata
+            wait.waitGridLoad(3L, 3L);
+
+            entityConfigFieldEfileMetadata.removeAll();
+
+            List<ConfigFieldVoEfileMetadata> metadatas = configFieldVo.getConfigFieldEfile().getMetadatas();
+            for (ConfigFieldVoEfileMetadata metadata : metadatas) {
+                entityConfigFieldEfileMetadata.add(metadata);
+            }
 
             tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
@@ -709,10 +713,6 @@ public class EntityConfigField {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType())) {
             tab.goToTab(2L); //Image Settings
 
-            assertElement.assertCheckbox(EXTRACT_METADATA, configFieldVo.getConfigFieldEfile().getExtractMetadata());
-            assertElement.assertSelect(IMAGE_LATITUDE, configFieldVo.getConfigFieldEfile().getImageLatitude());
-            assertElement.assertSelect(IMAGE_LONGITUDE, configFieldVo.getConfigFieldEfile().getImageLongitude());
-            assertElement.assertSelect(IMAGE_TIME_SNAPSHOT, configFieldVo.getConfigFieldEfile().getImageTimeSnapshot());
             assertElement.assertSelect(RESIZE_MODE, configFieldVo.getConfigFieldEfile().getResizeMode());
             assertElement.assertText(RESIZE_WIDTH, configFieldVo.getConfigFieldEfile().getResizeWidth());
             assertElement.assertText(RESIZE_HEIGHT, configFieldVo.getConfigFieldEfile().getResizeHeight());
@@ -720,6 +720,17 @@ public class EntityConfigField {
             assertElement.assertCheckbox(LOG_BLOB_CHANGES, configFieldVo.getConfigFieldEfile().getLogBlobChanges());
             assertElement.assertCheckbox(UPLOAD_TO_AWS, configFieldVo.getConfigFieldEfile().getUploadToAws());
             assertElement.assertRadioPsSelector("autocaptionClientFile", "btnautocaptionClientFile", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L, true);
+
+            tab.goToTab(3L); //File Metadata
+            wait.waitGridLoad(3L, 3L);
+
+            List<ConfigFieldVoEfileMetadata> metadatas = configFieldVo.getConfigFieldEfile().getMetadatas();
+            Assert.assertEquals(grid.getGridRowsCount(3L), Long.valueOf(metadatas.size()));
+            for (int i = 0; i < metadatas.size(); i++) {
+                js.selectGridRow(3L, Long.valueOf(i));
+                entityConfigFieldEfileMetadata.testInGrid(3L, Long.valueOf(i), metadatas.get(i));
+                entityConfigFieldEfileMetadata.testOnForm(metadatas.get(i));
+            }
 
             tab.goToTab(1L); //General
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {

@@ -1,13 +1,11 @@
 package com.onevizion.uitest.api.vo.entity;
 
+import java.util.List;
+
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 public class ConfigFieldVoEfile {
 
-    private String extractMetadata;
-    private String imageLatitude;
-    private String imageLongitude;
-    private String imageTimeSnapshot;
     private String resizeMode;
     private String resizeWidth;
     private String resizeHeight;
@@ -15,6 +13,7 @@ public class ConfigFieldVoEfile {
     private String logBlobChanges;
     private String uploadToAws;
     private String autocaptionTemplate;
+    private List<ConfigFieldVoEfileMetadata> metadatas;
 
     private ConfigFieldVoEfile() {
         
@@ -22,22 +21,6 @@ public class ConfigFieldVoEfile {
 
     public static Builder newBuilder() {
         return new ConfigFieldVoEfile().new Builder();
-    }
-
-    public String getExtractMetadata() {
-        return extractMetadata;
-    }
-
-    public String getImageLatitude() {
-        return imageLatitude;
-    }
-
-    public String getImageLongitude() {
-        return imageLongitude;
-    }
-
-    public String getImageTimeSnapshot() {
-        return imageTimeSnapshot;
     }
 
     public String getResizeMode() {
@@ -68,6 +51,10 @@ public class ConfigFieldVoEfile {
         return autocaptionTemplate;
     }
 
+    public List<ConfigFieldVoEfileMetadata> getMetadatas() {
+        return metadatas;
+    }
+
     public class Builder {
 
         private Builder() {
@@ -75,40 +62,17 @@ public class ConfigFieldVoEfile {
         }
 
         public ConfigFieldVoEfile build() {
-            if (ConfigFieldVoEfile.this.extractMetadata == null ||
-                    ConfigFieldVoEfile.this.imageLatitude == null ||
-                    ConfigFieldVoEfile.this.imageLongitude == null ||
-                    ConfigFieldVoEfile.this.imageTimeSnapshot == null ||
-                    ConfigFieldVoEfile.this.resizeMode == null ||
+            if (ConfigFieldVoEfile.this.resizeMode == null ||
                     ConfigFieldVoEfile.this.resizeWidth == null ||
                     ConfigFieldVoEfile.this.resizeHeight == null ||
                     ConfigFieldVoEfile.this.rotate == null ||
                     ConfigFieldVoEfile.this.logBlobChanges == null ||
                     ConfigFieldVoEfile.this.uploadToAws == null ||
-                    ConfigFieldVoEfile.this.autocaptionTemplate == null) {
+                    ConfigFieldVoEfile.this.autocaptionTemplate == null ||
+                    ConfigFieldVoEfile.this.metadatas == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return ConfigFieldVoEfile.this;
-        }
-
-        public Builder setExtractMetadata(String extractMetadata) {
-            ConfigFieldVoEfile.this.extractMetadata = extractMetadata;
-            return this;
-        }
-
-        public Builder setImageLatitude(String imageLatitude) {
-            ConfigFieldVoEfile.this.imageLatitude = imageLatitude;
-            return this;
-        }
-
-        public Builder setImageLongitude(String imageLongitude) {
-            ConfigFieldVoEfile.this.imageLongitude = imageLongitude;
-            return this;
-        }
-
-        public Builder setImageTimeSnapshot(String imageTimeSnapshot) {
-            ConfigFieldVoEfile.this.imageTimeSnapshot = imageTimeSnapshot;
-            return this;
         }
 
         public Builder setResizeMode(String resizeMode) {
@@ -143,6 +107,11 @@ public class ConfigFieldVoEfile {
 
         public Builder setAutocaptionTemplate(String autocaptionTemplate) {
             ConfigFieldVoEfile.this.autocaptionTemplate = autocaptionTemplate;
+            return this;
+        }
+
+        public Builder setMetadatas(List<ConfigFieldVoEfileMetadata> metadatas) {
+            ConfigFieldVoEfile.this.metadatas = metadatas;
             return this;
         }
 
