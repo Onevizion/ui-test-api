@@ -54,7 +54,7 @@ public class EntityConfigFieldEfileMetadata {
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(TYPE))).selectByVisibleText(configFieldVoEfileMetadata.getType().getLabel());
 
-        psSelector.selectSpecificValue(By.name(FIELD_BUTTON),  By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, configFieldVoEfileMetadata.getConfigField(), 1L);
+        psSelector.selectSpecificValue(By.name(FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, configFieldVoEfileMetadata.getConfigField(), 1L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridLoad(3L, 3L);
@@ -66,7 +66,7 @@ public class EntityConfigFieldEfileMetadata {
         wait.waitFormLoad();
 
         assertElement.assertSelect(TYPE, configFieldVoEfileMetadata.getType().getLabel());
-        assertElement.assertRadioPsSelector(FIELD, FIELD_BUTTON, AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L, configFieldVoEfileMetadata.getConfigField(), 1L, true);
+        assertElement.assertRadioPsSelector(FIELD, FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVoEfileMetadata.getConfigField(), 1L, true);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
