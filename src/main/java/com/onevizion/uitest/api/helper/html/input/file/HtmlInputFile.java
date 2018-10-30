@@ -106,7 +106,9 @@ public class HtmlInputFile {
     public void uploadOnForm(String fieldName, String value) {
         elementWait.waitElementById(FRAME_ID_ON_FORM);
 
-        
+        seleniumSettings.getWebDriver().switchTo().frame(FRAME_ID_ON_FORM);
+        elementWait.waitElementByName(fieldName);
+        seleniumSettings.getWebDriver().switchTo().parentFrame();
 
         htmlInputFileJs.showInputForFileTb(FRAME_ID_ON_FORM, fieldName);
         seleniumSettings.getWebDriver().switchTo().frame(FRAME_ID_ON_FORM);
