@@ -216,9 +216,19 @@ public class Js {
     }
 
     public Long getGridScrollTop(Long gridId, Long rowIndex) {
-        return NumberUtils.createLong(execJs("var scrollTop = 0;"
+        return NumberUtils.createLong(execJs("var columnIndex = 0;"
+                + "var columnsCount = gridArr[" + gridId + "].grid.getColumnsNum();"
+                + "for (var i = 0; i < columnsCount; i++) {"
+                + "    var isHidden = gridArr[" + gridId + "].grid.isColumnHidden(i);"
+                + "    if (!isHidden) {"
+                + "        columnIndex = i;"
+                + "        break;"
+                + "    }"
+                + "}"
+                + ""
+                + "var scrollTop = 0;"
                 + "for (var i = 0; i < " + rowIndex + "; i++) {"
-                + "    scrollTop = scrollTop + gridArr[" + gridId + "].grid.cellByIndex(i, 0).cell.offsetHeight;"
+                + "    scrollTop = scrollTop + gridArr[" + gridId + "].grid.cellByIndex(i, columnIndex).cell.offsetHeight;"
                 + "}"
                 + "return scrollTop;"));
     }
