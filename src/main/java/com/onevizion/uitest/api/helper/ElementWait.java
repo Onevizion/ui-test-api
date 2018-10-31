@@ -305,4 +305,10 @@ public class ElementWait {
             .until(webdriver -> elementJs.isElementVelocityAnimatedFinishById(id));
     }
 
+    public void waitElementNotExist(WebElement element) {
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Element [" + element + "] exist.")
+            .until(ExpectedConditions.stalenessOf(element));
+    }
+
 }

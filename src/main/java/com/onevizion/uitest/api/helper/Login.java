@@ -44,6 +44,10 @@ public class Login {
 
         seleniumSettings.getWebDriver().findElement(By.id("btn")).click();
 
+        elementWait.waitElementNotExist(userNameElem);
+        elementWait.waitElementNotExist(passwordElem);
+        document.waitReadyStateComplete();
+
         wait.waitWebElement(By.id("mainContainer"));
         wait.waitWebElement(By.id("Table1"));
         wait.waitWebElement(By.id("messageInfoDivContainer"));
@@ -69,6 +73,10 @@ public class Login {
         passwordElem.sendKeys(userPassword);
 
         seleniumSettings.getWebDriver().findElement(By.id("btn")).click();
+
+        elementWait.waitElementNotExist(userNameElem);
+        elementWait.waitElementNotExist(passwordElem);
+        document.waitReadyStateComplete();
 
         elementWait.waitElementById("auth_message");
         elementWait.waitElementVisibleById("auth_message");
