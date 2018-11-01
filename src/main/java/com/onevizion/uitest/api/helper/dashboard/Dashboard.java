@@ -104,7 +104,7 @@ public class Dashboard {
         WebElement axis = getAxis(oldName);
         String axisType = axis.findElement(By.className("tet_subtitle")).getText();
         if (DashAxisType.X.getName().equals(axisType)) {
-            axis.findElement(By.id("btn_edit0")).click();
+            axis.findElement(By.id("btn_edit")).click();
             axis.findElement(By.className("tet_input")).clear();
             axis.findElement(By.className("tet_input")).sendKeys(newName);
             axis.findElement(By.className("btn_label")).click();
