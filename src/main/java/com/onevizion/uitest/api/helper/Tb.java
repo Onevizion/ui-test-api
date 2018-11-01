@@ -174,13 +174,40 @@ public class Tb {
                 || ConfigFieldType.TIME.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
-                element.moveToElementById("idx" + idx);
-                seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).clear();
-                seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).sendKeys(value);
+
+                //chromedriver 2.43 for date, time, date/time clear() - sendkey - sendkey - alert after clear() (onblur event with delay)
+                //element.moveToElementById("idx" + idx);
+                //seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).clear();
+                //seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).sendKeys(value);
+
+                element.clickById("idx" + idx);
+                String prevVal = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).getAttribute("value");
+
+                Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+                for (int i = 0; i < prevVal.length(); i++) {
+                    actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
+                }
+                for (int i = 0; i < prevVal.length(); i++) {
+                    actionObject.sendKeys(Keys.BACK_SPACE).perform();
+                }
+                actionObject.sendKeys(value).perform();
             } else {
-                element.moveToElementByName(fieldName);
-                seleniumSettings.getWebDriver().findElement(By.name(fieldName)).clear();
-                seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(value);
+                //chromedriver 2.43 for date, time, date/time clear() - sendkey - sendkey - alert after clear() (onblur event with delay)
+                //element.moveToElementByName(fieldName);
+                //seleniumSettings.getWebDriver().findElement(By.name(fieldName)).clear();
+                //seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(value);
+
+                element.clickByName(fieldName);
+                String prevVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
+
+                Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+                for (int i = 0; i < prevVal.length(); i++) {
+                    actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
+                }
+                for (int i = 0; i < prevVal.length(); i++) {
+                    actionObject.sendKeys(Keys.BACK_SPACE).perform();
+                }
+                actionObject.sendKeys(value).perform();
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
