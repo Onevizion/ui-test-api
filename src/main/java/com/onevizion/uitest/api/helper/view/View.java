@@ -18,7 +18,6 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
@@ -88,9 +87,6 @@ public class View {
 
     @Resource
     private Js js;
-
-    @Resource
-    private Tab tab;
 
     @Resource
     private ElementWait elementWait;

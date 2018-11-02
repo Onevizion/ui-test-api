@@ -11,10 +11,10 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.NewDropDown;
-import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
+import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.Menu;
 
 @Component

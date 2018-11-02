@@ -1,10 +1,12 @@
-package com.onevizion.uitest.api.helper;
+package com.onevizion.uitest.api.helper.tab;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Js;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,24 @@ public class Tab {
     @Resource
     private TabJs tabJs;
 
+    public void goToTab(String tabLabel) {
+        Long tabIndex = null;
+        for (int i = 1; i <= getTabsCnt(); i++) {
+            if (tabLabel.equals(getTabLabel((long) i))) {
+                if (tabIndex != null) {
+                    throw new SeleniumUnexpectedException("Tab with text[" + tabLabel + "] found many times");
+                }
+                tabIndex = (long) i;
+            }
+        }
+
+        if (tabIndex == null) {
+            throw new SeleniumUnexpectedException("Tab with text[" + tabLabel + "] not found");
+        }
+
+        goToTab(tabIndex);
+    }
+
     public void goToTab(Long tabIndex) {
         js.scrollNewDropDownTop("newFormMenu", "scrollContainer", tabIndex * 28L);
 
@@ -34,10 +54,6 @@ public class Tab {
 
     public String getTabLabel(Long tabIndex) {
         return seleniumSettings.getWebDriver().findElement(By.name("tabLbl" + tabIndex.intValue())).getAttribute("textContent");
-    }
-
-    public void goToTabJS(Long tabIndex) {
-        js.gotoTab("tabLbl", tabIndex - 1L);
     }
 
     public void hideTabMenu() {
@@ -57,17 +73,4 @@ public class Tab {
         return tabs.size();
     }
 
-    public void goToTab (String tabLabel) {
-        Boolean isFind = false;
-        for(long i=1; i<=getTabsCnt();i++){
-            if(getTabLabel(i).equals(tabLabel))
-            {
-                goToTab(i);
-                isFind = true;
-                break;
-            }
-        }
-        if(!isFind)
-            throw new SeleniumUnexpectedException("Tab not found");
-    }
 }

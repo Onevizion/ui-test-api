@@ -14,9 +14,9 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.PsSelector;
-import com.onevizion.uitest.api.helper.Tab;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
 

@@ -137,10 +137,6 @@ public class Js {
         execJs("gridArr[" + gridId + "].grid.selectRowById('" + rowId + "', false, true, true);");
     }
 
-    public void gotoTab(String name, Long index) {
-        execJs("document.getElementsByName('" + name + "')[" + index + "].click();");
-    }
-
     public Long getGridCurTid(Long gridId) {
         return NumberUtils.createLong(execJs("return gridArr[" + gridId + "].curTid;"));
     }

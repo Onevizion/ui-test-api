@@ -59,8 +59,6 @@ import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Qs;
 import com.onevizion.uitest.api.helper.RelationSelector;
 import com.onevizion.uitest.api.helper.Sort;
-import com.onevizion.uitest.api.helper.Tab;
-import com.onevizion.uitest.api.helper.TabJs;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.UsersSettings;
 import com.onevizion.uitest.api.helper.Wait;
@@ -102,6 +100,7 @@ import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
+import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
 import com.onevizion.uitest.api.helper.view.View;
@@ -137,9 +136,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected Tab tab;
-
-    @Resource
-    protected TabJs tabJs;
 
     @Resource
     protected Window window;
