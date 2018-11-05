@@ -60,7 +60,7 @@ public class Logoff {
     }
 
     public void logoffFromApiV3() {
-        seleniumSettings.getWebDriver().get(seleniumSettings.getServerUrl());
+        document.open(seleniumSettings.getServerUrl());
 
         wait.waitWebElement(By.id("mainContainer"));
         wait.waitWebElement(By.id("Table1"));

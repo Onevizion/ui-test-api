@@ -97,7 +97,7 @@ public class Login {
     public void loginIntoApiV3() {
         login(seleniumSettings.getTestUser(), seleniumSettings.getTestPasswordApiV3());
 
-        seleniumSettings.getWebDriver().get(seleniumSettings.getServerUrl() + "/api/v3");
+        document.open(seleniumSettings.getServerUrl() + "/api/v3");
 
         wait.waitWebElement(By.className("info_title"));
         wait.waitWebElement(By.className("authorize__btn"));
