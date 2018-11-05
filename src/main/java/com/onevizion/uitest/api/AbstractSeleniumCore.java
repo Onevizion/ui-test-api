@@ -560,8 +560,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
             seleniumSettings.getWebDriver().manage().deleteAllCookies();
 
-            seleniumSettings.getWebDriver().get(seleniumSettings.getServerUrl());
             logger.info("{} browser open", seleniumSettings.getTestName());
+            seleniumSettings.getWebDriver().get(seleniumSettings.getServerUrl());
+            document.waitReadyStateComplete();
 
             String newTestUser = context.getCurrentXmlTest().getParameter("test.selenium.user");
             seleniumSettings.setTestUser(newTestUser);

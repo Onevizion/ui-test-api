@@ -21,6 +21,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.document.Document;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
@@ -39,6 +40,9 @@ public class Window {
 
     @Resource
     private ElementWait elementWait;
+
+    @Resource
+    private Document document;
 
     public void openModal(final By elemenLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -103,6 +107,8 @@ public class Window {
 
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
         seleniumSettings.getWebDriver().manage().window().maximize();
+
+        document.waitReadyStateComplete();
     }
 
     public void openModal(final WebElement element) {
@@ -157,6 +163,8 @@ public class Window {
 
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
         seleniumSettings.getWebDriver().manage().window().maximize();
+
+        document.waitReadyStateComplete();
     }
 
     public void closeModalCtrlEnter() {
