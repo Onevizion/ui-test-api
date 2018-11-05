@@ -140,6 +140,7 @@ public class SeleniumListener extends TestListenerAdapter {
                 //https://bugzilla.mozilla.org/show_bug.cgi?id=1434872
                 js.resetFormChange(test);
                 js.resetGridChange(test);
+                test.seleniumSettings.getWebDriver().get("about:blank");
                 test.seleniumSettings.getWebDriver().close();
 
                 new WebDriverWait(test.seleniumSettings.getWebDriver(), test.seleniumSettings.getDefaultTimeout())

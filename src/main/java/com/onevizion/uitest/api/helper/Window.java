@@ -194,6 +194,7 @@ public class Window {
         } else {
             //https://bugs.chromium.org/p/chromedriver/issues/detail?id=538
             //BUG window.onbeforeunload not fired
+            seleniumSettings.getWebDriver().get("about:blank");
             seleniumSettings.getWebDriver().close();
         }
 
@@ -221,6 +222,7 @@ public class Window {
         } else {
             //https://bugs.chromium.org/p/chromedriver/issues/detail?id=538
             //BUG window.onbeforeunload not fired
+            seleniumSettings.getWebDriver().get("about:blank");
             seleniumSettings.getWebDriver().close();
         }
 
