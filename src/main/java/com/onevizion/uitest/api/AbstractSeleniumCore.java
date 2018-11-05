@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -427,6 +428,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     //profile.setEnableNativeEvents(false); /* TODO selenium 5374 issue */
 
                     FirefoxOptions options = new FirefoxOptions();
+                    options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     //options.addPreference("security.sandbox.content.level", 5);
                     //options.setLegacy(true);
                     options.setProfile(profile);
@@ -450,6 +452,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
                     //TODO workaround for chrome 52
                     ChromeOptions options = new ChromeOptions();
+                    options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     options.addArguments("--no-sandbox");
                     options.setExperimentalOption("prefs", chromePrefs);
                     capability.setCapability(ChromeOptions.CAPABILITY, options);
@@ -500,6 +503,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     FirefoxOptions options = new FirefoxOptions();
                     //options.setLogLevel(FirefoxDriverLogLevel.TRACE);
                     //options.setLegacy(true);
+                    options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     options.setProfile(profile);
                     //TODO https://github.com/mozilla/geckodriver/issues/617
                     //https://bugzilla.mozilla.org/show_bug.cgi?id=1264259
@@ -515,6 +519,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     chromePrefs.put("download.default_directory", seleniumSettings.getUploadFilesPath());
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments(Arrays.asList("--disable-translate", "--always-authorize-plugins"));
+                    options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     options.setExperimentalOption("prefs", chromePrefs);
 
                     if (seleniumSettings.getHeadlessMode()) {
@@ -542,6 +547,16 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.getWebDriver().manage().window().maximize();
 
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+            //not finish or not need when PageLoadStrategy.NONE
+            //when PageLoadStrategy.NORMAL
+            //in chrome AdminProgramFullAutoCloneTest add submit
+            //in chrome AdminProgramFullManualCloneTest add submit
+            //[SEVERE]: Timed out receiving message from renderer: 300.000 = 5 minutes
+            //new value should be equal or more seleniumSettings.getDefaultTimeout()
+            //negative value not working
+            //seleniumSettings.getWebDriver().manage().timeouts().pageLoadTimeout(500, TimeUnit.SECONDS);
+            //seleniumSettings.getWebDriver().manage().timeouts().setScriptTimeout(500, TimeUnit.SECONDS);
 
             seleniumSettings.getWebDriver().manage().deleteAllCookies();
 
