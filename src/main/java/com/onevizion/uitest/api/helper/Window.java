@@ -22,6 +22,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.document.Document;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
@@ -43,6 +44,9 @@ public class Window {
 
     @Resource
     private Document document;
+
+    @Resource
+    private Jquery jquery;
 
     public void openModal(final By elemenLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -109,6 +113,7 @@ public class Window {
         seleniumSettings.getWebDriver().manage().window().maximize();
 
         document.waitReadyStateComplete();
+        jquery.waitLoad();
     }
 
     public void openModal(final WebElement element) {
@@ -165,6 +170,7 @@ public class Window {
         seleniumSettings.getWebDriver().manage().window().maximize();
 
         document.waitReadyStateComplete();
+        jquery.waitLoad();
     }
 
     public void closeModalCtrlEnter() {

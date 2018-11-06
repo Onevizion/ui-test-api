@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.document.Document;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 
 @Component
 public class Logoff {
@@ -26,6 +27,9 @@ public class Logoff {
 
     @Resource
     private Document document;
+
+    @Resource
+    private Jquery jquery;
 
     public void logoff() {
         elementWait.waitElementById("topPanelUserNameBtn");
@@ -57,6 +61,7 @@ public class Logoff {
         elementWait.waitElementById("btn");
 
         document.waitReadyStateComplete();
+        jquery.waitLoad();
     }
 
     public void logoffFromApiV3() {

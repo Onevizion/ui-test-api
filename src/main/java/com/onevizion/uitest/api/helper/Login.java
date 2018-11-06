@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.document.Document;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 
 @Component
 public class Login {
@@ -23,6 +24,9 @@ public class Login {
 
     @Resource
     private ElementWait elementWait;
+
+    @Resource
+    private Jquery jquery;
 
     public void login(String userName, String userPassword) {
         document.waitReadyStateComplete();
@@ -47,6 +51,7 @@ public class Login {
         elementWait.waitElementNotExist(userNameElem);
         elementWait.waitElementNotExist(passwordElem);
         document.waitReadyStateComplete();
+        jquery.waitLoad();
 
         wait.waitWebElement(By.id("mainContainer"));
         wait.waitWebElement(By.id("Table1"));
@@ -56,6 +61,7 @@ public class Login {
 
     public void failLogin(String userName, String userPassword, String errorMessage) {
         document.waitReadyStateComplete();
+        jquery.waitLoad();
 
         elementWait.waitElementById("username");
         elementWait.waitElementVisibleById("username");
@@ -77,6 +83,7 @@ public class Login {
         elementWait.waitElementNotExist(userNameElem);
         elementWait.waitElementNotExist(passwordElem);
         document.waitReadyStateComplete();
+        jquery.waitLoad();
 
         elementWait.waitElementById("auth_message");
         elementWait.waitElementVisibleById("auth_message");
