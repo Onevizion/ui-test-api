@@ -8,7 +8,7 @@ import com.onevizion.uitest.api.helper.Js;
 class DocumentJs extends Js {
 
     Boolean isReadyStateComplete() {
-        return Boolean.valueOf(execJs("return document.readyState").equals("complete"));
+        return Boolean.valueOf(execJs("return document.readyState == 'complete'"));
     }
 
 }
