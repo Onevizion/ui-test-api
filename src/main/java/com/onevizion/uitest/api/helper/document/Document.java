@@ -34,6 +34,7 @@ public class Document {
 
     public void open2(String page) {
         WebElement html = seleniumSettings.getWebDriver().findElement(By.tagName("html"));
+        seleniumSettings.getWebDriver().get("about:blank");
         seleniumSettings.getWebDriver().get(page);
         elementWait.waitElementNotExist(html);
 
