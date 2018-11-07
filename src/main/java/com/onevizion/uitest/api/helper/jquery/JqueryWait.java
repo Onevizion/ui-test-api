@@ -17,16 +17,9 @@ class JqueryWait {
     private JqueryJs jqueryJs;
 
     void waitJQueryLoad() {
-        waitJquery();
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for JQuery loading is failed")
             .until(webdriver -> jqueryJs.isJQueryNotActive());
-    }
-
-    void waitJquery() {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for JQuery is failed")
-            .until(webdriver -> jqueryJs.isJqueryExist());
     }
 
 }
