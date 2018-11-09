@@ -4,10 +4,8 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,7 +18,6 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.document.Document;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
@@ -71,24 +68,10 @@ public class Window {
             logger.warn("", e);
         }
 
-        boolean failOpenWindow = true;
-        int attemptsCnt = 0; //protection from the endless cycle
-        do {
-            try {
-                seleniumSettings.getWebDriver().findElement(elemenLocator).click();
-                new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-                    .withMessage("Waiting new modal window opened by [" + elemenLocator.toString() + "] is failed.")
-                    .until(webdriver -> webdriver.getWindowHandles().size() == openedWindowsCount + 1);
-                failOpenWindow = false;
-            } catch (TimeoutException | ElementNotVisibleException e) {
-                logger.warn("", e);
-            }
-            attemptsCnt = attemptsCnt + 1;
-        } while (failOpenWindow && attemptsCnt <= 10);
-
-        if (failOpenWindow && attemptsCnt > 10) {
-            throw new SeleniumUnexpectedException("Failed to open window by [" + elemenLocator.toString() + "]");
-        }
+        seleniumSettings.getWebDriver().findElement(elemenLocator).click();
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting new modal window opened by [" + elemenLocator.toString() + "] is failed.")
+            .until(webdriver -> webdriver.getWindowHandles().size() == openedWindowsCount + 1);
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting new modal window opened by [" + elemenLocator.toString() + "] is failed.")
@@ -128,24 +111,10 @@ public class Window {
 
         final int openedWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
 
-        boolean failOpenWindow = true;
-        int attemptsCnt = 0; //protection from the endless cycle
-        do {
-            try {
-                element.click();
-                new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-                    .withMessage("Waiting new modal window opened by [" + element.toString() + "] is failed.")
-                    .until(webdriver -> webdriver.getWindowHandles().size() == openedWindowsCount + 1);
-                failOpenWindow = false;
-            } catch (TimeoutException | ElementNotVisibleException e) {
-                logger.warn("", e);
-            }
-            attemptsCnt = attemptsCnt + 1;
-        } while (failOpenWindow && attemptsCnt <= 10);
-
-        if (failOpenWindow && attemptsCnt > 10) {
-            throw new SeleniumUnexpectedException("Failed to open window by [" + element.toString() + "]");
-        }
+        element.click();
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting new modal window opened by [" + element.toString() + "] is failed.")
+            .until(webdriver -> webdriver.getWindowHandles().size() == openedWindowsCount + 1);
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting new modal window opened by [" + element.toString() + "] is failed.")
