@@ -96,7 +96,6 @@ public class Window {
         seleniumSettings.getWebDriver().manage().window().maximize();
 
         document.waitReadyStateComplete();
-        jquery.waitLoad();
     }
 
     public void openModal(final WebElement element) {
@@ -139,7 +138,6 @@ public class Window {
         seleniumSettings.getWebDriver().manage().window().maximize();
 
         document.waitReadyStateComplete();
-        jquery.waitLoad();
     }
 
     public void closeModalCtrlEnter() {
