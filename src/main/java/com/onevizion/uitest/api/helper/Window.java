@@ -200,11 +200,7 @@ public class Window {
 
         if (elementClick != null) {
             wait.waitWebElement(elementClick);
-            try {
-                seleniumSettings.getWebDriver().findElement(elementClick).click();
-            } catch (WebDriverException e){
-                logger.warn("Exception in closeModal", e);
-            }
+            seleniumSettings.getWebDriver().findElement(elementClick).click();
         } else {
             //https://bugs.chromium.org/p/chromedriver/issues/detail?id=538
             //BUG window.onbeforeunload not fired
@@ -221,35 +217,6 @@ public class Window {
         wait.waitIsWindowClosed();
     }
 
-    @Deprecated
-    public void closeModalDeprecated(final By elementClick) {
-        final int currentWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
-        String title = seleniumSettings.getWebDriver().getTitle();
-
-        if (elementClick != null) {
-            wait.waitWebElement(elementClick);
-            try {
-                seleniumSettings.getWebDriver().findElement(elementClick).click();
-            } catch (WebDriverException e){
-                logger.warn("Exception in closeModal", e);
-            }
-        } else {
-            //https://bugs.chromium.org/p/chromedriver/issues/detail?id=538
-            //BUG window.onbeforeunload not fired
-            seleniumSettings.getWebDriver().get("about:blank");
-            seleniumSettings.getWebDriver().close();
-        }
-
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
-            .until(webdriver -> webdriver.getWindowHandles().size() == currentWindowsCount - 1);
-
-        seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
-        seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-
-        seleniumSettings.getWebDriver().findElement(By.id("DIVx")).click(); //TODO DIVx should be removed automatically after close window
-    }
-
     public void closeModalAndWaitGridLoad(By elementClick) {
         closeModal(elementClick);
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
@@ -260,11 +227,7 @@ public class Window {
         wait.waitWebElement(elementClick);
         String title = seleniumSettings.getWebDriver().getTitle();
 
-        try {
-            seleniumSettings.getWebDriver().findElement(elementClick).click();
-        } catch (WebDriverException e) {
-            logger.warn("Exception in closeModalWithAlert", e);
-        }
+        seleniumSettings.getWebDriver().findElement(elementClick).click();
 
         wait.waitAlert();
 
@@ -275,7 +238,7 @@ public class Window {
         try {
             seleniumSettings.getWebDriver().switchTo().alert().accept();
         } catch (WebDriverException e){
-            
+            logger.warn("Exception in closeModalWithAlert alert", e);
         }
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -297,11 +260,7 @@ public class Window {
         wait.waitWebElement(elementClick);
         String title = seleniumSettings.getWebDriver().getTitle();
 
-        try {
-            seleniumSettings.getWebDriver().findElement(elementClick).click();
-        } catch (WebDriverException e) {
-            logger.warn("Exception in closeModalFormButtonRule", e);
-        }
+        seleniumSettings.getWebDriver().findElement(elementClick).click();
 
         wait.waitAlert();
 
@@ -309,8 +268,8 @@ public class Window {
 
         try {
             seleniumSettings.getWebDriver().switchTo().alert().accept();
-        } catch (WebDriverException e){
-            
+        } catch (WebDriverException e) {
+            logger.warn("Exception in closeModalFormButtonRule alert1", e);
         }
 
         wait.waitAlert();
@@ -320,7 +279,7 @@ public class Window {
         try {
             seleniumSettings.getWebDriver().switchTo().alert().accept();
         } catch (WebDriverException e){
-            
+            logger.warn("Exception in closeModalFormButtonRule alert2", e);
         }
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -337,11 +296,7 @@ public class Window {
         wait.waitWebElement(elementClick);
         String title = seleniumSettings.getWebDriver().getTitle();
 
-        try {
-            seleniumSettings.getWebDriver().findElement(elementClick).click();
-        } catch (WebDriverException e) {
-            logger.warn("Exception in closeModalFormButtonRuleMassAssign", e);
-        }
+        seleniumSettings.getWebDriver().findElement(elementClick).click();
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
