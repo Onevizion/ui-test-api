@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
@@ -65,7 +64,7 @@ public class Window {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
             actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(elemenLocator)).perform();
         } catch (MoveTargetOutOfBoundsException e) {
-            logger.warn("", e);
+            logger.warn("Exception in openModal moveToElement", e);
         }
 
         seleniumSettings.getWebDriver().findElement(elemenLocator).click();
@@ -202,11 +201,7 @@ public class Window {
             Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
         }
 
-        try {
-            seleniumSettings.getWebDriver().switchTo().alert().accept();
-        } catch (WebDriverException e){
-            logger.warn("Exception in closeModalWithAlert alert", e);
-        }
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
@@ -233,21 +228,13 @@ public class Window {
 
         Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
 
-        try {
-            seleniumSettings.getWebDriver().switchTo().alert().accept();
-        } catch (WebDriverException e) {
-            logger.warn("Exception in closeModalFormButtonRule alert1", e);
-        }
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
 
         wait.waitAlert();
 
         Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message2, "Apply alert have wrong message");
 
-        try {
-            seleniumSettings.getWebDriver().switchTo().alert().accept();
-        } catch (WebDriverException e){
-            logger.warn("Exception in closeModalFormButtonRule alert2", e);
-        }
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
