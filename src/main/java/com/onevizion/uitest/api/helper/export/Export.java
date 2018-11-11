@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
@@ -62,7 +61,9 @@ public class Export {
     private SeleniumSettings seleniumSettings;
 
     public void export(Long gridIndex, ExportRun exportRun, List<Integer> uniqueColumns, CheckExportFile checkExportFile) {
-        runExport(gridIndex, exportRun);
+        ExportMenu exportMenu = getExportMenu();
+
+        runExport(gridIndex, exportMenu, exportRun);
         String processId = waitExportDone();
         if (StringUtils.isNotEmpty(exportRun.getFilePath())) {
             if ("Grid to CSV".equals(exportRun.getMode())) {
@@ -81,12 +82,14 @@ public class Export {
                 throw new SeleniumUnexpectedException("Not support Mode. Mode=" + exportRun.getMode());
             }
         }
-        checkExport(gridIndex, exportRun);
-        deleteExport(gridIndex, processId);
+        checkExport(gridIndex, exportMenu, exportRun);
+        deleteExport(gridIndex, exportMenu, processId);
     }
 
     public void export(Long gridIndex, ExportRun exportRun, CheckExportFile checkExportFile) {
-        runExport(gridIndex, exportRun);
+        ExportMenu exportMenu = getExportMenu();
+
+        runExport(gridIndex, exportMenu, exportRun);
         String processId = waitExportDone();
         if (StringUtils.isNotEmpty(exportRun.getFilePath())) {
             if ("Grid to CSV".equals(exportRun.getMode())) {
@@ -105,13 +108,15 @@ public class Export {
                 throw new SeleniumUnexpectedException("Not support Mode. Mode=" + exportRun.getMode());
             }
         }
-        checkExport(gridIndex, exportRun);
-        deleteExport(gridIndex, processId);
+        checkExport(gridIndex, exportMenu, exportRun);
+        deleteExport(gridIndex, exportMenu, processId);
     }
 
-    private void runExport(Long gridIndex, ExportRun exportRun) {
+    private void runExport(Long gridIndex, ExportMenu exportMenu, ExportRun exportRun) {
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click(); //TODO move AbstractSelenium.BUTTON_EXPORT_ID_BASE
-        window.openModal(getRunExportElement());
+        elementWait.waitElementVisible(exportMenu.getRun());
+        elementWait.waitElementDisplay(exportMenu.getRun());
+        window.openModal(exportMenu.getRun());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
         new Select(seleniumSettings.getWebDriver().findElement(By.name("GridExportMode"))).selectByVisibleText(exportRun.getMode());
@@ -146,9 +151,11 @@ public class Export {
         return processId;
     }
 
-    private void checkExport(Long gridIndex, ExportRun exportRun) {
+    private void checkExport(Long gridIndex, ExportMenu exportMenu, ExportRun exportRun) {
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click();
-        window.openModal(getExportHistoryElement());
+        elementWait.waitElementVisible(exportMenu.getHistory());
+        elementWait.waitElementDisplay(exportMenu.getHistory());
+        window.openModal(exportMenu.getHistory());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
@@ -170,9 +177,11 @@ public class Export {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
     }
 
-    private void deleteExport(Long gridIndex, String processId) {
+    private void deleteExport(Long gridIndex, ExportMenu exportMenu, String processId) {
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click();
-        window.openModal(getExportHistoryElement());
+        elementWait.waitElementVisible(exportMenu.getHistory());
+        elementWait.waitElementDisplay(exportMenu.getHistory());
+        window.openModal(exportMenu.getHistory());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
@@ -190,48 +199,51 @@ public class Export {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
     }
 
-    private WebElement getRunExportElement() {
-        WebElement runExportElement = null;
+    private ExportMenu getExportMenu() {
+        ExportMenu exportMenu = new ExportMenu();
 
-        int i = 0;
-        do {
-            try {
-                List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"));
-                for (WebElement webElement : webElements) {
-                    if ("Run Export".equals(webElement.getText())) {
-                        runExportElement = webElement;
-                    }
+        List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon"));
+        for (WebElement menu : menus) {
+            List<WebElement> menuItems = menu.findElements(By.className("sub_item"));
+            for (WebElement menuItem : menuItems) {
+                WebElement menuItemDiv = menuItem.findElement(By.tagName("div"));
+                String menuItemDivText = menuItemDiv.getAttribute("innerText");
+                if ("Run Export".equals(menuItemDivText)) {
+                    exportMenu.setRun(menuItemDiv);
+                } else if ("Export History".equals(menuItemDivText)) {
+                    exportMenu.setHistory(menuItemDiv);
                 }
-            } catch (StaleElementReferenceException e) {
-                
-            }
-            i++;
-        } while (i < 5);
 
-        Assert.assertNotNull(runExportElement, "Run Export button not found");
-        return runExportElement;
+                if (exportMenu.getRun() != null && exportMenu.getHistory() != null) {
+                    return exportMenu;
+                }
+            }
+        }
+
+        throw new SeleniumUnexpectedException("Export menu not found");
     }
 
-    private WebElement getExportHistoryElement() {
-        WebElement exportHistoryElement = null;
+    private class ExportMenu {
 
-        int i = 0;
-        do {
-            try {
-                List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"));
-                for (WebElement webElement : webElements) {
-                    if ("Export History".equals(webElement.getText())) {
-                        exportHistoryElement = webElement;
-                    }
-                }
-            } catch (StaleElementReferenceException e) {
-                
-            }
-            i++;
-        } while (i < 5);
+        private WebElement run;
+        private WebElement history;
 
-        Assert.assertNotNull(exportHistoryElement, "Export History button not found");
-        return exportHistoryElement;
+        public WebElement getRun() {
+            return run;
+        }
+
+        public void setRun(WebElement run) {
+            this.run = run;
+        }
+
+        public WebElement getHistory() {
+            return history;
+        }
+
+        public void setHistory(WebElement history) {
+            this.history = history;
+        }
+
     }
 
 }
