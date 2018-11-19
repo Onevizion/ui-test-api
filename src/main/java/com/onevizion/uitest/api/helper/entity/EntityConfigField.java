@@ -60,7 +60,6 @@ public class EntityConfigField {
     private static final String MANDATORY = "mandatory";
     private static final String TWO_COLUMNS = "twoColsSpan";
     private static final String LOCKABLE = "lockable";
-    private static final String MULTIPLE = "multiple";
     private static final String READ_ONLY = "readOnly";
     private static final String CALC_TOTAL = "calcTotal";
     private static final String NOT_CLONE_VALUE = "notCloneFieldValue";
@@ -345,11 +344,6 @@ public class EntityConfigField {
             checkbox.clickByName(LOCKABLE);
         }
 
-        if ((configFieldVo.getMultiple().equals("YES") && !checkbox.isCheckedByName(MULTIPLE))
-                || (configFieldVo.getMultiple().equals("NO") && checkbox.isCheckedByName(MULTIPLE))) {
-            checkbox.clickByName(MULTIPLE);
-        }
-
         if ((configFieldVo.getReadOnly().equals("YES") && !checkbox.isCheckedByName(READ_ONLY))
                 || (configFieldVo.getReadOnly().equals("NO") && checkbox.isCheckedByName(READ_ONLY))) {
             checkbox.clickByName(READ_ONLY);
@@ -606,11 +600,6 @@ public class EntityConfigField {
             checkbox.clickByName(LOCKABLE);
         }
 
-        if ((configFieldVo.getMultiple().equals("YES") && !checkbox.isCheckedByName(MULTIPLE))
-                || (configFieldVo.getMultiple().equals("NO") && checkbox.isCheckedByName(MULTIPLE))) {
-            checkbox.clickByName(MULTIPLE);
-        }
-
         if ((configFieldVo.getReadOnly().equals("YES") && !checkbox.isCheckedByName(READ_ONLY))
                 || (configFieldVo.getReadOnly().equals("NO") && checkbox.isCheckedByName(READ_ONLY))) {
             checkbox.clickByName(READ_ONLY);
@@ -797,7 +786,6 @@ public class EntityConfigField {
         assertElement.assertCheckbox(MANDATORY, configFieldVo.getMandatory());
         assertElement.assertCheckbox(TWO_COLUMNS, configFieldVo.getTwoColumns());
         assertElement.assertCheckbox(LOCKABLE, configFieldVo.getLockable());
-        assertElement.assertCheckbox(MULTIPLE, configFieldVo.getMultiple());
 
         assertElement.assertCheckbox(READ_ONLY, configFieldVo.getReadOnly());
         assertElement.assertCheckbox(CALC_TOTAL, configFieldVo.getCalcTotal());
@@ -864,7 +852,6 @@ public class EntityConfigField {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Field Width (px)"), configFieldVo.getWidth());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), configFieldVo.getDescription());
         gridVals.put(js.getColumnIndexByLabel(gridId, "TRACKOR Type"), configFieldVo.getTrackorTypeLabel());
-        gridVals.put(js.getColumnIndexByLabel(gridId, "Multiple Lines"), configFieldVo.getMultiple());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Read Only"), configFieldVo.getReadOnly());
 
         if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {

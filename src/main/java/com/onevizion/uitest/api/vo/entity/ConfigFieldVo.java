@@ -18,7 +18,6 @@ public class ConfigFieldVo {
     private String mandatory;
     private String twoColumns;
     private String lockable;
-    private String multiple;
     private String readOnly;
     private String calcTotal;
     private String notCloneValue;
@@ -73,7 +72,6 @@ public class ConfigFieldVo {
                     ConfigFieldVo.this.mandatory == null ||
                     ConfigFieldVo.this.twoColumns == null ||
                     ConfigFieldVo.this.lockable == null ||
-                    ConfigFieldVo.this.multiple == null ||
                     ConfigFieldVo.this.readOnly == null ||
                     ConfigFieldVo.this.calcTotal == null ||
                     ConfigFieldVo.this.notCloneValue == null ||
@@ -140,11 +138,6 @@ public class ConfigFieldVo {
 
         public Builder setLockable(String lockable) {
             ConfigFieldVo.this.lockable = lockable;
-            return this;
-        }
-
-        public Builder setMultiple(String multiple) {
-            ConfigFieldVo.this.multiple = multiple;
             return this;
         }
 
@@ -322,10 +315,6 @@ public class ConfigFieldVo {
 
     public String getLockable() {
         return lockable;
-    }
-
-    public String getMultiple() {
-        return multiple;
     }
 
     public String getReadOnly() {
