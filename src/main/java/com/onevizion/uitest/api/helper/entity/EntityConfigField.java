@@ -61,7 +61,6 @@ public class EntityConfigField {
     private static final String TWO_COLUMNS = "twoColsSpan";
     private static final String LOCKABLE = "lockable";
     private static final String READ_ONLY = "readOnly";
-    private static final String CALC_TOTAL = "calcTotal";
     private static final String NOT_CLONE_VALUE = "notCloneFieldValue";
     private static final String NOT_CLONE_LOCK = "notCloneLocks";
 
@@ -349,11 +348,6 @@ public class EntityConfigField {
             checkbox.clickByName(READ_ONLY);
         }
 
-        if ((configFieldVo.getCalcTotal().equals("YES") && !checkbox.isCheckedByName(CALC_TOTAL))
-                || (configFieldVo.getCalcTotal().equals("NO") && checkbox.isCheckedByName(CALC_TOTAL))) {
-            checkbox.clickByName(CALC_TOTAL);
-        }
-
         if ((configFieldVo.getNotCloneValue().equals("YES") && !checkbox.isCheckedByName(NOT_CLONE_VALUE))
                 || (configFieldVo.getNotCloneValue().equals("NO") && checkbox.isCheckedByName(NOT_CLONE_VALUE))) {
             checkbox.clickByName(NOT_CLONE_VALUE);
@@ -605,11 +599,6 @@ public class EntityConfigField {
             checkbox.clickByName(READ_ONLY);
         }
 
-        if ((configFieldVo.getCalcTotal().equals("YES") && !checkbox.isCheckedByName(CALC_TOTAL))
-                || (configFieldVo.getCalcTotal().equals("NO") && checkbox.isCheckedByName(CALC_TOTAL))) {
-            checkbox.clickByName(CALC_TOTAL);
-        }
-
         if ((configFieldVo.getNotCloneValue().equals("YES") && !checkbox.isCheckedByName(NOT_CLONE_VALUE))
                 || (configFieldVo.getNotCloneValue().equals("NO") && checkbox.isCheckedByName(NOT_CLONE_VALUE))) {
             checkbox.clickByName(NOT_CLONE_VALUE);
@@ -788,7 +777,6 @@ public class EntityConfigField {
         assertElement.assertCheckbox(LOCKABLE, configFieldVo.getLockable());
 
         assertElement.assertCheckbox(READ_ONLY, configFieldVo.getReadOnly());
-        assertElement.assertCheckbox(CALC_TOTAL, configFieldVo.getCalcTotal());
         assertElement.assertCheckbox(NOT_CLONE_VALUE, configFieldVo.getNotCloneValue());
         assertElement.assertCheckbox(NOT_CLONE_LOCK, configFieldVo.getNotCloneLock());
 
@@ -902,7 +890,6 @@ public class EntityConfigField {
             gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Display Field"), "");
         }
 
-        gridVals.put(js.getColumnIndexByLabel(gridId, "Calc Total"), configFieldVo.getCalcTotal());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Comments"), configFieldVo.getComment());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Don't Clone Field Value"), configFieldVo.getNotCloneValue());
 

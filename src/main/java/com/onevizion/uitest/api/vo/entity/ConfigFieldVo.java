@@ -19,7 +19,6 @@ public class ConfigFieldVo {
     private String twoColumns;
     private String lockable;
     private String readOnly;
-    private String calcTotal;
     private String notCloneValue;
     private String notCloneLock;
 
@@ -73,7 +72,6 @@ public class ConfigFieldVo {
                     ConfigFieldVo.this.twoColumns == null ||
                     ConfigFieldVo.this.lockable == null ||
                     ConfigFieldVo.this.readOnly == null ||
-                    ConfigFieldVo.this.calcTotal == null ||
                     ConfigFieldVo.this.notCloneValue == null ||
                     ConfigFieldVo.this.notCloneLock == null) {
                 throw new SeleniumUnexpectedException("");
@@ -143,11 +141,6 @@ public class ConfigFieldVo {
 
         public Builder setReadOnly(String readOnly) {
             ConfigFieldVo.this.readOnly = readOnly;
-            return this;
-        }
-
-        public Builder setCalcTotal(String calcTotal) {
-            ConfigFieldVo.this.calcTotal = calcTotal;
             return this;
         }
 
@@ -319,10 +312,6 @@ public class ConfigFieldVo {
 
     public String getReadOnly() {
         return readOnly;
-    }
-
-    public String getCalcTotal() {
-        return calcTotal;
     }
 
     public String getNotCloneValue() {
