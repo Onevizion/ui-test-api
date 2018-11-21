@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.tab.Tab;
+import com.onevizion.uitest.api.vo.WpDatePairType;
 import com.onevizion.uitest.api.vo.entity.WpDatePair;
 
 @Component
@@ -114,13 +115,19 @@ public class EntityWpDatePair {
         assertElement.assertText(LABEL, wpDatePair.getLabel());
         assertElement.assertText(SHORT_LABEL, wpDatePair.getShortLabel());
 
-        tab.goToTab(2L); //Role Privs
-        wait.waitGridLoad(2L, 2L);
-        grid.checkAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
-        grid.checkAssignmentGridColumnNew(2L, 2L, 0L, wpDatePair.getRoles(), "E");
-        grid.checkAssignmentGridColumnNew(2L, 3L, 0L, wpDatePair.getRoles(), "A");
-        grid.checkAssignmentGridColumnNew(2L, 4L, 0L, wpDatePair.getRoles(), "D");
-        grid.checkAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
+        if (!WpDatePairType.PROJECTED_DELTA.getName().equals(wpDatePair.getName())) {
+            tab.goToTab(2L); //Role Privs
+            wait.waitGridLoad(2L, 2L);
+            grid.checkAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
+            if (!WpDatePairType.BASELINE.getName().equals(wpDatePair.getName())
+                    && !WpDatePairType.EARLY.getName().equals(wpDatePair.getName())
+                    && !WpDatePairType.LATE.getName().equals(wpDatePair.getName())) {
+                grid.checkAssignmentGridColumnNew(2L, 2L, 0L, wpDatePair.getRoles(), "E");
+                grid.checkAssignmentGridColumnNew(2L, 3L, 0L, wpDatePair.getRoles(), "A");
+                grid.checkAssignmentGridColumnNew(2L, 4L, 0L, wpDatePair.getRoles(), "D");
+            }
+            grid.checkAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
+        }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
