@@ -406,12 +406,6 @@ public class Wait {
             });
     }
 
-    public void waitFCKEditorValue(final String name, final String value) {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for FCK Editor name=[" + name + "] value=[" + value + "] is failed")
-            .until(webdriver -> value.equals(js.getValueFromFCKEditor(name)));
-    }
-
     public void waitDropGridVerificationFinish() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for DropGrid Verification is failed")
