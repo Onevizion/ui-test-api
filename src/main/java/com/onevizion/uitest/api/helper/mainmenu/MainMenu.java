@@ -113,7 +113,7 @@ public class MainMenu {
               + "//label[text()='" + treeItem + "']"));
     }
 
-    private void waitPageTitle(String title) {
+    public void waitPageTitle(String title) {
         wait.waitWebElement(By.id("ttlPage"));
         mainMenuWait.waitPageTitle(title);
     }
