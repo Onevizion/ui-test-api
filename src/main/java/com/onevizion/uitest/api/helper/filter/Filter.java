@@ -43,16 +43,26 @@ public class Filter {
     private static final String BUTTON_CLEAR_SEARCH = "ddFilterClearSearch";
     private static final String BUTTON_ORGANIZE = "ddFilterBtnOrganize";
 
+    public static final String BUTTON_OPEN = "btnFilter";
+    private static final String FIELD_FILTER_NAME = "txtFilterName";
     public static final String FILTER_NAME = "TestFilter";
     private static final String BUTTON_SAVE = "unsavedFilterIcon";
-    private static final String FIELD_FILTER_NAME = "txtFilterName";
-    public static final String BUTTON_OPEN = "btnFilter";
-    public static final String BUTTON_CLEAR = "btnClear";
     private static final String UNSAVED_FILTER = "unsavedFilterId";
 
     private static final String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
     private static final String FILTER_DIALOG_OK = "filterDialogOk";
     private static final String FILTER_DIALOG_CANCEL = "filterDialogCancel";
+
+    private static final String FOLDER_LOCAL = "Local Filters";
+    private static final String FOLDER_GLOBAL = "Global Filters";
+
+    public static final String BUTTON_CLEAR = "btnClear";
+
+    private static final String FILTER_TYPE = "lbFilterType";
+
+    private static final String EXISTING_FILTERS = "ddExistingFilters";
+    private static final String SAVE_CONTAINER = "ddFilterFormSaveContainer";
+    private static final String SCROLL_CONTAINER = "scrollContainer";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -198,6 +208,49 @@ public class Filter {
         jquery.waitLoad(); //wait reload filters and grid
     }
 
+    private void selectFolderForSaveFilterByVisibleText(Long gridIdx, String folderName) {
+        String currentFolderName = seleniumSettings.getWebDriver().findElement(By.id(EXISTING_FILTERS + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
+        if (folderName.equals(currentFolderName)) {
+            return;
+        }
+
+        seleniumSettings.getWebDriver().findElement(By.id(EXISTING_FILTERS + gridIdx)).click();
+
+        elementWait.waitElementById(SAVE_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(SAVE_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(SAVE_CONTAINER + gridIdx);
+
+        seleniumSettings.getWebDriver().findElement(By.id("ddFilterFormSaveSearch" + gridIdx)).sendKeys(folderName);
+
+        WebElement viewElem = (WebElement) js.getNewDropDownElement(SAVE_CONTAINER + gridIdx, SCROLL_CONTAINER, "newGenericDropDownRow", folderName);
+        elementWait.waitElementVisible(viewElem);
+        viewElem.click();
+
+        seleniumSettings.getWebDriver().findElement(By.id(EXISTING_FILTERS + gridIdx)).click();
+
+        elementWait.waitElementById(SAVE_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(SAVE_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(SAVE_CONTAINER + gridIdx);
+
+        seleniumSettings.getWebDriver().findElement(By.id("ddFilterFormSaveClearSearch" + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(EXISTING_FILTERS + gridIdx)).click();
+    }
+
+    private void isExistAndSelectedFilter(Long gridIdx, String entityPrefix) {
+        boolean isSavedFilter = false;
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
+        for (WebElement filter : getFilters(gridIdx)) {
+            if (filter.getText().equals(entityPrefix)) {
+                isSavedFilter = true;
+            }
+        }
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
+        Assert.assertEquals(isSavedFilter, true, "Filter " + entityPrefix + " isn't saved");
+
+        filterWait.waitCurrentFilterName(gridIdx, entityPrefix);
+        wait.waitGridLoad(gridIdx, gridIdx);
+    }
+
     public void openSaveFilterForm(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
 
@@ -211,6 +264,7 @@ public class Filter {
         elementWait.waitElementVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);
         elementWait.waitElementDisplayById(FILTER_DIALOG_CONTAINER + gridIdx);
 
+        wait.waitWebElement(By.id(FILTER_TYPE + gridIdx));
         wait.waitWebElement(By.id(FIELD_FILTER_NAME + gridIdx));
         wait.waitWebElement(By.id(FILTER_DIALOG_OK + gridIdx));
     }
@@ -223,32 +277,51 @@ public class Filter {
         seleniumSettings.getWebDriver().findElement(By.id(FILTER_DIALOG_CANCEL + gridIdx)).click();
     }
 
-    public void saveFilter(Long gridIdx, String entityPrefix) {
+    public void saveFilter(Long gridIdx, String entityPrefix, boolean isLocal, boolean isNew) {
         int beforeSaveSize = getFiltersCount(gridIdx);
 
         openSaveFilterForm(gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(FIELD_FILTER_NAME + gridIdx)).sendKeys(entityPrefix + FILTER_NAME);
+        if (isNew) {
+            new Select(seleniumSettings.getWebDriver().findElement(By.id(FILTER_TYPE + gridIdx))).selectByVisibleText("New");
+        } else {
+            new Select(seleniumSettings.getWebDriver().findElement(By.id(FILTER_TYPE + gridIdx))).selectByVisibleText("Existing");
+        }
+
+        if (isLocal) {
+            selectFolderForSaveFilterByVisibleText(gridIdx, FOLDER_LOCAL);
+        } else {
+            selectFolderForSaveFilterByVisibleText(gridIdx, FOLDER_GLOBAL);
+        }
+
+        if (isNew) {
+            seleniumSettings.getWebDriver().findElement(By.id(FIELD_FILTER_NAME + gridIdx)).sendKeys(entityPrefix);
+        } else {
+            if (isLocal) {//TODO
+                new Select(seleniumSettings.getWebDriver().findElement(By.id("lbFilterName"))).selectByVisibleText(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix);//TODO
+            } else {//TODO
+                new Select(seleniumSettings.getWebDriver().findElement(By.id("lbGFilterName"))).selectByVisibleText(AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix);//TODO
+            }
+        }
 
         closeSaveFilterFormOk(gridIdx);
 
-        wait.waitFiltersCount(gridIdx, beforeSaveSize + 1);
-
-        boolean isSavedFilter = false;
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
-        for (WebElement filter : getFilters(gridIdx)) {
-            if (filter.getText().equals(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME)) {
-                isSavedFilter = true;
-            }
+        if (isNew) {
+            wait.waitFiltersCount(gridIdx, beforeSaveSize + 1);
+        } else {
+            wait.waitFiltersCount(gridIdx, beforeSaveSize);
         }
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
-        Assert.assertEquals(isSavedFilter, true, "Filter " + AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME + " isn't saved");
 
-        filterWait.waitCurrentFilterName(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME);
-        wait.waitGridLoad(gridIdx, gridIdx);
+        if (isLocal) {
+            isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix);
+        } else {
+            isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix);
+        }
     }
 
     public void deleteFilter(Long gridIdx, String entityPrefix) {
+        String currentFilterName = getCurrentFilterName(gridIdx);
+
         int beforeDeleteSize = getFiltersCount(gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
@@ -262,7 +335,7 @@ public class Filter {
         wait.waitFormLoad();
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
-        selectFilterInOrganize(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME);
+        selectFilterInOrganize(entityPrefix);
 
         seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
         wait.waitAlert();
@@ -277,14 +350,19 @@ public class Filter {
         boolean isDeletedFilter = false;
         seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
         for (WebElement filter : getFilters(gridIdx)) {
-            if (filter.getText().equals(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME)) {
+            if (filter.getText().equals(entityPrefix)) {
                 isDeletedFilter = true;
             }
         }
-        Assert.assertEquals(isDeletedFilter, false, "Filter " + AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + FILTER_NAME + " isn't deleted");
+        Assert.assertEquals(isDeletedFilter, false, "Filter " + entityPrefix + " isn't deleted");
 
-        filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
-        wait.waitGridLoad(gridIdx, gridIdx);
+        if (currentFilterName.equals(entityPrefix)) {
+            filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
+            wait.waitGridLoad(gridIdx, gridIdx);
+        } else {
+            filterWait.waitCurrentFilterName(gridIdx, currentFilterName);
+            wait.waitGridLoad(gridIdx, gridIdx);
+        }
     }
 
     public void clearFilter(Long gridIdx) {

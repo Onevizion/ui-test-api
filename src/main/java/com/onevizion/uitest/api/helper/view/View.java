@@ -183,7 +183,7 @@ public class View {
         }
     }
 
-    public void selectFolderForSaveViewByVisibleText(Long gridIdx, String folderName) {
+    private void selectFolderForSaveViewByVisibleText(Long gridIdx, String folderName) {
         String currentFolderName = seleniumSettings.getWebDriver().findElement(By.id(EXISTING_VIEWS + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
         if (folderName.equals(currentFolderName)) {
             return;
@@ -211,7 +211,7 @@ public class View {
         seleniumSettings.getWebDriver().findElement(By.id(EXISTING_VIEWS + gridIdx)).click();
     }
 
-    public void isExistAndSelectedView(Long gridIdx, String entityPrefix) {
+    private void isExistAndSelectedView(Long gridIdx, String entityPrefix) {
         boolean isSavedView = false;
         seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
         for (WebElement view : getViews(gridIdx)) {
@@ -242,8 +242,6 @@ public class View {
         wait.waitWebElement(By.id(VIEW_TYPE + gridIdx));
         wait.waitWebElement(By.id(FIELD_VIEW_NAME + gridIdx));
         wait.waitWebElement(By.id(VIEW_DIALOG_OK + gridIdx));
-
-        AbstractSeleniumCore.sleep(2000L); //TODO when form visible then all elements refreshing. we should first refresh elements and then show form
     }
 
     public void closeSaveViewFormOk(Long gridIdx) {
@@ -264,11 +262,13 @@ public class View {
         } else {
             new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("Existing");
         }
+
         if (isLocal) {
             selectFolderForSaveViewByVisibleText(gridIdx, FOLDER_LOCAL);
         } else {
             selectFolderForSaveViewByVisibleText(gridIdx, FOLDER_GLOBAL);
         }
+
         if (isNew) {
             seleniumSettings.getWebDriver().findElement(By.id(FIELD_VIEW_NAME + gridIdx)).sendKeys(entityPrefix);
         } else {
@@ -276,7 +276,7 @@ public class View {
                 new Select(seleniumSettings.getWebDriver().findElement(By.id("lbViewName"))).selectByVisibleText(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix);//TODO
             } else {//TODO
                 new Select(seleniumSettings.getWebDriver().findElement(By.id("lbGViewName"))).selectByVisibleText(AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix);//TODO
-            }//TODO
+            }
         }
 
         closeSaveViewFormOk(gridIdx);
