@@ -357,7 +357,7 @@ public class UserpageFilter {
         window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
-    private void selectFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
+    public void selectFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
