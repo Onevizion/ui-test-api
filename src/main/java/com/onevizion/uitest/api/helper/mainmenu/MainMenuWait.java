@@ -20,7 +20,7 @@ class MainMenuWait {
     private MainMenuJs mainMenuJs;
 
     void waitPageTitle(String title) {
-        Supplier<String> actualValueSupplier = ()-> seleniumSettings.getWebDriver().findElement(By.id("ttlPage")).getAttribute("innerText");
+        Supplier<String> actualValueSupplier = ()-> seleniumSettings.getWebDriver().findElement(By.id("ttlPage")).getAttribute("textContent");
 
         Supplier<String> messageSupplier = ()-> "Waiting for Page Title expectedVal=[" + title + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
