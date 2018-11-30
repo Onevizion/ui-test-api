@@ -23,6 +23,7 @@ import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 public class EntityDynamicVtableValue {
 
     private static final String VALUE = "Value";
+    private static final String LABEL = "valueLabel";
     private static final String ORD_NUM = "OrderNum";
     private static final String DISPLAY = "display";
     private static final String FILTERABLE = "filterable";
@@ -58,6 +59,8 @@ public class EntityDynamicVtableValue {
 
         seleniumSettings.getWebDriver().findElement(By.name(VALUE)).sendKeys(dynamicVtableValue.getValue());
 
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(dynamicVtableValue.getLabel());
+
         seleniumSettings.getWebDriver().findElement(By.name(ORD_NUM)).sendKeys(dynamicVtableValue.getOrdNum());
 
         window.openModal(By.name("btncolorDisplayed"));
@@ -86,6 +89,9 @@ public class EntityDynamicVtableValue {
         seleniumSettings.getWebDriver().findElement(By.name(VALUE)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(VALUE)).sendKeys(dynamicVtableValue.getValue());
 
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(dynamicVtableValue.getLabel());
+
         seleniumSettings.getWebDriver().findElement(By.name(ORD_NUM)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(ORD_NUM)).sendKeys(dynamicVtableValue.getOrdNum());
 
@@ -113,6 +119,7 @@ public class EntityDynamicVtableValue {
         wait.waitFormLoad();
 
         assertElement.assertText(VALUE, dynamicVtableValue.getValue());
+        assertElement.assertText(LABEL, dynamicVtableValue.getLabel());
         assertElement.assertText(ORD_NUM, dynamicVtableValue.getOrdNum());
         assertElement.assertText("color", dynamicVtableValue.getColor());
         assertElement.assertCheckbox(DISPLAY, dynamicVtableValue.getDisplay());
@@ -125,6 +132,7 @@ public class EntityDynamicVtableValue {
         Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Value"), dynamicVtableValue.getValue());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Label"), dynamicVtableValue.getLabel());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Order Number"), dynamicVtableValue.getOrdNum());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Color"), dynamicVtableValue.getColor());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Display?"), dynamicVtableValue.getDisplay());

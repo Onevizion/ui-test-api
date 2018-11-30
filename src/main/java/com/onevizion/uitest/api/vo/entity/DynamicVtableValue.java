@@ -5,6 +5,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 public class DynamicVtableValue {
 
     private String value;
+    private String label;
     private String ordNum;
     private String color;
     private String display;
@@ -20,6 +21,10 @@ public class DynamicVtableValue {
 
     public String getValue() {
         return value;
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public String getOrdNum() {
@@ -46,6 +51,7 @@ public class DynamicVtableValue {
 
         public DynamicVtableValue build() {
             if (DynamicVtableValue.this.value == null ||
+                    DynamicVtableValue.this.label == null ||
                     DynamicVtableValue.this.ordNum == null ||
                     DynamicVtableValue.this.color == null ||
                     DynamicVtableValue.this.display == null ||
@@ -57,6 +63,11 @@ public class DynamicVtableValue {
 
         public Builder setValue(String value) {
             DynamicVtableValue.this.value = value;
+            return this;
+        }
+
+        public Builder setLabel(String label) {
+            DynamicVtableValue.this.label = label;
             return this;
         }
 
