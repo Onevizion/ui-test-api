@@ -98,6 +98,7 @@ import com.onevizion.uitest.api.helper.export.Export;
 import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesigner;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
@@ -263,6 +264,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected BplExport bplExport;
+
+    @Resource
+    protected GridSort gridSort;
     /* Helpers End */
 
     /* Entity Helpers Begin */

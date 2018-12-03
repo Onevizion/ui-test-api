@@ -1,7 +1,18 @@
 package com.onevizion.uitest.api.vo;
 
-public enum SortType{
+public enum SortType {
 
-    ASC, DESC;
+    ASC("Sort ASC"),
+    DESC("Sort DESC");
+
+    private String name;
+
+    private SortType(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
 }
