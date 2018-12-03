@@ -12,6 +12,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -27,6 +28,9 @@ public class GridSort {
 
     @Resource
     private Js js;
+
+    @Resource
+    private Element element;
 
     @Resource
     private ElementWait elementWait;
@@ -56,6 +60,7 @@ public class GridSort {
 
         js.gridScrollLeft(gridId, scrollLeft);
         elementWait.waitElementVisible(elem);
+        element.moveToElement(elem);
         elem.click();
 
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
@@ -108,6 +113,7 @@ public class GridSort {
 
         js.gridScrollLeft(gridId, scrollLeft);
         elementWait.waitElementVisible(elem);
+        element.moveToElement(elem);
         elem.click();
 
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
