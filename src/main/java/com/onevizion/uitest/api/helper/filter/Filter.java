@@ -21,9 +21,9 @@ import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
-import com.onevizion.uitest.api.helper.Sort;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.FilterFieldType;
@@ -83,9 +83,6 @@ public class Filter {
     private Window window;
 
     @Resource
-    private Sort sort;
-
-    @Resource
     private PsSelector psSelector;
 
     @Resource
@@ -99,6 +96,9 @@ public class Filter {
 
     @Resource
     private Jquery jquery;
+
+    @Resource
+    private GridSort gridSort;
 
     public void checkIsExistFilterControl(Long gridIdx, boolean isExist) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -380,10 +380,13 @@ public class Filter {
     }
 
     public String getGridCellValueForFilterTest(Long gridId, String columnId, FilterFieldType filterFieldType) {
-        if (js.getGridIsSupportSortByGridId(gridId)) {
-            sort.sortColumn(gridId, columnId, SortType.ASC);
-        }
         Long columnIndex = js.getGridColIndexById(gridId, columnId);
+        String columnLabel = js.getGridColumnLabelByColIndex(gridId, columnIndex, 0L);
+
+        if (js.getGridIsSupportSortByGridId(gridId)) {
+            gridSort.sortColumn(gridId, SortType.ASC, columnLabel);
+        }
+
         if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
             return "YES";
         } else {
