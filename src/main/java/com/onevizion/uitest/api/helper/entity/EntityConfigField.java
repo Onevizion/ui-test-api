@@ -839,7 +839,7 @@ public class EntityConfigField {
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Field Width (px)"), configFieldVo.getWidth());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), configFieldVo.getDescription());
-        gridVals.put(js.getColumnIndexByLabel(gridId, "TRACKOR Type"), configFieldVo.getTrackorTypeLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Type"), configFieldVo.getTrackorTypeLabel());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Read Only"), configFieldVo.getReadOnly());
 
         if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
