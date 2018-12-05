@@ -17,7 +17,9 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.tab.Tab;
+import com.onevizion.uitest.api.vo.SortType;
 import com.onevizion.uitest.api.vo.entity.DynamicVtable;
 import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 
@@ -53,6 +55,9 @@ public class EntityDynamicVtable {
 
     @Resource
     private EntityDynamicVtableValue entityDynamicVtableValue;
+
+    @Resource
+    private GridSort gridSort;
 
     public void addWithChilds(DynamicVtable dynamicVtable) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -117,6 +122,8 @@ public class EntityDynamicVtable {
 
         tab.goToTab(2L); //Values
         wait.waitGridLoad(2L, 2L);
+
+        gridSort.sortColumn(2L, SortType.ASC, "Value");
 
         Assert.assertEquals(grid.getGridRowsCount(2L), Long.valueOf(dynamicVtable.getValues().size()));
         for (int i = 0; i < dynamicVtable.getValues().size(); i++) {
