@@ -2,27 +2,27 @@ package com.onevizion.uitest.api.vo;
 
 public enum BplComponentType {
 
-    APPLET("Config App", "Description"),
-    FIELD("Config Field", "Field Name"),
-    TAB("Config Tab", "Description"),
-    VTABLE("Configured V_Tables", "Table Name"),
+    APPLET("Applet", "Description"),
+    FIELD("Field", "Field Name"),
+    TAB("Configured Tab", "Description"),
+    VTABLE("Dynamic V_Tables", "Table Name"),
     DB_PACKAGE("DB Package", "Package Name"),
-    FILTER("Filter Options", "Filter Name"),
+    FILTER("Filter", "Filter Name"),
     IMPORT("Import", "Name"),
     INTEGRATION("Integration", "Integration Name"),
     DB_MAT_VIEW("Materialized View", "Name"),
     MENU("Menu Application", "Name"),
-    NOTIFICATION("Notification", "Filter Name"),
+    NOTIFICATION("Notifications", "Filter Name"),
     REPORT("Report", "Report Name"),
     RULE("Rule", "Rule Name"),
     SEC_ROLE("Security Role", "Role Name"),
     BPD_ITEM("Static Documentation Items", ""),
     TRACKOR_FORM("Trackor Form", "Form Name"),
-    TRACKOR_TOUR("Trackor Tour", "Tour Label"),
+    TRACKOR_TOUR("Trackor Tours", "Tour Label"),
     TRACKOR_TYPE("Trackor Type", "Trackor Type"),
-    VIEW("View Options", "View Name"),
+    VIEW("View Option", "View Name"),
     WORKFLOW("WorkFlow", "WF Template Name"),
-    WORKPLAN("WorkPlan", "Template Name");
+    WORKPLAN("WP Template", "Template Name");
 
     private String name;
     private String columnName;
