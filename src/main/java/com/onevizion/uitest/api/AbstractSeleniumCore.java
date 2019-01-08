@@ -59,7 +59,6 @@ import com.onevizion.uitest.api.helper.Privilegies;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Qs;
 import com.onevizion.uitest.api.helper.RelationSelector;
-import com.onevizion.uitest.api.helper.Sort;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.UsersSettings;
 import com.onevizion.uitest.api.helper.Wait;
@@ -144,9 +143,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected Grid grid;
-
-    @Resource
-    protected Sort sort;
 
     @Resource
     protected Nav nav;

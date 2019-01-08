@@ -11,4 +11,16 @@ class GridSortJs extends Js {
         return execJs("return gridArr[" + gridIdx + "].grid.fldSort[" + columnIndex + "];");
     }
 
+    String getGridSortTypeByGridId(Long gridId) {
+        return execJs("return gridArr[" + gridId + "].desc;");
+    }
+
+    String getGridSortColumnIdByGridId(Long gridId) {
+        return execJs("return gridArr[" + gridId + "].SortColumnIndx;");
+    }
+
+    public Object getGridSort(Long gridId) {
+        return execJs2("return gridArr[" + gridId + "].grid.getSortingState();");
+    }
+
 }

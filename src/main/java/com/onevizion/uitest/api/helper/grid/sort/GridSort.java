@@ -85,13 +85,13 @@ public class GridSort {
         wait.waitGridLoad(gridId, gridId);
 
         @SuppressWarnings("unchecked")
-        List<Object> elements = (List<Object>) js.getGridSort(gridId);
+        List<Object> elements = (List<Object>) gridSortJs.getGridSort(gridId);
         Assert.assertEquals((Long) elements.get(0), columnIndex, "Sorting working is not correct");
         Assert.assertEquals((String) elements.get(1), sortType.getTypeString(), "Sorting working is not correct");
 
-        String sortColumnId = js.getGridSortColumnIdByGridId(gridId);
+        String sortColumnId = gridSortJs.getGridSortColumnIdByGridId(gridId);
         Assert.assertEquals(sortColumnId, columnId);
-        String gridSortType = js.getGridSortTypeByGridId(gridId);
+        String gridSortType = gridSortJs.getGridSortTypeByGridId(gridId);
         Assert.assertEquals(gridSortType, sortType.getTypeNumber());
     }
 
@@ -133,13 +133,13 @@ public class GridSort {
         wait.waitGridLoad(gridId, gridId);
 
         @SuppressWarnings("unchecked")
-        List<Object> elements = (List<Object>) js.getGridSort(gridId);
+        List<Object> elements = (List<Object>) gridSortJs.getGridSort(gridId);
         Assert.assertEquals((Long) elements.get(0), columnIndex, "Sorting working is not correct");
         Assert.assertEquals((String) elements.get(1), sortType.getTypeString(), "Sorting working is not correct");
 
-        String sortColumnId = js.getGridSortColumnIdByGridId(gridId);
+        String sortColumnId = gridSortJs.getGridSortColumnIdByGridId(gridId);
         Assert.assertEquals(sortColumnId, columnId);
-        String gridSortType = js.getGridSortTypeByGridId(gridId);
+        String gridSortType = gridSortJs.getGridSortTypeByGridId(gridId);
         Assert.assertEquals(gridSortType, sortType.getTypeNumber());
     }
 

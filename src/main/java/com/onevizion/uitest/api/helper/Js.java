@@ -286,16 +286,8 @@ public class Js {
         return NumberUtils.createLong(execJs("return sqlEditorArr['" + name + "'][1].historySize().redo;"));
     }
 
-    public String getGridSortColumnIdByGridId(Long gridId) {
-        return execJs("return gridArr[" + gridId + "].SortColumnIndx;");
-    }
-
     public Boolean getGridIsSupportSortByGridId(Long gridId) {
         return Boolean.valueOf(execJs("return gridArr[" + gridId + "].isSupportSort();"));
-    }
-
-    public String getGridSortTypeByGridId(Long gridId) {
-        return execJs("return gridArr[" + gridId + "].desc;");
     }
 
     public String getChildrenAttributeInGridCellByRowIndexAndColIndex(Long gridId, Long rowIndex, Long columnIndex, Long childrenIndex, String attributeName) {
@@ -411,10 +403,6 @@ public class Js {
                 + "    array[i] = gridArr[" + gridId + "].grid.cellByIndex(i, " + columnIndex + ").cell.innerHTML;"
                 + "}"
                 + "return array;");
-    }
-
-    public Object getGridSort(Long gridId) {
-        return execJs2("return gridArr[" + gridId + "].grid.getSortingState();");
     }
 
     public Boolean isWindowClosed() {
