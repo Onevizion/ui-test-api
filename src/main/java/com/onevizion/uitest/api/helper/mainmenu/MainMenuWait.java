@@ -29,6 +29,16 @@ class MainMenuWait {
             .until(webdriver -> title.equals(actualValueSupplier.get()));
     }
 
+    void waitTabTitle(String title) {
+        Supplier<String> actualValueSupplier = ()-> seleniumSettings.getWebDriver().findElement(By.id("ttlTab")).getAttribute("textContent");
+
+        Supplier<String> messageSupplier = ()-> "Waiting for Tab Title expectedVal=[" + title + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage(messageSupplier)
+            .until(webdriver -> title.equals(actualValueSupplier.get()));
+    }
+
     void waitLeftMenuSearchUpdated() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for JQuery loading is failed")

@@ -113,9 +113,19 @@ public class MainMenu {
               + "//label[text()='" + treeItem + "']"));
     }
 
+    public void waitPageAndTabTitle(String pageTitle, String tabTitle) {
+        waitPageTitle(pageTitle);
+        waitTabTitle(tabTitle);
+    }
+
     public void waitPageTitle(String title) {
         wait.waitWebElement(By.id("ttlPage"));
         mainMenuWait.waitPageTitle(title);
+    }
+
+    public void waitTabTitle(String title) {
+        wait.waitWebElement(By.id("ttlTab"));
+        mainMenuWait.waitTabTitle(title);
     }
 
 }
