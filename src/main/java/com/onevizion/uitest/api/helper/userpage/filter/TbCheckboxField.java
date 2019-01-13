@@ -35,12 +35,12 @@ public class TbCheckboxField {
         List<FilterOperatorType> operators = FilterOperatorType.getCheckboxOperators(supportOuterOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, "Yes", null, FilterOperatorType.EQUAL, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, "No", null, FilterOperatorType.EQUAL, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, null, "Yes", null, FilterOperatorType.EQUAL, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, null, "No", null, FilterOperatorType.EQUAL, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
 
         if (supportOuterOperations) {
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, "Yes", null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
-            userpageFilter.checkFilterAttributeAndOperatorAndValue(fieldName, null, "No", null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilter(fieldName, null, "Yes", null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilter(fieldName, null, "No", null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
         }
     }
 

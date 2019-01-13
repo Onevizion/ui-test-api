@@ -113,82 +113,8 @@ public class UserpageFilter {
         window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE), null);
     }
 
-    public void checkFilterIsNew(String fieldName, List<String> cellVals, List<String> newTrackors) {
-        int randomIndex = fillFilter(fieldName, FilterOperatorType.NEW);
-
-        checkGridRowsCountIsNew(cellVals, newTrackors);
-        checkGridColumnIsNew(0L, fieldName, newTrackors);
-
-        clearFilter(fieldName, FilterOperatorType.NEW, randomIndex);
-    }
-
-    public void checkFilterIsNotNew(String fieldName, List<String> cellVals, List<String> newTrackors) {
-        int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_NEW);
-
-        checkGridRowsCountIsNotNew(cellVals, newTrackors);
-        checkGridColumnIsNotNew(0L, fieldName, newTrackors);
-
-        clearFilter(fieldName, FilterOperatorType.NOT_NEW, randomIndex);
-    }
-
-    private int fillFilter(String fieldName, FilterOperatorType operator) {
-        SecureRandom generator = new SecureRandom();
-        int randomIndex = generator.nextInt(2);
-
-        if (randomIndex == 1) {
-            selectFilterAttributeAndOperatorAndValue(fieldName, operator);
-        } else if (randomIndex == 0) {
-            filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue(), 0L);
-        } else {
-            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
-        }
-
-        return randomIndex;
-    }
-
-    private int fillFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
-        SecureRandom generator = new SecureRandom();
-        int randomIndex = generator.nextInt(2);
-
-        if (randomIndex == 1) {
-            selectFilterAttributeAndOperatorAndValue(1, fieldName, fieldName2, value, dateType, operator, fieldDataType);
-        } else if (randomIndex == 0) {
-            if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
-                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue() + " " + value, 0L);
-            } else if (dateType != null) {
-                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue() + " " + dateType, 0L);
-            } else {
-                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue(), 0L);
-            }
-        } else {
-            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
-        }
-
-        return randomIndex;
-    }
-
-    private void clearFilter(String fieldName, FilterOperatorType operator, int randomIndex) {
-        if (randomIndex == 1) {
-            clearFilterAttributeAndOperatorAndValue(fieldName, operator);
-        } else if (randomIndex == 0) {
-            filter.selectByVisibleText("Unsaved Filter", 0L);
-        } else {
-            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
-        }
-    }
-
-    private void clearFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType, int randomIndex) {
-        if (randomIndex == 1) {
-            clearFilterAttributeAndOperatorAndValue(fieldName, fieldName2, value, dateType, operator, fieldDataType);
-        } else if (randomIndex == 0) {
-            filter.selectByVisibleText("Unsaved Filter", 0L);
-        } else {
-            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
-        }
-    }
-
     @SuppressWarnings("unchecked")
-    public void checkFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType,
+    public void checkFilter(String fieldName, String fieldName2, String value, String dateType,
             FilterOperatorType operator, ConfigFieldType fieldDataType, Long columnIndex, Long columnIndex2,
             List<String> cellVals, List<String> cellVals2, List<String> ... cellValsKeys) {
         Long rowsCntBefore = grid.getGridRowsCount(0L);
@@ -342,7 +268,93 @@ public class UserpageFilter {
             throw new SeleniumUnexpectedException("Not support field data type");
         }
 
-        clearFilter(fieldName, fieldName2, value, dateType, operator, fieldDataType, randomIndex);
+        checkAndClearFilter(fieldName, fieldName2, value, dateType, operator, fieldDataType, randomIndex);
+    }
+
+    public void checkFilterIsNew(String fieldName, List<String> cellVals, List<String> newTrackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NEW);
+
+        checkGridRowsCountIsNew(cellVals, newTrackors);
+        checkGridColumnIsNew(0L, fieldName, newTrackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.NEW, randomIndex);
+    }
+
+    public void checkFilterIsNotNew(String fieldName, List<String> cellVals, List<String> newTrackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_NEW);
+
+        checkGridRowsCountIsNotNew(cellVals, newTrackors);
+        checkGridColumnIsNotNew(0L, fieldName, newTrackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.NOT_NEW, randomIndex);
+    }
+
+    private int fillFilter(String fieldName, FilterOperatorType operator) {
+        SecureRandom generator = new SecureRandom();
+        int randomIndex = generator.nextInt(2);
+
+        if (randomIndex == 1) {
+            selectFilterAttributeAndOperatorAndValue(fieldName, operator);
+        } else if (randomIndex == 0) {
+            filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue(), 0L);
+        } else {
+            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
+        }
+
+        return randomIndex;
+    }
+
+    private int fillFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
+        SecureRandom generator = new SecureRandom();
+        int randomIndex = generator.nextInt(2);
+
+        if (randomIndex == 1) {
+            selectFilterAttributeAndOperatorAndValue(1, fieldName, fieldName2, value, dateType, operator, fieldDataType);
+        } else if (randomIndex == 0) {
+            if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
+                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue() + " " + value, 0L);
+            } else if (dateType != null) {
+                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue() + " " + dateType, 0L);
+            } else {
+                filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue(), 0L);
+            }
+        } else {
+            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
+        }
+
+        return randomIndex;
+    }
+
+    private void checkAndClearFilter(String fieldName, FilterOperatorType operator, int randomIndex) {
+        if (randomIndex == 1) {
+            checkFilterAttributeAndOperatorAndValue(fieldName, operator);
+            clearFilter();
+        } else if (randomIndex == 0) {
+            filter.selectByVisibleText("Unsaved Filter", 0L);
+        } else {
+            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
+        }
+    }
+
+    private void checkAndClearFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType, int randomIndex) {
+        if (randomIndex == 1) {
+            checkFilterAttributeAndOperatorAndValue(1, fieldName, fieldName2, value, dateType, operator, fieldDataType);
+            clearFilter();
+        } else if (randomIndex == 0) {
+            filter.selectByVisibleText("Unsaved Filter", 0L);
+        } else {
+            throw new SeleniumUnexpectedException("Not support randomIndex. randomIndex=" + randomIndex);
+        }
+    }
+
+    private void clearFilter() {
+        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+
+        seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();
+
+        window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
     private void selectFilterAttributeAndOperatorAndValue(String fieldName, FilterOperatorType operator) {
@@ -436,7 +448,7 @@ public class UserpageFilter {
         window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
-    private void clearFilterAttributeAndOperatorAndValue(String fieldName, FilterOperatorType operator) {
+    private void checkFilterAttributeAndOperatorAndValue(String fieldName, FilterOperatorType operator) {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
@@ -445,103 +457,100 @@ public class UserpageFilter {
 
         assertElement.assertSelect(FILTER_ROW_OPER + 1, operator.getValue());
 
-        seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();
-
-        window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    private void clearFilterAttributeAndOperatorAndValue(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
+    public void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
         window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
-        assertElement.assertRadioPsSelector(FILTER_ROW_ATTRIB_TEXT + 1, FILTER_ROW_ATTRIB_BUTTON + 1, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
+        assertElement.assertRadioPsSelector(FILTER_ROW_ATTRIB_TEXT + row, FILTER_ROW_ATTRIB_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
         if (dateType != null) {
-            assertElement.assertSelect(FILTER_ROW_OPER_TASK + 1, dateType);
+            assertElement.assertSelect(FILTER_ROW_OPER_TASK + row, dateType);
         }
-        assertElement.assertSelect(FILTER_ROW_OPER + 1, operator.getValue());
+        assertElement.assertSelect(FILTER_ROW_OPER + row, operator.getValue());
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
             if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
-                assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_FIELD_TEXT + 1, FILTER_ROW_VALUE_FIELD_BUTTON + 1, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_FIELD_TEXT + row, FILTER_ROW_VALUE_FIELD_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)
                     && !operator.equals(FilterOperatorType.NEW) && !operator.equals(FilterOperatorType.NOT_NEW)) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    assertElement.assertCheckboxPsSelector(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + 1, FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON + 1, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + row, FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON + row, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    assertElement.assertCheckboxPsSelector(FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT + 1, FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON + 1, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector(FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT + row, FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON + row, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_TEXT + 1, FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_BUTTON + 1, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, value, 1L, true);
+                    assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_TEXT + row, FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_BUTTON + row, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, value, 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.SELECTOR)) {
-                    assertElement.assertCheckboxPsSelector(FILTER_ROW_VALUE_SELECTOR_TEXT + 1, FILTER_ROW_VALUE_SELECTOR_BUTTON + 1, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
+                    assertElement.assertCheckboxPsSelector(FILTER_ROW_VALUE_SELECTOR_TEXT + row, FILTER_ROW_VALUE_SELECTOR_BUTTON + row, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + row, "");
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT + row, "");
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_TEXT + row, "");
                 } else if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.SELECTOR)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_SELECTOR_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_SELECTOR_TEXT + row, "");
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            assertElement.assertSelect(FILTER_ROW_VALUE_CHECKBOX_TEXT + 1, value);
+            assertElement.assertSelect(FILTER_ROW_VALUE_CHECKBOX_TEXT + row, value);
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
             if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)
                     || operator.equals(FilterOperatorType.MORE_FIELD) || operator.equals(FilterOperatorType.LESS_FIELD)
                     || operator.equals(FilterOperatorType.MORE_AND_EQUAL_FIELD) || operator.equals(FilterOperatorType.LESS_AND_EQUAL_FIELD)) {
-                assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_FIELD_TEXT + 1, FILTER_ROW_VALUE_FIELD_BUTTON + 1, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_FIELD_TEXT + row, FILTER_ROW_VALUE_FIELD_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
                     //&& !operator.equals(FilterOperatorType.THIS_WK_TO_DT) && !operator.equals(FilterOperatorType.THIS_MO_TO_DT) //TODO check those lines
                     //&& !operator.equals(FilterOperatorType.THIS_FQ_TO_DT) && !operator.equals(FilterOperatorType.THIS_FY_TO_DT)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_DATE_TEXT + 1, value);
+                    assertElement.assertText(FILTER_ROW_VALUE_DATE_TEXT + row, value);
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_DATETIME_TEXT + 1, value);
+                    assertElement.assertText(FILTER_ROW_VALUE_DATETIME_TEXT + row, value);
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_TIME_TEXT + 1, value);
+                    assertElement.assertText(FILTER_ROW_VALUE_TIME_TEXT + row, value);
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_NUMBER_TEXT + 1, value);
+                    assertElement.assertText(FILTER_ROW_VALUE_NUMBER_TEXT + row, value);
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_LATLONG_TEXT + 1, value);
+                    assertElement.assertText(FILTER_ROW_VALUE_LATLONG_TEXT + row, value);
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_DATE_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_DATE_TEXT + row, "");
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_DATETIME_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_DATETIME_TEXT + row, "");
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_TIME_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_TIME_TEXT + row, "");
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_NUMBER_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_NUMBER_TEXT + row, "");
                 } else if (fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-                    assertElement.assertText(FILTER_ROW_VALUE_LATLONG_TEXT + 1, "");
+                    assertElement.assertText(FILTER_ROW_VALUE_LATLONG_TEXT + row, "");
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             }
         } else {
             if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
-                assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_FIELD_TEXT + 1, FILTER_ROW_VALUE_FIELD_BUTTON + 1, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
+                assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_FIELD_TEXT + row, FILTER_ROW_VALUE_FIELD_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
-                assertElement.assertText(FILTER_ROW_VALUE_TEXT_TEXT + 1, "*" + value + "*");
+                assertElement.assertText(FILTER_ROW_VALUE_TEXT_TEXT + row, "*" + value + "*");
             } else {
-                assertElement.assertText(FILTER_ROW_VALUE_TEXT_TEXT + 1, "");
+                assertElement.assertText(FILTER_ROW_VALUE_TEXT_TEXT + row, "");
             }
         }
-        seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();
 
-        window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void checkGridTextColumnEquals(Long gridId, Long columnIndex, List<String> values) {
