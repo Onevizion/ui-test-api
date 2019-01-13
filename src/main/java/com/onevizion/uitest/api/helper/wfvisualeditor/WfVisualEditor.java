@@ -90,7 +90,7 @@ public class WfVisualEditor {
         element.clickById("btnDelete");
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        wait.waitFormLoad();
+        wait.waitSavingLoad();
     }
 
 }
