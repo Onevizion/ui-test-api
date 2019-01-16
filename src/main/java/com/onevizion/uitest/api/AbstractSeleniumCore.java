@@ -16,7 +16,6 @@ import javax.annotation.Resource;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,7 +24,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.CommandInfo;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
@@ -413,8 +411,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         seleniumSettings.setTestStatus("success");
 
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
-        //System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
-        //System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"C:\\workspaces\\firefox.log");
 
         try {
             fillGlobalSettings();
@@ -422,7 +418,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             if (seleniumSettings.getRemoteWebDriver()) {
                 if (seleniumSettings.getBrowser().equals("firefox")) {
                     FirefoxProfile profile = new FirefoxProfile();
-                    //profile.setPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294 //TODO https://github.com/mozilla/geckodriver/issues/1474 uncomment when Firefox Nightly 66.0a1 (2019-01-15) (64-bit) will be available in production (March 19, 2019)
+                    profile.setPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294
                     profile.setPreference("dom.successive_dialog_time_limit", 0);
                     profile.setPreference("dom.max_script_run_time", 1000);
                     profile.setPreference("browser.download.folderList", 2);
@@ -432,16 +428,15 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     //profile.setEnableNativeEvents(false); /* TODO selenium 5374 issue */
 
                     FirefoxOptions options = new FirefoxOptions();
-                    //options.setLogLevel(FirefoxDriverLogLevel.TRACE);
                     options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     //options.addPreference("security.sandbox.content.level", 5);
                     //options.setLegacy(true);
                     options.setProfile(profile);
                     //TODO https://github.com/mozilla/geckodriver/issues/617
                     //https://bugzilla.mozilla.org/show_bug.cgi?id=1264259
-                    options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
-                    options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-                    options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    //options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+                    //options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    //options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
                     capability = DesiredCapabilities.firefox();
                     capability.setBrowserName(seleniumSettings.getBrowser());
@@ -483,8 +478,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 try {
                     //OkHttpClient.Factory factory = new OkHttpClient.Factory(Duration.ofMinutes(2), Duration.ofHours(3));
                     OkHttpClient.Factory factory = new OkHttpClient.Factory(Duration.ofMinutes(2), Duration.ofMinutes(30));
-                    //OkHttpClient.Factory factory = new OkHttpClient.Factory(); //for selenium 3.141.59
-                    //factory.builder().connectionTimeout(Duration.ofMinutes(2)).readTimeout(Duration.ofMinutes(30)); //for selenium 3.141.59
                     HttpCommandExecutor executor = new HttpCommandExecutor(Collections.<String, CommandInfo> emptyMap(), new URL("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub"), factory);
                     seleniumSettings.setWebDriver(new RemoteWebDriver(executor, capability));
                 } catch (MalformedURLException e) {
@@ -500,7 +493,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             } else {
                 if (seleniumSettings.getBrowser().equals("firefox")) {
                     FirefoxProfile profile = new FirefoxProfile();
-                    //profile.setPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294 //TODO https://github.com/mozilla/geckodriver/issues/1474 uncomment when Firefox Nightly 66.0a1 (2019-01-15) (64-bit) will be available in production (March 19, 2019)
+                    profile.setPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294
                     profile.setPreference("dom.successive_dialog_time_limit", 0);
                     profile.setPreference("dom.max_script_run_time", 100);
                     profile.setPreference("browser.download.folderList", 2);
@@ -515,9 +508,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setProfile(profile);
                     //TODO https://github.com/mozilla/geckodriver/issues/617
                     //https://bugzilla.mozilla.org/show_bug.cgi?id=1264259
-                    options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
-                    options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-                    options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    //options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+                    //options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    //options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
                     seleniumSettings.setWebDriver(new FirefoxDriver(options));
                 } else if (seleniumSettings.getBrowser().equals("chrome")) {

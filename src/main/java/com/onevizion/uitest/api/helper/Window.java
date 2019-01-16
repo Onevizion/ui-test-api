@@ -195,15 +195,13 @@ public class Window {
 
         seleniumSettings.getWebDriver().findElement(elementClick).click();
 
-        if (!seleniumSettings.getBrowser().equals("firefox")) { //TODO https://github.com/mozilla/geckodriver/issues/1474 remove "IF" when Firefox Nightly 66.0a1 (2019-01-15) (64-bit) will be available in production
-            wait.waitAlert();
+        wait.waitAlert();
 
-            if (message != null) {
-                Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
-            }
-
-            seleniumSettings.getWebDriver().switchTo().alert().accept();
+        if (message != null) {
+            Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
         }
+
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
