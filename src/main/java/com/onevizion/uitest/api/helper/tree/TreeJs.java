@@ -30,6 +30,10 @@ class TreeJs extends Js {
         execJs("treeArr[" + treeId + "].tree.selectItem('" + itemId + "', true, false);");
     }
 
+    void checkItemCheckbox(Long treeId, String itemId) {
+        execJs("treeArr[" + treeId + "].tree.setCheck('" + itemId + "', 1);");
+    }
+
     String getItemTextById(Long treeId, String itemId) {
         return execJs("return treeArr[" + treeId + "].tree.getItemText('" + itemId + "');");
     }

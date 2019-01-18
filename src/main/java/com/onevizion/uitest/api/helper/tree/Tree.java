@@ -85,4 +85,8 @@ public class Tree {
         return treeJs.getSelectedItem(treeId);
     }
 
+    public void checkItemCheckbox(Long treeId, String itemId) {
+        treeJs.checkItemCheckbox(treeId, itemId);
+    }
+
 }
