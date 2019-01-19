@@ -24,6 +24,9 @@ public class UsersSettings {
     @Resource
     private ElementWait elementWait;
 
+    @Resource
+    private Element element;
+
     public void openUserSettings() {
         elementWait.waitElementById("topPanelUserNameLbl");
         elementWait.waitElementVisibleById("topPanelUserNameLbl");
@@ -58,6 +61,7 @@ public class UsersSettings {
     }
 
     public void changeExactQuickSearchForClipboard(String exactQuickSearchForClipboard) {
+        element.moveToElementByName("exactSearchClipboard");
         new Select(seleniumSettings.getWebDriver().findElement(By.name("exactSearchClipboard"))).selectByVisibleText(exactQuickSearchForClipboard);
     }
 
