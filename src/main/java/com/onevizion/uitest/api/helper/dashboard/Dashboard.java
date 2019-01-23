@@ -136,11 +136,10 @@ public class Dashboard {
         //column.findElement(By.className("ia_edit")).click(); //Element <div class="ia_edit">...</div> is not clickable at point (340, 355). Other element would receive the click: <div class="item_placeholder_bottom"></div>
         //column.findElement(By.className("ia_edit")).findElement(By.className("button")).click();
         //column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")).click();
-        WebElement element = column.findElements(By.className("tg_buttons")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString()));
-        scrollDivWithAxes(element);
-        element.click();
-        scrollDivWithAxes();
-        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+
+        WebElement dialog = getDialog();
+        dialog.findElements(By.className("sw_buttons")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
+        dialog.findElement(By.id("buttonOk")).click();
     }
 
     public void changeColumnCalculationMethod(String axisName, String columnName, DashColumnCalcMethodType dashColumnCalcMethodType) {
@@ -150,11 +149,10 @@ public class Dashboard {
         //column.findElement(By.className("ia_edit")).click(); //Element <div class="ia_edit">...</div> is not clickable at point (340, 355). Other element would receive the click: <div class="item_placeholder_bottom"></div>
         //column.findElement(By.className("ia_edit")).findElement(By.className("button")).click();
         //column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")).click();
-        WebElement element = column.findElements(By.className("tg_buttons")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString()));
-        scrollDivWithAxes(element);
-        element.click();
-        scrollDivWithAxes();
-        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+
+        WebElement dialog = getDialog();
+        dialog.findElements(By.className("sw_buttons")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
+        dialog.findElement(By.id("buttonOk")).click();
     }
 
     public void saveDashlet() {
@@ -278,19 +276,8 @@ public class Dashboard {
         return result;
     }
 
-    private void scrollDivWithAxes() {
-        dashboardJs.scrollDivWithAxesTop("ed_axes", "scrollContainer", 0L);
-    }
-
-    private void scrollDivWithAxes(WebElement element) {
-        WebElement divWithAxes = seleniumSettings.getWebDriver().findElement(By.className("ed_axes"));
-
-        Long elementTop = dashboardJs.getElementTop(element);
-        Long divWithAxesTop = dashboardJs.getElementTop(divWithAxes);
-
-        Long top = elementTop - divWithAxesTop;
-
-        dashboardJs.scrollDivWithAxesTop("ed_axes", "scrollContainer", top);
+    private WebElement getDialog() {
+        return seleniumSettings.getWebDriver().findElement(By.className("md_dialog"));
     }
 
 }

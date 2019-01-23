@@ -2,7 +2,6 @@ package com.onevizion.uitest.api.helper.dashboard;
 
 import java.util.List;
 
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.helper.Js;
@@ -55,14 +54,6 @@ class DashboardJs extends Js {
                 + "    str += ',' + elements[i].y;"
                 + "}"
                 + "return str;");
-    }
-
-    void scrollDivWithAxesTop(String id, String containerClass, Long top) {
-        execJs("document.getElementsByClassName('" + id + "')[0].getElementsByClassName('" + containerClass + "')[0].scrollTop = '" + top + "';");
-    }
-
-    Long getElementTop(WebElement element) {
-        return Long.parseLong(execJs4("return arguments[0].getBoundingClientRect().top;", element));
     }
 
 }
