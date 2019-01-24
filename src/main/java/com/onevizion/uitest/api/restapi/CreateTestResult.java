@@ -15,12 +15,13 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 public class CreateTestResult {
 
     private static final String TRACKOR_TYPE_NAME = "SELENIUM_TEST_RESULT";
-    private static final String PARENT_TRACKOR_TYPE_NAME = "SELENIUM_TEST";
+    private static final String PARENT_TRACKOR_TYPE_NAME_TEST = "SELENIUM_TEST";
+    private static final String PARENT_TRACKOR_TYPE_NAME_PROCESS = "SELENIUM_PROCESS";
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void create(String testName, String browserName, String date, String testStatus, String duration) {
+    public void create(String process, String testName, String browserName, String date, String testStatus, String duration) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -39,9 +40,15 @@ public class CreateTestResult {
                     "   }, " + 
                     "   \"parents\": [ " + 
                     "     { " + 
-                    "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME + "\", " + 
+                    "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
                     "       \"filter\": { " + 
                     "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
+                    "       } " + 
+                    "     }, " + 
+                    "     { " + 
+                    "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
+                    "       \"filter\": { " + 
+                    "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
                     "       } " + 
                     "     } " + 
                     "   ] " + 
@@ -52,7 +59,7 @@ public class CreateTestResult {
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                throw new SeleniumUnexpectedException("Create Test Result Failed : HTTP error code : " + conn.getResponseCode());
+                throw new SeleniumUnexpectedException("CreateTestResult.create Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
             }
 
             conn.disconnect();

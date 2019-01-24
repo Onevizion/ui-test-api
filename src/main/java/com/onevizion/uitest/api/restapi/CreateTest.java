@@ -51,7 +51,7 @@ public class CreateTest {
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new SeleniumUnexpectedException("Failed : HTTP error code : " + conn.getResponseCode());
+                throw new SeleniumUnexpectedException("CreateTest.checkTestAlreadyExist Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
             }
 
             String result = IOUtils.toString(conn.getInputStream(), StandardCharsets.UTF_8.toString());
@@ -100,7 +100,7 @@ public class CreateTest {
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                throw new SeleniumUnexpectedException("Create Test Failed : HTTP error code : " + conn.getResponseCode());
+                throw new SeleniumUnexpectedException("CreateTest.createTest Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
             }
 
             conn.disconnect();

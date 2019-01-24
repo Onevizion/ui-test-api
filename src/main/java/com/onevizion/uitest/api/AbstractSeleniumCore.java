@@ -591,7 +591,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         }
     }
 
-    protected void seleniumCloseBrowser() {
+    protected void seleniumCloseBrowser(ITestContext context) {
         try {
             if (seleniumSettings.getWebDriver() != null) {
                 //TODO following code can throw exception if alert present. remove this code after remove firefox 59 bug
@@ -629,7 +629,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             String durationMinutesStr = Long.toString(durationMinutes);
             logger.info("{} executed in {} minutes", seleniumSettings.getTestName(), durationMinutesStr);
 
-            saveTestResult(durationMinutesStr);
+            saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
         } catch (Exception e) {
             seleniumSettings.setTestStatus("fail");
 
@@ -643,7 +643,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             String durationMinutesStr = Long.toString(durationMinutes);
             logger.info("{} executed in {} minutes", seleniumSettings.getTestName(), durationMinutesStr);
 
-            saveTestResult(durationMinutesStr);
+            saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
 
             throw new SeleniumUnexpectedException(e);
         }
@@ -690,7 +690,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         }
     }
 
-    private void saveTestResult(String durationMinutesStr) {
+    private void saveTestResult(String processTrackorKey, String durationMinutesStr) {
         if (seleniumSettings.getRestApiUrl().isEmpty() || seleniumSettings.getRestApiCredential().isEmpty()) {
             return;
         }
@@ -701,7 +701,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         try {
             createTest.create(getTestName());
-            createTestResult.create(getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr);
+            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr);
         } catch (Exception e) {
             logger.error("{} call REST API Unexpected exception: {}", seleniumSettings.getTestName(), e.getMessage());
         }
