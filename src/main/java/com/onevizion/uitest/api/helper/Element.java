@@ -6,17 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
 public class Element {
-
-    private final Logger logger = LoggerFactory.getLogger(Element.class);
 
     @Resource
     private ElementJs elementJs;
@@ -27,6 +24,9 @@ public class Element {
     @Resource
     private SeleniumSettings seleniumSettings;
 
+    @Resource
+    private SeleniumLogger seleniumLogger;
+
     public void moveToElement(WebElement element) {
         elementJs.moveToElement(element);
 
@@ -34,7 +34,7 @@ public class Element {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
             actionObject.moveToElement(element).perform();
         } catch (WebDriverException e) { //firefox 59 throw WebDriverException instead of MoveTargetOutOfBoundsException or instead success execution
-            logger.warn("Exception in moveToElement", e);
+            seleniumLogger.warn("Exception in moveToElement");
         }
     }
 
@@ -46,7 +46,7 @@ public class Element {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
             actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(name))).perform();
         } catch (WebDriverException e) { //firefox 59 throw WebDriverException instead of MoveTargetOutOfBoundsException or instead success execution
-            logger.warn("Exception in moveToElementByName", e);
+            seleniumLogger.warn("Exception in moveToElementByName");
         }
     }
 
@@ -58,7 +58,7 @@ public class Element {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
             actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(By.id(id))).perform();
         } catch (WebDriverException e) { //firefox 59 throw WebDriverException instead of MoveTargetOutOfBoundsException or instead success execution
-            logger.warn("Exception in moveToElementById", e);
+            seleniumLogger.warn("Exception in moveToElementById");
         }
     }
 

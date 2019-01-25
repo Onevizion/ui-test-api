@@ -5,10 +5,9 @@ import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
@@ -21,13 +20,14 @@ import com.onevizion.uitest.api.helper.Wait;
 @Component
 public class Comment {
 
-    private static final Logger logger = LoggerFactory.getLogger(Comment.class);
-
     @Resource
     private Tb tb;
 
     @Resource
     private SeleniumSettings seleniumSettings;
+
+    @Resource
+    private SeleniumLogger seleniumLogger;
 
     @Resource
     private Element element;
@@ -183,7 +183,7 @@ public class Comment {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            logger.error(seleniumSettings.getTestName() + " Interrupted!", e);
+            seleniumLogger.error(seleniumSettings.getTestName() + " Interrupted!");
             Thread.currentThread().interrupt();
         }
     }

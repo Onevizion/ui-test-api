@@ -29,11 +29,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.internal.OkHttpClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestContext;
-import org.testng.Reporter;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
@@ -110,8 +107,6 @@ import com.onevizion.uitest.api.restapi.CreateTest;
 import com.onevizion.uitest.api.restapi.CreateTestResult;
 
 public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTests {
-
-    protected static final Logger logger = LoggerFactory.getLogger(AbstractSeleniumCore.class);
 
     /* Helpers Begin */
     @Resource
@@ -341,6 +336,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     @Resource
     public SeleniumScreenshot seleniumScreenshot;
 
+    @Resource
+    protected SeleniumLogger seleniumLogger;
+
     private Date startDate;
 
     public static final String GRID_ID_BASE = "gridbox";
@@ -483,12 +481,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     HttpCommandExecutor executor = new HttpCommandExecutor(Collections.<String, CommandInfo> emptyMap(), new URL("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub"), factory);
                     seleniumSettings.setWebDriver(new RemoteWebDriver(executor, capability));
                 } catch (MalformedURLException e) {
-                    logger.error("{} Unexpected exception: {}", seleniumSettings.getTestName(), e.getMessage());
+                    seleniumLogger.error(seleniumSettings.getTestName() + " Unexpected exception: " + e.getMessage());
                 }
                 //try {
                 //    seleniumSettings.setWebDriver(new RemoteWebDriver(new URL("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub"), capability));
                 //} catch (MalformedURLException e) {
-                //    logger.error(seleniumSettings.getTestName() + " Unexpected exception: " + e.getMessage());
+                //    seleniumLogger.error(seleniumSettings.getTestName() + " Unexpected exception: " + e.getMessage());
                 //}
 
                 seleniumSettings.setWebDriver(new Augmenter().augment(seleniumSettings.getWebDriver()));
@@ -563,13 +561,13 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
             seleniumSettings.getWebDriver().manage().deleteAllCookies();
 
-            logger.info("{} browser open", seleniumSettings.getTestName());
+            seleniumLogger.info(seleniumSettings.getTestName() + " browser open");
             document.open2(seleniumSettings.getServerUrl());
 
             String newTestUser = context.getCurrentXmlTest().getParameter("test.selenium.user");
             seleniumSettings.setTestUser(newTestUser);
 
-            logger.info("{} login as {}", seleniumSettings.getTestName(), seleniumSettings.getTestUser());
+            seleniumLogger.info(seleniumSettings.getTestName() + " login as " + seleniumSettings.getTestUser());
             login(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
 
             dataPreparation();
@@ -582,8 +580,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         } catch (Exception e) {
             seleniumSettings.setTestStatus("fail");
 
-            logger.error("{} openBrowserAndLogin fail", seleniumSettings.getTestName());
-            logger.error("{} openBrowserAndLogin Unexpected exception: {}", seleniumSettings.getTestName(), e.getMessage());
+            seleniumLogger.error(seleniumSettings.getTestName() + " openBrowserAndLogin fail");
+            seleniumLogger.error(seleniumSettings.getTestName() + " openBrowserAndLogin Unexpected exception: " + e.getMessage());
 
             seleniumScreenshot.getScreenshot();
 
@@ -600,8 +598,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     maxAlertsCount = maxAlertsCount - 1;
                     try {
                         Alert alert = seleniumSettings.getWebDriver().switchTo().alert();
-                        logger.error("{} closeBrowser There is alert with error message: {}", seleniumSettings.getTestName(), alert.getText());
-                        Reporter.log(seleniumSettings.getTestName() + " closeBrowser There is alert with error message: " + alert.getText());
+                        seleniumLogger.error(seleniumSettings.getTestName() + " closeBrowser There is alert with error message: " + alert.getText());
                         alert.accept();
                     } catch (WebDriverException e) { // should be NoAlertPresentException
                         break;
@@ -609,8 +606,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 }
 
                 if (maxAlertsCount == 0) {
-                    logger.error("{} Window with title: {} have endless alerts", seleniumSettings.getTestName(), seleniumSettings.getWebDriver().getTitle());
-                    Reporter.log(seleniumSettings.getTestName() + " Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
+                    seleniumLogger.error(seleniumSettings.getTestName() + " Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
                 }
 
                 //TODO firefox 59 bug
@@ -619,7 +615,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 js.resetFormChange();
                 js.resetGridChange();
                 seleniumSettings.getWebDriver().quit();
-                logger.info("{} browser close", seleniumSettings.getTestName());
+                seleniumLogger.info(seleniumSettings.getTestName() + " browser close");
             }
 
             Calendar cal = Calendar.getInstance();
@@ -627,21 +623,21 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             long duration = finishDate.getTime() - startDate.getTime();
             long durationMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
             String durationMinutesStr = Long.toString(durationMinutes);
-            logger.info("{} executed in {} minutes", seleniumSettings.getTestName(), durationMinutesStr);
+            seleniumLogger.info(seleniumSettings.getTestName() + " executed in " + durationMinutesStr + " minutes");
 
             saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
         } catch (Exception e) {
             seleniumSettings.setTestStatus("fail");
 
-            logger.error("{} closeBrowser fail", seleniumSettings.getTestName());
-            logger.error("{} closeBrowser Unexpected exception: {}", seleniumSettings.getTestName(), e.getMessage());
+            seleniumLogger.error(seleniumSettings.getTestName() + " closeBrowser fail");
+            seleniumLogger.error(seleniumSettings.getTestName() + " closeBrowser Unexpected exception: " + e.getMessage());
 
             Calendar cal = Calendar.getInstance();
             Date finishDate = cal.getTime();
             long duration = finishDate.getTime() - startDate.getTime();
             long durationMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
             String durationMinutesStr = Long.toString(durationMinutes);
-            logger.info("{} executed in {} minutes", seleniumSettings.getTestName(), durationMinutesStr);
+            seleniumLogger.info(seleniumSettings.getTestName() + " executed in " + durationMinutesStr + " minutes");
 
             saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
 
@@ -652,7 +648,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             try {
                 Thread.sleep(60000);
             } catch (InterruptedException e) {
-                logger.error("Interrupted!", e);
+                //logger.error("Interrupted!", e); //TODO
                 Thread.currentThread().interrupt();
             }
         }
@@ -690,7 +686,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            logger.error("Interrupted!", e);
+            //logger.error("Interrupted!", e); //TODO
             Thread.currentThread().interrupt();
         }
     }
@@ -706,9 +702,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         try {
             createTest.createOrUpdate(getTestName(), getFullTestName());
-            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr, String.join("\\n", Reporter.getOutput()), seleniumSettings.getTestFailScreenshot());
+            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr, seleniumSettings.getTestLog(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
-            logger.error("{} call REST API Unexpected exception: {}", seleniumSettings.getTestName(), e.getMessage());
+            seleniumLogger.error(seleniumSettings.getTestName() + " call REST API Unexpected exception: " + e.getMessage());
         }
     }
 

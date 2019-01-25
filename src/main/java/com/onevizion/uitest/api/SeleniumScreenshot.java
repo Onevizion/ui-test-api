@@ -12,18 +12,16 @@ import javax.annotation.Resource;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.testng.Reporter;
 
 @Component
 public class SeleniumScreenshot {
 
-    private final Logger logger = LoggerFactory.getLogger(SeleniumScreenshot.class);
-
     @Resource
     private SeleniumSettings seleniumSettings;
+
+    @Resource
+    private SeleniumLogger seleniumLogger;
 
     public void getScreenshot() {
         try {
@@ -55,19 +53,15 @@ public class SeleniumScreenshot {
                     } else {
                         screenAddr = screensDirectory + screenFileName;
                     }
-                    logger.error("{} {}", seleniumSettings.getTestName(), screenAddr);
-                    Reporter.log(seleniumSettings.getTestName() + " " + screenAddr);
+                    seleniumLogger.error(seleniumSettings.getTestName() + " " + screenAddr);
                 } catch (IOException e) {
-                    logger.error("{} Can't save screenshot because of: {}", seleniumSettings.getTestName(), e.getMessage());
-                    Reporter.log(seleniumSettings.getTestName() + " Can't save screenshot because of: " + e.getMessage());
+                    seleniumLogger.error(seleniumSettings.getTestName() + " Can't save screenshot because of: " + e.getMessage());
                 }
             } else {
-                logger.error("{} Current web browser dont't supports getting screenshots", seleniumSettings.getTestName());
-                Reporter.log(seleniumSettings.getTestName() + " Current web browser dont't supports getting screenshots");
+                seleniumLogger.error(seleniumSettings.getTestName() + " Current web browser dont't supports getting screenshots");
             }
         } catch (Exception e) {
-            logger.error("{} Unexpected exception: {}", seleniumSettings.getTestName(), e.getMessage());
-            Reporter.log(seleniumSettings.getTestName() + " Unexpected exception: " + e.getMessage());
+            seleniumLogger.error(seleniumSettings.getTestName() + " Unexpected exception: " + e.getMessage());
         }
     }
 

@@ -14,12 +14,11 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
+import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
@@ -28,10 +27,11 @@ import com.onevizion.uitest.api.vo.ConfigFieldType;
 @Component
 public class Tb {
 
-    private final Logger logger = LoggerFactory.getLogger(Tb.class);
-
     @Resource
     private SeleniumSettings seleniumSettings;
+
+    @Resource
+    private SeleniumLogger seleniumLogger;
 
     @Resource
     private Js js;
@@ -271,7 +271,7 @@ public class Tb {
                 //TODO begin remove this code
                 AbstractSeleniumCore.sleep(1000L);
                 if (isAlertPresent()) {
-                    logger.warn("{} Alert Present {}", seleniumSettings.getTestName(), seleniumSettings.getWebDriver().switchTo().alert().getText());
+                    seleniumLogger.warn(seleniumSettings.getTestName() + " Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
                     Assert.assertTrue(seleniumSettings.getWebDriver().switchTo().alert().getText().contains("Following fields with unsaved changes has been modified on the server. Press \"OK\" to keep your values or \"Cancel\" to replace your values with new values from the server"));
                     seleniumSettings.getWebDriver().switchTo().alert().accept();
                     seleniumSettings.getWebDriver().switchTo().defaultContent();
@@ -284,7 +284,7 @@ public class Tb {
                 //    waitHelper.waitLoadingLoad();
                 //} catch (UnhandledAlertException e) {
                 //    if (seleniumSettings.getBrowser().equals("chrome")) {
-                //        logger.warn(seleniumSettings.getTestName() + " Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
+                //        seleniumLogger.warn(seleniumSettings.getTestName() + " Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
                 //        Assert.assertTrue(seleniumSettings.getWebDriver().switchTo().alert().getText().contains("Following fields with unsaved changes has been modified on the server. Press \"OK\" to keep your values or \"Cancel\" to replace your values with new values from the server"));
                 //        seleniumSettings.getWebDriver().switchTo().alert().accept();
                 //        seleniumSettings.getWebDriver().switchTo().defaultContent();

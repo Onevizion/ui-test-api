@@ -8,12 +8,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
+import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
@@ -27,8 +26,6 @@ import com.onevizion.uitest.api.vo.entity.ExportRun;
 
 @Component
 public class Export {
-
-    private static final Logger logger = LoggerFactory.getLogger(Export.class);
 
     @Resource
     private Window window;
@@ -60,6 +57,9 @@ public class Export {
     @Resource
     private SeleniumSettings seleniumSettings;
 
+    @Resource
+    private SeleniumLogger seleniumLogger;
+
     public void export(Long gridIndex, ExportRun exportRun, List<Integer> uniqueColumns, CheckExportFile checkExportFile) {
         ExportMenu exportMenu = getExportMenu();
 
@@ -70,13 +70,13 @@ public class Export {
                 if (checkExportFile != null) {
                     checkExportFile.checkExportCsvFile(processId, exportRun.getFilePath(), uniqueColumns);
                 } else {
-                    logger.error("export file not verified");
+                    seleniumLogger.error("export file not verified");
                 }
             } else if ("Grid to Excel".equals(exportRun.getMode())) {
                 if (checkExportFile != null) {
                     checkExportFile.checkExportExcelFile(processId, exportRun.getFilePath(), uniqueColumns);
                 } else {
-                    logger.error("export file not verified");
+                    seleniumLogger.error("export file not verified");
                 }
             } else {
                 throw new SeleniumUnexpectedException("Not support Mode. Mode=" + exportRun.getMode());
@@ -96,13 +96,13 @@ public class Export {
                 if (checkExportFile != null) {
                     checkExportFile.checkExportCsvFile(processId, exportRun.getFilePath());
                 } else {
-                    logger.error("export file not verified");
+                    seleniumLogger.error("export file not verified");
                 }
             } else if ("Grid to Excel".equals(exportRun.getMode())) {
                 if (checkExportFile != null) {
                     checkExportFile.checkExportExcelFile(processId, exportRun.getFilePath());
                 } else {
-                    logger.error("export file not verified");
+                    seleniumLogger.error("export file not verified");
                 }
             } else {
                 throw new SeleniumUnexpectedException("Not support Mode. Mode=" + exportRun.getMode());

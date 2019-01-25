@@ -10,12 +10,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
+import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.document.Document;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
@@ -23,8 +22,6 @@ import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
 public class Window {
-
-    private final Logger logger = LoggerFactory.getLogger(Window.class);
 
     @Resource
     private Wait wait;
@@ -34,6 +31,9 @@ public class Window {
 
     @Resource
     private SeleniumSettings seleniumSettings;
+
+    @Resource
+    private SeleniumLogger seleniumLogger;
 
     @Resource
     private ElementWait elementWait;
@@ -64,7 +64,7 @@ public class Window {
             Actions actionObject = new Actions(seleniumSettings.getWebDriver());
             actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(elemenLocator)).perform();
         } catch (MoveTargetOutOfBoundsException e) {
-            logger.warn("Exception in openModal moveToElement", e);
+            seleniumLogger.warn("Exception in openModal moveToElement");
         }
 
         seleniumSettings.getWebDriver().findElement(elemenLocator).click();

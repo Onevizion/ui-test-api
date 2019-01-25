@@ -11,17 +11,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
+import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
 public class Qs {
-
-    private final Logger logger = LoggerFactory.getLogger(Qs.class);
 
     @Resource
     private Js js;
@@ -34,6 +31,9 @@ public class Qs {
 
     @Resource
     private SeleniumSettings seleniumSettings;
+
+    @Resource
+    private SeleniumLogger seleniumLogger;
 
     public void checkFieldsCount(Long gridIdx, int size) {
         int actualSize = seleniumSettings.getWebDriver().findElement(By.id("qsField" + gridIdx)).findElements(By.className("item_select")).size();
@@ -76,7 +76,7 @@ public class Qs {
             try {
                 elementWait.waitElementAttributeById("qsContent" + gridIdx, "class", "component quickSearch active");
             } catch (TimeoutException e) {
-                logger.warn("Exception in waitQsActive", e);
+                seleniumLogger.warn("Exception in waitQsActive");
             }
         }
     }

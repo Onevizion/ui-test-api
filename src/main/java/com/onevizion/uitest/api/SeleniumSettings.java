@@ -22,6 +22,8 @@ public class SeleniumSettings {
 
     private ThreadLocal<String> testName = new ThreadLocal<>();
 
+    private ThreadLocal<String> testLog = new ThreadLocal<>();
+
     private ThreadLocal<String> testFailScreenshot = new ThreadLocal<>();
 
     @Resource
@@ -109,6 +111,14 @@ public class SeleniumSettings {
 
     void setTestName(String testName) {
         this.testName.set(testName);
+    }
+
+    public String getTestLog() {
+        return testLog.get();
+    }
+
+    void setTestLog(String testLog) {
+        this.testLog.set(testLog);
     }
 
     public String getTestFailScreenshot() {
