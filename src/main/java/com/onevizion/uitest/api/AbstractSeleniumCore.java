@@ -672,6 +672,11 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         return testName;
     }
 
+    private String getFullTestName() {
+        String testName = getClass().getName();
+        return testName;
+    }
+
     public static Long getGridIdx() {
         return 0L;
     }
@@ -700,7 +705,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         String date = format.format(cal.getTime());
 
         try {
-            createTest.create(getTestName());
+            createTest.createOrUpdate(getTestName(), getFullTestName());
             createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr);
         } catch (Exception e) {
             logger.error("{} call REST API Unexpected exception: {}", seleniumSettings.getTestName(), e.getMessage());

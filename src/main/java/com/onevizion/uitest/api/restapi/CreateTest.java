@@ -23,14 +23,14 @@ public class CreateTest {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void create(String testName) {
+    public void createOrUpdate(String testName, String fullTestName) {
         boolean isExist = checkTestAlreadyExist(testName);
 
         if (isExist) {
-            return;
+            updateTest(testName, fullTestName);
+        } else {
+            createTest(testName, fullTestName);
         }
-
-        createTest(testName);
     }
 
     private boolean checkTestAlreadyExist(String testName) {
@@ -79,7 +79,7 @@ public class CreateTest {
         }
     }
 
-    private void createTest(String testName) {
+    private void createTest(String testName, String fullTestName) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -91,7 +91,8 @@ public class CreateTest {
 
             String input = "{ " + 
                     "   \"fields\": { " + 
-                    "     \"XITOR_KEY\": \"" + testName + "\" " + 
+                    "     \"XITOR_KEY\": \"" + testName + "\", " + 
+                    "     \"ST_FULL_NAME\": \"" + fullTestName + "\" " + 
                     "   } " + 
                     " }";
 
@@ -101,6 +102,36 @@ public class CreateTest {
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                 throw new SeleniumUnexpectedException("CreateTest.createTest Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
+            }
+
+            conn.disconnect();
+        } catch (Exception e) {
+            throw new SeleniumUnexpectedException(e);
+        }
+    }
+
+    private void updateTest(String testName, String fullTestName) {
+        try {
+            URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME + ".TRACKOR_KEY=" + testName);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
+
+            String input = "{ " + 
+                    "   \"fields\": { " + 
+                    "     \"ST_FULL_NAME\": \"" + fullTestName + "\" " + 
+                    "   } " + 
+                    " }";
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new SeleniumUnexpectedException("CreateTest.updateTest Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
             }
 
             conn.disconnect();
