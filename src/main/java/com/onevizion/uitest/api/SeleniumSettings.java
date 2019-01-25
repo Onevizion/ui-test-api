@@ -22,6 +22,8 @@ public class SeleniumSettings {
 
     private ThreadLocal<String> testName = new ThreadLocal<>();
 
+    private ThreadLocal<String> testFailScreenshot = new ThreadLocal<>();
+
     @Resource
     private Long defaultTimeout;
 
@@ -107,6 +109,14 @@ public class SeleniumSettings {
 
     void setTestName(String testName) {
         this.testName.set(testName);
+    }
+
+    public String getTestFailScreenshot() {
+        return testFailScreenshot.get();
+    }
+
+    void setTestFailScreenshot(String testFailScreenshot) {
+        this.testFailScreenshot.set(testFailScreenshot);
     }
 
     public Long getDefaultTimeout() {

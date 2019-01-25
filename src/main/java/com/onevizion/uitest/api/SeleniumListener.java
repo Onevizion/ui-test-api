@@ -75,6 +75,8 @@ public class SeleniumListener extends TestListenerAdapter {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
                 Date date = new Date();
 
+                String screenshotBase64 = ((TakesScreenshot) test.seleniumSettings.getWebDriver()).getScreenshotAs(OutputType.BASE64);
+                test.seleniumSettings.setTestFailScreenshot(screenshotBase64);
                 byte[] screen = ((TakesScreenshot) test.seleniumSettings.getWebDriver()).getScreenshotAs(OutputType.BYTES);
 
                 try {

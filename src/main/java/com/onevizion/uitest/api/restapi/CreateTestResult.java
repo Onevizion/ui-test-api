@@ -21,7 +21,7 @@ public class CreateTestResult {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void create(String process, String testName, String browserName, String date, String testStatus, String duration) {
+    public void create(String process, String testName, String browserName, String date, String testStatus, String duration, String errorLog, String errorScreenshot) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -31,28 +31,56 @@ public class CreateTestResult {
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
 
-            String input = "{ " + 
-                    "   \"fields\": { " + 
-                    "     \"STR_DATE\": \"" + date + "\", " + 
-                    "     \"STR_BROWSER\": \"" + browserName + "\", " + 
-                    "     \"STR_STATUS\": \"" + testStatus + "\", " + 
-                    "     \"STR_DURATION\": \"" + duration + "\" " + 
-                    "   }, " + 
-                    "   \"parents\": [ " + 
-                    "     { " + 
-                    "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
-                    "       \"filter\": { " + 
-                    "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
-                    "       } " + 
-                    "     }, " + 
-                    "     { " + 
-                    "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
-                    "       \"filter\": { " + 
-                    "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
-                    "       } " + 
-                    "     } " + 
-                    "   ] " + 
-                    " }";
+            String input;
+            if ("fail".equals(testStatus)) {
+                input = "{ " + 
+                        "   \"fields\": { " + 
+                        "     \"STR_DATE\": \"" + date + "\", " + 
+                        "     \"STR_BROWSER\": \"" + browserName + "\", " + 
+                        "     \"STR_STATUS\": \"" + testStatus + "\", " + 
+                        "     \"STR_DURATION\": \"" + duration + "\", " + 
+                        "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
+                        "     \"STR_ERROR_FILE\": {\"file_name\": \"screenshot.jpg\", \"data\": \"" + errorScreenshot + "\"} " + 
+                        "   }, " + 
+                        "   \"parents\": [ " + 
+                        "     { " + 
+                        "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
+                        "       \"filter\": { " + 
+                        "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
+                        "       } " + 
+                        "     }, " + 
+                        "     { " + 
+                        "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
+                        "       \"filter\": { " + 
+                        "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
+                        "       } " + 
+                        "     } " + 
+                        "   ] " + 
+                        " }";
+            } else {
+                input = "{ " + 
+                        "   \"fields\": { " + 
+                        "     \"STR_DATE\": \"" + date + "\", " + 
+                        "     \"STR_BROWSER\": \"" + browserName + "\", " + 
+                        "     \"STR_STATUS\": \"" + testStatus + "\", " + 
+                        "     \"STR_DURATION\": \"" + duration + "\" " +
+                        "   }, " + 
+                        "   \"parents\": [ " + 
+                        "     { " + 
+                        "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
+                        "       \"filter\": { " + 
+                        "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
+                        "       } " + 
+                        "     }, " + 
+                        "     { " + 
+                        "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
+                        "       \"filter\": { " + 
+                        "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
+                        "       } " + 
+                        "     } " + 
+                        "   ] " + 
+                        " }";
+            }
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
