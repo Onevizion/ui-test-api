@@ -407,6 +407,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         seleniumSettings.setTestName(getTestName());
         seleniumSettings.setTestStatus("success");
+        seleniumSettings.clearTestLog();
+        seleniumSettings.clearTestFailScreenshot();
 
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
 

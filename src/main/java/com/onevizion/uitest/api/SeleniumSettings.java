@@ -113,12 +113,20 @@ public class SeleniumSettings {
         this.testName.set(testName);
     }
 
+    void clearTestLog() {
+        testLog.remove();
+    }
+
     public String getTestLog() {
         return testLog.get();
     }
 
     void setTestLog(String testLog) {
         this.testLog.set(testLog);
+    }
+
+    void clearTestFailScreenshot() {
+        testFailScreenshot.remove();
     }
 
     public String getTestFailScreenshot() {

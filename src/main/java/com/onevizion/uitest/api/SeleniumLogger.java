@@ -18,31 +18,42 @@ public class SeleniumLogger {
     public void trace(String msg) {
         logger.trace(msg);
         Reporter.log(msg);
-        seleniumSettings.setTestLog(seleniumSettings.getTestLog() + "\\n" + msg);
+        log(msg);
     }
 
     public void debug(String msg) {
         logger.debug(msg);
         Reporter.log(msg);
-        seleniumSettings.setTestLog(seleniumSettings.getTestLog() + "\\n" + msg);
+        log(msg);
     }
 
     public void info(String msg) {
         logger.info(msg);
         Reporter.log(msg);
-        seleniumSettings.setTestLog(seleniumSettings.getTestLog() + "\\n" + msg);
+        log(msg);
     }
 
     public void warn(String msg) {
         logger.warn(msg);
         Reporter.log(msg);
-        seleniumSettings.setTestLog(seleniumSettings.getTestLog() + "\\n" + msg);
+        log(msg);
     }
 
     public void error(String msg) {
         logger.error(msg);
         Reporter.log(msg);
-        seleniumSettings.setTestLog(seleniumSettings.getTestLog() + "\\n" + msg);
+        log(msg);
+    }
+
+    private void log(String msg) {
+        msg = msg.replaceAll("\"", "'");
+        String testLog = seleniumSettings.getTestLog();
+        if (testLog == null) {
+            testLog = msg;
+        } else {
+            testLog = testLog + "\\n" + msg;
+        }
+        seleniumSettings.setTestLog(testLog);
     }
 
 }
