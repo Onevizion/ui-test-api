@@ -33,37 +33,63 @@ public class CreateTestResult {
 
             String input;
             if ("fail".equals(testStatus)) {
-                input = "{ " + 
-                        "   \"fields\": { " + 
-                        "     \"STR_DATE\": \"" + date + "\", " + 
-                        "     \"STR_BROWSER\": \"" + browserName + "\", " + 
-                        "     \"STR_STATUS\": \"" + testStatus + "\", " + 
-                        "     \"STR_DURATION\": \"" + duration + "\", " + 
-                        "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
-                        "     \"STR_ERROR_FILE\": {\"file_name\": \"screenshot.jpg\", \"data\": \"" + errorScreenshot + "\"} " + 
-                        "   }, " + 
-                        "   \"parents\": [ " + 
-                        "     { " + 
-                        "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
-                        "       \"filter\": { " + 
-                        "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
-                        "       } " + 
-                        "     }, " + 
-                        "     { " + 
-                        "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
-                        "       \"filter\": { " + 
-                        "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
-                        "       } " + 
-                        "     } " + 
-                        "   ] " + 
-                        " }";
+                if (errorScreenshot != null) {
+                    input = "{ " + 
+                            "   \"fields\": { " + 
+                            "     \"STR_DATE\": \"" + date + "\", " + 
+                            "     \"STR_BROWSER\": \"" + browserName + "\", " + 
+                            "     \"STR_STATUS\": \"" + testStatus + "\", " + 
+                            "     \"STR_DURATION\": \"" + duration + "\", " + 
+                            "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
+                            "     \"STR_ERROR_FILE\": {\"file_name\": \"screenshot.jpg\", \"data\": \"" + errorScreenshot + "\"} " + 
+                            "   }, " + 
+                            "   \"parents\": [ " + 
+                            "     { " + 
+                            "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
+                            "       \"filter\": { " + 
+                            "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
+                            "       } " + 
+                            "     }, " + 
+                            "     { " + 
+                            "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
+                            "       \"filter\": { " + 
+                            "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
+                            "       } " + 
+                            "     } " + 
+                            "   ] " + 
+                            " }";
+                } else {
+                    input = "{ " + 
+                            "   \"fields\": { " + 
+                            "     \"STR_DATE\": \"" + date + "\", " + 
+                            "     \"STR_BROWSER\": \"" + browserName + "\", " + 
+                            "     \"STR_STATUS\": \"" + testStatus + "\", " + 
+                            "     \"STR_DURATION\": \"" + duration + "\", " + 
+                            "     \"STR_ERROR_LOG\": \"" + errorLog + "\" " + 
+                            "   }, " + 
+                            "   \"parents\": [ " + 
+                            "     { " + 
+                            "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
+                            "       \"filter\": { " + 
+                            "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
+                            "       } " + 
+                            "     }, " + 
+                            "     { " + 
+                            "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
+                            "       \"filter\": { " + 
+                            "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
+                            "       } " + 
+                            "     } " + 
+                            "   ] " + 
+                            " }";
+                }
             } else {
                 input = "{ " + 
                         "   \"fields\": { " + 
                         "     \"STR_DATE\": \"" + date + "\", " + 
                         "     \"STR_BROWSER\": \"" + browserName + "\", " + 
                         "     \"STR_STATUS\": \"" + testStatus + "\", " + 
-                        "     \"STR_DURATION\": \"" + duration + "\" " +
+                        "     \"STR_DURATION\": \"" + duration + "\" " + 
                         "   }, " + 
                         "   \"parents\": [ " + 
                         "     { " + 
