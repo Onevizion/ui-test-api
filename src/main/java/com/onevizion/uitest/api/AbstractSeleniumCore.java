@@ -664,6 +664,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     protected abstract void openInternalPage();
 
+    protected abstract String getModuleName();
+
     private String getTestName() {
         String testName = getClass().getName();
         testName = testName.substring(testName.lastIndexOf('.') + 1);
@@ -703,7 +705,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         String date = format.format(cal.getTime());
 
         try {
-            createTest.createOrUpdate(getTestName(), getFullTestName());
+            createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName());
             createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr, seleniumSettings.getTestLog(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
             seleniumLogger.error(seleniumSettings.getTestName() + " call REST API Unexpected exception: " + e.getMessage());

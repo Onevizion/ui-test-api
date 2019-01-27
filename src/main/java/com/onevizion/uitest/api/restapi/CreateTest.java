@@ -23,13 +23,13 @@ public class CreateTest {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void createOrUpdate(String testName, String fullTestName) {
+    public void createOrUpdate(String testName, String fullTestName, String moduleName) {
         boolean isExist = checkTestAlreadyExist(testName);
 
         if (isExist) {
-            updateTest(testName, fullTestName);
+            updateTest(testName, fullTestName, moduleName);
         } else {
-            createTest(testName, fullTestName);
+            createTest(testName, fullTestName, moduleName);
         }
     }
 
@@ -79,7 +79,7 @@ public class CreateTest {
         }
     }
 
-    private void createTest(String testName, String fullTestName) {
+    private void createTest(String testName, String fullTestName, String moduleName) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -92,7 +92,8 @@ public class CreateTest {
             String input = "{ " + 
                     "   \"fields\": { " + 
                     "     \"XITOR_KEY\": \"" + testName + "\", " + 
-                    "     \"ST_FULL_NAME\": \"" + fullTestName + "\" " + 
+                    "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
+                    "     \"ST_MODULE_NAME\": \"" + moduleName + "\" " + 
                     "   } " + 
                     " }";
 
@@ -110,7 +111,7 @@ public class CreateTest {
         }
     }
 
-    private void updateTest(String testName, String fullTestName) {
+    private void updateTest(String testName, String fullTestName, String moduleName) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME + ".TRACKOR_KEY=\"" + testName + "\"");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -122,7 +123,8 @@ public class CreateTest {
 
             String input = "{ " + 
                     "   \"fields\": { " + 
-                    "     \"ST_FULL_NAME\": \"" + fullTestName + "\" " + 
+                    "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
+                    "     \"ST_MODULE_NAME\": \"" + moduleName + "\" " + 
                     "   } " + 
                     " }";
 
