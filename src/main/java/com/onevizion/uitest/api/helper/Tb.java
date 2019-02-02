@@ -158,8 +158,9 @@ public class Tb {
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                element.moveToElementById("idx" + getLastFieldIndex(fieldName, elementPosition));
-                new Select(seleniumSettings.getWebDriver().findElement(By.id("idx" + getLastFieldIndex(fieldName, elementPosition)))).selectByVisibleText(value);
+                String idx = getLastFieldIndex(fieldName, elementPosition);
+                element.moveToElementById("idx" + idx);
+                new Select(seleniumSettings.getWebDriver().findElement(By.id("idx" + idx))).selectByVisibleText(value);
             } else {
                 element.moveToElementByName(fieldName);
                 new Select(seleniumSettings.getWebDriver().findElement(By.name(fieldName))).selectByVisibleText(value);
@@ -256,8 +257,9 @@ public class Tb {
             }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                By btnOpen = By.id("idx" + getLastFieldIndex(fieldName, elementPosition) + "_but");
-                element.moveToElementById("idx" + getLastFieldIndex(fieldName, elementPosition) + "_but");
+                String idx = getLastFieldIndex(fieldName, elementPosition);
+                By btnOpen = By.id("idx" + idx + "_but");
+                element.moveToElementById("idx" + idx + "_but");
                 psSelector.selectSpecificValue(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             } else {
                 element.moveToElementByName(fieldName + "_but");
@@ -366,7 +368,8 @@ public class Tb {
     public void checkField(ConfigFieldType fieldDataType, String field, Map<String, String> vals, int elementPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.assertCheckboxById("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
+                String idx = getLastFieldIndex(field, elementPosition);
+                assertElement.assertCheckboxById("idx" + idx, vals.get(field));
             } else {
                 assertElement.assertCheckbox(field, vals.get(field));
             }
@@ -376,14 +379,16 @@ public class Tb {
                 || ConfigFieldType.TEXT.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType)
                 || ConfigFieldType.TIME.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.assertTextById("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
+                String idx = getLastFieldIndex(field, elementPosition);
+                assertElement.assertTextById("idx" + idx, vals.get(field));
             } else {
                 assertElement.assertText(field, vals.get(field));
             }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.assertSelectById("idx" + getLastFieldIndex(field, elementPosition), vals.get(field));
+                String idx = getLastFieldIndex(field, elementPosition);
+                assertElement.assertSelectById("idx" + idx, vals.get(field));
             } else {
                 assertElement.assertSelect(field, vals.get(field));
             }
@@ -435,7 +440,8 @@ public class Tb {
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                assertElement.assertTextById("idx" + getLastFieldIndex(field + "_disp", elementPosition) + "_disp", vals.get(field));
+                String idx = getLastFieldIndex(field + "_disp", elementPosition);
+                assertElement.assertTextById("idx" + idx + "_disp", vals.get(field));
             } else {
                 assertElement.assertText(field + "_disp", vals.get(field));
             }
@@ -497,8 +503,9 @@ public class Tb {
                 || ConfigFieldType.TEXT.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType)
                 || ConfigFieldType.TIME.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                element.moveToElementById("idx" + getLastFieldIndex(field, elementPosition));
-                seleniumSettings.getWebDriver().findElement(By.id("idx" + getLastFieldIndex(field, elementPosition))).clear();
+                String idx = getLastFieldIndex(field, elementPosition);
+                element.moveToElementById("idx" + idx);
+                seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).clear();
             } else {
                 element.moveToElementByName(field);
                 seleniumSettings.getWebDriver().findElement(By.name(field)).clear();
@@ -547,8 +554,9 @@ public class Tb {
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             if (elementPosition > 1) {
-                element.moveToElementById("idx" + getLastFieldIndex(field, elementPosition));
-                new Select(seleniumSettings.getWebDriver().findElement(By.id("idx" + getLastFieldIndex(field, elementPosition)))).selectByVisibleText("");
+                String idx = getLastFieldIndex(field, elementPosition);
+                element.moveToElementById("idx" + idx);
+                new Select(seleniumSettings.getWebDriver().findElement(By.id("idx" + idx))).selectByVisibleText("");
             } else {
                 element.moveToElementByName(field);
                 new Select(seleniumSettings.getWebDriver().findElement(By.name(field))).selectByVisibleText("");
