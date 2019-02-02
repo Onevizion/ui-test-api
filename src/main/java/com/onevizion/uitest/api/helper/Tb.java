@@ -495,14 +495,50 @@ public class Tb {
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.HYPERLINK.equals(fieldDataType)
                 || ConfigFieldType.MEMO.equals(fieldDataType) || ConfigFieldType.NUMBER.equals(fieldDataType)
                 || ConfigFieldType.TEXT.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType)
-                || ConfigFieldType.TIME.equals(fieldDataType) || ConfigFieldType.LATITUDE.equals(fieldDataType)
-                || ConfigFieldType.LONGITUDE.equals(fieldDataType)) {
+                || ConfigFieldType.TIME.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 element.moveToElementById("idx" + getLastFieldIndex(field, elementPosition));
                 seleniumSettings.getWebDriver().findElement(By.id("idx" + getLastFieldIndex(field, elementPosition))).clear();
             } else {
                 element.moveToElementByName(field);
                 seleniumSettings.getWebDriver().findElement(By.name(field)).clear();
+            }
+            expVals.put(field, "");
+            if (column != null) {
+                gridExpVals.put(column, "");
+            }
+        } else if (ConfigFieldType.LATITUDE.equals(fieldDataType) || ConfigFieldType.LONGITUDE.equals(fieldDataType)) {
+            if (elementPosition > 1) {
+                String idx = getLastFieldIndex(field, elementPosition);
+                element.clickById("idx" + idx);
+                if (seleniumSettings.getBrowser().equals("chrome")) {
+                    seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).clear();
+                } else if (seleniumSettings.getBrowser().equals("firefox")) {
+                    Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+                    actionObject.sendKeys(Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT,
+                            Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT,
+                            Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT).perform();
+                    actionObject.sendKeys(Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE,
+                            Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE,
+                            Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE).perform();
+                } else {
+                    throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
+                }
+            } else {
+                element.clickByName(field);
+                if (seleniumSettings.getBrowser().equals("chrome")) {
+                    seleniumSettings.getWebDriver().findElement(By.name(field)).clear();
+                } else if (seleniumSettings.getBrowser().equals("firefox")) {
+                    Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+                    actionObject.sendKeys(Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT,
+                            Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT,
+                            Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT, Keys.ARROW_RIGHT).perform();
+                    actionObject.sendKeys(Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE,
+                            Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE,
+                            Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE, Keys.BACK_SPACE).perform();
+                } else {
+                    throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
+                }
             }
             expVals.put(field, "");
             if (column != null) {
