@@ -20,6 +20,7 @@ public enum RuleTypeType {
     USER_UPDATE("User Updated"),
     REPORT_EXECUTED("Report Executed"),
     REPORT_EXECUTED_SUCCESS("Report Executed - Success"),
+    REPORT_EXECUTED_DELIVERED("Report Executed - Delivered"),
     WF_DELETE("WorkFlow Deleted"),
     WF_FINISH("WorkFlow Finished"),
     WF_START("WorkFlow Started"),
