@@ -92,12 +92,12 @@ public class Dashboard {
     }
 
     public void changeDashletName(String name) {
-        seleniumSettings.getWebDriver().findElement(By.id("ed_edit_title_")).click();
+        seleniumSettings.getWebDriver().findElement(By.id("dashlet_options_")).click();
 
-        seleniumSettings.getWebDriver().findElement(By.id("ed_title_editor_")).findElement(By.className("tet_input")).clear();
-        seleniumSettings.getWebDriver().findElement(By.id("ed_title_editor_")).findElement(By.className("tet_input")).sendKeys(name);
-
-        seleniumSettings.getWebDriver().findElement(By.id("ed_title_editor_")).findElement(By.className("btn_label")).click();
+        WebElement dialog = getDialog();
+        dialog.findElement(By.className("in_input")).clear();
+        dialog.findElement(By.className("in_input")).sendKeys(name);
+        dialog.findElement(By.id("buttonOk")).click();
     }
 
     public void changeAxisName(String oldName, String newName) {
