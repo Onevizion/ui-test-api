@@ -62,7 +62,7 @@ public class UserpageFilter {
     public static final String FILTER_ROW_VALUE_DATETIME_TEXT = "dateTimeWPAttribValue";
     private static final String FILTER_ROW_VALUE_TIME_TEXT = "timeWPAttribValue";
     private static final String FILTER_ROW_VALUE_NUMBER_TEXT = "numWPAttribValue";
-    private static final String FILTER_ROW_VALUE_LATLONG_TEXT = "latlongWPAttribValue";
+    public static final String FILTER_ROW_VALUE_LATLONG_TEXT = "latlongWPAttribValue";
     public static final String FILTER_ROW_VALUE_CHECKBOX_TEXT = "ynWPAttribValue";
     public static final String FILTER_ROW_VALUE_TEXT_TEXT = "txtWPAttribValue";
 
