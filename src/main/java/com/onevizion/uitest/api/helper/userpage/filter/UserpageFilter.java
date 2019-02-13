@@ -57,9 +57,9 @@ public class UserpageFilter {
     private static final String FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_TEXT = "trDropDownWPAttribValue";
     private static final String FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_BUTTON = "btnTrDropDownWPAttribValue";
     private static final String FILTER_ROW_VALUE_SELECTOR_TEXT = "selWPAttribValue";
-    private static final String FILTER_ROW_VALUE_SELECTOR_BUTTON = "btnSelWPAttribValue";
+    public static final String FILTER_ROW_VALUE_SELECTOR_BUTTON = "btnSelWPAttribValue";
     public static final String FILTER_ROW_VALUE_DATE_TEXT = "dateWPAttribValue";
-    private static final String FILTER_ROW_VALUE_DATETIME_TEXT = "dateTimeWPAttribValue";
+    public static final String FILTER_ROW_VALUE_DATETIME_TEXT = "dateTimeWPAttribValue";
     private static final String FILTER_ROW_VALUE_TIME_TEXT = "timeWPAttribValue";
     private static final String FILTER_ROW_VALUE_NUMBER_TEXT = "numWPAttribValue";
     private static final String FILTER_ROW_VALUE_LATLONG_TEXT = "latlongWPAttribValue";
