@@ -49,7 +49,7 @@ public class UserpageFilter {
     private static final String FILTER_ROW_OPER_TASK = "tdWPOperator";
     private static final String FILTER_ROW_OPER = "WPOperator";
     private static final String FILTER_ROW_VALUE_FIELD_TEXT = "fSelWPAttribValue";
-    private static final String FILTER_ROW_VALUE_FIELD_BUTTON = "btnFSelWPAttribValue";
+    public static final String FILTER_ROW_VALUE_FIELD_BUTTON = "btnFSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT = "trSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON = "btnTrSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT = "multSelWPAttribValue";
@@ -58,13 +58,13 @@ public class UserpageFilter {
     private static final String FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_BUTTON = "btnTrDropDownWPAttribValue";
     private static final String FILTER_ROW_VALUE_SELECTOR_TEXT = "selWPAttribValue";
     private static final String FILTER_ROW_VALUE_SELECTOR_BUTTON = "btnSelWPAttribValue";
-    private static final String FILTER_ROW_VALUE_DATE_TEXT = "dateWPAttribValue";
+    public static final String FILTER_ROW_VALUE_DATE_TEXT = "dateWPAttribValue";
     private static final String FILTER_ROW_VALUE_DATETIME_TEXT = "dateTimeWPAttribValue";
     private static final String FILTER_ROW_VALUE_TIME_TEXT = "timeWPAttribValue";
     private static final String FILTER_ROW_VALUE_NUMBER_TEXT = "numWPAttribValue";
     private static final String FILTER_ROW_VALUE_LATLONG_TEXT = "latlongWPAttribValue";
-    private static final String FILTER_ROW_VALUE_CHECKBOX_TEXT = "ynWPAttribValue";
-    private static final String FILTER_ROW_VALUE_TEXT_TEXT = "txtWPAttribValue";
+    public static final String FILTER_ROW_VALUE_CHECKBOX_TEXT = "ynWPAttribValue";
+    public static final String FILTER_ROW_VALUE_TEXT_TEXT = "txtWPAttribValue";
 
     @Resource
     private Js js;
