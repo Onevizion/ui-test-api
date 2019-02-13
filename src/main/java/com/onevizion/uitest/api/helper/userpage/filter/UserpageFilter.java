@@ -53,7 +53,7 @@ public class UserpageFilter {
     private static final String FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT = "trSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON = "btnTrSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT = "multSelWPAttribValue";
-    private static final String FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON = "btnMultSelWPAttribValue";
+    public static final String FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON = "btnMultSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_TEXT = "trDropDownWPAttribValue";
     private static final String FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_BUTTON = "btnTrDropDownWPAttribValue";
     private static final String FILTER_ROW_VALUE_SELECTOR_TEXT = "selWPAttribValue";
@@ -61,7 +61,7 @@ public class UserpageFilter {
     public static final String FILTER_ROW_VALUE_DATE_TEXT = "dateWPAttribValue";
     public static final String FILTER_ROW_VALUE_DATETIME_TEXT = "dateTimeWPAttribValue";
     private static final String FILTER_ROW_VALUE_TIME_TEXT = "timeWPAttribValue";
-    private static final String FILTER_ROW_VALUE_NUMBER_TEXT = "numWPAttribValue";
+    public static final String FILTER_ROW_VALUE_NUMBER_TEXT = "numWPAttribValue";
     public static final String FILTER_ROW_VALUE_LATLONG_TEXT = "latlongWPAttribValue";
     public static final String FILTER_ROW_VALUE_CHECKBOX_TEXT = "ynWPAttribValue";
     public static final String FILTER_ROW_VALUE_TEXT_TEXT = "txtWPAttribValue";
