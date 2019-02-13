@@ -51,7 +51,7 @@ public class UserpageFilter {
     private static final String FILTER_ROW_VALUE_FIELD_TEXT = "fSelWPAttribValue";
     public static final String FILTER_ROW_VALUE_FIELD_BUTTON = "btnFSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT = "trSelWPAttribValue";
-    private static final String FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON = "btnTrSelWPAttribValue";
+    public static final String FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON = "btnTrSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT = "multSelWPAttribValue";
     public static final String FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON = "btnMultSelWPAttribValue";
     private static final String FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_TEXT = "trDropDownWPAttribValue";
