@@ -23,13 +23,13 @@ public class CreateTest {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void createOrUpdate(String testName, String fullTestName, String moduleName) {
+    public void createOrUpdate(String testName, String fullTestName, String moduleName, String bugs) {
         boolean isExist = checkTestAlreadyExist(testName);
 
         if (isExist) {
-            updateTest(testName, fullTestName, moduleName);
+            updateTest(testName, fullTestName, moduleName, bugs);
         } else {
-            createTest(testName, fullTestName, moduleName);
+            createTest(testName, fullTestName, moduleName, bugs);
         }
     }
 
@@ -79,7 +79,7 @@ public class CreateTest {
         }
     }
 
-    private void createTest(String testName, String fullTestName, String moduleName) {
+    private void createTest(String testName, String fullTestName, String moduleName, String bugs) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -93,7 +93,8 @@ public class CreateTest {
                     "   \"fields\": { " + 
                     "     \"XITOR_KEY\": \"" + testName + "\", " + 
                     "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
-                    "     \"ST_MODULE_NAME\": \"" + moduleName + "\" " + 
+                    "     \"ST_MODULE_NAME\": \"" + moduleName + "\", " + 
+                    "     \"ST_BUGS\": \"" + bugs + "\" " + 
                     "   } " + 
                     " }";
 
@@ -111,7 +112,7 @@ public class CreateTest {
         }
     }
 
-    private void updateTest(String testName, String fullTestName, String moduleName) {
+    private void updateTest(String testName, String fullTestName, String moduleName, String bugs) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME + ".TRACKOR_KEY=\"" + testName + "\"");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -124,7 +125,8 @@ public class CreateTest {
             String input = "{ " + 
                     "   \"fields\": { " + 
                     "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
-                    "     \"ST_MODULE_NAME\": \"" + moduleName + "\" " + 
+                    "     \"ST_MODULE_NAME\": \"" + moduleName + "\", " + 
+                    "     \"ST_BUGS\": \"" + bugs + "\" " + 
                     "   } " + 
                     " }";
 

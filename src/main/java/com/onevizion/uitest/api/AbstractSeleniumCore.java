@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriverException;
@@ -32,6 +33,7 @@ import org.openqa.selenium.remote.internal.OkHttpClient;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestContext;
 
+import com.onevizion.uitest.api.annotation.SeleniumBug;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
@@ -709,11 +711,32 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         String date = format.format(cal.getTime());
 
         try {
-            createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName());
-            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr, seleniumSettings.getTestLog(), seleniumSettings.getTestFailScreenshot());
+            createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName(), getBugs());
+            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr, getBugs(), seleniumSettings.getTestLog(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
             seleniumLogger.error(seleniumSettings.getTestName() + " call REST API Unexpected exception: " + e.getMessage());
         }
+    }
+
+    private String getBugs() {
+        Class<?> testClass;
+        try {
+            testClass = Class.forName(getFullTestName());
+        } catch (ClassNotFoundException e) {
+            return "Error";
+        }
+
+        String bugs = "";
+        SeleniumBug[] seleniumBugs = testClass.getAnnotationsByType(SeleniumBug.class);
+        for (SeleniumBug seleniumBug : seleniumBugs) {
+            if (StringUtils.isEmpty(bugs)) {
+                bugs = seleniumBug.value();
+            } else {
+                bugs = bugs + "," + seleniumBug.value();
+            }
+        }
+
+        return bugs;
     }
 
 }
