@@ -637,14 +637,14 @@ public class Js {
         //TODO firefox 59 bug
         //https://github.com/mozilla/geckodriver/issues/1067
         //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
-        execJs("if (typeof ov.bFormChanged !== 'undefined') {ov.bFormChanged = false;}");
+        execJs("if (typeof ov !== 'undefined' && typeof ov.bFormChanged !== 'undefined') {ov.bFormChanged = false;}");
     }
 
     public void resetFormChange(AbstractSeleniumCore test) {
         //TODO firefox 59 bug
         //https://github.com/mozilla/geckodriver/issues/1067
         //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
-        execJs(test, "if (typeof ov.bFormChanged !== 'undefined') {ov.bFormChanged = false;}");
+        execJs(test, "if (typeof ov !== 'undefined' && typeof ov.bFormChanged !== 'undefined') {ov.bFormChanged = false;}");
     }
 
     public void resetGridChange() {
