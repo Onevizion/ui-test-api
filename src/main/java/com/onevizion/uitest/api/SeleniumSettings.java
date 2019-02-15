@@ -63,6 +63,9 @@ public class SeleniumSettings {
     private String restApiUrl;
 
     @Resource
+    private String restApiVersion;
+
+    @Resource
     private String serverUrl;
 
     public WebDriver getWebDriver() {
@@ -183,6 +186,10 @@ public class SeleniumSettings {
 
     public String getRestApiUrl() {
         return restApiUrl;
+    }
+
+    public String getRestApiVersion() {
+        return restApiVersion;
     }
 
     public String getServerUrl() {

@@ -54,7 +54,7 @@ public class CreateProcess {
         }
     }
 
-    public static void update(String restApiUrl, String restApiCredential, String processTrackorKey, String browserName, String date, String duration, int testsCount) {
+    public static void update(String restApiUrl, String restApiCredential, String restApiVersion, String processTrackorKey, String browserName, String date, String duration, int testsCount) {
         try {
             URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -66,6 +66,7 @@ public class CreateProcess {
 
             String input = "{ " + 
                     "   \"fields\": { " + 
+                    "     \"SPRC_VERSION\": \"" + restApiVersion + "\", " + 
                     "     \"SPRC_BROWSER\": \"" + browserName + "\", " + 
                     "     \"SPRC_START_DATE\": \"" + date + "\", " + 
                     "     \"SPRC_DURATION\": \"" + duration + "\", " + 

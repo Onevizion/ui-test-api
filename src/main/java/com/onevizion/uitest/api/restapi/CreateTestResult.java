@@ -36,6 +36,7 @@ public class CreateTestResult {
                 if (errorScreenshot != null) {
                     input = "{ " + 
                             "   \"fields\": { " + 
+                            "     \"STR_VERSION\": \"" + seleniumSettings.getRestApiVersion() + "\", " + 
                             "     \"STR_DATE\": \"" + date + "\", " + 
                             "     \"STR_BROWSER\": \"" + browserName + "\", " + 
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
@@ -62,6 +63,7 @@ public class CreateTestResult {
                 } else {
                     input = "{ " + 
                             "   \"fields\": { " + 
+                            "     \"STR_VERSION\": \"" + seleniumSettings.getRestApiVersion() + "\", " + 
                             "     \"STR_DATE\": \"" + date + "\", " + 
                             "     \"STR_BROWSER\": \"" + browserName + "\", " + 
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
@@ -88,6 +90,7 @@ public class CreateTestResult {
             } else {
                 input = "{ " + 
                         "   \"fields\": { " + 
+                        "     \"STR_VERSION\": \"" + seleniumSettings.getRestApiVersion() + "\", " + 
                         "     \"STR_DATE\": \"" + date + "\", " + 
                         "     \"STR_BROWSER\": \"" + browserName + "\", " + 
                         "     \"STR_STATUS\": \"" + testStatus + "\", " + 
