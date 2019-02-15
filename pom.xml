@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
@@ -9,7 +11,7 @@
     <groupId>com.onevizion</groupId>
     <artifactId>ui-test-api</artifactId>
     <packaging>jar</packaging>
-    <version>19.3-SNAPSHOT</version>
+    <version>19.2-SNAPSHOT</version>
 
     <name>ui-test-api</name>
     <description>An API for easily write tests for OneVizion platform</description>
@@ -190,6 +192,10 @@
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>1.6</version>
                         <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
                             <passphrase>${gpg.passphrase}</passphrase>
                         </configuration>
                         <executions>
@@ -215,6 +221,5 @@
         <connection>scm:git:https://github.com/Onevizion/ui-test-api.git</connection>
         <developerConnection>scm:git:https://github.com/Onevizion/ui-test-api.git</developerConnection>
         <url>http://github.com/Onevizion/ui-test-api/tree/master</url>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
 </project>
