@@ -1,11 +1,16 @@
 package com.onevizion.uitest.api.vo.api.v3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 public class Option implements Comparable<Option> {
 
     private String id;
     private String value;
+
+    public static Builder newBuilder() {
+        return new Option().new Builder();
+    }
 
     @JsonProperty("id")
     public String getId() {
@@ -23,6 +28,31 @@ public class Option implements Comparable<Option> {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public class Builder {
+
+        private Builder() {
+            
+        }
+
+        public Option build() {
+            if (Option.this.id == null ||
+                    Option.this.value == null) {
+                throw new SeleniumUnexpectedException("");
+            }
+            return Option.this;
+        }
+
+        public Builder setId(String id) {
+            Option.this.id = id;
+            return this;
+        }
+
+        public Builder setValue(String value) {
+            Option.this.value = value;
+            return this;
+        }
     }
 
     @Override
