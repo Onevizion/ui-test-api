@@ -50,6 +50,11 @@ public class View {
     private static final String FOLDER_LOCAL = "Local Views";
     private static final String FOLDER_GLOBAL = "Global Views";
 
+    private static final String SCROLL_CONTAINER = "scrollContainer";
+    private static final String EXISTING_VIEWS = "ddExistingViews";
+    private static final String SAVE_CONTAINER = "ddViewFormSaveContainer";
+    private static final String VIEW_TYPE = "lbViewType";
+
     private static final String LEFT_COLUMNS_DIV_ID = "leftListBox";
     private static final String RIGHT_COLUMNS_DIV_ID = "rightListBox";
     private static final String ADD_BUTTON_ID = "addItem";
@@ -63,10 +68,6 @@ public class View {
     private static final String BUTTON_GROUP_MARKUP = "mug";
     private static final String BUTTON_GROUP_DATE_PAIR = "dp";
 
-    private static final String SCROLL_CONTAINER = "scrollContainer";
-    private static final String EXISTING_VIEWS = "ddExistingViews";
-    private static final String SAVE_CONTAINER = "ddViewFormSaveContainer";
-    private static final String VIEW_TYPE = "lbViewType";
     private static final String COLUMN_LABEL = "labelField";
     private static final String NAV_PANEL = "navPanel";
 

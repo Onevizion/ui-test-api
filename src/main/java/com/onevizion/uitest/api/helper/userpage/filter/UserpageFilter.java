@@ -37,12 +37,7 @@ import com.onevizion.uitest.api.vo.FilterOperatorType;
 @Component
 public class UserpageFilter {
 
-    public static final String BUTTON_OPEN = "btnFilter";
-    public static final String BUTTON_CLEAR = "btnClear";
-    public static final String BUTTON_ADD = "btnAdd";
-    public static final String BUTTON_OK_ID_BASE = "btnOK";
-
-    public static final int FIRST_MONTH_OF_FISCAL_YEAR = 1;
+    private static final int FIRST_MONTH_OF_FISCAL_YEAR = 1;
 
     private static final String FILTER_ROW_ATTRIB_TEXT = "txtWPAttrib";
     private static final String FILTER_ROW_ATTRIB_BUTTON = "btnWPAttrib";
@@ -94,9 +89,8 @@ public class UserpageFilter {
     private SeleniumSettings seleniumSettings;
 
     public void checkFilterOperators(String fieldName, List<String> dateTypes, List<FilterOperatorType> operators) {
-        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
+
         psSelector.selectSpecificValue(By.name(FILTER_ROW_ATTRIB_BUTTON + 1), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
         if (dateTypes != null) {
             List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER_TASK + 1))).getOptions();
@@ -110,6 +104,7 @@ public class UserpageFilter {
         for (int i = 0; i < operators.size(); i++) {
             Assert.assertEquals(options.get(i).getText(), operators.get(i).getValue());
         }
+
         window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE), null);
     }
 
@@ -328,7 +323,7 @@ public class UserpageFilter {
     private void checkAndClearFilter(String fieldName, FilterOperatorType operator, int randomIndex) {
         if (randomIndex == 1) {
             checkFilterAttributeAndOperatorAndValue(fieldName, operator);
-            clearFilter();
+            filter.clearFilter(AbstractSeleniumCore.getGridIdx());
         } else if (randomIndex == 0) {
             filter.selectByVisibleText("Unsaved Filter", 0L);
         } else {
@@ -339,7 +334,7 @@ public class UserpageFilter {
     private void checkAndClearFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType, int randomIndex) {
         if (randomIndex == 1) {
             checkFilterAttributeAndOperatorAndValue(1, fieldName, fieldName2, value, dateType, operator, fieldDataType);
-            clearFilter();
+            filter.clearFilter(AbstractSeleniumCore.getGridIdx());
         } else if (randomIndex == 0) {
             filter.selectByVisibleText("Unsaved Filter", 0L);
         } else {
@@ -347,32 +342,19 @@ public class UserpageFilter {
         }
     }
 
-    private void clearFilter() {
-        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-
-        seleniumSettings.getWebDriver().findElement(By.name(UserpageFilter.BUTTON_CLEAR)).click();
-
-        window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-    }
-
     private void selectFilterAttributeAndOperatorAndValue(String fieldName, FilterOperatorType operator) {
-        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
 
         psSelector.selectSpecificValue(By.name(FILTER_ROW_ATTRIB_BUTTON + 1), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + 1))).selectByVisibleText(operator.getValue());
 
-        window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        filter.closeFilterFormOk(AbstractSeleniumCore.getGridIdx());
     }
 
     public void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
-        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
+
         psSelector.selectSpecificValue(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
         if (dateType != null) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER_TASK + row))).selectByVisibleText(dateType);
@@ -445,25 +427,23 @@ public class UserpageFilter {
                 seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_VALUE_TEXT_TEXT + row)).sendKeys("*" + value + "*");
             }
         }
-        window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+
+        filter.closeFilterFormOk(AbstractSeleniumCore.getGridIdx());
     }
 
     private void checkFilterAttributeAndOperatorAndValue(String fieldName, FilterOperatorType operator) {
-        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
 
         assertElement.assertRadioPsSelector(FILTER_ROW_ATTRIB_TEXT + 1, FILTER_ROW_ATTRIB_BUTTON + 1, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
 
         assertElement.assertSelect(FILTER_ROW_OPER + 1, operator.getValue());
 
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        filter.closeFilterFormCancel();
     }
 
     public void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
-        window.openModal(By.id(UserpageFilter.BUTTON_OPEN + 0L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
+
         assertElement.assertRadioPsSelector(FILTER_ROW_ATTRIB_TEXT + row, FILTER_ROW_ATTRIB_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
         if (dateType != null) {
             assertElement.assertSelect(FILTER_ROW_OPER_TASK + row, dateType);
@@ -550,7 +530,7 @@ public class UserpageFilter {
             }
         }
 
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        filter.closeFilterFormCancel();
     }
 
     public void checkGridTextColumnEquals(Long gridId, Long columnIndex, List<String> values) {

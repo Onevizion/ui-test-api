@@ -32,6 +32,7 @@ import com.onevizion.uitest.api.vo.SortType;
 @Component
 public class Filter {
 
+    public static final String FILTER_NAME = "TestFilter";
     public static final String UNSAVED_FILTER_NAME = "Unsaved Filter";
     public static final String ALL_FILTER_NAME = "G:All";
 
@@ -43,9 +44,8 @@ public class Filter {
     private static final String BUTTON_CLEAR_SEARCH = "ddFilterClearSearch";
     private static final String BUTTON_ORGANIZE = "ddFilterBtnOrganize";
 
-    public static final String BUTTON_OPEN = "btnFilter";
+    private static final String BUTTON_OPEN = "btnFilter";
     private static final String FIELD_FILTER_NAME = "txtFilterName";
-    public static final String FILTER_NAME = "TestFilter";
     private static final String BUTTON_SAVE = "unsavedFilterIcon";
     private static final String UNSAVED_FILTER = "unsavedFilterId";
 
@@ -56,13 +56,12 @@ public class Filter {
     private static final String FOLDER_LOCAL = "Local Filters";
     private static final String FOLDER_GLOBAL = "Global Filters";
 
-    public static final String BUTTON_CLEAR = "btnClear";
-
-    private static final String FILTER_TYPE = "lbFilterType";
-
+    private static final String SCROLL_CONTAINER = "scrollContainer";
     private static final String EXISTING_FILTERS = "ddExistingFilters";
     private static final String SAVE_CONTAINER = "ddFilterFormSaveContainer";
-    private static final String SCROLL_CONTAINER = "scrollContainer";
+    private static final String FILTER_TYPE = "lbFilterType";
+
+    private static final String BUTTON_CLEAR = "btnClear";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -188,9 +187,7 @@ public class Filter {
     }
 
     public void saveFilterField(String fieldName, FilterFieldType filterFieldType, List<String> cellsValues, Long gridIdx) {
-        window.openModal(By.id(BUTTON_OPEN + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        openFilterForm(gridIdx);
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
             seleniumSettings.getWebDriver().findElement(By.name(fieldName)).sendKeys(cellsValues.get(0));
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
@@ -202,10 +199,7 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
             psSelector.selectMultipleSpecificValues(By.name("btn" + fieldName), 1L, cellsValues, 1L);
         }
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        jquery.waitLoad(); //wait reload filters and grid
-        wait.waitGridLoad(gridIdx, gridIdx);
-        jquery.waitLoad(); //wait reload filters and grid
+        closeFilterFormOk(gridIdx);
     }
 
     private void selectFolderForSaveFilterByVisibleText(Long gridIdx, String folderName) {
@@ -249,6 +243,24 @@ public class Filter {
 
         filterWait.waitCurrentFilterName(gridIdx, entityPrefix);
         wait.waitGridLoad(gridIdx, gridIdx);
+    }
+
+    public void openFilterForm(Long gridIdx) {
+        window.openModal(By.id(BUTTON_OPEN + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void closeFilterFormOk(Long gridIdx) {
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitGridLoad(gridIdx, gridIdx);
+
+        filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
+        wait.waitGridLoad(gridIdx, gridIdx);
+    }
+
+    public void closeFilterFormCancel() {
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void openSaveFilterForm(Long gridIdx) {
@@ -366,17 +378,9 @@ public class Filter {
     }
 
     public void clearFilter(Long gridIdx) {
-        window.openModal(By.id(BUTTON_OPEN + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        openFilterForm(gridIdx);
         seleniumSettings.getWebDriver().findElement(By.name(BUTTON_CLEAR)).click();
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        jquery.waitLoad(); //wait reload filters and grid
-        wait.waitGridLoad(gridIdx, gridIdx);
-        jquery.waitLoad(); //wait reload filters and grid
-
-        filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
-        wait.waitGridLoad(gridIdx, gridIdx);
+        closeFilterFormOk(gridIdx);
     }
 
     public String getGridCellValueForFilterTest(Long gridId, String columnId, FilterFieldType filterFieldType) {
@@ -421,9 +425,7 @@ public class Filter {
     }
 
     public void assertEmptyFilterField(String fieldName, FilterFieldType filterFieldType, Long gridIdx) {
-        window.openModal(By.id(BUTTON_OPEN + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        openFilterForm(gridIdx);
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
             assertElement.assertText(fieldName, "");
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
@@ -435,13 +437,11 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
             assertElement.assertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(""), 1L, true);
         }
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        closeFilterFormCancel();
     }
 
     public void assertFilterField(String fieldName, FilterFieldType filterFieldType, String cellValue, Long gridIdx) {
-        window.openModal(By.id(BUTTON_OPEN + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        openFilterForm(gridIdx);
         if (filterFieldType.equals(FilterFieldType.TEXT)) {
             assertElement.assertText(fieldName, cellValue);
         } else if (filterFieldType.equals(FilterFieldType.SELECT)) {
@@ -453,7 +453,7 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
             assertElement.assertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(cellValue), 1L, true);
         }
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        closeFilterFormCancel();
     }
 
     public void checkRowsInGrid(String rowIds, List<String> columnNames) {
