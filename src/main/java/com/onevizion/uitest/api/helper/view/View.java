@@ -26,6 +26,7 @@ import com.onevizion.uitest.api.helper.tree.Tree;
 @Component
 public class View {
 
+    public static final String VIEW_NAME = "TestViewOption";
     public static final String UNSAVED_VIEW_NAME = "Unsaved View";
     public static final String GENERAL_INFO_VIEW_NAME = "G:General Info";
 
@@ -37,9 +38,8 @@ public class View {
     private static final String BUTTON_CLEAR_SEARCH = "ddViewClearSearch";
     private static final String BUTTON_ORGANIZE = "ddViewBtnOrganize";
 
-    public static final String BUTTON_OPEN = "btnView";
+    private static final String BUTTON_OPEN = "btnView";
     private static final String FIELD_VIEW_NAME = "txtViewName";
-    public static final String VIEW_NAME = "TestViewOption";
     private static final String BUTTON_SAVE = "unsavedViewIcon";
     private static final String UNSAVED_VIEW = "unsavedViewId";
 
@@ -51,11 +51,11 @@ public class View {
     private static final String FOLDER_GLOBAL = "Global Views";
 
     private static final String LEFT_COLUMNS_DIV_ID = "leftListBox";
-    public static final String RIGHT_COLUMNS_DIV_ID = "rightListBox";
+    private static final String RIGHT_COLUMNS_DIV_ID = "rightListBox";
     private static final String ADD_BUTTON_ID = "addItem";
-    public static final String REMOVE_BUTTON_ID = "removeItem";
+    private static final String REMOVE_BUTTON_ID = "removeItem";
 
-    public static final Long COLUMN_DIV_HEIGHT = 28L;
+    private static final Long COLUMN_DIV_HEIGHT = 28L;
 
     private static final String BUTTON_GROUP_FIELD = "cfg";
     private static final String BUTTON_GROUP_TASK = "tsg";
@@ -226,6 +226,27 @@ public class View {
         wait.waitGridLoad(gridIdx, gridIdx);
     }
 
+    public void openViewForm(Long gridIdx) {
+        window.openModal(By.id(BUTTON_OPEN + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+
+        waitLeftListBoxReady();
+        waitRightListBoxReady();
+    }
+
+    public void closeViewFormOk(Long gridIdx) {
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitGridLoad(gridIdx, gridIdx);
+
+        viewWait.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
+        wait.waitGridLoad(gridIdx, gridIdx);
+    }
+
+    public void closeViewFormCancel() {
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+    }
+
     public void openSaveViewForm(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
 
@@ -347,6 +368,12 @@ public class View {
         return leftColumns;
     }
 
+    public void selectLastRightColumn() {
+        List<WebElement> actualRightColumns = getRightColumns();
+        js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, "scrollContainer", (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
+        actualRightColumns.get(actualRightColumns.size() - 1).click();
+    }
+
     public List<WebElement> getRightColumns() {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         List<WebElement> rightColumns = seleniumSettings.getWebDriver().findElement(By.id(RIGHT_COLUMNS_DIV_ID)).findElements(By.className("record"));
@@ -364,7 +391,7 @@ public class View {
         selectColumns(gridIdx, rightColumnsLocalView1);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
-        saveView(gridIdx, entityPrefix + View.VIEW_NAME + "1", true, true);
+        saveView(gridIdx, entityPrefix + VIEW_NAME + "1", true, true);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
 
@@ -372,7 +399,7 @@ public class View {
         selectColumns(gridIdx, rightColumnsGlobalView1);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
-        saveView(gridIdx, entityPrefix + View.VIEW_NAME + "1", false, true);
+        saveView(gridIdx, entityPrefix + VIEW_NAME + "1", false, true);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
 
@@ -380,7 +407,7 @@ public class View {
         selectColumns(gridIdx, rightColumnsLocalView2);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
-        saveView(gridIdx, entityPrefix + View.VIEW_NAME + "2", true, true);
+        saveView(gridIdx, entityPrefix + VIEW_NAME + "2", true, true);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
 
@@ -388,7 +415,7 @@ public class View {
         selectColumns(gridIdx, rightColumnsGlobalView2);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-        saveView(gridIdx, entityPrefix + View.VIEW_NAME + "2", false, true);
+        saveView(gridIdx, entityPrefix + VIEW_NAME + "2", false, true);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
@@ -398,47 +425,47 @@ public class View {
         checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
 
         //Select Local View 1
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + View.VIEW_NAME + "1");
+        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + VIEW_NAME + "1");
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
 
         //Select Global View 1
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + View.VIEW_NAME + "1");
+        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + VIEW_NAME + "1");
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
 
         //Select Unsaved View
-        selectByVisibleText(gridIdx, View.UNSAVED_VIEW_NAME);
+        selectByVisibleText(gridIdx, UNSAVED_VIEW_NAME);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsUnsavedView);
         checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
 
         //Select Local View 2
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + View.VIEW_NAME + "2");
+        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + VIEW_NAME + "2");
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
 
         //Select Global View 2
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + View.VIEW_NAME + "2");
+        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + VIEW_NAME + "2");
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Delete Local 1
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + View.VIEW_NAME + "1");
+        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + VIEW_NAME + "1");
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Delete Global 1
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + View.VIEW_NAME + "1");
+        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + VIEW_NAME + "1");
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Delete Local 2
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + View.VIEW_NAME + "2");
+        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + VIEW_NAME + "2");
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
         //Delete Global 2
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + View.VIEW_NAME + "2");
+        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + VIEW_NAME + "2");
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsUnsavedView);
         checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
     }
@@ -479,9 +506,7 @@ public class View {
     }
 
     public void selectAllColumns(Long gridIdx) {
-        window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        openViewForm(gridIdx);
 
         List<WebElement> actualRightColumns = getRightColumns();
         js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, SCROLL_CONTAINER, (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
@@ -491,11 +516,13 @@ public class View {
             seleniumSettings.getWebDriver().findElement(By.id(ADD_BUTTON_ID)).click();
         }
 
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(gridIdx, gridIdx);
+        closeViewFormOk(gridIdx);
+    }
 
-        viewWait.waitCurrentViewName(gridIdx, View.UNSAVED_VIEW_NAME);
-        wait.waitGridLoad(gridIdx, gridIdx);
+    public void removeAllColumns() {
+        while (seleniumSettings.getWebDriver().findElement(By.id(REMOVE_BUTTON_ID)).isEnabled()) {
+            seleniumSettings.getWebDriver().findElement(By.id(REMOVE_BUTTON_ID)).click();
+        }
     }
 
     public void selectAndCheckColumns(Long gridIdx, Long gridColumns, List<String> leftColumns, List<String> rightColumns) {
@@ -505,20 +532,13 @@ public class View {
     }
 
     private void selectColumns(Long gridIdx, List<String> rightColumns) {
-        window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-
-        waitLeftListBoxReady();
-        waitRightListBoxReady();
+        openViewForm(gridIdx);
 
         List<WebElement> actualRightColumns = getRightColumns();
         js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, SCROLL_CONTAINER, (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
         actualRightColumns.get(actualRightColumns.size() - 1).click();
 
-        while (seleniumSettings.getWebDriver().findElement(By.id(REMOVE_BUTTON_ID)).isEnabled()) {
-            seleniumSettings.getWebDriver().findElement(By.id(REMOVE_BUTTON_ID)).click();
-        }
+        removeAllColumns();
 
         for (String rightColumn : rightColumns) {
             List<WebElement> actualLeftColumns = getLeftColumns();
@@ -532,20 +552,11 @@ public class View {
             }
         }
 
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(gridIdx, gridIdx);
-
-        viewWait.waitCurrentViewName(gridIdx, View.UNSAVED_VIEW_NAME);
-        wait.waitGridLoad(gridIdx, gridIdx);
+        closeViewFormOk(gridIdx);
     }
 
     private void checkColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
-        window.openModal(By.id(View.BUTTON_OPEN + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-
-        waitLeftListBoxReady();
-        waitRightListBoxReady();
+        openViewForm(gridIdx);
 
         List<WebElement> actualLeftColumns = getLeftColumns();
         Assert.assertEquals(actualLeftColumns.size(), leftColumns.size());
@@ -561,7 +572,7 @@ public class View {
             Assert.assertEquals(actualRightColumns.get(i).findElements(By.className(COLUMN_LABEL)).get(0).getText(), rightColumns.get(i));
         }
 
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        closeViewFormCancel();
     }
 
     public void switchToRootSubgroup() {
