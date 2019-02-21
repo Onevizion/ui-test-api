@@ -27,6 +27,9 @@ public class UsersSettings {
     @Resource
     private Element element;
 
+    @Resource
+    private AssertElement assertElement;
+
     public void openUserSettings() {
         elementWait.waitElementById("topPanelUserNameLbl");
         elementWait.waitElementVisibleById("topPanelUserNameLbl");
@@ -48,6 +51,10 @@ public class UsersSettings {
         wait.waitWebElement(By.id("messageErrorDivContainer"));
     }
 
+    public void closeUserSettingsCancel() {
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+    }
+
     public void changeLanguage(String language) {
         new Select(seleniumSettings.getWebDriver().findElement(By.name("LanguageID"))).selectByVisibleText(language);
     }
@@ -63,6 +70,10 @@ public class UsersSettings {
     public void changeExactQuickSearchForClipboard(String exactQuickSearchForClipboard) {
         element.moveToElementByName("exactSearchClipboard");
         new Select(seleniumSettings.getWebDriver().findElement(By.name("exactSearchClipboard"))).selectByVisibleText(exactQuickSearchForClipboard);
+    }
+
+    public void checkHideStartTaskDates(String hideStartTaskDates) {
+        assertElement.assertSelect("HideStart", hideStartTaskDates);
     }
 
 }
