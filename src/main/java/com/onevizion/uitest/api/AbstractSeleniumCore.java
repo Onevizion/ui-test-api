@@ -576,7 +576,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.setTestUser(newTestUser);
 
             seleniumLogger.info(seleniumSettings.getTestName() + " login as " + seleniumSettings.getTestUser());
-            login(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
+            loginIntoSystem(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
 
             dataPreparation();
 
@@ -664,7 +664,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     protected abstract void fillGlobalSettings();
 
-    protected abstract void login(String user, String password);
+    protected abstract void loginIntoSystem(String user, String password);
 
     protected abstract void dataPreparation();
 

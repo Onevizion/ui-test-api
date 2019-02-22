@@ -138,14 +138,14 @@ public class Tb {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).isSelected() ? "YES" : "NO";
-                if (actualVal != value) {
+                if (!actualVal.equals(value)) {
                     WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
                     WebElement newCheckbox = checkbox.findLabelByElement(checkboxElement);
                     element.click(newCheckbox);
                 }
             } else {
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).isSelected() ? "YES" : "NO";
-                if (actualVal != value) {
+                if (!actualVal.equals(value)) {
                     WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
                     WebElement newCheckbox = checkbox.findLabelByElement(checkboxElement);
                     element.click(newCheckbox);
@@ -481,14 +481,14 @@ public class Tb {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx)).isSelected() ? "YES" : "NO";
-                if (actualVal != "NO") {
+                if (!actualVal.equals("NO")) {
                     WebElement webCheckbox = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
                     WebElement newCheckbox = webCheckbox.findElement(By.xpath("./.."));
                     element.click(newCheckbox);
                 }
             } else {
                 String actualVal = seleniumSettings.getWebDriver().findElement(By.name(field)).isSelected() ? "YES" : "NO";
-                if (actualVal != "NO") {
+                if (!actualVal.equals("NO")) {
                     WebElement checkboxElement = seleniumSettings.getWebDriver().findElement(By.name(field));
                     WebElement newCheckbox = checkbox.findLabelByElement(checkboxElement);
                     element.click(newCheckbox);

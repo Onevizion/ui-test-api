@@ -1880,11 +1880,13 @@ public class UserpageFilter {
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    Date thisDay = null;
+                    Date thisDay;
                     if (" - ".equals(cellValsKeys[0].get(0))) {
                         thisDay =  getToday(-Integer.parseInt(cellValsKeys[0].get(1)));
                     } else if (" + ".equals(cellValsKeys[0].get(0))) {
                         thisDay =  getToday(Integer.parseInt(cellValsKeys[0].get(1)));
+                    } else {
+                        throw new SeleniumUnexpectedException("Not support operation");
                     }
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() >= thisDay.getTime()) {
                         cnt = cnt + 1L;
@@ -1902,11 +1904,13 @@ public class UserpageFilter {
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    Date thisDay = null;
+                    Date thisDay;
                     if (" - ".equals(cellValsKeys[0].get(0))) {
                         thisDay =  getToday(-Integer.parseInt(cellValsKeys[0].get(1)));
                     } else if (" + ".equals(cellValsKeys[0].get(0))) {
                         thisDay =  getToday(Integer.parseInt(cellValsKeys[0].get(1)));
+                    } else {
+                        throw new SeleniumUnexpectedException("Not support operation");
                     }
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() <= thisDay.getTime()) {
                         cnt = cnt + 1L;
@@ -1943,14 +1947,16 @@ public class UserpageFilter {
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    Date startDayOfWeek = null;
-                    Date endDayOfWeek = null;
+                    Date startDayOfWeek;
+                    Date endDayOfWeek;
                     if (" - ".equals(cellValsKeys[0].get(0))) {
                         startDayOfWeek = getFirstDayOfThisWeek(-Integer.parseInt(cellValsKeys[0].get(1)));
                         endDayOfWeek = getLastDayOfThisWeek(-Integer.parseInt(cellValsKeys[0].get(1)));
                     } else if (" + ".equals(cellValsKeys[0].get(0))) {
                         startDayOfWeek = getFirstDayOfThisWeek(Integer.parseInt(cellValsKeys[0].get(1)));
                         endDayOfWeek = getLastDayOfThisWeek(Integer.parseInt(cellValsKeys[0].get(1)));
+                    } else {
+                        throw new SeleniumUnexpectedException("Not support operation");
                     }
                     if ((OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() >= startDayOfWeek.getTime()) && 
                             (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() <= endDayOfWeek.getTime())) {
@@ -1969,14 +1975,16 @@ public class UserpageFilter {
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    Date startDayOfMo = null;
-                    Date endDayOfMo = null;
+                    Date startDayOfMo;
+                    Date endDayOfMo;
                     if (" - ".equals(cellValsKeys[0].get(0))) {
                         startDayOfMo = getFirstDayOfThisMo(-Integer.parseInt(cellValsKeys[0].get(1)));
                         endDayOfMo= getLastDayOfThisMo(-Integer.parseInt(cellValsKeys[0].get(1)));
                     } else if (" + ".equals(cellValsKeys[0].get(0))) {
                         startDayOfMo = getFirstDayOfThisMo(Integer.parseInt(cellValsKeys[0].get(1)));
                         endDayOfMo = getLastDayOfThisMo(Integer.parseInt(cellValsKeys[0].get(1)));
+                    } else {
+                        throw new SeleniumUnexpectedException("Not support operation");
                     }
                     if ((OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() >= startDayOfMo.getTime()) && 
                             (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() <= endDayOfMo.getTime())) {
@@ -1995,14 +2003,16 @@ public class UserpageFilter {
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    Date startDayOfFQ = null;
-                    Date endDayOfFQ = null;
+                    Date startDayOfFQ;
+                    Date endDayOfFQ;
                     if (" - ".equals(cellValsKeys[0].get(0))) {
                         startDayOfFQ = getFirstDayOfThisFQ(-Integer.parseInt(cellValsKeys[0].get(1)));
                         endDayOfFQ = getLastDayOfThisFQ(-Integer.parseInt(cellValsKeys[0].get(1)));
                     } else if (" + ".equals(cellValsKeys[0].get(0))) {
                         startDayOfFQ = getFirstDayOfThisFQ(Integer.parseInt(cellValsKeys[0].get(1)));
                         endDayOfFQ = getLastDayOfThisFQ(Integer.parseInt(cellValsKeys[0].get(1)));
+                    } else {
+                        throw new SeleniumUnexpectedException("Not support operation");
                     }
                     if ((OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() >= startDayOfFQ.getTime()) && 
                             (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() <= endDayOfFQ.getTime())) {
@@ -2021,14 +2031,16 @@ public class UserpageFilter {
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
-                    Date startDayOfFY = null;
-                    Date endDayOfFY = null;
+                    Date startDayOfFY;
+                    Date endDayOfFY;
                     if (" - ".equals(cellValsKeys[0].get(0))) {
                         startDayOfFY = getFirstDayOfThisFY(-Integer.parseInt(cellValsKeys[0].get(1)));
                         endDayOfFY= getLastDayOfThisFY(-Integer.parseInt(cellValsKeys[0].get(1)));
                     } else if (" + ".equals(cellValsKeys[0].get(0))) {
                         startDayOfFY = getFirstDayOfThisFY(Integer.parseInt(cellValsKeys[0].get(1)));
                         endDayOfFY = getLastDayOfThisFY(Integer.parseInt(cellValsKeys[0].get(1)));
+                    } else {
+                        throw new SeleniumUnexpectedException("Not support operation");
                     }
                     if ((OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() >= startDayOfFY.getTime()) && 
                             (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() <= endDayOfFY.getTime())) {

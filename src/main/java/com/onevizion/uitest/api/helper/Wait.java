@@ -402,7 +402,7 @@ public class Wait {
             .until(webdriver -> {
                 Long actUndo = js.getCodeMirrorUndoSize(elementId);
                 Long actRedo = js.getCodeMirrorRedoSize(elementId);
-                return actUndo == undo && actRedo == redo;
+                return actUndo.equals(undo) && actRedo.equals(redo);
             });
     }
 
