@@ -149,8 +149,12 @@ public class GridSort {
 
     public void checkColumnSortAvailable(Long gridId, String columnLabel) {
         Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        String columnId = js.getGridColIdByIndex(gridId, columnIndex);
+
         String columnSortType = gridSortJs.getColumnSortType(gridId, columnIndex);
-        Assert.assertNotEquals(columnSortType, COLUMN_SORT_TYPE_NA);
+        Boolean isSortColumn = gridSortJs.getIsSortColumn(gridId, columnId, 1L);
+
+        Assert.assertTrue(!columnSortType.equals(COLUMN_SORT_TYPE_NA) && isSortColumn);
     }
 
     public void checkColumnSortAvailable(String columnLabel, String columnLabel2) {
@@ -159,8 +163,12 @@ public class GridSort {
 
     public void checkColumnSortAvailable(Long gridId, String columnLabel, String columnLabel2) {
         Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
+        String columnId = js.getGridColIdByIndex(gridId, columnIndex);
+
         String columnSortType = gridSortJs.getColumnSortType(gridId, columnIndex);
-        Assert.assertNotEquals(columnSortType, COLUMN_SORT_TYPE_NA);
+        Boolean isSortColumn = gridSortJs.getIsSortColumn(gridId, columnId, 2L);
+
+        Assert.assertTrue(!columnSortType.equals(COLUMN_SORT_TYPE_NA) && isSortColumn);
     }
 
     public void checkColumnSortNotAvailable(String columnLabel) {
@@ -169,8 +177,12 @@ public class GridSort {
 
     public void checkColumnSortNotAvailable(Long gridId, String columnLabel) {
         Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        String columnId = js.getGridColIdByIndex(gridId, columnIndex);
+
         String columnSortType = gridSortJs.getColumnSortType(gridId, columnIndex);
-        Assert.assertEquals(columnSortType, COLUMN_SORT_TYPE_NA);
+        Boolean isSortColumn = gridSortJs.getIsSortColumn(gridId, columnId, 1L);
+
+        Assert.assertFalse(!columnSortType.equals(COLUMN_SORT_TYPE_NA) && isSortColumn);
     }
 
     public void checkColumnSortNotAvailable(String columnLabel, String columnLabel2) {
@@ -179,8 +191,12 @@ public class GridSort {
 
     public void checkColumnSortNotAvailable(Long gridId, String columnLabel, String columnLabel2) {
         Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
+        String columnId = js.getGridColIdByIndex(gridId, columnIndex);
+
         String columnSortType = gridSortJs.getColumnSortType(gridId, columnIndex);
-        Assert.assertEquals(columnSortType, COLUMN_SORT_TYPE_NA);
+        Boolean isSortColumn = gridSortJs.getIsSortColumn(gridId, columnId, 2L);
+
+        Assert.assertFalse(!columnSortType.equals(COLUMN_SORT_TYPE_NA) && isSortColumn);
     }
 
 
