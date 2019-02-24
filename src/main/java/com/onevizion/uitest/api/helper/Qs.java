@@ -1,5 +1,6 @@
 package com.onevizion.uitest.api.helper;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -74,7 +75,7 @@ public class Qs {
     public void waitQsActive(Long gridIdx) {
         if (seleniumSettings.getWebDriver().findElement(By.id("qsValue" + gridIdx)).isDisplayed()) {
             try {
-                elementWait.waitElementAttributeById("qsContent" + gridIdx, "class", "component quickSearch active");
+                elementWait.waitElementAttributeById("qsContent" + gridIdx, "class", Arrays.asList("component", "quickSearch", "active"), " ");
             } catch (TimeoutException e) {
                 seleniumLogger.warn("Exception in waitQsActive");
             }

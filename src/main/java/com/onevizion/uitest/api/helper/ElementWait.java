@@ -189,23 +189,25 @@ public class ElementWait {
             .until(webdriver -> actualValueSupplier.get().equals(attributeValue));
     }
 
-    public void waitElementAttributeById(String id, String attribute, List<String> attributeValue) {
+    public void waitElementAttributeById(String id, String attribute, List<String> attributeValue, String attributeSeparator) {
         waitElementById(id);
 
-        Supplier<String> supplier = ()-> "Waiting for Element id=[" + id + "] attribute=[" + attribute + "] expectedVal=[" + attributeValue + "] actualVal=[" + seleniumSettings.getWebDriver().findElement(By.id(id)).getAttribute(attribute) + "] is failed";
+        Collections.sort(attributeValue);
+
+        Supplier<List<String>> actualValueSupplier = ()-> {
+            List<String> actualAttributeValue = Arrays.asList(seleniumSettings.getWebDriver().findElement(By.id(id)).getAttribute(attribute).split(attributeSeparator));
+            for (int i = 0; i < actualAttributeValue.size(); i++) {
+                actualAttributeValue.set(i, actualAttributeValue.get(i).trim());
+            }
+            Collections.sort(actualAttributeValue);
+            return actualAttributeValue;
+        };
+        Supplier<String> messageSupplier = ()-> "Waiting for Element id=[" + id + "] attribute=[" + attribute + "] expectedVal=[" + attributeValue + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage(supplier)
+            .withMessage(messageSupplier)
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                List<String> actualAttributeValue = Arrays.asList(webdriver.findElement(By.id(id)).getAttribute(attribute).split(";"));
-                for (int i = 0; i < actualAttributeValue.size(); i++) {
-                    actualAttributeValue.set(i, actualAttributeValue.get(i).trim());
-                }
-                Collections.sort(attributeValue);
-                Collections.sort(actualAttributeValue);
-                return attributeValue.equals(actualAttributeValue);
-            });
+            .until(webdriver -> actualValueSupplier.get().equals(attributeValue));
     }
 
     public void waitElementDisabled(WebElement element) {
