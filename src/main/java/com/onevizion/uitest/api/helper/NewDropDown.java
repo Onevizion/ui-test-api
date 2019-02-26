@@ -102,6 +102,7 @@ public class NewDropDown {
         jquery.waitLoad();
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         jquery.waitLoad();
+        closeDropDown("lbApplication");
     }
 
     public void deleteComponentPackage(String name) {
@@ -223,6 +224,13 @@ public class NewDropDown {
         if (failOpenWindow) {
             throw new SeleniumUnexpectedException("");
         }
+    }
+
+    private void closeDropDown(String id) {
+        seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
+        elementWait.waitElementById("new_rows_" + id);
+        elementWait.waitElementNotVisibleById("new_rows_" + id);
+        elementWait.waitElementNotDisplayById("new_rows_" + id);
     }
 
 }
