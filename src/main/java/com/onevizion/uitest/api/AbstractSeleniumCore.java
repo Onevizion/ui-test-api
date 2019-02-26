@@ -101,6 +101,7 @@ import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
+import com.onevizion.uitest.api.helper.notification.Notification;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
@@ -261,6 +262,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected GridSort gridSort;
+
+    @Resource
+    protected Notification notification;
     /* Helpers End */
 
     /* Entity Helpers Begin */
