@@ -1,5 +1,6 @@
 package com.onevizion.uitest.api.helper.formdesigner;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
@@ -94,7 +95,6 @@ public class FormDesigner {
 
     public void addElementToForm(String label) {
         fillSearch(label);
-        //List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("fieldRecord"));
         List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("record"));
         for (WebElement field : fields) {
             if (field.findElement(By.className("labelField")).getAttribute("innerText").trim().equals(label)) {
@@ -227,34 +227,30 @@ public class FormDesigner {
         }
     }
 
-    public void checkElementInList(String text) {
-        boolean isExist = false;
+    public List<String> getElementsInList() {
+        List<String> elements = new ArrayList<>();
         List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("record"));
         for (WebElement field : fields) {
-            if (field.findElement(By.className("labelField")).getAttribute("innerText").trim().equals(text)) {
-                if (isExist) {
-                    throw new SeleniumUnexpectedException("Element with text[" + text + "] found many times");
-                }
-                isExist = true;
-            }
+            elements.add(field.findElement(By.className("labelField")).getAttribute("innerText"));
         }
-
-        Assert.assertEquals(isExist, true);
+        return elements;
     }
 
-    public void checkElementInRightList(String text) {
-        boolean isExist = false;
+    public void checkElementInList(List<String> elements, String text) {
+        Assert.assertEquals(elements.stream().filter(p -> p.equals(text)).count(), 1L, "Element with text [" + text + "] not found in list");
+    }
+
+    public List<String> getElementsInRightList() {
+        List<String> elements = new ArrayList<>();
         List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("rightListBox")).findElement(By.id("listBoxContent")).findElements(By.className("record"));
         for (WebElement field : fields) {
-            if (field.findElement(By.className("labelField")).getAttribute("innerText").trim().equals(text)) {
-                if (isExist) {
-                    throw new SeleniumUnexpectedException("Element with text[" + text + "] found many times");
-                }
-                isExist = true;
-            }
+            elements.add(field.findElement(By.className("labelField")).getAttribute("innerText"));
         }
+        return elements;
+    }
 
-        Assert.assertEquals(isExist, true);
+    public void checkElementInRightList(List<String> elements, String text) {
+        Assert.assertEquals(elements.stream().filter(p -> p.equals(text)).count(), 1L, "Element with text [" + text + "] not found in right list");
     }
 
     public void checkElementsInList(List<String> elements, String drillDownPrefix) {
