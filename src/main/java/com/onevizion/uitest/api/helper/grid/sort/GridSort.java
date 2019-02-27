@@ -84,15 +84,7 @@ public class GridSort {
 
         wait.waitGridLoad(gridId, gridId);
 
-        @SuppressWarnings("unchecked")
-        List<Object> elements = (List<Object>) gridSortJs.getGridSort(gridId);
-        Assert.assertEquals((Long) elements.get(0), columnIndex, "Sorting working is not correct");
-        Assert.assertEquals((String) elements.get(1), sortType.getTypeString(), "Sorting working is not correct");
-
-        String sortColumnId = gridSortJs.getGridSortColumnIdByGridId(gridId);
-        Assert.assertEquals(sortColumnId, columnId);
-        String gridSortType = gridSortJs.getGridSortTypeByGridId(gridId);
-        Assert.assertEquals(gridSortType, sortType.getTypeNumber());
+        checkCurrentGridSort(gridId, sortType, columnIndex, columnId);
     }
 
     public void sortColumn(SortType sortType, String columnLabel, String columnLabel2) {
@@ -132,6 +124,32 @@ public class GridSort {
 
         wait.waitGridLoad(gridId, gridId);
 
+        checkCurrentGridSort(gridId, sortType, columnIndex, columnId);
+    }
+
+    public void checkCurrentGridSort(SortType sortType, String columnLabel) {
+        checkCurrentGridSort(AbstractSeleniumCore.getGridIdx(), sortType, columnLabel);
+    }
+
+    public void checkCurrentGridSort(Long gridId, SortType sortType, String columnLabel) {
+        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        String columnId = js.getGridColIdByIndex(gridId, columnIndex);
+
+        checkCurrentGridSort(gridId, sortType, columnIndex, columnId);
+    }
+
+    public void checkCurrentGridSort(SortType sortType, String columnLabel, String columnLabel2) {
+        checkCurrentGridSort(AbstractSeleniumCore.getGridIdx(), sortType, columnLabel, columnLabel2);
+    }
+
+    public void checkCurrentGridSort(Long gridId, SortType sortType, String columnLabel, String columnLabel2) {
+        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
+        String columnId = js.getGridColIdByIndex(gridId, columnIndex);
+
+        checkCurrentGridSort(gridId, sortType, columnIndex, columnId);
+    }
+
+    private void checkCurrentGridSort(Long gridId, SortType sortType, Long columnIndex, String columnId) {
         @SuppressWarnings("unchecked")
         List<Object> elements = (List<Object>) gridSortJs.getGridSort(gridId);
         Assert.assertEquals((Long) elements.get(0), columnIndex, "Sorting working is not correct");
