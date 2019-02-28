@@ -23,7 +23,7 @@ public class TbPsTrackorSelectorFieldByText {
     private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
-    public void test(String columnId, String value) {
+    public void test(String columnId, String value, boolean supportOuterOperations, List<String> ... cellValsKeys) {
         Long columnIndex = js.getGridColIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
@@ -33,6 +33,11 @@ public class TbPsTrackorSelectorFieldByText {
 
         userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.EQUAL, value, cellVals);
         userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.NOT_EQUAL, value, cellVals);
+
+        if (supportOuterOperations) {
+            userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, value, cellVals, cellValsKeys);
+            userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, value, cellVals, cellValsKeys);
+        }
     }
 
 }
