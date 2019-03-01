@@ -108,6 +108,8 @@ public class UserpageFilter {
         window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE), null);
     }
 
+    //we can use fieldName instead of columnIndex.
+    //but columnIndex need for check filter by finish task date
     @SuppressWarnings("unchecked")
     public void checkFilter(String fieldName, String fieldName2, String value, String dateType,
             FilterOperatorType operator, ConfigFieldType fieldDataType, Long columnIndex, Long columnIndex2,
@@ -137,16 +139,16 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
             if (operator.equals(FilterOperatorType.EQUAL)) {
                 checkGridRowsCountEquals(fieldDataType, cellVals, value);
-                checkGridTextColumnEquals(AbstractSeleniumCore.getGridIdx(), fieldName, Arrays.asList(value));
+                checkGridTextColumnEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, Arrays.asList(value));
             } else if (operator.equals(FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER)) {
                 checkGridRowsCountEqualsOrNull(fieldDataType, cellVals, value, rowsCntBefore, cellValsKeys);
-                checkGridTextColumnEqualsOrNull(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+                checkGridTextColumnEqualsOrNull(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
             } else if (operator.equals(FilterOperatorType.NOT_EQUAL)) {
                 checkGridRowsCountNotEquals(cellVals, value);
-                checkGridTextColumnNotEquals(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+                checkGridTextColumnNotEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
             } else if (operator.equals(FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER)) {
                 checkGridRowsCountNotEqualsOrNull(fieldDataType, cellVals, value, rowsCntBefore, cellValsKeys);
-                checkGridTextColumnNotEqualsOrNull(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+                checkGridTextColumnNotEqualsOrNull(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
             } else if (operator.equals(FilterOperatorType.NULL)) {
                 checkGridRowsCountIsNull(fieldDataType, cellVals);
                 checkGridColumnIsNull(AbstractSeleniumCore.getGridIdx(), columnIndex);
@@ -177,10 +179,10 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
             if (operator.equals(FilterOperatorType.EQUAL)) {
                 checkGridRowsCountEquals(fieldDataType, cellVals, value);
-                checkGridTextColumnEquals(AbstractSeleniumCore.getGridIdx(), fieldName, Arrays.asList(value));
+                checkGridTextColumnEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, Arrays.asList(value));
             } else if (operator.equals(FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER)) {
                 checkGridRowsCountEqualsOrNull(fieldDataType, cellVals, value, rowsCntBefore, cellValsKeys);
-                checkGridTextColumnEqualsOrNull(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+                checkGridTextColumnEqualsOrNull(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
             } else if (operator.equals(FilterOperatorType.MORE)) {
                 checkGridRowsCountMore(fieldDataType, cellVals, value);
                 checkGridColumnMore(AbstractSeleniumCore.getGridIdx(), columnIndex, value, fieldDataType);
@@ -195,10 +197,10 @@ public class UserpageFilter {
                 checkGridColumnLessEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, value, fieldDataType);
             } else if (operator.equals(FilterOperatorType.NOT_EQUAL)) {
                 checkGridRowsCountNotEquals(cellVals, value);
-                checkGridTextColumnNotEquals(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+                checkGridTextColumnNotEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
             } else if (operator.equals(FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER)) {
                 checkGridRowsCountNotEqualsOrNull(fieldDataType, cellVals, value, rowsCntBefore, cellValsKeys);
-                checkGridTextColumnNotEqualsOrNull(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+                checkGridTextColumnNotEqualsOrNull(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
             } else if (operator.equals(FilterOperatorType.NULL)) {
                 checkGridRowsCountIsNull(fieldDataType, cellVals);
                 checkGridColumnIsNull(AbstractSeleniumCore.getGridIdx(), columnIndex);
@@ -285,23 +287,23 @@ public class UserpageFilter {
     }
 
     @SuppressWarnings("unchecked")
-    public void checkFilterTrackorSelectorByText(String fieldName, FilterOperatorType operator, String value, List<String> cellVals, List<String> ... cellValsKeys) {
+    public void checkFilterTrackorSelectorByText(String fieldName, FilterOperatorType operator, String value, Long columnIndex, List<String> cellVals, List<String> ... cellValsKeys) {
         Long rowsCntBefore = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
 
         int randomIndex = fillFilter(fieldName, operator, value);
 
         if (operator.equals(FilterOperatorType.EQUAL)) {
             checkGridRowsCountEquals(ConfigFieldType.TRACKOR_SELECTOR, cellVals, value);
-            checkGridTextColumnEquals(AbstractSeleniumCore.getGridIdx(), fieldName, Arrays.asList(value));
+            checkGridTextColumnEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, Arrays.asList(value));
         } else if (operator.equals(FilterOperatorType.NOT_EQUAL)) {
             checkGridRowsCountNotEquals(cellVals, value);
-            checkGridTextColumnNotEquals(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+            checkGridTextColumnNotEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
         } else if (operator.equals(FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER)) {
             checkGridRowsCountEqualsOrNull(ConfigFieldType.TRACKOR_SELECTOR, cellVals, value, rowsCntBefore, cellValsKeys);
-            checkGridTextColumnEqualsOrNull(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+            checkGridTextColumnEqualsOrNull(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
         } else if (operator.equals(FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER)) {
             checkGridRowsCountNotEqualsOrNull(ConfigFieldType.TRACKOR_SELECTOR, cellVals, value, rowsCntBefore, cellValsKeys);
-            checkGridTextColumnNotEqualsOrNull(AbstractSeleniumCore.getGridIdx(), fieldName, value);
+            checkGridTextColumnNotEqualsOrNull(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
         } else {
             throw new SeleniumUnexpectedException("Not support operation");
         }
@@ -608,8 +610,7 @@ public class UserpageFilter {
         filter.closeFilterFormCancel();
     }
 
-    public void checkGridTextColumnEquals(Long gridId, String columnLabel, List<String> values) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+    public void checkGridTextColumnEquals(Long gridId, Long columnIndex, List<String> values) {
         Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
@@ -634,8 +635,7 @@ public class UserpageFilter {
         }
     }
 
-    private void checkGridTextColumnEqualsOrNull(Long gridId, String columnLabel, String value) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+    private void checkGridTextColumnEqualsOrNull(Long gridId, Long columnIndex, String value) {
         Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
@@ -706,8 +706,7 @@ public class UserpageFilter {
         }
     }
 
-    private void checkGridTextColumnNotEquals(Long gridId, String columnLabel, String value) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+    private void checkGridTextColumnNotEquals(Long gridId, Long columnIndex, String value) {
         Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
@@ -724,8 +723,7 @@ public class UserpageFilter {
         }
     }
 
-    private void checkGridTextColumnNotEqualsOrNull(Long gridId, String columnLabel, String value) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+    private void checkGridTextColumnNotEqualsOrNull(Long gridId, Long columnIndex, String value) {
         Long rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);

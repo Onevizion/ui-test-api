@@ -31,12 +31,12 @@ public class TbPsTrackorSelectorFieldByText {
         Long rowsCnt = grid.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
-        userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.EQUAL, value, cellVals);
-        userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.NOT_EQUAL, value, cellVals);
+        userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.EQUAL, value, columnIndex, cellVals);
+        userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.NOT_EQUAL, value, columnIndex, cellVals);
 
         if (supportOuterOperations) {
-            userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, value, cellVals, cellValsKeys);
-            userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, value, cellVals, cellValsKeys);
+            userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, value, columnIndex, cellVals, cellValsKeys);
+            userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, value, columnIndex, cellVals, cellValsKeys);
         }
     }
 
