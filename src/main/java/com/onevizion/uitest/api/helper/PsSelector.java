@@ -151,6 +151,7 @@ public class PsSelector {
         return ret;
     }
 
+    //TODO delete. was used only on admin rule page
     public List<String> selectMultipleSpecificValues2(String buttonName, Long colNum, List<String> values, Long filterFiledNum) {
         List<String> ret = new ArrayList<>();
         window.openModal(By.name(buttonName));
