@@ -473,7 +473,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.addArguments("--headless");
-                        options.addArguments("window-size=1024x768");
+                        options.addArguments("--window-size=1024,768");
                     }
 
                     capability.setCapability(ChromeOptions.CAPABILITY, options);
@@ -547,7 +547,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.addArguments("--headless");
-                        options.addArguments("window-size=1024x768");
+                        options.addArguments("--window-size=1024,768");
                     }
 
                     seleniumSettings.setWebDriver(new ChromeDriver(options));
