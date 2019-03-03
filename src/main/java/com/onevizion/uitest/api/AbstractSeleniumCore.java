@@ -470,6 +470,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.addArguments("--no-sandbox");
                     options.addArguments("--disable-gpu");
                     options.setExperimentalOption("prefs", chromePrefs);
+
+                    if (seleniumSettings.getHeadlessMode()) {
+                        options.addArguments("--headless");
+                        options.addArguments("window-size=1024x768");
+                    }
+
                     capability.setCapability(ChromeOptions.CAPABILITY, options);
                 } else if (seleniumSettings.getBrowser().equals("internet explorer 11")) {
                     capability = DesiredCapabilities.internetExplorer();
