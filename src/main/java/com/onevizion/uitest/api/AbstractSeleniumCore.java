@@ -473,6 +473,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.addArguments("--headless");
+                        options.addArguments("--app-shell-host-window-size=1024x768");
+                        options.addArguments("--content-shell-host-window-size=1024x768");
                         options.addArguments("--window-size=1024,768");
                     }
 
@@ -547,6 +549,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.addArguments("--headless");
+                        options.addArguments("--app-shell-host-window-size=1024x768");
+                        options.addArguments("--content-shell-host-window-size=1024x768");
                         options.addArguments("--window-size=1024,768");
                     }
 
