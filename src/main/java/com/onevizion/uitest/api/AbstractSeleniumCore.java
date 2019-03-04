@@ -478,14 +478,17 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     //TODO workaround for chrome 52
                     ChromeOptions options = new ChromeOptions();
                     options.setPageLoadStrategy(PageLoadStrategy.NONE);
-                    options.addArguments("--no-sandbox");
-                    options.addArguments("--disable-gpu");
                     options.setExperimentalOption("prefs", chromePrefs);
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.addArguments("--headless");
+                        options.addArguments("--ignore-certificate-errors");
+                        options.addArguments("--no-proxy-server");
                         options.addArguments("--proxy-server='direct://'");
                         options.addArguments("--proxy-bypass-list=*");
+                    } else {
+                        options.addArguments("--no-sandbox");
+                        options.addArguments("--disable-gpu");
                     }
 
                     capability.setCapability(ChromeOptions.CAPABILITY, options);
@@ -560,8 +563,13 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.addArguments("--headless");
+                        options.addArguments("--ignore-certificate-errors");
+                        options.addArguments("--no-proxy-server");
                         options.addArguments("--proxy-server='direct://'");
                         options.addArguments("--proxy-bypass-list=*");
+                    } else {
+                        options.addArguments("--no-sandbox");
+                        options.addArguments("--disable-gpu");
                     }
 
                     ChromeDriverService driverService = ChromeDriverService.createDefaultService();
