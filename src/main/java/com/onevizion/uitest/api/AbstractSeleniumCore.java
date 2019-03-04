@@ -481,6 +481,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setExperimentalOption("prefs", chromePrefs);
 
                     if (seleniumSettings.getHeadlessMode()) {
+                        options.setProxy(null);
                         options.addArguments("--headless");
                         options.addArguments("--deterministic-fetch");
                         options.addArguments("--ignore-certificate-errors");
@@ -563,6 +564,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setExperimentalOption("prefs", chromePrefs);
 
                     if (seleniumSettings.getHeadlessMode()) {
+                        options.setProxy(null);
                         options.addArguments("--headless");
                         options.addArguments("--deterministic-fetch");
                         options.addArguments("--ignore-certificate-errors");
