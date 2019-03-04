@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -92,7 +93,7 @@ public class Window {
         }
 
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-        seleniumSettings.getWebDriver().manage().window().maximize();
+        maximize();
 
         document.waitReadyStateComplete();
     }
@@ -134,7 +135,7 @@ public class Window {
         }
 
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
-        seleniumSettings.getWebDriver().manage().window().maximize();
+        maximize();
 
         document.waitReadyStateComplete();
     }
@@ -260,6 +261,18 @@ public class Window {
         seleniumSettings.getWindows().remove(seleniumSettings.getWindows().size() - 1);
         seleniumSettings.getWebDriver().switchTo().window(seleniumSettings.getWindows().get(seleniumSettings.getWindows().size() - 1));
         wait.waitIsWindowClosed();
+    }
+
+    public void maximize() {
+        if (seleniumSettings.getBrowser().equals("firefox")) {
+            seleniumSettings.getWebDriver().manage().window().maximize();
+        } else if (seleniumSettings.getBrowser().equals("chrome")) {
+            if (seleniumSettings.getHeadlessMode()) {
+                seleniumSettings.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
+            } else {
+                seleniumSettings.getWebDriver().manage().window().maximize();
+            }
+        }
     }
 
 }
