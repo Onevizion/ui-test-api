@@ -12,6 +12,8 @@ public class SeleniumSettings {
 
     private ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
+    private ThreadLocal<String> url = new ThreadLocal<>();
+
     private ThreadLocal<UserProperties> userProperties = new ThreadLocal<>();
 
     private ThreadLocal<List<String>> windows = new ThreadLocal<>();
@@ -74,6 +76,14 @@ public class SeleniumSettings {
 
     void setWebDriver(WebDriver webDriver) {
         this.webDriver.set(webDriver);
+    }
+
+    public String getUrl() {
+        return url.get();
+    }
+
+    void setUrl(String url) {
+        this.url.set(url);
     }
 
     public UserProperties getUserProperties() {
