@@ -586,6 +586,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             window.maximize();
 
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
             allowDownloadFileForHeadlessChrome();
 
             //not finish or not need when PageLoadStrategy.NONE
@@ -787,9 +788,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             ObjectMapper objectMapper = new ObjectMapper();
             HttpClient httpClient = HttpClientBuilder.create().build();
             String command = objectMapper.writeValueAsString(commandParams);
-            String u = seleniumSettings.getUrl() + "/session/" + sessionId + "/chromium/send_command";
-            seleniumLogger.info(seleniumSettings.getUrl() + "/session/" + sessionId + "/chromium/send_command");
-            HttpPost request = new HttpPost(u);
+            HttpPost request = new HttpPost(seleniumSettings.getUrl() + "/session/" + sessionId + "/chromium/send_command");
             request.addHeader("content-type", "application/json");
             request.setEntity(new StringEntity(command));
             HttpResponse httpResponse = httpClient.execute(request);
@@ -801,7 +800,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 seleniumLogger.error("The Response is " + json);
             }
         } catch (IOException e) {
-            seleniumLogger.error("exeption in allowDownloadFileForHedlessChrome " + e.getMessage());
+            seleniumLogger.error("exception in allowDownloadFileForHedlessChrome " + e.getMessage());
         }
     }
 
