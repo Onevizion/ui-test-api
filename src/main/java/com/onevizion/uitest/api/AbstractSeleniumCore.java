@@ -790,6 +790,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         try {
             SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
+            seleniumLogger.info(seleniumSettings.getTestName() + " " + sessionId);
 
             Map<String, Object> commandParams = new HashMap<>();
             commandParams.put("cmd", "Page.setDownloadBehavior");
