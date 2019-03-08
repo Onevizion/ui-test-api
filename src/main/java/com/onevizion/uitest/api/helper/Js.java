@@ -700,4 +700,8 @@ public class Js {
         return NumberUtils.createLong(execJs("return gridArr[" + gridIdx + "].parentGridIdx;"));
     }
 
+    public Long getDate() {
+        return NumberUtils.createLong(execJs("return (new Date()).getTime();"));
+    }
+
 }
