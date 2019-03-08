@@ -755,8 +755,18 @@ public class Tb {
             }
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType)
                 || ConfigFieldType.TIME.equals(fieldDataType)) {
-            seleniumSettings.getWebDriver().findElement(By.name("epmDate1")).clear();
-            seleniumSettings.getWebDriver().findElement(By.name("epmDate1")).sendKeys(value);
+            element.clickByName("epmDate1");
+            String prevVal = seleniumSettings.getWebDriver().findElement(By.name("epmDate1")).getAttribute("value");
+
+            Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+            for (int i = 0; i < prevVal.length(); i++) {
+                actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
+            }
+            for (int i = 0; i < prevVal.length(); i++) {
+                actionObject.sendKeys(Keys.BACK_SPACE).perform();
+            }
+            actionObject.sendKeys(value).perform();
+
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
