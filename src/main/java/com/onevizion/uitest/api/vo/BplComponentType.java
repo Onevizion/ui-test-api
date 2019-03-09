@@ -6,7 +6,7 @@ public enum BplComponentType {
     FIELD("Field", "Field Name"),
     TAB("Configured Tab", "Description"),
     VTABLE("Dynamic V_Tables", "Table Name"),
-    DB_PACKAGE("DB Package", "Package Name"),
+    DB_PACKAGE("DB Package", "DB Package Name"),
     FILTER("Filter", "Filter Name"),
     IMPORT("Import", "Name"),
     INTEGRATION("Integration", "Integration Name"),
