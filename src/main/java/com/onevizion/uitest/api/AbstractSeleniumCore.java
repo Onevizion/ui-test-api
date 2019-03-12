@@ -114,6 +114,7 @@ import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.notification.Notification;
+import com.onevizion.uitest.api.helper.portal.Portal;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
@@ -280,6 +281,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected DropGrid dropGrid;
+
+    @Resource
+    protected Portal portal;
     /* Helpers End */
 
     /* Entity Helpers Begin */
@@ -791,6 +795,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         try {
             SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
             seleniumLogger.info(seleniumSettings.getTestName() + " " + sessionId);
+            //https://gist.github.com/danggrianto/4607677
 
             Map<String, Object> commandParams = new HashMap<>();
             commandParams.put("cmd", "Page.setDownloadBehavior");

@@ -52,6 +52,10 @@ public class NewDropDown {
         selectEntity("lbDashboard", name);
     }
 
+    public void selectPortal(String name) {
+        selectEntity("lbPortal0", name);
+    }
+
     public void selectComponentPackage(String name) {
         selectEntity("lbCompPkg0", name);
         wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());

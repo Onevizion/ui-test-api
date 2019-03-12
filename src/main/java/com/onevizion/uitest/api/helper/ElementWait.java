@@ -159,10 +159,13 @@ public class ElementWait {
     }
 
     public void waitElementAttribute(WebElement element, String attribute, String attributeValue) {
+        Supplier<String> actualValueSupplier = ()-> element.getAttribute(attribute);
+        Supplier<String> messageSupplier = ()-> "Waiting for Element [" + element + "] attribute=[" + attribute + "] expectedVal=[" + attributeValue + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
+
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for Element [" + element + "] attribute [" + attribute + "] value [" + attributeValue + "] is failed")
+            .withMessage(messageSupplier)
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> element.getAttribute(attribute).equals(attributeValue));
+            .until(webdriver -> actualValueSupplier.get().equals(attributeValue));
     }
 
     public void waitElementAttributeByName(String name, String attribute, String attributeValue) {
