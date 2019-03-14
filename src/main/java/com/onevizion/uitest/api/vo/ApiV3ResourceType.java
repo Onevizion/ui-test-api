@@ -20,6 +20,7 @@ public enum ApiV3ResourceType {
     TRACKOR_TYPES_TREE("trackor-types-tree"),
     TRACKORS("trackors"),
     USER_SETTINGS("user-settings"),
+    USERS("users"),
     VIEWS("views"),
     WORKPLANS("workplans");
 
