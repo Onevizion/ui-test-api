@@ -87,6 +87,7 @@ import com.onevizion.uitest.api.helper.dropgrid.DropGrid;
 import com.onevizion.uitest.api.helper.entity.EntityClientFile;
 import com.onevizion.uitest.api.helper.entity.EntityColor;
 import com.onevizion.uitest.api.helper.entity.EntityComponentPackage;
+import com.onevizion.uitest.api.helper.entity.EntityConfigApp;
 import com.onevizion.uitest.api.helper.entity.EntityConfigAppExt;
 import com.onevizion.uitest.api.helper.entity.EntityConfigAppExtParam;
 import com.onevizion.uitest.api.helper.entity.EntityConfigField;
@@ -349,6 +350,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected EntityCoord entityCoord;
+
+    @Resource
+    protected EntityConfigApp entityConfigApp;
     /* Entity Helpers End */
 
     @Resource

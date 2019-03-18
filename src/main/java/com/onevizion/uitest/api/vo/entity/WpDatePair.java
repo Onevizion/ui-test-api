@@ -39,6 +39,7 @@ public class WpDatePair {
     public Map<String, String> getRoles() {
         return roles;
     }
+
     public class Builder {
 
         private Builder() {
