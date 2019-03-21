@@ -410,7 +410,7 @@ public class Tb {
                     actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_3, AbstractSeleniumCore.SPECIAL_CHARACTERS_3);
                     actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_4, AbstractSeleniumCore.SPECIAL_CHARACTERS_4);
                     Assert.assertEquals(actualVal, vals.get(field), "Element with id=[idx" + idx + "] has wrong value");
-                    seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
+                    seleniumSettings.getWebDriver().switchTo().parentFrame();
                 } else {
                     wait.waitWebElement(By.id("idx" + idx));
                     assertElement.assertFCKEditor("idx" + idx, vals.get(field));
@@ -424,7 +424,7 @@ public class Tb {
                     actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_3, AbstractSeleniumCore.SPECIAL_CHARACTERS_3);
                     actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_4, AbstractSeleniumCore.SPECIAL_CHARACTERS_4);
                     Assert.assertEquals(actualVal, vals.get(field), "Element with name=[" + field + "] has wrong value");
-                    seleniumSettings.getWebDriver().switchTo().parentFrame(); /* For selenium tests in ie8*/
+                    seleniumSettings.getWebDriver().switchTo().parentFrame();
                 } else {
                     String id = seleniumSettings.getWebDriver().findElement(By.name(field)).getAttribute("id");
                     wait.waitWebElement(By.id(id));

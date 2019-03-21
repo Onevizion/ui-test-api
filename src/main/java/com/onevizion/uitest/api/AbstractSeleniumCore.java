@@ -33,7 +33,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.CommandInfo;
@@ -509,17 +508,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     }
 
                     capability.setCapability(ChromeOptions.CAPABILITY, options);
-                } else if (seleniumSettings.getBrowser().equals("internet explorer 11")) {
-                    capability = DesiredCapabilities.internetExplorer();
-                    capability.setCapability("ie.ensureCleanSession", true);
-                    capability.setBrowserName("internet explorer");
-                    capability.setVersion("11");
-                } else if (seleniumSettings.getBrowser().equals("internet explorer 8")) {
-                    capability = DesiredCapabilities.internetExplorer();
-                    capability.setCapability("ie.validateCookieDocumentType", false);
-                    capability.setCapability("ie.ensureCleanSession", true);
-                    capability.setBrowserName("internet explorer");
-                    capability.setVersion("8");
                 }
 
                 //change readTimeout
@@ -599,19 +587,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     ChromeDriverService driverService = ChromeDriverService.createDefaultService();
                     seleniumSettings.setWebDriver(new ChromeDriver(driverService, options));
                     seleniumSettings.setUrl(driverService.getUrl().toString());
-                } else if (seleniumSettings.getBrowser().equals("internet explorer 11")) {
-                    capability = DesiredCapabilities.internetExplorer();
-                    capability.setCapability("ie.ensureCleanSession", true);
-                    capability.setBrowserName("internet explorer");
-                    capability.setVersion("11");
-                    seleniumSettings.setWebDriver(new InternetExplorerDriver(capability));
-                } else if (seleniumSettings.getBrowser().equals("internet explorer 8")) {
-                    capability = DesiredCapabilities.internetExplorer();
-                    capability.setCapability("ie.validateCookieDocumentType", false);
-                    capability.setCapability("ie.ensureCleanSession", true);
-                    capability.setBrowserName("internet explorer");
-                    capability.setVersion("8");
-                    seleniumSettings.setWebDriver(new InternetExplorerDriver(capability));
                 }
             }
 
@@ -714,15 +689,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
 
             throw new SeleniumUnexpectedException(e);
-        }
-
-        if (seleniumSettings.getBrowser().equals("internet explorer 11") || seleniumSettings.getBrowser().equals("internet explorer 8")) {
-            try {
-                Thread.sleep(60000);
-            } catch (InterruptedException e) {
-                //logger.error("Interrupted!", e); //TODO
-                Thread.currentThread().interrupt();
-            }
         }
     }
 
