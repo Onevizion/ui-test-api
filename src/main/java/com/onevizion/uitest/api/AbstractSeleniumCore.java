@@ -473,6 +473,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
                     options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
+                    options.setHeadless(seleniumSettings.getHeadlessMode());
+
                     capability = DesiredCapabilities.firefox();
                     capability.setBrowserName(seleniumSettings.getBrowser());
                     capability.merge(options);
@@ -564,6 +566,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
                     options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
                     options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+
+                    options.setHeadless(seleniumSettings.getHeadlessMode());
 
                     seleniumSettings.setWebDriver(new FirefoxDriver(options));
                 } else if (seleniumSettings.getBrowser().equals("chrome")) {
