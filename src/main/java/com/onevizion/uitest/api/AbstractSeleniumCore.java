@@ -494,6 +494,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
                     options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
+                    options.addArguments("--no-sandbox");
+                    options.addArguments("--disable-gpu");
+
                     if (seleniumSettings.getHeadlessMode()) {
                         options.setProxy(null);
                         options.addArguments("--headless");
@@ -502,9 +505,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                         options.addArguments("--no-proxy-server");
                         options.addArguments("--proxy-server='direct://'");
                         options.addArguments("--proxy-bypass-list=*");
-                    } else {
-                        options.addArguments("--no-sandbox");
-                        options.addArguments("--disable-gpu");
                     }
 
                     capability.setCapability(ChromeOptions.CAPABILITY, options);
@@ -571,6 +571,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
                     options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
+                    options.addArguments("--no-sandbox");
+                    options.addArguments("--disable-gpu");
+
                     if (seleniumSettings.getHeadlessMode()) {
                         options.setProxy(null);
                         options.addArguments("--headless");
@@ -579,9 +582,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                         options.addArguments("--no-proxy-server");
                         options.addArguments("--proxy-server='direct://'");
                         options.addArguments("--proxy-bypass-list=*");
-                    } else {
-                        options.addArguments("--no-sandbox");
-                        options.addArguments("--disable-gpu");
                     }
 
                     ChromeDriverService driverService = ChromeDriverService.createDefaultService();
