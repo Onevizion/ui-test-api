@@ -406,11 +406,21 @@ public class Js {
     }
 
     public Boolean isWindowClosed() {
-        return Boolean.valueOf(execJs("return wModal;"));
+        return Boolean.valueOf(execJs(""
+                + "if (typeof wModal !== 'undefined') {"
+                + "    return wModal;"
+                + "} else {"
+                + "    return true;"
+                + "}"));
     }
 
     public Boolean isWindowClosed(AbstractSeleniumCore test) {
-        return Boolean.valueOf(execJs(test, "return wModal;"));
+        return Boolean.valueOf(execJs(test, ""
+                + "if (typeof wModal !== 'undefined') {"
+                + "    return wModal;"
+                + "} else {"
+                + "    return true;"
+                + "}"));
     }
 
     public Boolean isDxtmlxWindowOpened(String windowName) {
