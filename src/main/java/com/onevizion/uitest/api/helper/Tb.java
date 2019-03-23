@@ -1271,13 +1271,4 @@ public class Tb {
         assertElement.assertFieldDisabled(fieldId, elementPosition);
     }
 
-    private boolean isAlertPresent() {
-        try {
-            seleniumSettings.getWebDriver().switchTo().alert();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
 }
