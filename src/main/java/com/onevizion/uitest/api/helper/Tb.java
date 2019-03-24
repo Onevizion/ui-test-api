@@ -21,6 +21,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumAlertException;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
@@ -282,7 +283,7 @@ public class Tb {
                     psSelector.selectSpecificValue(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
                 }
                 wait.waitFormLoad();
-            } catch (UnhandledAlertException e) {
+            } catch (UnhandledAlertException | SeleniumAlertException e) {
                 seleniumLogger.warn(seleniumSettings.getTestName() + " Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
                 Assert.assertTrue(seleniumSettings.getWebDriver().switchTo().alert().getText().contains("Following fields with unsaved changes has been modified on the server. Press \"OK\" to keep your values or \"Cancel\" to replace your values with new values from the server"));
                 seleniumSettings.getWebDriver().switchTo().alert().accept();
