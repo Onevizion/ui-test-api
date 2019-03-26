@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.document.Document;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
@@ -58,8 +57,6 @@ public class Login {
         wait.waitWebElement(By.id("Table1"));
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
-
-        AbstractSeleniumCore.sleep(10000L);
     }
 
     public void failLogin(String userName, String userPassword, String errorMessage) {
