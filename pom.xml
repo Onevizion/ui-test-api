@@ -9,7 +9,7 @@
     <groupId>com.onevizion</groupId>
     <artifactId>ui-test-api</artifactId>
     <packaging>jar</packaging>
-    <version>19.4.0</version>
+    <version>19.4-SNAPSHOT</version>
 
     <name>ui-test-api</name>
     <description>An API for easily write tests for OneVizion platform</description>
