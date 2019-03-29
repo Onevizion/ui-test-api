@@ -28,7 +28,6 @@ public class ElementWait {
     /*public void waitElement(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element [" + element + "] is failed")
-            .ignoring(NullPointerException.class)
             .until(webdriver -> {
                 return element;
             });
@@ -37,14 +36,12 @@ public class ElementWait {
     public void waitElementByName(String name) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element name=[" + name + "] is failed")
-            .ignoring(NullPointerException.class)
             .until(webdriver -> webdriver.findElement(By.name(name)));
     }
 
     public void waitElementById(String id) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element id=[" + id + "] is failed")
-            .ignoring(NullPointerException.class)
             .until(webdriver -> webdriver.findElement(By.id(id)));
     }
 
@@ -52,7 +49,6 @@ public class ElementWait {
     public void waitElementByBy(By by) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element by=[" + by + "] is failed")
-            .ignoring(NullPointerException.class)
             .until(webdriver -> webdriver.findElement(by));
     }
 
