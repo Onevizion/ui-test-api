@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -50,7 +49,6 @@ public class Wait {
             .withMessage("Waiting for WebElement [" + elementLocator.toString() + "] is failed.")
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
-            .ignoring(WebDriverException.class)
             .until(webdriver -> webdriver.findElement(elementLocator));
     }
 

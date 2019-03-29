@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,7 +31,6 @@ public class ElementWait {
             .withMessage("Waiting for Element [" + element + "] is failed")
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
-            .ignoring(WebDriverException.class)
             .until(webdriver -> {
                 return element;
             });
@@ -43,7 +41,6 @@ public class ElementWait {
             .withMessage("Waiting for Element name=[" + name + "] is failed")
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
-            .ignoring(WebDriverException.class)
             .until(webdriver -> webdriver.findElement(By.name(name)));
     }
 
@@ -52,7 +49,6 @@ public class ElementWait {
             .withMessage("Waiting for Element id=[" + id + "] is failed")
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
-            .ignoring(WebDriverException.class)
             .until(webdriver -> webdriver.findElement(By.id(id)));
     }
 
@@ -62,7 +58,6 @@ public class ElementWait {
             .withMessage("Waiting for Element by=[" + by + "] is failed")
             .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
-            .ignoring(WebDriverException.class)
             .until(webdriver -> webdriver.findElement(by));
     }
 
