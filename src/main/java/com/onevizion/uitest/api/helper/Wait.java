@@ -47,7 +47,6 @@ public class Wait {
     public void waitWebElement(final By elementLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for WebElement [" + elementLocator.toString() + "] is failed.")
-            .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .until(webdriver -> webdriver.findElement(elementLocator));
     }

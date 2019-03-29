@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -29,7 +28,6 @@ public class ElementWait {
     /*public void waitElement(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element [" + element + "] is failed")
-            .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .until(webdriver -> {
                 return element;
@@ -39,7 +37,6 @@ public class ElementWait {
     public void waitElementByName(String name) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element name=[" + name + "] is failed")
-            .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .until(webdriver -> webdriver.findElement(By.name(name)));
     }
@@ -47,7 +44,6 @@ public class ElementWait {
     public void waitElementById(String id) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element id=[" + id + "] is failed")
-            .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .until(webdriver -> webdriver.findElement(By.id(id)));
     }
@@ -56,7 +52,6 @@ public class ElementWait {
     public void waitElementByBy(By by) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element by=[" + by + "] is failed")
-            .ignoring(NoSuchElementException.class)
             .ignoring(NullPointerException.class)
             .until(webdriver -> webdriver.findElement(by));
     }
