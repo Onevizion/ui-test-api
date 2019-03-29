@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
@@ -48,7 +47,6 @@ public class Window {
     public void openModal(final By elemenLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Can't find button " + elemenLocator.toString() + " to open modal window.")
-            .ignoring(NoSuchElementException.class)
             .until(webDriver -> webDriver.findElement(elemenLocator));
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -101,7 +99,6 @@ public class Window {
     public void openModal(final WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Can't find button " + element.toString() + " to open modal window.")
-            .ignoring(NoSuchElementException.class)
             .until(webdriver -> element);
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
