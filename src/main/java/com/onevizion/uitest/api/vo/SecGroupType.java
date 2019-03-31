@@ -10,7 +10,8 @@ public enum SecGroupType {
     MENU("Menu Application"),
     IMPORT("Import"),
     NOTIFICATION_TYPE("Notification Type"),
-    VIEW("Global View");
+    VIEW("Global View"),
+    DISCIPLINE("Discipline");
 
     private String name;
 

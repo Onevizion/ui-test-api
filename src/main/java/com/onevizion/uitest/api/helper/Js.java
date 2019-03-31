@@ -583,7 +583,7 @@ public class Js {
         columnLabel = columnLabel.replaceAll("'", "\\\\'");
 
         return NumberUtils.createLong(execJs(""
-                + "var columnIdx;"
+                + "var columnIdx = null;"
                 + "var columnsCount = gridArr['" + gridId + "'].grid.getColumnsNum();"
                 + "for (var i = 0; i < columnsCount; i++) {"
                 + "    var columnLabel = gridArr['" + gridId + "'].grid.getColLabel(i);"
@@ -599,7 +599,7 @@ public class Js {
         columnLabel = columnLabel.replaceAll("'", "\\\\'");
 
         return NumberUtils.createLong(execJs(""
-                + "var columnIdx;"
+                + "var columnIdx = null;"
                 + "var columnIdxStart = null;"
                 + "var columnIdxFinish = null;"
                 + "var columnsCount = gridArr['" + gridId + "'].grid.getColumnsNum();"
@@ -615,6 +615,9 @@ public class Js {
                 + "        }"
                 + "    }"
                 + "    columnIdxFinish = i + 1;"
+                + "}"
+                + "if (columnIdxStart == null || columnIdxFinish == null) {"
+                + "    return columnIdx;"
                 + "}"
                 + "for (var i = columnIdxStart; i < columnIdxFinish; i++) {"
                 + "    var columnLabel2 = gridArr['" + gridId + "'].grid.getColLabel(i, 1);"

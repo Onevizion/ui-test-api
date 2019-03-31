@@ -3,6 +3,7 @@ package com.onevizion.uitest.api.helper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -357,6 +358,12 @@ public class Tb {
         checkField(ConfigFieldType.DATE_TIME, fields.get(16), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
         checkField(ConfigFieldType.TIME, fields.get(17), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
         checkField(ConfigFieldType.TRACKOR_DROP_DOWN, fields.get(18), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
+    }
+
+    public void checkField(ConfigFieldType fieldDataType, String field, String val, int elementPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
+        Map<String, String> vals = new HashMap<>();
+        vals.put(field, val);
+        checkField(fieldDataType, field, vals, elementPosition, isOpenSelector, isWikiReadOnly);
     }
 
     public void checkField(ConfigFieldType fieldDataType, String field, Map<String, String> vals, int elementPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
@@ -1129,6 +1136,10 @@ public class Tb {
 
     public void checkColumnNotExist(Long gridIndex, String columnLabel) {
         Assert.assertEquals(js.getColumnIndexByLabel(gridIndex, columnLabel) == null, true, "Grid have column");
+    }
+
+    public void checkColumnNotExist(Long gridIndex, String columnLabel, String columnLabel2) {
+        Assert.assertEquals(js.getColumnIndexByLabel(gridIndex, columnLabel, columnLabel2) == null, true, "Grid have column");
     }
 
     public void checkFieldsExist(List<String> fieldIds) {
