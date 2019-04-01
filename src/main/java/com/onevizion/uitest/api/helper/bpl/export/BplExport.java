@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Qs;
 import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.BplComponentType;
 
 @Component
@@ -36,12 +37,15 @@ public class BplExport {
     @Resource
     private Grid grid;
 
+    @Resource
+    private Grid2 grid2;
+
     public void openSubGrid(Long gridIdx, BplComponentType bplComponentType) {
         Long rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
         Long subGridId = getComponentTypeGridId(gridIdx, bplComponentType);
 
         js.openSubGrid(gridIdx, rowIndex, 0L);
-        wait.waitGridLoad(subGridId, gridIdx);
+        grid2.waitLoad(subGridId);
     }
 
     public void closeSubGrid(Long gridIdx, BplComponentType bplComponentType) {

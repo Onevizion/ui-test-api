@@ -15,6 +15,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.WpDiscipline;
 
@@ -40,6 +41,9 @@ public class EntityWpDiscipline {
     private Grid grid;
 
     @Resource
+    private Grid2 grid2;
+
+    @Resource
     private AssertElement assertElement;
 
     @Resource
@@ -55,12 +59,12 @@ public class EntityWpDiscipline {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(wpDiscipline.getDescription());
 
         tab.goToTab(2L); //Role Assignments
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(WpDiscipline wpDiscipline) {
@@ -75,12 +79,12 @@ public class EntityWpDiscipline {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(wpDiscipline.getDescription());
 
         tab.goToTab(2L);//Role Assignments
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(WpDiscipline wpDiscipline) {
@@ -92,7 +96,7 @@ public class EntityWpDiscipline {
         assertElement.assertText(DESCRIPTION, wpDiscipline.getDescription());
 
         tab.goToTab(2L); //Role Assignments
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
         grid.checkAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

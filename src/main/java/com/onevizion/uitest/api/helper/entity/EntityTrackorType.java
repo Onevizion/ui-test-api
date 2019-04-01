@@ -18,6 +18,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.TrackorType;
 
@@ -48,6 +49,9 @@ public class EntityTrackorType {
 
     @Resource
     private Grid grid;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private Js js;
@@ -94,7 +98,7 @@ public class EntityTrackorType {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(TrackorType trackorType) {
@@ -105,7 +109,7 @@ public class EntityTrackorType {
         
         
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(TrackorType trackorType) {
@@ -151,7 +155,7 @@ public class EntityTrackorType {
         wait.waitFormLoad();
 
         tab.goToTab(3L); //Role Privs
-        wait.waitGridLoad(3L, 3L);
+        grid2.waitLoad(3L);
         grid.checkAssignmentGridColumn(3L, 1L, secGroupsRead);
         grid.checkAssignmentGridColumn(3L, 2L, secGroupsEdit);
         grid.checkAssignmentGridColumn(3L, 3L, secGroupsAdd);
@@ -167,7 +171,7 @@ public class EntityTrackorType {
         wait.waitFormLoad();
 
         tab.goToTab(4L); //Role Restrictions
-        wait.waitGridLoad(4L, 4L);
+        grid2.waitLoad(4L);
         grid.checkPrivilegieGridColumn(4L, 1L, rolesRest, roleRest);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.vo.entity.ClientFile;
 
@@ -38,6 +39,9 @@ public class EntityClientFile {
     private Grid grid;
 
     @Resource
+    private Grid2 grid2;
+
+    @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
@@ -53,7 +57,7 @@ public class EntityClientFile {
         htmlInputFile.uploadOnAdminClientFile(clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(ClientFile clientFile) {
@@ -66,7 +70,7 @@ public class EntityClientFile {
         htmlInputFile.uploadOnAdminClientFile(clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(ClientFile clientFile) {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
@@ -40,6 +41,9 @@ public class NewDropDown {
     @Resource
     private Jquery jquery;
 
+    @Resource
+    private Grid2 grid2;
+
     public void selectMenu(String name) {
         selectEntity("lbApplication", name);
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
@@ -58,7 +62,7 @@ public class NewDropDown {
 
     public void selectComponentPackage(String name) {
         selectEntity("lbCompPkg0", name);
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     private void selectEntity(String id, String name) {
@@ -111,7 +115,7 @@ public class NewDropDown {
 
     public void deleteComponentPackage(String name) {
         deleteEntity("lbCompPkg0", "CompPkg0", 2, name);
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     private void deleteEntity(String id, String buttonId, int buttonsCnt, String name) {

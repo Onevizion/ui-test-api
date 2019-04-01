@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
 public class Comment {
@@ -43,6 +44,9 @@ public class Comment {
 
     @Resource
     private Js js;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private ElementWait elementWait;
@@ -115,7 +119,7 @@ public class Comment {
         wait.waitWebElement(By.id("comment"));
         wait.waitWebElement(By.id("btnSubmit"));
         wait.waitFormLoad();
-        wait.waitGridLoad(0L, 0L);
+        grid2.waitLoad(0L);
     }
 
     public void addComment(String text) {
@@ -128,7 +132,7 @@ public class Comment {
         elementWait.waitElementEnabledById("btnSubmit");
         seleniumSettings.getWebDriver().findElement(By.id("btnSubmit")).findElement(By.xpath("..")).click();
 
-        wait.waitGridLoad(0L, 0L);
+        grid2.waitLoad(0L);
 
         wait.waitGridRowsCount(0L, rowsCntBefore + 1L);
 
@@ -168,7 +172,7 @@ public class Comment {
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
 
-        wait.waitGridLoad(0L, 0L);
+        grid2.waitLoad(0L);
 
         wait.waitGridRowsCount(0L, rowsCntBefore - 1L);
     }

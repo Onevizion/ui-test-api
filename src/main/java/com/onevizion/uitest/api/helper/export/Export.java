@@ -22,6 +22,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.ExportRun;
 
 @Component
@@ -47,6 +48,9 @@ public class Export {
 
     @Resource
     private Grid grid;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private AssertElement assertElement;
@@ -157,7 +161,7 @@ public class Export {
         elementWait.waitElementDisplay(exportMenu.getHistory());
         window.openModal(exportMenu.getHistory());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
@@ -183,7 +187,7 @@ public class Export {
         elementWait.waitElementDisplay(exportMenu.getHistory());
         window.openModal(exportMenu.getHistory());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
@@ -192,7 +196,7 @@ public class Export {
         element.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx())));
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
         gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(0L), "Grid have wrong rows count");
 

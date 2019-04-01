@@ -12,6 +12,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 
 @Component
@@ -34,6 +35,9 @@ public class RelationSelector {
 
     @Resource
     private Window window;
+
+    @Resource
+    private Grid2 grid2;
 
     public static final String RELATION_ID_BASE = "lbParentsChildren";
     public static final String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
@@ -92,15 +96,15 @@ public class RelationSelector {
     }
 
     public void openRelationGrid(Long gridIdx) {
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
         jquery.waitLoad(); //wait reload relations
         window.openModal(By.id(BUTTON_RELATION_ID_BASE + gridIdx));
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void closeRelationGrid(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + gridIdx));
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
         jquery.waitLoad(); //wait reload relations
     }
 

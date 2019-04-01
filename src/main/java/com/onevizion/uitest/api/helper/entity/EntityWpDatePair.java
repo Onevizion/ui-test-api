@@ -15,6 +15,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.WpDatePairType;
 import com.onevizion.uitest.api.vo.entity.WpDatePair;
@@ -42,6 +43,9 @@ public class EntityWpDatePair {
     private Grid grid;
 
     @Resource
+    private Grid2 grid2;
+
+    @Resource
     private AssertElement assertElement;
 
     @Resource
@@ -59,7 +63,7 @@ public class EntityWpDatePair {
         seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).sendKeys(wpDatePair.getShortLabel());
 
         tab.goToTab(2L); //Role Privs
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn(2L, 1L);
         grid.clearAssignmentGridColumn(2L, 2L);
         grid.clearAssignmentGridColumn(2L, 3L);
@@ -72,7 +76,7 @@ public class EntityWpDatePair {
         grid.selectAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(WpDatePair wpDatePair) {
@@ -90,7 +94,7 @@ public class EntityWpDatePair {
         seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).sendKeys(wpDatePair.getShortLabel());
 
         tab.goToTab(2L); //Role Privs
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn(2L, 1L);
         grid.clearAssignmentGridColumn(2L, 2L);
         grid.clearAssignmentGridColumn(2L, 3L);
@@ -103,7 +107,7 @@ public class EntityWpDatePair {
         grid.selectAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(WpDatePair wpDatePair) {
@@ -117,7 +121,7 @@ public class EntityWpDatePair {
 
         if (!WpDatePairType.PROJECTED_DELTA.getName().equals(wpDatePair.getName())) {
             tab.goToTab(2L); //Role Privs
-            wait.waitGridLoad(2L, 2L);
+            grid2.waitLoad(2L);
             grid.checkAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
             if (!WpDatePairType.BASELINE.getName().equals(wpDatePair.getName())
                     && !WpDatePairType.EARLY.getName().equals(wpDatePair.getName())

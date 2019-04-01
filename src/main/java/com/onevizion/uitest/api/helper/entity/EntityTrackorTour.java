@@ -19,6 +19,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.TrackorTour;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
@@ -51,6 +52,9 @@ public class EntityTrackorTour {
     private Grid grid;
 
     @Resource
+    private Grid2 grid2;
+
+    @Resource
     private AssertElement assertElement;
 
     @Resource
@@ -67,7 +71,7 @@ public class EntityTrackorTour {
         wait.waitFormLoad();
 
         tab.goToTab(2L); //Tour Steps
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
 
         for (TrackorTourStep trackorTourStep : trackorTour.getSteps()) {
             entityTrackorTourStep.add(trackorTourStep);
@@ -102,12 +106,12 @@ public class EntityTrackorTour {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(trackorTour.getDescription());
 
         tab.goToTab(2L); //Role Assignments
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(TrackorTour trackorTour) {
@@ -138,12 +142,12 @@ public class EntityTrackorTour {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(trackorTour.getDescription());
 
         tab.goToTab(3L);//Role Assignments
-        wait.waitGridLoad(3L, 3L);
+        grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn2(3L, 0L);
         grid.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testWithChilds(TrackorTour trackorTour) {
@@ -155,7 +159,7 @@ public class EntityTrackorTour {
         wait.waitFormLoad();
 
         tab.goToTab(2L); //Tour Steps
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
 
         Assert.assertEquals(grid.getGridRowsCount(2L), Long.valueOf(trackorTour.getSteps().size()));
         for (int i = 0; i < trackorTour.getSteps().size(); i++) {
@@ -190,7 +194,7 @@ public class EntityTrackorTour {
         assertElement.assertText(DESCRIPTION, trackorTour.getDescription());
 
         tab.goToTab(3L); //Role Assignments
-        wait.waitGridLoad(3L, 3L);
+        grid2.waitLoad(3L);
         grid.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

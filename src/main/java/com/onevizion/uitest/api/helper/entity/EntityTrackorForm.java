@@ -17,6 +17,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.TrackorForm;
 
 @Component
@@ -53,6 +54,9 @@ public class EntityTrackorForm {
     @Resource
     private Grid grid;
 
+    @Resource
+    private Grid2 grid2;
+
     public void add(TrackorForm trackorForm) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -87,7 +91,7 @@ public class EntityTrackorForm {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(TrackorForm trackorForm) {
@@ -126,7 +130,7 @@ public class EntityTrackorForm {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(TrackorForm trackorForm) {

@@ -13,6 +13,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.Menu;
@@ -34,6 +35,9 @@ public class EntityMenu {
 
     @Resource
     private Grid grid;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private NewDropDown newDropDown;
@@ -62,7 +66,7 @@ public class EntityMenu {
         wait.waitFormLoad();
 
         tab.goToTab(2L); // Roles
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
         grid.checkAssignmentGridColumn2(2L, 0L, roles);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

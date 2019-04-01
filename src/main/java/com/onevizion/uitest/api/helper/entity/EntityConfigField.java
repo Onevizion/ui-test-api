@@ -24,6 +24,7 @@ import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.configfield.ConfigField;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
@@ -78,6 +79,9 @@ public class EntityConfigField {
 
     @Resource
     private Grid grid;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private Jquery jquery;
@@ -244,7 +248,7 @@ public class EntityConfigField {
             psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
             tab.goToTab(3L); //File Metadata
-            wait.waitGridLoad(3L, 3L);
+            grid2.waitLoad(3L);
 
             List<ConfigFieldVoEfileMetadata> metadatas = configFieldVo.getConfigFieldEfile().getMetadatas();
             for (ConfigFieldVoEfileMetadata metadata : metadatas) {
@@ -359,7 +363,7 @@ public class EntityConfigField {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(ConfigFieldVo configFieldVo) {
@@ -487,7 +491,7 @@ public class EntityConfigField {
             psSelector.selectSpecificValue(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
             tab.goToTab(3L); //File Metadata
-            wait.waitGridLoad(3L, 3L);
+            grid2.waitLoad(3L);
 
             entityConfigFieldEfileMetadata.removeAll();
 
@@ -614,7 +618,7 @@ public class EntityConfigField {
         } else {
             window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         }
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(ConfigFieldVo configFieldVo) {
@@ -708,7 +712,7 @@ public class EntityConfigField {
             assertElement.assertRadioPsSelector("autocaptionClientFile", "btnautocaptionClientFile", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L, true);
 
             tab.goToTab(3L); //File Metadata
-            wait.waitGridLoad(3L, 3L);
+            grid2.waitLoad(3L);
 
             List<ConfigFieldVoEfileMetadata> metadatas = configFieldVo.getConfigFieldEfile().getMetadatas();
             Assert.assertEquals(grid.getGridRowsCount(3L), Long.valueOf(metadatas.size()));

@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.SecurityRole;
 
 @Component
@@ -83,6 +84,9 @@ public class EntitySecurityRole {
     private Grid grid;
 
     @Resource
+    private Grid2 grid2;
+
+    @Resource
     private Checkbox checkbox;
 
     public void add(SecurityRole securityRole) {
@@ -135,7 +139,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(SecurityRole securityRole) {
@@ -190,7 +194,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(SecurityRole securityRole) {

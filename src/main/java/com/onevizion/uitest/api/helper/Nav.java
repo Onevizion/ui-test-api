@@ -12,6 +12,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
 public class Nav {
@@ -29,10 +30,13 @@ public class Nav {
     private Wait wait;
 
     @Resource
+    private Grid2 grid2;
+
+    @Resource
     private ElementWait elementWait;
 
     public Long getAllRecordsCount(Long gridIdx) {
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navTotal" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(recordsLabel.indexOf("of") + 2).trim();
         recordsLabel = recordsLabel.replace(",", "");
@@ -40,7 +44,7 @@ public class Nav {
     }
 
     private Long getFirstRowNum(Long gridIdx) {
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navRange" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(0, recordsLabel.indexOf("..")).trim();
         recordsLabel = recordsLabel.replace(",", "");
@@ -48,7 +52,7 @@ public class Nav {
     }
 
     private Long getLastRowNum(Long gridIdx) {
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navRange" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(recordsLabel.indexOf("..") + 2).trim();
         recordsLabel = recordsLabel.replace(",", "");
@@ -56,7 +60,7 @@ public class Nav {
     }
 
     public void checkNavigation(Long gridIdx) {
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
 
         Long allRecordsCount = getAllRecordsCount(gridIdx);
         Long actualVisibleRecordsCount = js.getGridRowsCount(gridIdx);
@@ -75,7 +79,7 @@ public class Nav {
             checkCountRowsOnPage(gridIdx);
 
             goToNextPage(gridIdx, pageNum + 1);
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
         }
 
         Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1 + (countPages - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
@@ -84,7 +88,7 @@ public class Nav {
 
         for (int pageNum = countPages; pageNum > 1; pageNum--) {
             goToPrevPage(gridIdx, pageNum - 1);
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
 
             Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf((pageNum - 2) * actualVisibleRecordsCount + 1), "First num row in grid is wrong");
             Assert.assertEquals(getLastRowNum(gridIdx), Long.valueOf((pageNum - 1) * actualVisibleRecordsCount), "Last num row in grid is wrong");

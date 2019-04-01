@@ -16,6 +16,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
 public class Grid {
@@ -34,6 +35,9 @@ public class Grid {
 
     @Resource
     private Element element;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private ElementWait elementWait;
@@ -156,7 +160,7 @@ public class Grid {
         element.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId)));
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        wait.waitGridLoad(gridId, parentGridId);
+        grid2.waitLoad(gridId);
         Long newCnt = js.getGridRowsCount(gridId);
         Assert.assertEquals(newCnt, oldCnt, "Delete row is wrong");
     }

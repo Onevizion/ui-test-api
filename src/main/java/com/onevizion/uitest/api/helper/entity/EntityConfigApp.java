@@ -24,6 +24,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.view.View;
 import com.onevizion.uitest.api.vo.entity.ConfigApp;
@@ -76,6 +77,9 @@ public class EntityConfigApp {
     private Grid grid;
 
     @Resource
+    private Grid2 grid2;
+
+    @Resource
     private HtmlSelect htmlSelect;
 
     public void add(ConfigApp configApp) {
@@ -109,7 +113,7 @@ public class EntityConfigApp {
         }
 
         tab.goToTab(3L); //Role Privs
-        wait.waitGridLoad(3L, 3L);
+        grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn(3L, 1L);
         grid.clearAssignmentGridColumn(3L, 2L);
         grid.clearAssignmentGridColumn(3L, 3L);
@@ -123,20 +127,20 @@ public class EntityConfigApp {
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(4L); //Trackor Classes
-            wait.waitGridLoad(4L, 4L);
+            grid2.waitLoad(4L);
             grid.clearAssignmentGridColumn2(4L, 0L);
             grid.selectAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(5L); //ePM Pages
-            wait.waitGridLoad(5L, 5L);
+            grid2.waitLoad(5L);
             grid.clearAssignmentGridColumn2(5L, 0L);
             grid.selectAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(ConfigApp configApp) {
@@ -163,7 +167,7 @@ public class EntityConfigApp {
         }
 
         tab.goToTab(3L); //Role Privs
-        wait.waitGridLoad(3L, 3L);
+        grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn(3L, 1L);
         grid.clearAssignmentGridColumn(3L, 2L);
         if (isDynamicTrackorType(configApp) && isMaster(configApp)) {
@@ -181,20 +185,20 @@ public class EntityConfigApp {
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(4L); //Trackor Classes
-            wait.waitGridLoad(4L, 4L);
+            grid2.waitLoad(4L);
             grid.clearAssignmentGridColumn2(4L, 0L);
             grid.selectAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(5L); //ePM Pages
-            wait.waitGridLoad(5L, 5L);
+            grid2.waitLoad(5L);
             grid.clearAssignmentGridColumn2(5L, 0L);
             grid.selectAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(ConfigApp configApp) {
@@ -221,7 +225,7 @@ public class EntityConfigApp {
         }
 
         tab.goToTab(3L); //Role Privs
-        wait.waitGridLoad(3L, 3L);
+        grid2.waitLoad(3L);
         grid.checkAssignmentGridColumnNew(3L, 1L, 0L, configApp.getRoles(), "R");
         grid.checkAssignmentGridColumnNew(3L, 2L, 0L, configApp.getRoles(), "E");
         if (isDynamicTrackorType(configApp) && isMaster(configApp)) {
@@ -232,13 +236,13 @@ public class EntityConfigApp {
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(4L); //Trackor Classes
-            wait.waitGridLoad(4L, 4L);
+            grid2.waitLoad(4L);
             grid.checkAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(5L); //ePM Pages
-            wait.waitGridLoad(5L, 5L);
+            grid2.waitLoad(5L);
             grid.checkAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
         }
 

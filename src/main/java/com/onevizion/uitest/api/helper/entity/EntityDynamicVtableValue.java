@@ -17,6 +17,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 
 @Component
@@ -52,6 +53,9 @@ public class EntityDynamicVtableValue {
     @Resource
     private Checkbox checkbox;
 
+    @Resource
+    private Grid2 grid2;
+
     public void add(DynamicVtableValue dynamicVtableValue) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -78,7 +82,7 @@ public class EntityDynamicVtableValue {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
     }
 
     public void edit(DynamicVtableValue dynamicVtableValue) {
@@ -110,7 +114,7 @@ public class EntityDynamicVtableValue {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
     }
 
     public void testOnForm(DynamicVtableValue dynamicVtableValue) {

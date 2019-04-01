@@ -9,6 +9,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
 public class MainMenu {
@@ -21,6 +22,9 @@ public class MainMenu {
 
     @Resource
     private Js js;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private ElementWait elementWait;
@@ -61,7 +65,7 @@ public class MainMenu {
         menuItem.click();
         elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
         waitPageTitle(item);
-        wait.waitGridLoad(0L, 0L);
+        grid2.waitLoad(0L);
     }
 
     public void selectMenuItemWithTree(String item, String treeItem) {
@@ -79,7 +83,7 @@ public class MainMenu {
         }
         elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
         waitPageTitle(item + " - " + treeItem);
-        wait.waitGridLoad(0L, 0L);
+        grid2.waitLoad(0L);
     }
 
     private WebElement findMenuItem(String item) {

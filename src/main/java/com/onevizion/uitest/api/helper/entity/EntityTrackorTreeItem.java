@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
@@ -56,6 +57,9 @@ public class EntityTrackorTreeItem {
 
     @Resource
     private Grid grid;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private Tree tree;
@@ -163,7 +167,7 @@ public class EntityTrackorTreeItem {
         wait.waitFormLoad();
 
         tab.goToTab(2L); //Role Privs
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
         grid.checkAssignmentGridColumn(2L, 1L, rolePrivsRead);
         grid.checkAssignmentGridColumn(2L, 2L, rolePrivsEdit);
         grid.checkAssignmentGridColumn(2L, 3L, rolePrivsAdd);
@@ -179,7 +183,7 @@ public class EntityTrackorTreeItem {
         wait.waitFormLoad();
 
         tab.goToTab(3L); //Role Lock Privs
-        wait.waitGridLoad(3L, 3L);
+        grid2.waitLoad(3L);
         grid.checkAssignmentGridColumn(3L, 1L, roleLockPrivsLock);
         grid.checkAssignmentGridColumn(3L, 2L, roleLockPrivsUnlock);
         grid.checkAssignmentGridColumn(3L, 3L, roleLockPrivsNone);

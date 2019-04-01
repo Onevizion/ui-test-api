@@ -16,7 +16,6 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.filter.Filter;
-import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.view.View;
 
 @Component
@@ -40,9 +39,6 @@ public class Wait {
     @Resource
     private HtmlSelect htmlSelect;
 
-    @Resource //TODO bug in Grid-115098 load views/filters before load grid
-    private Jquery jquery; //TODO bug in Grid-115098 load views/filters before load grid
-
     public void waitWebElement(final By elementLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for WebElement [" + elementLocator.toString() + "] is failed.")
@@ -55,32 +51,6 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
             .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId)).isDisplayed());
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> js.isGridLoaded(gridId).equals("1"));
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> js.isGridDataLoaded(gridId));
-    }
-
-    public void waitGridLoad(final Long gridId, final Long parentGridId) {
-        jquery.waitLoad(); //TODO bug in Grid-115098 load views/filters before load grid
-        waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + gridId));
-        waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId));
-
-        Long parentGridIdNewTemp = gridId;
-        //get parentGridId from js instead of java parameter
-        if (js.getIsSubGrid(gridId)) {
-            parentGridIdNewTemp = js.getParentGridIdx(gridId);
-        }
-
-        final Long parentGridIdNew = parentGridIdNewTemp;
-
-        waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + parentGridIdNew));
-        waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + parentGridIdNew));
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for grid with id=[" + parentGridIdNew + "] is failed")
-            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + parentGridIdNew)).isDisplayed());
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
             .until(webdriver -> js.isGridLoaded(gridId).equals("1"));

@@ -15,6 +15,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.TrackorClass;
 
 @Component
@@ -41,6 +42,9 @@ public class EntityTrackorClass {
     @Resource
     private Grid grid;
 
+    @Resource
+    private Grid2 grid2;
+
     public void add(TrackorClass trackorClass) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -53,7 +57,7 @@ public class EntityTrackorClass {
         seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER)).sendKeys(trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(TrackorClass trackorClass) {
@@ -70,7 +74,7 @@ public class EntityTrackorClass {
         seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER)).sendKeys(trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(TrackorClass trackorClass) {

@@ -17,6 +17,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.SortType;
@@ -59,6 +60,9 @@ public class EntityDynamicVtable {
     @Resource
     private GridSort gridSort;
 
+    @Resource
+    private Grid2 grid2;
+
     public void addWithChilds(DynamicVtable dynamicVtable) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -74,14 +78,14 @@ public class EntityDynamicVtable {
         wait.waitFormLoad();
 
         tab.goToTab(2L); //Values
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
 
         for (DynamicVtableValue dynamicVtableValue : dynamicVtable.getValues()) {
             entityDynamicVtableValue.add(dynamicVtableValue);
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void add(DynamicVtable dynamicVtable) {
@@ -94,7 +98,7 @@ public class EntityDynamicVtable {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(DynamicVtable dynamicVtable) {
@@ -109,7 +113,7 @@ public class EntityDynamicVtable {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testWithChilds(DynamicVtable dynamicVtable) {
@@ -121,7 +125,7 @@ public class EntityDynamicVtable {
         wait.waitFormLoad();
 
         tab.goToTab(2L); //Values
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
 
         gridSort.sortColumn(2L, SortType.ASC, "Value");
 

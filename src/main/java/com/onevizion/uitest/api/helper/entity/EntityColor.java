@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.Color;
 
 @Component
@@ -32,6 +33,9 @@ public class EntityColor {
 
     @Resource
     private Grid grid;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private Js js;
@@ -56,7 +60,7 @@ public class EntityColor {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(Color color) {
@@ -75,7 +79,7 @@ public class EntityColor {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(Color color) {

@@ -12,6 +12,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.ComponentPackage;
 
 @Component
@@ -25,6 +26,9 @@ public class EntityComponentPackage {
 
     @Resource
     private Window window;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private AssertElement assertElement;
@@ -48,7 +52,7 @@ public class EntityComponentPackage {
         seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackage.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void edit(ComponentPackage componentPackageOld, ComponentPackage componentPackage) {
@@ -60,7 +64,7 @@ public class EntityComponentPackage {
         seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackage.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void testOnForm(ComponentPackage componentPackage) {

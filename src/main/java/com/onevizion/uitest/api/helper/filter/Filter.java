@@ -23,6 +23,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
@@ -99,6 +100,9 @@ public class Filter {
     @Resource
     private GridSort gridSort;
 
+    @Resource
+    private Grid2 grid2;
+
     public void checkIsExistFilterControl(Long gridIdx, boolean isExist) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         int count = seleniumSettings.getWebDriver().findElements(By.id(FILTER_MAIN_ELEMENT_ID_BASE + gridIdx)).size();
@@ -161,7 +165,7 @@ public class Filter {
 
         if (entityPrefix.equals(UNSAVED_FILTER_NAME)) {
             seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_FILTER + gridIdx)).click();
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
         } else {
             seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
@@ -169,7 +173,7 @@ public class Filter {
             elementWait.waitElementVisible(filterElem);
             filterElem.click();
 
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
 
             seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
 
@@ -242,7 +246,7 @@ public class Filter {
         Assert.assertEquals(isSavedFilter, true, "Filter " + entityPrefix + " isn't saved");
 
         filterWait.waitCurrentFilterName(gridIdx, entityPrefix);
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void openFilterForm(Long gridIdx) {
@@ -253,10 +257,10 @@ public class Filter {
 
     public void closeFilterFormOk(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
 
         filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void closeFilterFormCancel() {
@@ -355,7 +359,7 @@ public class Filter {
         tree.waitLoad(0L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
 
         wait.waitFiltersCount(gridIdx, beforeDeleteSize - 1);
 
@@ -370,10 +374,10 @@ public class Filter {
 
         if (currentFilterName.equals(entityPrefix)) {
             filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
         } else {
             filterWait.waitCurrentFilterName(gridIdx, currentFilterName);
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
         }
     }
 

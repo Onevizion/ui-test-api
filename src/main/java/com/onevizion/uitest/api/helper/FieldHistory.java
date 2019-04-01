@@ -15,6 +15,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
 public class FieldHistory {
@@ -31,6 +32,9 @@ public class FieldHistory {
 
     @Resource
     private Grid grid;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private Window window;
@@ -148,7 +152,7 @@ public class FieldHistory {
         }
 
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        wait.waitGridLoad(1L, 1L);
+        grid2.waitLoad(1L);
     }
 
     private List<String> getHistoryVals(int position, @SuppressWarnings("unchecked") List<String> ... vals) {

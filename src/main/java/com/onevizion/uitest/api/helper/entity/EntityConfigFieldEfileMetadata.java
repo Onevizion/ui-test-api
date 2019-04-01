@@ -17,6 +17,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.ConfigFieldVoEfileMetadata;
 
 @Component
@@ -42,6 +43,9 @@ public class EntityConfigFieldEfileMetadata {
     private Grid grid;
 
     @Resource
+    private Grid2 grid2;
+
+    @Resource
     private AssertElement assertElement;
 
     @Resource
@@ -57,7 +61,7 @@ public class EntityConfigFieldEfileMetadata {
         psSelector.selectSpecificValue(By.name(FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, configFieldVoEfileMetadata.getConfigField(), 1L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(3L, 3L);
+        grid2.waitLoad(3L);
     }
 
     public void testOnForm(ConfigFieldVoEfileMetadata configFieldVoEfileMetadata) {

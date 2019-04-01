@@ -20,6 +20,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
@@ -85,6 +86,9 @@ public class View {
 
     @Resource
     private Tree tree;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private Js js;
@@ -163,7 +167,7 @@ public class View {
 
         if (entityPrefix.equals(UNSAVED_VIEW_NAME)) {
             seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_VIEW + gridIdx)).click();
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
         } else {
             seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
@@ -171,7 +175,7 @@ public class View {
             elementWait.waitElementVisible(viewElem);
             viewElem.click();
 
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
 
             seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
 
@@ -224,7 +228,7 @@ public class View {
         Assert.assertEquals(isSavedView, true, "View " + entityPrefix + " isn't saved");
 
         viewWait.waitCurrentViewName(gridIdx, entityPrefix);
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void openViewForm(Long gridIdx) {
@@ -238,10 +242,10 @@ public class View {
 
     public void closeViewFormOk(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
 
         viewWait.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void closeViewFormCancel() {
@@ -340,7 +344,7 @@ public class View {
         tree.waitLoad(0L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
 
         wait.waitViewsCount(gridIdx, beforeDeleteSize - 1);
 
@@ -355,10 +359,10 @@ public class View {
 
         if (currentViewName.equals(entityPrefix)) {
             viewWait.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
         } else {
             viewWait.waitCurrentViewName(gridIdx, currentViewName);
-            wait.waitGridLoad(gridIdx, gridIdx);
+            grid2.waitLoad(gridIdx);
         }
     }
 

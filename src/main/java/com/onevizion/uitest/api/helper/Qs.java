@@ -17,6 +17,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
 public class Qs {
@@ -29,6 +30,9 @@ public class Qs {
 
     @Resource
     private ElementWait elementWait;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -117,17 +121,17 @@ public class Qs {
                 item.click();
             }
         }
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void clickSearchQs(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id("btnSearch" + gridIdx)).click();
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void clickClearQs(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id("btnSearchClear" + gridIdx)).click();
-        wait.waitGridLoad(gridIdx, gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void searchValue(Long gridIdx, String fieldName, String search) {

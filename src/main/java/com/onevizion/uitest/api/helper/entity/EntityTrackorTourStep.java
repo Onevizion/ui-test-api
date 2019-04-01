@@ -18,6 +18,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
 
 @Component
@@ -49,6 +50,9 @@ public class EntityTrackorTourStep {
 
     @Resource
     private Grid grid;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private Js js;
@@ -95,7 +99,7 @@ public class EntityTrackorTourStep {
         js.setValueToFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
     }
 
     public void edit(TrackorTourStep trackorTourStep) {
@@ -140,7 +144,7 @@ public class EntityTrackorTourStep {
         js.setValueToFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitGridLoad(2L, 2L);
+        grid2.waitLoad(2L);
     }
 
     public void testOnForm(TrackorTourStep trackorTourStep) {

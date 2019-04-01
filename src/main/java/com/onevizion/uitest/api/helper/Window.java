@@ -17,6 +17,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.document.Document;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
@@ -43,6 +44,9 @@ public class Window {
 
     @Resource
     private Jquery jquery;
+
+    @Resource
+    private Grid2 grid2;
 
     public void openModal(final By elemenLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -155,7 +159,7 @@ public class Window {
 
     public void closeModalCtrlEnterAndWaitGridLoad() {
         closeModalCtrlEnter();
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void closeModal(final By elementClick) {
@@ -183,7 +187,7 @@ public class Window {
 
     public void closeModalAndWaitGridLoad(By elementClick) {
         closeModal(elementClick);
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void closeModalWithAlert(final By elementClick, final String message) {

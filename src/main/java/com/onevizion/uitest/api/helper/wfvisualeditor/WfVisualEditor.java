@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
 public class WfVisualEditor {
@@ -23,6 +24,9 @@ public class WfVisualEditor {
 
     @Resource
     private Wait wait;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private Window window;
@@ -76,13 +80,13 @@ public class WfVisualEditor {
     public void openStepNotificationsGrid(String text) {
         selectStepNode(text);
         window.openModal(By.id("btnNotifications"));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void openStepLinksGrid(String text) {
         selectStepNode(text);
         window.openModal(By.id("btnLinks"));
-        wait.waitGridLoad(AbstractSeleniumCore.getGridIdx(), AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
     public void deleteStep(String text) {

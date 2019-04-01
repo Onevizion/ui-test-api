@@ -21,6 +21,7 @@ import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.GridColumnType;
 import com.onevizion.uitest.api.vo.SortType;
 
@@ -43,6 +44,9 @@ public class GridSort {
 
     @Resource
     private Wait wait;
+
+    @Resource
+    private Grid2 grid2;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -82,7 +86,7 @@ public class GridSort {
             }
         }
 
-        wait.waitGridLoad(gridId, gridId);
+        grid2.waitLoad(gridId);
 
         checkCurrentGridSort(gridId, sortType, columnIndex, columnId);
     }
@@ -122,7 +126,7 @@ public class GridSort {
             }
         }
 
-        wait.waitGridLoad(gridId, gridId);
+        grid2.waitLoad(gridId);
 
         checkCurrentGridSort(gridId, sortType, columnIndex, columnId);
     }
