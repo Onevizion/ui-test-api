@@ -86,7 +86,7 @@ public class EntityConfigFieldEfileMetadata {
 
     public void removeAll() {
         while (!grid.isGridEmpty(3L)) {
-            grid.deleteCurrentRow(3L, 3L);
+            grid.deleteCurrentRow(3L);
         }
     }
 

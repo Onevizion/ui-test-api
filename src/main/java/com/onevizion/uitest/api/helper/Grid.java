@@ -151,7 +151,7 @@ public class Grid {
         }
     }
 
-    public void deleteCurrentRow(Long gridId, Long parentGridId) {
+    public void deleteCurrentRow(Long gridId) {
         Long oldCnt = js.getGridRowsCount(gridId);
         if (oldCnt > 1) {
             oldCnt = oldCnt - 1L;
