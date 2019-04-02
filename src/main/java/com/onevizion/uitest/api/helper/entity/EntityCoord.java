@@ -48,7 +48,7 @@ public class EntityCoord {
         psSelector.selectSpecificValue(By.id("btnlongitudeField"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, coord.getLongFieldName(), 1L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testInGrid(Long gridId, Long rowIndex, Coord coord) {

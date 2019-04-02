@@ -57,7 +57,7 @@ public class EntityTrackorClass {
         seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER)).sendKeys(trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(TrackorClass trackorClass) {
@@ -74,7 +74,7 @@ public class EntityTrackorClass {
         seleniumSettings.getWebDriver().findElement(By.name(ORDER_NUMBER)).sendKeys(trackorClass.getOrderNumber());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(TrackorClass trackorClass) {

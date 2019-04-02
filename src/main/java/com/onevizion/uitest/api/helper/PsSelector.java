@@ -50,7 +50,7 @@ public class PsSelector {
         String ret = null;
 
         window.openModal(By.name(buttonName));
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
         for (Long i = romNum; i <= romNum; i++) {
             String value = js.getGridCellValueByRowIndexAndColIndex(0L, romNum, colNum);
             value = OnevizionUtils.removeHTMLTags(value);
@@ -67,7 +67,7 @@ public class PsSelector {
         List<String> ret = new ArrayList<>();
 
         window.openModal(By.name(buttonName));
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
         List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("cb0_0"));
         for (Long i = firstRowNum; i <= lastRowNum; i++) {
             checkbox.clickByElement(webElements.get(i.intValue()));
@@ -81,7 +81,7 @@ public class PsSelector {
     public String selectSpecificValue(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(btnClose);
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
 
         if (qs.isExistQs(0L)) {
             qs.waitQsActive(0L);
@@ -116,7 +116,7 @@ public class PsSelector {
         List<String> ret = new ArrayList<>();
         window.openModal(btnOpen);
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
 
         if (qs.isExistQs(0L)) {
             qs.waitQsActive(0L);
@@ -159,7 +159,7 @@ public class PsSelector {
     public List<String> selectMultipleSpecificValues2(String buttonName, Long colNum, List<String> values, Long filterFiledNum) {
         List<String> ret = new ArrayList<>();
         window.openModal(By.name(buttonName));
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
 
         for (String value : values) {
             if (qs.isTextQs(0L)) {
@@ -189,7 +189,7 @@ public class PsSelector {
         boolean ret = false;
         window.openModal(btnOpen);
         wait.waitWebElement(By.id(btnCloseName));
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
 
         if (qs.isExistQs(0L)) {
             qs.waitQsActive(0L);
@@ -224,7 +224,7 @@ public class PsSelector {
     public boolean checkMultipleValues(By btnOpen, String btnCloseName, List<String> values, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(By.name(btnCloseName));
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
 
         if (qs.isExistQs(0L)) {
             for (String value : values) {

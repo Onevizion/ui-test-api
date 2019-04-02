@@ -91,7 +91,7 @@ public class EntityTrackorForm {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(TrackorForm trackorForm) {
@@ -130,7 +130,7 @@ public class EntityTrackorForm {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(TrackorForm trackorForm) {

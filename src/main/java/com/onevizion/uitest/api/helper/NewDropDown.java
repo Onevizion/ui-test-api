@@ -62,7 +62,7 @@ public class NewDropDown {
 
     public void selectComponentPackage(String name) {
         selectEntity("lbCompPkg0", name);
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     private void selectEntity(String id, String name) {
@@ -115,7 +115,7 @@ public class NewDropDown {
 
     public void deleteComponentPackage(String name) {
         deleteEntity("lbCompPkg0", "CompPkg0", 2, name);
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     private void deleteEntity(String id, String buttonId, int buttonsCnt, String name) {

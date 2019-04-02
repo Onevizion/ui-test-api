@@ -64,7 +64,7 @@ public class EntityWpDiscipline {
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(WpDiscipline wpDiscipline) {
@@ -84,7 +84,7 @@ public class EntityWpDiscipline {
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(WpDiscipline wpDiscipline) {

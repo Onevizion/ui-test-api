@@ -159,7 +159,7 @@ public class Window {
 
     public void closeModalCtrlEnterAndWaitGridLoad() {
         closeModalCtrlEnter();
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void closeModal(final By elementClick) {
@@ -187,7 +187,7 @@ public class Window {
 
     public void closeModalAndWaitGridLoad(By elementClick) {
         closeModal(elementClick);
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void closeModalWithAlert(final By elementClick, final String message) {

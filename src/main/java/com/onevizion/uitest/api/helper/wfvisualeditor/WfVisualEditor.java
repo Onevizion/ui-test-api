@@ -80,13 +80,13 @@ public class WfVisualEditor {
     public void openStepNotificationsGrid(String text) {
         selectStepNode(text);
         window.openModal(By.id("btnNotifications"));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void openStepLinksGrid(String text) {
         selectStepNode(text);
         window.openModal(By.id("btnLinks"));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void deleteStep(String text) {

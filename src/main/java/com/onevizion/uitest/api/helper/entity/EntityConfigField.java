@@ -363,7 +363,7 @@ public class EntityConfigField {
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(ConfigFieldVo configFieldVo) {
@@ -618,7 +618,7 @@ public class EntityConfigField {
         } else {
             window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         }
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(ConfigFieldVo configFieldVo) {

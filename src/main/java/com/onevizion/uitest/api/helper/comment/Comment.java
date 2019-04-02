@@ -119,7 +119,7 @@ public class Comment {
         wait.waitWebElement(By.id("comment"));
         wait.waitWebElement(By.id("btnSubmit"));
         wait.waitFormLoad();
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
     }
 
     public void addComment(String text) {
@@ -132,7 +132,7 @@ public class Comment {
         elementWait.waitElementEnabledById("btnSubmit");
         seleniumSettings.getWebDriver().findElement(By.id("btnSubmit")).findElement(By.xpath("..")).click();
 
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
 
         wait.waitGridRowsCount(0L, rowsCntBefore + 1L);
 
@@ -172,7 +172,7 @@ public class Comment {
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
 
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
 
         wait.waitGridRowsCount(0L, rowsCntBefore - 1L);
     }

@@ -53,7 +53,7 @@ public class EntityReportGroup {
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(reportGroup.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(ReportGroup reportGroup) {
@@ -65,7 +65,7 @@ public class EntityReportGroup {
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(reportGroup.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(ReportGroup reportGroup) {

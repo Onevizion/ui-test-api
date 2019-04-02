@@ -139,7 +139,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(SecurityRole securityRole) {
@@ -194,7 +194,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(SecurityRole securityRole) {

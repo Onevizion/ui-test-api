@@ -161,7 +161,7 @@ public class Export {
         elementWait.waitElementDisplay(exportMenu.getHistory());
         window.openModal(exportMenu.getHistory());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
@@ -187,7 +187,7 @@ public class Export {
         elementWait.waitElementDisplay(exportMenu.getHistory());
         window.openModal(exportMenu.getHistory());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
@@ -196,7 +196,7 @@ public class Export {
         element.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx())));
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
         gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(0L), "Grid have wrong rows count");
 

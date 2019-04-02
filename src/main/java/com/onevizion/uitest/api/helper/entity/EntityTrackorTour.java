@@ -111,7 +111,7 @@ public class EntityTrackorTour {
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(TrackorTour trackorTour) {
@@ -147,7 +147,7 @@ public class EntityTrackorTour {
         grid.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testWithChilds(TrackorTour trackorTour) {

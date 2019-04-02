@@ -57,7 +57,7 @@ public class EntityClientFile {
         htmlInputFile.uploadOnAdminClientFile(clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(ClientFile clientFile) {
@@ -70,7 +70,7 @@ public class EntityClientFile {
         htmlInputFile.uploadOnAdminClientFile(clientFile.getFileName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(ClientFile clientFile) {

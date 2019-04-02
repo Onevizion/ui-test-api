@@ -65,7 +65,7 @@ public class MainMenu {
         menuItem.click();
         elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
         waitPageTitle(item);
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
     }
 
     public void selectMenuItemWithTree(String item, String treeItem) {
@@ -83,7 +83,7 @@ public class MainMenu {
         }
         elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
         waitPageTitle(item + " - " + treeItem);
-        grid2.waitLoad(0L);
+        grid2.waitLoad();
     }
 
     private WebElement findMenuItem(String item) {

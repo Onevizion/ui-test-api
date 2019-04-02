@@ -76,7 +76,7 @@ public class EntityWpDatePair {
         grid.selectAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(WpDatePair wpDatePair) {
@@ -107,7 +107,7 @@ public class EntityWpDatePair {
         grid.selectAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(WpDatePair wpDatePair) {

@@ -52,7 +52,7 @@ public class EntityComponentPackage {
         seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackage.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(ComponentPackage componentPackageOld, ComponentPackage componentPackage) {
@@ -64,7 +64,7 @@ public class EntityComponentPackage {
         seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackage.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(ComponentPackage componentPackage) {

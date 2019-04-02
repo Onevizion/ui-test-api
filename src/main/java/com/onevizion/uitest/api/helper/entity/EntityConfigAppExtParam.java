@@ -59,7 +59,7 @@ public class EntityConfigAppExtParam {
         js.setValueToCodeMirror(SQL, "select 1 from dual");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(ConfigAppExtParam configAppExtParam) {
@@ -77,7 +77,7 @@ public class EntityConfigAppExtParam {
         js.setValueToCodeMirror(SQL, "select 11 from dual");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(ConfigAppExtParam configAppExtParam) {

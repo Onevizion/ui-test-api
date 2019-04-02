@@ -60,7 +60,7 @@ public class EntityColor {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void edit(Color color) {
@@ -79,7 +79,7 @@ public class EntityColor {
         seleniumSettings.getWebDriver().findElement(By.name("description")).sendKeys(color.getDescription());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        grid2.waitLoad(AbstractSeleniumCore.getGridIdx());
+        grid2.waitLoad();
     }
 
     public void testOnForm(Color color) {
