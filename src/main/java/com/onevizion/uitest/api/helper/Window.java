@@ -265,18 +265,10 @@ public class Window {
     }
 
     public void maximize() {
-        if (seleniumSettings.getBrowser().equals("firefox")) {
-            if (seleniumSettings.getHeadlessMode()) {
-                seleniumSettings.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
-            } else {
-                seleniumSettings.getWebDriver().manage().window().maximize();
-            }
-        } else if (seleniumSettings.getBrowser().equals("chrome")) {
-            if (seleniumSettings.getHeadlessMode()) {
-                seleniumSettings.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
-            } else {
-                seleniumSettings.getWebDriver().manage().window().maximize();
-            }
+        if (seleniumSettings.getHeadlessMode()) {
+            seleniumSettings.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
+        } else {
+            seleniumSettings.getWebDriver().manage().window().maximize();
         }
     }
 
