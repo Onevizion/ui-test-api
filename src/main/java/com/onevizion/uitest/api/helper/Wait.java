@@ -1,5 +1,7 @@
 package com.onevizion.uitest.api.helper;
 
+import java.util.function.IntSupplier;
+import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
 import javax.annotation.Resource;
@@ -60,13 +62,13 @@ public class Wait {
     }
 
     public void waitGridRowsCount(final Long gridId, final Long rowsCount) {
-        Supplier<Long> actualValueSupplier = ()-> grid.getGridRowsCount(gridId);
+        LongSupplier actualValueSupplier = ()-> grid.getGridRowsCount(gridId);
 
-        Supplier<String> messageSupplier = ()-> "Waiting rows count for grid with id=[" + gridId + "] expectedVal=[" + rowsCount + "] actualVal=[" + actualValueSupplier.get() + "] is failed";
+        Supplier<String> messageSupplier = ()-> "Waiting rows count for grid with id=[" + gridId + "] expectedVal=[" + rowsCount + "] actualVal=[" + actualValueSupplier.getAsLong() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> rowsCount.equals(actualValueSupplier.get()));
+            .until(webdriver -> rowsCount.equals(actualValueSupplier.getAsLong()));
     }
 
     public void waitFiltersCount(final Long gridIdx, final int filtersCount) {
@@ -76,13 +78,13 @@ public class Wait {
     }
 
     public void waitViewsCount(final Long gridIdx, final int viewsCount) {
-        Supplier<Integer> actualValueSupplier = ()-> view.getViewsCount(gridIdx);
+        IntSupplier actualValueSupplier = ()-> view.getViewsCount(gridIdx);
 
-        Supplier<String> messageSupplier = ()-> "Waiting views count for grid with idx=[" + gridIdx + "] expectedVal=[" + viewsCount + "] actualVal=[" + actualValueSupplier.get().intValue() + "] is failed";
+        Supplier<String> messageSupplier = ()-> "Waiting views count for grid with idx=[" + gridIdx + "] expectedVal=[" + viewsCount + "] actualVal=[" + actualValueSupplier.getAsInt() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> viewsCount == actualValueSupplier.get().intValue());
+            .until(webdriver -> viewsCount == actualValueSupplier.getAsInt());
     }
 
     public void waitNewDropDownCount(final By elemenLocator, final int afterCount) {

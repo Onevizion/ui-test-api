@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -703,14 +702,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected abstract String getModuleName();
 
     private String getTestName() {
-        String testName = getClass().getName();
-        testName = testName.substring(testName.lastIndexOf('.') + 1);
-        return testName;
+        String fullTestName = getFullTestName();
+        return fullTestName.substring(fullTestName.lastIndexOf('.') + 1);
     }
 
     private String getFullTestName() {
-        String testName = getClass().getName();
-        return testName;
+        return getClass().getName();
     }
 
     public static Long getGridIdx() {
@@ -756,17 +753,18 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             return "Error";
         }
 
-        String bugs = "";
         SeleniumBug[] seleniumBugs = testClass.getAnnotationsByType(SeleniumBug.class);
+
+        StringBuilder strBuilder = new StringBuilder();
         for (SeleniumBug seleniumBug : seleniumBugs) {
-            if (StringUtils.isEmpty(bugs)) {
-                bugs = seleniumBug.value();
+            if (strBuilder.length() == 0) {
+                strBuilder.append(seleniumBug.value());
             } else {
-                bugs = bugs + "," + seleniumBug.value();
+                strBuilder.append("," + seleniumBug.value());
             }
         }
 
-        return bugs;
+        return strBuilder.toString();
     }
 
     protected void allowDownloadFileForHeadlessChrome() {

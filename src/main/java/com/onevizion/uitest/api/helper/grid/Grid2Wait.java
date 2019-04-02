@@ -1,5 +1,6 @@
 package com.onevizion.uitest.api.helper.grid;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 import javax.annotation.Resource;
@@ -20,13 +21,13 @@ class Grid2Wait {
     private Grid2Js grid2Js;
 
     void waitLoadAllRows(Long gridIdx) {
-        Supplier<Boolean> actualValueSupplier = ()-> grid2Js.isLoadAllRowsDone(gridIdx);
+        BooleanSupplier actualValueSupplier = ()-> grid2Js.isLoadAllRowsDone(gridIdx);
 
         Supplier<String> messageSupplier = ()-> "Waiting for load all rows is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> actualValueSupplier.get());
+            .until(webdriver -> actualValueSupplier.getAsBoolean());
     }
 
     void waitGridCellLockType(Long gridId, Long columnIndex, Long rowIndex, LockType lockType) {
