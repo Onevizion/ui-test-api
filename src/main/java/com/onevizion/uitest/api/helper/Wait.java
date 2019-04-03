@@ -18,6 +18,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.filter.Filter;
+import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.view.View;
 
 @Component
@@ -37,6 +38,9 @@ public class Wait {
 
     @Resource
     private View view;
+
+    @Resource
+    private Tab tab;
 
     @Resource
     private HtmlSelect htmlSelect;
@@ -239,7 +243,12 @@ public class Wait {
             .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0"));
     }
 
-    public void waitConfigTabLoad(final Long tabIndex) {
+    public void waitConfigTabLoad(String tabLabel) {
+        Long tabIndex = tab.getTabIndex(tabLabel);
+        waitConfigTabLoad(tabIndex);
+    }
+
+    public void waitConfigTabLoad(Long tabIndex) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
             .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("innerHTML").contains("Loading Tab. Please wait..."));

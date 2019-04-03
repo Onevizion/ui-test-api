@@ -26,20 +26,7 @@ public class Tab {
     private TabJs tabJs;
 
     public void goToTab(String tabLabel) {
-        Long tabIndex = null;
-        for (int i = 1; i <= getTabsCnt(); i++) {
-            if (tabLabel.equals(getTabLabel((long) i))) {
-                if (tabIndex != null) {
-                    throw new SeleniumUnexpectedException("Tab with text[" + tabLabel + "] found many times");
-                }
-                tabIndex = (long) i;
-            }
-        }
-
-        if (tabIndex == null) {
-            throw new SeleniumUnexpectedException("Tab with text[" + tabLabel + "] not found");
-        }
-
+        Long tabIndex = getTabIndex(tabLabel);
         goToTab(tabIndex);
     }
 
@@ -54,6 +41,24 @@ public class Tab {
 
     public String getTabLabel(Long tabIndex) {
         return seleniumSettings.getWebDriver().findElement(By.name("tabLbl" + tabIndex.intValue())).getAttribute("textContent");
+    }
+
+    public Long getTabIndex(String tabLabel) {
+        Long tabIndex = null;
+        for (int i = 1; i <= getTabsCnt(); i++) {
+            if (tabLabel.equals(getTabLabel((long) i))) {
+                if (tabIndex != null) {
+                    throw new SeleniumUnexpectedException("Tab with text[" + tabLabel + "] found many times");
+                }
+                tabIndex = (long) i;
+            }
+        }
+
+        if (tabIndex == null) {
+            throw new SeleniumUnexpectedException("Tab with text[" + tabLabel + "] not found");
+        }
+
+        return tabIndex;
     }
 
     public void hideTabMenu() {
