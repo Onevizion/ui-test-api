@@ -49,6 +49,7 @@ public class SeleniumLogger {
         msg = msg.replaceAll("\\\\", "\\\\\\\\");
         msg = msg.replaceAll("\\n", "\\\\n");
         msg = msg.replaceAll("\\t", "\\\\t");
+        msg = msg.replaceAll("\\r", "\\\\r");
         msg = msg.replaceAll("\"", "'");
         String testLog = seleniumSettings.getTestLog();
         if (testLog == null) {

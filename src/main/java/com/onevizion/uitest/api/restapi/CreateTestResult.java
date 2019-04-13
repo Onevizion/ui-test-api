@@ -21,7 +21,7 @@ public class CreateTestResult {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void create(String process, String testName, String browserName, String date, String testStatus, String duration, String bugs, String errorLog, String errorScreenshot) {
+    public void create(String process, String testName, String browserName, String date, String testStatus, String duration, String bugs, String errorLog, String errorReport, String errorScreenshot) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -43,6 +43,7 @@ public class CreateTestResult {
                             "     \"STR_DURATION\": \"" + duration + "\", " + 
                             "     \"STR_BUGS\": \"" + bugs + "\", " + 
                             "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
+                            "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
                             "     \"STR_ERROR_FILE\": {\"file_name\": \"screenshot.jpg\", \"data\": \"" + errorScreenshot + "\"} " + 
                             "   }, " + 
                             "   \"parents\": [ " + 
@@ -69,7 +70,8 @@ public class CreateTestResult {
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                             "     \"STR_DURATION\": \"" + duration + "\", " + 
                             "     \"STR_BUGS\": \"" + bugs + "\", " + 
-                            "     \"STR_ERROR_LOG\": \"" + errorLog + "\" " + 
+                            "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
+                            "     \"STR_ERROR_REPORT\": \"" + errorReport + "\" " + 
                             "   }, " + 
                             "   \"parents\": [ " + 
                             "     { " + 
