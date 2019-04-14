@@ -24,6 +24,10 @@ public class SeleniumScreenshot {
     private SeleniumLogger seleniumLogger;
 
     public void getScreenshot() {
+        getScreenshot(false);
+    }
+
+    public void getScreenshot(boolean saveScreenshotToExternalSystem) {
         try {
             String screensDirectory = seleniumSettings.getScreenshotsPath();
             String ciAddress = seleniumSettings.getCiAddr();
@@ -41,6 +45,11 @@ public class SeleniumScreenshot {
 
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
                 Date date = new Date();
+
+                if (saveScreenshotToExternalSystem) {
+                    String screenshotBase64 = ((TakesScreenshot) seleniumSettings.getWebDriver()).getScreenshotAs(OutputType.BASE64);
+                    seleniumSettings.setTestFailScreenshot(screenshotBase64);
+                }
 
                 byte[] screen = ((TakesScreenshot) seleniumSettings.getWebDriver()).getScreenshotAs(OutputType.BYTES);
                 String screenFileName = String.format("%s_%s_%s.jpg", browserName, seleniumSettings.getTestName(), dateFormat.format(date));
@@ -61,7 +70,7 @@ public class SeleniumScreenshot {
                 seleniumLogger.error(seleniumSettings.getTestName() + " Current web browser dont't supports getting screenshots");
             }
         } catch (Exception e) {
-            seleniumLogger.error(seleniumSettings.getTestName() + " Unexpected exception: " + e.getMessage());
+            seleniumLogger.error(seleniumSettings.getTestName() + " getScreenshot Unexpected exception: " + e.getMessage());
         }
     }
 

@@ -22,10 +22,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -364,10 +362,13 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     private DesiredCapabilities capability;
 
     @Resource
-    public SeleniumSettings seleniumSettings;
+    protected SeleniumSettings seleniumSettings;
 
     @Resource
-    public SeleniumScreenshot seleniumScreenshot;
+    protected SeleniumScreenshot seleniumScreenshot;
+
+    @Resource
+    protected SeleniumHelper seleniumHelper;
 
     @Resource
     protected SeleniumLogger seleniumLogger;
@@ -616,20 +617,21 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumLogger.info(seleniumSettings.getTestName() + " login as " + seleniumSettings.getTestUser());
             loginIntoSystem(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
 
-            dataPreparation();
-
-            openInternalPage();
-
             seleniumSettings.setWindows(new LinkedList<String>());
             seleniumSettings.getWindows().add(seleniumSettings.getWebDriver().getWindowHandle());
 
+            dataPreparation();
+
+            openInternalPage();
         } catch (Exception e) {
             seleniumSettings.setTestStatus("fail");
 
             seleniumLogger.error(seleniumSettings.getTestName() + " openBrowserAndLogin fail");
             seleniumLogger.error(seleniumSettings.getTestName() + " openBrowserAndLogin Unexpected exception: " + e.getMessage());
 
-            seleniumScreenshot.getScreenshot();
+            if (seleniumSettings.getWebDriver() != null) {
+                seleniumHelper.closeAfterErrorAndGetScreenshot();
+            }
 
             throw new SeleniumUnexpectedException(e);
         }
@@ -638,28 +640,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected void seleniumCloseBrowser(ITestContext context) {
         try {
             if (seleniumSettings.getWebDriver() != null) {
-                //TODO following code can throw exception if alert present. remove this code after remove firefox 59 bug
-                int maxAlertsCount = 100; //protection from the endless cycle
-                while (maxAlertsCount > 0) {
-                    maxAlertsCount = maxAlertsCount - 1;
-                    try {
-                        Alert alert = seleniumSettings.getWebDriver().switchTo().alert();
-                        seleniumLogger.error(seleniumSettings.getTestName() + " closeBrowser There is alert with error message: " + alert.getText());
-                        alert.accept();
-                    } catch (WebDriverException e) { // should be NoAlertPresentException
-                        break;
-                    }
-                }
-
-                if (maxAlertsCount == 0) {
-                    seleniumLogger.error(seleniumSettings.getTestName() + " Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
-                }
-
-                //TODO firefox 59 bug
-                //https://github.com/mozilla/geckodriver/issues/1151
-                //https://bugzilla.mozilla.org/show_bug.cgi?id=1434872
-                js.resetFormChange();
-                js.resetGridChange();
+                seleniumHelper.closeAfterError();
                 seleniumSettings.getWebDriver().quit();
                 seleniumLogger.info(seleniumSettings.getTestName() + " browser close");
             }

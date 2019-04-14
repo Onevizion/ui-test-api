@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumAlertException;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
@@ -24,30 +23,6 @@ public class Js {
     protected String execJs(String script) {
         try {
             Object result = ((JavascriptExecutor) seleniumSettings.getWebDriver()).executeScript(script);
-            if (result != null) {
-                String res = result.toString();
-                if (res.length() > 0) {
-                    if ("'".equals(res.substring(0, 1)) || "\"".equals(res.substring(0, 1))) {
-                        res = res.substring(1);
-                    }
-                    if ("'".equals(res.substring(res.length() - 1)) || "\"".equals(res.substring(res.length() - 1))) {
-                        res = res.substring(0, res.length() - 1);
-                    }
-                }
-                return res;
-            } else {
-                return null;
-            }
-        } catch (UnhandledAlertException e) {
-            throw new SeleniumAlertException("Error while executing JavaScript with code: " + script, e);
-        } catch (WebDriverException e) {
-            throw new SeleniumUnexpectedException("Error while executing JavaScript with code: " + script, e);
-        }
-    }
-
-    protected String execJs(AbstractSeleniumCore test, String script) {
-        try {
-            Object result = ((JavascriptExecutor) test.seleniumSettings.getWebDriver()).executeScript(script);
             if (result != null) {
                 String res = result.toString();
                 if (res.length() > 0) {
@@ -426,15 +401,6 @@ public class Js {
                 + "}"));
     }
 
-    public Boolean isWindowClosed(AbstractSeleniumCore test) {
-        return Boolean.valueOf(execJs(test, ""
-                + "if (typeof wModal !== 'undefined') {"
-                + "    return wModal;"
-                + "} else {"
-                + "    return true;"
-                + "}"));
-    }
-
     public Boolean isDxtmlxWindowOpened(String windowName) {
         return Boolean.valueOf(execJs("return dhxWinsLog.isWindow('" + windowName + "');"));
     }
@@ -692,23 +658,8 @@ public class Js {
         execJs("if (typeof ov !== 'undefined' && typeof ov.bFormChanged !== 'undefined') {ov.bFormChanged = false;}");
     }
 
-    public void resetFormChange(AbstractSeleniumCore test) {
-        //TODO firefox 59 bug
-        //https://github.com/mozilla/geckodriver/issues/1067
-        //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
-        execJs(test, "if (typeof ov !== 'undefined' && typeof ov.bFormChanged !== 'undefined') {ov.bFormChanged = false;}");
-    }
-
     public void resetGridChange() {
         execJs(""
-                + "var buttons = document.getElementsByClassName('btnSaveChanges');"
-                + "for (var i = 0; i < buttons.length; i++) {"
-                + "    buttons[i].classList.remove('btnSaveChanges');"
-                + "}");
-    }
-
-    public void resetGridChange(AbstractSeleniumCore test) {
-        execJs(test, ""
                 + "var buttons = document.getElementsByClassName('btnSaveChanges');"
                 + "for (var i = 0; i < buttons.length; i++) {"
                 + "    buttons[i].classList.remove('btnSaveChanges');"
