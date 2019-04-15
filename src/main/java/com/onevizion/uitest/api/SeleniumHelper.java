@@ -24,14 +24,14 @@ public class SeleniumHelper {
     @Resource
     private Js js;
 
-    public void closeAfterErrorAndGetScreenshot() {
+    void closeAfterErrorAndGetScreenshot() {
         closeAllAlertsOnWindow();
         resetAllChangesOnWindow();
         seleniumScreenshot.getScreenshot(true);
         closeAllWindows();
     }
 
-    public void closeAfterError() {
+    void closeAfterError() {
         closeAllAlertsOnWindow();
         resetAllChangesOnWindow();
         closeAllWindows();

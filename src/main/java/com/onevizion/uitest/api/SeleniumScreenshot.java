@@ -27,7 +27,7 @@ public class SeleniumScreenshot {
         getScreenshot(false);
     }
 
-    public void getScreenshot(boolean saveScreenshotToExternalSystem) {
+    void getScreenshot(boolean saveScreenshotToExternalSystem) {
         try {
             String screensDirectory = seleniumSettings.getScreenshotsPath();
             String ciAddress = seleniumSettings.getCiAddr();

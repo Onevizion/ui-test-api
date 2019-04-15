@@ -21,6 +21,7 @@ public class SeleniumListener extends TestListenerAdapter {
     public void onTestFailure(ITestResult tr) {
         AbstractSeleniumCore test = ((AbstractSeleniumCore) tr.getTestClass().getInstances(false)[0]);
         test.seleniumLogger.error(test.seleniumSettings.getTestName() + " method " + tr.getName() + " fail");
+        test.seleniumLogger.error(test.seleniumSettings.getTestName() + " method " + tr.getName() + " fail Unexpected exception: " + tr.getThrowable().getMessage());
         test.seleniumSettings.setTestStatus("fail");
         test.seleniumHelper.closeAfterErrorAndGetScreenshot();
     }
