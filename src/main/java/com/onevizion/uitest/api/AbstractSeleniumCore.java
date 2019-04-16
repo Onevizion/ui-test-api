@@ -439,6 +439,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
 
+        seleniumLogger.info(seleniumSettings.getTestName() + " start");
+
         try {
             fillGlobalSettings();
 
@@ -459,9 +461,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 //https://github.com/SeleniumHQ/selenium/pull/285
                 try {
                     //OkHttpClient.Factory factory = new OkHttpClient.Factory(Duration.ofMinutes(2), Duration.ofHours(3));
-                    //OkHttpClient.Factory factory = new OkHttpClient.Factory(Duration.ofMinutes(2), Duration.ofMinutes(30));
+                    //OkHttpClient.Factory factory = new OkHttpClient.Factory(Duration.ofMinutes(3), Duration.ofMinutes(30));
                     OkHttpClient.Factory factory = new OkHttpClient.Factory();
-                    factory.builder().connectionTimeout(Duration.ofMinutes(2)).readTimeout(Duration.ofMinutes(30));
+                    factory.builder().connectionTimeout(Duration.ofMinutes(3)).readTimeout(Duration.ofMinutes(30));
                     HttpCommandExecutor executor = new HttpCommandExecutor(Collections.<String, CommandInfo> emptyMap(), new URL("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub"), factory);
                     seleniumSettings.setWebDriver(new RemoteWebDriver(executor, capabilities));
                     seleniumSettings.setUrl("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub");
