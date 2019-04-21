@@ -121,7 +121,8 @@ public class UserpageFilter {
         if ((fieldName.equals("FTB:FTB ID") || fieldName.equals("FT:FT ID") || fieldName.equals("FR:FR ID")
                 || fieldName.equals("FTB:Rollup") || fieldName.equals("FTBP:Rollup") || fieldName.equals("FTBC:Rollup")
                 || fieldName.equals("FT:Rollup") || fieldName.equals("FTP:Rollup") || fieldName.equals("FTC:Rollup")
-                || fieldName.equals("FR:Rollup") || fieldName.equals("FRP:Rollup") || fieldName.equals("FRC:Rollup")) && operator.equals(FilterOperatorType.NULL)) {
+                || fieldName.equals("FR:Rollup") || fieldName.equals("FRP:Rollup") || fieldName.equals("FRC:Rollup")
+                || fieldName.equals("FWF:Rollup 1")) && operator.equals(FilterOperatorType.NULL)) {
             
         } else {
             Long rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
