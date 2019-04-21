@@ -230,7 +230,7 @@ public class DualListbox {
     }
 
     public void addValueByValue(String btnId, String value) {
-        
+        checkValueByValueIsPresent(value);
 
         List<WebElement> leftColumns = view.getLeftColumns();
         for (int i = 0; i <= leftColumns.size(); i++) {
@@ -244,36 +244,30 @@ public class DualListbox {
         seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
     }
 
-    private void checkValuesByValueIsPresent(List<String> columnNames) {
+    private void checkValueByValueIsPresent(String value) {
         int attemptsCnt = 0; //protection from the endless cycle
         int i = 0;
         do {
-            if (i == 20 && columnNames.get(i) == null) { //Workplan and Tasks trackor types not support
-                i = i + 1;
-            } else {
-                try {
-                    List<WebElement> leftColumns = view.getLeftColumns();
-                    for (WebElement leftColumn : leftColumns) {
-                        if (columnNames.get(i).equals(leftColumn.getAttribute("id"))) {
-                            i = i + 1;
-                            break;
-                        }
+            try{
+                List<WebElement> leftColumns = view.getLeftColumns();
+                for (WebElement leftColumn : leftColumns) {
+                    if (value.equals(leftColumn.getAttribute("id"))) {
+                        i = i + 1;
+                        break;
                     }
-                } catch (StaleElementReferenceException e) {
-                    i = 0;
-                    attemptsCnt = attemptsCnt + 1;
                 }
+            } catch (StaleElementReferenceException e) {
+                i = 0;
             }
-        } while (i < columnNames.size() && attemptsCnt <= 10);
+            attemptsCnt = attemptsCnt + 1;
+        } while (i < 1 && attemptsCnt <= 10);
 
-        if (i < columnNames.size() && attemptsCnt > 10) {
+        if (i < 1 && attemptsCnt > 10) {
             throw new SeleniumUnexpectedException("Value not found in duallist box");
         }
     }
 
     public void addValues(String btnId, List<String> columnNames) {
-        checkValuesByValueIsPresent(columnNames);
-
         addValueByValue(btnId, columnNames.get(0)); //CHECKBOX
         addValueByValue(btnId, columnNames.get(1)); //DATE
         addValueByValue(btnId, columnNames.get(2)); //DB_DROP_DOWN
