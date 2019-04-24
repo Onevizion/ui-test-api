@@ -49,7 +49,7 @@ class DashboardJs extends Js {
 
     String getDashletSerieDataY(String dashletId, int serieIdx) {
         return execJs("var elements = dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series[" + serieIdx + "].data;"
-                + "var str = elements[0].x;"
+                + "var str = elements[0].y;"
                 + "for (var i = 1; i < elements.length; i++) {"
                 + "    str += ',' + elements[i].y;"
                 + "}"
