@@ -47,6 +47,15 @@ class DashboardJs extends Js {
                 + "return str;");
     }
 
+    String getDashletSerieDataXText(String dashletId, int serieIdx) {
+        return execJs("var elements = dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series[" + serieIdx + "].data;"
+                + "var str = elements[0].name;"
+                + "for (var i = 1; i < elements.length; i++) {"
+                + "    str += ',' + elements[i].name;"
+                + "}"
+                + "return str;");
+    }
+
     String getDashletSerieDataY(String dashletId, int serieIdx) {
         return execJs("var elements = dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series[" + serieIdx + "].data;"
                 + "var str = elements[0].y;"

@@ -87,6 +87,10 @@ public class Dashboard {
         return dashboardJs.getDashletSerieDataX(dashletId, serieIdx);
     }
 
+    public String getDashletSerieDataXText(String dashletId, int serieIdx) {
+        return dashboardJs.getDashletSerieDataXText(dashletId, serieIdx);
+    }
+
     public String getDashletSerieDataY(String dashletId, int serieIdx) {
         return dashboardJs.getDashletSerieDataY(dashletId, serieIdx);
     }
