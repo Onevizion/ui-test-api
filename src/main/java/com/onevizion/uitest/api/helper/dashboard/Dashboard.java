@@ -1,12 +1,14 @@
 package com.onevizion.uitest.api.helper.dashboard;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -15,6 +17,7 @@ import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.vo.DashAxisType;
 import com.onevizion.uitest.api.vo.DashColumnCalcMethodType;
 import com.onevizion.uitest.api.vo.DashColumnChartType;
+import com.onevizion.uitest.api.vo.DashDisplayModeType;
 
 @Component
 public class Dashboard {
@@ -95,12 +98,47 @@ public class Dashboard {
         return dashboardJs.getDashletSerieDataY(dashletId, serieIdx);
     }
 
+    public void openEditDashletForm(String dashletName) {
+        WebElement dashlet = getDashlet(dashletName);
+        dashlet.findElement(By.className("lm_settings")).findElements(By.className("btn_input")).get(1).click();
+
+        WebElement editButton = null;
+        List<WebElement> allMenu = seleniumSettings.getWebDriver().findElements(By.className("context_menu"));
+        for (WebElement menu : allMenu) {
+            if (menu.isDisplayed()) {
+                List<WebElement> menuButtons = menu.findElements(By.className("ic_container"));
+                for (WebElement menuButton : menuButtons) {
+                    if ("Edit".equals(menuButton.getText())) {
+                        if (editButton != null) {
+                            throw new SeleniumUnexpectedException("Edit button for dashlet [" + dashletName + "] found many times");
+                        }
+                        editButton = menuButton;
+                    }
+                }
+            }
+        }
+
+        if (editButton == null) {
+            throw new SeleniumUnexpectedException("Edit button for dashlet [" + dashletName + "] not found");
+        }
+
+        editButton.click();
+    }
+
     public void changeDashletName(String name) {
         seleniumSettings.getWebDriver().findElement(By.id("dashlet_options_")).click();
 
         WebElement dialog = getDialog();
         dialog.findElement(By.className("in_input")).clear();
         dialog.findElement(By.className("in_input")).sendKeys(name);
+        dialog.findElement(By.id("buttonOk")).click();
+    }
+
+    public void changeDashletDisplayMode(DashDisplayModeType dashDisplayModeType) {
+        seleniumSettings.getWebDriver().findElement(By.id("dashlet_options_")).click();
+
+        WebElement dialog = getDialog(); 
+        dialog.findElement(By.id(dashDisplayModeType.getIdx().toString())).click(); 
         dialog.findElement(By.id("buttonOk")).click();
     }
 
@@ -166,6 +204,12 @@ public class Dashboard {
         waitDashboardLoad();
     }
 
+    public void closeDashlet() {
+        seleniumSettings.getWebDriver().findElement(By.id("ed_cancel_")).click();
+        waitDashboardPageLoaded();
+        waitDashboardLoad();
+    }
+
     public void moveColumnToAxisX(String columnName) {
         WebElement source = getColumnFromDatasource(columnName);
 
@@ -216,6 +260,27 @@ public class Dashboard {
 
         elementJs.dragAndDropDragEnd(source);
         AbstractSeleniumCore.sleep(100L);
+    }
+
+    private WebElement getDashlet(String dashletName) {
+        WebElement result = null;
+
+        List<WebElement> dashlets = seleniumSettings.getWebDriver().findElements(By.className("lm_stack"));
+        for (WebElement dashlet : dashlets) {
+            WebElement dashletTitle = dashlet.findElement(By.className("lm_title"));
+            if (dashletName.equals(dashletTitle.getText())) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Dashlet [" + dashletName + "] found many times");
+                }
+                result = dashlet;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Dashlet [" + dashletName + "] not found");
+        }
+
+        return result;
     }
 
     private WebElement getColumnFromDatasource(String columnName) {
@@ -282,6 +347,33 @@ public class Dashboard {
 
     private WebElement getDialog() {
         return seleniumSettings.getWebDriver().findElement(By.className("md_dialog"));
+    }
+
+    public void checkDashletViewDisplayMode(String dashletName, DashDisplayModeType dashDisplayModeType) {
+        WebElement dashlet = getDashlet(dashletName);
+        checkDashletDisplayMode(dashlet, dashDisplayModeType);
+    }
+
+    public void checkDashletEditDisplayMode(DashDisplayModeType dashDisplayModeType) {
+        WebElement dashlet = seleniumSettings.getWebDriver().findElement(By.className("ed_content"));
+        checkDashletDisplayMode(dashlet, dashDisplayModeType);
+    }
+
+    private void checkDashletDisplayMode(WebElement dashlet, DashDisplayModeType dashDisplayModeType) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int chartCount = dashlet.findElements(By.className("lm_chart")).size();
+        int tableCount = dashlet.findElements(By.className("table")).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        if (DashDisplayModeType.CHART.equals(dashDisplayModeType)) {
+            Assert.assertEquals(chartCount, 1);
+            Assert.assertEquals(tableCount, 0);
+        } else if (DashDisplayModeType.TABLE.equals(dashDisplayModeType)) {
+            Assert.assertEquals(chartCount, 0);
+            Assert.assertEquals(tableCount, 1);
+        } else {
+            throw new SeleniumUnexpectedException("Not support DashDisplayModeType. DashDisplayModeType=" + dashDisplayModeType);
+        }
     }
 
 }
