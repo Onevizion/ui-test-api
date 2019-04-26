@@ -139,6 +139,7 @@ public class SeleniumScreenshot {
             BufferedImage differentImage = getDifferentImage(actualImage, expectedImage);
             byte[] differentScreen = convertBufferedImageToByteArray(differentImage);
             saveScreenshot("_different", differentScreen);
+            throw new SeleniumUnexpectedException("Images not equal.");
         }
     }
 
