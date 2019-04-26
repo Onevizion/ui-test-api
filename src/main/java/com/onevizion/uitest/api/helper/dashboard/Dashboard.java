@@ -99,7 +99,7 @@ public class Dashboard {
     }
 
     public void openEditDashletForm(String dashletName) {
-        WebElement dashlet = getDashlet(dashletName);
+        WebElement dashlet = getDashletInViewMode(dashletName);
         dashlet.findElement(By.className("lm_settings")).findElements(By.className("btn_input")).get(1).click();
 
         WebElement editButton = null;
@@ -262,7 +262,7 @@ public class Dashboard {
         AbstractSeleniumCore.sleep(100L);
     }
 
-    private WebElement getDashlet(String dashletName) {
+    public WebElement getDashletInViewMode(String dashletName) {
         WebElement result = null;
 
         List<WebElement> dashlets = seleniumSettings.getWebDriver().findElements(By.className("lm_stack"));
@@ -281,6 +281,10 @@ public class Dashboard {
         }
 
         return result;
+    }
+
+    public WebElement getDashletInEditMode() {
+        return seleniumSettings.getWebDriver().findElement(By.className("ed_content"));
     }
 
     private WebElement getColumnFromDatasource(String columnName) {
@@ -350,12 +354,12 @@ public class Dashboard {
     }
 
     public void checkDashletViewDisplayMode(String dashletName, DashDisplayModeType dashDisplayModeType) {
-        WebElement dashlet = getDashlet(dashletName);
+        WebElement dashlet = getDashletInViewMode(dashletName);
         checkDashletDisplayMode(dashlet, dashDisplayModeType);
     }
 
     public void checkDashletEditDisplayMode(DashDisplayModeType dashDisplayModeType) {
-        WebElement dashlet = seleniumSettings.getWebDriver().findElement(By.className("ed_content"));
+        WebElement dashlet = getDashletInEditMode();
         checkDashletDisplayMode(dashlet, dashDisplayModeType);
     }
 
