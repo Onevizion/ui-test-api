@@ -34,9 +34,6 @@ public class GridSort {
     private GridSortJs gridSortJs;
 
     @Resource
-    private GridSortWait gridSortWait;
-
-    @Resource
     private Js js;
 
     @Resource
@@ -74,12 +71,8 @@ public class GridSort {
         js.gridScrollLeft(gridId, scrollLeft);
         elementWait.waitElementVisible(elem);
         element.moveToElement(elem);
-        gridSortWait.waitSortIconIsDisplayed(elem);
         elem.click();
 
-        gridSortWait.waitSortMenuIsDisplayed();
-
-        WebElement sortButton = null;
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
         for (WebElement menu : menus) {
             if (menu.isDisplayed()) {
@@ -87,20 +80,11 @@ public class GridSort {
                 for (WebElement menuItem : menuItems) {
                     String menuItemText = menuItem.getAttribute("innerText");
                     if (sortType.getName().equals(menuItemText)) {
-                        if (sortButton != null) {
-                            throw new SeleniumUnexpectedException("Sort button [" + sortType.getName() + "] found many times");
-                        }
-                        sortButton = menuItem;
+                        menuItem.click();
                     }
                 }
             }
         }
-
-        if (sortButton == null) {
-            throw new SeleniumUnexpectedException("Sort button [" + sortType.getName() + "] not found");
-        }
-
-        sortButton.click();
 
         grid2.waitLoad(gridId);
 
@@ -127,12 +111,8 @@ public class GridSort {
         js.gridScrollLeft(gridId, scrollLeft);
         elementWait.waitElementVisible(elem);
         element.moveToElement(elem);
-        gridSortWait.waitSortIconIsDisplayed(elem);
         elem.click();
 
-        gridSortWait.waitSortMenuIsDisplayed();
-
-        WebElement sortButton = null;
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
         for (WebElement menu : menus) {
             if (menu.isDisplayed()) {
@@ -140,20 +120,11 @@ public class GridSort {
                 for (WebElement menuItem : menuItems) {
                     String menuItemText = menuItem.getAttribute("innerText");
                     if (sortType.getName().equals(menuItemText)) {
-                        if (sortButton != null) {
-                            throw new SeleniumUnexpectedException("Sort button [" + sortType.getName() + "] found many times");
-                        }
-                        sortButton = menuItem;
+                        menuItem.click();
                     }
                 }
             }
         }
-
-        if (sortButton == null) {
-            throw new SeleniumUnexpectedException("Sort button [" + sortType.getName() + "] not found");
-        }
-
-        sortButton.click();
 
         grid2.waitLoad(gridId);
 
@@ -183,9 +154,15 @@ public class GridSort {
     }
 
     private void checkCurrentGridSort(Long gridId, SortType sortType, Long columnIndex, String columnId) {
-        gridSortWait.checkGridSort(gridId, columnIndex, sortType.getTypeString());
-        gridSortWait.checkGridSortColumnId(gridId, columnId);
-        gridSortWait.checkGridSortTypeNumber(gridId, sortType.getTypeNumber());
+        @SuppressWarnings("unchecked")
+        List<Object> elements = (List<Object>) gridSortJs.getGridSort(gridId);
+        Assert.assertEquals((Long) elements.get(0), columnIndex, "Sorting working is not correct");
+        Assert.assertEquals((String) elements.get(1), sortType.getTypeString(), "Sorting working is not correct");
+
+        String sortColumnId = gridSortJs.getGridSortColumnIdByGridId(gridId);
+        Assert.assertEquals(sortColumnId, columnId);
+        String gridSortType = gridSortJs.getGridSortTypeByGridId(gridId);
+        Assert.assertEquals(gridSortType, sortType.getTypeNumber());
     }
 
     public void checkColumnSortAvailable(String columnLabel) {
