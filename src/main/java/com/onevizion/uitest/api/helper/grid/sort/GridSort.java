@@ -76,6 +76,7 @@ public class GridSort {
         element.moveToElement(elem);
         elem.click();
 
+        WebElement sortButton = null;
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
         for (WebElement menu : menus) {
             if (menu.isDisplayed()) {
@@ -83,11 +84,20 @@ public class GridSort {
                 for (WebElement menuItem : menuItems) {
                     String menuItemText = menuItem.getAttribute("innerText");
                     if (sortType.getName().equals(menuItemText)) {
-                        menuItem.click();
+                        if (sortButton != null) {
+                            throw new SeleniumUnexpectedException("Sort button [" + sortType.getName() + "] found many times");
+                        }
+                        sortButton = menuItem;
                     }
                 }
             }
         }
+
+        if (sortButton == null) {
+            throw new SeleniumUnexpectedException("Sort button [" + sortType.getName() + "] not found");
+        }
+
+        sortButton.click();
 
         grid2.waitLoad(gridId);
 
@@ -116,6 +126,7 @@ public class GridSort {
         element.moveToElement(elem);
         elem.click();
 
+        WebElement sortButton = null;
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
         for (WebElement menu : menus) {
             if (menu.isDisplayed()) {
@@ -123,11 +134,20 @@ public class GridSort {
                 for (WebElement menuItem : menuItems) {
                     String menuItemText = menuItem.getAttribute("innerText");
                     if (sortType.getName().equals(menuItemText)) {
-                        menuItem.click();
+                        if (sortButton != null) {
+                            throw new SeleniumUnexpectedException("Sort button [" + sortType.getName() + "] found many times");
+                        }
+                        sortButton = menuItem;
                     }
                 }
             }
         }
+
+        if (sortButton == null) {
+            throw new SeleniumUnexpectedException("Sort button [" + sortType.getName() + "] not found");
+        }
+
+        sortButton.click();
 
         grid2.waitLoad(gridId);
 
