@@ -71,6 +71,9 @@ public class GridSort {
         js.gridScrollLeft(gridId, scrollLeft);
         elementWait.waitElementVisible(elem);
         element.moveToElement(elem);
+        if (seleniumSettings.getBrowser().equals("chrome")) {
+            AbstractSeleniumCore.sleep(500L); //TODO BUG in chrome 74 and chromedriver 74. works without sleep in chrome 72 and chromedriver 2.46
+        }
         elem.click();
 
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
@@ -111,6 +114,9 @@ public class GridSort {
         js.gridScrollLeft(gridId, scrollLeft);
         elementWait.waitElementVisible(elem);
         element.moveToElement(elem);
+        if (seleniumSettings.getBrowser().equals("chrome")) {
+            AbstractSeleniumCore.sleep(500L); //TODO BUG in chrome 74 and chromedriver 74. works without sleep in chrome 72 and chromedriver 2.46
+        }
         elem.click();
 
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
