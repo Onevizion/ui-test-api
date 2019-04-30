@@ -34,6 +34,9 @@ public class GridSort {
     private GridSortJs gridSortJs;
 
     @Resource
+    private GridSortWait gridSortWait;
+
+    @Resource
     private Js js;
 
     @Resource
@@ -154,15 +157,9 @@ public class GridSort {
     }
 
     private void checkCurrentGridSort(Long gridId, SortType sortType, Long columnIndex, String columnId) {
-        @SuppressWarnings("unchecked")
-        List<Object> elements = (List<Object>) gridSortJs.getGridSort(gridId);
-        Assert.assertEquals((Long) elements.get(0), columnIndex, "Sorting working is not correct");
-        Assert.assertEquals((String) elements.get(1), sortType.getTypeString(), "Sorting working is not correct");
-
-        String sortColumnId = gridSortJs.getGridSortColumnIdByGridId(gridId);
-        Assert.assertEquals(sortColumnId, columnId);
-        String gridSortType = gridSortJs.getGridSortTypeByGridId(gridId);
-        Assert.assertEquals(gridSortType, sortType.getTypeNumber());
+        gridSortWait.checkGridSort(gridId, columnIndex, sortType.getTypeString());
+        gridSortWait.checkGridSortColumnId(gridId, columnId);
+        gridSortWait.checkGridSortTypeNumber(gridId, sortType.getTypeNumber());
     }
 
     public void checkColumnSortAvailable(String columnLabel) {
