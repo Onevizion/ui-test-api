@@ -1,10 +1,13 @@
 package com.onevizion.uitest.api.helper.grid.sort;
 
 import java.util.List;
+import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
 import javax.annotation.Resource;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +21,25 @@ class GridSortWait {
 
     @Resource
     private GridSortJs gridSortJs;
+
+    void waitSortMenuIsDisplayed() {
+        IntSupplier actualValueSupplier = ()-> {
+            int count = 0;
+            List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
+            for (WebElement menu : menus) {
+                if (menu.isDisplayed()) {
+                    count = count + 1;
+                }
+            }
+            return count;
+        };
+
+        Supplier<String> messageSupplier = ()-> "Sorting menu not displayed expected [1] but found [" + actualValueSupplier.getAsInt() + "]";
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage(messageSupplier)
+            .until(webdriver -> 1 == actualValueSupplier.getAsInt());
+    }
 
     void checkGridSort(Long gridId, Long columnIndex, String sortTypeString) {
         @SuppressWarnings("unchecked")

@@ -76,6 +76,8 @@ public class GridSort {
         element.moveToElement(elem);
         elem.click();
 
+        gridSortWait.waitSortMenuIsDisplayed();
+
         WebElement sortButton = null;
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
         for (WebElement menu : menus) {
@@ -125,6 +127,8 @@ public class GridSort {
         elementWait.waitElementVisible(elem);
         element.moveToElement(elem);
         elem.click();
+
+        gridSortWait.waitSortMenuIsDisplayed();
 
         WebElement sortButton = null;
         List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.className("contextSort"));
