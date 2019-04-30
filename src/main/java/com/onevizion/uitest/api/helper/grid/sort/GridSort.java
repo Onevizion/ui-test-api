@@ -74,6 +74,7 @@ public class GridSort {
         js.gridScrollLeft(gridId, scrollLeft);
         elementWait.waitElementVisible(elem);
         element.moveToElement(elem);
+        gridSortWait.waitSortIconIsDisplayed(elem);
         elem.click();
 
         gridSortWait.waitSortMenuIsDisplayed();
@@ -126,6 +127,7 @@ public class GridSort {
         js.gridScrollLeft(gridId, scrollLeft);
         elementWait.waitElementVisible(elem);
         element.moveToElement(elem);
+        gridSortWait.waitSortIconIsDisplayed(elem);
         elem.click();
 
         gridSortWait.waitSortMenuIsDisplayed();

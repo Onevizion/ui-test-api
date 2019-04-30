@@ -22,6 +22,14 @@ class GridSortWait {
     @Resource
     private GridSortJs gridSortJs;
 
+    void waitSortIconIsDisplayed(WebElement elem) {
+        Supplier<String> messageSupplier = ()-> "Sorting icon not displayed";
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage(messageSupplier)
+            .until(webdriver -> elem.findElement(By.className("hdr_sort")).isDisplayed());
+    }
+
     void waitSortMenuIsDisplayed() {
         IntSupplier actualValueSupplier = ()-> {
             int count = 0;
