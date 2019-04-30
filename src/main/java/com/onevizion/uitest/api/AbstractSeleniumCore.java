@@ -401,6 +401,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     public static final String MESSAGE_WF_PREV_STEP = "Are you sure you want to move back to the Previous Step?";
     public static final String MESSAGE_APPLY_SUCCESS = "Data successfully submitted.";
     public static final String MESSAGE_DELETE_LOCKABLE = "Warning! You are going to remove \"Lockable\" flag, all existing locks for this field will be removed also. Are you sure you want to proceed?";
+    public static final String MESSAGE_DELETE_DROPGRID_CONFIGURATION = "You are going to remove all objects and Trackors created with help of DropGrid. Are you sure you want to continue?";
     public static final String BUTTON_APPLY_ID = "btnApply";
     public static final String CHECKBOX_SELECT_ALL_ID = "SelectCheckboxes";
 
