@@ -5,12 +5,14 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumAlertException;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
@@ -36,6 +38,8 @@ public class Js {
             } else {
                 return null;
             }
+        } catch (UnhandledAlertException e) {
+            throw new SeleniumAlertException("Error while executing JavaScript with code: " + script, e);
         } catch (WebDriverException e) {
             throw new SeleniumUnexpectedException("Error while executing JavaScript with code: " + script, e);
         }
@@ -58,6 +62,8 @@ public class Js {
             } else {
                 return null;
             }
+        } catch (UnhandledAlertException e) {
+            throw new SeleniumAlertException("Error while executing JavaScript with code: " + script, e);
         } catch (WebDriverException e) {
             throw new SeleniumUnexpectedException("Error while executing JavaScript with code: " + script, e);
         }
@@ -66,6 +72,8 @@ public class Js {
     protected Object execJs2(String script) {
         try {
             return ((JavascriptExecutor) seleniumSettings.getWebDriver()).executeScript(script);
+        } catch (UnhandledAlertException e) {
+            throw new SeleniumAlertException("Error while executing JavaScript with code: " + script, e);
         } catch (WebDriverException e) {
             throw new SeleniumUnexpectedException("Error while executing JavaScript with code: " + script, e);
         }
@@ -74,6 +82,8 @@ public class Js {
     protected void execJs3(String script, WebElement element) {
         try {
             ((JavascriptExecutor) seleniumSettings.getWebDriver()).executeScript(script, element);
+        } catch (UnhandledAlertException e) {
+            throw new SeleniumAlertException("Error while executing JavaScript with code: " + script, e);
         } catch (WebDriverException e) {
             throw new SeleniumUnexpectedException("Error while executing JavaScript with code: " + script, e);
         }
@@ -96,6 +106,8 @@ public class Js {
             } else {
                 return null;
             }
+        } catch (UnhandledAlertException e) {
+            throw new SeleniumAlertException("Error while executing JavaScript with code: " + script, e);
         } catch (WebDriverException e) {
             throw new SeleniumUnexpectedException("Error while executing JavaScript with code: " + script, e);
         }
@@ -532,6 +544,8 @@ public class Js {
     public WebElement getParentElement(WebElement element) {
         try {
             return (WebElement) ((JavascriptExecutor) seleniumSettings.getWebDriver()).executeScript("return arguments[0].parentNode;", element);
+        } catch (UnhandledAlertException e) {
+            throw new SeleniumAlertException("Error while executing JavaScript with code", e);
         } catch (WebDriverException e) {
             throw new SeleniumUnexpectedException("Error while executing JavaScript with code", e);
         }
