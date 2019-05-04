@@ -483,6 +483,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     ChromeOptions options = new ChromeOptions();
                     options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     options.setExperimentalOption("prefs", chromePrefs);
+                    options.addArguments("user-data-dir=/opt/profile-chrome/");
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.setProxy(null);
