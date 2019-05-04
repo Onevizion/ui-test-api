@@ -33,7 +33,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.CommandInfo;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -484,9 +483,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     ChromeOptions options = new ChromeOptions();
                     options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     options.setExperimentalOption("prefs", chromePrefs);
-                    options.addArguments("user-data-dir=/opt/profile-chrome/");
-                    options.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
-                    options.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.setProxy(null);
