@@ -262,6 +262,28 @@ public class Dashboard {
         AbstractSeleniumCore.sleep(100L);
     }
 
+    public void moveColumnToAxisY(String axisName, String columnName) {
+        WebElement source = getColumnFromDatasource(columnName);
+
+        elementJs.dragAndDropPrepare();
+
+        elementJs.dragAndDropDragStart(source);
+        AbstractSeleniumCore.sleep(100L);
+
+        WebElement axis = getAxis(axisName);
+        WebElement target = axis.findElement(By.className("item_placeholder"));
+
+        elementJs.dragAndDropDragEnter(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragOver(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDrop(target);
+        AbstractSeleniumCore.sleep(100L);
+
+        elementJs.dragAndDropDragEnd(source);
+        AbstractSeleniumCore.sleep(100L);
+    }
+
     public WebElement getDashletInViewMode(String dashletName) {
         WebElement result = null;
 
