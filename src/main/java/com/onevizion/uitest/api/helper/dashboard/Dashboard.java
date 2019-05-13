@@ -273,8 +273,14 @@ public class Dashboard {
         elementJs.dragAndDropDragStart(source);
         AbstractSeleniumCore.sleep(100L);
 
+        //in all elements except source and target
+        //dragenter
+        //dragover
+        //dragleave
+
         WebElement axis = getAxis(axisName);
-        WebElement target = axis.findElement(By.className("item_placeholder"));
+        List<WebElement> columns = axis.findElements(By.className("item_placeholder_bottom"));
+        WebElement target = columns.get(columns.size() - 1);
 
         elementJs.dragAndDropDragEnter(target);
         AbstractSeleniumCore.sleep(100L);
