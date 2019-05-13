@@ -1,5 +1,6 @@
 package com.onevizion.uitest.api.helper.dashboard;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,8 +16,10 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.vo.DashAxisType;
+import com.onevizion.uitest.api.vo.DashColumn;
 import com.onevizion.uitest.api.vo.DashColumnCalcMethodType;
 import com.onevizion.uitest.api.vo.DashColumnChartType;
+import com.onevizion.uitest.api.vo.DashColumnType;
 import com.onevizion.uitest.api.vo.DashDisplayModeType;
 
 @Component
@@ -307,6 +310,25 @@ public class Dashboard {
 
     public WebElement getDashletInEditMode() {
         return seleniumSettings.getWebDriver().findElement(By.className("ed_content"));
+    }
+
+    public List<DashColumn> getDatasourceColumns() {
+        List<DashColumn> columns = new ArrayList<DashColumn>();
+
+        List<WebElement> textColumns = seleniumSettings.getWebDriver().findElement(By.className("ed_datasource")).findElements(By.className("item_type_string"));
+        for (WebElement textColumn : textColumns) {
+            columns.add(new DashColumn(textColumn.getText(), DashColumnType.TEXT));
+        }
+        List<WebElement> dateColumns = seleniumSettings.getWebDriver().findElement(By.className("ed_datasource")).findElements(By.className("item_type_date"));
+        for (WebElement dateColumn : dateColumns) {
+            columns.add(new DashColumn(dateColumn.getText(), DashColumnType.DATE));
+        }
+        List<WebElement> numberColumns = seleniumSettings.getWebDriver().findElement(By.className("ed_datasource")).findElements(By.className("item_type_number"));
+        for (WebElement numberColumn : numberColumns) {
+            columns.add(new DashColumn(numberColumn.getText(), DashColumnType.NUMBER));
+        }
+
+        return columns;
     }
 
     private WebElement getColumnFromDatasource(String columnName) {
