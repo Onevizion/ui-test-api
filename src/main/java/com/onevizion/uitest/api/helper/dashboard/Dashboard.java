@@ -200,6 +200,28 @@ public class Dashboard {
         dialog.findElement(By.id("buttonOk")).click();
     }
 
+    public void changeColumnChartType(String axisName, String groupName, String columnName, DashColumnChartType dashColumnChartType) {
+        WebElement axis = getAxis(axisName);
+        WebElement group = getGroupFromAxis(axis, groupName);
+        WebElement column = getColumnFromGroup(group, columnName);
+        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+
+        WebElement dialog = getDialog();
+        dialog.findElements(By.className("sw_buttons")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
+        dialog.findElement(By.id("buttonOk")).click();
+    }
+
+    public void changeColumnCalculationMethod(String axisName, String groupName, String columnName, DashColumnCalcMethodType dashColumnCalcMethodType) {
+        WebElement axis = getAxis(axisName);
+        WebElement group = getGroupFromAxis(axis, groupName);
+        WebElement column = getColumnFromGroup(group, columnName);
+        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+
+        WebElement dialog = getDialog();
+        dialog.findElements(By.className("sw_buttons")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
+        dialog.findElement(By.id("buttonOk")).click();
+    }
+
     public void removeColumnFromAxis(String axisName, String columnName){
         WebElement axis = getAxis(axisName);
         WebElement column = getColumnFromAxis(axis, columnName);
@@ -358,6 +380,48 @@ public class Dashboard {
 
         if (result == null) {
             throw new SeleniumUnexpectedException("Column [" + columnName + "] not found");
+        }
+
+        return result;
+    }
+
+    private WebElement getColumnFromGroup(WebElement group, String columnName) {
+        WebElement result = null;
+
+        List<WebElement> columns = group.findElements(By.className("dashlet_field"));
+        for (WebElement column : columns) {
+            WebElement columnTitle = column.findElement(By.className("ia_title"));
+            if (columnName.equals(columnTitle.getText())) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Column [" + columnName + "] found many times");
+                }
+                result = column;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Column [" + columnName + "] not found");
+        }
+
+        return result;
+    }
+
+    private WebElement getGroupFromAxis(WebElement axis, String groupName) {
+        WebElement result = null;
+
+        List<WebElement> groups = axis.findElement(By.className("pc_groups")).findElements(By.className("entity_component"));
+        for (WebElement group : groups) {
+            WebElement groupTitle = group.findElement(By.className("tes_title"));
+            if (groupName.equals(groupTitle.getText())) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Group [" + groupName + "] found many times");
+                }
+                result = group;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Group [" + groupName + "] not found");
         }
 
         return result;
