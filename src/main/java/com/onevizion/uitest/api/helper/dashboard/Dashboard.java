@@ -200,6 +200,12 @@ public class Dashboard {
         dialog.findElement(By.id("buttonOk")).click();
     }
 
+    public void removeColumnFromAxis(String axisName, String columnName){
+        WebElement axis = getAxis(axisName);
+        WebElement column = getColumnFromAxis(axis, columnName);
+        elementJs.click(column.findElement(By.className("ia_title_delete")).findElement(By.className("btn_input")));
+    }
+
     public void saveDashlet() {
         seleniumSettings.getWebDriver().findElement(By.id("ed_ok_")).click();
         AbstractSeleniumCore.sleep(2000L);
