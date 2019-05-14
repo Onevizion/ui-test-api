@@ -101,6 +101,55 @@ public class Dashboard {
         return dashboardJs.getDashletSerieDataY(dashletId, serieIdx);
     }
 
+    public void addGroupInAxis(String axisName, String columnName) {
+        WebElement axis = getAxis(axisName);
+        String axisType = axis.findElement(By.className("tet_subtitle")).getText();
+        if (DashAxisType.X.getName().equals(axisType)) {
+            throw new SeleniumUnexpectedException("Not support Add Group for X-Axis");
+        } else if (DashAxisType.Y.getName().equals(axisType)) {
+            axis.findElement(By.className("pc_buttons")).findElement(By.className("btn_input")).click();
+            List<WebElement> allMenu = seleniumSettings.getWebDriver().findElements(By.className("context_menu"));
+            for (WebElement menu : allMenu) {
+                if (menu.isDisplayed()) {
+                    List<WebElement> menuButtons = menu.findElements(By.className("ic_container"));
+                    for (WebElement menuButton : menuButtons) {
+                        if ("Add Group".equals(menuButton.getText())) {
+                            menuButton.click();
+                            selectGroupingFieldByVisibleText(axisName, columnName);
+                        }
+                    }
+                }
+            }
+        } else {
+            throw new SeleniumUnexpectedException("Not support DashAxisType [" + axisType + "]");
+        }
+    }
+
+    private void selectGroupingFieldByVisibleText(String axisName, String groupingFieldName) {
+        WebElement axis = getAxis(axisName);
+        List<WebElement> allGroup = axis.findElement(By.className("pc_groups")).findElements(By.className("entity_component"));
+        WebElement field = null;
+        for(WebElement group : allGroup) {
+            if(!group.findElement(By.className("drop_list")).getAttribute("class").contains(" closed")) {
+                List<WebElement> allItem = group.findElements(By.className("item_select"));
+                for(WebElement item : allItem) {
+                    if(item.getText().equals(groupingFieldName)) {
+                        field = item;
+                        break;
+                    }
+                }
+
+                if(field == null) {
+                    throw new SeleniumUnexpectedException("Grouping Field [" + groupingFieldName + "] for Y-Axis [" + axisName + "] not found");
+                }
+
+                field.click();
+                group.findElement(By.className("tes_editor_save")).click();
+                break;
+            }
+        }
+    }
+
     public void openEditDashletForm(String dashletName) {
         WebElement dashlet = getDashletInViewMode(dashletName);
         dashlet.findElement(By.className("lm_settings")).findElements(By.className("btn_input")).get(1).click();
@@ -309,6 +358,46 @@ public class Dashboard {
         WebElement axis = getAxis(axisName);
         List<WebElement> columns = axis.findElements(By.className("item_placeholder_bottom"));
         WebElement target = columns.get(columns.size() - 1);
+
+        elementJs.dragAndDropDragEnter(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragOver(target);
+        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDrop(target);
+        AbstractSeleniumCore.sleep(100L);
+
+        elementJs.dragAndDropDragEnd(source);
+        AbstractSeleniumCore.sleep(100L);
+    }
+
+    public void moveColumnToGroup(String axisName, String groupName, String columnName) {
+        WebElement source = getColumnFromDatasource(columnName);
+
+        elementJs.dragAndDropPrepare();
+
+        elementJs.dragAndDropDragStart(source);
+        AbstractSeleniumCore.sleep(100L);
+
+        //in all elements except source and target
+        //dragenter
+        //dragover
+        //dragleave
+
+        WebElement target = null;
+
+        WebElement axis = getAxis(axisName);
+        WebElement group = getGroupFromAxis(axis, groupName);
+
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = group.findElements(By.className("placeholder_column")).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        if (count > 0) {
+            target = group.findElement(By.className("placeholder_column"));
+        } else {
+            List<WebElement> columns = axis.findElements(By.className("item_placeholder_bottom"));
+            target = columns.get(columns.size() - 1);
+        }
 
         elementJs.dragAndDropDragEnter(target);
         AbstractSeleniumCore.sleep(100L);
