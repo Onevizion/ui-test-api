@@ -542,12 +542,17 @@ public class Dashboard {
 
         List<WebElement> allAxis = seleniumSettings.getWebDriver().findElement(By.className("ed_axes")).findElements(By.className("entity_component"));
         for (WebElement axis : allAxis) {
-            WebElement axisTitle = axis.findElement(By.className("tet_title"));
-            if (axisName.equals(axisTitle.getText())) {
-                if (result != null) {
-                    throw new SeleniumUnexpectedException("Axis [" + axisName + "] found many times");
+            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            int count = axis.findElements(By.className("tet_title")).size();
+            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            if (count > 0) {
+                WebElement axisTitle = axis.findElement(By.className("tet_title"));
+                if (axisName.equals(axisTitle.getText())) {
+                    if (result != null) {
+                        throw new SeleniumUnexpectedException("Axis [" + axisName + "] found many times");
+                    }
+                    result = axis;
                 }
-                result = axis;
             }
         }
 
