@@ -301,6 +301,12 @@ public class Tb {
                 } else {
                     throw e;
                 }
+            } catch (NullPointerException e) {
+                seleniumLogger.error(seleniumSettings.getTestName() + " Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
+                Assert.assertTrue(seleniumSettings.getWebDriver().switchTo().alert().getText().contains("Following fields with unsaved changes has been modified on the server. Press \"OK\" to keep your values or \"Cancel\" to replace your values with new values from the server"));
+                seleniumSettings.getWebDriver().switchTo().alert().accept();
+                //seleniumSettings.getWebDriver().switchTo().defaultContent(); //need or not need?
+                wait.waitFormLoad();
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
