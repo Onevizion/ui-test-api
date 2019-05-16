@@ -17,6 +17,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
@@ -30,6 +31,9 @@ public class Qs {
 
     @Resource
     private ElementWait elementWait;
+
+    @Resource
+    private Grid grid;
 
     @Resource
     private Grid2 grid2;
@@ -151,6 +155,40 @@ public class Qs {
         fillBooleanQsValue(gridIdx, search);
     }
 
+    public void searchValueAndCheck(Long gridIdx, String fieldName, String search, Long rowsCnt, List<String> expectedValues) {
+        Long columnIndex = js.getColumnIndexByLabel(gridIdx, fieldName);
+
+        searchValue(gridIdx, fieldName, search);
+
+        Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
+
+        String gridPageName = grid2.getPageName(gridIdx);
+        if ("TRACKOR_BROWSER".equals(gridPageName)) {
+            checkUserpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
+        } else {
+            checkAdminpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
+        }
+
+        clickClearQs(gridIdx);
+    }
+
+    public void searchBooleanValueAndCheck(Long gridIdx, String fieldName, String search, Long rowsCnt, List<String> expectedValues) {
+        Long columnIndex = js.getColumnIndexByLabel(gridIdx, fieldName);
+
+        searchBooleanValue(gridIdx, fieldName, search);
+
+        Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
+
+        String gridPageName = grid2.getPageName(gridIdx);
+        if ("TRACKOR_BROWSER".equals(gridPageName)) {
+            checkUserpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
+        } else {
+            checkAdminpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
+        }
+
+        fillBooleanQsValue(gridIdx, "Search for");
+    }
+
     public void searchValue(Long gridIdx, Long fieldIndex, String search) {
         selectQsFieldByIdx(gridIdx, fieldIndex);
         fillQsValue(gridIdx, search);
@@ -160,6 +198,60 @@ public class Qs {
     public void searchBooleanValue(Long gridIdx, Long fieldIndex, String search) {
         selectQsFieldByIdx(gridIdx, fieldIndex);
         fillBooleanQsValue(gridIdx, search);
+    }
+
+    /*
+     * Not finish. Need think in future after create many tests.
+     * checkUserpageGridTextColumnEquals and checkAdminpageGridTextColumnEquals similar as userpageFilter.checkGridTextColumnEquals
+     */
+    private void checkUserpageGridTextColumnEquals(Long gridId, Long columnIndex, List<String> expectedValues) {
+        Long rowsCnt = js.getGridRowsCount(gridId);
+        @SuppressWarnings("unchecked")
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+
+        for (int i = 0; i < rowsCnt; i++) {
+            boolean isError = true;
+            String gridValue = vals.get(i);
+            if ("&nbsp;".equals(gridValue) || "".equals(gridValue)) {
+                gridValue = "";
+            }
+            for (String expectedValue : expectedValues) {
+                if (expectedValue.equalsIgnoreCase(gridValue)) {
+                    isError = false;
+                }
+            }
+
+            if (isError) {
+                throw new SeleniumUnexpectedException("Check fails at column [" + columnIndex + "] row [" + i + "]. Cell value in grid [" + gridValue +"]");
+            }
+        }
+    }
+
+    /*
+     * Not finish. Need think in future after create many tests.
+     * checkUserpageGridTextColumnEquals and checkAdminpageGridTextColumnEquals similar as userpageFilter.checkGridTextColumnEquals
+     */
+    private void checkAdminpageGridTextColumnEquals(Long gridId, Long columnIndex, List<String> expectedValues) {
+        Long rowsCnt = js.getGridRowsCount(gridId);
+        @SuppressWarnings("unchecked")
+        List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, rowsCnt, columnIndex);
+
+        for (int i = 0; i < rowsCnt; i++) {
+            boolean isError = true;
+            String gridValue = vals.get(i);
+            if ("&nbsp;".equals(gridValue) || "".equals(gridValue)) {
+                gridValue = "";
+            }
+            for (String expectedValue : expectedValues) {
+                if (expectedValue.equalsIgnoreCase(gridValue)) {
+                    isError = false;
+                }
+            }
+
+            if (isError) {
+                throw new SeleniumUnexpectedException("Check fails at column [" + columnIndex + "] row [" + i + "]. Cell value in grid [" + gridValue +"]");
+            }
+        }
     }
 
 }

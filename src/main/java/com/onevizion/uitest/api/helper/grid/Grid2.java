@@ -20,6 +20,9 @@ public class Grid2 {
     private Grid2Wait grid2Wait;
 
     @Resource
+    private Grid2Js grid2Js;
+
+    @Resource
     private Wait wait;
 
     @Resource
@@ -66,6 +69,10 @@ public class Grid2 {
 
     public void waitGridCellLockType(Long gridId, Long columnIndex, Long rowIndex, LockType lockType) {
         grid2Wait.waitGridCellLockType(gridId, columnIndex, rowIndex, lockType);
+    }
+
+    public String getPageName(Long gridId) {
+        return grid2Js.getPageName(gridId);
     }
 
 }

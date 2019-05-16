@@ -17,4 +17,8 @@ class Grid2Js extends Js {
         return LockType.getByGridCellClass(lockType);
     }
 
+    String getPageName(Long gridId) {
+        return execJs("return gridArr[" + gridId + "].PageName;");
+    }
+
 }
