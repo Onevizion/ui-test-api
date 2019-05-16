@@ -15,6 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
+import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
@@ -44,9 +45,17 @@ public class Qs {
     @Resource
     private SeleniumLogger seleniumLogger;
 
+    public void checkFieldsCount(int size) {
+        checkFieldsCount(AbstractSeleniumCore.getGridIdx(), size);
+    }
+
     public void checkFieldsCount(Long gridIdx, int size) {
         int actualSize = seleniumSettings.getWebDriver().findElement(By.id("qsField" + gridIdx)).findElements(By.className("item_select")).size();
         Assert.assertEquals(actualSize, size);
+    }
+
+    public void checkFieldText(int index, String fieldText) {
+        checkFieldText(AbstractSeleniumCore.getGridIdx(), index, fieldText);
     }
 
     public void checkFieldText(Long gridIdx, int index, String fieldText) {
@@ -155,6 +164,10 @@ public class Qs {
         fillBooleanQsValue(gridIdx, search);
     }
 
+    public void searchValueAndCheck(String fieldName, String search, Long rowsCnt, List<String> expectedValues) {
+        searchValueAndCheck(AbstractSeleniumCore.getGridIdx(), fieldName, search, rowsCnt, expectedValues);
+    }
+
     public void searchValueAndCheck(Long gridIdx, String fieldName, String search, Long rowsCnt, List<String> expectedValues) {
         Long columnIndex = js.getColumnIndexByLabel(gridIdx, fieldName);
 
@@ -170,6 +183,10 @@ public class Qs {
         }
 
         clickClearQs(gridIdx);
+    }
+
+    public void searchBooleanValueAndCheck(String fieldName, String search, Long rowsCnt, List<String> expectedValues) {
+        searchBooleanValueAndCheck(AbstractSeleniumCore.getGridIdx(), fieldName, search, rowsCnt, expectedValues);
     }
 
     public void searchBooleanValueAndCheck(Long gridIdx, String fieldName, String search, Long rowsCnt, List<String> expectedValues) {
@@ -212,9 +229,6 @@ public class Qs {
         for (int i = 0; i < rowsCnt; i++) {
             boolean isError = true;
             String gridValue = vals.get(i);
-            if ("&nbsp;".equals(gridValue) || "".equals(gridValue)) {
-                gridValue = "";
-            }
             for (String expectedValue : expectedValues) {
                 if (expectedValue.equalsIgnoreCase(gridValue)) {
                     isError = false;
@@ -239,9 +253,6 @@ public class Qs {
         for (int i = 0; i < rowsCnt; i++) {
             boolean isError = true;
             String gridValue = vals.get(i);
-            if ("&nbsp;".equals(gridValue) || "".equals(gridValue)) {
-                gridValue = "";
-            }
             for (String expectedValue : expectedValues) {
                 if (expectedValue.equalsIgnoreCase(gridValue)) {
                     isError = false;
