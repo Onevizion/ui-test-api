@@ -69,6 +69,10 @@ public class Qs {
         Assert.assertEquals(actualFieldText, fieldText);
     }
 
+    public void checkCurrentFieldText(String fieldText) {
+        checkCurrentFieldText(AbstractSeleniumCore.getGridIdx(), fieldText);
+    }
+
     public void checkCurrentFieldText(Long gridIdx, String fieldText) {
         String actualFieldText = seleniumSettings.getWebDriver().findElement(By.id("qsField" + gridIdx)).findElement(By.className("dl_selected")).findElement(By.tagName("input")).getAttribute("value");
         Assert.assertEquals(actualFieldText, fieldText);
