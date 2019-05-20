@@ -72,6 +72,12 @@ public class Logoff {
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
 
+        elementWait.waitElementById("topPanelUserNameLbl");
+        elementWait.waitElementVisibleById("topPanelUserNameLbl");
+        elementWait.waitElementDisplayById("topPanelUserNameLbl");
+
+        wait.waitWebElement(By.id("userNameMenuItemlogoff"));
+
         logoff();
     }
 

@@ -57,6 +57,12 @@ public class Login {
         wait.waitWebElement(By.id("Table1"));
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
+
+        elementWait.waitElementById("topPanelUserNameLbl");
+        elementWait.waitElementVisibleById("topPanelUserNameLbl");
+        elementWait.waitElementDisplayById("topPanelUserNameLbl");
+
+        wait.waitWebElement(By.id("userNameMenuItemlogoff"));
     }
 
     public void failLogin(String userName, String userPassword, String errorMessage) {
