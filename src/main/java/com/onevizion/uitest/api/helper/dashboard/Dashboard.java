@@ -15,6 +15,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementJs;
+import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.DashAxisType;
 import com.onevizion.uitest.api.vo.DashColumn;
 import com.onevizion.uitest.api.vo.DashColumnCalcMethodType;
@@ -36,6 +37,9 @@ public class Dashboard {
 
     @Resource
     private ElementJs elementJs;
+
+    @Resource
+    private Js js;
 
     public String getDashletXAxisLabel(int dashletIdx) {
         return seleniumSettings.getWebDriver().findElements(By.className("lm_stack")).get(dashletIdx).findElement(By.className("highcharts-xaxis")).getAttribute("textContent");
@@ -292,96 +296,86 @@ public class Dashboard {
 
     public void moveColumnToAxisX(String columnName) {
         WebElement source = getColumnFromDatasource(columnName);
+        WebElement target = seleniumSettings.getWebDriver().findElement(By.className("placeholder_column"));
 
         elementJs.dragAndDropPrepare();
-
-        elementJs.dragAndDropDragStart(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragStartTop(source);
 
         //in all elements except source and target
         //dragenter
         //dragover
         //dragleave
 
-        WebElement target = seleniumSettings.getWebDriver().findElement(By.className("placeholder_column"));
-
-        elementJs.dragAndDropDragEnter(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDragOver(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDrop(target);
-        AbstractSeleniumCore.sleep(100L);
-
-        elementJs.dragAndDropDragEnd(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragEnterTop(target);
+        elementJs.dragAndDropDragOverTop(target);
+        elementJs.dragAndDropDragOverBottom(target);
+        String coord = elementJs.dragAndDropDropBottom(target);
+        elementJs.dragAndDropDragEndBottom(source, coord);
     }
 
     public void createNewAxisY(String columnName) {
         WebElement source = getColumnFromDatasource(columnName);
+        WebElement target = seleniumSettings.getWebDriver().findElement(By.className("ed_placeholder"));
 
         elementJs.dragAndDropPrepare();
-
-        elementJs.dragAndDropDragStart(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragStartTop(source);
 
         //in all elements except source and target
         //dragenter
         //dragover
         //dragleave
 
-        WebElement target = seleniumSettings.getWebDriver().findElement(By.className("ed_placeholder"));
-
-        elementJs.dragAndDropDragEnter(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDragOver(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDrop(target);
-        AbstractSeleniumCore.sleep(100L);
-
-        elementJs.dragAndDropDragEnd(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragEnterTop(target);
+        elementJs.dragAndDropDragOverTop(target);
+        elementJs.dragAndDropDragOverBottom(target);
+        String coord = elementJs.dragAndDropDropBottom(target);
+        elementJs.dragAndDropDragEndBottom(source, coord);
     }
 
     public void moveColumnToAxisY(String axisName, String columnName) {
         WebElement source = getColumnFromDatasource(columnName);
 
         elementJs.dragAndDropPrepare();
+        elementJs.dragAndDropDragStartTop(source);
 
-        elementJs.dragAndDropDragStart(source);
-        AbstractSeleniumCore.sleep(100L);
-
-        //in all elements except source and target
-        //dragenter
-        //dragover
-        //dragleave
+        List<WebElement> items = seleniumSettings.getWebDriver().findElements(By.className("droppable_item"));
+        for (WebElement item : items) {
+            WebElement list = js.getParentElement(js.getParentElement(item));
+            elementJs.dragAndDropDragEnterTop(list);
+            elementJs.dragAndDropDragEnterTop(item);
+            elementJs.dragAndDropDragOverTop(item);
+            elementJs.dragAndDropDragOverBottom(item);
+            elementJs.dragAndDropDragLeave(item);
+            elementJs.dragAndDropDragLeave(list);
+        }
 
         WebElement axis = getAxis(axisName);
-        List<WebElement> columns = axis.findElements(By.className("item_placeholder_bottom"));
+        List<WebElement> columns = axis.findElements(By.className("droppable_item"));
         WebElement target = columns.get(columns.size() - 1);
 
-        elementJs.dragAndDropDragEnter(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDragOver(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDrop(target);
-        AbstractSeleniumCore.sleep(100L);
-
-        elementJs.dragAndDropDragEnd(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragEnterTop(target);
+        elementJs.dragAndDropDragOverTop(target);
+        elementJs.dragAndDropDragOverBottom(target);
+        String coord = elementJs.dragAndDropDropBottom(target);
+        elementJs.dragAndDropDragEndBottom(source, coord);
     }
 
     public void moveColumnToGroup(String axisName, String groupName, String columnName) {
         WebElement source = getColumnFromDatasource(columnName);
 
         elementJs.dragAndDropPrepare();
+        elementJs.dragAndDropDragStartTop(source);
 
-        elementJs.dragAndDropDragStart(source);
-        AbstractSeleniumCore.sleep(100L);
-
-        //in all elements except source and target
-        //dragenter
-        //dragover
-        //dragleave
+        List<WebElement> items = seleniumSettings.getWebDriver().findElements(By.className("droppable_item"));
+        for (WebElement item : items) {
+            WebElement list = js.getParentElement(js.getParentElement(item));
+            elementJs.dragAndDropDragEnterTop(list);
+            elementJs.dragAndDropDragEnterTop(item);
+            elementJs.dragAndDropDragOverTop(item);
+            elementJs.dragAndDropDragOverBottom(item);
+            elementJs.dragAndDropDragLeave(item);
+            elementJs.dragAndDropDragLeave(list);
+        }
 
         WebElement target = null;
 
@@ -395,19 +389,15 @@ public class Dashboard {
         if (count > 0) {
             target = group.findElement(By.className("placeholder_column"));
         } else {
-            List<WebElement> columns = axis.findElements(By.className("item_placeholder_bottom"));
+            List<WebElement> columns = axis.findElements(By.className("droppable_item"));
             target = columns.get(columns.size() - 1);
         }
 
-        elementJs.dragAndDropDragEnter(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDragOver(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDrop(target);
-        AbstractSeleniumCore.sleep(100L);
-
-        elementJs.dragAndDropDragEnd(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragEnterTop(target);
+        elementJs.dragAndDropDragOverTop(target);
+        elementJs.dragAndDropDragOverBottom(target);
+        String coord = elementJs.dragAndDropDropBottom(target);
+        elementJs.dragAndDropDragEndBottom(source, coord);
     }
 
     public WebElement getDashletInViewMode(String dashletName) {

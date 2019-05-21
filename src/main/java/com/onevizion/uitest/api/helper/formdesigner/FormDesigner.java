@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
-import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
@@ -384,54 +383,40 @@ public class FormDesigner {
 
     private void moveFieldToEndForm(String sourceId, String targetId) {
         WebElement source = seleniumSettings.getWebDriver().findElement(By.id(sourceId));
+        WebElement target = seleniumSettings.getWebDriver().findElement(By.id(targetId));
 
         elementJs.dragAndDropPrepare();
-
-        elementJs.dragAndDropDragStart(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragStartTop(source);
 
         //in all elements except source and target
         //dragenter
         //dragover
         //dragleave
 
-        WebElement target = seleniumSettings.getWebDriver().findElement(By.id(targetId));
-
-        elementJs.dragAndDropDragEnter(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDragOver(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDrop(target);
-        AbstractSeleniumCore.sleep(100L);
-
-        elementJs.dragAndDropDragEnd(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragEnterTop(target);
+        elementJs.dragAndDropDragOverTop(target);
+        elementJs.dragAndDropDragOverBottom(target);
+        String coord = elementJs.dragAndDropDropBottom(target);
+        elementJs.dragAndDropDragEndBottom(source, coord);
     }
 
     public void moveFieldToList(String sourceId, String targetId) {
         WebElement source = seleniumSettings.getWebDriver().findElement(By.id(sourceId));
+        WebElement target = seleniumSettings.getWebDriver().findElement(By.id(targetId));
 
         elementJs.dragAndDropPrepare();
-
-        elementJs.dragAndDropDragStart(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragStartTop(source);
 
         //in all elements except source and target
         //dragenter
         //dragover
         //dragleave
 
-        WebElement target = seleniumSettings.getWebDriver().findElement(By.id(targetId));
-
-        elementJs.dragAndDropDragEnter(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDragOver(target);
-        AbstractSeleniumCore.sleep(100L);
-        elementJs.dragAndDropDrop(target);
-        AbstractSeleniumCore.sleep(100L);
-
-        elementJs.dragAndDropDragEnd(source);
-        AbstractSeleniumCore.sleep(100L);
+        elementJs.dragAndDropDragEnterTop(target);
+        elementJs.dragAndDropDragOverTop(target);
+        elementJs.dragAndDropDragOverBottom(target);
+        String coord = elementJs.dragAndDropDropBottom(target);
+        elementJs.dragAndDropDragEndBottom(source, coord);
     }
 
 }

@@ -82,58 +82,89 @@ public class ElementJs extends Js {
         execJs("getSeleniumDataTransfer();");
     }
 
-    public void dragAndDropDragStart(WebElement element) {
-        dragAndDropDragStart(element, 0, 0);
+    public void dragAndDropDragStartTop(WebElement source) {
+        execJs3("var x = arguments[0].getBoundingClientRect().left + 1;" + 
+                "var y = arguments[0].getBoundingClientRect().top + 1;" + 
+                "var event = new DragEvent('dragstart', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", source);
     }
 
-    public void dragAndDropDragStart(WebElement element, int x, int y) {
-        execJs3("var event = new DragEvent('dragstart', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':" + x + ", 'clientY':" + y + "});" + 
-                "arguments[0].dispatchEvent(event);", element);
+    public void dragAndDropDragStartBottom(WebElement source) {
+        execJs3("var x = arguments[0].getBoundingClientRect().left + 1;" + 
+                "var y = arguments[0].getBoundingClientRect().bottom - 1;" + 
+                "var event = new DragEvent('dragstart', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", source);
     }
 
-    public void dragAndDropDragEnd(WebElement element) {
-        dragAndDropDragEnd(element, 0, 0);
+    public void dragAndDropDragEnterTop(WebElement target) {
+        execJs3("var x = arguments[0].getBoundingClientRect().left + 1;" + 
+                "var y = arguments[0].getBoundingClientRect().top + 1;" + 
+                "var event = new DragEvent('dragenter', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", target);
     }
 
-    public void dragAndDropDragEnd(WebElement element, int x, int y) {
-        execJs3("var event = new DragEvent('dragend', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':" + x + ", 'clientY':" + y + "});" + 
-                "arguments[0].dispatchEvent(event);", element);
+    public void dragAndDropDragEnterBottom(WebElement target) {
+        execJs3("var x = arguments[0].getBoundingClientRect().left + 1;" + 
+                "var y = arguments[0].getBoundingClientRect().bottom - 1;" + 
+                "var event = new DragEvent('dragenter', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", target);
     }
 
-    public void dragAndDropDrop(WebElement element) {
-        dragAndDropDrop(element, 0, 0);
+    public void dragAndDropDragOverTop(WebElement target) {
+        execJs3("var x = arguments[0].getBoundingClientRect().left + 1;" + 
+                "var y = arguments[0].getBoundingClientRect().top + 1;" + 
+                "var event = new DragEvent('dragover', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", target);
     }
 
-    public void dragAndDropDrop(WebElement element, int x, int y) {
-        execJs3("var event = new DragEvent('drop', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':" + x + ", 'clientY':" + y + "});" + 
-                "arguments[0].dispatchEvent(event);", element);
+    public void dragAndDropDragOverBottom(WebElement target) {
+        execJs3("var x = arguments[0].getBoundingClientRect().left + 1;" + 
+                "var y = arguments[0].getBoundingClientRect().bottom - 1;" + 
+                "var event = new DragEvent('dragover', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", target);
     }
 
-    public void dragAndDropDragEnter(WebElement element) {
-        dragAndDropDragEnter(element, 0, 0);
+    public void dragAndDropDragLeave(WebElement target) {
+        dragAndDropDragLeave(target, 0, 0);
     }
 
-    public void dragAndDropDragEnter(WebElement element, int x, int y) {
-        execJs3("var event = new DragEvent('dragenter', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':" + x + ", 'clientY':" + y + "});" + 
-                "arguments[0].dispatchEvent(event);", element);
+    private void dragAndDropDragLeave(WebElement target, int x, int y) {
+        execJs3("var x = " + x + ";" + 
+                "var y = " + y + ";" + 
+                "var event = new DragEvent('dragleave', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", target);
     }
 
-    public void dragAndDropDragOver(WebElement element) {
-        dragAndDropDragOver(element, 0, 0);
+    public String dragAndDropDropTop(WebElement target) {
+        return execJs4(
+                "var x = arguments[0].getBoundingClientRect().left + 1;" + 
+                "var y = arguments[0].getBoundingClientRect().top + 1;" + 
+                "var event = new DragEvent('drop', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);" + 
+                "return x + ' ' + y;", target);
     }
 
-    public void dragAndDropDragOver(WebElement element, int x, int y) {
-        execJs3("var event = new DragEvent('dragover', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':" + x + ", 'clientY':" + y + "});" + 
-                "arguments[0].dispatchEvent(event);", element);
+    public String dragAndDropDropBottom(WebElement target) {
+        return execJs4(
+                "var x = arguments[0].getBoundingClientRect().left + 1;" + 
+                "var y = arguments[0].getBoundingClientRect().bottom - 1;" + 
+                "var event = new DragEvent('drop', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);" + 
+                "return x + ' ' + y;", target);
     }
 
-    public void dragAndDropDragLeave(WebElement element) {
-        dragAndDropDragLeave(element, 0, 0);
+    public void dragAndDropDragEndTop(WebElement source, String coord) {
+        execJs3("var x = " + coord.split(" ")[0] + ";" + 
+                "var y = " + coord.split(" ")[1] + ";" + 
+                "var event = new DragEvent('dragend', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", source);
     }
 
-    public void dragAndDropDragLeave(WebElement element, int x, int y) {
-        execJs3("var event = new DragEvent('dragleave', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':" + x + ", 'clientY':" + y + "});" + 
-                "arguments[0].dispatchEvent(event);", element);
+    public void dragAndDropDragEndBottom(WebElement source, String coord) {
+        execJs3("var x = " + coord.split(" ")[0] + ";" + 
+                "var y = " + coord.split(" ")[1] + ";" + 
+                "var event = new DragEvent('dragend', {'dataTransfer': seleniumDataTransfer, 'bubbles':true, 'cancelable':true, 'composed':true, 'clientX':x, 'clientY':y});" + 
+                "arguments[0].dispatchEvent(event);", source);
     }
 
 }
