@@ -226,7 +226,7 @@ public class Qs {
      * checkUserpageGridTextColumnEquals and checkAdminpageGridTextColumnEquals similar as userpageFilter.checkGridTextColumnEquals
      */
     private void checkUserpageGridTextColumnEquals(Long gridId, Long columnIndex, List<String> expectedValues) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        Long rowsCnt = grid.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -236,6 +236,7 @@ public class Qs {
             for (String expectedValue : expectedValues) {
                 if (expectedValue.equalsIgnoreCase(gridValue)) {
                     isError = false;
+                    break;
                 }
             }
 
@@ -250,7 +251,7 @@ public class Qs {
      * checkUserpageGridTextColumnEquals and checkAdminpageGridTextColumnEquals similar as userpageFilter.checkGridTextColumnEquals
      */
     private void checkAdminpageGridTextColumnEquals(Long gridId, Long columnIndex, List<String> expectedValues) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        Long rowsCnt = grid.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, rowsCnt, columnIndex);
 
@@ -260,6 +261,7 @@ public class Qs {
             for (String expectedValue : expectedValues) {
                 if (expectedValue.equalsIgnoreCase(gridValue)) {
                     isError = false;
+                    break;
                 }
             }
 
