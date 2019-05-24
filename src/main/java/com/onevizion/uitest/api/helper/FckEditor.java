@@ -3,7 +3,9 @@ package com.onevizion.uitest.api.helper;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -31,7 +33,14 @@ public class FckEditor {
         seleniumSettings.getWebDriver().switchTo().frame(iframe);
         WebElement body = seleniumSettings.getWebDriver().findElement(By.tagName("body"));
         body.clear();
-        body.sendKeys(value);
+        if (value.length() > 0) {
+            body.sendKeys(value);
+        } else {
+            body.click();
+            body.sendKeys(" ");
+            Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+            actionObject.sendKeys(Keys.BACK_SPACE).perform();
+        }
         seleniumSettings.getWebDriver().switchTo().parentFrame();
     }
 
