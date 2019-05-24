@@ -47,6 +47,7 @@ import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.helper.FckEditor;
 import com.onevizion.uitest.api.helper.FieldHistory;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.GridRowButton;
@@ -128,6 +129,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected AssertElement assertElement;
+
+    @Resource
+    protected FckEditor fckEditor;
 
     @Resource
     protected Js js;

@@ -67,6 +67,9 @@ public class Tb {
     @Resource
     private HtmlInputFile htmlInputFile;
 
+    @Resource
+    private FckEditor fckEditor;
+
     String getLastFieldIndex(String name, int elementPosition) {
         List<WebElement> elems = seleniumSettings.getWebDriver().findElements(By.name(name));
         List<Integer> idx = new ArrayList<>();
@@ -337,12 +340,10 @@ public class Tb {
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
-                wait.waitWebElement(By.id("idx" + idx));
-                js.setValueToFCKEditor("idx" + idx, value);
+                fckEditor.setValue("idx" + idx, value);
             } else {
                 String id = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("id");
-                wait.waitWebElement(By.id(id));
-                js.setValueToFCKEditor(id, value);
+                fckEditor.setValue(id, value);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -421,32 +422,16 @@ public class Tb {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
                 if (isWikiReadOnly) {
-                    seleniumSettings.getWebDriver().switchTo().frame("idx" + idx);
-                    String actualVal = seleniumSettings.getWebDriver().findElement(By.tagName("body")).getAttribute("innerHTML").trim();
-                    actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_1, AbstractSeleniumCore.SPECIAL_CHARACTERS_1);
-                    actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_2, AbstractSeleniumCore.SPECIAL_CHARACTERS_2);
-                    actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_3, AbstractSeleniumCore.SPECIAL_CHARACTERS_3);
-                    actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_4, AbstractSeleniumCore.SPECIAL_CHARACTERS_4);
-                    Assert.assertEquals(actualVal, vals.get(field), "Element with id=[idx" + idx + "] has wrong value");
-                    seleniumSettings.getWebDriver().switchTo().parentFrame();
+                    fckEditor.checkValueReadOnly("idx" + idx, vals.get(field));
                 } else {
-                    wait.waitWebElement(By.id("idx" + idx));
-                    assertElement.assertFCKEditor("idx" + idx, vals.get(field));
+                    fckEditor.checkValue("idx" + idx, vals.get(field));
                 }
             } else {
                 if (isWikiReadOnly) {
-                    seleniumSettings.getWebDriver().switchTo().frame(field);
-                    String actualVal = seleniumSettings.getWebDriver().findElement(By.tagName("body")).getAttribute("innerHTML").trim();
-                    actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_1, AbstractSeleniumCore.SPECIAL_CHARACTERS_1);
-                    actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_2, AbstractSeleniumCore.SPECIAL_CHARACTERS_2);
-                    actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_3, AbstractSeleniumCore.SPECIAL_CHARACTERS_3);
-                    actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_4, AbstractSeleniumCore.SPECIAL_CHARACTERS_4);
-                    Assert.assertEquals(actualVal, vals.get(field), "Element with name=[" + field + "] has wrong value");
-                    seleniumSettings.getWebDriver().switchTo().parentFrame();
+                    fckEditor.checkValueReadOnly(field, vals.get(field));
                 } else {
                     String id = seleniumSettings.getWebDriver().findElement(By.name(field)).getAttribute("id");
-                    wait.waitWebElement(By.id(id));
-                    assertElement.assertFCKEditor(id, vals.get(field));
+                    fckEditor.checkValue(id, vals.get(field));
                 }
             }
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)) {
@@ -627,12 +612,10 @@ public class Tb {
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                wait.waitWebElement(By.id("idx" + idx));
-                js.setValueToFCKEditor("idx" + idx, "");
+                fckEditor.setValue("idx" + idx, "");
             } else {
                 String id = seleniumSettings.getWebDriver().findElement(By.name(field)).getAttribute("id");
-                wait.waitWebElement(By.id(id));
-                js.setValueToFCKEditor(id, "");
+                fckEditor.setValue(id, "");
             }
             expVals.put(field, "");
             if (column != null) {
@@ -808,8 +791,7 @@ public class Tb {
                 expVals.put(fieldName, value);
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
-            wait.waitWebElement(By.id("epmMemo1"));
-            js.setValueToFCKEditor("epmMemo1", value);
+            fckEditor.setValue("epmMemo1", value);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
@@ -935,8 +917,7 @@ public class Tb {
                 expVals.put(fieldName, "");
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
-            wait.waitWebElement(By.id("epmMemo1"));
-            js.setValueToFCKEditor("epmMemo1", "");
+            fckEditor.setValue("epmMemo1", "");
             gridExpVals.put(gridColumnId, "");
             if (fieldName != null) {
                 expVals.put(fieldName, "");

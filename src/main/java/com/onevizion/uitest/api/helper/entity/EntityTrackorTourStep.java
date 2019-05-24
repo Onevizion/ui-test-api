@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
+import com.onevizion.uitest.api.helper.FckEditor;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -60,6 +61,9 @@ public class EntityTrackorTourStep {
     @Resource
     private AssertElement assertElement;
 
+    @Resource
+    private FckEditor fckEditor;
+
     public void add(TrackorTourStep trackorTourStep) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -95,8 +99,7 @@ public class EntityTrackorTourStep {
 
         seleniumSettings.getWebDriver().findElement(By.name(TITLE_LABEL)).sendKeys(trackorTourStep.getTitleLabel());
 
-        wait.waitWebElement(By.id(CONTENT_LABEL));
-        js.setValueToFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
+        fckEditor.setValue(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad(2L);
@@ -140,8 +143,7 @@ public class EntityTrackorTourStep {
         seleniumSettings.getWebDriver().findElement(By.name(TITLE_LABEL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(TITLE_LABEL)).sendKeys(trackorTourStep.getTitleLabel());
 
-        wait.waitWebElement(By.id(CONTENT_LABEL));
-        js.setValueToFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
+        fckEditor.setValue(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad(2L);
@@ -167,9 +169,7 @@ public class EntityTrackorTourStep {
         assertElement.assertSelect(ACTION, trackorTourStep.getAction());
         assertElement.assertText(FORM_NUMBER, trackorTourStep.getFormNumber());
         assertElement.assertText(TITLE_LABEL, trackorTourStep.getTitleLabel());
-
-        wait.waitWebElement(By.id(CONTENT_LABEL));
-        assertElement.assertFCKEditor(CONTENT_LABEL, trackorTourStep.getContentLabel());
+        fckEditor.checkValue(CONTENT_LABEL, trackorTourStep.getContentLabel());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

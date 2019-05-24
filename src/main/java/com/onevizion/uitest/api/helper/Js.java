@@ -216,15 +216,6 @@ public class Js {
                 + "return scrollTop;"));
     }
 
-    // TODO remove trim
-    public String getValueFromFCKEditor(String name) {
-        return execJs("return CKEDITOR.instances." + name + ".getData().trim();");
-    }
-
-    public void setValueToFCKEditor(String name, String value) {
-        execJs("CKEDITOR.instances." + name + ".setData('" + value + "');");
-    }
-
     public void gridScrollLeft(Long gridId, Long left) {
         execJs("document.getElementById('gridbox" + gridId + "').getElementsByClassName('objbox')[0].scrollLeft = '" + left + "';");
     }

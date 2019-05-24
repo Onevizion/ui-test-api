@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
-import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 import java.util.ArrayList;
@@ -147,15 +146,6 @@ public class AssertElement {
             boolean isChecked = psSelector.checkMultipleValues(btnOpen, btnCloseName, val, filterFieldNum);
             Assert.assertEquals(isChecked, true, "Radiobutton not selected");
         }
-    }
-
-    public void assertFCKEditor(String name, String expectedVal) {
-        String actualVal = js.getValueFromFCKEditor(name);
-        actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_1, AbstractSeleniumCore.SPECIAL_CHARACTERS_1);
-        actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_2, AbstractSeleniumCore.SPECIAL_CHARACTERS_2);
-        actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_3, AbstractSeleniumCore.SPECIAL_CHARACTERS_3);
-        actualVal = actualVal.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_4, AbstractSeleniumCore.SPECIAL_CHARACTERS_4);
-        Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
     }
 
     public void assertCodeMirror(String elementId, String expectedVal) {
