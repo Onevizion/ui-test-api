@@ -25,6 +25,9 @@ public class FckEditor {
     @Resource
     private Wait wait;
 
+    @Resource
+    private FckEditorWait fckEditorWait;
+
     public void setValue(String name, String value) {
         if (value.startsWith("<p>") && value.endsWith("</p>")) {
             value = value.substring(3, value.length() - 4);
@@ -32,6 +35,7 @@ public class FckEditor {
 
         wait.waitWebElement(By.id(name));
         wait.waitWebElement(By.id("cke_" + name));
+        fckEditorWait.waitReady(name);
         WebElement div = seleniumSettings.getWebDriver().findElement(By.id("cke_" + name));
         WebElement iframe = div.findElement(By.tagName("iframe"));
         seleniumSettings.getWebDriver().switchTo().frame(iframe);
