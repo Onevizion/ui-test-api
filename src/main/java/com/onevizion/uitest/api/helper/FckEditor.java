@@ -87,15 +87,25 @@ public class FckEditor {
         while (isException) {
             WebElement body = seleniumSettings.getWebDriver().findElement(By.tagName("body"));
 
-            body.clear();
-            if (value.length() > 0) {
-                body.sendKeys(value);
-            } else {
-                body.click();
-                body.sendKeys(" ");
-                Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+            body.click();
+            String prevVal = body.getAttribute("innerHTML");
+            Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+            for (int i = 0; i < prevVal.length(); i++) {
+                actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
+            }
+            for (int i = 0; i < prevVal.length(); i++) {
                 actionObject.sendKeys(Keys.BACK_SPACE).perform();
             }
+            actionObject.sendKeys(value).perform();
+            //body.clear();
+            //if (value.length() > 0) {
+            //    body.sendKeys(value);
+            //} else {
+            //    body.click();
+            //    body.sendKeys(" ");
+            //    Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+            //    actionObject.sendKeys(Keys.BACK_SPACE).perform();
+            //}
 
             String actualValue = body.getAttribute("innerHTML").trim();
 
