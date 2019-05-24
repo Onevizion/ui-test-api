@@ -58,10 +58,8 @@ public class FckEditor {
       actualValue = actualValue.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_3, AbstractSeleniumCore.SPECIAL_CHARACTERS_3);
       actualValue = actualValue.replaceAll(AbstractSeleniumCore.SPECIAL_CHARACTERS_ENCODED_4, AbstractSeleniumCore.SPECIAL_CHARACTERS_4);
 
-      if (seleniumSettings.getBrowser().equals("firefox")) {
-          if ("<br>".equals(actualValue)) {
-              actualValue = "";
-          }
+      if ("<br>".equals(actualValue) || "<p><br></p>".equals(actualValue)) {
+          actualValue = "";
       }
 
       Assert.assertEquals(actualValue, expectedValue, "Element with name=[" + name + "] has wrong value");
