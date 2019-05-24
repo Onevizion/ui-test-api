@@ -100,9 +100,11 @@ public class FckEditor {
             for (int i = 0; i < prevVal.length(); i++) {
                 actionObject.sendKeys(Keys.BACK_SPACE).perform();
             }
-            actionObject.sendKeys(value.substring(0, value.length() - 1)).perform();
-            AbstractSeleniumCore.sleep(500L);
-            actionObject.sendKeys(value.substring(value.length() - 1)).perform();
+            if (value.length() > 0) {
+                actionObject.sendKeys(value.substring(0, value.length() - 1)).perform();
+                AbstractSeleniumCore.sleep(500L);
+                actionObject.sendKeys(value.substring(value.length() - 1)).perform();
+            }
             //body.clear();
             //if (value.length() > 0) {
             //    body.sendKeys(value);
