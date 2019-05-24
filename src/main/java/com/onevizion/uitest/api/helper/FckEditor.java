@@ -108,6 +108,14 @@ public class FckEditor {
                 actualValue = "";
             }
 
+            if (actualValue.startsWith("<p>") && actualValue.endsWith("<br></p>")) {
+                actualValue = actualValue.substring(3, actualValue.length() - 8);
+            }
+
+            if (actualValue.startsWith("<p>") && actualValue.endsWith("</p>")) {
+                actualValue = actualValue.substring(3, actualValue.length() - 4);
+            }
+
             if (value.equals(actualValue)) {
                 isException = false;
             } else {
