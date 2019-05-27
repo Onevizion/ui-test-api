@@ -442,6 +442,8 @@ public class Js {
     }
 
     public Object getNewDropDownElement(String id, String containerClass, String containerItemClass, String text) {
+        text = text.replaceAll("'", "\\\\'");
+
         return execJs2("var elem = null;"
                 + "var elements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
                 + "for (var i = 0; i < elements.length; i++) {"
@@ -466,6 +468,8 @@ public class Js {
     }
 
     public Long getNewDropDownElementPosition(String id, String containerClass, String containerItemClass, String text) {
+        text = text.replaceAll("'", "\\\\'");
+
         return NumberUtils.createLong(execJs("var j = 0;"
                 + "var elements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
                 + "for (var i = 0; i < elements.length; i++) {"
