@@ -47,7 +47,6 @@ import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.ElementWait;
-import com.onevizion.uitest.api.helper.FckEditor;
 import com.onevizion.uitest.api.helper.FieldHistory;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.GridRowButton;
@@ -115,6 +114,7 @@ import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
 import com.onevizion.uitest.api.helper.view.View;
 import com.onevizion.uitest.api.helper.wfvisualeditor.WfVisualEditor;
+import com.onevizion.uitest.api.helper.wiki.FckEditor;
 import com.onevizion.uitest.api.restapi.CreateTest;
 import com.onevizion.uitest.api.restapi.CreateTestResult;
 

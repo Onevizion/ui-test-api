@@ -1,6 +1,8 @@
-package com.onevizion.uitest.api.helper;
+package com.onevizion.uitest.api.helper.wiki;
 
 import org.springframework.stereotype.Component;
+
+import com.onevizion.uitest.api.helper.Js;
 
 @Component
 class FckEditorJs extends Js {

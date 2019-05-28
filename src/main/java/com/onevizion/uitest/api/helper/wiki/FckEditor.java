@@ -1,4 +1,4 @@
-package com.onevizion.uitest.api.helper;
+package com.onevizion.uitest.api.helper.wiki;
 
 import javax.annotation.Resource;
 
@@ -10,17 +10,15 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
-import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.Element;
+import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 public class FckEditor {
 
     @Resource
     private SeleniumSettings seleniumSettings;
-
-    @Resource
-    private SeleniumLogger seleniumLogger;
 
     @Resource
     private Wait wait;

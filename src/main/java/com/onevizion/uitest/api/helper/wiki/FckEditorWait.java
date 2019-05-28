@@ -1,4 +1,4 @@
-package com.onevizion.uitest.api.helper;
+package com.onevizion.uitest.api.helper.wiki;
 
 import javax.annotation.Resource;
 

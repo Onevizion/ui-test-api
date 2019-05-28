@@ -26,6 +26,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumAlertException;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
+import com.onevizion.uitest.api.helper.wiki.FckEditor;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
 @Component
