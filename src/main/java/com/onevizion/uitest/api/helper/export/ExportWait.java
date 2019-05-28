@@ -24,7 +24,6 @@ class ExportWait {
             .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> {
                 WebElement panel = webdriver.findElement(By.id("processEventList"));
-
                 List<WebElement> processes = panel.findElements(By.className("group_event"));
                 return !processes.isEmpty();
             });
