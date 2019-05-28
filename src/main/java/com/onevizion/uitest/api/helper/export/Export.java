@@ -134,6 +134,9 @@ public class Export {
 
         exportWait.waitExportDone();
 
+        WebElement processListButton = seleniumSettings.getWebDriver().findElement(By.id("topPanelProcessContainer")).findElement(By.className("btn_input"));
+        processListButton.click();
+
         WebElement panel = seleniumSettings.getWebDriver().findElement(By.id("processEventList"));
         WebElement link = panel.findElement(By.className("ge_link"));
         String processId = link.getAttribute("onclick").replace("showExpDetails(", "").replace(")", "");
@@ -149,7 +152,6 @@ public class Export {
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
 
-        WebElement processListButton = seleniumSettings.getWebDriver().findElement(By.id("topPanelProcessContainer")).findElement(By.className("btn_input"));
         processListButton.click();
 
         return processId;

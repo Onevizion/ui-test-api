@@ -20,7 +20,7 @@ class ExportWait {
 
     void waitExport() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for Element name=[" + null + "] is failed")
+            .withMessage("Waiting for export is failed")
             .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> {
                 WebElement panel = webdriver.findElement(By.id("processEventList"));
@@ -32,24 +32,13 @@ class ExportWait {
 
     void waitExportDone() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for Element name=[" + null + "] is failed")
+            .withMessage("Waiting for export done is failed")
             .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> {
-                boolean isDisplayed = webdriver.findElement(By.id("processStatusNotification")).isDisplayed();
-                if (isDisplayed) {
-                    webdriver.findElement(By.id("closeNotification")).click();
-                }
-
-                isDisplayed = webdriver.findElement(By.id("processEventList")).isDisplayed();
-                if (!isDisplayed) {
-                    WebElement processListButton = webdriver.findElement(By.id("topPanelProcessContainer")).findElement(By.className("btn_input"));
-                    processListButton.click();
-                }
-
                 WebElement panel = webdriver.findElement(By.id("processEventList"));
                 List<WebElement> statuses = panel.findElements(By.className("ie_status"));
                 for (WebElement status : statuses) {
-                    if ("Executed without Errors".equals(status.getText())) {
+                    if ("Executed without Errors".equals(status.getAttribute("textContent"))) {
                         return true;
                     }
                 }
