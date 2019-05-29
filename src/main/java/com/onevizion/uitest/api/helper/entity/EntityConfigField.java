@@ -382,6 +382,9 @@ public class EntityConfigField {
         } else {
             packagesTabIndex = 5L;
         }
+        if ("YES".equals(configFieldVo.getLockable())) {
+            packagesTabIndex = packagesTabIndex + 1L;
+        }
         tab.goToTab(packagesTabIndex); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
@@ -648,6 +651,9 @@ public class EntityConfigField {
         } else {
             packagesTabIndex = 5L;
         }
+        if ("YES".equals(configFieldVo.getLockable())) {
+            packagesTabIndex = packagesTabIndex + 1L;
+        }
         tab.goToTab(packagesTabIndex); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
@@ -833,6 +839,9 @@ public class EntityConfigField {
             packagesTabIndex = 7L;
         } else {
             packagesTabIndex = 5L;
+        }
+        if ("YES".equals(configFieldVo.getLockable())) {
+            packagesTabIndex = packagesTabIndex + 1L;
         }
         tab.goToTab(packagesTabIndex); //Components Package
         grid2.waitLoad(packagesTabIndex);
