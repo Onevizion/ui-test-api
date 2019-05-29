@@ -651,7 +651,7 @@ public class EntityConfigField {
         } else {
             packagesTabIndex = 5L;
         }
-        if ("YES".equals(configFieldVo.getLockable())) {
+        if ("YES".equals(configFieldVo.getLockable()) || removeLockable) {
             packagesTabIndex = packagesTabIndex + 1L;
         }
         tab.goToTab(packagesTabIndex); //Components Package
