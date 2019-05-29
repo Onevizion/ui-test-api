@@ -38,7 +38,6 @@ public class EntityConfigField {
     private static final String DATA_TYPE = "dataType";
     private static final String LABEL = "LabelName";
     private static final String NAME = "configFieldName";
-    private static final String COMP_PACKAGE = "componentsPackageId";
     private static final String COLOR = "colorId";
     private static final String WIDTH = "fieldWidth";
 
@@ -132,8 +131,6 @@ public class EntityConfigField {
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(configFieldVo.getName());
-
-        new Select(seleniumSettings.getWebDriver().findElement(By.name(COMP_PACKAGE))).selectByVisibleText(configFieldVo.getCompPackage());
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(COLOR))).selectByVisibleText(configFieldVo.getColor());
 
@@ -364,6 +361,34 @@ public class EntityConfigField {
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
+
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+
+        if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
+            jquery.waitLoad();
+        }
+
+        Long packagesTabIndex;
+        if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType()) ||
+                ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 4L;
+        } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 6L;
+        } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType()) ||
+                "XITOR_CLASS_ID".equals(configFieldVo.getName())) {
+            packagesTabIndex = 7L;
+        } else {
+            packagesTabIndex = 5L;
+        }
+        tab.goToTab(packagesTabIndex); //Components Package
+        grid2.waitLoad(packagesTabIndex);
+        grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
+        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configFieldVo.getPackages());
+
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        grid2.waitLoad();
     }
 
     public void edit(ConfigFieldVo configFieldVo) {
@@ -380,8 +405,6 @@ public class EntityConfigField {
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(configFieldVo.getName());
-
-        new Select(seleniumSettings.getWebDriver().findElement(By.name(COMP_PACKAGE))).selectByVisibleText(configFieldVo.getCompPackage());
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(COLOR))).selectByVisibleText(configFieldVo.getColor());
 
@@ -613,6 +636,23 @@ public class EntityConfigField {
             checkbox.clickByName(NOT_CLONE_LOCK);
         }
 
+        Long packagesTabIndex;
+        if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType()) ||
+                ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 4L;
+        } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 6L;
+        } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType()) ||
+                "XITOR_CLASS_ID".equals(configFieldVo.getName())) {
+            packagesTabIndex = 7L;
+        } else {
+            packagesTabIndex = 5L;
+        }
+        tab.goToTab(packagesTabIndex); //Components Package
+        grid2.waitLoad(packagesTabIndex);
+        grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
+        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configFieldVo.getPackages());
+
         if (removeLockable) {
             window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), AbstractSeleniumCore.MESSAGE_DELETE_LOCKABLE);
         } else {
@@ -634,8 +674,6 @@ public class EntityConfigField {
         assertElement.assertSelect(DATA_TYPE, configFieldVo.getConfigFieldType().getLabel());
         assertElement.assertText(LABEL, configFieldVo.getLabel());
         assertElement.assertText(NAME, configFieldVo.getName());
-
-        assertElement.assertSelect(COMP_PACKAGE, configFieldVo.getCompPackage());
 
         assertElement.assertSelect(COLOR, configFieldVo.getColor());
 
@@ -783,6 +821,22 @@ public class EntityConfigField {
         assertElement.assertCheckbox(READ_ONLY, configFieldVo.getReadOnly());
         assertElement.assertCheckbox(NOT_CLONE_VALUE, configFieldVo.getNotCloneValue());
         assertElement.assertCheckbox(NOT_CLONE_LOCK, configFieldVo.getNotCloneLock());
+
+        Long packagesTabIndex;
+        if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType()) ||
+                ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 4L;
+        } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 6L;
+        } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType()) ||
+                "XITOR_CLASS_ID".equals(configFieldVo.getName())) {
+            packagesTabIndex = 7L;
+        } else {
+            packagesTabIndex = 5L;
+        }
+        tab.goToTab(packagesTabIndex); //Components Package
+        grid2.waitLoad(packagesTabIndex);
+        grid.checkAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configFieldVo.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -1,5 +1,7 @@
 package com.onevizion.uitest.api.vo.entity;
 
+import java.util.List;
+
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
@@ -9,7 +11,6 @@ public class ConfigFieldVo {
     private String trackorTypeLabel;
     private String label;
     private String name;
-    private String compPackage;
     private String color;
     private String width;
 
@@ -21,6 +22,8 @@ public class ConfigFieldVo {
     private String readOnly;
     private String notCloneValue;
     private String notCloneLock;
+
+    private List<String> packages;
 
     private ConfigFieldVoEfile configFieldVoEfile;
     private ConfigFieldVoNumber configFieldVoNumber;
@@ -63,7 +66,6 @@ public class ConfigFieldVo {
                     ConfigFieldVo.this.trackorTypeLabel == null ||
                     ConfigFieldVo.this.label == null ||
                     ConfigFieldVo.this.name == null ||
-                    ConfigFieldVo.this.compPackage == null ||
                     ConfigFieldVo.this.color == null ||
                     ConfigFieldVo.this.width == null ||
                     ConfigFieldVo.this.description == null ||
@@ -73,7 +75,8 @@ public class ConfigFieldVo {
                     ConfigFieldVo.this.lockable == null ||
                     ConfigFieldVo.this.readOnly == null ||
                     ConfigFieldVo.this.notCloneValue == null ||
-                    ConfigFieldVo.this.notCloneLock == null) {
+                    ConfigFieldVo.this.notCloneLock == null ||
+                    ConfigFieldVo.this.packages == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return ConfigFieldVo.this;
@@ -96,11 +99,6 @@ public class ConfigFieldVo {
 
         public Builder setName(String name) {
             ConfigFieldVo.this.name = name;
-            return this;
-        }
-
-        public Builder setCompPackage(String compPackage) {
-            ConfigFieldVo.this.compPackage = compPackage;
             return this;
         }
 
@@ -151,6 +149,11 @@ public class ConfigFieldVo {
 
         public Builder setNotCloneLock(String notCloneLock) {
             ConfigFieldVo.this.notCloneLock = notCloneLock;
+            return this;
+        }
+
+        public Builder setPackages(List<String> packages) {
+            ConfigFieldVo.this.packages = packages;
             return this;
         }
 
@@ -254,7 +257,6 @@ public class ConfigFieldVo {
             return this;
         }
 
-        
         public Builder setConfigFieldCalculated(ConfigFieldVoCalculated configFieldVoCalculated) {
             ConfigFieldVo.this.configFieldVoCalculated = configFieldVoCalculated;
             return this;
@@ -276,10 +278,6 @@ public class ConfigFieldVo {
 
     public String getName() {
         return name;
-    }
-
-    public String getCompPackage() {
-        return compPackage;
     }
 
     public String getColor() {
@@ -320,6 +318,10 @@ public class ConfigFieldVo {
 
     public String getNotCloneLock() {
         return notCloneLock;
+    }
+
+    public List<String> getPackages() {
+        return packages;
     }
 
     public ConfigFieldVoEfile getConfigFieldEfile() {
