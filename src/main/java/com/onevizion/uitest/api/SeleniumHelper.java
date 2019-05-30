@@ -28,13 +28,18 @@ public class SeleniumHelper {
         closeAllAlertsOnWindow();
         resetAllChangesOnWindow();
         seleniumScreenshot.getScreenshot(true);
+
         closeAllWindows();
+        closeAllAlertsOnWindow();
+        resetAllChangesOnWindow();
+        getErrorReportFromWindow();
     }
 
     void closeAfterError() {
+        closeAllWindows();
         closeAllAlertsOnWindow();
         resetAllChangesOnWindow();
-        closeAllWindows();
+        getErrorReportFromWindow();
     }
 
     private void closeAllAlertsOnWindow() {
@@ -64,10 +69,6 @@ public class SeleniumHelper {
     }
 
     private void closeAllWindows() {
-        //TODO
-        //close all alerts and windows (except main window)
-        //because webDriver.quit() not wait for all windows are closed
-
         if (seleniumSettings.getWindows() == null) {
             return;
         }
@@ -76,6 +77,7 @@ public class SeleniumHelper {
             while (seleniumSettings.getWindows().size() > 1) {
                 closeAllAlertsOnWindow();
                 resetAllChangesOnWindow();
+                getErrorReportFromWindow();
 
                 final int currentWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
                 String title = seleniumSettings.getWebDriver().getTitle();
@@ -98,6 +100,20 @@ public class SeleniumHelper {
             }
         } catch (Exception e) {
             seleniumLogger.error(seleniumSettings.getTestName() + " closeAllWindows Unexpected exception: " + e.getMessage());
+        }
+    }
+
+    private void getErrorReportFromWindow() {
+        String prefix = "Error Report ID: ";
+        int uuidLength = 36;
+
+        String pageText = js.getPageText();
+        int startIndex = pageText.indexOf(prefix);
+        if (startIndex > -1) {
+            int errorReportStartIndex = startIndex;
+            int errorReportEndIndex = errorReportStartIndex + prefix.length() + uuidLength;
+            String errorReport = pageText.substring(errorReportStartIndex, errorReportEndIndex);
+            seleniumLogger.error(seleniumSettings.getTestName() + " Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have error report: " + errorReport);
         }
     }
 

@@ -677,4 +677,8 @@ public class Js {
         return NumberUtils.createLong(execJs("return (new Date()).getTime();"));
     }
 
+    public String getPageText() {
+        return execJs("return document.documentElement.innerText;");
+    }
+
 }
