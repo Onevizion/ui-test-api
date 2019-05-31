@@ -10,6 +10,8 @@ public class DynamicVtable {
     private String desc;
     private List<DynamicVtableValue> values;
 
+    private List<String> packages;
+
     private DynamicVtable() {
         
     }
@@ -30,6 +32,10 @@ public class DynamicVtable {
         return values;
     }
 
+    public List<String> getPackages() {
+        return packages;
+    }
+
     public class Builder {
 
         private Builder() {
@@ -39,7 +45,8 @@ public class DynamicVtable {
         public DynamicVtable build() {
             if (DynamicVtable.this.name == null ||
                     DynamicVtable.this.desc == null ||
-                    DynamicVtable.this.values == null) {
+                    DynamicVtable.this.values == null ||
+                    DynamicVtable.this.packages == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return DynamicVtable.this;
@@ -57,6 +64,11 @@ public class DynamicVtable {
 
         public Builder setValues(List<DynamicVtableValue> values) {
             DynamicVtable.this.values = values;
+            return this;
+        }
+
+        public Builder setPackages(List<String> packages) {
+            DynamicVtable.this.packages = packages;
             return this;
         }
 

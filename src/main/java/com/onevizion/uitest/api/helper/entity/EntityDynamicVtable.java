@@ -84,6 +84,11 @@ public class EntityDynamicVtable {
             entityDynamicVtableValue.add(dynamicVtableValue);
         }
 
+        tab.goToTab(3L); //Components Package
+        grid2.waitLoad(3L);
+        grid.clearAssignmentGridColumn2(3L, 0L);
+        grid.selectAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
@@ -96,6 +101,16 @@ public class EntityDynamicVtable {
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(dynamicVtable.getName());
 
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
+
+        element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
+        wait.waitReloadForm("reloaded=1");
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+
+        tab.goToTab(3L); //Components Package
+        grid2.waitLoad(3L);
+        grid.clearAssignmentGridColumn2(3L, 0L);
+        grid.selectAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -111,6 +126,11 @@ public class EntityDynamicVtable {
 
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
+
+        tab.goToTab(3L); //Components Package
+        grid2.waitLoad(3L);
+        grid.clearAssignmentGridColumn2(3L, 0L);
+        grid.selectAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -146,6 +166,10 @@ public class EntityDynamicVtable {
 
         assertElement.assertText(NAME, dynamicVtable.getName());
         assertElement.assertText(DESCRIPTION, dynamicVtable.getDesc());
+
+        tab.goToTab(3L); //Components Package
+        grid2.waitLoad(3L);
+        grid.checkAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
