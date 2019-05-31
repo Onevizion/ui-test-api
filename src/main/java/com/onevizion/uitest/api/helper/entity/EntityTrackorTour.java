@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.PsSelector;
@@ -56,6 +57,9 @@ public class EntityTrackorTour {
 
     @Resource
     private AssertElement assertElement;
+
+    @Resource
+    private Element element;
 
     @Resource
     private Js js;
@@ -110,6 +114,16 @@ public class EntityTrackorTour {
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
 
+        element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
+        wait.waitReloadForm("reloaded=1");
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+
+        tab.goToTab(4L); //Components Package
+        grid2.waitLoad(4L);
+        grid.clearAssignmentGridColumn2(4L, 0L);
+        grid.selectAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
@@ -145,6 +159,11 @@ public class EntityTrackorTour {
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn2(3L, 0L);
         grid.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
+
+        tab.goToTab(4L); //Components Package
+        grid2.waitLoad(4L);
+        grid.clearAssignmentGridColumn2(4L, 0L);
+        grid.selectAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -196,6 +215,10 @@ public class EntityTrackorTour {
         tab.goToTab(3L); //Role Assignments
         grid2.waitLoad(3L);
         grid.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
+
+        tab.goToTab(4L); //Components Package
+        grid2.waitLoad(4L);
+        grid.checkAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

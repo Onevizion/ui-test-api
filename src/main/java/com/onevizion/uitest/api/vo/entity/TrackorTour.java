@@ -14,10 +14,10 @@ public class TrackorTour {
     private String tabName;
     private String orderNumber;
     private String description;
+    private List<TrackorTourStep> steps;
 
     private List<String> roles;
-
-    private List<TrackorTourStep> steps;
+    private List<String> packages;
 
     private TrackorTour() {
         
@@ -59,12 +59,16 @@ public class TrackorTour {
         return description;
     }
 
+    public List<TrackorTourStep> getSteps() {
+        return steps;
+    }
+
     public List<String> getRoles() {
         return roles;
     }
 
-    public List<TrackorTourStep> getSteps() {
-        return steps;
+    public List<String> getPackages() {
+        return packages;
     }
 
     public class Builder {
@@ -82,8 +86,9 @@ public class TrackorTour {
                     TrackorTour.this.tabName == null ||
                     TrackorTour.this.orderNumber == null ||
                     TrackorTour.this.description == null ||
+                    TrackorTour.this.steps == null ||
                     TrackorTour.this.roles == null ||
-                    TrackorTour.this.steps == null) {
+                    TrackorTour.this.packages == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return TrackorTour.this;
@@ -129,13 +134,18 @@ public class TrackorTour {
             return this;
         }
 
+        public Builder setSteps(List<TrackorTourStep> steps) {
+            TrackorTour.this.steps = steps;
+            return this;
+        }
+
         public Builder setRoles(List<String> roles) {
             TrackorTour.this.roles = roles;
             return this;
         }
 
-        public Builder setSteps(List<TrackorTourStep> steps) {
-            TrackorTour.this.steps = steps;
+        public Builder setPackages(List<String> packages) {
+            TrackorTour.this.packages = packages;
             return this;
         }
 

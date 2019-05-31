@@ -64,16 +64,9 @@ public class EntityDynamicVtable {
     private Grid2 grid2;
 
     public void addWithChilds(DynamicVtable dynamicVtable) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        add(dynamicVtable);
 
-        seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(dynamicVtable.getName());
-
-        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
-
-        element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
-        wait.waitReloadForm("reloaded=1");
+        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
@@ -83,11 +76,6 @@ public class EntityDynamicVtable {
         for (DynamicVtableValue dynamicVtableValue : dynamicVtable.getValues()) {
             entityDynamicVtableValue.add(dynamicVtableValue);
         }
-
-        tab.goToTab(3L); //Components Package
-        grid2.waitLoad(3L);
-        grid.clearAssignmentGridColumn2(3L, 0L);
-        grid.selectAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
