@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
@@ -32,7 +33,6 @@ public class EntityTrackorType {
     private static final String LABEL_PREFIX = "prefixLabel";
     private static final String LABEL_MY_ITEMS = "myTrackorsLabel";
     private static final String LIMIT_WP = "wpModeId";
-    private static final String COMP_PACKAGE = "componentsPackageId";
     private static final String CLONE = "cloningAllowed";
     private static final String TEMPLATE = "template";
     private static final String USER = "user";
@@ -65,6 +65,9 @@ public class EntityTrackorType {
     @Resource
     private Checkbox checkbox;
 
+    @Resource
+    private Element element;
+
     public void add(TrackorType trackorType) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -78,7 +81,6 @@ public class EntityTrackorType {
         seleniumSettings.getWebDriver().findElement(By.name(LABEL_MY_ITEMS)).sendKeys(trackorType.getLabelMyItems());
 
         (new Select(seleniumSettings.getWebDriver().findElement(By.name(LIMIT_WP)))).selectByVisibleText(trackorType.getLimitWp());
-        (new Select(seleniumSettings.getWebDriver().findElement(By.name(COMP_PACKAGE)))).selectByVisibleText(trackorType.getCompPack());
 
         if ((trackorType.getClone().equals("YES") && !checkbox.isCheckedByName(CLONE))
                 || (trackorType.getClone().equals("NO") && checkbox.isCheckedByName(CLONE))) {
@@ -96,6 +98,16 @@ public class EntityTrackorType {
                 || (trackorType.getEfileContainer().equals("NO") && checkbox.isCheckedByName(EFILE_CONTAINER))) {
             checkbox.clickByName(EFILE_CONTAINER);
         }
+
+        element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
+        wait.waitReloadForm("reloaded=1");
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+
+        tab.goToTab(6L); //Components Package
+        grid2.waitLoad(6L);
+        grid.clearAssignmentGridColumn2(6L, 0L);
+        grid.selectAssignmentGridColumn2New(6L, 0L, 2L, trackorType.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -126,7 +138,6 @@ public class EntityTrackorType {
         assertElement.assertRadioPsSelector("objDisplayField", "btnobjDisplayField", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAliasField(), 1L, true);
         assertElement.assertCheckboxPsSelector("xsFieldsStr", "btnxsFieldsStr", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAutoFilterFields(), 1L, true);
         assertElement.assertSelect(LIMIT_WP, trackorType.getLimitWp());
-        assertElement.assertSelect(COMP_PACKAGE, trackorType.getCompPack());
         assertElement.assertCheckbox(CLONE, trackorType.getClone());
         assertElement.assertCheckbox(TEMPLATE, trackorType.getTemplate());
         assertElement.assertCheckbox(USER, trackorType.getUser());
@@ -145,6 +156,10 @@ public class EntityTrackorType {
         assertElement.assertSelect("lbSeparator3", trackorType.getSeparator3());
         assertElement.assertSelect("lbDigits", trackorType.getDigits4());
         assertElement.assertSelect("lbUnique", trackorType.getUniqueAcross4());
+
+        tab.goToTab(6L); //Components Package
+        grid2.waitLoad(6L);
+        grid.checkAssignmentGridColumn2New(6L, 0L, 2L, trackorType.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -13,7 +13,6 @@ public class TrackorType {
     private String aliasField;
     private List<String> autoFilterFields;
     private String limitWp;
-    private String compPack;
     private String clone;
     private String template;
     private String user;
@@ -32,10 +31,12 @@ public class TrackorType {
     private String digits4;
     private String uniqueAcross4;
 
+    private List<String> packages;
+
     public TrackorType(String name, String label, String labelItemId, String labelClass, String labelPrefix, String labelMyItems, String aliasField,
-            List<String> autoFilterFields, String limitWp, String compPack, String clone, String template, String user, String efileContainer,
+            List<String> autoFilterFields, String limitWp, String clone, String template, String user, String efileContainer,
             String autoKey, String autoKeyStartAt, String owner1, String field1, String separator1, String owner2, String field2,
-            String separator2, String staticText3, String separator3, String digits4, String uniqueAcross4) {
+            String separator2, String staticText3, String separator3, String digits4, String uniqueAcross4, List<String> packages) {
         this.name = name;
         this.label = label;
         this.labelItemId = labelItemId;
@@ -45,7 +46,6 @@ public class TrackorType {
         this.aliasField = aliasField;
         this.autoFilterFields = autoFilterFields;
         this.limitWp = limitWp;
-        this.compPack = compPack;
         this.clone = clone;
         this.template = template;
         this.user = user;
@@ -63,6 +63,8 @@ public class TrackorType {
         this.separator3 = separator3;
         this.digits4 = digits4;
         this.uniqueAcross4 = uniqueAcross4;
+
+        this.packages = packages;
     }
 
     public String getName() {
@@ -99,10 +101,6 @@ public class TrackorType {
 
     public String getLimitWp() {
         return limitWp;
-    }
-
-    public String getCompPack() {
-        return compPack;
     }
 
     public String getClone() {
@@ -167,6 +165,10 @@ public class TrackorType {
 
     public String getUniqueAcross4() {
         return uniqueAcross4;
+    }
+
+    public List<String> getPackages() {
+        return packages;
     }
 
 }
