@@ -191,8 +191,11 @@ public class Grid {
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
+
+        Assert.assertEquals(names.containsAll(values.keySet()), true, "Some of expected values [" + values.keySet() + "] not exist in grid [" + names + "]");
+
         for (Long i = 0L; i < cnt; i++) {
-            if (values.containsKey(names.get(i.intValue())) /*&& priv.contains(values.get(names.get(i.intValue())))*/ && values.get(names.get(i.intValue())).contains(priv)) {
+            if (values.containsKey(names.get(i.intValue())) && values.get(names.get(i.intValue())).contains(priv)) {
                 js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
                 WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
                 checkbox.clickByElement(webElement);
@@ -217,6 +220,9 @@ public class Grid {
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
+
+        Assert.assertEquals(names.containsAll(values), true, "Some of expected values [" + values + "] not exist in grid [" + names + "]");
+
         for (Long i = 0L; i < cnt; i++) {
             if (values.contains(names.get(i.intValue()))) {
                 js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
@@ -301,7 +307,7 @@ public class Grid {
         @SuppressWarnings("unchecked")
         List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdxCheckbox);
         for (Long i = 0L; i < cnt; i++) {
-            if (values.containsKey(names.get(i.intValue())) /*&& priv.contains(values.get(names.get(i.intValue())))*/ && values.get(names.get(i.intValue())).contains(priv)) {
+            if (values.containsKey(names.get(i.intValue())) && values.get(names.get(i.intValue())).contains(priv)) {
                 Assert.assertEquals(gridVals.get(i.intValue()), "1", "Check priv for row=[" + names.get(i.intValue()) + "] is failed");
             } else {
                 Assert.assertEquals(gridVals.get(i.intValue()), "0", "Check priv for row=[" + names.get(i.intValue()) + "] is failed");
