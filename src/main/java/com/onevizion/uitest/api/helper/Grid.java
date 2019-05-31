@@ -188,19 +188,16 @@ public class Grid {
 
     public void selectAssignmentGridColumnNew(Long gridId, Long colIdxCheckbox, Long colIdxName, Map<String, String> values, String priv) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            @SuppressWarnings("unchecked")
-            List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
-            for (Long i = 0L; i < cnt; i++) {
-                if (values.containsKey(names.get(i.intValue())) /*&& priv.contains(values.get(names.get(i.intValue())))*/ && values.get(names.get(i.intValue())).contains(priv)) {
-                    js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    checkbox.clickByElement(webElement);
-                }
+        @SuppressWarnings("unchecked")
+        List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
+        for (Long i = 0L; i < cnt; i++) {
+            if (values.containsKey(names.get(i.intValue())) /*&& priv.contains(values.get(names.get(i.intValue())))*/ && values.get(names.get(i.intValue())).contains(priv)) {
+                js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
+                WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
+                checkbox.clickByElement(webElement);
             }
-//        }
+        }
     }
 
     //TODO remove when getValue will be return 1 and 0 instead of html
@@ -217,160 +214,131 @@ public class Grid {
 
     public void selectAssignmentGridColumn2New(Long gridId, Long colIdxCheckbox, Long colIdxName, List<String> values) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            @SuppressWarnings("unchecked")
-            List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
-            for (Long i = 0L; i < cnt; i++) {
-                if (values.contains(names.get(i.intValue()))) {
-                    js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
-                    checkbox.clickByElement(webElement);
-                }
+        @SuppressWarnings("unchecked")
+        List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
+        for (Long i = 0L; i < cnt; i++) {
+            if (values.contains(names.get(i.intValue()))) {
+                js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
+                WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
+                checkbox.clickByElement(webElement);
             }
-//        }
+        }
     }
 
     public void clearPrivilegieGridColumn(Long gridId, Long colIdx) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            @SuppressWarnings("unchecked")
-            List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
-            for (Long i = 0L; i < cnt; i++) {
-                if (!"".equals(vals.get(i.intValue()))) {
-                    js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
-                    new Select(seleniumSettings.getWebDriver().findElement(By.id("lbpriv"))).selectByVisibleText("");
-                }
+        @SuppressWarnings("unchecked")
+        List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
+        for (Long i = 0L; i < cnt; i++) {
+            if (!"".equals(vals.get(i.intValue()))) {
+                js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
+                new Select(seleniumSettings.getWebDriver().findElement(By.id("lbpriv"))).selectByVisibleText("");
             }
-//        }
+        }
     }
 
     public void clearAssignmentGridColumn(Long gridId, Long colIdx) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            @SuppressWarnings("unchecked")
-            List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
-            for (Long i = 0L; i < cnt; i++) {
-                if ("1".equals(vals.get(i.intValue()))) {
-                    js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
-                    WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
-                    checkbox.clickByElement(webElement);
-                }
+        @SuppressWarnings("unchecked")
+        List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
+        for (Long i = 0L; i < cnt; i++) {
+            if ("1".equals(vals.get(i.intValue()))) {
+                js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
+                WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
+                checkbox.clickByElement(webElement);
             }
-//        }
+        }
     }
 
     //TODO remove when getValue will be return 1 and 0 instead of html
     public void clearAssignmentGridColumn2(Long gridId, Long colIdx) {
-//        Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
-
-//        if (!isGridEmpty) {
-            List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdx));
-            for (Long i = 0L; i < checkboxes.size(); i++) {
-                if (checkboxes.get(i.intValue()).isSelected() && checkboxes.get(i.intValue()).isEnabled()) {
-                    checkbox.clickByElement(checkboxes.get(i.intValue()));
-                }
+        List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdx));
+        for (Long i = 0L; i < checkboxes.size(); i++) {
+            if (checkboxes.get(i.intValue()).isSelected() && checkboxes.get(i.intValue()).isEnabled()) {
+                checkbox.clickByElement(checkboxes.get(i.intValue()));
             }
-//        }
+        }
     }
 
     public void checkPrivilegieGridColumn(Long gridId, Long colIdx, List<String> vals, String val) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            @SuppressWarnings("unchecked")
-            List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
-            for (Long i = 0L; i < cnt; i++) {
-                String rowId = js.getGridRowIdByIndex(gridId, i);
-                if (vals.contains(rowId)) {
-                    Assert.assertEquals(gridVals.get(i.intValue()), val, "Check priv for row id=[" + rowId + "] is failed");
-                } else {
-                    Assert.assertEquals(gridVals.get(i.intValue()), "", "Check priv for row id=[" + rowId + "] is failed");
-                }
+        @SuppressWarnings("unchecked")
+        List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
+        for (Long i = 0L; i < cnt; i++) {
+            String rowId = js.getGridRowIdByIndex(gridId, i);
+            if (vals.contains(rowId)) {
+                Assert.assertEquals(gridVals.get(i.intValue()), val, "Check priv for row id=[" + rowId + "] is failed");
+            } else {
+                Assert.assertEquals(gridVals.get(i.intValue()), "", "Check priv for row id=[" + rowId + "] is failed");
             }
-//        }
+        }
     }
 
     public void checkAssignmentGridColumn(Long gridId, Long colIdx, List<String> vals) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            @SuppressWarnings("unchecked")
-            List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
-            for (Long i = 0L; i < cnt; i++) {
-                String rowId = js.getGridRowIdByIndex(gridId, i);
-                if (vals.contains(rowId)) {
-                    Assert.assertEquals(gridVals.get(i.intValue()), "1", "Check priv for row id=[" + rowId + "] is failed");
-                } else {
-                    Assert.assertEquals(gridVals.get(i.intValue()), "0", "Check priv for row id=[" + rowId + "] is failed");
-                }
+        @SuppressWarnings("unchecked")
+        List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
+        for (Long i = 0L; i < cnt; i++) {
+            String rowId = js.getGridRowIdByIndex(gridId, i);
+            if (vals.contains(rowId)) {
+                Assert.assertEquals(gridVals.get(i.intValue()), "1", "Check priv for row id=[" + rowId + "] is failed");
+            } else {
+                Assert.assertEquals(gridVals.get(i.intValue()), "0", "Check priv for row id=[" + rowId + "] is failed");
             }
-//        }
+        }
     }
 
     public void checkAssignmentGridColumnNew(Long gridId, Long colIdxCheckbox, Long colIdxName, Map<String, String> values, String priv) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            @SuppressWarnings("unchecked")
-            List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
-            @SuppressWarnings("unchecked")
-            List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdxCheckbox);
-            for (Long i = 0L; i < cnt; i++) {
-                if (values.containsKey(names.get(i.intValue())) /*&& priv.contains(values.get(names.get(i.intValue())))*/ && values.get(names.get(i.intValue())).contains(priv)) {
-                    Assert.assertEquals(gridVals.get(i.intValue()), "1", "Check priv for row=[" + names.get(i.intValue()) + "] is failed");
-                } else {
-                    Assert.assertEquals(gridVals.get(i.intValue()), "0", "Check priv for row=[" + names.get(i.intValue()) + "] is failed");
-                }
+        @SuppressWarnings("unchecked")
+        List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
+        @SuppressWarnings("unchecked")
+        List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdxCheckbox);
+        for (Long i = 0L; i < cnt; i++) {
+            if (values.containsKey(names.get(i.intValue())) /*&& priv.contains(values.get(names.get(i.intValue())))*/ && values.get(names.get(i.intValue())).contains(priv)) {
+                Assert.assertEquals(gridVals.get(i.intValue()), "1", "Check priv for row=[" + names.get(i.intValue()) + "] is failed");
+            } else {
+                Assert.assertEquals(gridVals.get(i.intValue()), "0", "Check priv for row=[" + names.get(i.intValue()) + "] is failed");
             }
-//        }
+        }
     }
 
     //TODO remove when getValue will be return 1 and 0 instead of html
     public void checkAssignmentGridColumn2(Long gridId, Long colIdx, List<String> vals) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdx));
-            for (Long i = 0L; i < cnt; i++) {
-                boolean selected = checkboxes.get(i.intValue()).isSelected();
-                String id = checkboxes.get(i.intValue()).getAttribute("id");
-                if (vals.contains(id)) {
-                    Assert.assertEquals(selected, true, "Check checkbox with id=[" + id + "] is failed");
-                } else {
-                    Assert.assertEquals(selected, false, "Check checkbox with id=[" + id + "] is failed");
-                }
+        List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdx));
+        for (Long i = 0L; i < cnt; i++) {
+            boolean selected = checkboxes.get(i.intValue()).isSelected();
+            String id = checkboxes.get(i.intValue()).getAttribute("id");
+            if (vals.contains(id)) {
+                Assert.assertEquals(selected, true, "Check checkbox with id=[" + id + "] is failed");
+            } else {
+                Assert.assertEquals(selected, false, "Check checkbox with id=[" + id + "] is failed");
             }
-//        }
+        }
     }
 
     public void checkAssignmentGridColumn2New(Long gridId, Long colIdxCheckbox, Long colIdxName, List<String> values) {
         Long cnt = js.getGridRowsCount(gridId);
-//        boolean isGridEmpty = cnt.equals(1L) && js.getGridSelectedRowId(gridId).equals("0");
 
-//        if (!isGridEmpty) {
-            @SuppressWarnings("unchecked")
-            List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
-            List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdxCheckbox));
-            for (Long i = 0L; i < cnt; i++) {
-                boolean selected = checkboxes.get(i.intValue()).isSelected();
-                if (values.contains(names.get(i.intValue()))) {
-                    Assert.assertEquals(selected, true, "Check checkbox with id=[" + names.get(i.intValue()) + "] is failed");
-                } else {
-                    Assert.assertEquals(selected, false, "Check checkbox with id=[" + names.get(i.intValue()) + "] is failed");
-                }
+        @SuppressWarnings("unchecked")
+        List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
+        List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdxCheckbox));
+        for (Long i = 0L; i < cnt; i++) {
+            boolean selected = checkboxes.get(i.intValue()).isSelected();
+            if (values.contains(names.get(i.intValue()))) {
+                Assert.assertEquals(selected, true, "Check checkbox with id=[" + names.get(i.intValue()) + "] is failed");
+            } else {
+                Assert.assertEquals(selected, false, "Check checkbox with id=[" + names.get(i.intValue()) + "] is failed");
             }
-//        }
+        }
     }
 
     public Long checkColumns(Long gridIndex, Long columnIndex, List<String> columnNames) {
