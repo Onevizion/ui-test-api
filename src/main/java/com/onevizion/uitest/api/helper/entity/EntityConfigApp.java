@@ -38,7 +38,6 @@ public class EntityConfigApp {
     private static final String RELATED_TRACKOR_TYPE = "wpTtid";
     private static final String ICON = "icon";
     private static final String ICON_BUTTON = "btnicon";
-    private static final String COMP_PACKAGE = "componentsPackageId";
 
     private static final String BUTTON_ADD_TAB = "addItem";
     private static final String BUTTON_REMOVE_ALL_TABS = "removeAllItems";
@@ -97,7 +96,6 @@ public class EntityConfigApp {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RELATED_TRACKOR_TYPE))).selectByVisibleText(configApp.getRelatedTrackorType());
         }
         psSelector.selectSpecificValue(By.name(ICON_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configApp.getIcon(), 1L);
-        new Select(seleniumSettings.getWebDriver().findElement(By.name(COMP_PACKAGE))).selectByVisibleText(configApp.getCompPackage());
 
         element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");
@@ -138,6 +136,17 @@ public class EntityConfigApp {
             grid.clearAssignmentGridColumn2(5L, 0L);
             grid.selectAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
         }
+
+        Long packagesTabIndex;
+        if (isDynamicTrackorType(configApp)) {
+            packagesTabIndex = 6L;
+        } else {
+            packagesTabIndex = 4L;
+        }
+        tab.goToTab(packagesTabIndex); //Components Package
+        grid2.waitLoad(packagesTabIndex);
+        grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
+        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -197,6 +206,17 @@ public class EntityConfigApp {
             grid.selectAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
         }
 
+        Long packagesTabIndex;
+        if (isDynamicTrackorType(configApp)) {
+            packagesTabIndex = 6L;
+        } else {
+            packagesTabIndex = 4L;
+        }
+        tab.goToTab(packagesTabIndex); //Components Package
+        grid2.waitLoad(packagesTabIndex);
+        grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
+        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
@@ -216,7 +236,6 @@ public class EntityConfigApp {
             assertElement.assertSelect(RELATED_TRACKOR_TYPE, configApp.getRelatedTrackorType());
         }
         assertElement.assertRadioPsSelector(ICON, ICON_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx(), configApp.getIcon(), 1L, true);
-        assertElement.assertSelect(COMP_PACKAGE, configApp.getCompPackage());
 
         tab.goToTab(2L); //Tabs
         Assert.assertEquals(view.getRightColumns().size(), configApp.getTabs().size(), "Selected have wrong cnt");
@@ -245,6 +264,16 @@ public class EntityConfigApp {
             grid2.waitLoad(5L);
             grid.checkAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
         }
+
+        Long packagesTabIndex;
+        if (isDynamicTrackorType(configApp)) {
+            packagesTabIndex = 6L;
+        } else {
+            packagesTabIndex = 4L;
+        }
+        tab.goToTab(packagesTabIndex); //Components Package
+        grid2.waitLoad(packagesTabIndex);
+        grid.checkAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

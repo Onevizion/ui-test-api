@@ -12,12 +12,12 @@ public class ConfigApp {
     private String trackorType;
     private String relatedTrackorType;
     private String icon;
-    private String compPackage;
     private String isMaster;
     private List<String> tabs;
     private Map<String, String> roles;
     private List<String> classes;
     private List<String> pages;
+    private List<String> packages;
 
     private ConfigApp() {
         
@@ -47,10 +47,6 @@ public class ConfigApp {
         return icon;
     }
 
-    public String getCompPackage() {
-        return compPackage;
-    }
-
     public String getIsMaster() {
         return isMaster;
     }
@@ -71,6 +67,10 @@ public class ConfigApp {
         return pages;
     }
 
+    public List<String> getPackages() {
+        return packages;
+    }
+
     public class Builder {
 
         private Builder() {
@@ -83,12 +83,12 @@ public class ConfigApp {
                     ConfigApp.this.trackorType == null ||
                     ConfigApp.this.relatedTrackorType == null ||
                     ConfigApp.this.icon == null ||
-                    ConfigApp.this.compPackage == null ||
                     ConfigApp.this.isMaster == null ||
                     ConfigApp.this.tabs == null ||
                     ConfigApp.this.roles == null ||
                     ConfigApp.this.classes == null ||
-                    ConfigApp.this.pages == null) {
+                    ConfigApp.this.pages == null ||
+                    ConfigApp.this.packages == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return ConfigApp.this;
@@ -119,11 +119,6 @@ public class ConfigApp {
             return this;
         }
 
-        public Builder setCompPackage(String compPackage) {
-            ConfigApp.this.compPackage = compPackage;
-            return this;
-        }
-
         public Builder setIsMaster(String isMaster) {
             ConfigApp.this.isMaster = isMaster;
             return this;
@@ -146,6 +141,11 @@ public class ConfigApp {
 
         public Builder setPages(List<String> pages) {
             ConfigApp.this.pages = pages;
+            return this;
+        }
+
+        public Builder setPackages(List<String> packages) {
+            ConfigApp.this.packages = packages;
             return this;
         }
 
