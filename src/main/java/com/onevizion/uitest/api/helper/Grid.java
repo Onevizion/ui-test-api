@@ -187,7 +187,7 @@ public class Grid {
     }
 
     public void selectAssignmentGridColumnNew(Long gridId, Long colIdxCheckbox, Long colIdxName, Map<String, String> values, String priv) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
@@ -216,7 +216,7 @@ public class Grid {
     }
 
     public void selectAssignmentGridColumn2New(Long gridId, Long colIdxCheckbox, Long colIdxName, List<String> values) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
@@ -233,7 +233,7 @@ public class Grid {
     }
 
     public void clearPrivilegieGridColumn(Long gridId, Long colIdx) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
@@ -246,7 +246,7 @@ public class Grid {
     }
 
     public void clearAssignmentGridColumn(Long gridId, Long colIdx) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
@@ -270,7 +270,7 @@ public class Grid {
     }
 
     public void checkPrivilegieGridColumn(Long gridId, Long colIdx, List<String> vals, String val) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
@@ -285,7 +285,7 @@ public class Grid {
     }
 
     public void checkAssignmentGridColumn(Long gridId, Long colIdx, List<String> vals) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
@@ -300,7 +300,7 @@ public class Grid {
     }
 
     public void checkAssignmentGridColumnNew(Long gridId, Long colIdxCheckbox, Long colIdxName, Map<String, String> values, String priv) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
@@ -317,7 +317,7 @@ public class Grid {
 
     //TODO remove when getValue will be return 1 and 0 instead of html
     public void checkAssignmentGridColumn2(Long gridId, Long colIdx, List<String> vals) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdx));
         for (Long i = 0L; i < cnt; i++) {
@@ -332,7 +332,7 @@ public class Grid {
     }
 
     public void checkAssignmentGridColumn2New(Long gridId, Long colIdxCheckbox, Long colIdxName, List<String> values) {
-        Long cnt = js.getGridRowsCount(gridId);
+        Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
