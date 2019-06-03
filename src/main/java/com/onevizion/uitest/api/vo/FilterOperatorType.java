@@ -5,44 +5,50 @@ import java.util.List;
 
 public enum FilterOperatorType {
 
-    EQUAL("="),
-    NOT_EQUAL("<>"),
-    MORE(">"),
-    MORE_AND_EQUAL(">="),
-    LESS("<"),
-    LESS_AND_EQUAL("<="),
-    EQUAL_AND_EMPTY_FOR_OTHER("(+)="),
-    NOT_EQUAL_AND_EMPTY_FOR_OTHER("(+)<>"),
-    NULL("Is Null"),
-    NOT_NULL("Is Not Null"),
-    EQUAL_FIELD("=Field"),
-    NOT_EQUAL_FIELD("<>Field"),
-    MORE_FIELD(">Field"),
-    MORE_AND_EQUAL_FIELD(">=Field"),
-    LESS_FIELD("<Field"),
-    LESS_AND_EQUAL_FIELD("<=Field"),
-    NEW("Is New"),
-    NOT_NEW("Is Not New"),
-    MORE_AND_EQUAL_TODAY(">=Today"),
-    LESS_AND_EQUAL_TODAY("<=Today"),
-    WITHIN("Within"),
-    THIS_WK("This Wk"),
-    THIS_MO("This Mo"),
-    THIS_FQ("This FQ"),
-    THIS_FY("This FY"),
-    THIS_WK_TO_DT("This Wk to Dt"),
-    THIS_MO_TO_DT("This Mo to Dt"),
-    THIS_FQ_TO_DT("This FQ to Dt"),
-    THIS_FY_TO_DT("This FY to Dt");
+    EQUAL("=", "equal"),
+    NOT_EQUAL("<>", "not_equal"),
+    MORE(">", "greater"),
+    MORE_AND_EQUAL(">=", "greater_or_equal"),
+    LESS("<", "less"),
+    LESS_AND_EQUAL("<=", "less_or_equal"),
+    EQUAL_AND_EMPTY_FOR_OTHER("(+)=", "outer_equal"),
+    NOT_EQUAL_AND_EMPTY_FOR_OTHER("(+)<>", "outer_not_equal"),
+    NULL("Is Null", "null"),
+    NOT_NULL("Is Not Null", "is_not_null"),
+    EQUAL_FIELD("=Field", "field_equal"),
+    NOT_EQUAL_FIELD("<>Field", "field_not_equal"),
+    MORE_FIELD(">Field", "field_greater"),
+    MORE_AND_EQUAL_FIELD(">=Field", "field_greater_or_equal"),
+    LESS_FIELD("<Field", "field_less"),
+    LESS_AND_EQUAL_FIELD("<=Field", "field_less_or_equal"),
+    NEW("Is New", "new"),
+    NOT_NEW("Is Not New", "not_new"),
+    MORE_AND_EQUAL_TODAY(">=Today", "gt_today"),
+    LESS_AND_EQUAL_TODAY("<=Today", "lt_today"),
+    WITHIN("Within", "within"),
+    THIS_WK("This Wk", "this_week"),
+    THIS_MO("This Mo", "this_month"),
+    THIS_FQ("This FQ", "this_quarter"),
+    THIS_FY("This FY", "this_year"),
+    THIS_WK_TO_DT("This Wk to Dt", "this_week_to_date"),
+    THIS_MO_TO_DT("This Mo to Dt", "this_month_to_date"),
+    THIS_FQ_TO_DT("This FQ to Dt", "this_quarter_to_date"),
+    THIS_FY_TO_DT("This FY to Dt", "this_year_to_date");
 
     private String value;
+    private String valueApiV3;
 
-    private FilterOperatorType(String value) {
+    private FilterOperatorType(String value, String valueApiV3) {
         this.value = value;
+        this.valueApiV3 = valueApiV3;
     }
 
     public String getValue() {
         return value;
+    }
+
+    public String getValueApiV3() {
+        return valueApiV3;
     }
 
     public static List<FilterOperatorType> getCalculatedOperators(boolean supportOuterOperations) {
