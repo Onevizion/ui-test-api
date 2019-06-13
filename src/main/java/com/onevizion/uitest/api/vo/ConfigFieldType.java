@@ -16,6 +16,7 @@ public enum ConfigFieldType {
     LONGITUDE("Longitude", "Longitude", "LONGITUDE"),
     ELECTRONIC_FILE("Electronic File", "EFile", "EFILE"),
     TRACKOR_SELECTOR("Trackor Selector", "Tr Sel", "TR_SEL"),
+    MULTI_TRACKOR_SELECTOR("Trackor MultiSelector", "Multi Tr Sel", "MULTI_TR_SEL"),
     TRACKOR_DROP_DOWN("Trackor Drop-Down", "Tr DD", "TR_DD"),
     CALCULATED("Calculated", "Calculated", "CALC"),
     HYPERLINK("Hyperlink", "Hyperlink", "HYPERLINK"),

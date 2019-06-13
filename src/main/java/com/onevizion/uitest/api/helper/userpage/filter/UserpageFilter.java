@@ -137,7 +137,8 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.DB_SELECTOR) || fieldDataType.equals(ConfigFieldType.DB_DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
-                || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
+                || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)
+                || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
             if (operator.equals(FilterOperatorType.EQUAL)) {
                 checkGridRowsCountEquals(fieldDataType, cellVals, value);
                 checkGridTextColumnEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, Arrays.asList(value));
@@ -278,11 +279,29 @@ public class UserpageFilter {
         checkAndClearFilter(fieldName, FilterOperatorType.NEW, randomIndex);
     }
 
+    public void checkFilterMultiTrackorSelectorIsNew(String fieldName, List<String> cellVals, List<String> newTrackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NEW);
+
+        checkGridRowsCountMultiTrackorSelectorIsNew(cellVals, newTrackors);
+        checkGridColumnMultiTrackorSelectorIsNew(AbstractSeleniumCore.getGridIdx(), fieldName, newTrackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.NEW, randomIndex);
+    }
+
     public void checkFilterIsNotNew(String fieldName, List<String> cellVals, List<String> newTrackors) {
         int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_NEW);
 
         checkGridRowsCountIsNotNew(cellVals, newTrackors);
         checkGridColumnIsNotNew(AbstractSeleniumCore.getGridIdx(), fieldName, newTrackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.NOT_NEW, randomIndex);
+    }
+
+    public void checkFilterMultiTrackorSelectorIsNotNew(String fieldName, List<String> cellVals, List<String> oldTrackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_NEW);
+
+        checkGridRowsCountMultiTrackorSelectorIsNotNew(cellVals, oldTrackors);
+        checkGridColumnMultiTrackorSelectorIsNotNew(AbstractSeleniumCore.getGridIdx(), fieldName, oldTrackors);
 
         checkAndClearFilter(fieldName, FilterOperatorType.NOT_NEW, randomIndex);
     }
@@ -305,6 +324,22 @@ public class UserpageFilter {
         } else if (operator.equals(FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER)) {
             checkGridRowsCountNotEqualsOrNull(ConfigFieldType.TRACKOR_SELECTOR, cellVals, value, rowsCntBefore, cellValsKeys);
             checkGridTextColumnNotEqualsOrNull(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
+        } else {
+            throw new SeleniumUnexpectedException("Not support operation");
+        }
+
+        checkAndClearFilter(fieldName, operator, value, randomIndex);
+    }
+
+    public void checkFilterMultiTrackorSelectorByText(String fieldName, FilterOperatorType operator, String value, Long columnIndex, List<String> cellVals) {
+        int randomIndex = fillFilter(fieldName, operator, value);
+
+        if (operator.equals(FilterOperatorType.EQUAL)) {
+            checkGridRowsCountEquals(ConfigFieldType.MULTI_TRACKOR_SELECTOR, cellVals, value);
+            checkGridTextColumnEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, Arrays.asList(value));
+        } else if (operator.equals(FilterOperatorType.NOT_EQUAL)) {
+            checkGridRowsCountNotEquals(cellVals, value);
+            checkGridTextColumnNotEquals(AbstractSeleniumCore.getGridIdx(), columnIndex, value);
         } else {
             throw new SeleniumUnexpectedException("Not support operation");
         }
@@ -428,12 +463,12 @@ public class UserpageFilter {
         new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + row))).selectByVisibleText(operator.getValue());
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
-                || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
+                || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN) || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
             if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
                 psSelector.selectSpecificValue(By.name(FILTER_ROW_VALUE_FIELD_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)
                     && !operator.equals(FilterOperatorType.NEW) && !operator.equals(FilterOperatorType.NOT_NEW)) {
-                if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
+                if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
                     psSelector.selectMultipleSpecificValues(By.name(FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON + row), 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
                     psSelector.selectMultipleSpecificValues(By.name(FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON + row), 0L, Arrays.asList(value), 1L);
@@ -529,12 +564,12 @@ public class UserpageFilter {
         assertElement.assertSelect(FILTER_ROW_OPER + row, operator.getValue());
         if (fieldDataType.equals(ConfigFieldType.DROP_DOWN) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
-                || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
+                || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN) || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
             if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
                 assertElement.assertRadioPsSelector(FILTER_ROW_VALUE_FIELD_TEXT + row, FILTER_ROW_VALUE_FIELD_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName2, 1L, true);
             } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)
                     && !operator.equals(FilterOperatorType.NEW) && !operator.equals(FilterOperatorType.NOT_NEW)) {
-                if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
+                if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
                     assertElement.assertCheckboxPsSelector(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + row, FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON + row, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
                     assertElement.assertCheckboxPsSelector(FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT + row, FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON + row, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(value), 1L, true);
@@ -546,7 +581,7 @@ public class UserpageFilter {
                     throw new SeleniumUnexpectedException("Not support field data type");
                 }
             } else {
-                if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)) {
+                if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
                     assertElement.assertText(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + row, "");
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
                     assertElement.assertText(FILTER_ROW_VALUE_MULTI_SELECTOR_TEXT + row, "");
@@ -794,6 +829,20 @@ public class UserpageFilter {
         }
     }
 
+    private void checkGridColumnMultiTrackorSelectorIsNew(Long gridId, String columnLabel, List<String> newTrackors) {
+        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        Long rowsCnt = js.getGridRowsCount(gridId);
+        @SuppressWarnings("unchecked")
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+
+        String failMessage = null;
+        for (int i = 0; i < rowsCnt; i++) {
+            String gridValue = vals.get(i);
+            failMessage = String.format("Check fails at column [%s] row [%s]. Cell value in grid [%s]. NewTrackors[%s]. Value in filter [Is New]", columnIndex, i, gridValue, newTrackors);
+            Assert.assertTrue(newTrackors.stream().anyMatch(s -> gridValue.contains(s)), failMessage);
+        }
+    }
+
     private void checkGridColumnIsNotNew(Long gridId, String columnLabel, List<String> newTrackors) {
         Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
         Long rowsCnt = js.getGridRowsCount(gridId);
@@ -806,6 +855,20 @@ public class UserpageFilter {
             gridValue = vals.get(i);
             failMessage = String.format("Check fails at column [%s] row [%s]. Cell value in grid [%s]. NewTrackors[%s]. Value in filter [Is Not New]", columnIndex, i, gridValue, newTrackors);
             Assert.assertTrue(!newTrackors.contains(gridValue), failMessage);
+        }
+    }
+
+    private void checkGridColumnMultiTrackorSelectorIsNotNew(Long gridId, String columnLabel, List<String> oldTrackors) {
+        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        Long rowsCnt = js.getGridRowsCount(gridId);
+        @SuppressWarnings("unchecked")
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
+
+        String failMessage = null;
+        for (int i = 0; i < rowsCnt; i++) {
+            String gridValue = vals.get(i);
+            failMessage = String.format("Check fails at column [%s] row [%s]. Cell value in grid [%s]. OldTrackors[%s]. Value in filter [Is Not New]", columnIndex, i, gridValue, oldTrackors);
+            Assert.assertTrue(oldTrackors.stream().anyMatch(s -> gridValue.contains(s)), failMessage);
         }
     }
 
@@ -1343,7 +1406,8 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.DB_SELECTOR) || fieldDataType.equals(ConfigFieldType.DB_DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
-                || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
+                || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)
+                || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
             Long cnt = 0L;
             for (String cellVal : cellVals) {
                 if (cellVal.contains(value)) {
@@ -1634,7 +1698,8 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.DB_SELECTOR) || fieldDataType.equals(ConfigFieldType.DB_DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
-                || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
+                || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)
+                || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
             Long cnt = 0L;
             for (String cellVal : cellVals) {
                 if ("&nbsp;".equals(cellVal) || "".equals(cellVal)) {
@@ -1664,7 +1729,8 @@ public class UserpageFilter {
             || fieldDataType.equals(ConfigFieldType.DB_SELECTOR) || fieldDataType.equals(ConfigFieldType.DB_DROP_DOWN)
             || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
             || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
-            || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
+            || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)
+            || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
             Long cnt = 0L;
             for (String cellVal : cellVals) {
                 if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal)) {
@@ -1698,11 +1764,33 @@ public class UserpageFilter {
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
+    private void checkGridRowsCountMultiTrackorSelectorIsNew(List<String> cellVals, List<String> newTrackors) {
+        Long cnt = 0L;
+        for (String cellVal : cellVals) {
+            if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
+                    newTrackors.stream().anyMatch(s -> cellVal.contains(s))) {
+                cnt = cnt + 1L;
+            }
+        }
+        Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
+    }
+
     private void checkGridRowsCountIsNotNew(List<String> cellVals, List<String> newTrackors) {
         Long cnt = 0L;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
                     !newTrackors.contains(cellVal)) {
+                cnt = cnt + 1L;
+            }
+        }
+        Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
+    }
+
+    private void checkGridRowsCountMultiTrackorSelectorIsNotNew(List<String> cellVals, List<String> oldTrackors) {
+        Long cnt = 0L;
+        for (String cellVal : cellVals) {
+            if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
+                    oldTrackors.stream().anyMatch(s -> cellVal.contains(s))) {
                 cnt = cnt + 1L;
             }
         }

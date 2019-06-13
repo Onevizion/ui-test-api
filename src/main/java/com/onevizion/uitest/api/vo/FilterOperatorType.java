@@ -203,6 +203,10 @@ public enum FilterOperatorType {
         }
     }
 
+    public static List<FilterOperatorType> getMultiTrackorSelectorOperators() {
+        return Arrays.asList(EQUAL, NOT_EQUAL, NULL, NOT_NULL, NEW, NOT_NEW);
+    }
+
     public static List<FilterOperatorType> getRollupOperators() {
         return Arrays.asList(EQUAL, NOT_EQUAL, NULL, NOT_NULL);
     }
