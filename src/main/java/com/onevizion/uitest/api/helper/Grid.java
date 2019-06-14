@@ -365,18 +365,15 @@ public class Grid {
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(12)); //TEXT
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(13)); //TRACKOR_SELECTOR
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(14)); //WIKI
-        if (columnNames.get(15) != null) { //Multiple fields not support
-            columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(15)); //MULTI_SELECTOR
-        }
+        columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(15)); //MULTI_SELECTOR
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(16)); //DATE_TIME
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(17)); //TIME
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(18)); //TRACKOR_DROPDOWN
-        if (columnNames.get(19) != null) { //Multiple fields not support
-            columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(19)); //CALCULATED
-        }
-        if (columnNames.get(20) != null) { //Multiple fields not support Workplan and Tasks trackor types not support
+        columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(19)); //CALCULATED
+        if (columnNames.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
             columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(20)); //ROLLUP
         }
+        columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(21)); //MULTI_TRACKOR_SELECTOR
 
         return columnIndex;
     }
