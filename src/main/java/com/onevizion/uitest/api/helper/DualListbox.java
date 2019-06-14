@@ -101,6 +101,7 @@ public class DualListbox {
         if (columnNames.get(20) != null) { //Workplan and Tasks trackor types not support
             removeValueByValue(btnId, columnNames.get(20)); //ROLLUP
         }
+        removeValueByValue(btnId, columnNames.get(21)); //MULTI_TRACKOR_SELECTOR
     }
 
     public void addValueByText(Select select, String btnId, String text) {
@@ -291,6 +292,7 @@ public class DualListbox {
         if (columnNames.get(20) != null) { //Workplan and Tasks trackor types not support
             addValueByValue(btnId, columnNames.get(20)); //ROLLUP
         }
+        addValueByValue(btnId, columnNames.get(21)); //MULTI_TRACKOR_SELECTOR
     }
 
     public void checkValues(String selectId, List<String> columnNames) {
@@ -320,6 +322,7 @@ public class DualListbox {
         if (columnNames.get(20) != null) { //Workplan and Tasks trackor types not support
             Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(20)), true, "Select have wrong cnt"); //ROLLUP
         }
+        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(21)), true, "Select have wrong cnt"); //MULTI_TRACKOR_SELECTOR
     }
 
     private void deselectSelectOptions(final Select select) {
