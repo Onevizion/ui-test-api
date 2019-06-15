@@ -67,29 +67,30 @@ public class FormDesigner {
     }
 
     public void addElementsToForm(List<String> elements, String drillDownPrefix) {
-        element.doubleClickById(drillDownPrefix + elements.get(0));
-        element.doubleClickById(drillDownPrefix + elements.get(1));
-        element.doubleClickById(drillDownPrefix + elements.get(2));
-        element.doubleClickById(drillDownPrefix + elements.get(3));
-        element.doubleClickById(drillDownPrefix + elements.get(4));
-        element.doubleClickById(drillDownPrefix + elements.get(5));
-        element.doubleClickById(drillDownPrefix + elements.get(6));
-        element.doubleClickById(drillDownPrefix + elements.get(7));
-        element.doubleClickById(drillDownPrefix + elements.get(8));
-        element.doubleClickById(drillDownPrefix + elements.get(9));
-        element.doubleClickById(drillDownPrefix + elements.get(10));
-        element.doubleClickById(drillDownPrefix + elements.get(11));
-        element.doubleClickById(drillDownPrefix + elements.get(12));
-        element.doubleClickById(drillDownPrefix + elements.get(13));
-        element.doubleClickById(drillDownPrefix + elements.get(14));
-        element.doubleClickById(drillDownPrefix + elements.get(15));
-        element.doubleClickById(drillDownPrefix + elements.get(16));
-        element.doubleClickById(drillDownPrefix + elements.get(17));
-        element.doubleClickById(drillDownPrefix + elements.get(18));
-        element.doubleClickById(drillDownPrefix + elements.get(19));
-        if (elements.get(20) != null) {
-            element.doubleClickById(drillDownPrefix + elements.get(20));
+        element.doubleClickById(drillDownPrefix + elements.get(0)); //CHECKBOX
+        element.doubleClickById(drillDownPrefix + elements.get(1)); //DATE
+        element.doubleClickById(drillDownPrefix + elements.get(2)); //DB_DROP_DOWN
+        element.doubleClickById(drillDownPrefix + elements.get(3)); //DB_SELECTOR
+        element.doubleClickById(drillDownPrefix + elements.get(4)); //DROP_DOWN
+        element.doubleClickById(drillDownPrefix + elements.get(5)); //ELECTRONIC_FILE
+        element.doubleClickById(drillDownPrefix + elements.get(6)); //HYPERLINK
+        element.doubleClickById(drillDownPrefix + elements.get(7)); //LATITUDE
+        element.doubleClickById(drillDownPrefix + elements.get(8)); //LONGITUDE
+        element.doubleClickById(drillDownPrefix + elements.get(9)); //MEMO
+        element.doubleClickById(drillDownPrefix + elements.get(10)); //NUMBER
+        element.doubleClickById(drillDownPrefix + elements.get(11)); //SELECTOR
+        element.doubleClickById(drillDownPrefix + elements.get(12)); //TEXT
+        element.doubleClickById(drillDownPrefix + elements.get(13)); //TRACKOR_SELECTOR
+        element.doubleClickById(drillDownPrefix + elements.get(14)); //WIKI
+        element.doubleClickById(drillDownPrefix + elements.get(15)); //MULTI_SELECTOR
+        element.doubleClickById(drillDownPrefix + elements.get(16)); //DATE_TIME
+        element.doubleClickById(drillDownPrefix + elements.get(17)); //TIME
+        element.doubleClickById(drillDownPrefix + elements.get(18)); //TRACKOR_DROPDOWN
+        element.doubleClickById(drillDownPrefix + elements.get(19)); //CALCULATED
+        if (elements.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
+            element.doubleClickById(drillDownPrefix + elements.get(20)); //ROLLUP
         }
+        element.doubleClickById(drillDownPrefix + elements.get(21)); //MULTI_TRACKOR_SELECTOR
     }
 
     public void addElementToForm(String label) {
@@ -138,50 +139,52 @@ public class FormDesigner {
     public void removeElementsFromForm(List<String> elements, String drillDownPrefix) {
         WebElement formfields = seleniumSettings.getWebDriver().findElement(By.id(FORM_ID));
 
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(0))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(0)))); //CHECKBOX
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(1))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(1)))); //DATE
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(2))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(2)))); //DB_DROP_DOWN
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(3))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(3)))); //DB_SELECTOR
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(4))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(4)))); //DROP_DOWN
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(5))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(5)))); //ELECTRONIC_FILE
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(6))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(6)))); //HYPERLINK
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(7))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(7)))); //LATITUDE
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(8))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(8)))); //LONGITUDE
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(9))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(9)))); //MEMO
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(10))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(10)))); //NUMBER
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(11))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(11)))); //SELECTOR
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(12))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(12)))); //TEXT
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(13))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(13)))); //TRACKOR_SELECTOR
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(14))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(14)))); //WIKI
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(15))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(15)))); //MULTI_SELECTOR
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(16))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(16)))); //DATE_TIME
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(17))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(17)))); //TIME
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(18))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(18)))); //TRACKOR_DROPDOWN
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(19))));
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(19)))); //CALCULATED
         element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
-        if (elements.get(20) != null) {
-            element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(20))));
+        if (elements.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
+            element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(20)))); //ROLLUP
             element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
         }
+        element.click(formfields.findElement(By.id(drillDownPrefix + elements.get(21)))); //MULTI_TRACKOR_SELECTOR
+        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
     }
 
     public List<FormDesignerField> getElementsOnForm() {
@@ -201,29 +204,30 @@ public class FormDesigner {
     }
 
     public void checkElementsOnFormByIds(List<FormDesignerField> fields, List<String> fieldIds, String drillDownIdx) {
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(0));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(1));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(2));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(3));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(4));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(5));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(6));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(7));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(8));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(9));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(10));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(11));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(12));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(13));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(14));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(15));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(16));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(17));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(18));
-        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(19));
-        if (fieldIds.get(20) != null) {
-            checkElementOnFormById(fields, drillDownIdx + fieldIds.get(20));
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(0)); //CHECKBOX
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(1)); //DATE
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(2)); //DB_DROP_DOWN
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(3)); //DB_SELECTOR
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(4)); //DROP_DOWN
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(5)); //ELECTRONIC_FILE
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(6)); //HYPERLINK
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(7)); //LATITUDE
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(8)); //LONGITUDE
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(9)); //MEMO
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(10)); //NUMBER
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(11)); //SELECTOR
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(12)); //TEXT
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(13)); //TRACKOR_SELECTOR
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(14)); //WIKI
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(15)); //MULTI_SELECTOR
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(16)); //DATE_TIME
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(17)); //TIME
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(18)); //TRACKOR_DROPDOWN
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(19)); //CALCULATED
+        if (fieldIds.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
+            checkElementOnFormById(fields, drillDownIdx + fieldIds.get(20)); //ROLLUP
         }
+        checkElementOnFormById(fields, drillDownIdx + fieldIds.get(21)); //MULTI_TRACKOR_SELECTOR
     }
 
     public List<String> getElementsInList() {
@@ -254,29 +258,30 @@ public class FormDesigner {
 
     public void checkElementsInList(List<String> elements, String drillDownPrefix) {
         WebElement listBox = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent"));
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(0))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(0) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(1))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(1) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(2))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(2) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(3))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(3) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(4))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(4) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(5))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(5) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(6))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(6) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(7))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(7) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(8))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(8) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(9))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(9) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(10))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(10) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(11))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(11) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(12))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(12) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(13))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(13) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(14))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(14) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(15))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(15) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(16))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(16) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(17))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(17) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(18))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(18) + "] not found");
-        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(19))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(19) + "] not found");
-        if (elements.get(20) != null) {
-            Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(20))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(20) + "] not found");
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(0))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(0) + "] not found"); //CHECKBOX
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(1))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(1) + "] not found"); //DATE
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(2))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(2) + "] not found"); //DB_DROP_DOWN
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(3))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(3) + "] not found"); //DB_SELECTOR
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(4))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(4) + "] not found"); //DROP_DOWN
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(5))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(5) + "] not found"); //ELECTRONIC_FILE
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(6))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(6) + "] not found"); //HYPERLINK
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(7))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(7) + "] not found"); //LATITUDE
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(8))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(8) + "] not found"); //LONGITUDE
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(9))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(9) + "] not found"); //MEMO
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(10))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(10) + "] not found"); //NUMBER
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(11))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(11) + "] not found"); //SELECTOR
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(12))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(12) + "] not found"); //TEXT
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(13))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(13) + "] not found"); //TRACKOR_SELECTOR
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(14))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(14) + "] not found"); //WIKI
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(15))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(15) + "] not found"); //MULTI_SELECTOR
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(16))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(16) + "] not found"); //DATE_TIME
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(17))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(17) + "] not found"); //TIME
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(18))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(18) + "] not found"); //TRACKOR_DROPDOWN
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(19))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(19) + "] not found"); //CALCULATED
+        if (elements.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
+            Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(20))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(20) + "] not found"); //ROLLUP
         }
+        Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(21))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(21) + "] not found"); //MULTI_TRACKOR_SELECTOR
     }
 
     public void checkSubgroupInList(String text) {

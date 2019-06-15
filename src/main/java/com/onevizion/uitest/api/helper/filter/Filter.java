@@ -481,9 +481,10 @@ public class Filter {
         Assert.assertEquals(rowIds.contains(columnNames.get(17)), true, "Not found in grid"); //TIME
         Assert.assertEquals(rowIds.contains(columnNames.get(18)), true, "Not found in grid"); //TRACKOR_DROPDOWN
         Assert.assertEquals(rowIds.contains(columnNames.get(19)), true, "Not found in grid"); //CALCULATED
-        if (columnNames.get(20) != null) { //Workplan and Tasks trackor types not support
+        if (columnNames.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
             Assert.assertEquals(rowIds.contains(columnNames.get(20)), true, "Not found in grid"); //ROLLUP
         }
+        Assert.assertEquals(rowIds.contains(columnNames.get(21)), true, "Not found in grid"); //MULTI_TRACKOR_SELECTOR
     }
 
     public void waitCurrentFilterName(Long gridIdx, String filterName) {
