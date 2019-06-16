@@ -46,6 +46,7 @@ public class ConfigFieldVo {
     private ConfigFieldVoDbDropDown configFieldVoDbDropDown;
     private ConfigFieldVoDbSelector configFieldVoDbSelector;
     private ConfigFieldVoCalculated configFieldVoCalculated;
+    private ConfigFieldVoMultiTrackorSelector configFieldVoMultiTrackorSelector;
 
     private ConfigFieldVo() {
         
@@ -262,6 +263,11 @@ public class ConfigFieldVo {
             return this;
         }
 
+        public Builder setConfigFieldMultiTrackorSelector(ConfigFieldVoMultiTrackorSelector configFieldVoMultiTrackorSelector) {
+            ConfigFieldVo.this.configFieldVoMultiTrackorSelector = configFieldVoMultiTrackorSelector;
+            return this;
+        }
+
     }
 
     public ConfigFieldType getConfigFieldType() {
@@ -406,6 +412,10 @@ public class ConfigFieldVo {
 
     public ConfigFieldVoCalculated getConfigFieldCalculated() {
         return configFieldVoCalculated;
+    }
+
+    public ConfigFieldVoMultiTrackorSelector getConfigFieldMultiTrackorSelector() {
+        return configFieldVoMultiTrackorSelector;
     }
 
 }

@@ -271,6 +271,11 @@ public class EntityConfigField {
             psSelector.selectSpecificValue(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorSelector().getDefValueSql());
+        } else if (ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldMultiTrackorSelector().getLines());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name("ObjectTrackorType"))).selectByVisibleText(configFieldVo.getConfigFieldMultiTrackorSelector().getTrackorType());
+            setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiTrackorSelector().getDefValueSql());
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldTrackorDropDown().getSql());
 
@@ -545,6 +550,11 @@ public class EntityConfigField {
             psSelector.selectSpecificValue(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorSelector().getDefValueSql());
+        } else if (ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
+            seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldMultiTrackorSelector().getLines());
+            new Select(seleniumSettings.getWebDriver().findElement(By.name("ObjectTrackorType"))).selectByVisibleText(configFieldVo.getConfigFieldMultiTrackorSelector().getTrackorType());
+            setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiTrackorSelector().getDefValueSql());
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldTrackorDropDown().getSql());
 
@@ -778,6 +788,10 @@ public class EntityConfigField {
             assertElement.assertRadioPsSelector("objCf", "btnobjCf", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L, true);
 
             checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorSelector().getDefValueSql());
+        } else if (ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
+            assertElement.assertText(LINES, configFieldVo.getConfigFieldMultiTrackorSelector().getLines());
+            assertElement.assertSelect("ObjectTrackorType", configFieldVo.getConfigFieldMultiTrackorSelector().getTrackorType());
+            checkSqlInCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiTrackorSelector().getDefValueSql());
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
             checkSqlInCodeMirror("btnSQL", configFieldVo.getConfigFieldTrackorDropDown().getSql());
 
@@ -900,6 +914,8 @@ public class EntityConfigField {
             gridVals.put(js.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldWiki().getLines());
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
             gridVals.put(js.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldMultiSelector().getLines());
+        } else if (ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Lines Qty"), configFieldVo.getConfigFieldMultiTrackorSelector().getLines());
         } else {
             gridVals.put(js.getColumnIndexByLabel(gridId, "Lines Qty"), "");
         }
@@ -913,6 +929,10 @@ public class EntityConfigField {
             gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldTrackorSelector().getTrackorType());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Short Name"), configFieldVo.getConfigFieldTrackorSelector().getShortName());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), configFieldVo.getConfigFieldTrackorSelector().getMyThingsFilter());
+        } else if (ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldMultiTrackorSelector().getTrackorType());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Short Name"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Use in \"My Things\" filter"), "NO");
         } else if (ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
             gridVals.put(js.getColumnIndexByLabel(gridId, "Selector's Trackor Type"), configFieldVo.getConfigFieldTrackorDropDown().getTrackorType());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Short Name"), configFieldVo.getConfigFieldTrackorDropDown().getShortName());
