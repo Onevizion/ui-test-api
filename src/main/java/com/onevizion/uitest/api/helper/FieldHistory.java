@@ -66,12 +66,13 @@ public class FieldHistory {
         checkFieldHistory(false, fieldIds.get(12), getHistoryVals(12, vals), isShowMenu, elementPosition); //TEXT
         checkFieldHistory(false, fieldIds.get(13), getHistoryVals(13, vals), isShowMenu, elementPosition); //TRACKOR_SELECTOR
         checkFieldHistory(false, fieldIds.get(14), getHistoryVals(14, vals), isShowMenu, elementPosition); //WIKI
-        if (fieldIds.get(15) != null) {
-            checkFieldHistory(false, fieldIds.get(15), getHistoryValsMultiSelector(15, vals), isShowMenu, elementPosition); //MULTI_SELECTOR
-        }
+        checkFieldHistory(false, fieldIds.get(15), getHistoryValsMultiSelector(15, vals), isShowMenu, elementPosition); //MULTI_SELECTOR
         checkFieldHistory(false, fieldIds.get(16), getHistoryVals(16, vals), isShowMenu, elementPosition); //DATE_TIME
         checkFieldHistory(false, fieldIds.get(17), getHistoryVals(17, vals), isShowMenu, elementPosition); //TIME
         checkFieldHistory(false, fieldIds.get(18), getHistoryVals(18, vals), isShowMenu, elementPosition); //TRACKOR_DROPDOWN
+        //CALCULATED
+        //ROLLUP
+        checkFieldHistory(false, fieldIds.get(21), getHistoryValsMultiSelector(21, vals), isShowMenu, elementPosition); //MULTI_TRACKOR_SELECTOR
     }
 
     public void checkFieldHistory(boolean isTaskDate, String fieldId, List<String> vals, boolean isShowMenu, int elementPosition) {
