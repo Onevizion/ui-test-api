@@ -1063,7 +1063,8 @@ public class Tb {
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDd1")).size(), 1);
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType) 
-                || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)) {
+                || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)
+                || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmSelector1")).size(), 1);
         } else if (ConfigFieldType.LATITUDE.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmLat1")).size(), 1); 
@@ -1135,7 +1136,8 @@ public class Tb {
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDd1")).size(), 0);
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType) 
-                || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)) {
+                || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)
+                || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmSelector1")).size(), 0);
         } else if (ConfigFieldType.LATITUDE.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmLat1")).size(), 0); 
