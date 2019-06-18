@@ -684,7 +684,7 @@ public class Tb {
         vals.put(columnNames.get(18), values.get(18)); //TRACKOR_DROPDOWN
         //CALCULATED
         //ROLLUP
-        vals.put(columnNames.get(21), values.get(21)); //MULTI_TRACKOR_SELECTOR
+        vals.put(columnNames.get(21), values.get(21).replaceAll(",", ", ")); //MULTI_TRACKOR_SELECTOR
 
         return vals;
     }
