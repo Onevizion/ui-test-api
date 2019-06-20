@@ -176,15 +176,17 @@ public class AssertElement {
             errorMessage = "Element with id=[idx" + idx + "] should be enabled";
         } else {
             webElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
-            errorMessage = "Element with name=[" + webElement.getAttribute("name") + "] should be enabled";
+            errorMessage = "Element with name=[" + fieldName + "] should be enabled";
         }
 
+        String tagName = webElement.getTagName();
+
         boolean isEnabled;
-        if ("textarea".equals(webElement.getTagName())) {
+        if ("textarea".equals(tagName)) {
             isEnabled = !"true".equals(webElement.getAttribute("readonly"));
-        } else if ("iframe".equals(webElement.getTagName())) {
+        } else if ("iframe".equals(tagName)) {
             isEnabled = false;
-        } else if ("input".equals(webElement.getTagName()) && ("text".equals(webElement.getAttribute("type")) || "hidden".equals(webElement.getAttribute("type")) )) {
+        } else if ("input".equals(tagName) && ("text".equals(webElement.getAttribute("type")) || "hidden".equals(webElement.getAttribute("type")) )) {
             isEnabled = !"true".equals(webElement.getAttribute("readonly"));
         } else {
             isEnabled = webElement.isEnabled();
@@ -202,15 +204,17 @@ public class AssertElement {
             errorMessage = "Element with id=[idx" + idx + "] should be disabled";
         } else {
             webElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
-            errorMessage = "Element with name=[" + webElement.getAttribute("name") + "] should be disabled";
+            errorMessage = "Element with name=[" + fieldName + "] should be disabled";
         }
 
+        String tagName = webElement.getTagName();
+
         boolean isDisabled;
-        if ("textarea".equals(webElement.getTagName())) {
+        if ("textarea".equals(tagName)) {
             isDisabled = "true".equals(webElement.getAttribute("readonly"));
-        } else if ("iframe".equals(webElement.getTagName())) {
+        } else if ("iframe".equals(tagName)) {
             isDisabled = true;
-        } else if ("input".equals(webElement.getTagName()) && ("text".equals(webElement.getAttribute("type")) || "hidden".equals(webElement.getAttribute("type")))) {
+        } else if ("input".equals(tagName) && ("text".equals(webElement.getAttribute("type")) || "hidden".equals(webElement.getAttribute("type")))) {
             isDisabled = "true".equals(webElement.getAttribute("readonly"));
         } else {
             isDisabled = !webElement.isEnabled();
