@@ -187,7 +187,7 @@ public class Comment {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            seleniumLogger.error(seleniumSettings.getTestName() + " Interrupted!");
+            seleniumLogger.error("Interrupted!");
             Thread.currentThread().interrupt();
         }
     }

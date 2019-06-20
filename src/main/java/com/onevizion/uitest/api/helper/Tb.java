@@ -316,14 +316,14 @@ public class Tb {
                 }
                 wait.waitFormLoad();
             } catch (UnhandledAlertException | SeleniumAlertException e) {
-                seleniumLogger.warn(seleniumSettings.getTestName() + " Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
+                seleniumLogger.warn("Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
                 Assert.assertTrue(seleniumSettings.getWebDriver().switchTo().alert().getText().contains("Following fields with unsaved changes has been modified on the server. Press \"OK\" to keep your values or \"Cancel\" to replace your values with new values from the server"));
                 seleniumSettings.getWebDriver().switchTo().alert().accept();
                 //seleniumSettings.getWebDriver().switchTo().defaultContent(); //need or not need?
                 wait.waitFormLoad();
             } catch (WebDriverException e) {
                 if (seleniumSettings.getBrowser().equals("firefox") && e.getMessage().startsWith("Failed to convert data to an object")) {
-                    seleniumLogger.error(seleniumSettings.getTestName() + " Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
+                    seleniumLogger.error("Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
                     Assert.assertTrue(seleniumSettings.getWebDriver().switchTo().alert().getText().contains("Following fields with unsaved changes has been modified on the server. Press \"OK\" to keep your values or \"Cancel\" to replace your values with new values from the server"));
                     seleniumSettings.getWebDriver().switchTo().alert().accept();
                     //seleniumSettings.getWebDriver().switchTo().defaultContent(); //need or not need?
@@ -332,7 +332,7 @@ public class Tb {
                     throw e;
                 }
             } catch (NullPointerException e) {
-                seleniumLogger.error(seleniumSettings.getTestName() + " Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
+                seleniumLogger.error("Alert Present " + seleniumSettings.getWebDriver().switchTo().alert().getText());
                 Assert.assertTrue(seleniumSettings.getWebDriver().switchTo().alert().getText().contains("Following fields with unsaved changes has been modified on the server. Press \"OK\" to keep your values or \"Cancel\" to replace your values with new values from the server"));
                 seleniumSettings.getWebDriver().switchTo().alert().accept();
                 //seleniumSettings.getWebDriver().switchTo().defaultContent(); //need or not need?

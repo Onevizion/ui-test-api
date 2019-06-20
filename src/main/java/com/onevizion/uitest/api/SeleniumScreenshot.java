@@ -48,10 +48,10 @@ public class SeleniumScreenshot {
 
                 saveScreenshot("", screen);
             } else {
-                seleniumLogger.error(seleniumSettings.getTestName() + " Current web browser dont't supports getting screenshots");
+                seleniumLogger.error("Current web browser dont't supports getting screenshots");
             }
         } catch (Exception e) {
-            seleniumLogger.error(seleniumSettings.getTestName() + " getScreenshot Unexpected exception: " + e.getMessage());
+            seleniumLogger.error("getScreenshot Unexpected exception: " + e.getMessage());
         }
     }
 
@@ -82,9 +82,9 @@ public class SeleniumScreenshot {
             } else {
                 screenAddr = screensDirectory + screenshotFileName;
             }
-            seleniumLogger.error(seleniumSettings.getTestName() + " " + screenAddr);
+            seleniumLogger.error(screenAddr);
         } catch (IOException e) {
-            seleniumLogger.error(seleniumSettings.getTestName() + " Can't save screenshot because of: " + e.getMessage());
+            seleniumLogger.error("Can't save screenshot because of: " + e.getMessage());
         }
     }
 

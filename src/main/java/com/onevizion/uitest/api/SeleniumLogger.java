@@ -16,32 +16,32 @@ public class SeleniumLogger {
     private SeleniumSettings seleniumSettings;
 
     public void trace(String msg) {
-        logger.trace(msg);
-        Reporter.log(msg);
+        logger.trace(seleniumSettings.getTestName() + " " + msg);
+        Reporter.log(seleniumSettings.getTestName() + " " + msg);
         log(msg);
     }
 
     public void debug(String msg) {
-        logger.debug(msg);
-        Reporter.log(msg);
+        logger.debug(seleniumSettings.getTestName() + " " + msg);
+        Reporter.log(seleniumSettings.getTestName() + " " + msg);
         log(msg);
     }
 
     public void info(String msg) {
-        logger.info(msg);
-        Reporter.log(msg);
+        logger.info(seleniumSettings.getTestName() + " " + msg);
+        Reporter.log(seleniumSettings.getTestName() + " " + msg);
         log(msg);
     }
 
     public void warn(String msg) {
-        logger.warn(msg);
-        Reporter.log(msg);
+        logger.warn(seleniumSettings.getTestName() + " " + msg);
+        Reporter.log(seleniumSettings.getTestName() + " " + msg);
         log(msg);
     }
 
     public void error(String msg) {
-        logger.error(msg);
-        Reporter.log(msg);
+        logger.error(seleniumSettings.getTestName() + " " + msg);
+        Reporter.log(seleniumSettings.getTestName() + " " + msg);
         log(msg);
     }
 

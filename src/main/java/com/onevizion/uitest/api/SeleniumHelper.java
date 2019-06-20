@@ -48,7 +48,7 @@ public class SeleniumHelper {
             maxAlertsCount = maxAlertsCount - 1;
             try {
                 Alert alert = seleniumSettings.getWebDriver().switchTo().alert();
-                seleniumLogger.error(seleniumSettings.getTestName() +  " There is alert with error message: " + alert.getText());
+                seleniumLogger.error("There is alert with error message: " + alert.getText());
                 alert.accept();
             } catch (WebDriverException e) { // should be NoAlertPresentException
                 break;
@@ -56,7 +56,7 @@ public class SeleniumHelper {
         }
 
         if (maxAlertsCount == 0) {
-            seleniumLogger.error(seleniumSettings.getTestName() + " Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
+            seleniumLogger.error("Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have endless alerts");
         }
     }
 
@@ -82,7 +82,7 @@ public class SeleniumHelper {
                 final int currentWindowsCount = seleniumSettings.getWebDriver().getWindowHandles().size();
                 String title = seleniumSettings.getWebDriver().getTitle();
 
-                seleniumLogger.error(seleniumSettings.getTestName() + " There is window with title: " + seleniumSettings.getWebDriver().getTitle());
+                seleniumLogger.error("There is window with title: " + seleniumSettings.getWebDriver().getTitle());
 
                 seleniumSettings.getWebDriver().get("about:blank");
                 seleniumSettings.getWebDriver().close();
@@ -99,7 +99,7 @@ public class SeleniumHelper {
                     .until(webdriver -> !js.isWindowClosed());
             }
         } catch (Exception e) {
-            seleniumLogger.error(seleniumSettings.getTestName() + " closeAllWindows Unexpected exception: " + e.getMessage());
+            seleniumLogger.error("closeAllWindows Unexpected exception: " + e.getMessage());
         }
     }
 
@@ -113,7 +113,7 @@ public class SeleniumHelper {
             int errorReportStartIndex = startIndex;
             int errorReportEndIndex = errorReportStartIndex + prefix.length() + uuidLength;
             String errorReport = pageText.substring(errorReportStartIndex, errorReportEndIndex);
-            seleniumLogger.error(seleniumSettings.getTestName() + " Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have error report: " + errorReport);
+            seleniumLogger.error("Window with title: " + seleniumSettings.getWebDriver().getTitle() + " have error report: " + errorReport);
         }
     }
 
