@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,73 +155,60 @@ public class AssertElement {
         Assert.assertEquals(actualVal, expectedVal, "CodeMirror editor for element with id=[" + elementId + "] has wrong value");
     }
 
-    public void assertElementEnabled(WebElement element, boolean expectedIsEnabled) {
-        boolean actualIsEnabled;
-        String errorMessage = "Element with name=[" + element.getAttribute("name") + "] should be " + (expectedIsEnabled ? "enabled" : "disabled");
-        if ("textarea".equals(element.getTagName())) {
-            actualIsEnabled = !"true".equals(element.getAttribute("readonly"));
-        } else if ("input".equals(element.getTagName()) && "text".equals(element.getAttribute("type"))) {
-            actualIsEnabled = !"true".equals(element.getAttribute("readonly"));
-        } else {
-            actualIsEnabled = element.isEnabled();
-        }
-        Assert.assertEquals(actualIsEnabled, expectedIsEnabled, errorMessage);
-    }
-
-    public void assertFieldEnabled(String fieldName, int elementPosition) {
-        WebElement webElement;
-        String errorMessage;
-        if (elementPosition > 1) {
-            String idx = tb.getLastFieldIndex(fieldName, elementPosition);
-            webElement = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
-            errorMessage = "Element with id=[idx" + idx + "] should be enabled";
-        } else {
-            webElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
-            errorMessage = "Element with name=[" + fieldName + "] should be enabled";
-        }
-
-        String tagName = webElement.getTagName();
+    public void assertElementEnabled(WebElement webElement) {
+        String tag = webElement.getTagName();
 
         boolean isEnabled;
-        if ("textarea".equals(tagName)) {
+        if ("textarea".equals(tag)) {
             isEnabled = !"true".equals(webElement.getAttribute("readonly"));
-        } else if ("iframe".equals(tagName)) {
+        } else if ("iframe".equals(tag)) {
             isEnabled = false;
-        } else if ("input".equals(tagName) && ("text".equals(webElement.getAttribute("type")) || "hidden".equals(webElement.getAttribute("type")) )) {
-            isEnabled = !"true".equals(webElement.getAttribute("readonly"));
-        } else {
+        } else if ("select".equals(tag)) {
             isEnabled = webElement.isEnabled();
+        } else if ("input".equals(tag)) {
+            String type = webElement.getAttribute("type");
+            if ("checkbox".equals(type)) {
+                isEnabled = webElement.isEnabled();
+            } else if ("text".equals(type)) {
+                isEnabled = !"true".equals(webElement.getAttribute("readonly"));
+            } else if ("button".equals(type)) {
+                isEnabled = webElement.isEnabled();
+            } else {
+                throw new SeleniumUnexpectedException("Not support type[" + type + "]");
+            }
+        } else {
+            throw new SeleniumUnexpectedException("Not support tag[" + tag + "]");
         }
 
-        Assert.assertEquals(isEnabled, true, errorMessage);
+        Assert.assertEquals(isEnabled, true, "Element should be enabled");
     }
 
-    public void assertFieldDisabled(String fieldName, int elementPosition) {
-        WebElement webElement;
-        String errorMessage;
-        if (elementPosition > 1) {
-            String idx = tb.getLastFieldIndex(fieldName, elementPosition);
-            webElement = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
-            errorMessage = "Element with id=[idx" + idx + "] should be disabled";
-        } else {
-            webElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
-            errorMessage = "Element with name=[" + fieldName + "] should be disabled";
-        }
-
-        String tagName = webElement.getTagName();
+    public void assertElementDisabled(WebElement webElement) {
+        String tag = webElement.getTagName();
 
         boolean isDisabled;
-        if ("textarea".equals(tagName)) {
+        if ("textarea".equals(tag)) {
             isDisabled = "true".equals(webElement.getAttribute("readonly"));
-        } else if ("iframe".equals(tagName)) {
+        } else if ("iframe".equals(tag)) {
             isDisabled = true;
-        } else if ("input".equals(tagName) && ("text".equals(webElement.getAttribute("type")) || "hidden".equals(webElement.getAttribute("type")))) {
-            isDisabled = "true".equals(webElement.getAttribute("readonly"));
-        } else {
+        } else if ("select".equals(tag)) {
             isDisabled = !webElement.isEnabled();
+        } else if ("input".equals(tag)) {
+            String type = webElement.getAttribute("type");
+            if ("checkbox".equals(type)) {
+                isDisabled = !webElement.isEnabled();
+            } else if ("text".equals(type)) {
+                isDisabled = "true".equals(webElement.getAttribute("readonly"));
+            } else if ("button".equals(type)) {
+                isDisabled = !webElement.isEnabled();
+            } else {
+                throw new SeleniumUnexpectedException("Not support type[" + type + "]");
+            }
+        } else {
+            throw new SeleniumUnexpectedException("Not support tag[" + tag + "]");
         }
 
-        Assert.assertEquals(isDisabled, true, errorMessage);
+        Assert.assertEquals(isDisabled, true, "Element should be disabled");
     }
 
 }

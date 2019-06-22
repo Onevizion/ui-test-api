@@ -1058,7 +1058,7 @@ public class Tb {
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             WebElement elem = gridCell.findElement(By.tagName("input"));
-            assertElement.assertElementEnabled(elem, true);
+            assertElement.assertElementEnabled(elem);
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType) 
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDd1")).size(), 1);
@@ -1131,7 +1131,7 @@ public class Tb {
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             WebElement elem = gridCell.findElement(By.tagName("input"));
-            assertElement.assertElementEnabled(elem, false);
+            assertElement.assertElementDisabled(elem);
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType) 
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDd1")).size(), 0);
@@ -1288,89 +1288,122 @@ public class Tb {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    public void assertFieldsDisabled(List<String> fieldIds) {//TODO elementPosition
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(0))), false); //CHECKBOX
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(1))), false); //DATE
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(2))), false); //DB_DROP_DOWN
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(3) + "_disp")), false); //DB_SELECTOR
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(4))), false); //DROP_DOWN
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(5) + "_disp")), false); //ELECTRONIC_FILE
-        if (fieldIds.get(6) != null) {
-            assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(6))), false); //HYPERLINK
+    public void checkFieldsEnabled(List<String> fieldNames, int elementPosition) {
+        checkFieldEnabled(ConfigFieldType.CHECKBOX, fieldNames.get(0), elementPosition);
+        checkFieldEnabled(ConfigFieldType.DATE, fieldNames.get(1), elementPosition);
+        checkFieldEnabled(ConfigFieldType.DB_DROP_DOWN, fieldNames.get(2), elementPosition);
+        checkFieldEnabled(ConfigFieldType.DB_SELECTOR, fieldNames.get(3), elementPosition);
+        checkFieldEnabled(ConfigFieldType.DROP_DOWN, fieldNames.get(4), elementPosition);
+        checkFieldEnabled(ConfigFieldType.ELECTRONIC_FILE, fieldNames.get(5), elementPosition);
+        checkFieldEnabled(ConfigFieldType.HYPERLINK, fieldNames.get(6), elementPosition);
+        checkFieldEnabled(ConfigFieldType.LATITUDE, fieldNames.get(7), elementPosition);
+        checkFieldEnabled(ConfigFieldType.LONGITUDE, fieldNames.get(8), elementPosition);
+        checkFieldEnabled(ConfigFieldType.MEMO, fieldNames.get(9), elementPosition);
+        checkFieldEnabled(ConfigFieldType.NUMBER, fieldNames.get(10), elementPosition);
+        checkFieldEnabled(ConfigFieldType.SELECTOR, fieldNames.get(11), elementPosition);
+        checkFieldEnabled(ConfigFieldType.TEXT, fieldNames.get(12), elementPosition);
+        checkFieldEnabled(ConfigFieldType.TRACKOR_SELECTOR, fieldNames.get(13), elementPosition);
+        checkFieldEnabled(ConfigFieldType.WIKI, fieldNames.get(14), elementPosition);
+        checkFieldEnabled(ConfigFieldType.MULTI_SELECTOR, fieldNames.get(15), elementPosition);
+        checkFieldEnabled(ConfigFieldType.DATE_TIME, fieldNames.get(16), elementPosition);
+        checkFieldEnabled(ConfigFieldType.TIME, fieldNames.get(17), elementPosition);
+        checkFieldEnabled(ConfigFieldType.TRACKOR_DROP_DOWN, fieldNames.get(18), elementPosition);
+        //CALCULATED
+        //ROLLUP
+        checkFieldEnabled(ConfigFieldType.MULTI_TRACKOR_SELECTOR, fieldNames.get(21), elementPosition);
+    }
+
+    public void checkFieldEnabled(ConfigFieldType configFieldType, String fieldName, int elementPosition) {
+        if (ConfigFieldType.CHECKBOX.equals(configFieldType) || ConfigFieldType.DB_DROP_DOWN.equals(configFieldType)
+                || ConfigFieldType.DROP_DOWN.equals(configFieldType) || ConfigFieldType.HYPERLINK.equals(configFieldType)
+                || ConfigFieldType.LATITUDE.equals(configFieldType) || ConfigFieldType.LONGITUDE.equals(configFieldType)
+                || ConfigFieldType.MEMO.equals(configFieldType) || ConfigFieldType.NUMBER.equals(configFieldType)
+                || ConfigFieldType.TEXT.equals(configFieldType) || ConfigFieldType.WIKI.equals(configFieldType)
+                || ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldType)) {
+            checkFieldEnabled(fieldName, elementPosition);
+        } else if (ConfigFieldType.DATE.equals(configFieldType) || ConfigFieldType.DATE_TIME.equals(configFieldType)
+                || ConfigFieldType.TIME.equals(configFieldType)) {
+            checkFieldEnabled(fieldName, elementPosition);
+            checkFieldEnabled(fieldName + "_but", elementPosition);
+        } else if (ConfigFieldType.DB_SELECTOR.equals(configFieldType) || ConfigFieldType.ELECTRONIC_FILE.equals(configFieldType)
+                || ConfigFieldType.SELECTOR.equals(configFieldType) || ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldType)
+                || ConfigFieldType.MULTI_SELECTOR.equals(configFieldType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldType)) {
+            checkFieldEnabled(fieldName + "_disp", elementPosition);
+            checkFieldEnabled(fieldName + "_but", elementPosition);
+        } else {
+            throw new SeleniumUnexpectedException("Not support ConfigFieldType");
         }
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(7))), false); //LATITUDE
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(8))), false); //LONGITUDE
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(9))), false); //MEMO
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(10))), false); //NUMBER
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(11) + "_disp")), false); //SELECTOR
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(12))), false); //TEXT
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(13) + "_disp")), false); //TRACKOR_SELECTOR
-        //WIKI
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(15) + "_disp")), false); //MULTI_SELECTOR
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(16))), false); //DATE_TIME
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(17))), false); //TIME
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(18))), false); //TRACKOR_DROPDOWN
+    }
+
+    private void checkFieldEnabled(String fieldName, int elementPosition) {
+        WebElement webElement;
+        if (elementPosition > 1) {
+            String idx = getLastFieldIndex(fieldName, elementPosition);
+            webElement = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
+        } else {
+            webElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
+        }
+
+        assertElement.assertElementEnabled(webElement);
+    }
+
+    public void checkFieldsDisabled(List<String> fieldNames, int elementPosition) {
+        checkFieldDisabled(ConfigFieldType.CHECKBOX, fieldNames.get(0), elementPosition);
+        checkFieldDisabled(ConfigFieldType.DATE, fieldNames.get(1), elementPosition);
+        checkFieldDisabled(ConfigFieldType.DB_DROP_DOWN, fieldNames.get(2), elementPosition);
+        checkFieldDisabled(ConfigFieldType.DB_SELECTOR, fieldNames.get(3), elementPosition);
+        checkFieldDisabled(ConfigFieldType.DROP_DOWN, fieldNames.get(4), elementPosition);
+        checkFieldDisabled(ConfigFieldType.ELECTRONIC_FILE, fieldNames.get(5), elementPosition);
+        checkFieldDisabled(ConfigFieldType.HYPERLINK, fieldNames.get(6), elementPosition);
+        checkFieldDisabled(ConfigFieldType.LATITUDE, fieldNames.get(7), elementPosition);
+        checkFieldDisabled(ConfigFieldType.LONGITUDE, fieldNames.get(8), elementPosition);
+        checkFieldDisabled(ConfigFieldType.MEMO, fieldNames.get(9), elementPosition);
+        checkFieldDisabled(ConfigFieldType.NUMBER, fieldNames.get(10), elementPosition);
+        checkFieldDisabled(ConfigFieldType.SELECTOR, fieldNames.get(11), elementPosition);
+        checkFieldDisabled(ConfigFieldType.TEXT, fieldNames.get(12), elementPosition);
+        checkFieldDisabled(ConfigFieldType.TRACKOR_SELECTOR, fieldNames.get(13), elementPosition);
+        checkFieldDisabled(ConfigFieldType.WIKI, fieldNames.get(14), elementPosition);
+        checkFieldDisabled(ConfigFieldType.MULTI_SELECTOR, fieldNames.get(15), elementPosition);
+        checkFieldDisabled(ConfigFieldType.DATE_TIME, fieldNames.get(16), elementPosition);
+        checkFieldDisabled(ConfigFieldType.TIME, fieldNames.get(17), elementPosition);
+        checkFieldDisabled(ConfigFieldType.TRACKOR_DROP_DOWN, fieldNames.get(18), elementPosition);
         //CALCULATED
         //ROLLUP
-        assertElement.assertElementEnabled(seleniumSettings.getWebDriver().findElement(By.name(fieldIds.get(21) + "_disp")), false); //MULTI_TRACKOR_SELECTOR
+        checkFieldDisabled(ConfigFieldType.MULTI_TRACKOR_SELECTOR, fieldNames.get(21), elementPosition);
     }
 
-    public void checkFieldsEnabled(List<String> fieldIds, int elementPosition) {
-        checkFieldEnabled(fieldIds.get(0), elementPosition); //CHECKBOX
-        checkFieldEnabled(fieldIds.get(1), elementPosition); //DATE
-        checkFieldEnabled(fieldIds.get(2), elementPosition); //DB_DROP_DOWN
-        checkFieldEnabled(fieldIds.get(3), elementPosition); //DB_SELECTOR
-        checkFieldEnabled(fieldIds.get(4), elementPosition); //DROP_DOWN
-        checkFieldEnabled(fieldIds.get(5) + "_but", elementPosition); //ELECTRONIC_FILE
-        checkFieldEnabled(fieldIds.get(6), elementPosition); //HYPERLINK
-        checkFieldEnabled(fieldIds.get(7), elementPosition); //LATITUDE
-        checkFieldEnabled(fieldIds.get(8), elementPosition); //LONGITUDE
-        checkFieldEnabled(fieldIds.get(9), elementPosition); //MEMO
-        checkFieldEnabled(fieldIds.get(10), elementPosition); //NUMBER
-        checkFieldEnabled(fieldIds.get(11), elementPosition); //SELECTOR
-        checkFieldEnabled(fieldIds.get(12), elementPosition); //TEXT
-        checkFieldEnabled(fieldIds.get(13), elementPosition); //TRACKOR_SELECTOR
-        checkFieldEnabled(fieldIds.get(14), elementPosition); //WIKI
-        checkFieldEnabled(fieldIds.get(15), elementPosition); //MULTI_SELECTOR
-        checkFieldEnabled(fieldIds.get(16), elementPosition); //DATE_TIME
-        checkFieldEnabled(fieldIds.get(17), elementPosition); //TIME
-        checkFieldEnabled(fieldIds.get(18), elementPosition); //TRACKOR_DROPDOWN
-        //CALCULATED
-        //ROLLUP
-        checkFieldEnabled(fieldIds.get(21), elementPosition); //MULTI_TRACKOR_SELECTOR
+    public void checkFieldDisabled(ConfigFieldType configFieldType, String fieldName, int elementPosition) {
+        if (ConfigFieldType.CHECKBOX.equals(configFieldType) || ConfigFieldType.DB_DROP_DOWN.equals(configFieldType)
+                || ConfigFieldType.DROP_DOWN.equals(configFieldType) || ConfigFieldType.HYPERLINK.equals(configFieldType)
+                || ConfigFieldType.LATITUDE.equals(configFieldType) || ConfigFieldType.LONGITUDE.equals(configFieldType)
+                || ConfigFieldType.MEMO.equals(configFieldType) || ConfigFieldType.NUMBER.equals(configFieldType)
+                || ConfigFieldType.TEXT.equals(configFieldType) || ConfigFieldType.WIKI.equals(configFieldType)
+                || ConfigFieldType.TRACKOR_DROP_DOWN.equals(configFieldType)) {
+            checkFieldDisabled(fieldName, elementPosition);
+        } else if (ConfigFieldType.DATE.equals(configFieldType) || ConfigFieldType.DATE_TIME.equals(configFieldType)
+                || ConfigFieldType.TIME.equals(configFieldType)) {
+            checkFieldDisabled(fieldName, elementPosition);
+            checkFieldDisabled(fieldName + "_but", elementPosition);
+        } else if (ConfigFieldType.DB_SELECTOR.equals(configFieldType) || ConfigFieldType.ELECTRONIC_FILE.equals(configFieldType)
+                || ConfigFieldType.SELECTOR.equals(configFieldType) || ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldType)
+                || ConfigFieldType.MULTI_SELECTOR.equals(configFieldType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldType)) {
+            checkFieldDisabled(fieldName + "_disp", elementPosition);
+            checkFieldDisabled(fieldName + "_but", elementPosition);
+        } else {
+            throw new SeleniumUnexpectedException("Not support ConfigFieldType");
+        }
     }
 
-    public void checkFieldEnabled(String fieldId, int elementPosition) {
-        assertElement.assertFieldEnabled(fieldId, elementPosition);
-    }
+    private void checkFieldDisabled(String fieldName, int elementPosition) {
+        WebElement webElement;
+        if (elementPosition > 1) {
+            String idx = getLastFieldIndex(fieldName, elementPosition);
+            webElement = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx));
+        } else {
+            webElement = seleniumSettings.getWebDriver().findElement(By.name(fieldName));
+        }
 
-    public void checkFieldsDisabled(List<String> fieldIds, int elementPosition) {
-        checkFieldDisabled(fieldIds.get(0), elementPosition); //CHECKBOX
-        checkFieldDisabled(fieldIds.get(1), elementPosition); //DATE
-        checkFieldDisabled(fieldIds.get(2), elementPosition); //DB_DROP_DOWN
-        checkFieldDisabled(fieldIds.get(3), elementPosition); //DB_SELECTOR
-        checkFieldDisabled(fieldIds.get(4), elementPosition); //DROP_DOWN
-        checkFieldDisabled(fieldIds.get(5) + "_but", elementPosition); //ELECTRONIC_FILE
-        checkFieldDisabled(fieldIds.get(6), elementPosition); //HYPERLINK
-        checkFieldDisabled(fieldIds.get(7), elementPosition); //LATITUDE
-        checkFieldDisabled(fieldIds.get(8), elementPosition); //LONGITUDE
-        checkFieldDisabled(fieldIds.get(9), elementPosition); //MEMO
-        checkFieldDisabled(fieldIds.get(10), elementPosition); //NUMBER
-        checkFieldDisabled(fieldIds.get(11), elementPosition); //SELECTOR
-        checkFieldDisabled(fieldIds.get(12), elementPosition); //TEXT
-        checkFieldDisabled(fieldIds.get(13), elementPosition); //TRACKOR_SELECTOR
-        checkFieldDisabled(fieldIds.get(14), elementPosition); //WIKI
-        checkFieldDisabled(fieldIds.get(15), elementPosition); //MULTI_SELECTOR
-        checkFieldDisabled(fieldIds.get(16), elementPosition); //DATE_TIME
-        checkFieldDisabled(fieldIds.get(17), elementPosition); //TIME
-        checkFieldDisabled(fieldIds.get(18), elementPosition); //TRACKOR_DROPDOWN
-        //CALCULATED
-        //ROLLUP
-        checkFieldDisabled(fieldIds.get(21), elementPosition); //MULTI_TRACKOR_SELECTOR
-    }
-
-    public void checkFieldDisabled(String fieldId, int elementPosition) {
-        assertElement.assertFieldDisabled(fieldId, elementPosition);
+        assertElement.assertElementDisabled(webElement);
     }
 
 }
