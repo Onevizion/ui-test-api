@@ -125,6 +125,7 @@ public class FieldHistory {
         String id;
         if (elementPosition > 1) {
             id = tb.getLastFieldIndex(fieldId, elementPosition);
+            id = id.replace("_disp", ""); //for efile field
             id = "idx" + id;
         } else {
             id = seleniumSettings.getWebDriver().findElement(By.name(fieldId)).getAttribute("id");

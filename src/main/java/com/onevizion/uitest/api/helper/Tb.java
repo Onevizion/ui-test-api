@@ -476,6 +476,7 @@ public class Tb {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field + "_disp", elementPosition);
+                idx = idx.replace("_disp", "");
                 assertElement.assertTextById("idx" + idx + "_disp", vals.get(field));
             } else {
                 assertElement.assertText(field + "_disp", vals.get(field));
@@ -635,6 +636,7 @@ public class Tb {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field + "_disp", elementPosition);
+                idx = idx.replace("_disp", "");
                 element.moveToElementById("idx" + idx + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("idx" + idx + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             } else {
