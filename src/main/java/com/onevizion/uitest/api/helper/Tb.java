@@ -81,6 +81,8 @@ public class Tb {
             suffix = "_finish";
         } else if (name.contains("_but")) {
             suffix = "_but";
+        } else if (name.contains("_disp")) {
+            suffix = "_disp";
         }
         for (WebElement elem : elems) {
             String id = elem.getAttribute("id");
@@ -1325,10 +1327,11 @@ public class Tb {
                 || ConfigFieldType.TIME.equals(configFieldType)) {
             checkFieldEnabled(fieldName, elementPosition);
             checkFieldEnabled(fieldName + "_but", elementPosition);
-        } else if (ConfigFieldType.DB_SELECTOR.equals(configFieldType) || ConfigFieldType.ELECTRONIC_FILE.equals(configFieldType)
-                || ConfigFieldType.SELECTOR.equals(configFieldType) || ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldType)
-                || ConfigFieldType.MULTI_SELECTOR.equals(configFieldType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldType)) {
+        } else if (ConfigFieldType.SELECTOR.equals(configFieldType) || ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldType)) {
             checkFieldEnabled(fieldName + "_disp", elementPosition);
+            checkFieldEnabled(fieldName + "_but", elementPosition);
+        } else if (ConfigFieldType.DB_SELECTOR.equals(configFieldType) || ConfigFieldType.ELECTRONIC_FILE.equals(configFieldType)
+                || ConfigFieldType.MULTI_SELECTOR.equals(configFieldType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldType)) {
             checkFieldEnabled(fieldName + "_but", elementPosition);
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
@@ -1384,10 +1387,11 @@ public class Tb {
                 || ConfigFieldType.TIME.equals(configFieldType)) {
             checkFieldDisabled(fieldName, elementPosition);
             checkFieldDisabled(fieldName + "_but", elementPosition);
-        } else if (ConfigFieldType.DB_SELECTOR.equals(configFieldType) || ConfigFieldType.ELECTRONIC_FILE.equals(configFieldType)
-                || ConfigFieldType.SELECTOR.equals(configFieldType) || ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldType)
-                || ConfigFieldType.MULTI_SELECTOR.equals(configFieldType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldType)) {
+        } else if (ConfigFieldType.SELECTOR.equals(configFieldType) || ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldType)) {
             checkFieldDisabled(fieldName + "_disp", elementPosition);
+            checkFieldDisabled(fieldName + "_but", elementPosition);
+        } else if (ConfigFieldType.DB_SELECTOR.equals(configFieldType) || ConfigFieldType.ELECTRONIC_FILE.equals(configFieldType)
+                || ConfigFieldType.MULTI_SELECTOR.equals(configFieldType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldType)) {
             checkFieldDisabled(fieldName + "_but", elementPosition);
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
