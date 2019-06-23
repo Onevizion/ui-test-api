@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
+import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
@@ -67,30 +68,37 @@ public class FormDesigner {
     }
 
     public void addElementsToForm(List<String> elements, String drillDownPrefix) {
-        element.doubleClickById(drillDownPrefix + elements.get(0)); //CHECKBOX
-        element.doubleClickById(drillDownPrefix + elements.get(1)); //DATE
-        element.doubleClickById(drillDownPrefix + elements.get(2)); //DB_DROP_DOWN
-        element.doubleClickById(drillDownPrefix + elements.get(3)); //DB_SELECTOR
-        element.doubleClickById(drillDownPrefix + elements.get(4)); //DROP_DOWN
-        element.doubleClickById(drillDownPrefix + elements.get(5)); //ELECTRONIC_FILE
-        element.doubleClickById(drillDownPrefix + elements.get(6)); //HYPERLINK
-        element.doubleClickById(drillDownPrefix + elements.get(7)); //LATITUDE
-        element.doubleClickById(drillDownPrefix + elements.get(8)); //LONGITUDE
-        element.doubleClickById(drillDownPrefix + elements.get(9)); //MEMO
-        element.doubleClickById(drillDownPrefix + elements.get(10)); //NUMBER
-        element.doubleClickById(drillDownPrefix + elements.get(11)); //SELECTOR
-        element.doubleClickById(drillDownPrefix + elements.get(12)); //TEXT
-        element.doubleClickById(drillDownPrefix + elements.get(13)); //TRACKOR_SELECTOR
-        element.doubleClickById(drillDownPrefix + elements.get(14)); //WIKI
-        element.doubleClickById(drillDownPrefix + elements.get(15)); //MULTI_SELECTOR
-        element.doubleClickById(drillDownPrefix + elements.get(16)); //DATE_TIME
-        element.doubleClickById(drillDownPrefix + elements.get(17)); //TIME
-        element.doubleClickById(drillDownPrefix + elements.get(18)); //TRACKOR_DROPDOWN
-        element.doubleClickById(drillDownPrefix + elements.get(19)); //CALCULATED
+        addElementToFormById(drillDownPrefix + elements.get(0)); //CHECKBOX
+        addElementToFormById(drillDownPrefix + elements.get(1)); //DATE
+        addElementToFormById(drillDownPrefix + elements.get(2)); //DB_DROP_DOWN
+        addElementToFormById(drillDownPrefix + elements.get(3)); //DB_SELECTOR
+        addElementToFormById(drillDownPrefix + elements.get(4)); //DROP_DOWN
+        addElementToFormById(drillDownPrefix + elements.get(5)); //ELECTRONIC_FILE
+        addElementToFormById(drillDownPrefix + elements.get(6)); //HYPERLINK
+        addElementToFormById(drillDownPrefix + elements.get(7)); //LATITUDE
+        addElementToFormById(drillDownPrefix + elements.get(8)); //LONGITUDE
+        addElementToFormById(drillDownPrefix + elements.get(9)); //MEMO
+        addElementToFormById(drillDownPrefix + elements.get(10)); //NUMBER
+        addElementToFormById(drillDownPrefix + elements.get(11)); //SELECTOR
+        addElementToFormById(drillDownPrefix + elements.get(12)); //TEXT
+        addElementToFormById(drillDownPrefix + elements.get(13)); //TRACKOR_SELECTOR
+        addElementToFormById(drillDownPrefix + elements.get(14)); //WIKI
+        addElementToFormById(drillDownPrefix + elements.get(15)); //MULTI_SELECTOR
+        addElementToFormById(drillDownPrefix + elements.get(16)); //DATE_TIME
+        addElementToFormById(drillDownPrefix + elements.get(17)); //TIME
+        addElementToFormById(drillDownPrefix + elements.get(18)); //TRACKOR_DROPDOWN
+        addElementToFormById(drillDownPrefix + elements.get(19)); //CALCULATED
         if (elements.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
-            element.doubleClickById(drillDownPrefix + elements.get(20)); //ROLLUP
+            addElementToFormById(drillDownPrefix + elements.get(20)); //ROLLUP
         }
-        element.doubleClickById(drillDownPrefix + elements.get(21)); //MULTI_TRACKOR_SELECTOR
+        addElementToFormById(drillDownPrefix + elements.get(21)); //MULTI_TRACKOR_SELECTOR
+    }
+
+    private void addElementToFormById(String id) {
+        element.doubleClickById(id);
+        if (seleniumSettings.getBrowser().equals("chrome")) {
+            AbstractSeleniumCore.sleep(300L); //TODO BUG in chrome 75 and chromedriver 75. works without sleep in chrome 74 and chromedriver 74
+        }
     }
 
     public void addElementToForm(String label) {
