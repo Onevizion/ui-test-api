@@ -41,10 +41,8 @@ public class TbCalculatedField {
         userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
 
         if (supportOuterOperations) {
-            //TODO null pointer exception
-            //on TB for parent and child fields
-            //userFilterHelper.checkFilter(fieldName, null, value, null, "(+)=", FieldDataType.CALCULATED, columnIndex, null, cellVals, null, cellValsKeys);
-            //userFilterHelper.checkFilter(fieldName, null, value, null, "(+)<>", FieldDataType.CALCULATED, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null, cellValsKeys);
         }
     }
 
