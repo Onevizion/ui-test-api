@@ -34,6 +34,7 @@ public class CreateProcess {
                     "     \"SPRC_VERSION\": \"" + restApiVersion + "\", " + 
                     "     \"SPRC_BROWSER\": \"" + browserName + "\", " + 
                     "     \"SPRC_START_DATE\": \"" + date + "\" " + 
+                    "   } " + 
                     " }";
 
             OutputStream os = conn.getOutputStream();
