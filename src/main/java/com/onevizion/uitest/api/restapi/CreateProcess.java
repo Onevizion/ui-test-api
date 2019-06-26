@@ -19,7 +19,7 @@ public class CreateProcess {
 
     private static final String TRACKOR_TYPE_NAME = "SELENIUM_PROCESS";
 
-    public static String create(String restApiUrl, String restApiCredential) {
+    public static String create(String restApiUrl, String restApiCredential, String restApiVersion, String browserName, String date) {
         try {
             URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -30,6 +30,10 @@ public class CreateProcess {
             conn.setRequestProperty("Authorization", "Basic " + restApiCredential);
 
             String input = "{ " + 
+                    "   \"fields\": { " + 
+                    "     \"SPRC_VERSION\": \"" + restApiVersion + "\", " + 
+                    "     \"SPRC_BROWSER\": \"" + browserName + "\", " + 
+                    "     \"SPRC_START_DATE\": \"" + date + "\" " + 
                     " }";
 
             OutputStream os = conn.getOutputStream();
@@ -54,7 +58,7 @@ public class CreateProcess {
         }
     }
 
-    public static void update(String restApiUrl, String restApiCredential, String restApiVersion, String processTrackorKey, String browserName, String date, String duration, int testsCount) {
+    public static void update(String restApiUrl, String restApiCredential, String processTrackorKey, int testsCount) {
         try {
             URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -66,11 +70,37 @@ public class CreateProcess {
 
             String input = "{ " + 
                     "   \"fields\": { " + 
-                    "     \"SPRC_VERSION\": \"" + restApiVersion + "\", " + 
-                    "     \"SPRC_BROWSER\": \"" + browserName + "\", " + 
-                    "     \"SPRC_START_DATE\": \"" + date + "\", " + 
-                    "     \"SPRC_DURATION\": \"" + duration + "\", " + 
                     "     \"SPRC_TESTS_COUNT\": \"" + testsCount + "\" " + 
+                    "   } " + 
+                    " }";
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new SeleniumUnexpectedException("CreateProcess.update Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
+            }
+
+            conn.disconnect();
+        } catch (Exception e) {
+            throw new SeleniumUnexpectedException(e);
+        }
+    }
+
+    public static void update(String restApiUrl, String restApiCredential, String processTrackorKey, String duration) {
+        try {
+            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Basic " + restApiCredential);
+
+            String input = "{ " + 
+                    "   \"fields\": { " + 
+                    "     \"SPRC_DURATION\": \"" + duration + "\" " + 
                     "   } " + 
                     " }";
 
