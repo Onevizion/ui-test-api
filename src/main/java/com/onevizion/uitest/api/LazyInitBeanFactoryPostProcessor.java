@@ -11,7 +11,7 @@ public class LazyInitBeanFactoryPostProcessor implements BeanFactoryPostProcesso
             BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
             String className = beanDefinition.getBeanClassName();
             if (className != null && className.startsWith("com.onevizion")
-                    && !className.startsWith("com.onevizion.guitest")&& !className.startsWith("com.onevizion.uitest")) {
+                    && !className.startsWith("com.onevizion.guitest") && !className.startsWith("com.onevizion.uitest")) {
                 beanFactory.getBeanDefinition(beanName).setLazyInit(true);
             }
         }
