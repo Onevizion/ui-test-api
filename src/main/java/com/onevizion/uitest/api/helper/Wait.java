@@ -382,12 +382,6 @@ public class Wait {
             });
     }
 
-    public void waitDropGridVerificationFinish() {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for DropGrid Verification is failed")
-            .until(webdriver -> js.isDropGridVerificationFinish());
-    }
-
     public void waitBplImportFileSubmitDone() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for DropGrid Verification is failed")

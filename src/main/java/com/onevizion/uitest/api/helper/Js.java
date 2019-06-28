@@ -522,24 +522,6 @@ public class Js {
         }
     }
 
-    public Boolean isDropGridVerificationFinish() {
-        return Boolean.valueOf(execJs(
-                  "$.get('/wizard/dropgrid/Verification/GetConfigItems.do?id=' + wizard.entityId, {}).done(function (source) {"
-                + "    var configGroups = source.configGroups;"
-                + "    for (var i = 0; i < configGroups.length; i++) {"
-                + "        var items = configGroups[i].items;"
-                + "        for (var j = 0; j < items.length; j++) {"
-                + "            var objectStatus = items[j].objectStatus;"
-                + "            if ((objectStatus != 2) && (objectStatus != 3) && (objectStatus != 4)) {"
-                + "                return false;"
-                + "            }"
-                + "        }"
-                + "    }"
-                + "    return true;"
-                + "});"
-        ));
-    }
-
     public Long getColumnIndexByLabel(Long gridId, String columnLabel) {
         columnLabel = columnLabel.replaceAll("'", "\\\\'");
 
