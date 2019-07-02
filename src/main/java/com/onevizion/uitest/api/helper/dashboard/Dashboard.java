@@ -89,10 +89,6 @@ public class Dashboard {
         return dashboardJs.getDashletSeriesCount(dashletId);
     }
 
-    public Long getDashletSerieDataCount(String dashletId, int serieIdx) {
-        return dashboardJs.getDashletSerieDataCount(dashletId, serieIdx);
-    }
-
     public String getDashletSerieDataX(String dashletId, int serieIdx) {
         return dashboardJs.getDashletSerieDataX(dashletId, serieIdx);
     }
