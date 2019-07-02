@@ -34,29 +34,30 @@ class DashboardJs extends Js {
         return Long.parseLong(execJs("return dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series.length;"));
     }
 
-    String getDashletSerieDataX(String dashletId, int serieIdx) {
-        return execJs("var elements = dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series[" + serieIdx + "].data;"
+    String getDashletSerieDataX(String dashletId) {
+        return execJs("var elements = dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series[0].data;"
                 + "if (elements.length == 0) {"
                 + "    return '';"
                 + "} else {"
-                + "    var str = elements[0].x;"
-                + "    for (var i = 1; i < elements.length; i++) {"
-                + "        str = str + ',' + elements[i].x;"
+                + "    if (typeof elements[0].x !== 'undefined' && typeof elements[0].name !== 'undefined') {"
+                + "        throw new Error('x and name exists');"
                 + "    }"
-                + "    return str;"
-                + "}");
-    }
-
-    String getDashletSerieDataXText(String dashletId, int serieIdx) {
-        return execJs("var elements = dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series[" + serieIdx + "].data;"
-                + "if (elements.length == 0) {"
-                + "    return '';"
-                + "} else {"
-                + "    var str = elements[0].name;"
-                + "    for (var i = 1; i < elements.length; i++) {"
-                + "        str = str + ',' + elements[i].name;"
+                + "    if (typeof elements[0].x == 'undefined' && typeof elements[0].name == 'undefined') {"
+                + "        throw new Error('x and name not exists');"
                 + "    }"
-                + "    return str;"
+                + "    if (typeof elements[0].x !== 'undefined') {"
+                + "        var str = elements[0].x;"
+                + "        for (var i = 1; i < elements.length; i++) {"
+                + "            str = str + ',' + elements[i].x;"
+                + "        }"
+                + "        return str;"
+                + "    } else {"
+                + "        var str = elements[0].name;"
+                + "        for (var i = 1; i < elements.length; i++) {"
+                + "            str = str + ',' + elements[i].name;"
+                + "        }"
+                + "        return str;"
+                + "    }"
                 + "}");
     }
 
