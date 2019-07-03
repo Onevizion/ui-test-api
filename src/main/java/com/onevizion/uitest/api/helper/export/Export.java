@@ -168,7 +168,7 @@ public class Export {
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
         assertElement.assertLink("gridPageName", exportRun.getGridPageName() + " ");
         assertElement.assertLink("trackorTypeName", exportRun.getTrackorTypeName());
