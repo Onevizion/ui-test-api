@@ -3,6 +3,7 @@ package com.onevizion.uitest.api.helper;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,12 @@ public class UsersSettings {
     @Resource
     private AssertElement assertElement;
 
+    private ThreadLocal<WebElement> html = new ThreadLocal<>();
+
     public void openUserSettings() {
+        WebElement html = seleniumSettings.getWebDriver().findElement(By.tagName("html"));
+        this.html.set(html);
+
         elementWait.waitElementById("topPanelUserNameLbl");
         elementWait.waitElementVisibleById("topPanelUserNameLbl");
         elementWait.waitElementDisplayById("topPanelUserNameLbl");
@@ -40,10 +46,10 @@ public class UsersSettings {
         wait.waitFormLoad();
     }
 
-    public void closeUserSettings() {
+    public void closeUserSettingsOkWithReloadPage() {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
 
-        AbstractSeleniumCore.sleep(1000L); //this sleep need because in js code we have setTimeout
+        elementWait.waitElementNotExist(this.html.get());
 
         wait.waitWebElement(By.id("mainContainer"));
         wait.waitWebElement(By.id("Table1"));
@@ -55,6 +61,10 @@ public class UsersSettings {
         elementWait.waitElementDisplayById("topPanelUserNameLbl");
 
         wait.waitWebElement(By.id("userNameMenuItemlogoff"));
+    }
+
+    public void closeUserSettingsOkWithoutReloadPage() {
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
     public void closeUserSettingsCancel() {
