@@ -130,12 +130,12 @@ public class Export {
     }
 
     private String waitExportDone() {
+        WebElement processListButton = seleniumSettings.getWebDriver().findElement(By.id("topPanelProcessContainer")).findElement(By.className("btn_input"));
+        processListButton.click();
+
         exportWait.waitExport();
 
         exportWait.waitExportDone();
-
-        WebElement processListButton = seleniumSettings.getWebDriver().findElement(By.id("topPanelProcessContainer")).findElement(By.className("btn_input"));
-        processListButton.click();
 
         WebElement panel = seleniumSettings.getWebDriver().findElement(By.id("processEventList"));
         WebElement link = panel.findElement(By.className("ge_link"));
