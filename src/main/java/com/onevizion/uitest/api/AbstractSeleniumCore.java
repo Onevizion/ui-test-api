@@ -529,7 +529,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             dataPreparation();
 
             openInternalPage();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             seleniumSettings.setTestStatus("fail");
 
             seleniumLogger.error("openBrowserAndLogin fail");
@@ -559,7 +559,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumLogger.info("executed in " + durationMinutesStr + " minutes");
 
             saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             seleniumSettings.setTestStatus("fail");
 
             seleniumLogger.error("closeBrowser fail");
