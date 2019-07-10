@@ -3,7 +3,6 @@ package com.onevizion.uitest.api;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.Collections;
@@ -619,10 +618,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         if (seleniumSettings.getRestApiUrl().isEmpty() || seleniumSettings.getRestApiCredential().isEmpty()) {
             return;
         }
-
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String date = format.format(cal.getTime());
 
         try {
             createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName(), getBugs());
