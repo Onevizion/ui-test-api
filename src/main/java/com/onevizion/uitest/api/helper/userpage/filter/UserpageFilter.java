@@ -118,16 +118,16 @@ public class UserpageFilter {
 
         int randomIndex = fillFilter(fieldName, fieldName2, value, dateType, operator, fieldDataType);
 
-        if ((fieldName.equals("FTB:FTB ID") || fieldName.equals("FT:FT ID") || fieldName.equals("FR:FR ID")
-                || fieldName.equals("FTB:Rollup") || fieldName.equals("FTBP:Rollup") || fieldName.equals("FTBC:Rollup")
-                || fieldName.equals("FT:Rollup") || fieldName.equals("FTP:Rollup") || fieldName.equals("FTC:Rollup")
-                || fieldName.equals("FR:Rollup") || fieldName.equals("FRP:Rollup") || fieldName.equals("FRC:Rollup")
-                || fieldName.equals("FWF:Rollup 1")) && operator.equals(FilterOperatorType.NULL)) {
-            
+        if ((fieldName.equals("FTB:FTB ID") || fieldName.equals("FT:FT ID")
+                || fieldName.equals("FTB:Rollup") || fieldName.equals("FT:Rollup")) && operator.equals(FilterOperatorType.NULL)) {
+            Long rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
+            if (!rowsCntAfter.equals(Long.valueOf(0L))) {
+                throw new SeleniumUnexpectedException("Grid have wrong rows count. Should be 0 rows.");
+            }
         } else {
             Long rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
             if (rowsCntAfter.equals(Long.valueOf(0L))) {
-                throw new SeleniumUnexpectedException("Grid have wrong rows count");
+                throw new SeleniumUnexpectedException("Grid have wrong rows count. Should be more than 0 rows.");
             }
         }
 
