@@ -21,7 +21,7 @@ public class CreateTestResult {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void create(String process, String testName, String browserName, String date, String testStatus, String duration, String bugs, String errorLog, String errorScreenshot) {
+    public void create(String process, String testName, String testStatus, String duration, String bugs, String errorLog, String errorScreenshot) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -36,9 +36,6 @@ public class CreateTestResult {
                 if (errorScreenshot != null) {
                     input = "{ " + 
                             "   \"fields\": { " + 
-                            "     \"STR_VERSION\": \"" + seleniumSettings.getRestApiVersion() + "\", " + 
-                            "     \"STR_DATE\": \"" + date + "\", " + 
-                            "     \"STR_BROWSER\": \"" + browserName + "\", " + 
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                             "     \"STR_DURATION\": \"" + duration + "\", " + 
                             "     \"STR_BUGS\": \"" + bugs + "\", " + 
@@ -63,9 +60,6 @@ public class CreateTestResult {
                 } else {
                     input = "{ " + 
                             "   \"fields\": { " + 
-                            "     \"STR_VERSION\": \"" + seleniumSettings.getRestApiVersion() + "\", " + 
-                            "     \"STR_DATE\": \"" + date + "\", " + 
-                            "     \"STR_BROWSER\": \"" + browserName + "\", " + 
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                             "     \"STR_DURATION\": \"" + duration + "\", " + 
                             "     \"STR_BUGS\": \"" + bugs + "\", " + 
@@ -90,9 +84,6 @@ public class CreateTestResult {
             } else {
                 input = "{ " + 
                         "   \"fields\": { " + 
-                        "     \"STR_VERSION\": \"" + seleniumSettings.getRestApiVersion() + "\", " + 
-                        "     \"STR_DATE\": \"" + date + "\", " + 
-                        "     \"STR_BROWSER\": \"" + browserName + "\", " + 
                         "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                         "     \"STR_DURATION\": \"" + duration + "\", " + 
                         "     \"STR_BUGS\": \"" + bugs + "\" " + 

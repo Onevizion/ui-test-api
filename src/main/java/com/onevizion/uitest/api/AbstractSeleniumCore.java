@@ -760,7 +760,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         try {
             createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName(), getBugs());
-            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getBrowser(), date, seleniumSettings.getTestStatus(), durationMinutesStr, getBugs(), seleniumSettings.getTestLog(), seleniumSettings.getTestFailScreenshot());
+            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getTestStatus(), durationMinutesStr, getBugs(), seleniumSettings.getTestLog(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
             seleniumLogger.error(seleniumSettings.getTestName() + " call REST API Unexpected exception: " + e.getMessage());
         }
