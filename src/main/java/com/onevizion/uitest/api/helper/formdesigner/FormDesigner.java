@@ -68,28 +68,35 @@ public class FormDesigner {
     }
 
     public void addElementsToForm(List<String> elements, String drillDownPrefix) {
-        element.doubleClickById(drillDownPrefix + elements.get(0));
-        element.doubleClickById(drillDownPrefix + elements.get(1));
-        element.doubleClickById(drillDownPrefix + elements.get(2));
-        element.doubleClickById(drillDownPrefix + elements.get(3));
-        element.doubleClickById(drillDownPrefix + elements.get(4));
-        element.doubleClickById(drillDownPrefix + elements.get(5));
-        element.doubleClickById(drillDownPrefix + elements.get(6));
-        element.doubleClickById(drillDownPrefix + elements.get(7));
-        element.doubleClickById(drillDownPrefix + elements.get(8));
-        element.doubleClickById(drillDownPrefix + elements.get(9));
-        element.doubleClickById(drillDownPrefix + elements.get(10));
-        element.doubleClickById(drillDownPrefix + elements.get(11));
-        element.doubleClickById(drillDownPrefix + elements.get(12));
-        element.doubleClickById(drillDownPrefix + elements.get(13));
-        element.doubleClickById(drillDownPrefix + elements.get(14));
-        element.doubleClickById(drillDownPrefix + elements.get(15));
-        element.doubleClickById(drillDownPrefix + elements.get(16));
-        element.doubleClickById(drillDownPrefix + elements.get(17));
-        element.doubleClickById(drillDownPrefix + elements.get(18));
-        element.doubleClickById(drillDownPrefix + elements.get(19));
+        addElementToFormById(drillDownPrefix + elements.get(0));
+        addElementToFormById(drillDownPrefix + elements.get(1));
+        addElementToFormById(drillDownPrefix + elements.get(2));
+        addElementToFormById(drillDownPrefix + elements.get(3));
+        addElementToFormById(drillDownPrefix + elements.get(4));
+        addElementToFormById(drillDownPrefix + elements.get(5));
+        addElementToFormById(drillDownPrefix + elements.get(6));
+        addElementToFormById(drillDownPrefix + elements.get(7));
+        addElementToFormById(drillDownPrefix + elements.get(8));
+        addElementToFormById(drillDownPrefix + elements.get(9));
+        addElementToFormById(drillDownPrefix + elements.get(10));
+        addElementToFormById(drillDownPrefix + elements.get(11));
+        addElementToFormById(drillDownPrefix + elements.get(12));
+        addElementToFormById(drillDownPrefix + elements.get(13));
+        addElementToFormById(drillDownPrefix + elements.get(14));
+        addElementToFormById(drillDownPrefix + elements.get(15));
+        addElementToFormById(drillDownPrefix + elements.get(16));
+        addElementToFormById(drillDownPrefix + elements.get(17));
+        addElementToFormById(drillDownPrefix + elements.get(18));
+        addElementToFormById(drillDownPrefix + elements.get(19));
         if (elements.get(20) != null) {
-            element.doubleClickById(drillDownPrefix + elements.get(20));
+            addElementToFormById(drillDownPrefix + elements.get(20));
+        }
+    }
+
+    private void addElementToFormById(String id) {
+        element.doubleClickById(id);
+        if (seleniumSettings.getBrowser().equals("chrome")) {
+            AbstractSeleniumCore.sleep(300L); //TODO BUG in chrome 75 and chromedriver 75. works without sleep in chrome 74 and chromedriver 74
         }
     }
 
