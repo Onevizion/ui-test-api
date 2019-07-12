@@ -25,6 +25,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -34,6 +35,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.CommandInfo;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
@@ -463,9 +465,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setProfile(profile);
                     //TODO https://github.com/mozilla/geckodriver/issues/617
                     //https://bugzilla.mozilla.org/show_bug.cgi?id=1264259
-                    //options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
-                    //options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-                    //options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+                    options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
                     capability = DesiredCapabilities.firefox();
                     capability.setBrowserName(seleniumSettings.getBrowser());
@@ -483,6 +485,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     ChromeOptions options = new ChromeOptions();
                     options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     options.setExperimentalOption("prefs", chromePrefs);
+                    options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+                    options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.setProxy(null);
@@ -552,9 +557,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.setProfile(profile);
                     //TODO https://github.com/mozilla/geckodriver/issues/617
                     //https://bugzilla.mozilla.org/show_bug.cgi?id=1264259
-                    //options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
-                    //options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-                    //options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+                    options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
                     seleniumSettings.setWebDriver(new FirefoxDriver(options));
                 } else if (seleniumSettings.getBrowser().equals("chrome")) {
@@ -566,6 +571,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     options.addArguments(Arrays.asList("--disable-translate", "--always-authorize-plugins"));
                     options.setPageLoadStrategy(PageLoadStrategy.NONE);
                     options.setExperimentalOption("prefs", chromePrefs);
+                    options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+                    options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+                    options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
                     if (seleniumSettings.getHeadlessMode()) {
                         options.setProxy(null);
