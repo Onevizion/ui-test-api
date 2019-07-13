@@ -50,7 +50,6 @@ import com.onevizion.uitest.api.helper.FieldHistory;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.GridRowButton;
 import com.onevizion.uitest.api.helper.Help;
-import com.onevizion.uitest.api.helper.HtmlInput;
 import com.onevizion.uitest.api.helper.HtmlSelect;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Login;
@@ -230,9 +229,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected UserpageFilter userpageFilter;
-
-    @Resource
-    protected HtmlInput htmlInput;
 
     @Resource
     protected WfVisualEditor wfVisualEditor;
