@@ -185,7 +185,7 @@ public class Dashboard {
     public void changeDashletDisplayMode(DashDisplayModeType dashDisplayModeType) {
         seleniumSettings.getWebDriver().findElement(By.id("dashlet_options_")).click();
 
-        WebElement dialog = getDialog(); 
+        WebElement dialog = getDialog();
         dialog.findElement(By.id(dashDisplayModeType.getIdx().toString())).click(); 
         dialog.findElement(By.id("buttonOk")).click();
     }
@@ -222,10 +222,7 @@ public class Dashboard {
     public void changeColumnChartType(String axisName, String columnName, DashColumnChartType dashColumnChartType) {
         WebElement axis = getAxis(axisName);
         WebElement column = getColumnFromAxis(axis, columnName);
-        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
-        //column.findElement(By.className("ia_edit")).click(); //Element <div class="ia_edit">...</div> is not clickable at point (340, 355). Other element would receive the click: <div class="item_placeholder_bottom"></div>
-        //column.findElement(By.className("ia_edit")).findElement(By.className("button")).click();
-        //column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")).click();
+        column.findElement(By.className("ia_edit")).click();
 
         WebElement dialog = getDialog();
         dialog.findElements(By.className("sw_buttons")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
@@ -235,10 +232,7 @@ public class Dashboard {
     public void changeColumnCalculationMethod(String axisName, String columnName, DashColumnCalcMethodType dashColumnCalcMethodType) {
         WebElement axis = getAxis(axisName);
         WebElement column = getColumnFromAxis(axis, columnName);
-        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
-        //column.findElement(By.className("ia_edit")).click(); //Element <div class="ia_edit">...</div> is not clickable at point (340, 355). Other element would receive the click: <div class="item_placeholder_bottom"></div>
-        //column.findElement(By.className("ia_edit")).findElement(By.className("button")).click();
-        //column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")).click();
+        column.findElement(By.className("ia_edit")).click();
 
         WebElement dialog = getDialog();
         dialog.findElements(By.className("sw_buttons")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
@@ -249,7 +243,7 @@ public class Dashboard {
         WebElement axis = getAxis(axisName);
         WebElement group = getGroupFromAxis(axis, groupName);
         WebElement column = getColumnFromGroup(group, columnName);
-        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+        column.findElement(By.className("ia_edit")).click();
 
         WebElement dialog = getDialog();
         dialog.findElements(By.className("sw_buttons")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
@@ -260,7 +254,7 @@ public class Dashboard {
         WebElement axis = getAxis(axisName);
         WebElement group = getGroupFromAxis(axis, groupName);
         WebElement column = getColumnFromGroup(group, columnName);
-        elementJs.click(column.findElement(By.className("ia_edit")).findElement(By.className("btn_input")));
+        column.findElement(By.className("ia_edit")).click();
 
         WebElement dialog = getDialog();
         dialog.findElements(By.className("sw_buttons")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
@@ -270,7 +264,7 @@ public class Dashboard {
     public void removeColumnFromAxis(String axisName, String columnName){
         WebElement axis = getAxis(axisName);
         WebElement column = getColumnFromAxis(axis, columnName);
-        elementJs.click(column.findElement(By.className("ia_title_delete")).findElement(By.className("btn_input")));
+        column.findElement(By.className("ia_title_delete")).click();
     }
 
     public void saveDashlet() {
