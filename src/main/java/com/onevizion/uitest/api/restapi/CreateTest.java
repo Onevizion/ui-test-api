@@ -24,17 +24,12 @@ public class CreateTest {
     private SeleniumSettings seleniumSettings;
 
     public void createOrUpdate(String testName, String fullTestName, String moduleName, String bugs) {
-        boolean isExist = checkTestAlreadyExist(testName);
-
         if ("MASTER".equals(seleniumSettings.getRestApiVersion())) {
+            boolean isExist = checkTestAlreadyExist(testName);
             if (!isExist) {
-                createTest(testName, fullTestName, moduleName, bugs, true);
+                createTest(testName, fullTestName, moduleName, bugs);
             } else {
-                updateTest(testName, fullTestName, moduleName, bugs, true);
-            }
-        } else {
-            if (!isExist) {
-                createTest(testName, null, null, null, false);
+                updateTest(testName, fullTestName, moduleName, bugs);
             }
         }
     }
@@ -85,7 +80,7 @@ public class CreateTest {
         }
     }
 
-    private void createTest(String testName, String fullTestName, String moduleName, String bugs, boolean inMaster) {
+    private void createTest(String testName, String fullTestName, String moduleName, String bugs) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -95,25 +90,15 @@ public class CreateTest {
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
 
-            String input;
-            if (inMaster) {
-                input = "{ " + 
-                        "   \"fields\": { " + 
-                        "     \"XITOR_KEY\": \"" + testName + "\", " + 
-                        "     \"ST_IN_MASTER\": \"1\", " + 
-                        "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
-                        "     \"ST_MODULE_NAME\": \"" + moduleName + "\", " + 
-                        "     \"ST_BUGS\": \"" + bugs + "\" " + 
-                        "   } " + 
-                        " }";
-            } else {
-                input = "{ " + 
-                        "   \"fields\": { " + 
-                        "     \"XITOR_KEY\": \"" + testName + "\", " + 
-                        "     \"ST_IN_MASTER\": \"0\" " + 
-                        "   } " + 
-                        " }";
-            }
+            String input = "{ " + 
+                    "   \"fields\": { " + 
+                    "     \"XITOR_KEY\": \"" + testName + "\", " + 
+                    "     \"ST_IN_MASTER\": \"1\", " + 
+                    "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
+                    "     \"ST_MODULE_NAME\": \"" + moduleName + "\", " + 
+                    "     \"ST_BUGS\": \"" + bugs + "\" " + 
+                    "   } " + 
+                    " }";
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
@@ -129,7 +114,7 @@ public class CreateTest {
         }
     }
 
-    private void updateTest(String testName, String fullTestName, String moduleName, String bugs, boolean inMaster) {
+    private void updateTest(String testName, String fullTestName, String moduleName, String bugs) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME + ".TRACKOR_KEY=\"" + testName + "\"");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -139,19 +124,14 @@ public class CreateTest {
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
 
-            String input;
-            if (inMaster) {
-                input = "{ " + 
-                        "   \"fields\": { " + 
-                        "     \"ST_IN_MASTER\": \"1\", " + 
-                        "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
-                        "     \"ST_MODULE_NAME\": \"" + moduleName + "\", " + 
-                        "     \"ST_BUGS\": \"" + bugs + "\" " + 
-                        "   } " + 
-                        " }";
-            } else {
-                throw new SeleniumUnexpectedException("Not implement");
-            }
+            String input = "{ " + 
+                    "   \"fields\": { " + 
+                    "     \"ST_IN_MASTER\": \"1\", " + 
+                    "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
+                    "     \"ST_MODULE_NAME\": \"" + moduleName + "\", " + 
+                    "     \"ST_BUGS\": \"" + bugs + "\" " + 
+                    "   } " + 
+                    " }";
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
