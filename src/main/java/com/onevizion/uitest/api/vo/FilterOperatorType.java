@@ -51,12 +51,8 @@ public enum FilterOperatorType {
         return valueApiV3;
     }
 
-    public static List<FilterOperatorType> getCalculatedOperators(boolean supportOuterOperations) {
-        if (supportOuterOperations) {
-            return Arrays.asList(EQUAL, EQUAL_AND_EMPTY_FOR_OTHER, NOT_EQUAL, NOT_EQUAL_AND_EMPTY_FOR_OTHER, NULL, NOT_NULL);
-        } else {
-            return Arrays.asList(EQUAL, NOT_EQUAL, NULL, NOT_NULL);
-        }
+    public static List<FilterOperatorType> getCalculatedOperators() {
+        return Arrays.asList(EQUAL, NOT_EQUAL, NULL, NOT_NULL);
     }
 
     public static List<FilterOperatorType> getCheckboxOperators(boolean supportOuterOperations) {

@@ -24,7 +24,7 @@ public class TbCalculatedField {
     private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
-    public void test(String columnId, String value, boolean supportOuterOperations, List<String> ... cellValsKeys) {
+    public void test(String columnId, String value) {
         Long columnIndex = js.getGridColIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
@@ -32,18 +32,13 @@ public class TbCalculatedField {
         Long rowsCnt = grid.getGridRowsCount(0L);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
-        List<FilterOperatorType> operators = FilterOperatorType.getCalculatedOperators(supportOuterOperations);
+        List<FilterOperatorType> operators = FilterOperatorType.getCalculatedOperators();
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
         userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
         userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
         userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
         userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null);
-
-        if (supportOuterOperations) {
-            userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null, cellValsKeys);
-            userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CALCULATED, columnIndex, null, cellVals, null, cellValsKeys);
-        }
     }
 
 }
