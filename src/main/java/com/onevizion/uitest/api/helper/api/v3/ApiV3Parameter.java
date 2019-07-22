@@ -26,7 +26,7 @@ public class ApiV3Parameter {
             return 0;
         } else if (parametersSections.size() == 1) {
             WebElement parametersSection = parametersSections.get(0);
-            List<WebElement> parameters = parametersSection.findElements(By.tagName("tr"));
+            List<WebElement> parameters = parametersSection.findElements(By.xpath("tr"));
             return parameters.size();
         } else {
             throw new SeleniumUnexpectedException("Found many sections for parameters");
@@ -37,13 +37,37 @@ public class ApiV3Parameter {
         WebElement ret = null;
         int count = 0;
 
-        List<WebElement> parameters = endpoint.findElement(By.className("operation-params")).findElements(By.tagName("tr"));
+        List<WebElement> parameters = endpoint.findElement(By.className("operation-params")).findElements(By.xpath("tr"));
         for (WebElement parameter : parameters) {
             element.moveToElement(parameter);
             String actualParam = parameter.findElement(By.className("code")).findElement(By.tagName("label")).getText();
             String actualDataType = parameter.findElement(By.className("model-signature")).getText();
 
             if (param.equals(actualParam) && dataType.equals(actualDataType)) {
+                count = count + 1;
+                ret = parameter;
+            }
+        }
+
+        if (count == 0) {
+            throw new SeleniumUnexpectedException("Parameter not found");
+        } else if (count > 1) {
+            throw new SeleniumUnexpectedException("Parameter found many times");
+        }
+
+        return ret;
+    }
+
+    public WebElement findParameter(WebElement endpoint, String param) {
+        WebElement ret = null;
+        int count = 0;
+
+        List<WebElement> parameters = endpoint.findElement(By.className("operation-params")).findElements(By.xpath("tr"));
+        for (WebElement parameter : parameters) {
+            element.moveToElement(parameter);
+            String actualParam = parameter.findElement(By.className("code")).findElement(By.tagName("label")).getText();
+
+            if (param.equals(actualParam)) {
                 count = count + 1;
                 ret = parameter;
             }
