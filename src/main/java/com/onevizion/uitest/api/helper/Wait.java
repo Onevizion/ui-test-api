@@ -51,20 +51,6 @@ public class Wait {
             .until(webdriver -> webdriver.findElement(elementLocator));
     }
 
-    public void waitIframeGridLoad(final Long gridId) {
-        waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + gridId));
-        waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId));
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId)).isDisplayed());
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> js.isGridLoaded(gridId).equals("1"));
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
-            .until(webdriver -> js.isGridDataLoaded(gridId));
-    }
-
     public void waitGridRowsCount(final Long gridId, final Long rowsCount) {
         LongSupplier actualValueSupplier = ()-> grid.getGridRowsCount(gridId);
 
