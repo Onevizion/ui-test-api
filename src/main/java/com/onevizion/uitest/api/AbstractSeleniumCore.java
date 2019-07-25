@@ -85,6 +85,7 @@ import com.onevizion.uitest.api.helper.entity.EntityConfigField;
 import com.onevizion.uitest.api.helper.entity.EntityCoord;
 import com.onevizion.uitest.api.helper.entity.EntityDynamicVtable;
 import com.onevizion.uitest.api.helper.entity.EntityDynamicVtableValue;
+import com.onevizion.uitest.api.helper.entity.EntityIntegration;
 import com.onevizion.uitest.api.helper.entity.EntityMenu;
 import com.onevizion.uitest.api.helper.entity.EntityMenuItem;
 import com.onevizion.uitest.api.helper.entity.EntityReportGroup;
@@ -345,6 +346,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected EntityConfigApp entityConfigApp;
+
+    @Resource
+    protected EntityIntegration entityIntegration;
     /* Entity Helpers End */
 
     @Resource

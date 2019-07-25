@@ -16,6 +16,8 @@ public class HtmlInputFile {
     private static final String INPUT_FILE_ID_ON_RUN_IMPORT = "impFile";
     private static final String PARENT_ID_ON_ADMIN_REPORT = "TemplateFile";
     private static final String INPUT_FILE_ID_ON_ADMIN_REPORT = "inputTemplateFile";
+    private static final String PARENT_ID_ON_ADMIN_INTEGRATION = "integrationSettingsFile";
+    private static final String INPUT_FILE_ID_ON_ADMIN_INTEGRATION = "inputintegrationSettingsFile";
     private static final String PARENT_ID_ON_BPD_ITEM = "FileUploader";
     private static final String INPUT_FILE_ID_ON_BPD_ITEM = "inputFileUploader";
     private static final String PARENT_ID_ON_ADMIN_CLIENT_FILE = "FileUploader";
@@ -68,6 +70,15 @@ public class HtmlInputFile {
         elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_ADMIN_REPORT);
         elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_ADMIN_REPORT);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_ADMIN_REPORT)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
+    }
+
+    public void uploadOnAdminIntegration(String value) {
+        elementWait.waitElementById(PARENT_ID_ON_ADMIN_INTEGRATION);
+        elementWait.waitElementById(INPUT_FILE_ID_ON_ADMIN_INTEGRATION);
+        htmlInputFileJs.showInputForFile(PARENT_ID_ON_ADMIN_INTEGRATION, INPUT_FILE_ID_ON_ADMIN_INTEGRATION);
+        elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_ADMIN_INTEGRATION);
+        elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_ADMIN_INTEGRATION);
+        seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_ADMIN_INTEGRATION)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
     }
 
     public void uploadOnBpdItem(String value) {
