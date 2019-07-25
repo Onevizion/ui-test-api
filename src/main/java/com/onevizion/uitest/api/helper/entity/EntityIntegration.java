@@ -98,6 +98,7 @@ public class EntityIntegration {
         seleniumSettings.getWebDriver().findElement(By.name(VERSION)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(VERSION)).sendKeys(integration.getVersion());
 
+        seleniumSettings.getWebDriver().findElement(By.name(COMMAND)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(COMMAND)).sendKeys(integration.getCommand());
 
         htmlInputFile.uploadOnAdminIntegration(integration.getSettingsFile());
@@ -109,6 +110,7 @@ public class EntityIntegration {
             checkbox.clickByName(READ_FROM_STDOUT);
         }
 
+        seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(integration.getDescription());
 
         seleniumSettings.getWebDriver().findElement(By.name(SCHEDULE)).sendKeys(integration.getSchedule());
