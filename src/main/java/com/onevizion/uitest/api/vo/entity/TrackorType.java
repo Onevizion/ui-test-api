@@ -17,6 +17,7 @@ public class TrackorType {
     private String template;
     private String user;
     private String efileContainer;
+    private String comments;
 
     private String autoKey;
     private String autoKeyStartAt;
@@ -34,7 +35,7 @@ public class TrackorType {
     private List<String> packages;
 
     public TrackorType(String name, String label, String labelItemId, String labelClass, String labelPrefix, String labelMyItems, String aliasField,
-            List<String> autoFilterFields, String limitWp, String clone, String template, String user, String efileContainer,
+            List<String> autoFilterFields, String limitWp, String clone, String template, String user, String efileContainer, String comments,
             String autoKey, String autoKeyStartAt, String owner1, String field1, String separator1, String owner2, String field2,
             String separator2, String staticText3, String separator3, String digits4, String uniqueAcross4, List<String> packages) {
         this.name = name;
@@ -50,6 +51,7 @@ public class TrackorType {
         this.template = template;
         this.user = user;
         this.efileContainer = efileContainer;
+        this.comments = comments;
 
         this.autoKey = autoKey;
         this.autoKeyStartAt = autoKeyStartAt;
@@ -117,6 +119,10 @@ public class TrackorType {
 
     public String getEfileContainer() {
         return efileContainer;
+    }
+
+    public String getComments() {
+        return comments;
     }
 
     public String getAutoKey() {

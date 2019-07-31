@@ -37,6 +37,7 @@ public class EntityTrackorType {
     private static final String TEMPLATE = "template";
     private static final String USER = "user";
     private static final String EFILE_CONTAINER = "efileContainer";
+    private static final String COMMENTS = "supportChats";
 
     @Resource
     private Window window;
@@ -98,6 +99,10 @@ public class EntityTrackorType {
                 || (trackorType.getEfileContainer().equals("NO") && checkbox.isCheckedByName(EFILE_CONTAINER))) {
             checkbox.clickByName(EFILE_CONTAINER);
         }
+        if ((trackorType.getComments().equals("YES") && !checkbox.isCheckedByName(COMMENTS))
+                || (trackorType.getComments().equals("NO") && checkbox.isCheckedByName(COMMENTS))) {
+            checkbox.clickByName(COMMENTS);
+        }
 
         element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");
@@ -142,6 +147,7 @@ public class EntityTrackorType {
         assertElement.assertCheckbox(TEMPLATE, trackorType.getTemplate());
         assertElement.assertCheckbox(USER, trackorType.getUser());
         assertElement.assertCheckbox(EFILE_CONTAINER, trackorType.getEfileContainer());
+        assertElement.assertCheckbox(COMMENTS, trackorType.getComments());
 
         tab.goToTab(2L); // Key Generation
         assertElement.assertCheckbox("autokey", trackorType.getAutoKey());
@@ -203,6 +209,7 @@ public class EntityTrackorType {
         gridVals.put(js.getColumnIndexByLabel(gridId, "\"Class\" Label"), trackorType.getLabelClass());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Is ePM User?"), trackorType.getUser());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Can be a Template"), trackorType.getTemplate());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Enable Comments"), trackorType.getComments());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
