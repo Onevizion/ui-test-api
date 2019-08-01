@@ -51,6 +51,7 @@ public class BrowserCodeCoverage {
         }
 
         SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
+        seleniumLogger.info(seleniumSettings.getRemoteAddress() + " " + 5555 + " " + sessionId);
         String[] hostAndPort = getHostNameAndPort(seleniumSettings.getRemoteAddress(), 5555, sessionId);
         seleniumLogger.info(hostAndPort[0]);
         seleniumLogger.info(hostAndPort[1]);
@@ -262,7 +263,7 @@ public class BrowserCodeCoverage {
         }
     }
 
-    public static String[] getHostNameAndPort(String hostName, int port, SessionId session) {
+    public String[] getHostNameAndPort(String hostName, int port, SessionId session) {
         String[] hostAndPort = new String[2];
         String errorMsg = "Failed to acquire remote webdriver node and port info. Root cause: ";
 
@@ -285,7 +286,7 @@ public class BrowserCodeCoverage {
         return hostAndPort;
     }
 
-    private static JSONObject extractObject(HttpResponse resp) throws IOException, JSONException {
+    private JSONObject extractObject(HttpResponse resp) throws IOException, JSONException {
         BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
         StringBuffer s = new StringBuffer();
         String line;
@@ -293,6 +294,7 @@ public class BrowserCodeCoverage {
             s.append(line);
         }
         rd.close();
+        seleniumLogger.info("getHostNameAndPort " + s.toString());
         JSONObject objToReturn = new JSONObject(s.toString());
         return objToReturn;
     }
