@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
-import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHttpEntityEnclosingRequest;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -271,14 +271,11 @@ public class BrowserCodeCoverage {
 
     public String[] getHostNameAndPort(String hostName, int port, SessionId session) {
         String[] hostAndPort = new String[2];
-        String errorMsg = "Failed to acquire remote webdriver node and port info. Root cause: ";
-
         try {
-            HttpHost host = new HttpHost(hostName, port);
-            DefaultHttpClient client = new DefaultHttpClient();
-            URL sessionURL = new URL("http://" + hostName + ":" + port + "/grid/api/testsession?session=" + session);
-            BasicHttpEntityEnclosingRequest r = new BasicHttpEntityEnclosingRequest("POST", sessionURL.toExternalForm());
-            HttpResponse response = client.execute(host, r);
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet request = new HttpGet("http://" + hostName + ":" + port + "/grid/api/testsession?session=" + session);
+            request.addHeader("accept", "application/json");
+            HttpResponse response = httpClient.execute(request);
             JSONObject object = extractObject(response);
             URL myURL = new URL(object.getString("proxyId"));
             if ((myURL.getHost() != null) && (myURL.getPort() != -1)) {
@@ -287,7 +284,7 @@ public class BrowserCodeCoverage {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(errorMsg, e);
+            throw new RuntimeException(e);
         }
         return hostAndPort;
     }
