@@ -38,6 +38,10 @@ public class BrowserChrome {
             options.addArguments("--proxy-bypass-list=*");
         }
 
+        if (seleniumSettings.getCodeCoverage()) {
+            options.addArguments("--remote-debugging-port=9222");
+        }
+
         return options;
     }
 

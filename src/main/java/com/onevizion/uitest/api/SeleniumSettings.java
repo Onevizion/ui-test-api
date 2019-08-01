@@ -44,6 +44,9 @@ public class SeleniumSettings {
     private Boolean headlessMode;
 
     @Resource
+    private Boolean codeCoverage;
+
+    @Resource
     private String screenshotsPath;
 
     @Resource
@@ -176,6 +179,10 @@ public class SeleniumSettings {
 
     public Boolean getHeadlessMode() {
         return headlessMode;
+    }
+
+    public Boolean getCodeCoverage() {
+        return codeCoverage;
     }
 
     public String getScreenshotsPath() {
