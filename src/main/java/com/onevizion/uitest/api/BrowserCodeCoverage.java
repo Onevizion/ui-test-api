@@ -52,12 +52,6 @@ public class BrowserCodeCoverage {
 
         SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
         seleniumLogger.info(seleniumSettings.getRemoteAddress() + " " + 5555 + " " + sessionId);
-        try {
-            Thread.sleep(10000L);
-        } catch (InterruptedException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
         String[] hostAndPort = getHostNameAndPort(seleniumSettings.getRemoteAddress(), 5555, sessionId);
         seleniumLogger.info(hostAndPort[0]);
         seleniumLogger.info(hostAndPort[1]);
@@ -66,13 +60,13 @@ public class BrowserCodeCoverage {
 
         try {
             sendWSMessage(wsUrl, "{\"id\":1, \"method\":\"Profiler.enable\"}");
-        } catch (IOException | WebSocketException | InterruptedException e) {
+        } catch (Exception e) {
             seleniumLogger.error("exception in coverageStart " + e.getMessage());
         }
 
         try {
             sendWSMessage(wsUrl, "{\"id\":2, \"method\":\"Profiler.startPreciseCoverage\", \"params\":{\"callCount\":true, \"detailed\":true}}");
-        } catch (IOException | WebSocketException | InterruptedException e) {
+        } catch (Exception e) {
             seleniumLogger.error("exception in coverageStart " + e.getMessage());
         }
     }
@@ -84,20 +78,20 @@ public class BrowserCodeCoverage {
 
         try {
             sendWSMessage(wsUrl, "{\"id\":3, \"method\":\"Profiler.takePreciseCoverage\"}");
-        } catch (IOException | WebSocketException | InterruptedException e) {
+        } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
 
         try {
             sendWSMessage(wsUrl, "{\"id\":4, \"method\":\"Profiler.stopPreciseCoverage\"}");
-        } catch (IOException | WebSocketException | InterruptedException e) {
+        } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
 
         try {
             //Files.deleteIfExists(Paths.get(seleniumSettings.getTestName() + ".json"));
             Files.write(Paths.get("/opt/tomcat/guitest-scripts/code_coverage/" + seleniumSettings.getTestName() + ".json"), coverage.getBytes());
-        } catch (IOException e) {
+        } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
     }
@@ -118,7 +112,7 @@ public class BrowserCodeCoverage {
                     break;
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             seleniumLogger.error("exception in getWebSocketDebuggerUrl " + e.getMessage());
         }
 
