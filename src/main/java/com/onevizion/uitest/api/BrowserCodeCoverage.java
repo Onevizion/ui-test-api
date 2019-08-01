@@ -3,7 +3,6 @@ package com.onevizion.uitest.api;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -94,33 +93,6 @@ public class BrowserCodeCoverage {
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
-    }
-
-    private String getWebSocketDebuggerUrl(String host) {
-        String webSocketDebuggerUrl = "";
-
-        try {
-            URL url = new URL("http://" + host + ":9222/json");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String json = org.apache.commons.io.IOUtils.toString(reader);
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (jsonObject.getString("type").equals("page")) {
-                    webSocketDebuggerUrl = jsonObject.getString("webSocketDebuggerUrl");
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            seleniumLogger.error("exception in getWebSocketDebuggerUrl " + e.getMessage());
-        }
-
-        if (webSocketDebuggerUrl.equals("")) {
-            throw new SeleniumUnexpectedException("webSocketDebuggerUrl not found");
-        }
-
-        return webSocketDebuggerUrl;
     }
 
     private void sendWSMessage(String url, String message) throws IOException, WebSocketException, InterruptedException {
@@ -263,6 +235,32 @@ public class BrowserCodeCoverage {
         }
     }
 
+    private String getWebSocketDebuggerUrl(String host) {
+        String webSocketDebuggerUrl = "";
+        try {
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet request = new HttpGet("http://" + host + ":9222/json");
+            request.addHeader("accept", "application/json");
+            HttpResponse response = httpClient.execute(request);
+            JSONArray jsonArray = new JSONArray(extractObject(response));
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if (jsonObject.getString("type").equals("page")) {
+                    webSocketDebuggerUrl = jsonObject.getString("webSocketDebuggerUrl");
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            seleniumLogger.error("exception in getWebSocketDebuggerUrl " + e.getMessage());
+        }
+
+        if (webSocketDebuggerUrl.equals("")) {
+            throw new SeleniumUnexpectedException("webSocketDebuggerUrl not found");
+        }
+
+        return webSocketDebuggerUrl;
+    }
+
     public String[] getHostNameAndPort(String hostName, int port, SessionId session) {
         String[] hostAndPort = new String[2];
         try {
@@ -270,7 +268,7 @@ public class BrowserCodeCoverage {
             HttpGet request = new HttpGet("http://" + hostName + ":" + port + "/grid/api/testsession?session=" + session);
             request.addHeader("accept", "application/json");
             HttpResponse response = httpClient.execute(request);
-            JSONObject object = extractObject(response);
+            JSONObject object = new JSONObject(extractObject(response));
             URL myURL = new URL(object.getString("proxyId"));
             if ((myURL.getHost() != null) && (myURL.getPort() != -1)) {
                 hostAndPort[0] = myURL.getHost();
@@ -283,7 +281,7 @@ public class BrowserCodeCoverage {
         return hostAndPort;
     }
 
-    private JSONObject extractObject(HttpResponse resp) throws IOException, JSONException {
+    private String extractObject(HttpResponse resp) throws IOException, JSONException {
         BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
         StringBuffer s = new StringBuffer();
         String line;
@@ -292,8 +290,7 @@ public class BrowserCodeCoverage {
         }
         rd.close();
         seleniumLogger.info("getHostNameAndPort " + s.toString());
-        JSONObject objToReturn = new JSONObject(s.toString());
-        return objToReturn;
+        return s.toString();
     }
 
 }
