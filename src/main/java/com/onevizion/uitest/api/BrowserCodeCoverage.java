@@ -29,7 +29,7 @@ import com.neovisionaries.ws.client.WebSocketFactory;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
-public class CodeCoverage {
+public class BrowserCodeCoverage {
 
     @Resource
     private SeleniumSettings seleniumSettings;

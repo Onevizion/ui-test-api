@@ -352,7 +352,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     /* Entity Helpers End */
 
     @Resource
-    private CodeCoverage codeCoverage;
+    private BrowserCodeCoverage browserCodeCoverage;
 
     @Resource
     private CreateTest createTest;
@@ -517,7 +517,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.getWebDriver().manage().deleteAllCookies();
 
             seleniumLogger.info("browser open");
-            codeCoverage.start();
+            browserCodeCoverage.start();
             document.open2(seleniumSettings.getServerUrl());
 
             String newTestUser = context.getCurrentXmlTest().getParameter("test.selenium.user");
@@ -549,7 +549,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected void seleniumCloseBrowser(ITestContext context) {
         try {
             if (seleniumSettings.getWebDriver() != null) {
-                codeCoverage.finish();
+                browserCodeCoverage.finish();
                 seleniumHelper.closeAfterError();
                 seleniumSettings.getWebDriver().quit();
                 seleniumLogger.info("browser close");
