@@ -239,7 +239,7 @@ public class BrowserCodeCoverage {
         String webSocketDebuggerUrl = "";
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpGet request = new HttpGet("http://" + host + ":9222/json");
+            HttpGet request = new HttpGet("http://" + host + ":9223/json");
             request.addHeader("accept", "application/json");
             HttpResponse response = httpClient.execute(request);
             JSONArray jsonArray = new JSONArray(extractObject(response));
