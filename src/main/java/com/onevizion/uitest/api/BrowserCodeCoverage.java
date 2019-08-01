@@ -52,6 +52,12 @@ public class BrowserCodeCoverage {
 
         SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
         seleniumLogger.info(seleniumSettings.getRemoteAddress() + " " + 5555 + " " + sessionId);
+        try {
+            Thread.sleep(10000L);
+        } catch (InterruptedException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         String[] hostAndPort = getHostNameAndPort(seleniumSettings.getRemoteAddress(), 5555, sessionId);
         seleniumLogger.info(hostAndPort[0]);
         seleniumLogger.info(hostAndPort[1]);
