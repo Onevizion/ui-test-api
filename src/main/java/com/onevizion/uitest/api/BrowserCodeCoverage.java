@@ -47,8 +47,6 @@ public class BrowserCodeCoverage {
         }
     };
 
-    private ThreadLocal<String> coverage = new ThreadLocal<>();
-
     public void start() {
         if (!seleniumSettings.getBrowser().equals("chrome") || !seleniumSettings.getCodeCoverage()) {
             return;
@@ -91,17 +89,13 @@ public class BrowserCodeCoverage {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
 
-        try {
-            //Files.deleteIfExists(Paths.get(seleniumSettings.getTestName() + ".json"));
-            Files.write(Paths.get("/opt/tomcat/guitest-scripts/code_coverage/" + seleniumSettings.getTestName() + ".json"), coverage.get().getBytes());
-        } catch (Exception e) {
-            seleniumLogger.error("exception in coverageFinish " + e.getMessage());
-        }
+        ws.get().disconnect();
     }
 
     private void sendWSMessage(String url, String message) throws IOException, WebSocketException, InterruptedException {
         //seleniumLogger.info("sendWSMessage 1");
         Object object1 = waitCoordinator.get();
+        String testName = seleniumSettings.getTestName();
         if (ws.get() == null) {
             //seleniumLogger.info("sendWSMessage 5");
             WebSocket webSocket = new WebSocketFactory()
@@ -130,7 +124,13 @@ public class BrowserCodeCoverage {
                                     //Files.deleteIfExists(Paths.get("name_small.txt"));
                                     //Files.write(Paths.get("name_small.txt"), jsonObject.toString().getBytes());
                                     //seleniumLogger.info("Files.write 6");
-                                    coverage.set(jsonObject.toString());
+                                    //coverage.set(jsonObject.toString());
+                                    try {
+                                        //Files.deleteIfExists(Paths.get(seleniumSettings.getTestName() + ".json"));
+                                        Files.write(Paths.get("/opt/tomcat/guitest-scripts/code_coverage/" + testName + ".json"), jsonObject.toString().getBytes());
+                                    } catch (Exception e) {
+                                        seleniumLogger.error("exception in writeCoverageFile " + e.getMessage());
+                                    }
                                 //} catch (IOException e) {
                                 //    seleniumLogger.error("exception in Files.write " + e.getMessage());
                                 //}
