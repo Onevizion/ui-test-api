@@ -36,13 +36,18 @@ public class BrowserCodeCoverage {
     @Resource
     private SeleniumLogger seleniumLogger;
 
-    private String wsUrl;
+    private ThreadLocal<String> wsUrl = new ThreadLocal<>();
 
-    private WebSocket ws;
+    private ThreadLocal<WebSocket> ws = new ThreadLocal<>();
 
-    private Object waitCoordinator = new Object();
+    private ThreadLocal<Object> waitCoordinator = new ThreadLocal<Object>() {
+        @Override
+        public Object initialValue() {
+            return new Object();
+        }
+    };
 
-    private String coverage;
+    private ThreadLocal<String> coverage = new ThreadLocal<>();
 
     public void start() {
         if (!seleniumSettings.getBrowser().equals("chrome") || !seleniumSettings.getCodeCoverage()) {
@@ -50,21 +55,20 @@ public class BrowserCodeCoverage {
         }
 
         SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
-        seleniumLogger.info(seleniumSettings.getRemoteAddress() + " " + 5555 + " " + sessionId);
-        String[] hostAndPort = getHostNameAndPort(seleniumSettings.getRemoteAddress(), 5555, sessionId);
-        seleniumLogger.info(hostAndPort[0]);
-        seleniumLogger.info(hostAndPort[1]);
-        wsUrl = getWebSocketDebuggerUrl(hostAndPort[0]);
-        seleniumLogger.info(wsUrl);
+        seleniumLogger.info(seleniumSettings.getRemoteAddress() + " " + sessionId);
+        String host = getHost(seleniumSettings.getRemoteAddress(), sessionId);
+        seleniumLogger.info(host);
+        wsUrl.set(getWebSocketDebuggerUrl(host));
+        seleniumLogger.info(wsUrl.get());
 
         try {
-            sendWSMessage(wsUrl, "{\"id\":1, \"method\":\"Profiler.enable\"}");
+            sendWSMessage(wsUrl.get(), "{\"id\":1, \"method\":\"Profiler.enable\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageStart " + e.getMessage());
         }
 
         try {
-            sendWSMessage(wsUrl, "{\"id\":2, \"method\":\"Profiler.startPreciseCoverage\", \"params\":{\"callCount\":true, \"detailed\":true}}");
+            sendWSMessage(wsUrl.get(), "{\"id\":2, \"method\":\"Profiler.startPreciseCoverage\", \"params\":{\"callCount\":true, \"detailed\":true}}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageStart " + e.getMessage());
         }
@@ -76,28 +80,28 @@ public class BrowserCodeCoverage {
         }
 
         try {
-            sendWSMessage(wsUrl, "{\"id\":3, \"method\":\"Profiler.takePreciseCoverage\"}");
+            sendWSMessage(wsUrl.get(), "{\"id\":3, \"method\":\"Profiler.takePreciseCoverage\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
 
         try {
-            sendWSMessage(wsUrl, "{\"id\":4, \"method\":\"Profiler.stopPreciseCoverage\"}");
+            sendWSMessage(wsUrl.get(), "{\"id\":4, \"method\":\"Profiler.stopPreciseCoverage\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
 
         try {
             //Files.deleteIfExists(Paths.get(seleniumSettings.getTestName() + ".json"));
-            Files.write(Paths.get("/opt/tomcat/guitest-scripts/code_coverage/" + seleniumSettings.getTestName() + ".json"), coverage.getBytes());
+            Files.write(Paths.get("/opt/tomcat/guitest-scripts/code_coverage/" + seleniumSettings.getTestName() + ".json"), coverage.get().getBytes());
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
     }
 
     private void sendWSMessage(String url, String message) throws IOException, WebSocketException, InterruptedException {
-        if (ws==null) {
-            ws = new WebSocketFactory()
+        if (ws.get() == null) {
+            WebSocket webSocket = new WebSocketFactory()
                     .createSocket(url)
                     .addListener(new WebSocketAdapter() {
                         @Override
@@ -123,23 +127,24 @@ public class BrowserCodeCoverage {
                                     //Files.deleteIfExists(Paths.get("name_small.txt"));
                                     //Files.write(Paths.get("name_small.txt"), jsonObject.toString().getBytes());
                                     //seleniumLogger.info("Files.write 6");
-                                    coverage = jsonObject.toString();
+                                    coverage.set(jsonObject.toString());
                                 //} catch (IOException e) {
                                 //    seleniumLogger.error("exception in Files.write " + e.getMessage());
                                 //}
                             } else {
                                 //seleniumLogger.info("gkovalev " + message);
                             }
-                            synchronized (waitCoordinator) {
-                                waitCoordinator.notifyAll();
+                            synchronized (waitCoordinator.get()) {
+                                waitCoordinator.get().notifyAll();
                             }
                         }
                     })
                     .connect();
+            ws.set(webSocket);
         }
-        ws.sendText(message);
-        synchronized (waitCoordinator) {
-            waitCoordinator.wait();
+        ws.get().sendText(message);
+        synchronized (waitCoordinator.get()) {
+            waitCoordinator.get().wait();
         }
         //seleniumLogger.info("gkovalev GOOD");
     }
@@ -261,24 +266,23 @@ public class BrowserCodeCoverage {
         return webSocketDebuggerUrl;
     }
 
-    public String[] getHostNameAndPort(String hostName, int port, SessionId session) {
-        String[] hostAndPort = new String[2];
+    public String getHost(String hostName, SessionId session) {
+        String host = null;
         try {
             HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpGet request = new HttpGet("http://" + hostName + ":" + port + "/grid/api/testsession?session=" + session);
+            HttpGet request = new HttpGet("http://" + hostName + ":5555/grid/api/testsession?session=" + session);
             request.addHeader("accept", "application/json");
             HttpResponse response = httpClient.execute(request);
             JSONObject object = new JSONObject(extractObject(response));
             URL myURL = new URL(object.getString("proxyId"));
             if ((myURL.getHost() != null) && (myURL.getPort() != -1)) {
-                hostAndPort[0] = myURL.getHost();
-                hostAndPort[1] = Integer.toString(myURL.getPort());
+                host = myURL.getHost();
             }
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-        return hostAndPort;
+        return host;
     }
 
     private String extractObject(HttpResponse resp) throws IOException, JSONException {
