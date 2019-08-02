@@ -90,6 +90,7 @@ public class BrowserCodeCoverage {
         }
 
         ws.get().disconnect();
+        ws.set(null);
     }
 
     private void sendWSMessage(String url, String message) throws IOException, WebSocketException, InterruptedException {
