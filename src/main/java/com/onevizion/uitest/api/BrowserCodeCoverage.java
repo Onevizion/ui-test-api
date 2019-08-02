@@ -100,7 +100,10 @@ public class BrowserCodeCoverage {
     }
 
     private void sendWSMessage(String url, String message) throws IOException, WebSocketException, InterruptedException {
+        //seleniumLogger.info("sendWSMessage 1");
+        Object object1 = waitCoordinator.get();
         if (ws.get() == null) {
+            //seleniumLogger.info("sendWSMessage 5");
             WebSocket webSocket = new WebSocketFactory()
                     .createSocket(url)
                     .addListener(new WebSocketAdapter() {
@@ -134,18 +137,29 @@ public class BrowserCodeCoverage {
                             } else {
                                 //seleniumLogger.info("gkovalev " + message);
                             }
-                            synchronized (waitCoordinator.get()) {
-                                waitCoordinator.get().notifyAll();
+                            //seleniumLogger.info("sendWSMessage 6");
+                            //Object object1 = waitCoordinator.get();
+                            synchronized (object1) {
+                                //seleniumLogger.info("sendWSMessage 10");
+                                object1.notifyAll();
+                                //seleniumLogger.info("sendWSMessage 11");
                             }
+                            //seleniumLogger.info("sendWSMessage 7");
                         }
                     })
                     .connect();
             ws.set(webSocket);
         }
+        //seleniumLogger.info("sendWSMessage 2");
         ws.get().sendText(message);
-        synchronized (waitCoordinator.get()) {
-            waitCoordinator.get().wait();
+        //seleniumLogger.info("sendWSMessage 3");
+        //Object object2 = waitCoordinator.get();
+        synchronized (object1) {
+            //seleniumLogger.info("sendWSMessage 20");
+            object1.wait();
+            //seleniumLogger.info("sendWSMessage 21");
         }
+        //seleniumLogger.info("sendWSMessage 4");
         //seleniumLogger.info("gkovalev GOOD");
     }
 
