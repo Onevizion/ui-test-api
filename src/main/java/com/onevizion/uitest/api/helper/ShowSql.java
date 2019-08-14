@@ -43,27 +43,27 @@ public class ShowSql {
         Assert.assertEquals(sql.contains("select"), true);
 
         String runtimeDbStr = seleniumSettings.getWebDriver().findElement(By.id(RUNTIME_DB)).getText();
-        double runtimeDb = Double.valueOf(runtimeDbStr);
+        double runtimeDb = Double.parseDouble(runtimeDbStr);
         Assert.assertEquals(Double.compare(runtimeDb, 1000) < 0, true);
 
         String runtimeServerStr = seleniumSettings.getWebDriver().findElement(By.id(RUNTIME_SERVER)).getText();
-        double runtimeServer = Double.valueOf(runtimeServerStr);
+        double runtimeServer = Double.parseDouble(runtimeServerStr);
         Assert.assertEquals(Double.compare(runtimeServer, 1000) < 0, true);
 
         String runtimeResponseStr = seleniumSettings.getWebDriver().findElement(By.id(RUNTIME_RESPONSE)).getText();
-        double runtimeResponse = Double.valueOf(runtimeResponseStr);
+        double runtimeResponse = Double.parseDouble(runtimeResponseStr);
         Assert.assertEquals(Double.compare(runtimeResponse, 1000) < 0, true);
 
         String runtimeBrowserStr = seleniumSettings.getWebDriver().findElement(By.id(RUNTIME_BROWSER)).getText();
-        double runtimeBrowser = Double.valueOf(runtimeBrowserStr);
+        double runtimeBrowser = Double.parseDouble(runtimeBrowserStr);
         Assert.assertEquals(Double.compare(runtimeBrowser, 1000) < 0, true);
 
         String runtimeUserStr = seleniumSettings.getWebDriver().findElement(By.id(RUNTIME_USER)).getText();
-        double runtimeUser = Double.valueOf(runtimeUserStr);
+        double runtimeUser = Double.parseDouble(runtimeUserStr);
         Assert.assertEquals(Double.compare(runtimeUser, 1000) < 0, true);
 
         String responseSizeStr = seleniumSettings.getWebDriver().findElement(By.id(RESPONSE_SIZE)).getText();
-        double responseSize = Double.valueOf(responseSizeStr);
+        double responseSize = Double.parseDouble(responseSizeStr);
         Assert.assertEquals(Double.compare(responseSize, 1000) < 0, true);
     }
 
