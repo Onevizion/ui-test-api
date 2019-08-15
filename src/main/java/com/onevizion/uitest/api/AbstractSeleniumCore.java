@@ -52,6 +52,7 @@ import com.onevizion.uitest.api.helper.GridRowButton;
 import com.onevizion.uitest.api.helper.Help;
 import com.onevizion.uitest.api.helper.HtmlSelect;
 import com.onevizion.uitest.api.helper.Js;
+import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.Login;
 import com.onevizion.uitest.api.helper.Logoff;
 import com.onevizion.uitest.api.helper.Nav;
@@ -138,6 +139,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected DualListbox dualListbox;
+
+    @Resource
+    protected Listbox listbox;
 
     @Resource
     protected Filter filter;
