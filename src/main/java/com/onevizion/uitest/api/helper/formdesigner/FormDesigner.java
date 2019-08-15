@@ -251,19 +251,6 @@ public class FormDesigner {
         Assert.assertEquals(elements.stream().filter(p -> p.equals(text)).count(), 1L, "Element with text [" + text + "] not found in list");
     }
 
-    public List<String> getElementsInRightList() {
-        List<String> elements = new ArrayList<>();
-        List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("rightListBox")).findElement(By.id("listBoxContent")).findElements(By.className("record"));
-        for (WebElement field : fields) {
-            elements.add(field.findElement(By.className("labelField")).getAttribute("innerText"));
-        }
-        return elements;
-    }
-
-    public void checkElementInRightList(List<String> elements, String text) {
-        Assert.assertEquals(elements.stream().filter(p -> p.equals(text)).count(), 1L, "Element with text [" + text + "] not found in right list");
-    }
-
     public void checkElementsInList(List<String> elements, String drillDownPrefix) {
         WebElement listBox = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent"));
         Assert.assertEquals(listBox.findElements(By.id(drillDownPrefix + elements.get(0))).size(), 1, "Element with id [" + drillDownPrefix + elements.get(0) + "] not found"); //CHECKBOX
@@ -309,11 +296,6 @@ public class FormDesigner {
 
     public void checkElementsCountInList(int size) {
         List<WebElement> listBoxfields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("record"));
-        Assert.assertEquals(listBoxfields.size(), size);
-    }
-
-    public void checkElementsCountInRightList(int size) {
-        List<WebElement> listBoxfields = seleniumSettings.getWebDriver().findElement(By.id("rightListBox")).findElement(By.id("listBoxContent")).findElements(By.className("record"));
         Assert.assertEquals(listBoxfields.size(), size);
     }
 
