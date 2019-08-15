@@ -188,29 +188,6 @@ public class DualListbox {
         }
     }
 
-    public void checkValueByTextIsPresentInRightNew(String text) {
-        int attemptsCnt = 0; //protection from the endless cycle
-        int i = 0;
-        do {
-            try{
-                List<WebElement> leftColumns = view.getRightColumns();
-                for (WebElement leftColumn : leftColumns) {
-                    if (text.equals(htmlSelect.getOptionTextNew(leftColumn))) {
-                        i = i + 1;
-                        break;
-                    }
-                }
-            } catch (StaleElementReferenceException e) {
-                i = 0;
-            }
-            attemptsCnt = attemptsCnt + 1;
-        } while (i < 1 && attemptsCnt <= 10);
-
-        if (i < 1 && attemptsCnt > 10) {
-            throw new SeleniumUnexpectedException("Value not found in duallist box");
-        }
-    }
-
     private void addValueByValue(String btnId, String value) {
         checkValueByValueIsPresent(value);
 

@@ -11,7 +11,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
-import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -21,12 +20,14 @@ import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.HtmlSelect;
 import com.onevizion.uitest.api.helper.Js;
+import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.PsSelector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.view.View;
+import com.onevizion.uitest.api.vo.ListboxElement;
 import com.onevizion.uitest.api.vo.entity.ConfigApp;
 
 @Component
@@ -65,6 +66,9 @@ public class EntityConfigApp {
 
     @Resource
     private DualListbox dualListbox;
+
+    @Resource
+    private Listbox listbox;
 
     @Resource
     private AssertElement assertElement;
@@ -238,9 +242,10 @@ public class EntityConfigApp {
         assertElement.assertRadioPsSelector(ICON, ICON_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx(), configApp.getIcon(), 1L, true);
 
         tab.goToTab(2L); //Tabs
-        Assert.assertEquals(view.getRightColumns().size(), configApp.getTabs().size(), "Selected have wrong cnt");
-        for (String tab : configApp.getTabs()) {
-            dualListbox.checkValueByTextIsPresentInRightNew(tab);
+        List<ListboxElement> rightTabs = listbox.getElements("rightListBox");
+        listbox.checkElementsCount(rightTabs, configApp.getTabs().size());
+        for (int i = 0; i < configApp.getTabs().size(); i++) {
+            listbox.checkElementByLabel(rightTabs, i + 1, configApp.getTabs().get(i));
         }
 
         tab.goToTab(3L); //Role Privs

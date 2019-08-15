@@ -2,6 +2,7 @@ package com.onevizion.uitest.api.helper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import javax.annotation.Resource;
@@ -23,7 +24,10 @@ public class Listbox {
     public List<ListboxElement> getElements(String listboxId) {
         List<ListboxElement> elements = new ArrayList<>();
 
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         List<WebElement> webElements = seleniumSettings.getWebDriver().findElement(By.id(listboxId)).findElements(By.className("record"));
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         for (WebElement webElement : webElements) {
             ListboxElement listboxElement = new ListboxElement();
             listboxElement.setId(webElement.getAttribute("id"));
