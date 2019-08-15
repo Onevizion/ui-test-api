@@ -39,21 +39,21 @@ public class Listbox {
     }
 
     public void checkElementByLabel(List<ListboxElement> elements, String label) {
-        Assert.assertEquals(IntStream.range(0, elements.size() - 1).filter(p -> elements.get(p).getLabel().equals(label)).count(), 1L, "Element with label [" + label + "] not found in Listbox");
+        Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getLabel().equals(label)).count(), 1L, "Element with label [" + label + "] not found in Listbox");
     }
 
     public void checkElementByLabel(List<ListboxElement> elements, int position, String label) {
-        Assert.assertEquals(IntStream.range(0, elements.size() - 1).filter(p -> elements.get(p).getLabel().equals(label)).count(), 1L, "Element with label [" + label + "] not found in Listbox");
-        Assert.assertEquals(IntStream.range(0, elements.size() - 1).filter(p -> elements.get(p).getLabel().equals(label) && p == position - 1).count(), 1L, "Element with label [" + label + "] not found in position [" + position + "] in Listbox");
+        Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getLabel().equals(label)).count(), 1L, "Element with label [" + label + "] not found in Listbox");
+        Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getLabel().equals(label) && p == position - 1).count(), 1L, "Element with label [" + label + "] not found in position [" + position + "] in Listbox");
     }
 
     public void checkElementById(List<ListboxElement> elements, String id) {
-        Assert.assertEquals(IntStream.range(0, elements.size() - 1).filter(p -> elements.get(p).getId().equals(id)).count(), 1L, "Element with id [" + id + "] not found in Listbox");
+        Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getId().equals(id)).count(), 1L, "Element with id [" + id + "] not found in Listbox");
     }
 
     public void checkElementById(List<ListboxElement> elements, int position, String id) {
-        Assert.assertEquals(IntStream.range(0, elements.size() - 1).filter(p -> elements.get(p).getId().equals(id)).count(), 1L, "Element with id [" + id + "] not found in Listbox");
-        Assert.assertEquals(IntStream.range(0, elements.size() - 1).filter(p -> elements.get(p).getId().equals(id) && p == position - 1).count(), 1L, "Element with id [" + id + "] not found in position [" + position + "] in Listbox");
+        Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getId().equals(id)).count(), 1L, "Element with id [" + id + "] not found in Listbox");
+        Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getId().equals(id) && p == position - 1).count(), 1L, "Element with id [" + id + "] not found in position [" + position + "] in Listbox");
     }
 
 }
