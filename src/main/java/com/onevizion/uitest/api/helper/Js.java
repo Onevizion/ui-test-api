@@ -493,17 +493,6 @@ public class Js {
                 + "return j;"));
     }
 
-    public Object getElementsValuesFromDualListBox(String selectId) {
-        return execJs2("var array = [];"
-                + "var j = 0;"
-                + "var elements = document.getElementById('" + selectId + "').getElementsByClassName('listBoxContent')[0].getElementsByClassName('record');"
-                + "for (var i = 0; i < elements.length; i++) {"
-                + "    array[j] = elements[i].getAttribute('id');"
-                + "    j++;"
-                + "}"
-                + "return array;");
-    }
-
     public Object getChangedFieldsOnForm() {
         return execJs2("return PsUtils.getChangedCfs(elemsArr);");
     }

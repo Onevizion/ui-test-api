@@ -9,7 +9,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
-import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
@@ -275,36 +274,6 @@ public class DualListbox {
             addValueByValue(btnId, columnNames.get(20)); //ROLLUP
         }
         addValueByValue(btnId, columnNames.get(21)); //MULTI_TRACKOR_SELECTOR
-    }
-
-    public void checkValues(String selectId, List<String> columnNames) {
-        @SuppressWarnings("unchecked")
-        List<String> elementsValues = (List<String>) js.getElementsValuesFromDualListBox(selectId);
-
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(0)), true, "Select have wrong cnt"); //CHECKBOX
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(1)), true, "Select have wrong cnt"); //DATE
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(2)), true, "Select have wrong cnt"); //DB_DROP_DOWN
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(3)), true, "Select have wrong cnt"); //DB_SELECTOR
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(4)), true, "Select have wrong cnt"); //DROP_DOWN
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(5)), true, "Select have wrong cnt"); //ELECTRONIC_FILE
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(6)), true, "Select have wrong cnt"); //HYPERLINK
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(7)), true, "Select have wrong cnt"); //LATITUDE
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(8)), true, "Select have wrong cnt"); //LONGITUDE
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(9)), true, "Select have wrong cnt"); //MEMO
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(10)), true, "Select have wrong cnt"); //NUMBER
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(11)), true, "Select have wrong cnt"); //SELECTOR
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(12)), true, "Select have wrong cnt"); //TEXT
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(13)), true, "Select have wrong cnt"); //TRACKOR_SELECTOR
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(14)), true, "Select have wrong cnt"); //WIKI
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(15)), true, "Select have wrong cnt"); //MULTI_SELECTOR
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(16)), true, "Select have wrong cnt"); //DATE_TIME
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(17)), true, "Select have wrong cnt"); //TIME
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(18)), true, "Select have wrong cnt"); //TRACKOR_DROPDOWN
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(19)), true, "Select have wrong cnt"); //CALCULATED
-        if (columnNames.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
-            Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(20)), true, "Select have wrong cnt"); //ROLLUP
-        }
-        Assert.assertEquals(htmlSelect.isSelectOptionPresentByValue(elementsValues, columnNames.get(21)), true, "Select have wrong cnt"); //MULTI_TRACKOR_SELECTOR
     }
 
     private void deselectSelectOptions(final Select select) {
