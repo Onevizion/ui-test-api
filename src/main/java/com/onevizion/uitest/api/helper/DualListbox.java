@@ -33,24 +33,6 @@ public class DualListbox {
     @Resource
     private View view;
 
-    /*new void to support new duallist box*/
-    public int getElementsCount(WebElement select) {
-        return select.findElements(By.tagName("div")).size();
-    }
-
-    /*new void to support new duallist box*/
-    public void removeValueByText(WebElement select, String btnId, String text) {
-        //deselectSelectOptions(select);
-        for (WebElement option :select.findElements(By.tagName("div"))) {
-            if (text.equals(htmlSelect.getOptionText(option, true))) {
-                option.click();
-                break;
-            }
-        }
-        //select.selectByVisibleText(text);
-        seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
-    }
-
     public void removeValueByTextNew(String btnId, String text) {
         Long position = js.getNewDropDownElementPositionNew("rightListBox", "record", text);
         js.scrollNewDropDownTop("rightListBox", "scrollContainer", position * 28L);
@@ -63,7 +45,7 @@ public class DualListbox {
         seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
     }
 
-    public void removeValueByValue(String btnId, String value) {
+    private void removeValueByValue(String btnId, String value) {
         
 
         List<WebElement> rightColumns = view.getRightColumns();
@@ -162,7 +144,7 @@ public class DualListbox {
     }
 
     /*new void to support new duallist box*/
-    public void checkValueByTextIsPresent(WebElement select, String text) {
+    private void checkValueByTextIsPresent(WebElement select, String text) {
         int attemptsCnt = 0; //protection from the endless cycle
         int i = 0;
         do {
@@ -184,7 +166,7 @@ public class DualListbox {
         }
     }
 
-    public void checkValueByTextIsPresentNew(String text) {
+    private void checkValueByTextIsPresentNew(String text) {
         int attemptsCnt = 0; //protection from the endless cycle
         int i = 0;
         do {
@@ -230,7 +212,7 @@ public class DualListbox {
         }
     }
 
-    public void addValueByValue(String btnId, String value) {
+    private void addValueByValue(String btnId, String value) {
         checkValueByValueIsPresent(value);
 
         List<WebElement> leftColumns = view.getLeftColumns();
