@@ -244,6 +244,10 @@ public class Js {
         execJs("document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].scrollTop = '" + top + "';");
     }
 
+    public void scrollNewDropDownTop(WebElement element, String containerClass, Long top) {
+        execJs3("return arguments[0].getElementsByClassName('" + containerClass + "')[0].scrollTop = '" + top + "';", element);
+    }
+
     public String isGridLoaded(Long gridId) {
         return execJs("return gridArr[" + gridId + "].PageLoaded;");
     }
