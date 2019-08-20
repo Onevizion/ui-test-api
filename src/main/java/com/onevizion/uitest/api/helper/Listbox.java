@@ -38,6 +38,23 @@ public class Listbox {
         return elements;
     }
 
+    public List<ListboxElement> getGroups(String listboxId) {
+        List<ListboxElement> elements = new ArrayList<>();
+
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        List<WebElement> webElements = seleniumSettings.getWebDriver().findElement(By.id(listboxId)).findElements(By.className("record"));
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        for (WebElement webElement : webElements) {
+            ListboxElement listboxElement = new ListboxElement();
+            listboxElement.setId(webElement.getAttribute("id"));
+            listboxElement.setLabel(webElement.getAttribute("innerText"));
+            elements.add(listboxElement);
+        }
+
+        return elements;
+    }
+
     public void checkElementsCount(List<ListboxElement> elements, int size) {
         Assert.assertEquals(elements.size(), size);
     }
