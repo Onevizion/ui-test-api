@@ -202,20 +202,6 @@ public class Wait {
             .until(webdriver -> !select.findElements(By.tagName("div")).isEmpty());
     }
 
-    public void waitListBoxLoad4(final Select select, final String text) {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Loading items in ListBox failed.")
-            .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> {
-                for (WebElement option :select.getOptions()) {
-                    if (htmlSelect.getOptionText(option).equals(text)) {
-                        return true;
-                    }
-                }
-                return false;
-            });
-    }
-
     public void waitReloadForm(final String str) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for form is failed.")

@@ -47,14 +47,6 @@ public class HtmlSelect {
         return false;
     }
 
-    public String getOptionText(final WebElement option) {
-        if (StringUtils.isNotEmpty(option.getAttribute("innerText"))) {
-            return option.getAttribute("innerText");
-        } else {
-            return option.getAttribute("textContent");
-        }
-    }
-
     /* new void to support new duallist box */
     public String getOptionText(final WebElement option, final boolean isNew) {
         if (StringUtils.isNotEmpty(option.findElement(By.tagName("span")).getAttribute("innerText"))) {
