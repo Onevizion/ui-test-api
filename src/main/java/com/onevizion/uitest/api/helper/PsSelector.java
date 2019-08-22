@@ -155,36 +155,6 @@ public class PsSelector {
         return ret;
     }
 
-    //TODO delete. was used only on admin rule page
-    public List<String> selectMultipleSpecificValues2(String buttonName, Long colNum, List<String> values, Long filterFiledNum) {
-        List<String> ret = new ArrayList<>();
-        window.openModal(By.name(buttonName));
-        grid2.waitLoad();
-
-        for (String value : values) {
-            if (qs.isTextQs(0L)) {
-                qs.searchValue(0L, filterFiledNum, value);
-            } else if (qs.isBooleanQs(0L)) {
-                qs.searchBooleanValue(0L, filterFiledNum, value);
-            } else {
-                throw new SeleniumUnexpectedException("Not support QS type");
-            }
-            List<WebElement> webElements = checkbox.findLabelsByName("cb0_0");
-            for (WebElement webElement : webElements) {
-                webElement.click();
-                String rowId = js.getGridSelectedRowId(0L);
-                ret.add(js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
-            }
-        }
-
-        if (!ret.isEmpty()) { 
-            window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
-        } else {
-            window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L));
-        }
-        return ret;
-    }
-
     public boolean checkValue(By btnOpen, String btnCloseName, String value, Long filterFiledNum) {
         boolean ret = false;
         window.openModal(btnOpen);
