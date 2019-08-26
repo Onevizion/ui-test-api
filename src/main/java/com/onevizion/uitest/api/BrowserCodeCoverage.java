@@ -220,8 +220,8 @@ public class BrowserCodeCoverage {
                             }
                         }
                     })
-                    .addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
-                    .setMissingCloseFrameAllowed(false)
+                    //.addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
+                    //.setMissingCloseFrameAllowed(false)
                     .connect();
             ws.set(webSocket);
         }
