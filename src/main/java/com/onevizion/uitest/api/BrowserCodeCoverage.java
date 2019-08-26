@@ -162,66 +162,66 @@ public class BrowserCodeCoverage {
                             }
                         }
                     })
-                    .addListener(new WebSocketAdapter() {
-                        @Override
-                        public void handleCallbackError(WebSocket websocket, Throwable cause) {
-                            seleniumLogger.error(testName + " exception in coverage handleCallbackError " + cause.getMessage());
-                            synchronized (object1) {
-                                object1.notifyAll();
-                            }
-                        }
-                    })
-                    .addListener(new WebSocketAdapter() {
-                        @Override
-                        public void onDisconnected(WebSocket websocket,
-                                WebSocketFrame serverCloseFrame, WebSocketFrame clientCloseFrame,
-                                boolean closedByServer) {
-                            if (closedByServer) {
-                                seleniumLogger.error(testName + " exception in coverage onDisconnected ");
-                                synchronized (object1) {
-                                    object1.notifyAll();
-                                }
-                            }
-                        }
-                    })
-                    .addListener(new WebSocketAdapter() {
-                        @Override
-                        public void onError(WebSocket websocket, WebSocketException cause) {
-                            seleniumLogger.error(testName + " exception in coverage onError " + cause.getMessage());
-                            synchronized (object1) {
-                                object1.notifyAll();
-                            }
-                        }
-                    })
-                    .addListener(new WebSocketAdapter() {
-                        @Override
-                        public void onSendError(WebSocket websocket, WebSocketException cause, WebSocketFrame frame) {
-                            seleniumLogger.error(testName + " exception in coverage onSendError " + cause.getMessage());
-                            synchronized (object1) {
-                                object1.notifyAll();
-                            }
-                        }
-                    })
-                    .addListener(new WebSocketAdapter() {
-                        @Override
-                        public void onTextMessageError(WebSocket websocket, WebSocketException cause, byte[] data) {
-                            seleniumLogger.error(testName + " exception in coverage onTextMessageError " + cause.getMessage());
-                            synchronized (object1) {
-                                object1.notifyAll();
-                            }
-                        }
-                    })
-                    .addListener(new WebSocketAdapter() {
-                        @Override
-                        public void onUnexpectedError(WebSocket websocket, WebSocketException cause) {
-                            seleniumLogger.error(testName + " exception in coverage onUnexpectedError " + cause.getMessage());
-                            synchronized (object1) {
-                                object1.notifyAll();
-                            }
-                        }
-                    })
-                    .addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
-                    .setMissingCloseFrameAllowed(false)
+                    //.addListener(new WebSocketAdapter() {
+                    //    @Override
+                    //    public void handleCallbackError(WebSocket websocket, Throwable cause) {
+                    //        seleniumLogger.error(testName + " exception in coverage handleCallbackError " + cause.getMessage());
+                    //        synchronized (object1) {
+                    //            object1.notifyAll();
+                    //        }
+                    //    }
+                    //})
+                    //.addListener(new WebSocketAdapter() {
+                    //    @Override
+                    //    public void onDisconnected(WebSocket websocket,
+                    //            WebSocketFrame serverCloseFrame, WebSocketFrame clientCloseFrame,
+                    //            boolean closedByServer) {
+                    //        if (closedByServer) {
+                    //            seleniumLogger.error(testName + " exception in coverage onDisconnected ");
+                    //            synchronized (object1) {
+                    //                object1.notifyAll();
+                    //            }
+                    //        }
+                    //    }
+                    //})
+                    //.addListener(new WebSocketAdapter() {
+                    //    @Override
+                    //    public void onError(WebSocket websocket, WebSocketException cause) {
+                    //        seleniumLogger.error(testName + " exception in coverage onError " + cause.getMessage());
+                    //        synchronized (object1) {
+                    //            object1.notifyAll();
+                    //        }
+                    //    }
+                    //})
+                    //.addListener(new WebSocketAdapter() {
+                    //    @Override
+                    //    public void onSendError(WebSocket websocket, WebSocketException cause, WebSocketFrame frame) {
+                    //        seleniumLogger.error(testName + " exception in coverage onSendError " + cause.getMessage());
+                    //        synchronized (object1) {
+                    //            object1.notifyAll();
+                    //        }
+                    //    }
+                    //})
+                    //.addListener(new WebSocketAdapter() {
+                    //    @Override
+                    //    public void onTextMessageError(WebSocket websocket, WebSocketException cause, byte[] data) {
+                    //        seleniumLogger.error(testName + " exception in coverage onTextMessageError " + cause.getMessage());
+                    //        synchronized (object1) {
+                    //            object1.notifyAll();
+                    //        }
+                    //    }
+                    //})
+                    //.addListener(new WebSocketAdapter() {
+                    //    @Override
+                    //    public void onUnexpectedError(WebSocket websocket, WebSocketException cause) {
+                    //        seleniumLogger.error(testName + " exception in coverage onUnexpectedError " + cause.getMessage());
+                    //        synchronized (object1) {
+                    //            object1.notifyAll();
+                    //        }
+                    //    }
+                    //})
+                    //.addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
+                    //.setMissingCloseFrameAllowed(false)
                     .connect();
             ws.set(webSocket);
         }
@@ -232,7 +232,7 @@ public class BrowserCodeCoverage {
         synchronized (object1) {
             //seleniumLogger.info("sendWSMessage 20");
             //object1.wait();
-            object1.wait(120 * 1000);
+            object1.wait(300 * 1000);
             //seleniumLogger.info("sendWSMessage 21");
         }
         //seleniumLogger.info("sendWSMessage 4");
