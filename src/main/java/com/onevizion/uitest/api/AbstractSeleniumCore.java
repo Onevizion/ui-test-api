@@ -561,10 +561,11 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected void seleniumCloseBrowser(ITestContext context) {
         try {
             if (seleniumSettings.getWebDriver() != null) {
+                seleniumLogger.info("browser close start");
                 browserCodeCoverage.finish();
                 seleniumHelper.closeAfterError();
                 seleniumSettings.getWebDriver().quit();
-                seleniumLogger.info("browser close");
+                seleniumLogger.info("browser close finish");
             }
 
             Calendar cal = Calendar.getInstance();

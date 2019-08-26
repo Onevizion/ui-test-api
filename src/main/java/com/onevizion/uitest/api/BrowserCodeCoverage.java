@@ -63,12 +63,14 @@ public class BrowserCodeCoverage {
         seleniumLogger.info(wsUrl.get());
 
         try {
+            seleniumLogger.error("exception in coverage sendWSMessage 1");
             sendWSMessage(wsUrl.get(), "{\"id\":1, \"method\":\"Profiler.enable\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageStart " + e.getMessage());
         }
 
         try {
+            seleniumLogger.error("exception in coverage sendWSMessage 2");
             sendWSMessage(wsUrl.get(), "{\"id\":2, \"method\":\"Profiler.startPreciseCoverage\", \"params\":{\"callCount\":true, \"detailed\":true}}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageStart " + e.getMessage());
@@ -81,12 +83,14 @@ public class BrowserCodeCoverage {
         }
 
         try {
+            seleniumLogger.error("exception in coverage sendWSMessage 3");
             sendWSMessage(wsUrl.get(), "{\"id\":3, \"method\":\"Profiler.takePreciseCoverage\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
         }
 
         try {
+            seleniumLogger.error("exception in coverage sendWSMessage 4");
             sendWSMessage(wsUrl.get(), "{\"id\":4, \"method\":\"Profiler.stopPreciseCoverage\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverageFinish " + e.getMessage());
@@ -107,6 +111,7 @@ public class BrowserCodeCoverage {
                         @Override
                         public void onTextMessage(WebSocket ws, String message) {
                             try {
+                                seleniumLogger.error(testName + " exception in coverage sendWSMessage response " + message);
                                 if (new JSONObject(message).getInt("id") == 3) {
                                     //try {
                                         //seleniumLogger.info("Files.write 1");
