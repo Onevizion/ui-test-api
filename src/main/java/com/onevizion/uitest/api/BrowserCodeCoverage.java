@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
+import com.neovisionaries.ws.client.WebSocketExtension;
 import com.neovisionaries.ws.client.WebSocketFactory;
 import com.neovisionaries.ws.client.WebSocketFrame;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
@@ -192,6 +193,8 @@ public class BrowserCodeCoverage {
                             }
                         }
                     })
+                    .addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
+                    .setMissingCloseFrameAllowed(false)
                     .connect();
             ws.set(webSocket);
         }
