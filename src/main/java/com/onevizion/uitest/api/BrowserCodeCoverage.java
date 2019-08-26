@@ -112,7 +112,6 @@ public class BrowserCodeCoverage {
                         @Override
                         public void onTextMessage(WebSocket ws, String message) {
                             try {
-                                seleniumLogger.error(testName + " exception in coverage sendWSMessage response " + message);
                                 if (new JSONObject(message).getInt("id") == 3) {
                                     //try {
                                         //seleniumLogger.info("Files.write 1");
@@ -152,6 +151,7 @@ public class BrowserCodeCoverage {
                                 
                                 //seleniumLogger.info("sendWSMessage 7");
                             } catch (Exception e) {
+                                seleniumLogger.error(testName + " exception in coverage onTextMessage response " + message);
                                 seleniumLogger.error(testName + " exception in coverage onTextMessage " + e.getMessage());
                             } finally {
                                 synchronized (object1) {
@@ -220,8 +220,8 @@ public class BrowserCodeCoverage {
                             }
                         }
                     })
-                    //.addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
-                    //.setMissingCloseFrameAllowed(false)
+                    .addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
+                    .setMissingCloseFrameAllowed(false)
                     .connect();
             ws.set(webSocket);
         }
@@ -231,8 +231,8 @@ public class BrowserCodeCoverage {
         //Object object2 = waitCoordinator.get();
         synchronized (object1) {
             //seleniumLogger.info("sendWSMessage 20");
-            object1.wait();
-            //object1.wait(10 * 1000);
+            //object1.wait();
+            object1.wait(120 * 1000);
             //seleniumLogger.info("sendWSMessage 21");
         }
         //seleniumLogger.info("sendWSMessage 4");
