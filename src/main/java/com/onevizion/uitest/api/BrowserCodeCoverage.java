@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -24,9 +25,7 @@ import org.springframework.stereotype.Component;
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
-import com.neovisionaries.ws.client.WebSocketExtension;
 import com.neovisionaries.ws.client.WebSocketFactory;
-import com.neovisionaries.ws.client.WebSocketFrame;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
@@ -50,62 +49,99 @@ public class BrowserCodeCoverage {
     };
 
     public void start() {
-        if (!seleniumSettings.getBrowser().equals("chrome") || !seleniumSettings.getCodeCoverage()) {
+        if (skipCodeCoverage()) {
             return;
         }
 
         ws.remove();
 
         SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
-////        seleniumLogger.info(seleniumSettings.getRemoteAddress() + " " + sessionId);
         String host = getHost(seleniumSettings.getRemoteAddress(), sessionId);
-        seleniumLogger.info(host);
         wsUrl.set(getWebSocketDebuggerUrl(host));
-        seleniumLogger.info(wsUrl.get());
 
         try {
-            seleniumLogger.error("exception in coverage sendWSMessage 1");
+            seleniumLogger.error("coverage sendWSMessage 1");
             sendWSMessage(wsUrl.get(), "{\"id\":1, \"method\":\"Profiler.enable\"}");
         } catch (Exception e) {
-            seleniumLogger.error("exception in coverageStart " + e.getMessage());
+            seleniumLogger.error("exception in coverage sendWSMessage 1 " + e.getMessage());
         }
 
         try {
-            seleniumLogger.error("exception in coverage sendWSMessage 2");
+            seleniumLogger.error("coverage sendWSMessage 2");
             sendWSMessage(wsUrl.get(), "{\"id\":2, \"method\":\"Profiler.startPreciseCoverage\", \"params\":{\"callCount\":true, \"detailed\":true}}");
         } catch (Exception e) {
-            seleniumLogger.error("exception in coverageStart " + e.getMessage());
+            seleniumLogger.error("exception in coverage sendWSMessage 2 " + e.getMessage());
         }
     }
 
     public void finish() {
-        if (!seleniumSettings.getBrowser().equals("chrome") || !seleniumSettings.getCodeCoverage()) {
+        if (skipCodeCoverage()) {
             return;
         }
 
         try {
-            seleniumLogger.error("exception in coverage sendWSMessage 3");
+            seleniumLogger.error("coverage sendWSMessage 3");
             sendWSMessage(wsUrl.get(), "{\"id\":3, \"method\":\"Profiler.takePreciseCoverage\"}");
         } catch (Exception e) {
-            seleniumLogger.error("exception in coverageFinish " + e.getMessage());
+            seleniumLogger.error("exception in coverage sendWSMessage 3 " + e.getMessage());
         }
 
         try {
-            seleniumLogger.error("exception in coverage sendWSMessage 4");
+            seleniumLogger.error("coverage sendWSMessage 4");
             sendWSMessage(wsUrl.get(), "{\"id\":4, \"method\":\"Profiler.stopPreciseCoverage\"}");
         } catch (Exception e) {
-            seleniumLogger.error("exception in coverageFinish " + e.getMessage());
+            seleniumLogger.error("exception in coverage sendWSMessage 4 " + e.getMessage());
         }
 
         ws.get().disconnect();
     }
 
+    private boolean skipCodeCoverage() {
+        if (!seleniumSettings.getBrowser().equals("chrome") || !seleniumSettings.getCodeCoverage()) {
+            return true;
+        }
+
+        List<String> tests = new ArrayList<>();
+        tests.add("TasksEditTest");
+        tests.add("TbSameFieldsOnDifferentTabsTest");
+        tests.add("WorkflowWithKeyWithCurrentWithParentTest");
+        tests.add("TbSortMultiTest");
+        tests.add("TbPrivFieldsDrillDownParentApplet2Tab2Test");
+        tests.add("TbPrivFieldsDrillDownApplet2Tab2Test");
+        tests.add("TbCloningTest");
+        tests.add("TbTemplatingTest");
+        tests.add("TbRestrictedMyFilterUserAsDirectChildOfNotDirectParentTest");
+
+        tests.add("TbGridEditorCurrentTest");
+        tests.add("TbGridEditorChildTest");
+        tests.add("TbGridEditorParentTest");
+        tests.add("TbGridEditorWp1Test");
+        tests.add("TbGridEditorWp2Test");
+        tests.add("TbGridEditorDrillDownATest");
+        tests.add("TbGridEditorDrillDownZTest");
+
+        tests.add("TbGridRowEditorTrackorCurrentTest");
+        tests.add("TbGridRowEditorTrackorChildTest");
+        tests.add("TbGridRowEditorTrackorParentTest");
+        tests.add("TbGridRowEditorTrackorWp1Test");
+        tests.add("TbGridRowEditorTrackorWp2Test");
+        tests.add("TbGridRowEditorTrackorDrillDownATest");
+        tests.add("TbGridRowEditorTrackorDrillDownAParentTest");
+        tests.add("TbGridRowEditorTrackorDrillDownZTest");
+        tests.add("TbGridRowEditorTrackorDrillDownZParentTest");
+
+        if (tests.contains(seleniumSettings.getTestName())) {
+            seleniumLogger.error("Skip Code Coverage for test " + seleniumSettings.getTestName());
+            return true;
+        }
+
+        return false;
+    }
+
     private void sendWSMessage(String url, String message) throws IOException, WebSocketException, InterruptedException {
-        //seleniumLogger.info("sendWSMessage 1");
         Object object1 = waitCoordinator.get();
         String testName = seleniumSettings.getTestName();
         if (ws.get() == null) {
-            //seleniumLogger.info("sendWSMessage 5");
             WebSocket webSocket = new WebSocketFactory()
                     .createSocket(url)
                     .addListener(new WebSocketAdapter() {
@@ -113,130 +149,38 @@ public class BrowserCodeCoverage {
                         public void onTextMessage(WebSocket ws, String message) {
                             try {
                                 if (new JSONObject(message).getInt("id") == 3) {
-                                    //try {
-                                        //seleniumLogger.info("Files.write 1");
-                                        //Files.deleteIfExists(Paths.get("name_full.txt"));
-                                        //Files.write(Paths.get("name_full.txt"), message.getBytes());
-                                        //seleniumLogger.info("Files.write 2");
-
-                                        //seleniumLogger.info("Files.write 3");
-                                        JSONObject jsonObject = new JSONObject(message);
-
-                                        removeScriptsWithoutName(jsonObject);
-                                        //removeFunctionsWithoutName(jsonObject);
-                                        //removeNotCoverageRanges(jsonObject);
-                                        //removeEmptyFunctions(jsonObject);
-                                        //removeEmptyScripts(jsonObject);
-                                        //seleniumLogger.info("Files.write 4");
-
-                                        //seleniumLogger.info("Files.write 5");
-                                        //Files.deleteIfExists(Paths.get("name_small.txt"));
-                                        //Files.write(Paths.get("name_small.txt"), jsonObject.toString().getBytes());
-                                        //seleniumLogger.info("Files.write 6");
-                                        //coverage.set(jsonObject.toString());
-                                        try {
-                                            //Files.deleteIfExists(Paths.get(seleniumSettings.getTestName() + ".json"));
-                                            Files.write(Paths.get("/opt/tomcat/guitest-scripts/code_coverage/coverage_v8/" + testName + ".json"), jsonObject.toString().getBytes());
-                                        } catch (Exception e) {
-                                            seleniumLogger.error(testName + " exception in writeCoverageFile " + e.getMessage());
-                                        }
-                                    //} catch (IOException e) {
-                                    //    seleniumLogger.error("exception in Files.write " + e.getMessage());
-                                    //}
-                                } else {
-                                    //seleniumLogger.info("gkovalev " + message);
+                                    JSONObject jsonObject = new JSONObject(message);
+                                    removeScriptsWithoutName(jsonObject);
+                                    //removeFunctionsWithoutName(jsonObject);
+                                    //removeNotCoverageRanges(jsonObject);
+                                    //removeEmptyFunctions(jsonObject);
+                                    //removeEmptyScripts(jsonObject);
+                                    try {
+                                        Files.write(Paths.get("/opt/tomcat/guitest-scripts/code_coverage/coverage_v8/" + testName + ".json"), jsonObject.toString().getBytes());
+                                    } catch (Exception e) {
+                                        seleniumLogger.error(testName + " exception in writeCoverageFile " + e.getMessage());
+                                    }
                                 }
-                                //seleniumLogger.info("sendWSMessage 6");
-                                //Object object1 = waitCoordinator.get();
-                                
-                                //seleniumLogger.info("sendWSMessage 7");
                             } catch (Exception e) {
                                 seleniumLogger.error(testName + " exception in coverage onTextMessage response " + message);
                                 seleniumLogger.error(testName + " exception in coverage onTextMessage " + e.getMessage());
                             } finally {
                                 synchronized (object1) {
-                                    //seleniumLogger.info("sendWSMessage 10");
                                     object1.notifyAll();
-                                    //seleniumLogger.info("sendWSMessage 11");
                                 }
                             }
                         }
                     })
-                    //.addListener(new WebSocketAdapter() {
-                    //    @Override
-                    //    public void handleCallbackError(WebSocket websocket, Throwable cause) {
-                    //        seleniumLogger.error(testName + " exception in coverage handleCallbackError " + cause.getMessage());
-                    //        synchronized (object1) {
-                    //            object1.notifyAll();
-                    //        }
-                    //    }
-                    //})
-                    //.addListener(new WebSocketAdapter() {
-                    //    @Override
-                    //    public void onDisconnected(WebSocket websocket,
-                    //            WebSocketFrame serverCloseFrame, WebSocketFrame clientCloseFrame,
-                    //            boolean closedByServer) {
-                    //        if (closedByServer) {
-                    //            seleniumLogger.error(testName + " exception in coverage onDisconnected ");
-                    //            synchronized (object1) {
-                    //                object1.notifyAll();
-                    //            }
-                    //        }
-                    //    }
-                    //})
-                    //.addListener(new WebSocketAdapter() {
-                    //    @Override
-                    //    public void onError(WebSocket websocket, WebSocketException cause) {
-                    //        seleniumLogger.error(testName + " exception in coverage onError " + cause.getMessage());
-                    //        synchronized (object1) {
-                    //            object1.notifyAll();
-                    //        }
-                    //    }
-                    //})
-                    //.addListener(new WebSocketAdapter() {
-                    //    @Override
-                    //    public void onSendError(WebSocket websocket, WebSocketException cause, WebSocketFrame frame) {
-                    //        seleniumLogger.error(testName + " exception in coverage onSendError " + cause.getMessage());
-                    //        synchronized (object1) {
-                    //            object1.notifyAll();
-                    //        }
-                    //    }
-                    //})
-                    //.addListener(new WebSocketAdapter() {
-                    //    @Override
-                    //    public void onTextMessageError(WebSocket websocket, WebSocketException cause, byte[] data) {
-                    //        seleniumLogger.error(testName + " exception in coverage onTextMessageError " + cause.getMessage());
-                    //        synchronized (object1) {
-                    //            object1.notifyAll();
-                    //        }
-                    //    }
-                    //})
-                    //.addListener(new WebSocketAdapter() {
-                    //    @Override
-                    //    public void onUnexpectedError(WebSocket websocket, WebSocketException cause) {
-                    //        seleniumLogger.error(testName + " exception in coverage onUnexpectedError " + cause.getMessage());
-                    //        synchronized (object1) {
-                    //            object1.notifyAll();
-                    //        }
-                    //    }
-                    //})
-                    //.addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
-                    //.setMissingCloseFrameAllowed(false)
                     .connect();
             ws.set(webSocket);
         }
-        //seleniumLogger.info("sendWSMessage 2");
+
         ws.get().sendText(message);
-        //seleniumLogger.info("sendWSMessage 3");
-        //Object object2 = waitCoordinator.get();
+
         synchronized (object1) {
-            //seleniumLogger.info("sendWSMessage 20");
             //object1.wait();
             object1.wait(300 * 1000);
-            //seleniumLogger.info("sendWSMessage 21");
         }
-        //seleniumLogger.info("sendWSMessage 4");
-        //seleniumLogger.info("gkovalev GOOD");
     }
 
     private void removeScriptsWithoutName(JSONObject jsonObject) {
@@ -383,7 +327,6 @@ public class BrowserCodeCoverage {
             s.append(line);
         }
         rd.close();
-////        seleniumLogger.info("getHostNameAndPort " + s.toString());
         return s.toString();
     }
 
