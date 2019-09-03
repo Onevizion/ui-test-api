@@ -75,6 +75,11 @@ public class EntityCoord {
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(coord.getName());
 
+        assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LATITUDE)));
+        assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LATITUDE_BUTTON)));
+        assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LONGITUDE)));
+        assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LONGITUDE_BUTTON)));
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
@@ -87,6 +92,11 @@ public class EntityCoord {
         assertElement.assertText(NAME, coord.getName());
         assertElement.assertRadioPsSelector(LATITUDE, null, null, coord.getLatFieldName(), null, false);
         assertElement.assertRadioPsSelector(LONGITUDE, null, null, coord.getLongFieldName(), null, false);
+
+        assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LATITUDE)));
+        assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LATITUDE_BUTTON)));
+        assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LONGITUDE)));
+        assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LONGITUDE_BUTTON)));
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
