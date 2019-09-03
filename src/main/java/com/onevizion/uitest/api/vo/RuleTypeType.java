@@ -17,6 +17,7 @@ public enum RuleTypeType {
     TRACKOR_CREATE("Trackor Created (After)"),
     TRACKOR_DELETE("Trackor Deleted (Before)"),
     TRACKOR_UPDATE("Trackor Updated (After)"),
+    TRACKOR_CREATE_AND_UPDATE("Trackor Created/Updated (After)"),
     USER_CREATE("User Created (After)"),
     USER_UPDATE("User Updated (After)"),
     REPORT_EXECUTED("Report Executed (After)"),
