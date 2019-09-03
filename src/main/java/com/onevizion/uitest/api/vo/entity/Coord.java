@@ -4,6 +4,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 public class Coord {
 
+    private String name;
     private String latFieldName;
     private String latFieldLabel;
     private String longFieldName;
@@ -17,6 +18,10 @@ public class Coord {
 
     public static Builder newBuilder() {
         return new Coord().new Builder();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getLatFieldName() {
@@ -50,7 +55,8 @@ public class Coord {
         }
 
         public Coord build() {
-            if (Coord.this.latFieldName == null ||
+            if (Coord.this.name == null ||
+                    Coord.this.latFieldName == null ||
                     Coord.this.latFieldLabel == null ||
                     Coord.this.longFieldName == null ||
                     Coord.this.longFieldLabel == null ||
@@ -59,6 +65,11 @@ public class Coord {
                 throw new SeleniumUnexpectedException("");
             }
             return Coord.this;
+        }
+
+        public Builder setName(String name) {
+            Coord.this.name = name;
+            return this;
         }
 
         public Builder setLatFieldName(String latFieldName) {
