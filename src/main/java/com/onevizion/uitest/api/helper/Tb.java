@@ -364,7 +364,7 @@ public class Tb {
             htmlInputFile.uploadOnForm(fieldName, value);
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
-                gridExpVals.put("fName" + gridColumnId, value);
+                gridExpVals.put(gridColumnId, value);
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -645,7 +645,7 @@ public class Tb {
             }
             expVals.put(field, "");
             if (column != null) {
-                gridExpVals.put("fName" + column, "");
+                gridExpVals.put(column, "");
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -672,7 +672,7 @@ public class Tb {
         vals.put(columnNames.get(2), values.get(2)); //DB_DROP_DOWN
         vals.put(columnNames.get(3), values.get(3)); //DB_SELECTOR
         vals.put(columnNames.get(4), values.get(4)); //DROP_DOWN
-        vals.put("fName" + columnNames.get(5), values.get(5)); //ELECTRONIC_FILE
+        vals.put(columnNames.get(5), values.get(5)); //ELECTRONIC_FILE
         vals.put(columnNames.get(6), values.get(6)); //HYPERLINK
         vals.put(columnNames.get(7), values.get(7)); //LATITUDE
         vals.put(columnNames.get(8), values.get(8)); //LONGITUDE
@@ -856,7 +856,7 @@ public class Tb {
 
             htmlInputFile.uploadOnGrid(gridIndex, "eFile_" + fieldId + "_" + tid, value);
 
-            gridExpVals.put("fName" + gridColumnId, value);
+            gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
             }
@@ -946,7 +946,7 @@ public class Tb {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("txtEfile1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-            gridExpVals.put("fName" + gridColumnId, "");
+            gridExpVals.put(gridColumnId, "");
             if (fieldName != null) {
                 expVals.put(fieldName, "");
             }
