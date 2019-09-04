@@ -359,9 +359,7 @@ public class Grid {
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(2)); //DB_DROP_DOWN
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(3)); //DB_SELECTOR
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(4)); //DROP_DOWN
-        columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(5).replaceAll("d_", "fNamed_").replaceAll("w_", "fNamew_")); //ELECTRONIC_FILE
-        columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(5).replaceAll("d_", "fSized_").replaceAll("w_", "fSizew_")); //ELECTRONIC_FILE
-        columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(5).replaceAll("d_", "fThumbd_").replaceAll("w_", "fThumbw_")); //ELECTRONIC_FILE
+        columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(5)); //ELECTRONIC_FILE
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(6)); //HYPERLINK
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(7)); //LATITUDE
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(8)); //LONGITUDE
