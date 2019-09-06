@@ -1052,7 +1052,7 @@ public class Tb {
         WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWait.waitElementVisible(gridCell);
 
-        if (!ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
+        if (!ConfigFieldType.CHECKBOX.equals(fieldDataType) && !ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.doubleClick(gridCell);
         }
 
@@ -1081,7 +1081,8 @@ public class Tb {
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType) || ConfigFieldType.TIME.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDate1")).size(), 1);
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
-            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("btnEfile1")).size(), 1);
+            element.moveToElement(gridCell);
+            Assert.assertEquals(gridCell.findElements(By.id("btnEfile1")).size(), 1);
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
         }
@@ -1125,7 +1126,7 @@ public class Tb {
         WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWait.waitElementVisible(gridCell);
 
-        if (!ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
+        if (!ConfigFieldType.CHECKBOX.equals(fieldDataType) && !ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.doubleClick(gridCell);
         }
 
@@ -1154,7 +1155,8 @@ public class Tb {
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType) || ConfigFieldType.TIME.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDate1")).size(), 0);
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
-            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("btnEfile1")).size(), 0);
+            element.moveToElement(gridCell);
+            Assert.assertEquals(gridCell.findElements(By.id("btnEfile1")).size(), 0);
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
         }
