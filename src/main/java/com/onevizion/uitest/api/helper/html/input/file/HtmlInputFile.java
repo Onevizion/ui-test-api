@@ -131,6 +131,16 @@ public class HtmlInputFile {
         htmlInputFileJs.hideInputForFileTb(FRAME_ID_ON_FORM, fieldName);
     }
 
+    public void beforeUploadOnGrid(Long gridIndex) {
+        if (seleniumSettings.getBrowser().equals("firefox")) {
+            WebElement frame = (WebElement) htmlInputFileJs.getFrameForFileTbGrid(gridIndex);
+
+            seleniumSettings.getWebDriver().switchTo().frame(frame);
+            htmlInputFileJs.disableClickForFileTbGrid();
+            seleniumSettings.getWebDriver().switchTo().parentFrame();
+        }
+    }
+
     public void uploadOnGrid(Long gridIndex, String fieldName, String value) {
         WebElement frame = (WebElement) htmlInputFileJs.getFrameForFileTbGrid(gridIndex);
 

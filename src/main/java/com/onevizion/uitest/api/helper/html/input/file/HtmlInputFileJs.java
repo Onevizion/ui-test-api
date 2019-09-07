@@ -75,4 +75,12 @@ class HtmlInputFileJs extends Js {
                 + "arguments[0].contentWindow.document.getElementById('" + inputId + "').style.top = '-100px';", element);
     }
 
+    void disableClickForFileTbGrid() {
+        execJs("HTMLInputElement.prototype.click = function() {"
+               + "    if (this.type !== 'file') {"
+               + "        HTMLElement.prototype.click.call(this);"
+               + "    }"
+               + "}");
+    }
+
 }

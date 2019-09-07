@@ -851,6 +851,7 @@ public class Tb {
             } else if (buttons.size() < 1 || 2 < buttons.size()) {
                 throw new SeleniumUnexpectedException("Wrong efile buttons size");
             }
+            htmlInputFile.beforeUploadOnGrid(gridIndex);
             gridCell.findElement(By.id("btnEfile1")).click();
             htmlInputFile.uploadOnGrid(gridIndex, "eFile_" + fieldId + "_" + tid, value);
             gridExpVals.put(gridColumnId, value);
