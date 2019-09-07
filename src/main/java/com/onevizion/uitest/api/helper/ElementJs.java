@@ -54,6 +54,18 @@ public class ElementJs extends Js {
         return Boolean.valueOf(execJs("return $(document.getElementById('" + id + "')).is('.velocity-animating') == false;"));
     }
 
+    public void mouseMove(WebElement element) {
+        execJs3("var event = new Event('mousemove', {'bubbles':true, 'cancelable':true, 'composed':true}); arguments[0].dispatchEvent(event);", element);
+    }
+
+    public void mouseMoveByName(String name) {
+        execJs2("var event = new Event('mousemove', {'bubbles':true, 'cancelable':true, 'composed':true}); document.getElementsByName('" + name + "')[0].dispatchEvent(event);");
+    }
+
+    public void mouseMoveById(String id) {
+        execJs2("var event = new Event('mousemove', {'bubbles':true, 'cancelable':true, 'composed':true}); document.getElementById('" + id + "').dispatchEvent(event);");
+    }
+
     public void doubleClick(WebElement element) {
         execJs3("var event = new Event('click', {'bubbles':true, 'cancelable':true, 'composed':true}); arguments[0].dispatchEvent(event);" +
                 "var event = new Event('click', {'bubbles':true, 'cancelable':true, 'composed':true}); arguments[0].dispatchEvent(event);" +

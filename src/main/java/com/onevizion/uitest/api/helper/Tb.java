@@ -729,11 +729,10 @@ public class Tb {
         WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWait.waitElementVisible(gridCell);
 
-        if (!ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
+        if (!ConfigFieldType.CHECKBOX.equals(fieldDataType) && !ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.doubleClick(gridCell);
+            AbstractSeleniumCore.sleep(500L);
         }
-
-        AbstractSeleniumCore.sleep(500L);
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             WebElement elem = gridCell.findElement(By.tagName("input"));
@@ -843,19 +842,17 @@ public class Tb {
                 expVals.put(fieldName, value);
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
-            wait.waitWebElement(By.id("txtEfile1"));
-
-            Actions action = new Actions(seleniumSettings.getWebDriver());
-            action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("txtEfile1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-
-            element.doubleClick(gridCell);
-
-            AbstractSeleniumCore.sleep(500L);
-
-            wait.waitWebElement(By.id("txtEfile1"));
-
+            element.moveToElement(gridCell);
+            List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
+            if (buttons.size() == 2) {
+                buttons.get(1).click();
+                element.moveToElementById("topPanelUserNameBtn");
+                element.moveToElement(gridCell);
+            } else if (buttons.size() < 1 || 2 < buttons.size()) {
+                throw new SeleniumUnexpectedException("Wrong efile buttons size");
+            }
+            gridCell.findElement(By.id("btnEfile1")).click();
             htmlInputFile.uploadOnGrid(gridIndex, "eFile_" + fieldId + "_" + tid, value);
-
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
@@ -911,11 +908,10 @@ public class Tb {
         WebElement gridCell = (WebElement) js.getGridCellByRowIndexAndColIndex(gridIndex, rowIndex, columnIndex);
         elementWait.waitElementVisible(gridCell);
 
-        if (!ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
+        if (!ConfigFieldType.CHECKBOX.equals(fieldDataType) && !ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.doubleClick(gridCell);
+            AbstractSeleniumCore.sleep(500L);
         }
-
-        AbstractSeleniumCore.sleep(500L);
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             WebElement elem = gridCell.findElement(By.tagName("input"));
@@ -944,8 +940,13 @@ public class Tb {
                 expVals.put(fieldName, "");
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
-            Actions action = new Actions(seleniumSettings.getWebDriver());
-            action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("txtEfile1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
+            element.moveToElement(gridCell);
+            List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
+            if (buttons.size() == 2) {
+                buttons.get(1).click();
+            } else if (buttons.size() < 1 || 2 < buttons.size()) {
+                throw new SeleniumUnexpectedException("Wrong efile buttons size");
+            }
             gridExpVals.put(gridColumnId, "");
             if (fieldName != null) {
                 expVals.put(fieldName, "");
@@ -1054,9 +1055,8 @@ public class Tb {
 
         if (!ConfigFieldType.CHECKBOX.equals(fieldDataType) && !ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.doubleClick(gridCell);
+            AbstractSeleniumCore.sleep(500L);
         }
-
-        AbstractSeleniumCore.sleep(500L);
 
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
@@ -1128,9 +1128,8 @@ public class Tb {
 
         if (!ConfigFieldType.CHECKBOX.equals(fieldDataType) && !ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.doubleClick(gridCell);
+            AbstractSeleniumCore.sleep(500L);
         }
-
-        AbstractSeleniumCore.sleep(500L);
 
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 

@@ -36,6 +36,10 @@ public class Element {
         } catch (WebDriverException e) { //firefox 59 throw WebDriverException instead of MoveTargetOutOfBoundsException or instead success execution
             seleniumLogger.warn("Exception in moveToElement");
         }
+
+        if (seleniumSettings.getBrowser().equals("firefox")) {
+            elementJs.mouseMove(element);
+        }
     }
 
     public void moveToElementByName(String name) {
@@ -48,6 +52,10 @@ public class Element {
         } catch (WebDriverException e) { //firefox 59 throw WebDriverException instead of MoveTargetOutOfBoundsException or instead success execution
             seleniumLogger.warn("Exception in moveToElementByName");
         }
+
+        if (seleniumSettings.getBrowser().equals("firefox")) {
+            elementJs.mouseMoveByName(name);
+        }
     }
 
     public void moveToElementById(String id) {
@@ -59,6 +67,10 @@ public class Element {
             actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(By.id(id))).perform();
         } catch (WebDriverException e) { //firefox 59 throw WebDriverException instead of MoveTargetOutOfBoundsException or instead success execution
             seleniumLogger.warn("Exception in moveToElementById");
+        }
+
+        if (seleniumSettings.getBrowser().equals("firefox")) {
+            elementJs.mouseMoveById(id);
         }
     }
 
