@@ -846,7 +846,7 @@ public class Tb {
             List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
             if (buttons.size() == 2) {
                 buttons.get(1).click();
-                element.moveToElementById("topPanelUserNameBtn");
+                element.moveToElementById("btnSaveGrid" + gridIndex);
                 element.moveToElement(gridCell);
             } else if (buttons.size() < 1 || 2 < buttons.size()) {
                 throw new SeleniumUnexpectedException("Wrong efile buttons size");
