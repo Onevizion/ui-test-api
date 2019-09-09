@@ -32,6 +32,9 @@ import com.onevizion.uitest.api.vo.ConfigFieldType;
 @Component
 public class Tb {
 
+    private static final String EFILE_EDIT_BUTTON = "btnEditEfile1";
+    private static final String EFILE_DELETE_BUTTON = "btnDeleteEfile1";
+
     @Resource
     private SeleniumSettings seleniumSettings;
 
@@ -845,14 +848,14 @@ public class Tb {
             element.moveToElement(gridCell);
             List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
             if (buttons.size() == 2) {
-                buttons.get(1).click();
+                gridCell.findElement(By.id(EFILE_DELETE_BUTTON)).click();
                 element.moveToElementById("btnSaveGrid" + gridIndex);
                 element.moveToElement(gridCell);
             } else if (buttons.size() < 1 || 2 < buttons.size()) {
                 throw new SeleniumUnexpectedException("Wrong efile buttons size");
             }
             htmlInputFile.beforeUploadOnGrid(gridIndex);
-            gridCell.findElement(By.id("btnEfile1")).click();
+            gridCell.findElement(By.id(EFILE_EDIT_BUTTON)).click();
             htmlInputFile.uploadOnGrid(gridIndex, "eFile_" + fieldId + "_" + tid, value);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
@@ -944,7 +947,7 @@ public class Tb {
             element.moveToElement(gridCell);
             List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
             if (buttons.size() == 2) {
-                buttons.get(1).click();
+                gridCell.findElement(By.id(EFILE_DELETE_BUTTON)).click();
             } else if (buttons.size() < 1 || 2 < buttons.size()) {
                 throw new SeleniumUnexpectedException("Wrong efile buttons size");
             }
@@ -1083,7 +1086,7 @@ public class Tb {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDate1")).size(), 1);
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.moveToElement(gridCell);
-            Assert.assertEquals(gridCell.findElements(By.id("btnEfile1")).size(), 1);
+            Assert.assertEquals(gridCell.findElements(By.id(EFILE_EDIT_BUTTON)).size(), 1);
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
         }
@@ -1156,7 +1159,7 @@ public class Tb {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmDate1")).size(), 0);
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.moveToElement(gridCell);
-            Assert.assertEquals(gridCell.findElements(By.id("btnEfile1")).size(), 0);
+            Assert.assertEquals(gridCell.findElements(By.id(EFILE_EDIT_BUTTON)).size(), 0);
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
         }
