@@ -11,7 +11,6 @@ public class TrackorType {
     private String labelPrefix;
     private String labelMyItems;
     private String aliasField;
-    private List<String> autoFilterFields;
     private String limitWp;
     private String clone;
     private String template;
@@ -35,7 +34,7 @@ public class TrackorType {
     private List<String> packages;
 
     public TrackorType(String name, String label, String labelItemId, String labelClass, String labelPrefix, String labelMyItems, String aliasField,
-            List<String> autoFilterFields, String limitWp, String clone, String template, String user, String efileContainer, String comments,
+            String limitWp, String clone, String template, String user, String efileContainer, String comments,
             String autoKey, String autoKeyStartAt, String owner1, String field1, String separator1, String owner2, String field2,
             String separator2, String staticText3, String separator3, String digits4, String uniqueAcross4, List<String> packages) {
         this.name = name;
@@ -45,7 +44,6 @@ public class TrackorType {
         this.labelPrefix = labelPrefix;
         this.labelMyItems = labelMyItems;
         this.aliasField = aliasField;
-        this.autoFilterFields = autoFilterFields;
         this.limitWp = limitWp;
         this.clone = clone;
         this.template = template;
@@ -95,10 +93,6 @@ public class TrackorType {
 
     public String getAliasField() {
         return aliasField;
-    }
-
-    public List<String> getAutoFilterFields() {
-        return autoFilterFields;
     }
 
     public String getLimitWp() {

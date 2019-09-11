@@ -141,7 +141,6 @@ public class EntityTrackorType {
         assertElement.assertText(LABEL_PREFIX, trackorType.getLabelPrefix());
         assertElement.assertText(LABEL_MY_ITEMS, trackorType.getLabelMyItems());
         assertElement.assertRadioPsSelector("objDisplayField", "btnobjDisplayField", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAliasField(), 1L, true);
-        assertElement.assertCheckboxPsSelector("xsFieldsStr", "btnxsFieldsStr", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getAutoFilterFields(), 1L, true);
         assertElement.assertSelect(LIMIT_WP, trackorType.getLimitWp());
         assertElement.assertCheckbox(CLONE, trackorType.getClone());
         assertElement.assertCheckbox(TEMPLATE, trackorType.getTemplate());
