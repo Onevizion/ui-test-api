@@ -83,6 +83,22 @@ public class ApiV3Endpoint {
         elementWait.waitElementAnimatedFinish(response);
     }
 
+    public <T extends Comparable<? super T>> List<T> getResponse(WebElement endpoint, Class<T> clazz) {
+        WebElement responseText = endpoint.findElement(By.className("response_body"));
+        element.moveToElement(responseText);
+        String actualResponseText = responseText.getText();
+
+        List<T> actualResponse = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            actualResponse = mapper.readValue(actualResponseText, mapper.getTypeFactory().constructCollectionType(List.class, clazz));
+        } catch (IOException e) {
+            throw new SeleniumUnexpectedException(e);
+        }
+
+        return actualResponse;
+    }
+
     public <T extends Comparable<? super T>> void checkResponse(WebElement endpoint, List<T> expectedResponse, Class<T> clazz) {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
         element.moveToElement(responseText);
