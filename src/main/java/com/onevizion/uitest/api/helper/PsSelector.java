@@ -1,17 +1,14 @@
 package com.onevizion.uitest.api.helper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
-import com.onevizion.uitest.api.OnevizionUtils;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.grid.Grid2;
@@ -38,47 +35,33 @@ public class PsSelector {
     private Element element;
 
     @Resource
-    private ElementWait elementWait;
-
-    @Resource
     private Qs qs;
 
     @Resource
     private Grid2 grid2;
 
-    public String selectValue(String buttonName, Long romNum, Long colNum) {
-        String ret = null;
-
+    public void selectValue(String buttonName, Long romNum) {
         window.openModal(By.name(buttonName));
         grid2.waitLoad();
-        for (Long i = romNum; i <= romNum; i++) {
-            String value = js.getGridCellValueByRowIndexAndColIndex(0L, romNum, colNum);
-            value = OnevizionUtils.removeHTMLTags(value);
-            value = StringUtils.substringBefore(value, "\n");
-            seleniumSettings.getWebDriver().findElements(By.name("rb0")).get(romNum.intValue()).click();
-            ret = value;
-        }
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
 
-        return ret;
+        seleniumSettings.getWebDriver().findElements(By.name("rb0")).get(romNum.intValue()).click();
+
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
     }
 
-    public List<String> selectMultipleValues(String buttonName, Long firstRowNum, Long lastRowNum, Long colNum) {
-        List<String> ret = new ArrayList<>();
-
+    public void selectMultipleValues(String buttonName, Long firstRowNum, Long lastRowNum) {
         window.openModal(By.name(buttonName));
         grid2.waitLoad();
+
         List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("cb0_0"));
         for (Long i = firstRowNum; i <= lastRowNum; i++) {
             checkbox.clickByElement(webElements.get(i.intValue()));
-            ret.add(js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum));
         }
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
 
-        return ret;
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
     }
 
-    public String selectSpecificValue(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
+    public void selectSpecificValue(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(btnClose);
         grid2.waitLoad();
@@ -92,13 +75,12 @@ public class PsSelector {
             } else {
                 throw new SeleniumUnexpectedException("Not support QS type");
             }
-            List<WebElement> webElement = seleniumSettings.getWebDriver().findElements(By.name("rb0"));
-            webElement.get(0).click();
+            seleniumSettings.getWebDriver().findElements(By.name("rb0")).get(0).click();
         } else {
             Long cnt = js.getGridRowsCount(0L);
             for (Long i = 0L; i < cnt; i++) {
                 if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
-                    WebElement rb = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                    WebElement rb = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                     element.moveToElement(rb);
                     rb.click();
                     break;
@@ -106,14 +88,10 @@ public class PsSelector {
             }
         }
 
-        String rowId = js.getGridSelectedRowId(0L);
-        String ret = js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum);
         window.closeModal(btnClose);
-        return ret;
     }
 
-    public List<String> selectMultipleSpecificValues(By btnOpen, Long colNum, List<String> values, Long filterFiledNum) {
-        List<String> ret = new ArrayList<>();
+    public void selectMultipleSpecificValues(By btnOpen, Long colNum, List<String> values, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         grid2.waitLoad();
@@ -129,30 +107,24 @@ public class PsSelector {
                     throw new SeleniumUnexpectedException("Not support QS type");
                 }
                 checkbox.findLabelsByName("cb0_0").get(0).click();
-                String rowId = js.getGridSelectedRowId(0L);
-                ret.add(js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
             }
         } else {
             Long cnt = js.getGridRowsCount(0L);
             for (String value : values) {
                 for (Long i = 0L; i < cnt; i++) {
                     if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
-                        WebElement cell = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                        WebElement cell = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
                         WebElement label = checkbox.findLabelByElement(cb);
                         element.moveToElement(label);
                         label.click();
-                        String rowId = js.getGridSelectedRowId(0L);
-                        ret.add(js.getGridCellValueByRowIdAndColIndex(0L, rowId, colNum));
                         break;
                     }
                 }
-                
             }
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
-        return ret;
     }
 
     public boolean checkValue(By btnOpen, String btnCloseName, String value, Long filterFiledNum) {
