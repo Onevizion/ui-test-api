@@ -77,7 +77,7 @@ public class SeleniumSettings {
         return webDriver.get();
     }
 
-    void setWebDriver(WebDriver webDriver) {
+    public void setWebDriver(WebDriver webDriver) {
         this.webDriver.set(webDriver);
     }
 
@@ -155,6 +155,10 @@ public class SeleniumSettings {
 
     public Long getDefaultTimeout() {
         return defaultTimeout;
+    }
+
+    public void setDefaultTimeout(Long defaultTimeout) {
+        this.defaultTimeout = defaultTimeout;
     }
 
     public String getUploadFilesPath() {
