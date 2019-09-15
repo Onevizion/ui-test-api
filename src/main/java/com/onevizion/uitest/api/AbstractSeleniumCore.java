@@ -451,19 +451,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         Calendar cal = Calendar.getInstance();
         startDate = cal.getTime();
 
-        String newServerUrl = context.getCurrentXmlTest().getParameter("test.selenium.serverUrl");
-        if (newServerUrl != null) {
-            seleniumSettings.setServerUrl(newServerUrl);
-        }
-        String newTestUser = context.getCurrentXmlTest().getParameter("test.selenium.user");
-        if (newTestUser != null) {
-            seleniumSettings.setTestUser(newTestUser);
-        }
-        String newTestPassword = context.getCurrentXmlTest().getParameter("test.selenium.password");
-        if (newTestPassword != null) {
-            seleniumSettings.setTestPassword(newTestPassword);
-        }
-
         seleniumSettings.setTestName(getTestName());
         seleniumSettings.setTestStatus("success");
         seleniumSettings.clearTestLog();
@@ -544,6 +531,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumLogger.info("browser open");
             browserCodeCoverage.start();
             document.open2(seleniumSettings.getServerUrl());
+
+            String newTestUser = context.getCurrentXmlTest().getParameter("test.selenium.user");
+            seleniumSettings.setTestUser(newTestUser);
 
             seleniumLogger.info("login as " + seleniumSettings.getTestUser());
             loginIntoSystem(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());

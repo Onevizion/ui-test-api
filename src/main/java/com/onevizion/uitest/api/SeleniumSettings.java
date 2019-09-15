@@ -172,10 +172,6 @@ public class SeleniumSettings {
     public String getTestPassword() {
         return testPassword;
     }
-
-    void setTestPassword(String testPassword) {
-        this.testPassword = testPassword;
-    }
  
     public String getTestPasswordApiV3() {
         return testPasswordApiV3;
@@ -219,10 +215,6 @@ public class SeleniumSettings {
 
     public String getServerUrl() {
         return serverUrl;
-    }
-
-    void setServerUrl(String serverUrl) {
-        this.serverUrl = serverUrl;
     }
 
 }
