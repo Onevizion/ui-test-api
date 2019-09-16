@@ -97,8 +97,7 @@ public class AssertElement {
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + fieldName + "] has wrong value");
         if (isOpenSelector && !"".equals(expectedVal)) {
-            boolean isChecked = psSelector.checkValue(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
-            Assert.assertEquals(isChecked, true, "Radiobutton not selected");
+            psSelector.checkValue(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
         }
     }
 
@@ -107,8 +106,7 @@ public class AssertElement {
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(fieldId)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + fieldId + "] has wrong value");
         if (isOpenSelector && !"".equals(expectedVal)) {
-            boolean isChecked = psSelector.checkValue(By.id(btnOpenId), btnCloseName, expectedVal, filterFieldNum);
-            Assert.assertEquals(isChecked, true, "Radiobutton not selected");
+            psSelector.checkValue(By.id(btnOpenId), btnCloseName, expectedVal, filterFieldNum);
         }
     }
 
@@ -119,14 +117,13 @@ public class AssertElement {
             Assert.assertEquals(actualVal.contains(expectedVal.trim()), true, "Element with name=[" + fieldName + "] has wrong value");
         }
         if (isOpenSelector) {
-            List<String> val = new ArrayList<>();
+            List<String> vals = new ArrayList<>();
             for (String expectedVal : expectedVals) {
                 if (!"".equals(expectedVal)) {
-                    val.add(expectedVal);
+                    vals.add(expectedVal);
                 }
             }
-            boolean isChecked = psSelector.checkMultipleValues(By.name(btnOpenName), btnCloseName, val, filterFieldNum);
-            Assert.assertEquals(isChecked, true, "Radiobutton not selected");
+            psSelector.checkMultipleValues(By.name(btnOpenName), btnCloseName, vals, filterFieldNum);
         }
     }
 
@@ -137,15 +134,13 @@ public class AssertElement {
             Assert.assertEquals(actualVal.contains(expectedVal.trim()), true, "Element with id=[" + fieldId + "] has wrong value");
         }
         if (isOpenSelector) {
-            List<String> val = new ArrayList<>();
+            List<String> vals = new ArrayList<>();
             for (String expectedVal : expectedVals) {
                 if (!"".equals(expectedVal)) {
-                    val.add(expectedVal);
+                    vals.add(expectedVal);
                 }
             }
-            By btnOpen = By.id(btnOpenId);
-            boolean isChecked = psSelector.checkMultipleValues(btnOpen, btnCloseName, val, filterFieldNum);
-            Assert.assertEquals(isChecked, true, "Radiobutton not selected");
+            psSelector.checkMultipleValues(By.id(btnOpenId), btnCloseName, vals, filterFieldNum);
         }
     }
 

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -127,11 +128,12 @@ public class PsSelector {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
     }
 
-    public boolean checkValue(By btnOpen, String btnCloseName, String value, Long filterFiledNum) {
-        boolean ret = false;
+    public void checkValue(By btnOpen, String btnCloseName, String value, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(By.id(btnCloseName));
         grid2.waitLoad();
+
+        boolean isChecked = false;
 
         if (qs.isExistQs(0L)) {
             qs.waitQsActive(0L);
@@ -140,73 +142,70 @@ public class PsSelector {
             for (Long i = 0L; i < webElements.size(); i = i + 1L) {
                 String checked = webElements.get(i.intValue()).getAttribute("checked");
                 if (checked != null && checked.equals("true")) {
-                    ret = true;
+                    isChecked = true;
                     break;
                 }
             }
         } else {
             Long cnt = js.getGridRowsCount(0L);
-            WebElement rb;
             for (Long i = 0L; i < cnt; i++) {
                 if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
-                    rb = ((WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L)).findElement(By.name("rb0"));
+                    WebElement rb = ((WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0L)).findElement(By.name("rb0"));
                     String checked = rb.getAttribute("checked");
                     if (checked != null && checked.equals("true")) {
-                        ret = true;
+                        isChecked = true;
+                        break;
                     }
-                    break;
                 }
             }
         }
 
+        Assert.assertEquals(isChecked, true, "value not selected");
+
         window.closeModal(By.id(btnCloseName));
-        return ret;
     }
 
-    public boolean checkMultipleValues(By btnOpen, String btnCloseName, List<String> values, Long filterFiledNum) {
+    public void checkMultipleValues(By btnOpen, String btnCloseName, List<String> values, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(By.name(btnCloseName));
         grid2.waitLoad();
 
         if (qs.isExistQs(0L)) {
             for (String value : values) {
+                boolean isChecked = false;
+
                 qs.searchValue(0L, filterFiledNum, "*" + value + "*");
                 List<WebElement> webElements = checkbox.findCheckboxesByName("cb0_0");
-                boolean ret = false;
                 for (Long i = 0L; i < webElements.size(); i = i + 1L) {
                     if (checkbox.isElementChecked(webElements.get(i.intValue()))) {
-                        ret = true;
+                        isChecked = true;
                         break;
                     }
                 }
-                if (!ret) {
-                    window.closeModal(By.name(btnCloseName));
-                    return ret;
-                }
+
+                Assert.assertEquals(isChecked, true, "value not selected");
             }
         } else {
             Long cnt = js.getGridRowsCount(0L);
             for (String value : values) {
-                boolean ret = false;
+                boolean isChecked = false;
+
                 for (Long i = 0L; i < cnt; i++) {
                     if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
-                        WebElement cell = (WebElement)js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                        WebElement cell = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
                         if (checkbox.isElementChecked(cb)) {
-                            ret = true;
+                            isChecked = true;
+                            break;
                         }
-                        break;
                     }
                 }
-                if (!ret) {
-                    window.closeModal(By.name(btnCloseName));
-                    return ret;
-                }
+
+                Assert.assertEquals(isChecked, true, "value not selected");
             }
         }
 
         window.closeModal(By.name(btnCloseName));
-        return true;
     }
 
 }
