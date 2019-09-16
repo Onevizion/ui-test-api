@@ -41,27 +41,6 @@ public class PsSelector {
     @Resource
     private Grid2 grid2;
 
-    public void selectValue(String buttonName, Long romNum) {
-        window.openModal(By.name(buttonName));
-        grid2.waitLoad();
-
-        seleniumSettings.getWebDriver().findElements(By.name("rb0")).get(romNum.intValue()).click();
-
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
-    }
-
-    public void selectMultipleValues(String buttonName, Long firstRowNum, Long lastRowNum) {
-        window.openModal(By.name(buttonName));
-        grid2.waitLoad();
-
-        List<WebElement> webElements = seleniumSettings.getWebDriver().findElements(By.name("cb0_0"));
-        for (Long i = firstRowNum; i <= lastRowNum; i++) {
-            checkbox.clickByElement(webElements.get(i.intValue()));
-        }
-
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
-    }
-
     public void selectSpecificValue(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(btnClose);
