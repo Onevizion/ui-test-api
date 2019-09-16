@@ -27,7 +27,7 @@ public class AssertElement {
     private Wait wait;
 
     @Resource
-    private PsSelector psSelector;
+    private Selector selector;
 
     @Resource
     private Element element;
@@ -97,7 +97,7 @@ public class AssertElement {
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + fieldName + "] has wrong value");
         if (isOpenSelector && !"".equals(expectedVal)) {
-            psSelector.checkRadio(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
+            selector.checkRadio(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
         }
     }
 
@@ -106,7 +106,7 @@ public class AssertElement {
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(fieldId)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + fieldId + "] has wrong value");
         if (isOpenSelector && !"".equals(expectedVal)) {
-            psSelector.checkRadio(By.id(btnOpenId), btnCloseName, expectedVal, filterFieldNum);
+            selector.checkRadio(By.id(btnOpenId), btnCloseName, expectedVal, filterFieldNum);
         }
     }
 
@@ -123,7 +123,7 @@ public class AssertElement {
                     vals.add(expectedVal);
                 }
             }
-            psSelector.checkCheckbox(By.name(btnOpenName), btnCloseName, vals, filterFieldNum);
+            selector.checkCheckbox(By.name(btnOpenName), btnCloseName, vals, filterFieldNum);
         }
     }
 
@@ -140,7 +140,7 @@ public class AssertElement {
                     vals.add(expectedVal);
                 }
             }
-            psSelector.checkCheckbox(By.id(btnOpenId), btnCloseName, vals, filterFieldNum);
+            selector.checkCheckbox(By.id(btnOpenId), btnCloseName, vals, filterFieldNum);
         }
     }
 

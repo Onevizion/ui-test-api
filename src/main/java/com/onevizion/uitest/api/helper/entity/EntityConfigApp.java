@@ -21,7 +21,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.HtmlSelect;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Listbox;
-import com.onevizion.uitest.api.helper.PsSelector;
+import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
@@ -56,7 +56,7 @@ public class EntityConfigApp {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private PsSelector psSelector;
+    private Selector selector;
 
     @Resource
     private Element element;
@@ -99,7 +99,7 @@ public class EntityConfigApp {
         if (isCanHaveRelatedTrackorType(configApp)) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RELATED_TRACKOR_TYPE))).selectByVisibleText(configApp.getRelatedTrackorType());
         }
-        psSelector.selectRadio(By.name(ICON_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configApp.getIcon(), 1L);
+        selector.selectRadio(By.name(ICON_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configApp.getIcon(), 1L);
 
         element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");

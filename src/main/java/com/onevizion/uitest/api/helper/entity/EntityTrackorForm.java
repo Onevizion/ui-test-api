@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.PsSelector;
+import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
@@ -40,7 +40,7 @@ public class EntityTrackorForm {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private PsSelector psSelector;
+    private Selector selector;
 
     @Resource
     private Checkbox checkbox;
@@ -64,11 +64,11 @@ public class EntityTrackorForm {
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorForm.getName());
 
-        psSelector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
+        selector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
 
-        psSelector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
+        selector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
 
-        psSelector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
+        selector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
 
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).sendKeys(trackorForm.getInterval());
@@ -102,11 +102,11 @@ public class EntityTrackorForm {
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorForm.getName());
 
-        psSelector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
+        selector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
 
-        psSelector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
+        selector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
 
-        psSelector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
+        selector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
 
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).sendKeys(trackorForm.getInterval());

@@ -54,7 +54,7 @@ public class Tb {
     private FieldHistory fieldHistory;
 
     @Resource
-    private PsSelector psSelector;
+    private Selector selector;
 
     @Resource
     private Element element;
@@ -299,10 +299,10 @@ public class Tb {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
                 By btnOpen = By.id("idx" + idx + "_but");
                 element.moveToElementById("idx" + idx + "_but");
-                psSelector.selectRadio(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                selector.selectRadio(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             } else {
                 element.moveToElementByName(fieldName + "_but");
-                psSelector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                selector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -314,10 +314,10 @@ public class Tb {
                     String idx = getLastFieldIndex(fieldName, elementPosition);
                     By btnOpen = By.id("idx" + idx + "_but");
                     element.moveToElementById("idx" + idx + "_but");
-                    psSelector.selectRadio(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                    selector.selectRadio(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
                 } else {
                     element.moveToElementByName(fieldName + "_but");
-                    psSelector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                    selector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
                 }
                 wait.waitFormLoad();
             } catch (UnhandledAlertException | SeleniumAlertException e) {
@@ -353,11 +353,11 @@ public class Tb {
                 element.moveToElementById("idx" + idx + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("idx" + idx + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
                 By btnOpen = By.id("idx" + idx + "_but");
-                psSelector.selectCheckbox(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
+                selector.selectCheckbox(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
             } else {
                 element.moveToElementByName(fieldName + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(fieldName + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-                psSelector.selectCheckbox(By.name(fieldName + "_but"), 1L, Arrays.asList(value.split(",")), 1L);
+                selector.selectCheckbox(By.name(fieldName + "_but"), 1L, Arrays.asList(value.split(",")), 1L);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -757,7 +757,7 @@ public class Tb {
                 expVals.put(fieldName, value);
             }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
-            psSelector.selectRadio(By.name("btn1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+            selector.selectRadio(By.name("btn1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
@@ -765,7 +765,7 @@ public class Tb {
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("epmSelector1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-            psSelector.selectCheckbox(By.name("btn1"), 1L, Arrays.asList(value.split(",")), 1L);
+            selector.selectCheckbox(By.name("btn1"), 1L, Arrays.asList(value.split(",")), 1L);
             gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
             if (fieldName != null) {
                 expVals.put(fieldName, value);

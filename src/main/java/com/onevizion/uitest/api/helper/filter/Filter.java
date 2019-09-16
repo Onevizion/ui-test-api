@@ -20,7 +20,7 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.PsSelector;
+import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
@@ -83,7 +83,7 @@ public class Filter {
     private Window window;
 
     @Resource
-    private PsSelector psSelector;
+    private Selector selector;
 
     @Resource
     private Checkbox checkbox;
@@ -199,9 +199,9 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
             checkbox.clickByName(fieldName);
         } else if (filterFieldType.equals(FilterFieldType.RADIO_PS_SELECTOR)) {
-            psSelector.selectRadio(By.name("btn" + fieldName), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, cellsValues.get(0), 1L);
+            selector.selectRadio(By.name("btn" + fieldName), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, cellsValues.get(0), 1L);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
-            psSelector.selectCheckbox(By.name("btn" + fieldName), 1L, cellsValues, 1L);
+            selector.selectCheckbox(By.name("btn" + fieldName), 1L, cellsValues, 1L);
         }
         closeFilterFormOk(gridIdx);
     }

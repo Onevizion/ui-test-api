@@ -26,7 +26,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.PsSelector;
+import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Tb;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -71,7 +71,7 @@ public class UserpageFilter {
     private Window window;
 
     @Resource
-    private PsSelector psSelector;
+    private Selector selector;
 
     @Resource
     private AssertElement assertElement;
@@ -91,7 +91,7 @@ public class UserpageFilter {
     public void checkFilterOperators(String fieldName, List<String> dateTypes, List<FilterOperatorType> operators) {
         filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
 
-        psSelector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + 1), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+        selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + 1), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
         if (dateTypes != null) {
             List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER_TASK + 1))).getOptions();
             Assert.assertEquals(options.size(), dateTypes.size());
@@ -434,7 +434,7 @@ public class UserpageFilter {
     private void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator) {
         filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
 
-        psSelector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+        selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + row))).selectByVisibleText(operator.getValue());
 
@@ -444,7 +444,7 @@ public class UserpageFilter {
     private void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator, String value) {
         filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
 
-        psSelector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+        selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + row))).selectByVisibleText(operator.getValue());
 
@@ -456,7 +456,7 @@ public class UserpageFilter {
     public void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
         filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
 
-        psSelector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+        selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
         if (dateType != null) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER_TASK + row))).selectByVisibleText(dateType);
         }
@@ -465,17 +465,17 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN) || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
             if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
-                psSelector.selectRadio(By.name(FILTER_ROW_VALUE_FIELD_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                selector.selectRadio(By.name(FILTER_ROW_VALUE_FIELD_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)
                     && !operator.equals(FilterOperatorType.NEW) && !operator.equals(FilterOperatorType.NOT_NEW)) {
                 if (fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR) || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
-                    psSelector.selectCheckbox(By.name(FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON + row), 0L, Arrays.asList(value), 1L);
+                    selector.selectCheckbox(By.name(FILTER_ROW_VALUE_TRACKOR_SELECTOR_BUTTON + row), 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR)) {
-                    psSelector.selectCheckbox(By.name(FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON + row), 0L, Arrays.asList(value), 1L);
+                    selector.selectCheckbox(By.name(FILTER_ROW_VALUE_MULTI_SELECTOR_BUTTON + row), 0L, Arrays.asList(value), 1L);
                 } else if (fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-                    psSelector.selectRadio(By.name(FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 0L, value, 1L);
+                    selector.selectRadio(By.name(FILTER_ROW_VALUE_TRACKOR_DROP_DOWN_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 0L, value, 1L);
                 } else {
-                    psSelector.selectCheckbox(By.name(FILTER_ROW_VALUE_SELECTOR_BUTTON + row), 0L, Arrays.asList(value), 1L);
+                    selector.selectCheckbox(By.name(FILTER_ROW_VALUE_SELECTOR_BUTTON + row), 0L, Arrays.asList(value), 1L);
                 }
             }
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
@@ -486,7 +486,7 @@ public class UserpageFilter {
             if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)
                     || operator.equals(FilterOperatorType.MORE_FIELD) || operator.equals(FilterOperatorType.LESS_FIELD)
                     || operator.equals(FilterOperatorType.MORE_AND_EQUAL_FIELD) || operator.equals(FilterOperatorType.LESS_AND_EQUAL_FIELD)) {
-                psSelector.selectRadio(By.name(FILTER_ROW_VALUE_FIELD_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                selector.selectRadio(By.name(FILTER_ROW_VALUE_FIELD_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             //} else if (operator.equals(FilterOperatorType.MORE_AND_EQUAL_TODAY) || operator.equals(FilterOperatorType.LESS_AND_EQUAL_TODAY) //TODO check those lines
             //        || operator.equals(FilterOperatorType.THIS_WK) || operator.equals(FilterOperatorType.THIS_MO)
             //        || operator.equals(FilterOperatorType.THIS_FQ) || operator.equals(FilterOperatorType.THIS_FY)) {
@@ -523,7 +523,7 @@ public class UserpageFilter {
             }
         } else {
             if (operator.equals(FilterOperatorType.EQUAL_FIELD) || operator.equals(FilterOperatorType.NOT_EQUAL_FIELD)) {
-                psSelector.selectRadio(By.name(FILTER_ROW_VALUE_FIELD_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
+                selector.selectRadio(By.name(FILTER_ROW_VALUE_FIELD_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName2, 1L);
             } else if (!operator.equals(FilterOperatorType.NULL) && !operator.equals(FilterOperatorType.NOT_NULL)) {
                 seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_VALUE_TEXT_TEXT + row)).sendKeys("*" + value + "*");
             }

@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.PsSelector;
+import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
@@ -44,7 +44,7 @@ public class EntityTrackorTour {
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private PsSelector psSelector;
+    private Selector selector;
 
     @Resource
     private Tab tab;
@@ -96,11 +96,11 @@ public class EntityTrackorTour {
         new Select(seleniumSettings.getWebDriver().findElement(By.name(START_PLACE))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            psSelector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
+            selector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
         } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
-            psSelector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
+            selector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
         } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
-            psSelector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
+            selector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
@@ -141,11 +141,11 @@ public class EntityTrackorTour {
         new Select(seleniumSettings.getWebDriver().findElement(By.name(START_PLACE))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            psSelector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
+            selector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
         } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
-            psSelector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
+            selector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
         } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
-            psSelector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
+            selector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }

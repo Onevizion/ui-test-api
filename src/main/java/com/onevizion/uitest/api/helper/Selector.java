@@ -15,7 +15,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
-public class PsSelector {
+public class Selector {
 
     @Resource
     private Js js;

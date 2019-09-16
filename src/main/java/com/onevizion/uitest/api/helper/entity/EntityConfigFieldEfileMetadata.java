@@ -14,7 +14,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.PsSelector;
+import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
@@ -34,7 +34,7 @@ public class EntityConfigFieldEfileMetadata {
     private Wait wait;
 
     @Resource
-    private PsSelector psSelector;
+    private Selector selector;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -58,7 +58,7 @@ public class EntityConfigFieldEfileMetadata {
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(TYPE))).selectByVisibleText(configFieldVoEfileMetadata.getType().getLabel());
 
-        psSelector.selectRadio(By.name(FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, configFieldVoEfileMetadata.getConfigField(), 1L);
+        selector.selectRadio(By.name(FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, configFieldVoEfileMetadata.getConfigField(), 1L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad(3L);
