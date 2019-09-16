@@ -199,9 +199,9 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
             checkbox.clickByName(fieldName);
         } else if (filterFieldType.equals(FilterFieldType.RADIO_PS_SELECTOR)) {
-            psSelector.selectSpecificValue(By.name("btn" + fieldName), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, cellsValues.get(0), 1L);
+            psSelector.selectRadio(By.name("btn" + fieldName), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, cellsValues.get(0), 1L);
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
-            psSelector.selectMultipleSpecificValues(By.name("btn" + fieldName), 1L, cellsValues, 1L);
+            psSelector.selectCheckbox(By.name("btn" + fieldName), 1L, cellsValues, 1L);
         }
         closeFilterFormOk(gridIdx);
     }

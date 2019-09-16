@@ -41,7 +41,7 @@ public class PsSelector {
     @Resource
     private Grid2 grid2;
 
-    public void selectSpecificValue(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
+    public void selectRadio(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(btnClose);
         grid2.waitLoad();
@@ -71,7 +71,7 @@ public class PsSelector {
         window.closeModal(btnClose);
     }
 
-    public void selectMultipleSpecificValues(By btnOpen, Long colNum, List<String> values, Long filterFiledNum) {
+    public void selectCheckbox(By btnOpen, Long colNum, List<String> values, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         grid2.waitLoad();
@@ -107,7 +107,7 @@ public class PsSelector {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
     }
 
-    public void checkValue(By btnOpen, String btnCloseName, String value, Long filterFiledNum) {
+    public void checkRadio(By btnOpen, String btnCloseName, String value, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(By.id(btnCloseName));
         grid2.waitLoad();
@@ -144,7 +144,7 @@ public class PsSelector {
         window.closeModal(By.id(btnCloseName));
     }
 
-    public void checkMultipleValues(By btnOpen, String btnCloseName, List<String> values, Long filterFiledNum) {
+    public void checkCheckbox(By btnOpen, String btnCloseName, List<String> values, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(By.name(btnCloseName));
         grid2.waitLoad();

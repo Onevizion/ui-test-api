@@ -71,7 +71,7 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        psSelector.selectSpecificValue(By.name("btntrackorType"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, trackorTreeItem.getTrackorType(), 1L);
+        psSelector.selectRadio(By.name("btntrackorType"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, trackorTreeItem.getTrackorType(), 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(CARDINALITY))).selectByVisibleText(trackorTreeItem.getCardinality());
 

@@ -96,11 +96,11 @@ public class EntityTrackorTour {
         new Select(seleniumSettings.getWebDriver().findElement(By.name(START_PLACE))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            psSelector.selectSpecificValue(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
+            psSelector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
         } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
-            psSelector.selectSpecificValue(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
+            psSelector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
         } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
-            psSelector.selectSpecificValue(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
+            psSelector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
@@ -141,11 +141,11 @@ public class EntityTrackorTour {
         new Select(seleniumSettings.getWebDriver().findElement(By.name(START_PLACE))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            psSelector.selectSpecificValue(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
+            psSelector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
         } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
-            psSelector.selectSpecificValue(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
+            psSelector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
         } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
-            psSelector.selectSpecificValue(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
+            psSelector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }

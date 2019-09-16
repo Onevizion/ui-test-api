@@ -99,7 +99,7 @@ public class EntityConfigApp {
         if (isCanHaveRelatedTrackorType(configApp)) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RELATED_TRACKOR_TYPE))).selectByVisibleText(configApp.getRelatedTrackorType());
         }
-        psSelector.selectSpecificValue(By.name(ICON_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configApp.getIcon(), 1L);
+        psSelector.selectRadio(By.name(ICON_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configApp.getIcon(), 1L);
 
         element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");

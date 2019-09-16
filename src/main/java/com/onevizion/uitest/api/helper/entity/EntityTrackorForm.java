@@ -64,11 +64,11 @@ public class EntityTrackorForm {
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorForm.getName());
 
-        psSelector.selectSpecificValue(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
+        psSelector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
 
-        psSelector.selectSpecificValue(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
+        psSelector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
 
-        psSelector.selectSpecificValue(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
+        psSelector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
 
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).sendKeys(trackorForm.getInterval());
@@ -102,11 +102,11 @@ public class EntityTrackorForm {
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorForm.getName());
 
-        psSelector.selectSpecificValue(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
+        psSelector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
 
-        psSelector.selectSpecificValue(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
+        psSelector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
 
-        psSelector.selectSpecificValue(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
+        psSelector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
 
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).sendKeys(trackorForm.getInterval());

@@ -59,9 +59,9 @@ public class EntityCoord {
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(coord.getName());
 
-        psSelector.selectSpecificValue(By.name(LATITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, coord.getLatFieldName(), 1L);
+        psSelector.selectRadio(By.name(LATITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, coord.getLatFieldName(), 1L);
 
-        psSelector.selectSpecificValue(By.name(LONGITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, coord.getLongFieldName(), 1L);
+        psSelector.selectRadio(By.name(LONGITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, coord.getLongFieldName(), 1L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();

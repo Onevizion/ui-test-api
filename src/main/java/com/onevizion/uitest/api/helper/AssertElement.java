@@ -97,7 +97,7 @@ public class AssertElement {
         String actualVal = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + fieldName + "] has wrong value");
         if (isOpenSelector && !"".equals(expectedVal)) {
-            psSelector.checkValue(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
+            psSelector.checkRadio(By.name(btnOpenName), btnCloseName, expectedVal, filterFieldNum);
         }
     }
 
@@ -106,7 +106,7 @@ public class AssertElement {
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(fieldId)).getAttribute("value");
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + fieldId + "] has wrong value");
         if (isOpenSelector && !"".equals(expectedVal)) {
-            psSelector.checkValue(By.id(btnOpenId), btnCloseName, expectedVal, filterFieldNum);
+            psSelector.checkRadio(By.id(btnOpenId), btnCloseName, expectedVal, filterFieldNum);
         }
     }
 
@@ -123,7 +123,7 @@ public class AssertElement {
                     vals.add(expectedVal);
                 }
             }
-            psSelector.checkMultipleValues(By.name(btnOpenName), btnCloseName, vals, filterFieldNum);
+            psSelector.checkCheckbox(By.name(btnOpenName), btnCloseName, vals, filterFieldNum);
         }
     }
 
@@ -140,7 +140,7 @@ public class AssertElement {
                     vals.add(expectedVal);
                 }
             }
-            psSelector.checkMultipleValues(By.id(btnOpenId), btnCloseName, vals, filterFieldNum);
+            psSelector.checkCheckbox(By.id(btnOpenId), btnCloseName, vals, filterFieldNum);
         }
     }
 

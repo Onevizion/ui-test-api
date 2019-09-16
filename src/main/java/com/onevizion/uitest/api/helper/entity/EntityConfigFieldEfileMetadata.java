@@ -58,7 +58,7 @@ public class EntityConfigFieldEfileMetadata {
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(TYPE))).selectByVisibleText(configFieldVoEfileMetadata.getType().getLabel());
 
-        psSelector.selectSpecificValue(By.name(FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, configFieldVoEfileMetadata.getConfigField(), 1L);
+        psSelector.selectRadio(By.name(FIELD_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, configFieldVoEfileMetadata.getConfigField(), 1L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad(3L);
