@@ -132,13 +132,11 @@ public class HtmlInputFile {
     }
 
     public void beforeUploadOnGrid(Long gridIndex) {
-        if (seleniumSettings.getBrowser().equals("firefox")) {
-            WebElement frame = (WebElement) htmlInputFileJs.getFrameForFileTbGrid(gridIndex);
+        WebElement frame = (WebElement) htmlInputFileJs.getFrameForFileTbGrid(gridIndex);
 
-            seleniumSettings.getWebDriver().switchTo().frame(frame);
-            htmlInputFileJs.disableClickForFileTbGrid();
-            seleniumSettings.getWebDriver().switchTo().parentFrame();
-        }
+        seleniumSettings.getWebDriver().switchTo().frame(frame);
+        htmlInputFileJs.disableClickForFileTbGrid();
+        seleniumSettings.getWebDriver().switchTo().parentFrame();
     }
 
     public void uploadOnGrid(Long gridIndex, String fieldName, String value) {
