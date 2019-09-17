@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.HtmlSelect;
@@ -65,9 +64,6 @@ public class EntityConfigApp {
     private Tab tab;
 
     @Resource
-    private DualListbox dualListbox;
-
-    @Resource
     private Listbox listbox;
 
     @Resource
@@ -110,8 +106,9 @@ public class EntityConfigApp {
         view.waitRightListBoxReady();
 
         tab.goToTab(2L); //Tabs
+        List<ListboxElement> leftTabs = listbox.getElements("leftListBox");
         for (String tab : configApp.getTabs()) {
-            dualListbox.addValueByTextNew(BUTTON_ADD_TAB, tab);
+            listbox.moveElementByLabel(leftTabs, tab, BUTTON_ADD_TAB);
         }
 
         tab.goToTab(3L); //Role Privs
@@ -173,9 +170,10 @@ public class EntityConfigApp {
         for (WebElement rightColumn : rightColumns) {
             rightApps.add(htmlSelect.getOptionTextNew(rightColumn));
         }
+        List<ListboxElement> leftTabs = listbox.getElements("leftListBox");
         for (String tab : configApp.getTabs()) {
             if (!rightApps.contains(tab)) {
-                dualListbox.addValueByTextNew(BUTTON_ADD_TAB, tab);
+                listbox.moveElementByLabel(leftTabs, tab, BUTTON_ADD_TAB);
             }
         }
 
