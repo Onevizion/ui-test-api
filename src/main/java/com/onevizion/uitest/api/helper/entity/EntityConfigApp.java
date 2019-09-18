@@ -1,6 +1,5 @@
 package com.onevizion.uitest.api.helper.entity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +15,6 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Grid;
-import com.onevizion.uitest.api.helper.HtmlSelect;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.Selector;
@@ -77,9 +74,6 @@ public class EntityConfigApp {
 
     @Resource
     private Grid2 grid2;
-
-    @Resource
-    private HtmlSelect htmlSelect;
 
     public void add(ConfigApp configApp) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -165,14 +159,11 @@ public class EntityConfigApp {
         if (seleniumSettings.getWebDriver().findElement(By.id(BUTTON_REMOVE_ALL_TABS)).isEnabled()) {
             seleniumSettings.getWebDriver().findElement(By.id(BUTTON_REMOVE_ALL_TABS)).click();
         }
-        List<String> rightApps = new ArrayList<>();
-        List<WebElement> rightColumns = view.getRightColumns();
-        for (WebElement rightColumn : rightColumns) {
-            rightApps.add(htmlSelect.getOptionTextNew(rightColumn));
-        }
+        List<ListboxElement> rightTabs = listbox.getElements("rightListBox");
         List<ListboxElement> leftTabs = listbox.getElements("leftListBox");
         for (String tab : configApp.getTabs()) {
-            if (!rightApps.contains(tab)) {
+            boolean alreadyInRightList = rightTabs.stream().anyMatch(p -> p.getLabel().equals(tab));
+            if (!alreadyInRightList) {
                 listbox.moveElementByLabel(leftTabs, tab, BUTTON_ADD_TAB);
             }
         }

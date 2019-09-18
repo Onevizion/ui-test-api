@@ -243,7 +243,6 @@ public class FormDesigner {
     }
 
     public void switchToRootSubgroup() {
-        //elementHelper.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink")).get(0));
         element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.tagName("input")));
         waitListBoxReady();
     }
@@ -251,11 +250,6 @@ public class FormDesigner {
     public void switchToParentSubgroup() {
         List<WebElement> links = seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink"));
         element.click(links.get(links.size() - 2));
-        waitListBoxReady();
-    }
-
-    public void switchToSubgroup(String subgroupName) {
-        element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.name(subgroupName)));
         waitListBoxReady();
     }
 

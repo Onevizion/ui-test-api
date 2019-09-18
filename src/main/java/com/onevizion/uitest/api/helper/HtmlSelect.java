@@ -28,7 +28,10 @@ public class HtmlSelect {
         return false;
     }
 
-    /* new void to support new duallist box */
+    /**
+     * @deprecated (we should use listbox.checkElementByLabel when UI will be updated. fields on admin wf step form)
+     */
+    @Deprecated
     public boolean isSelectOptionPresent(WebElement select, String visibleText) {
         boolean isException = true;
         while (isException) {
@@ -47,21 +50,15 @@ public class HtmlSelect {
         return false;
     }
 
-    /* new void to support new duallist box */
+    /**
+     * @deprecated (we should use listbox.checkElementByLabel when UI will be updated. fields on admin wf step form and applets on reorder form)
+     */
+    @Deprecated
     public String getOptionText(final WebElement option, final boolean isNew) {
         if (StringUtils.isNotEmpty(option.findElement(By.tagName("span")).getAttribute("innerText"))) {
             return option.findElement(By.tagName("span")).getAttribute("innerText");
         } else {
             return option.findElement(By.tagName("span")).getAttribute("textContent");
-        }
-    }
-
-    public String getOptionTextNew(final WebElement option) {
-        WebElement label = option.findElement(By.className("labelField"));
-        if (StringUtils.isNotEmpty(label.getAttribute("innerText"))) {
-            return label.getAttribute("innerText").trim();
-        } else {
-            return label.getAttribute("textContent").trim();
         }
     }
 

@@ -66,7 +66,6 @@ public class View {
     private static final String BUTTON_GROUP_FIELD = "cfg";
     private static final String BUTTON_GROUP_TASK = "tsg";
     private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
-    private static final String BUTTON_GROUP_MARKUP = "mug";
     private static final String BUTTON_GROUP_DATE_PAIR = "dp";
 
     private static final String COLUMN_LABEL = "labelField";
@@ -475,41 +474,6 @@ public class View {
         checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
     }
 
-    public Select selectApplet(Select apps, Select tabs, String appletName, int cntTabs) {
-        apps.selectByVisibleText(appletName);
-        jquery.waitLoad(); //wait load tabs and fields
-        wait.waitListBoxLoad(tabs);
-        jquery.waitLoad(); //wait load tabs and fields
-        Assert.assertEquals(apps.getFirstSelectedOption().getText(), appletName);
-        jquery.waitLoad(); //wait load tabs and fields
-        wait.waitListBoxLoadCnt(tabs, cntTabs);
-        jquery.waitLoad(); //wait load tabs and fields
-        Assert.assertEquals(tabs.getOptions().size(), cntTabs, "Tabs have wrong cnt");
-        return tabs;
-    }
-
-    public Select selectTab(Select tabs, Select allFields, String tabName, int cntFields) {
-        tabs.selectByVisibleText(tabName);
-        jquery.waitLoad(); //wait load tabs and fields
-        wait.waitListBoxLoad(allFields);
-        jquery.waitLoad(); //wait load tabs and fields
-        wait.waitListBoxLoadCnt(allFields, cntFields);
-        jquery.waitLoad(); //wait load tabs and fields
-        Assert.assertEquals(allFields.getOptions().size(), cntFields, "All Fields have wrong cnt");
-        return allFields;
-    }
-
-    public WebElement selectTab(Select tabs, WebElement allFields, String tabName, int cntFields) {
-        tabs.selectByVisibleText(tabName);
-        jquery.waitLoad(); //wait load tabs and fields
-        wait.waitListBoxLoad(allFields);
-        jquery.waitLoad(); //wait load tabs and fields
-        wait.waitListBoxLoadCnt(allFields, cntFields);
-        jquery.waitLoad(); //wait load tabs and fields
-        Assert.assertEquals(allFields.findElements(By.tagName("div")).size(), cntFields, "All Fields have wrong cnt");
-        return allFields;
-    }
-
     public void selectAllColumns(Long gridIdx) {
         openViewForm(gridIdx);
 
@@ -591,11 +555,6 @@ public class View {
         waitLeftListBoxReady();
     }
 
-    public void switchToSubgroup(String subgroupName) {
-        element.click(seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElement(By.name(subgroupName)));
-        waitLeftListBoxReady();
-    }
-
     public void switchToSubgroupInList(String text) {
         WebElement subgroupElement = null;
         List<WebElement> subgroups = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("groupRecord"));
@@ -628,11 +587,6 @@ public class View {
 
     public void switchToDrillDownGroup() {
         element.clickById(BUTTON_GROUP_DRILLDOWN);
-        waitLeftListBoxReady();
-    }
-
-    public void switchToMarkupGroup() {
-        element.clickById(BUTTON_GROUP_MARKUP);
         waitLeftListBoxReady();
     }
 

@@ -27,7 +27,10 @@ public class DualListbox {
         seleniumSettings.getWebDriver().findElement(By.id(btnId)).click();
     }
 
-    /*new void to support new duallist box*/
+    /**
+     * @deprecated (we should use listbox.moveElementByLabel when UI will be updated. fields on admin wf step form)
+     */
+    @Deprecated
     public void addValueByText(WebElement select, String btnId, String text) {
         checkValueByTextIsPresent(select, text);
         //deselectSelectOptions(select);
@@ -63,7 +66,10 @@ public class DualListbox {
         }
     }
 
-    /*new void to support new duallist box*/
+    /**
+     * @deprecated (we should use listbox.moveElementByLabel when UI will be updated. fields on admin wf step form)
+     */
+    @Deprecated
     private void checkValueByTextIsPresent(WebElement select, String text) {
         int attemptsCnt = 0; //protection from the endless cycle
         int i = 0;

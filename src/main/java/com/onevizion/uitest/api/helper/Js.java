@@ -459,18 +459,6 @@ public class Js {
                 + "return elem;");
     }
 
-    public Object getNewDropDownElementNew(String id, String containerClass, String text) {
-        return execJs2("var elem = null;"
-                + "var elements = document.getElementById('" + id + "').getElementsByClassName('scrollContainer')[0].getElementsByClassName('" + containerClass + "');"
-                + "for (var i = 0; i < elements.length; i++) {"
-                + "    if (elements[i].getElementsByClassName('labelField')[0].innerText.trim() == '" + text +"' || elements[i].getElementsByClassName('labelField')[0].textContent.trim() == '" + text +"') {"
-                + "        elem = elements[i];"
-                + "        break;"
-                + "    }"
-                + "}"
-                + "return elem;");
-    }
-
     public Long getNewDropDownElementPosition(String id, String containerClass, String containerItemClass, String text) {
         text = text.replaceAll("'", "\\\\'");
 
@@ -478,18 +466,6 @@ public class Js {
                 + "var elements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
                 + "for (var i = 0; i < elements.length; i++) {"
                 + "    if (elements[i].innerText == '" + text +"' || elements[i].textContent == '" + text +"') {"
-                + "        j = i;"
-                + "        break;"
-                + "    }"
-                + "}"
-                + "return j;"));
-    }
-
-    public Long getNewDropDownElementPositionNew(String id, String id2, String text) {
-        return NumberUtils.createLong(execJs("var j = 0;"
-                + "var elements = document.getElementById('" + id + "').getElementsByClassName('scrollContainer')[0].getElementsByClassName('" + id2 + "');"
-                + "for (var i = 0; i < elements.length; i++) {"
-                + "    if (elements[i].getElementsByClassName('labelField')[0].innerText.trim() == '" + text +"' || elements[i].getElementsByClassName('labelField')[0].textContent.trim() == '" + text +"') {"
                 + "        j = i;"
                 + "        break;"
                 + "    }"
