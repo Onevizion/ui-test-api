@@ -63,6 +63,7 @@ public class EntityConfigField {
     private static final String READ_ONLY = "readOnly";
     private static final String NOT_CLONE_VALUE = "notCloneFieldValue";
     private static final String NOT_CLONE_LOCK = "notCloneLocks";
+    private static final String BARCODE = "supportBarcode";
 
     @Resource
     private Window window;
@@ -364,6 +365,11 @@ public class EntityConfigField {
             checkbox.clickByName(NOT_CLONE_LOCK);
         }
 
+        if ((configFieldVo.getBarcode().equals("YES") && !checkbox.isCheckedByName(BARCODE))
+                || (configFieldVo.getBarcode().equals("NO") && checkbox.isCheckedByName(BARCODE))) {
+            checkbox.clickByName(BARCODE);
+        }
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
 
@@ -649,6 +655,11 @@ public class EntityConfigField {
             checkbox.clickByName(NOT_CLONE_LOCK);
         }
 
+        if ((configFieldVo.getBarcode().equals("YES") && !checkbox.isCheckedByName(BARCODE))
+                || (configFieldVo.getBarcode().equals("NO") && checkbox.isCheckedByName(BARCODE))) {
+            checkbox.clickByName(BARCODE);
+        }
+
         Long packagesTabIndex;
         if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType()) ||
                 ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
@@ -841,6 +852,7 @@ public class EntityConfigField {
         assertElement.assertCheckbox(READ_ONLY, configFieldVo.getReadOnly());
         assertElement.assertCheckbox(NOT_CLONE_VALUE, configFieldVo.getNotCloneValue());
         assertElement.assertCheckbox(NOT_CLONE_LOCK, configFieldVo.getNotCloneLock());
+        assertElement.assertCheckbox(BARCODE, configFieldVo.getBarcode());
 
         Long packagesTabIndex;
         if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType()) ||
@@ -979,6 +991,7 @@ public class EntityConfigField {
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Comments"), configFieldVo.getComment());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Don't Clone Field Value"), configFieldVo.getNotCloneValue());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Support Barcode"), configFieldVo.getBarcode());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

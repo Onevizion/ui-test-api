@@ -22,6 +22,7 @@ public class ConfigFieldVo {
     private String readOnly;
     private String notCloneValue;
     private String notCloneLock;
+    private String barcode;
 
     private List<String> packages;
 
@@ -77,6 +78,7 @@ public class ConfigFieldVo {
                     ConfigFieldVo.this.readOnly == null ||
                     ConfigFieldVo.this.notCloneValue == null ||
                     ConfigFieldVo.this.notCloneLock == null ||
+                    ConfigFieldVo.this.barcode == null ||
                     ConfigFieldVo.this.packages == null) {
                 throw new SeleniumUnexpectedException("");
             }
@@ -150,6 +152,11 @@ public class ConfigFieldVo {
 
         public Builder setNotCloneLock(String notCloneLock) {
             ConfigFieldVo.this.notCloneLock = notCloneLock;
+            return this;
+        }
+
+        public Builder setBarcode(String barcode) {
+            ConfigFieldVo.this.barcode = barcode;
             return this;
         }
 
@@ -324,6 +331,10 @@ public class ConfigFieldVo {
 
     public String getNotCloneLock() {
         return notCloneLock;
+    }
+
+    public String getBarcode() {
+        return barcode;
     }
 
     public List<String> getPackages() {
