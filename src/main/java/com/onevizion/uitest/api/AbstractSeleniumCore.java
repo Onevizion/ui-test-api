@@ -514,7 +514,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-            allowDownloadFileForHeadlessChrome();
+            //allowDownloadFileForHeadlessChrome();
 
             //not finish or not need when PageLoadStrategy.NONE
             //when PageLoadStrategy.NORMAL
