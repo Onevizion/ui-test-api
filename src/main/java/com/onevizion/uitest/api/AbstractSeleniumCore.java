@@ -1,28 +1,18 @@
 package com.onevizion.uitest.api;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -30,12 +20,10 @@ import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.CommandInfo;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.remote.internal.OkHttpClient;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestContext;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onevizion.uitest.api.annotation.SeleniumBug;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
@@ -485,7 +473,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     factory.builder().connectionTimeout(Duration.ofMinutes(3)).readTimeout(Duration.ofMinutes(30));
                     HttpCommandExecutor executor = new HttpCommandExecutor(Collections.<String, CommandInfo> emptyMap(), new URL("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub"), factory);
                     seleniumSettings.setWebDriver(new RemoteWebDriver(executor, capabilities));
-                    seleniumSettings.setUrl("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub");
                 } catch (MalformedURLException e) {
                     seleniumLogger.error("Unexpected exception: " + e.getMessage());
                 }
@@ -502,9 +489,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     seleniumSettings.setWebDriver(new FirefoxDriver(firefoxOptions));
                 } else if (seleniumSettings.getBrowser().equals("chrome")) {
                     ChromeOptions chromeOptions = BrowserChrome.create(seleniumSettings);
-                    ChromeDriverService driverService = ChromeDriverService.createDefaultService();
-                    seleniumSettings.setWebDriver(new ChromeDriver(driverService, chromeOptions));
-                    seleniumSettings.setUrl(driverService.getUrl().toString());
+                    seleniumSettings.setWebDriver(new ChromeDriver(chromeOptions));
                 } else {
                     throw new SeleniumUnexpectedException("Not support browser " + seleniumSettings.getBrowser());
                 }
@@ -513,8 +498,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             window.maximize();
 
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-            //allowDownloadFileForHeadlessChrome();
 
             //not finish or not need when PageLoadStrategy.NONE
             //when PageLoadStrategy.NORMAL
@@ -668,39 +651,5 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     }
 
     protected abstract String getErrorReport();
-
-    protected void allowDownloadFileForHeadlessChrome() {
-        if (!seleniumSettings.getBrowser().equals("chrome") || !seleniumSettings.getHeadlessMode()) {
-            return;
-        }
-
-        try {
-            SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
-            //https://gist.github.com/danggrianto/4607677
-
-            Map<String, Object> commandParams = new HashMap<>();
-            commandParams.put("cmd", "Page.setDownloadBehavior");
-            Map<String, String> params = new HashMap<>();
-            params.put("behavior", "allow");
-            params.put("downloadPath", seleniumSettings.getUploadFilesPath());
-            commandParams.put("params", params);
-            ObjectMapper objectMapper = new ObjectMapper();
-            HttpClient httpClient = HttpClientBuilder.create().build();
-            String command = objectMapper.writeValueAsString(commandParams);
-            HttpPost request = new HttpPost(seleniumSettings.getUrl() + "/session/" + sessionId + "/chromium/send_command");
-            request.addHeader("content-type", "application/json");
-            request.setEntity(new StringEntity(command));
-            HttpResponse httpResponse = httpClient.execute(request);
-
-            int statusCode = httpResponse.getStatusLine().getStatusCode();
-            if (statusCode != 200) {
-                String json = EntityUtils.toString(httpResponse.getEntity());
-                seleniumLogger.error("The Response Status Code is " + statusCode);
-                seleniumLogger.error("The Response is " + json);
-            }
-        } catch (IOException e) {
-            seleniumLogger.error("exception in allowDownloadFileForHedlessChrome " + e.getMessage());
-        }
-    }
 
 }

@@ -15,6 +15,9 @@ public class BrowserChrome {
         chromePrefs.put("profile.default_content_settings.popups", 0);
         chromePrefs.put("safebrowsing.enabled", "true");
         chromePrefs.put("download.default_directory", seleniumSettings.getUploadFilesPath());
+        HashMap<String, Object> chromeDownloadPrefs = new HashMap<>();
+        chromeDownloadPrefs.put("default_directory", seleniumSettings.getUploadFilesPath());
+        chromePrefs.put("download", chromeDownloadPrefs);
 
         //TODO workaround for chrome 52
         ChromeOptions options = new ChromeOptions();
