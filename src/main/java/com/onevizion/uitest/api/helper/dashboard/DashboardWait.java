@@ -39,4 +39,22 @@ class DashboardWait {
             .until(webdriver -> !webdriver.findElement(By.id("loaderDashboard")).isDisplayed());
     }
 
+    void waitDashletLoad() {
+        wait.waitWebElement(By.id("loaderDashlet"));
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for dashlet is failed.")
+            .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> !isDashletLoaderDisplayed());
+    }
+
+    boolean isDashletLoaderDisplayed() {
+        if (seleniumSettings.getWebDriver().findElements(By.id("loaderDashlet")).size()==1) {
+            if (seleniumSettings.getWebDriver().findElement(By.id("loaderDashlet")).isDisplayed()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

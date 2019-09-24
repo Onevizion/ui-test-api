@@ -269,7 +269,7 @@ public class Dashboard {
 
     public void saveDashlet() {
         seleniumSettings.getWebDriver().findElement(By.id("ed_ok_")).click();
-        AbstractSeleniumCore.sleep(5000L);
+        dashboardWait.waitDashletLoad();
         waitDashboardPageLoaded();
         waitDashboardLoad();
     }
