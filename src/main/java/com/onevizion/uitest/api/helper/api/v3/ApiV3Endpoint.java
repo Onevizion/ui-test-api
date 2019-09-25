@@ -116,37 +116,14 @@ public class ApiV3Endpoint {
     }
 
     public <T extends Comparable<? super T>> void checkResponseAsObject(WebElement endpoint, T expectedResponse, Class<T> clazz) {
-        WebElement responseText = endpoint.findElement(By.className("response_body"));
-        element.moveToElement(responseText);
-        String actualResponseText = responseText.getText();
-
-        T actualResponse = null;
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            actualResponse = mapper.readValue(actualResponseText, clazz);
-        } catch (IOException e) {
-            throw new SeleniumUnexpectedException(e);
-        }
-
+        T actualResponse = getResponseAsObject(endpoint, clazz);
         Assert.assertEquals(actualResponse, expectedResponse);
     }
 
     public <T extends Comparable<? super T>> void checkResponse(WebElement endpoint, List<T> expectedResponse, Class<T> clazz) {
-        WebElement responseText = endpoint.findElement(By.className("response_body"));
-        element.moveToElement(responseText);
-        String actualResponseText = responseText.getText();
-
-        List<T> actualResponse = null;
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            actualResponse = mapper.readValue(actualResponseText, mapper.getTypeFactory().constructCollectionType(List.class, clazz));
-        } catch (IOException e) {
-            throw new SeleniumUnexpectedException(e);
-        }
-
+        List<T> actualResponse = getResponse(endpoint, clazz);
         Collections.sort(expectedResponse);
         Collections.sort(actualResponse);
-
         Assert.assertEquals(actualResponse, expectedResponse);
     }
 
