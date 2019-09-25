@@ -36,6 +36,11 @@ class DashboardWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for dashboard is failed.")
             .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> webdriver.findElement(By.id("loaderDashboard")).isDisplayed());
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for dashboard is failed.")
+            .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> !webdriver.findElement(By.id("loaderDashboard")).isDisplayed());
     }
 
