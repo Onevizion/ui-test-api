@@ -115,6 +115,22 @@ public class ApiV3Endpoint {
         return actualResponse;
     }
 
+    public <T extends Comparable<? super T>> void checkResponseAsObject(WebElement endpoint, T expectedResponse, Class<T> clazz) {
+        WebElement responseText = endpoint.findElement(By.className("response_body"));
+        element.moveToElement(responseText);
+        String actualResponseText = responseText.getText();
+
+        T actualResponse = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            actualResponse = mapper.readValue(actualResponseText, clazz);
+        } catch (IOException e) {
+            throw new SeleniumUnexpectedException(e);
+        }
+
+        Assert.assertEquals(actualResponse, expectedResponse);
+    }
+
     public <T extends Comparable<? super T>> void checkResponse(WebElement endpoint, List<T> expectedResponse, Class<T> clazz) {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
         element.moveToElement(responseText);
