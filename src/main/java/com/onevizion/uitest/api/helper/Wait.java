@@ -212,7 +212,7 @@ public class Wait {
     public void waitTabLoad(final Long tabIndex) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0"));
+            .until(webdriver -> "2".equals(webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loadingstate")));
     }
 
     public void waitConfigTabLoad(String tabLabel) {
@@ -224,9 +224,7 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
             .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("innerHTML").contains("Loading Tab. Please wait..."));
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0"));
+        waitTabLoad(tabIndex);
     }
 
     public void waitGridRowEditorLoad() {
