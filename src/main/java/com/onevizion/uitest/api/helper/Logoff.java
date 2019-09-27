@@ -3,7 +3,6 @@ package com.onevizion.uitest.api.helper;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
