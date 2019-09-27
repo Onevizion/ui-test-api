@@ -13,6 +13,11 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class UsersSettings {
 
+    private static final String ID_USER = "topPanelUserNameLbl";
+    private static final String ID_USERMENU = "userPopupMenu";
+    private static final String ID_USERMENU_USERSETTINGS = "itemUserSettings";
+    private static final String ID_USERMENU_LOGOFF = "itemLogoff";
+
     @Resource
     private SeleniumSettings seleniumSettings;
 
@@ -37,11 +42,21 @@ public class UsersSettings {
         WebElement html = seleniumSettings.getWebDriver().findElement(By.tagName("html"));
         this.html.set(html);
 
-        elementWait.waitElementById("topPanelUserNameLbl");
-        elementWait.waitElementVisibleById("topPanelUserNameLbl");
-        elementWait.waitElementDisplayById("topPanelUserNameLbl");
+        elementWait.waitElementById(ID_USER);
+        elementWait.waitElementVisibleById(ID_USER);
+        elementWait.waitElementDisplayById(ID_USER);
 
-        window.openModal(By.id("topPanelUserNameLbl"));
+        element.clickById(ID_USER);
+
+        elementWait.waitElementById(ID_USERMENU);
+        elementWait.waitElementVisibleById(ID_USERMENU);
+        elementWait.waitElementDisplayById(ID_USERMENU);
+
+        elementWait.waitElementById(ID_USERMENU_USERSETTINGS);
+        elementWait.waitElementVisibleById(ID_USERMENU_USERSETTINGS);
+        elementWait.waitElementDisplayById(ID_USERMENU_USERSETTINGS);
+
+        window.openModal(By.id(ID_USERMENU_USERSETTINGS));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
@@ -56,11 +71,11 @@ public class UsersSettings {
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
 
-        elementWait.waitElementById("topPanelUserNameLbl");
-        elementWait.waitElementVisibleById("topPanelUserNameLbl");
-        elementWait.waitElementDisplayById("topPanelUserNameLbl");
+        elementWait.waitElementById(ID_USER);
+        elementWait.waitElementVisibleById(ID_USER);
+        elementWait.waitElementDisplayById(ID_USER);
 
-        wait.waitWebElement(By.id("userNameMenuItemlogoff"));
+        wait.waitWebElement(By.id(ID_USERMENU_LOGOFF));
     }
 
     public void closeUserSettingsOkWithoutReloadPage() {

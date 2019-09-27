@@ -13,6 +13,9 @@ import com.onevizion.uitest.api.helper.jquery.Jquery;
 @Component
 public class Login {
 
+    private static final String ID_USER = "topPanelUserNameLbl";
+    private static final String ID_USERMENU_LOGOFF = "itemLogoff";
+
     @Resource
     private Wait wait;
 
@@ -58,11 +61,11 @@ public class Login {
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
 
-        elementWait.waitElementById("topPanelUserNameLbl");
-        elementWait.waitElementVisibleById("topPanelUserNameLbl");
-        elementWait.waitElementDisplayById("topPanelUserNameLbl");
+        elementWait.waitElementById(ID_USER);
+        elementWait.waitElementVisibleById(ID_USER);
+        elementWait.waitElementDisplayById(ID_USER);
 
-        wait.waitWebElement(By.id("userNameMenuItemlogoff"));
+        wait.waitWebElement(By.id(ID_USERMENU_LOGOFF));
     }
 
     public void failLogin(String userName, String userPassword, String errorMessage) {

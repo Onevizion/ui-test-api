@@ -11,6 +11,10 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class SharePageLink {
 
+    private static final String ID_HELP = "topPanelBtnHelp";
+    private static final String ID_HELPMENU = "helpPopupMenu";
+    private static final String ID_HELPMENU_SHAREPAGELINK = "itemSharePageLink";
+
     @Resource
     private SeleniumSettings seleniumSettings;
 
@@ -27,35 +31,21 @@ public class SharePageLink {
     private Wait wait;
 
     public void openSharePageLinkForm() {
-        elementWait.waitElementById("topPanelUserNameBtn");
-        elementWait.waitElementVisibleById("topPanelUserNameBtn");
-        elementWait.waitElementDisplayById("topPanelUserNameBtn");
+        elementWait.waitElementById(ID_HELP);
+        elementWait.waitElementVisibleById(ID_HELP);
+        elementWait.waitElementDisplayById(ID_HELP);
 
-        element.clickById("topPanelUserNameBtn");
+        element.clickById(ID_HELP);
 
-        elementWait.waitElementById("userNameMenu");
-        elementWait.waitElementVisibleById("userNameMenu");
-        elementWait.waitElementDisplayById("userNameMenu");
+        elementWait.waitElementById(ID_HELPMENU);
+        elementWait.waitElementVisibleById(ID_HELPMENU);
+        elementWait.waitElementDisplayById(ID_HELPMENU);
 
-        elementWait.waitElementById("userNameMenuItemfavorites");
-        elementWait.waitElementVisibleById("userNameMenuItemfavorites");
-        elementWait.waitElementDisplayById("userNameMenuItemfavorites");
+        elementWait.waitElementById(ID_HELPMENU_SHAREPAGELINK);
+        elementWait.waitElementVisibleById(ID_HELPMENU_SHAREPAGELINK);
+        elementWait.waitElementDisplayById(ID_HELPMENU_SHAREPAGELINK);
 
-        element.moveToElementById("userNameMenuItemfavorites");
-
-        elementWait.waitElementById("userNameMenufavorites");
-        elementWait.waitElementVisibleById("userNameMenufavorites");
-        elementWait.waitElementDisplayById("userNameMenufavorites");
-
-        elementWait.waitElementById("userNameMenuItemfav3");
-        elementWait.waitElementVisibleById("userNameMenuItemfav3");
-        elementWait.waitElementDisplayById("userNameMenuItemfav3");
-
-        element.moveToElementById("userNameMenuItemfav1");
-
-        element.moveToElementById("userNameMenuItemfav3");
-
-        window.openModal(By.id("userNameMenuItemfav3"));
+        window.openModal(By.id(ID_HELPMENU_SHAREPAGELINK));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
