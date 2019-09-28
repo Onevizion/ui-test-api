@@ -5,6 +5,8 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 public class ConfigFieldVoHyperlink {
 
     private String length;
+    private String validation;
+    private String validationEnabled;
 
     private ConfigFieldVoHyperlink() {
         
@@ -18,6 +20,14 @@ public class ConfigFieldVoHyperlink {
         return length;
     }
 
+    public String getValidation() {
+        return validation;
+    }
+
+    public String getValidationEnabled() {
+        return validationEnabled;
+    }
+
     public class Builder {
 
         private Builder() {
@@ -25,7 +35,9 @@ public class ConfigFieldVoHyperlink {
         }
 
         public ConfigFieldVoHyperlink build() {
-            if (ConfigFieldVoHyperlink.this.length == null) {
+            if (ConfigFieldVoHyperlink.this.length == null ||
+                    ConfigFieldVoHyperlink.this.validation == null ||
+                    ConfigFieldVoHyperlink.this.validationEnabled == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return ConfigFieldVoHyperlink.this;
@@ -33,6 +45,16 @@ public class ConfigFieldVoHyperlink {
 
         public Builder setLength(String length) {
             ConfigFieldVoHyperlink.this.length = length;
+            return this;
+        }
+
+        public Builder setValidation(String validation) {
+            ConfigFieldVoHyperlink.this.validation = validation;
+            return this;
+        }
+
+        public Builder setValidationEnabled(String validationEnabled) {
+            ConfigFieldVoHyperlink.this.validationEnabled = validationEnabled;
             return this;
         }
 

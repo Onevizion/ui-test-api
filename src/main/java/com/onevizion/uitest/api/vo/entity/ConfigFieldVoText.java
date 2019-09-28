@@ -6,6 +6,8 @@ public class ConfigFieldVoText {
 
     private String length;
     private String defValueSql;
+    private String validation;
+    private String validationEnabled;
 
     private ConfigFieldVoText() {
         
@@ -23,6 +25,14 @@ public class ConfigFieldVoText {
         return defValueSql;
     }
 
+    public String getValidation() {
+        return validation;
+    }
+
+    public String getValidationEnabled() {
+        return validationEnabled;
+    }
+
     public class Builder {
 
         private Builder() {
@@ -31,7 +41,9 @@ public class ConfigFieldVoText {
 
         public ConfigFieldVoText build() {
             if (ConfigFieldVoText.this.length == null ||
-                    ConfigFieldVoText.this.defValueSql == null) {
+                    ConfigFieldVoText.this.defValueSql == null ||
+                    ConfigFieldVoText.this.validation == null ||
+                    ConfigFieldVoText.this.validationEnabled == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return ConfigFieldVoText.this;
@@ -44,6 +56,16 @@ public class ConfigFieldVoText {
 
         public Builder setDefValueSql(String defValueSql) {
             ConfigFieldVoText.this.defValueSql = defValueSql;
+            return this;
+        }
+
+        public Builder setValidation(String validation) {
+            ConfigFieldVoText.this.validation = validation;
+            return this;
+        }
+
+        public Builder setValidationEnabled(String validationEnabled) {
+            ConfigFieldVoText.this.validationEnabled = validationEnabled;
             return this;
         }
 
