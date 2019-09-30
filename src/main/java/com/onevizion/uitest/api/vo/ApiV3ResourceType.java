@@ -2,6 +2,7 @@ package com.onevizion.uitest.api.vo;
 
 public enum ApiV3ResourceType {
 
+    CHATS("chats"),
     EXPORTS("exports"),
     FILES("files"),
     FILTERS("filters"),
