@@ -11,9 +11,9 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class SharePageLink {
 
-    private static final String ID_HELP = "topPanelBtnHelp";
-    private static final String ID_HELPMENU = "helpPopupMenu";
-    private static final String ID_HELPMENU_SHAREPAGELINK = "itemSharePageLink";
+    private static final String ID_FAVORITES = "topPanelBtnFavorites";
+    private static final String ID_FAVORITESMENU = "favoritesPopupMenu";
+    private static final String ID_FAVORITESMENU_SHAREPAGELINK = "btnSharePageLink";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -31,21 +31,21 @@ public class SharePageLink {
     private Wait wait;
 
     public void openSharePageLinkForm() {
-        elementWait.waitElementById(ID_HELP);
-        elementWait.waitElementVisibleById(ID_HELP);
-        elementWait.waitElementDisplayById(ID_HELP);
+        elementWait.waitElementById(ID_FAVORITES);
+        elementWait.waitElementVisibleById(ID_FAVORITES);
+        elementWait.waitElementDisplayById(ID_FAVORITES);
 
-        element.clickById(ID_HELP);
+        element.clickById(ID_FAVORITES);
 
-        elementWait.waitElementById(ID_HELPMENU);
-        elementWait.waitElementVisibleById(ID_HELPMENU);
-        elementWait.waitElementDisplayById(ID_HELPMENU);
+        elementWait.waitElementById(ID_FAVORITESMENU);
+        elementWait.waitElementVisibleById(ID_FAVORITESMENU);
+        elementWait.waitElementDisplayById(ID_FAVORITESMENU);
 
-        elementWait.waitElementById(ID_HELPMENU_SHAREPAGELINK);
-        elementWait.waitElementVisibleById(ID_HELPMENU_SHAREPAGELINK);
-        elementWait.waitElementDisplayById(ID_HELPMENU_SHAREPAGELINK);
+        elementWait.waitElementById(ID_FAVORITESMENU_SHAREPAGELINK);
+        elementWait.waitElementVisibleById(ID_FAVORITESMENU_SHAREPAGELINK);
+        elementWait.waitElementDisplayById(ID_FAVORITESMENU_SHAREPAGELINK);
 
-        window.openModal(By.id(ID_HELPMENU_SHAREPAGELINK));
+        window.openModal(By.id(ID_FAVORITESMENU_SHAREPAGELINK));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
