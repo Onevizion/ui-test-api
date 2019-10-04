@@ -13,16 +13,15 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.jquery.Jquery;
 
 @Component
 public class RelationSelector {
 
-    @Resource
-    private SeleniumSettings seleniumSettings;
+    private static final String RELATION_ID_BASE = "lbParentsChildren";
+    private static final String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
 
     @Resource
-    private Wait wait;
+    private SeleniumSettings seleniumSettings;
 
     @Resource
     private Js js;
@@ -31,16 +30,16 @@ public class RelationSelector {
     private ElementWait elementWait;
 
     @Resource
-    private Jquery jquery;
-
-    @Resource
     private Window window;
 
     @Resource
     private Grid2 grid2;
 
-    public static final String RELATION_ID_BASE = "lbParentsChildren";
-    public static final String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
+    @Resource
+    private RelationSelectorWait relationSelectorWait;
+
+    @Resource
+    private RelationSelectorJs relationSelectorJs;
 
     public void checkRelationSelectorValuesCount(int count) {
         List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id("new_rows_lbParentsChildren0")).findElements(By.className("newDropDownRowContainer"));
@@ -74,9 +73,9 @@ public class RelationSelector {
     }
 
     public void selectGridRow(Long gridIdx, Long rowIndex) {
+        relationSelectorJs.setIsReadyToFalse(gridIdx);
         js.selectGridRow(gridIdx, rowIndex);
-        AbstractSeleniumCore.sleep(1000L);
-        jquery.waitLoad(); //wait reload relations
+        waitRelationSelector(gridIdx);
     }
 
     public void openRelationSelector(Long gridIdx) {
@@ -96,8 +95,7 @@ public class RelationSelector {
     }
 
     public void openRelationGrid(Long gridIdx) {
-        grid2.waitLoad(gridIdx);
-        jquery.waitLoad(); //wait reload relations
+        relationSelectorJs.setIsReadyToFalse(gridIdx);
         window.openModal(By.id(BUTTON_RELATION_ID_BASE + gridIdx));
         grid2.waitLoad(gridIdx);
     }
@@ -105,7 +103,7 @@ public class RelationSelector {
     public void closeRelationGrid(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + gridIdx));
         grid2.waitLoad(gridIdx);
-        jquery.waitLoad(); //wait reload relations
+        waitRelationSelector(gridIdx);
     }
 
     public void chooseParentChildTrackorType(String trackorType) {
@@ -126,6 +124,11 @@ public class RelationSelector {
     public void checkCurrentValueInRelationSelector(String label) {
         String actualLabel = seleniumSettings.getWebDriver().findElement(By.id("new_lbParentsChildren0")).findElement(By.className("newDropDownLabel")).getText();
         Assert.assertEquals(actualLabel, label);
+    }
+
+    public void waitRelationSelector(Long gridIdx) {
+        relationSelectorWait.waitIsReadyRelationSelector(gridIdx);
+        relationSelectorWait.waitIsReadyMutationObserver(gridIdx);
     }
 
 }
