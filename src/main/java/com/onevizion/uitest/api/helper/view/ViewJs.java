@@ -12,7 +12,7 @@ class ViewJs extends Js {
         //https://github.com/mozilla/geckodriver/issues/1067
         //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
         //return Boolean.valueOf(execJs("return window.leftListBox.isReady == true;"));
-        return Boolean.valueOf(execJs("return getLeftListBox().isReady == true;"));
+        return Boolean.valueOf(execJs("return getLeftListBox().listBox.isReady == true;"));
     }
 
     Boolean isReadyRightListBox() {
@@ -20,7 +20,7 @@ class ViewJs extends Js {
         //https://github.com/mozilla/geckodriver/issues/1067
         //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
         //return Boolean.valueOf(execJs("return window.rightListBox.isReady == true;"));
-        return Boolean.valueOf(execJs("return getRightListBox().isReady == true;"));
+        return Boolean.valueOf(execJs("return getRightListBox().listBox.isReady == true;"));
     }
 
 }
