@@ -63,14 +63,11 @@ public class View {
     private static final String ADD_BUTTON_ID = "addItem";
     private static final String REMOVE_BUTTON_ID = "removeItem";
 
-    private static final Long COLUMN_DIV_HEIGHT = 28L;
-
     private static final String BUTTON_GROUP_FIELD = "cfg";
     private static final String BUTTON_GROUP_TASK = "tsg";
     private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
     private static final String BUTTON_GROUP_DATE_PAIR = "dp";
 
-    private static final String COLUMN_LABEL = "labelField";
     private static final String NAV_PANEL = "navPanel";
 
     @Resource
