@@ -116,9 +116,7 @@ public class Listbox {
         checkElementByLabel(elements, label);
 
         ListboxElement listboxElement = elements.stream().filter(p -> p.getLabel().equals(label)).findFirst().get();
-        listboxJs.scrollToElementInListbox(listboxElement.getWebElement());
-        elementWait.waitElementVisible(listboxElement.getWebElement());
-        listboxElement.getWebElement().click();
+        selectElement(listboxElement);
 
         seleniumSettings.getWebDriver().findElement(By.id(buttonId)).click();
     }
@@ -127,9 +125,7 @@ public class Listbox {
         checkElementById(elements, id);
 
         ListboxElement listboxElement = elements.stream().filter(p -> p.getId().equals(id)).findFirst().get();
-        listboxJs.scrollToElementInListbox(listboxElement.getWebElement());
-        elementWait.waitElementVisible(listboxElement.getWebElement());
-        listboxElement.getWebElement().click();
+        selectElement(listboxElement);
 
         seleniumSettings.getWebDriver().findElement(By.id(buttonId)).click();
     }
@@ -159,6 +155,12 @@ public class Listbox {
             moveElementById(elements, ids.get(20), buttonId); //ROLLUP
         }
         moveElementById(elements, ids.get(21), buttonId); //MULTI_TRACKOR_SELECTOR
+    }
+
+    public void selectElement(ListboxElement element) {
+        listboxJs.scrollToElementInListbox(element.getWebElement());
+        elementWait.waitElementVisible(element.getWebElement());
+        element.getWebElement().click();
     }
 
 }

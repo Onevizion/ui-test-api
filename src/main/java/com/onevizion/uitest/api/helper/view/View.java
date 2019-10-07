@@ -18,11 +18,13 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
+import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
+import com.onevizion.uitest.api.vo.ListboxElement;
 
 @Component
 public class View {
@@ -103,6 +105,9 @@ public class View {
 
     @Resource
     private Element element;
+
+    @Resource
+    private Listbox listbox;
 
     public void checkIsExistViewControl(Long gridIdx, boolean isExist) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -365,24 +370,9 @@ public class View {
         }
     }
 
-    public List<WebElement> getLeftColumns() {
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        List<WebElement> leftColumns = seleniumSettings.getWebDriver().findElement(By.id(LEFT_COLUMNS_DIV_ID)).findElements(By.className("record"));
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        return leftColumns;
-    }
-
     public void selectLastRightColumn() {
-        List<WebElement> actualRightColumns = getRightColumns();
-        js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, "scrollContainer", (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
-        actualRightColumns.get(actualRightColumns.size() - 1).click();
-    }
-
-    public List<WebElement> getRightColumns() {
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        List<WebElement> rightColumns = seleniumSettings.getWebDriver().findElement(By.id(RIGHT_COLUMNS_DIV_ID)).findElements(By.className("record"));
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        return rightColumns;
+        List<ListboxElement> actualRightColumns = listbox.getElements(RIGHT_COLUMNS_DIV_ID);
+        listbox.selectElement(actualRightColumns.get(actualRightColumns.size() - 1));
     }
 
     public void checkViewOptionsNew(Long gridIdx, String entityPrefix,
@@ -477,12 +467,12 @@ public class View {
     public void selectAllColumns(Long gridIdx) {
         openViewForm(gridIdx);
 
-        List<WebElement> actualRightColumns = getRightColumns();
-        js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, SCROLL_CONTAINER, (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
-        actualRightColumns.get(actualRightColumns.size() - 1).click();
+        List<ListboxElement> actualRightColumns = listbox.getElements(RIGHT_COLUMNS_DIV_ID);
+        listbox.selectElement(actualRightColumns.get(actualRightColumns.size() - 1));
 
-        while (seleniumSettings.getWebDriver().findElement(By.id(ADD_BUTTON_ID)).isEnabled()) {
-            seleniumSettings.getWebDriver().findElement(By.id(ADD_BUTTON_ID)).click();
+        List<ListboxElement> actualLeftColumns = listbox.getElements(LEFT_COLUMNS_DIV_ID);
+        for (ListboxElement actualLeftColumn : actualLeftColumns) {
+            listbox.moveElementByLabel(actualLeftColumns, actualLeftColumn.getLabel(), ADD_BUTTON_ID);
         }
 
         closeViewFormOk(gridIdx);
@@ -503,22 +493,14 @@ public class View {
     private void selectColumns(Long gridIdx, List<String> rightColumns) {
         openViewForm(gridIdx);
 
-        List<WebElement> actualRightColumns = getRightColumns();
-        js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, SCROLL_CONTAINER, (actualRightColumns.size() - 1) * COLUMN_DIV_HEIGHT);
-        actualRightColumns.get(actualRightColumns.size() - 1).click();
+        List<ListboxElement> actualRightColumns = listbox.getElements(RIGHT_COLUMNS_DIV_ID);
+        for (ListboxElement actualRightColumn : actualRightColumns) {
+            listbox.moveElementByLabel(actualRightColumns, actualRightColumn.getLabel(), REMOVE_BUTTON_ID);
+        }
 
-        removeAllColumns();
-
+        List<ListboxElement> actualLeftColumns = listbox.getElements(LEFT_COLUMNS_DIV_ID);
         for (String rightColumn : rightColumns) {
-            List<WebElement> actualLeftColumns = getLeftColumns();
-            for (int i = 0; i < actualLeftColumns.size(); i++) {
-                js.scrollNewDropDownTop(LEFT_COLUMNS_DIV_ID, SCROLL_CONTAINER, i * COLUMN_DIV_HEIGHT);
-                if (actualLeftColumns.get(i).findElements(By.className(COLUMN_LABEL)).get(0).getText().equals(rightColumn)) {
-                    actualLeftColumns.get(i).click();
-                    seleniumSettings.getWebDriver().findElement(By.id(ADD_BUTTON_ID)).click();
-                    break;
-                }
-            }
+            listbox.moveElementByLabel(actualLeftColumns, rightColumn, ADD_BUTTON_ID);
         }
 
         closeViewFormOk(gridIdx);
@@ -527,18 +509,16 @@ public class View {
     private void checkColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
         openViewForm(gridIdx);
 
-        List<WebElement> actualLeftColumns = getLeftColumns();
-        Assert.assertEquals(actualLeftColumns.size(), leftColumns.size());
-        for (int i = 0; i < actualLeftColumns.size(); i++) {
-            js.scrollNewDropDownTop(LEFT_COLUMNS_DIV_ID, SCROLL_CONTAINER, i * COLUMN_DIV_HEIGHT);
-            Assert.assertEquals(actualLeftColumns.get(i).findElements(By.className(COLUMN_LABEL)).get(0).getText(), leftColumns.get(i));
+        List<ListboxElement> actualLeftColumns = listbox.getElements(LEFT_COLUMNS_DIV_ID);
+        listbox.checkElementsCount(actualLeftColumns, leftColumns.size());
+        for (int i = 0; i < leftColumns.size(); i++) {
+            listbox.checkElementByLabel(actualLeftColumns, i + 1, leftColumns.get(i));
         }
 
-        List<WebElement> actualRightColumns = getRightColumns();
-        Assert.assertEquals(actualRightColumns.size(), rightColumns.size());
-        for (int i = 0; i < actualRightColumns.size(); i++) {
-            js.scrollNewDropDownTop(RIGHT_COLUMNS_DIV_ID, SCROLL_CONTAINER, i * COLUMN_DIV_HEIGHT);
-            Assert.assertEquals(actualRightColumns.get(i).findElements(By.className(COLUMN_LABEL)).get(0).getText(), rightColumns.get(i));
+        List<ListboxElement> actualRightColumns = listbox.getElements(RIGHT_COLUMNS_DIV_ID);
+        listbox.checkElementsCount(actualRightColumns, rightColumns.size());
+        for (int i = 0; i < rightColumns.size(); i++) {
+            listbox.checkElementByLabel(actualRightColumns, i + 1, rightColumns.get(i));
         }
 
         closeViewFormCancel();
