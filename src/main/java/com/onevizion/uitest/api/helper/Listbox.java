@@ -28,6 +28,14 @@ public class Listbox {
     private ElementWait elementWait;
 
     public List<ListboxElement> getElements(String listboxId) {
+        return getItems(listboxId);
+    }
+
+    public List<ListboxElement> getGroups(String listboxId) {
+        return getItems(listboxId);
+    }
+
+    private List<ListboxElement> getItems(String listboxId) {
         List<ListboxElement> elements = new ArrayList<>();
 
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -39,24 +47,6 @@ public class Listbox {
             listboxElement.setWebElement(webElement);
             listboxElement.setId(webElement.getAttribute("id"));
             listboxElement.setLabel(webElement.findElement(By.className("labelField")).getAttribute("innerText"));
-            elements.add(listboxElement);
-        }
-
-        return elements;
-    }
-
-    public List<ListboxElement> getGroups(String listboxId) {
-        List<ListboxElement> elements = new ArrayList<>();
-
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        List<WebElement> webElements = seleniumSettings.getWebDriver().findElement(By.id(listboxId)).findElements(By.className("record"));
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        for (WebElement webElement : webElements) {
-            ListboxElement listboxElement = new ListboxElement();
-            listboxElement.setWebElement(webElement);
-            listboxElement.setId(webElement.getAttribute("id"));
-            listboxElement.setLabel(webElement.getAttribute("innerText"));
             elements.add(listboxElement);
         }
 
