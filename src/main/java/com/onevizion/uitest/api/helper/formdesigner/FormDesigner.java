@@ -14,7 +14,9 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.Js;
+import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.vo.FormDesignerField;
+import com.onevizion.uitest.api.vo.ListboxElement;
 
 @Component
 public class FormDesigner {
@@ -47,6 +49,9 @@ public class FormDesigner {
 
     @Resource
     private ElementJs elementJs;
+
+    @Resource
+    private Listbox listbox;
 
     public void fillSearch(String name) {
         element.moveToElementById(FIELD_LIST_SEARCH);
@@ -102,13 +107,15 @@ public class FormDesigner {
 
     public void addElementToForm(String label) {
         fillSearch(label);
-        List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("record"));
-        for (WebElement field : fields) {
-            if (field.findElement(By.className("labelField")).getAttribute("innerText").trim().equals(label)) {
-                element.doubleClick(field);
+
+        List<ListboxElement> fields = listbox.getElements("listBoxContent");
+        for (ListboxElement field : fields) {
+            if (label.equals(field.getLabel())) {
+                element.doubleClick(field.getWebElement());
                 break;
             }
         }
+
         clearSearch();
     }
 
