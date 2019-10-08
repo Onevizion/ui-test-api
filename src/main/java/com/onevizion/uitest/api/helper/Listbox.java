@@ -2,6 +2,7 @@ package com.onevizion.uitest.api.helper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.vo.ListboxElement;
 
 @Component
@@ -115,19 +117,27 @@ public class Listbox {
         checkElementById(elements, ids.get(21)); //MULTI_TRACKOR_SELECTOR
     }
 
-    public void moveElementByLabel(List<ListboxElement> elements, String label, String buttonId) {
+    private ListboxElement getElementByLabel(List<ListboxElement> elements, String label) {
         checkElementByLabel(elements, label);
+        Optional<ListboxElement> optional = elements.stream().filter(p -> p.getLabel().equals(label)).findFirst();
+        return optional.orElseThrow(() -> new SeleniumUnexpectedException());
+    }
 
-        ListboxElement listboxElement = elements.stream().filter(p -> p.getLabel().equals(label)).findFirst().get();
+    private ListboxElement getElementById(List<ListboxElement> elements, String id) {
+        checkElementById(elements, id);
+        Optional<ListboxElement> optional = elements.stream().filter(p -> p.getId().equals(id)).findFirst();
+        return optional.orElseThrow(() -> new SeleniumUnexpectedException());
+    }
+
+    public void moveElementByLabel(List<ListboxElement> elements, String label, String buttonId) {
+        ListboxElement listboxElement = getElementByLabel(elements, label);
         selectElement(listboxElement);
 
         seleniumSettings.getWebDriver().findElement(By.id(buttonId)).click();
     }
 
     public void moveElementById(List<ListboxElement> elements, String id, String buttonId) {
-        checkElementById(elements, id);
-
-        ListboxElement listboxElement = elements.stream().filter(p -> p.getId().equals(id)).findFirst().get();
+        ListboxElement listboxElement = getElementById(elements, id);
         selectElement(listboxElement);
 
         seleniumSettings.getWebDriver().findElement(By.id(buttonId)).click();
@@ -179,8 +189,7 @@ public class Listbox {
 
     public void switchToSubgroupInList(String listboxId, String label) {
         List<ListboxElement> groups = getGroups(listboxId);
-        checkElementByLabel(groups, label);
-        ListboxElement group = groups.stream().filter(p -> p.getLabel().equals(label)).findFirst().get();
+        ListboxElement group = getElementByLabel(groups, label);
         element.click(group.getWebElement());
         listboxWait.waitIsReadyListbox(listboxId);
     }
