@@ -18,6 +18,13 @@ import com.onevizion.uitest.api.vo.ListboxElement;
 @Component
 public class Listbox {
 
+    private static final String NAV_PANEL = "navigation";
+    private static final String BUTTON_GROUP_FIELD = "cfg";
+    private static final String BUTTON_GROUP_TASK = "tsg";
+    private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
+    private static final String BUTTON_GROUP_DATE_PAIR = "dp";
+    private static final String BUTTON_GROUP_MARKUP= "mug";
+
     @Resource
     private SeleniumSettings seleniumSettings;
 
@@ -25,7 +32,13 @@ public class Listbox {
     private ListboxJs listboxJs;
 
     @Resource
+    private ListboxWait listboxWait;
+
+    @Resource
     private ElementWait elementWait;
+
+    @Resource
+    private Element element;
 
     public List<ListboxElement> getElements(String listboxId) {
         return getItems(listboxId);
@@ -151,6 +164,54 @@ public class Listbox {
         listboxJs.scrollToElementInListbox(element.getWebElement());
         elementWait.waitElementVisible(element.getWebElement());
         element.getWebElement().click();
+    }
+
+    public void switchToRootSubgroup(String listboxId) {
+        element.click(seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElement(By.tagName("input")));
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void switchToParentSubgroup(String listboxId) {
+        List<WebElement> links = seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElements(By.tagName("input"));
+        element.click(links.get(links.size() - 2));
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void switchToSubgroupInList(String listboxId, String label) {
+        List<ListboxElement> groups = getGroups(listboxId);
+        checkElementByLabel(groups, label);
+        ListboxElement group = groups.stream().filter(p -> p.getLabel().equals(label)).findFirst().get();
+        element.click(group.getWebElement());
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void switchToFieldGroup(String listboxId) {
+        element.clickById(BUTTON_GROUP_FIELD);
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void switchToTaskGroup(String listboxId) {
+        element.clickById(BUTTON_GROUP_TASK);
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void switchToDrillDownGroup(String listboxId) {
+        element.clickById(BUTTON_GROUP_DRILLDOWN);
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void switchToDatePairGroup(String listboxId) {
+        element.clickById(BUTTON_GROUP_DATE_PAIR);
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void switchToMarkupGroup(String listboxId) {
+        element.clickById(BUTTON_GROUP_MARKUP);
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void waitIsReadyListbox(String listboxId) {
+        listboxWait.waitIsReadyListbox(listboxId);
     }
 
 }

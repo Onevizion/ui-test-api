@@ -25,11 +25,6 @@ public class FormDesigner {
     private static final String BUTTON_CLEAR_SEARCH = "wrapperClearSearch";
     private static final String BUTTON_DELETE_ELEMENT = "btnDelElem";
 
-    private static final String BUTTON_GROUP_FIELD = "cfg";
-    private static final String BUTTON_GROUP_TASK = "tsg";
-    private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
-    private static final String BUTTON_GROUP_MARKUP= "mug";
-
     private static final String FORM_ID = "formContent";
 
     @Resource
@@ -250,45 +245,31 @@ public class FormDesigner {
     }
 
     public void switchToRootSubgroup() {
-        element.click(seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElement(By.tagName("input")));
-        waitListBoxReady();
+        listbox.switchToRootSubgroup("listBox");
     }
 
     public void switchToParentSubgroup() {
-        List<WebElement> links = seleniumSettings.getWebDriver().findElement(By.id("navPanel")).findElements(By.className("navLink"));
-        element.click(links.get(links.size() - 2));
-        waitListBoxReady();
+        listbox.switchToParentSubgroup("listBox");
     }
 
     public void switchToSubgroupInList(String label) {
-        List<WebElement> subgroups = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("groupRecord"));
-        for (WebElement subgroup : subgroups) {
-            if (subgroup.getAttribute("innerText").trim().equals(label)) {
-                element.click(subgroup);
-                break;
-            }
-        }
-        waitListBoxReady();
+        listbox.switchToSubgroupInList("listBox", label);
     }
 
     public void switchToFieldGroup() {
-        element.clickById(BUTTON_GROUP_FIELD);
-        waitListBoxReady();
+        listbox.switchToFieldGroup("listBox");
     }
 
     public void switchToTaskGroup() {
-        element.clickById(BUTTON_GROUP_TASK);
-        waitListBoxReady();
+        listbox.switchToTaskGroup("listBox");
     }
 
     public void switchToDrillDownGroup() {
-        element.clickById(BUTTON_GROUP_DRILLDOWN);
-        waitListBoxReady();
+        listbox.switchToDrillDownGroup("listBox");
     }
 
     public void switchToMarkupGroup() {
-        element.clickById(BUTTON_GROUP_MARKUP);
-        waitListBoxReady();
+        listbox.switchToMarkupGroup("listBox");
     }
 
     public void scrollFormToRight() {
@@ -300,7 +281,7 @@ public class FormDesigner {
     }
 
     public void waitListBoxReady() {
-        formDesignerWait.waitListBoxReady();
+        listbox.waitIsReadyListbox("listBox");
     }
 
     public void waitFormDesignerLoad() {

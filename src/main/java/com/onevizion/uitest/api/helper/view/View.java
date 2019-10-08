@@ -63,13 +63,6 @@ public class View {
     private static final String ADD_BUTTON_ID = "addItem";
     private static final String REMOVE_BUTTON_ID = "removeItem";
 
-    private static final String BUTTON_GROUP_FIELD = "cfg";
-    private static final String BUTTON_GROUP_TASK = "tsg";
-    private static final String BUTTON_GROUP_DRILLDOWN = "ddg";
-    private static final String BUTTON_GROUP_DATE_PAIR = "dp";
-
-    private static final String NAV_PANEL = "navPanel";
-
     @Resource
     private SeleniumSettings seleniumSettings;
 
@@ -522,54 +515,31 @@ public class View {
     }
 
     public void switchToRootSubgroup() {
-        element.click(seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElement(By.tagName("input")));
-        waitLeftListBoxReady();
+        listbox.switchToRootSubgroup("leftListBox");
     }
 
     public void switchToParentSubgroup() {
-        List<WebElement> links = seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElements(By.className("navLink"));
-        element.click(links.get(links.size() - 2));
-        waitLeftListBoxReady();
+        listbox.switchToParentSubgroup("leftListBox");
     }
 
-    public void switchToSubgroupInList(String text) {
-        WebElement subgroupElement = null;
-        List<WebElement> subgroups = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent")).findElements(By.className("groupRecord"));
-        for (WebElement subgroup : subgroups) {
-            if (subgroup.getAttribute("innerText").trim().equals(text)) {
-                if (subgroupElement != null) {
-                    throw new SeleniumUnexpectedException("Subgroup with text[" + text + "] found many times");
-                }
-                subgroupElement = subgroup;
-            }
-        }
-
-        if (subgroupElement == null) {
-            throw new SeleniumUnexpectedException("Subgroup with text[" + text + "] not found");
-        }
-
-        element.click(subgroupElement);
-        waitLeftListBoxReady();
+    public void switchToSubgroupInList(String label) {
+        listbox.switchToSubgroupInList("leftListBox", label);
     }
 
     public void switchToFieldGroup() {
-        element.clickById(BUTTON_GROUP_FIELD);
-        waitLeftListBoxReady();
+        listbox.switchToFieldGroup("leftListBox");
     }
 
     public void switchToTaskGroup() {
-        element.clickById(BUTTON_GROUP_TASK);
-        waitLeftListBoxReady();
+        listbox.switchToTaskGroup("leftListBox");
     }
 
     public void switchToDrillDownGroup() {
-        element.clickById(BUTTON_GROUP_DRILLDOWN);
-        waitLeftListBoxReady();
+        listbox.switchToDrillDownGroup("leftListBox");
     }
 
     public void switchToDatePairGroup() {
-        element.clickById(BUTTON_GROUP_DATE_PAIR);
-        waitLeftListBoxReady();
+        listbox.switchToDatePairGroup("leftListBox");
     }
 
     public void waitCurrentViewName(Long gridIdx, String viewName) {
@@ -577,11 +547,11 @@ public class View {
     }
 
     public void waitLeftListBoxReady() {
-        viewWait.waitLeftListBoxReady();
+        listbox.waitIsReadyListbox("leftListBox");
     }
 
     public void waitRightListBoxReady() {
-        viewWait.waitRightListBoxReady();
+        listbox.waitIsReadyListbox("rightListBox");
     }
 
 }

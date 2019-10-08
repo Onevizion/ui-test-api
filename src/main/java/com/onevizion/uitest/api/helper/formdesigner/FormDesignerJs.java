@@ -14,14 +14,6 @@ import com.onevizion.uitest.api.vo.FormDesignerField;
 @Component
 class FormDesignerJs extends Js {
 
-    Boolean isReadyListBox() {
-        //TODO firefox 59 bug
-        //https://github.com/mozilla/geckodriver/issues/1067
-        //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
-        //return Boolean.valueOf(execJs("return window.listBox.isReady == true;"));
-        return Boolean.valueOf(execJs("return getListBox().isReady == true;"));
-    }
-
     List<FormDesignerField> getElementsOnForm() {
         String resultStr = (String) execJs2("" + 
                 "var formDesigner = getFormDesigner();" + 
