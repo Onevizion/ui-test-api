@@ -488,9 +488,13 @@ public class View {
             listbox.moveElementByLabel(actualRightColumns, actualRightColumn.getLabel(), REMOVE_BUTTON_ID);
         }
 
+        actualRightColumns = listbox.getElements(RIGHT_COLUMNS_DIV_ID);
         List<ListboxElement> actualLeftColumns = listbox.getElements(LEFT_COLUMNS_DIV_ID);
         for (String rightColumn : rightColumns) {
-            listbox.moveElementByLabel(actualLeftColumns, rightColumn, ADD_BUTTON_ID);
+            boolean alreadyInRightList = actualRightColumns.stream().anyMatch(p -> p.getLabel().equals(rightColumn));
+            if (!alreadyInRightList) {
+                listbox.moveElementByLabel(actualLeftColumns, rightColumn, ADD_BUTTON_ID);
+            }
         }
 
         closeViewFormOk(gridIdx);
