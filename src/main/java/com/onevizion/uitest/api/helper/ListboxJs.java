@@ -11,10 +11,7 @@ class ListboxJs extends Js {
     }
 
     Boolean isReadyListbox(String listboxId) {
-        //TODO firefox 59 bug
-        //https://github.com/mozilla/geckodriver/issues/1067
-        //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
-        return Boolean.valueOf(execJs("return listboxArr['" + listboxId + "'].listBox.isReady == true;"));
+        return Boolean.valueOf(execJs("return " + listboxId + ".listBox.isReady == true;"));
     }
 
 }
