@@ -61,7 +61,7 @@ public class FormDesigner {
 
     public void addElementToForm(String fieldName, String elementId) {
         fillSearch(fieldName);
-        WebElement listBoxfields = seleniumSettings.getWebDriver().findElement(By.id("listBoxContent"));
+        WebElement listBoxfields = seleniumSettings.getWebDriver().findElement(By.id("listBox"));
         element.doubleClick(listBoxfields.findElement(By.id(elementId)));
         clearSearch();
     }
@@ -103,7 +103,7 @@ public class FormDesigner {
     public void addElementToForm(String label) {
         fillSearch(label);
 
-        List<ListboxElement> fields = listbox.getElements("listBoxContent");
+        List<ListboxElement> fields = listbox.getElements("listBox");
         for (ListboxElement field : fields) {
             if (label.equals(field.getLabel())) {
                 element.doubleClick(field.getWebElement());
