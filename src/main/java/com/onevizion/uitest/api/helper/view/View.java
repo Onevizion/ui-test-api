@@ -558,4 +558,102 @@ public class View {
         listbox.waitIsReadyListbox("rightListBox");
     }
 
+    public void changeFrozenColumns(String newValue) {
+        seleniumSettings.getWebDriver().findElement(By.id("frozen")).click();
+        WebElement element = (WebElement) js.getNewDropDownElement("frozen", "customscroll", "item_select", newValue);
+        Long elementPosition = js.getNewDropDownElementPosition("frozen", "customscroll", "item_select", newValue);
+        js.scrollNewDropDownTop("frozen", "customscroll", elementPosition * 28L);
+        elementWait.waitElementVisible(element);
+        element.click();
+    }
+
+    public void checkFrozenColumns(String expectedValue) {
+        String actualValue = seleniumSettings.getWebDriver().findElement(By.id("frozen")).findElement(By.className("dl_selected")).findElement(By.tagName("input")).getAttribute("value");
+        Assert.assertEquals(actualValue, expectedValue);
+    }
+
+    public void checkFrozenColumnsNotExist() {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id("frozen")).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
+    }
+
+    public void changeHighlightFields(String newValue) {
+        seleniumSettings.getWebDriver().findElement(By.id("highlight")).click();
+        WebElement element = (WebElement) js.getNewDropDownElement("highlight", "customscroll", "item_select", newValue);
+        Long elementPosition = js.getNewDropDownElementPosition("highlight", "customscroll", "item_select", newValue);
+        js.scrollNewDropDownTop("highlight", "customscroll", elementPosition * 28L);
+        elementWait.waitElementVisible(element);
+        element.click();
+    }
+
+    public void checkHighlightFields(String expectedValue) {
+        String actualValue = seleniumSettings.getWebDriver().findElement(By.id("highlight")).findElement(By.className("dl_selected")).findElement(By.tagName("input")).getAttribute("value");
+        Assert.assertEquals(actualValue, expectedValue);
+    }
+
+    public void checkHighlightFieldsNotExist() {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id("highlight")).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
+    }
+
+    public void removeMultiSort(int position) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        boolean isExistMultiSort = seleniumSettings.getWebDriver().findElements(By.id("mult_sort" + position)).size() == 1;
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if (isExistMultiSort) {
+            seleniumSettings.getWebDriver().findElement(By.id("mult_sort" + position)).findElement(By.className("ms_removed")).findElement(By.tagName("input")).click();
+        }
+    }
+
+    public void changeMultiSortColumn(int position, String newValue) {
+        seleniumSettings.getWebDriver().findElement(By.id("fields" + position)).click();
+        WebElement element = (WebElement) js.getNewDropDownElement("fields" + position, "customscroll", "item_select", newValue);
+        Long elementPosition = js.getNewDropDownElementPosition("fields" + position, "customscroll", "item_select", newValue);
+        js.scrollNewDropDownTop("fields" + position, "customscroll", elementPosition * 28L);
+        elementWait.waitElementVisible(element);
+        element.click();
+    }
+
+    public void changeMultiSortColumnTaskDateType(int position, String newValue) {
+        seleniumSettings.getWebDriver().findElement(By.id("task" + position)).click();
+        WebElement element = (WebElement) js.getNewDropDownElement("task" + position, "customscroll", "item_select", newValue);
+        Long elementPosition = js.getNewDropDownElementPosition("task" + position, "customscroll", "item_select", newValue);
+        js.scrollNewDropDownTop("task" + position, "customscroll", elementPosition * 28L);
+        elementWait.waitElementVisible(element);
+        element.click();
+    }
+
+    public void changeMultiSortColumnOrder(int position, String newValue) {
+        String currentSortOrder1 = seleniumSettings.getWebDriver().findElement(By.id("mult_sort" + position)).findElement(By.className("ms_sort")).findElement(By.tagName("input")).getAttribute("title");
+        if (!newValue.equals(currentSortOrder1)) {
+            seleniumSettings.getWebDriver().findElement(By.id("mult_sort" + position)).findElement(By.className("ms_sort")).findElement(By.tagName("input")).click();
+        }
+    }
+
+    public void checkMultiSortColumn(int position, String expectedValue) {
+        String actualValue = seleniumSettings.getWebDriver().findElement(By.id("fields" + position)).findElement(By.className("dl_selected")).findElement(By.tagName("input")).getAttribute("value");
+        Assert.assertEquals(actualValue, expectedValue);
+    }
+
+    public void checkMultiSortColumnTaskDateType(int position, String expectedValue) {
+        String actualValue = seleniumSettings.getWebDriver().findElement(By.id("task" + position)).findElement(By.className("dl_selected")).findElement(By.tagName("input")).getAttribute("value");
+        Assert.assertEquals(actualValue, expectedValue);
+    }
+
+    public void checkMultiSortColumnOrder(int position, String expectedValue) {
+        String actualValue = seleniumSettings.getWebDriver().findElement(By.id("mult_sort" + position)).findElement(By.className("ms_sort")).findElement(By.tagName("input")).getAttribute("title");
+        Assert.assertEquals(actualValue, expectedValue);
+    }
+
+    public void checkMultiSortNotExist(int position) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id("mult_sort" + position)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
+    }
+
 }
