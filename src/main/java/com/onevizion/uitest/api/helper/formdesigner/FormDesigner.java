@@ -21,8 +21,8 @@ import com.onevizion.uitest.api.vo.ListboxElement;
 @Component
 public class FormDesigner {
 
-    private static final String FIELD_LIST_SEARCH = "searchField";
-    private static final String BUTTON_CLEAR_SEARCH = "wrapperClearSearch";
+    private static final String FIELD_LIST_SEARCH = "search_listBox";
+    private static final String BUTTON_CLEAR_SEARCH = "clear_search_listBox";
     private static final String BUTTON_DELETE_ELEMENT = "btnDelElem";
 
     private static final String FORM_ID = "formContent";
