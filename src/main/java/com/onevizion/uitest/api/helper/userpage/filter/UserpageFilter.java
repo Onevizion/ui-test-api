@@ -454,8 +454,9 @@ public class UserpageFilter {
     }
 
     private void checkAndClearFilter(String fieldName, FilterOperatorType operator, int randomIndex) {
+        checkFilterAttributeAndOperatorAndValue(1, fieldName, operator);
+
         if (randomIndex == 1) {
-            checkFilterAttributeAndOperatorAndValue(1, fieldName, operator);
             filter.clearFilter(AbstractSeleniumCore.getGridIdx());
         } else if (randomIndex == 0) {
             filter.selectByVisibleText("Unsaved Filter", AbstractSeleniumCore.getGridIdx());
@@ -465,8 +466,9 @@ public class UserpageFilter {
     }
 
     private void checkAndClearFilter(String fieldName, FilterOperatorType operator, String value, int randomIndex) {
+        checkFilterAttributeAndOperatorAndValue(1, fieldName, operator, value);
+
         if (randomIndex == 1) {
-            checkFilterAttributeAndOperatorAndValue(1, fieldName, operator, value);
             filter.clearFilter(AbstractSeleniumCore.getGridIdx());
         } else if (randomIndex == 0) {
             filter.selectByVisibleText("Unsaved Filter", AbstractSeleniumCore.getGridIdx());
@@ -476,8 +478,9 @@ public class UserpageFilter {
     }
 
     private void checkAndClearFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType, int randomIndex) {
+        checkFilterAttributeAndOperatorAndValue(1, fieldName, fieldName2, value, dateType, operator, fieldDataType);
+
         if (randomIndex == 1) {
-            checkFilterAttributeAndOperatorAndValue(1, fieldName, fieldName2, value, dateType, operator, fieldDataType);
             filter.clearFilter(AbstractSeleniumCore.getGridIdx());
         } else if (randomIndex == 0) {
             filter.selectByVisibleText("Unsaved Filter", AbstractSeleniumCore.getGridIdx());
