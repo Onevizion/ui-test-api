@@ -463,9 +463,15 @@ public class Js {
         text = text.replaceAll("'", "\\\\'");
 
         return NumberUtils.createLong(execJs("var j = 0;"
-                + "var elements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
-                + "for (var i = 0; i < elements.length; i++) {"
-                + "    if (elements[i].innerText == '" + text +"' || elements[i].textContent == '" + text +"') {"
+                + "var allElements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
+                + "var visibleElements = [];"
+                + "for (var i = 0; i < allElements.length; i++) {"
+                + "    if (!allElements[i].className.includes('hidden')) {"
+                + "        visibleElements.push(allElements[i]);"
+                + "    }"
+                + "}"
+                + "for (var i = 0; i < visibleElements.length; i++) {"
+                + "    if (visibleElements[i].innerText == '" + text +"' || visibleElements[i].textContent == '" + text +"') {"
                 + "        j = i;"
                 + "        break;"
                 + "    }"
