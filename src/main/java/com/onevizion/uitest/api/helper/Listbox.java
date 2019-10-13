@@ -58,6 +58,10 @@ public class Listbox {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         for (WebElement webElement : webElements) {
+            if (webElement.getAttribute("class").contains("hidden")) {
+                continue;
+            }
+
             ListboxElement listboxElement = new ListboxElement();
             listboxElement.setWebElement(webElement);
             listboxElement.setId(webElement.getAttribute("id"));
