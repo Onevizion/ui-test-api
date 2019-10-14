@@ -23,9 +23,12 @@ public class FormDesigner {
 
     private static final String FIELD_LIST_SEARCH = "search_listBox";
     private static final String BUTTON_CLEAR_SEARCH = "clear_search_listBox";
-    private static final String BUTTON_DELETE_ELEMENT = "btnDelElem";
 
-    private static final String FORM_ID = "formContent";
+    private static final String TOOLBAR = "toolbar";
+    private static final String TOOLBAR_DELETE = "btnDelete";
+
+    private static final String FORM = "formContent";
+    private static final String FORM_ELEMENT = "item_form";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -117,20 +120,20 @@ public class FormDesigner {
     public void removeElementFromForm(String label) {
         boolean isElementRemoved = false;
 
-        List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id(FORM_ID)).findElements(By.xpath("div[contains(@class, 'cf')]"));
+        List<WebElement> fields = seleniumSettings.getWebDriver().findElement(By.id(FORM)).findElements(By.className(FORM_ELEMENT));
         for (WebElement field : fields) {
             List<WebElement> labels = field.findElements(By.tagName("label"));
             if (!labels.isEmpty()) {
                 if (labels.get(0).getAttribute("innerText").trim().equals(label)) {
                     element.click(field);
-                    element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+                    clickDeleteButtonOnToolbar();
                     isElementRemoved = true;
                 }
             } else {
                 if ((field.getAttribute("Title").equals("BlankLine") && field.getAttribute("innerText").trim().equals(label)) ||
                         (field.getAttribute("Title").equals("Splitter") && "Splitter".equals(label))) {
                     element.click(field);
-                    element.click(field.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+                    clickDeleteButtonOnToolbar();
                     isElementRemoved = true;
                 }
             }
@@ -146,54 +149,59 @@ public class FormDesigner {
     }
 
     public void removeElementsFromForm(List<String> elements) {
-        WebElement formfields = seleniumSettings.getWebDriver().findElement(By.id(FORM_ID));
+        WebElement formfields = seleniumSettings.getWebDriver().findElement(By.id(FORM));
 
         element.click(formfields.findElement(By.id(elements.get(0)))); //CHECKBOX
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(1)))); //DATE
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(2)))); //DB_DROP_DOWN
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(3)))); //DB_SELECTOR
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(4)))); //DROP_DOWN
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(5)))); //ELECTRONIC_FILE
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(6)))); //HYPERLINK
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(7)))); //LATITUDE
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(8)))); //LONGITUDE
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(9)))); //MEMO
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(10)))); //NUMBER
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(11)))); //SELECTOR
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(12)))); //TEXT
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(13)))); //TRACKOR_SELECTOR
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(14)))); //WIKI
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(15)))); //MULTI_SELECTOR
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(16)))); //DATE_TIME
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(17)))); //TIME
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(18)))); //TRACKOR_DROPDOWN
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         element.click(formfields.findElement(By.id(elements.get(19)))); //CALCULATED
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
         if (elements.get(20) != null) { //Workplan and Tasks and Workflow trackor types not support
             element.click(formfields.findElement(By.id(elements.get(20)))); //ROLLUP
-            element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+            clickDeleteButtonOnToolbar();
         }
         element.click(formfields.findElement(By.id(elements.get(21)))); //MULTI_TRACKOR_SELECTOR
-        element.click(formfields.findElement(By.id(BUTTON_DELETE_ELEMENT)));
+        clickDeleteButtonOnToolbar();
+    }
+
+    private void clickDeleteButtonOnToolbar() {
+        WebElement deleteButton = seleniumSettings.getWebDriver().findElement(By.className(TOOLBAR)).findElement(By.id(TOOLBAR_DELETE));
+        element.click(deleteButton);
     }
 
     public List<FormDesignerField> getElementsOnForm() {
@@ -240,7 +248,7 @@ public class FormDesigner {
     }
 
     public int getElementsCountOnForm() {
-        List<WebElement> listBoxfields = seleniumSettings.getWebDriver().findElement(By.id(FORM_ID)).findElements(By.xpath("div[contains(@class, 'cf')]"));
+        List<WebElement> listBoxfields = seleniumSettings.getWebDriver().findElement(By.id(FORM)).findElements(By.className(FORM_ELEMENT));
         return listBoxfields.size();
     }
 
