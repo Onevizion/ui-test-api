@@ -91,7 +91,7 @@ public class SeleniumSettings {
         return windows.get();
     }
 
-    void setWindows(List<String> windows) {
+    public void setWindows(List<String> windows) {
         this.windows.set(windows);
     }
 
