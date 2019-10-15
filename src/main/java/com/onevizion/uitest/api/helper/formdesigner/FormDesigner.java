@@ -130,8 +130,8 @@ public class FormDesigner {
                     isElementRemoved = true;
                 }
             } else {
-                if ((field.getAttribute("Title").equals("BlankLine") && field.getAttribute("innerText").trim().equals(label)) ||
-                        (field.getAttribute("Title").equals("Splitter") && "Splitter".equals(label))) {
+                if ((field.getAttribute("title").equals("Blank Line") && field.getAttribute("innerText").trim().equals(label)) ||
+                        (field.getAttribute("title").equals("Splitter") && "Splitter".equals(label))) {
                     element.click(field);
                     clickDeleteButtonOnToolbar();
                     isElementRemoved = true;
