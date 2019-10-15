@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.vo.ApiV3EndpointType;
 
 @Component
 public class ApiV3Endpoint {
@@ -34,6 +35,38 @@ public class ApiV3Endpoint {
         return endpoints.size();
     }
 
+    public WebElement findEndpoint(WebElement resource, ApiV3EndpointType apiV3EndpointType) {
+        WebElement ret = null;
+        int count = 0;
+
+        List<WebElement> endpoints = resource.findElements(By.className("endpoint"));
+        for (WebElement endpoint : endpoints) {
+            element.moveToElement(endpoint);
+            String actualMethod = endpoint.findElement(By.className("heading")).findElement(By.className("http_method")).getText();
+            String actualPath = endpoint.findElement(By.className("heading")).findElement(By.className("path")).getText();
+            String actualDescription = endpoint.findElement(By.className("heading")).findElement(By.tagName("li")).getText();
+
+            if (apiV3EndpointType.getMethod().equals(actualMethod)
+                    && apiV3EndpointType.getPath().equals(actualPath)
+                    && apiV3EndpointType.getDescription().equals(actualDescription)) {
+                count = count + 1;
+                ret = endpoint;
+            }
+        }
+
+        if (count == 0) {
+            throw new SeleniumUnexpectedException("Endpoint not found");
+        } else if (count > 1) {
+            throw new SeleniumUnexpectedException("Endpoint found many times");
+        }
+
+        return ret;
+    }
+
+    /**
+     * @deprecated (we should use findEndpoint with ApiV3EndpointType)
+     */
+    @Deprecated
     public WebElement findEndpoint(WebElement resource, String method, String path, String description) {
         WebElement ret = null;
         int count = 0;
