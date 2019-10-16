@@ -8,6 +8,7 @@ public enum ApiV3EndpointType {
     IMPORTS_SEARCH_RUNS("GET", "/v3/imports/{import_id}/runs", "Search import runs"),
     IMPORTS_INTERRUPT("POST", "/v3/imports/runs/{process_id}/interrupt", "Interrupt import"),
     IMPORTS_RUN("POST", "/v3/imports/{import_id}/run", "Run import"),
+    PROGRAMS_CREATE_PROGRAM("POST", "/v3/programs", "ID of new Program created"),
     SECURITY_ROLES_READ("GET", "/v3/security-roles/{role_name}/users", "Read Users assigned to Security Role");
 
     private String method;
