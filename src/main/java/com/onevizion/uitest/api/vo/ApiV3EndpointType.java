@@ -9,7 +9,10 @@ public enum ApiV3EndpointType {
     IMPORTS_INTERRUPT("POST", "/v3/imports/runs/{process_id}/interrupt", "Interrupt import"),
     IMPORTS_RUN("POST", "/v3/imports/{import_id}/run", "Run import"),
     PROGRAMS_CREATE_PROGRAM("POST", "/v3/programs", "ID of new Program created"),
-    SECURITY_ROLES_READ("GET", "/v3/security-roles/{role_name}/users", "Read Users assigned to Security Role");
+    SECURITY_ROLES_READ("GET", "/v3/security-roles/{role_name}/users", "Read Users assigned to Security Role"),
+    WORKPLANS_READ_WPS("GET", "/v3/wps", "Read Workplans"),
+    WORKPLANS_READ_WP("GET", "/v3/wps/{workplan_id}", "Read Workplan by id"),
+    WORKPLANS_CREATE_WP("POST", "/v3/trackors/{trackor_id}/assign_wp", "Assign Workplan to Trackor");
 
     private String method;
     private String path;
