@@ -12,6 +12,10 @@ public enum ApiV3EndpointType {
     PARAMS_READ_SYSTEM_PARAM("GET", "/v3/params/system/{param_name}", "Read System Parameter"),
     PROGRAMS_CREATE_PROGRAM("POST", "/v3/programs", "ID of new Program created"),
     SECURITY_ROLES_READ("GET", "/v3/security-roles/{role_name}/users", "Read Users assigned to Security Role"),
+    USER_SETTINGS_READ("GET", "/v3/user_settings", "Read user settings"),
+    VIEWS_READ_VIEWS("GET", "/v3/trackor_types/{trackor_type}/views", "Read Views"),
+    VIEWS_READ_VIEW_COLUMNS("GET", "/v3/trackor_types/{trackor_type}/views/{view_name}", "Read View fields"),
+    VIEWS_SET_VIEW_AS_CURRENT("POST", "/v3/trackor_types/{trackor_type}/views/{view_name}/set_as_current", "Set view as current"),
     WORKPLANS_READ_WPS("GET", "/v3/wps", "Read Workplans"),
     WORKPLANS_READ_WP("GET", "/v3/wps/{workplan_id}", "Read Workplan by id"),
     WORKPLANS_CREATE_WP("POST", "/v3/trackors/{trackor_id}/assign_wp", "Assign Workplan to Trackor");
