@@ -63,36 +63,6 @@ public class ApiV3Endpoint {
         return ret;
     }
 
-    /**
-     * @deprecated (we should use findEndpoint with ApiV3EndpointType)
-     */
-    @Deprecated
-    public WebElement findEndpoint(WebElement resource, String method, String path, String description) {
-        WebElement ret = null;
-        int count = 0;
-
-        List<WebElement> endpoints = resource.findElements(By.className("endpoint"));
-        for (WebElement endpoint : endpoints) {
-            element.moveToElement(endpoint);
-            String actualMethod = endpoint.findElement(By.className("heading")).findElement(By.className("http_method")).getText();
-            String actualPath = endpoint.findElement(By.className("heading")).findElement(By.className("path")).getText();
-            String actualDescription = endpoint.findElement(By.className("heading")).findElement(By.tagName("li")).getText();
-
-            if (method.equals(actualMethod) && path.equals(actualPath) && description.equals(actualDescription)) {
-                count = count + 1;
-                ret = endpoint;
-            }
-        }
-
-        if (count == 0) {
-            throw new SeleniumUnexpectedException("Endpoint not found");
-        } else if (count > 1) {
-            throw new SeleniumUnexpectedException("Endpoint found many times");
-        }
-
-        return ret;
-    }
-
     public void openEndpoint(WebElement endpoint) {
         endpoint.findElement(By.className("heading")).findElement(By.className("http_method")).findElement(By.tagName("a")).click();
 
