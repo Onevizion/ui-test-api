@@ -79,6 +79,8 @@ public class RelationSelector {
     }
 
     public void openRelationSelector(Long gridIdx) {
+        waitRelationSelector(gridIdx);
+
         seleniumSettings.getWebDriver().findElement(By.id("new_lbParentsChildren" + gridIdx)).findElement(By.className("newDropDown")).click();
 
         elementWait.waitElementById("new_rows_lbParentsChildren" + gridIdx);
@@ -95,6 +97,7 @@ public class RelationSelector {
     }
 
     public void openRelationGrid(Long gridIdx) {
+        waitRelationSelector(gridIdx);
         relationSelectorJs.setIsReadyToFalse(gridIdx);
         window.openModal(By.id(BUTTON_RELATION_ID_BASE + gridIdx));
         grid2.waitLoad(gridIdx);
@@ -126,7 +129,7 @@ public class RelationSelector {
         Assert.assertEquals(actualLabel, label);
     }
 
-    public void waitRelationSelector(Long gridIdx) {
+    private void waitRelationSelector(Long gridIdx) {
         relationSelectorWait.waitIsReadyRelationSelector(gridIdx);
         relationSelectorWait.waitIsReadyMutationObserver(gridIdx);
     }
