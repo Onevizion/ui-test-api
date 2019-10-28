@@ -91,7 +91,7 @@ public class EntityRuleType {
         assertElement.assertText(NAME, ruleType.getName());
         assertElement.assertText(LABEL, ruleType.getLabel());
         assertElement.assertText(DESCRIPTION, ruleType.getDescription());
-////        assertElement.assertText(START_DATE_TIME, ruleType.getStartDateTime());
+        assertElement.assertText(START_DATE_TIME, ruleType.getStartDateTime());
         assertElement.assertText(REPEAT_INTERVAL, ruleType.getRepeatInterval());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -103,7 +103,7 @@ public class EntityRuleType {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Rule Type"), ruleType.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Rule Type Label"), ruleType.getLabel());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), ruleType.getDescription());
-////        gridVals.put(js.getColumnIndexByLabel(gridId, "Start Date/Time"), ruleType.getStartDateTime() + ":00");
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Start Date/Time"), ruleType.getStartDateTime() + ":00");
         gridVals.put(js.getColumnIndexByLabel(gridId, "Repeat Interval"), ruleType.getRepeatInterval());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
