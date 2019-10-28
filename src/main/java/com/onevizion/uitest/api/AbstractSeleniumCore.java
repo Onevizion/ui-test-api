@@ -80,6 +80,7 @@ import com.onevizion.uitest.api.helper.entity.EntityIntegration;
 import com.onevizion.uitest.api.helper.entity.EntityMenu;
 import com.onevizion.uitest.api.helper.entity.EntityMenuItem;
 import com.onevizion.uitest.api.helper.entity.EntityReportGroup;
+import com.onevizion.uitest.api.helper.entity.EntityRuleType;
 import com.onevizion.uitest.api.helper.entity.EntitySecurityRole;
 import com.onevizion.uitest.api.helper.entity.EntityTrackorClass;
 import com.onevizion.uitest.api.helper.entity.EntityTrackorForm;
@@ -353,6 +354,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected EntityValidation entityValidation;
+
+    @Resource
+    protected EntityRuleType entityRuleType;
     /* Entity Helpers End */
 
     @Resource
