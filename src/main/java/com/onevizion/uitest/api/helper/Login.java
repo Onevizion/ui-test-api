@@ -110,6 +110,33 @@ public class Login {
         elementWait.waitElementNotDisplayById("auth_close");
     }
 
+    public void mustChangePasswordLogin(String userName, String userPassword, String newUserPassword) {
+        WebElement html;
+
+        document.waitReadyStateComplete();
+        jquery.waitLoad();
+        html = seleniumSettings.getWebDriver().findElement(By.tagName("html"));
+        elementWait.waitElementById("username");
+        elementWait.waitElementVisibleById("username");
+        elementWait.waitElementDisplayById("username");
+        seleniumSettings.getWebDriver().findElement(By.name("username")).sendKeys(userName);
+        seleniumSettings.getWebDriver().findElement(By.name("password")).sendKeys(userPassword);
+        seleniumSettings.getWebDriver().findElement(By.id("btn")).click();
+        elementWait.waitElementNotExist(html);
+
+        document.waitReadyStateComplete();
+        jquery.waitLoad();
+        html = seleniumSettings.getWebDriver().findElement(By.tagName("html"));
+        elementWait.waitElementById("CurPass");
+        elementWait.waitElementVisibleById("CurPass");
+        elementWait.waitElementDisplayById("CurPass");
+        seleniumSettings.getWebDriver().findElement(By.name("CurPass")).sendKeys(userPassword);
+        seleniumSettings.getWebDriver().findElement(By.name("NewPass1")).sendKeys(newUserPassword);
+        seleniumSettings.getWebDriver().findElement(By.name("NewPass2")).sendKeys(newUserPassword);
+        seleniumSettings.getWebDriver().findElement(By.id("auth_submit")).click();
+        elementWait.waitElementNotExist(html);
+    }
+
     public void loginIntoApiV3() {
         login(seleniumSettings.getTestUser(), seleniumSettings.getTestPasswordApiV3());
 
