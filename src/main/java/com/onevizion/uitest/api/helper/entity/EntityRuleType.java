@@ -103,7 +103,7 @@ public class EntityRuleType {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Rule Type"), ruleType.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Rule Type Label"), ruleType.getLabel());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), ruleType.getDescription());
-        gridVals.put(js.getColumnIndexByLabel(gridId, "Start Date/Time"), ruleType.getStartDateTime() + ":00");
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Start Date/Time"), ruleType.getStartDateTime());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Repeat Interval"), ruleType.getRepeatInterval());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
