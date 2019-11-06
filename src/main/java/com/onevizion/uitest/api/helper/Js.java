@@ -553,6 +553,11 @@ public class Js {
                 + "return columnIdx;"));
     }
 
+    @Deprecated
+    public void setColumnLabel(Long gridId, String columnIndex, String columnLabel) {
+        execJs("gridArr['" + gridId + "'].grid.setColLabel('" + columnIndex + "', '" + columnLabel + "');");
+    }
+
     public Long getColumnFirstRowIndex(Long gridId, String columnLabel) {
         columnLabel = columnLabel.replaceAll("'", "\\\\'");
 
