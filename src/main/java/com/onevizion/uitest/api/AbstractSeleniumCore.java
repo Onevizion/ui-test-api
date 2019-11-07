@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -107,6 +108,7 @@ import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
 import com.onevizion.uitest.api.helper.view.View;
 import com.onevizion.uitest.api.helper.wfvisualeditor.WfVisualEditor;
 import com.onevizion.uitest.api.helper.wiki.FckEditor;
+import com.onevizion.uitest.api.restapi.CreateProcess;
 import com.onevizion.uitest.api.restapi.CreateTest;
 import com.onevizion.uitest.api.restapi.CreateTestResult;
 
@@ -625,7 +627,10 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             return;
         }
 
+        String browserVersion = ((HasCapabilities) seleniumSettings.getWebDriver()).getCapabilities().getVersion();
+
         try {
+            CreateProcess.updateBrowserVersion(seleniumSettings.getRestApiUrl(), seleniumSettings.getRestApiCredential(), processTrackorKey, browserVersion);
             createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName(), getBugs());
             createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getTestStatus(), durationMinutesStr, getBugs(), seleniumSettings.getTestLog(), getErrorReport(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {

@@ -59,7 +59,7 @@ public class CreateProcess {
         }
     }
 
-    public static void update(String restApiUrl, String restApiCredential, String processTrackorKey, int testsCount) {
+    public static void updateTestsCount(String restApiUrl, String restApiCredential, String processTrackorKey, int testsCount) {
         try {
             URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -80,7 +80,7 @@ public class CreateProcess {
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new SeleniumUnexpectedException("CreateProcess.update Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
+                throw new SeleniumUnexpectedException("CreateProcess.updateTestsCount Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
             }
 
             conn.disconnect();
@@ -89,7 +89,7 @@ public class CreateProcess {
         }
     }
 
-    public static void update(String restApiUrl, String restApiCredential, String processTrackorKey, String duration) {
+    public static void updateDuration(String restApiUrl, String restApiCredential, String processTrackorKey, String duration) {
         try {
             URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -110,7 +110,37 @@ public class CreateProcess {
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new SeleniumUnexpectedException("CreateProcess.update Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
+                throw new SeleniumUnexpectedException("CreateProcess.updateDuration Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
+            }
+
+            conn.disconnect();
+        } catch (Exception e) {
+            throw new SeleniumUnexpectedException(e);
+        }
+    }
+
+    public static void updateBrowserVersion(String restApiUrl, String restApiCredential, String processTrackorKey, String browserVersion) {
+        try {
+            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Basic " + restApiCredential);
+
+            String input = "{ " + 
+                    "   \"fields\": { " + 
+                    "     \"SPRC_BROWSER_VERSION\": \"" + browserVersion + "\" " + 
+                    "   } " + 
+                    " }";
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new SeleniumUnexpectedException("CreateProcess.updateBrowserVersion Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
             }
 
             conn.disconnect();
