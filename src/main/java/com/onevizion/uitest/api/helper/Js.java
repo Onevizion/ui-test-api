@@ -649,4 +649,8 @@ public class Js {
         return execJs("return document.documentElement.innerText;");
     }
 
+    public Boolean isUsageLogUpdated(Long gridIdx) {
+        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].isUsageLogUpdated;"));
+    }
+
 }
