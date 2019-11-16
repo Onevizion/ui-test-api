@@ -35,8 +35,7 @@ public class Tab {
 
         List<WebElement> tabs = seleniumSettings.getWebDriver().findElement(By.id("formMenuTree")).findElement(By.className("scrollContent")).findElements(By.className("newGuiMenuRowContainer"));
         WebElement tab = tabs.get(tabIndex.intValue() - 1);
-        WebElement tabLabel = tab.findElement(By.className("menuItemWidthWrapper"));
-        tabLabel.click();
+        tab.click();
     }
 
     public String getTabLabel(Long tabIndex) {
