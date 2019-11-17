@@ -137,14 +137,6 @@ public class ApiV3Endpoint {
         Assert.assertEquals(actualResponseText, expectedResponseText);
     }
 
-    public void checkResponseTextWithErrorReportId(WebElement endpoint, String expectedResponseText) {
-        WebElement responseText = endpoint.findElement(By.className("response_body"));
-        element.moveToElement(responseText);
-        String actualResponseText = responseText.getText();
-        actualResponseText = actualResponseText.substring(0, actualResponseText.length() - 36);
-        Assert.assertEquals(actualResponseText, expectedResponseText);
-    }
-
     public void checkResponseCode(WebElement endpoint, String expectedResponseCode) {
         WebElement responseCode = endpoint.findElement(By.className("response_code"));
         element.moveToElement(responseCode);
