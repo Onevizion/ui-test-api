@@ -2,9 +2,7 @@ package com.onevizion.uitest.api;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
@@ -15,16 +13,17 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.CommandInfo;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.internal.OkHttpClient;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestContext;
 
+import com.google.common.collect.ImmutableMap;
 import com.onevizion.uitest.api.annotation.SeleniumBug;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
@@ -468,6 +467,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     capabilities = BrowserFirefox.create(seleniumSettings);
                 } else if (seleniumSettings.getBrowser().equals("chrome")) {
                     capabilities = BrowserChrome.create(seleniumSettings);
+                } else if (seleniumSettings.getBrowser().equals("edge")) {
+                    capabilities = BrowserEdge.create(seleniumSettings);
                 } else {
                     throw new SeleniumUnexpectedException("Not support browser " + seleniumSettings.getBrowser());
                 }
@@ -480,9 +481,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 try {
                     //OkHttpClient.Factory factory = new OkHttpClient.Factory(Duration.ofMinutes(2), Duration.ofHours(3));
                     //OkHttpClient.Factory factory = new OkHttpClient.Factory(Duration.ofMinutes(3), Duration.ofMinutes(30));
-                    OkHttpClient.Factory factory = new OkHttpClient.Factory();
-                    factory.builder().connectionTimeout(Duration.ofMinutes(3)).readTimeout(Duration.ofMinutes(30));
-                    HttpCommandExecutor executor = new HttpCommandExecutor(Collections.<String, CommandInfo> emptyMap(), new URL("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub"), factory);
+                    //OkHttpClient.Factory factory = new OkHttpClient.Factory();
+                    //factory.builder().connectionTimeout(Duration.ofMinutes(3)).readTimeout(Duration.ofMinutes(30));
+                    //HttpCommandExecutor executor = new HttpCommandExecutor(Collections.<String, CommandInfo> emptyMap(), new URL("http://" + seleniumSettings.getRemoteAddress() + ":5555/wd/hub"), factory);
+                    
+                    CustomOkHttpClientFactory factory = new CustomOkHttpClientFactory();
+                    HttpCommandExecutor executor = new HttpCommandExecutor(ImmutableMap.of(), new URL("http://" + seleniumSettings.getRemoteAddress() + ":9999"), factory);
                     seleniumSettings.setWebDriver(new RemoteWebDriver(executor, capabilities));
                 } catch (MalformedURLException e) {
                     seleniumLogger.error("Unexpected exception: " + e.getMessage());
@@ -501,6 +505,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 } else if (seleniumSettings.getBrowser().equals("chrome")) {
                     ChromeOptions chromeOptions = BrowserChrome.create(seleniumSettings);
                     seleniumSettings.setWebDriver(new ChromeDriver(chromeOptions));
+                } else if (seleniumSettings.getBrowser().equals("edge")) {
+                    EdgeOptions edgeOptions = BrowserEdge.create(seleniumSettings);
+                    seleniumSettings.setWebDriver(new EdgeDriver(edgeOptions));
                 } else {
                     throw new SeleniumUnexpectedException("Not support browser " + seleniumSettings.getBrowser());
                 }
