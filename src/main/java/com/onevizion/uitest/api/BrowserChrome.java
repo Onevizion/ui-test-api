@@ -32,7 +32,7 @@ public class BrowserChrome {
         options.addArguments("--disable-gpu");
 
         if (seleniumSettings.getHeadlessMode()) {
-            options.setProxy(null);
+        ////////////    options.setProxy(null);
             options.addArguments("--headless");
             options.addArguments("--deterministic-fetch");
             options.addArguments("--ignore-certificate-errors");
