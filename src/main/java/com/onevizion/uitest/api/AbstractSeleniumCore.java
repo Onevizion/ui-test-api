@@ -35,6 +35,7 @@ import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.helper.Favorites;
 import com.onevizion.uitest.api.helper.FieldHistory;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.GridRowButton;
@@ -282,6 +283,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected SharePageLink sharePageLink;
+
+    @Resource
+    protected Favorites favorites;
     /* Helpers End */
 
     /* Entity Helpers Begin */

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Priv implements Comparable<Priv> {
 
     private String securityGroup;
-    private String tokenType;
+    private String secGroupType;
     private String priv;
 
     @JsonProperty("security_group")
@@ -19,13 +19,13 @@ public class Priv implements Comparable<Priv> {
         this.securityGroup = securityGroup;
     }
 
-    @JsonProperty("token_type")
-    public String getTokenType() {
-        return tokenType;
+    @JsonProperty("sec_group_type")
+    public String getSecGroupType() {
+        return secGroupType;
     }
 
-    public void setTokenType(String tokenType) {
-        this.tokenType = tokenType;
+    public void setSecGroupType(String secGroupType) {
+        this.secGroupType = secGroupType;
     }
 
     @JsonProperty("priv")
@@ -44,7 +44,7 @@ public class Priv implements Comparable<Priv> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(priv, securityGroup, tokenType);
+        return Objects.hash(priv, securityGroup, secGroupType);
     }
 
     @Override
@@ -60,12 +60,12 @@ public class Priv implements Comparable<Priv> {
         }
         Priv other = (Priv) obj;
         return Objects.equals(priv, other.priv) && Objects.equals(securityGroup, other.securityGroup)
-                && Objects.equals(tokenType, other.tokenType);
+                && Objects.equals(secGroupType, other.secGroupType);
     }
 
     @Override
     public String toString() {
-        return "Priv [securityGroup=" + securityGroup + ", tokenType=" + tokenType + ", priv=" + priv + "]";
+        return "Priv [securityGroup=" + securityGroup + ", secGroupType=" + secGroupType + ", priv=" + priv + "]";
     }
 
 }
