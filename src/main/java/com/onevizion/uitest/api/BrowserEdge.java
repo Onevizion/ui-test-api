@@ -20,7 +20,7 @@ public class BrowserEdge {
 //
 //        return options;
 
-        ///////////System.setProperty("webdriver.edge.driver", "C:\\workspace2\\msedgedriver.exe");
+        System.setProperty("webdriver.edge.driver", "C:\\selenium\\msedgedriver.exe");
         EdgeOptions options = new EdgeOptions();
         return options;
     }
