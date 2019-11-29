@@ -358,10 +358,4 @@ public class Wait {
             .until(webdriver -> js.bplImportFileSubmitDone());
     }
 
-    public void waitUsageLogUpdater(final Long gridId) {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-        .withMessage("Waiting for Usage Log updating is failed")
-        .until(webdriver -> js.isUsageLogUpdated(gridId));
-    }
-
 }
