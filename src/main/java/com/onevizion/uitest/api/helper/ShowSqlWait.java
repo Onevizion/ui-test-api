@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class ShowSqlWait {
+class ShowSqlWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -16,10 +16,10 @@ public class ShowSqlWait {
     @Resource
     private ShowSqlJs showSqlJs;
 
-    public void waitUsageLogUpdater(final Long gridId) {
+    void waitIsUsageLogUpdated(final Long gridId) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-        .withMessage("Waiting for Usage Log updating is failed")
-        .until(webdriver -> showSqlJs.isUsageLogUpdated(gridId));
+            .withMessage("Waiting for Usage Log updating is failed")
+            .until(webdriver -> showSqlJs.isUsageLogUpdated(gridId));
     }
 
 }
