@@ -36,7 +36,7 @@ public class ShowSql {
     private ShowSqlWait showSqlWait;
 
     public void openShowSqlForm(Long gridIdx) {
-        showSqlWait.waitUsageLogUpdater(gridIdx);
+        showSqlWait.waitIsUsageLogUpdated(gridIdx);
         window.openModal(By.id(BUTTON_SHOW_SQL_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
