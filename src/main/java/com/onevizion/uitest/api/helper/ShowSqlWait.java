@@ -16,7 +16,7 @@ class ShowSqlWait {
     @Resource
     private ShowSqlJs showSqlJs;
 
-    void waitIsUsageLogUpdated(final Long gridId) {
+    void waitIsUsageLogUpdated(Long gridId) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Usage Log updating is failed")
             .until(webdriver -> showSqlJs.isUsageLogUpdated(gridId));
