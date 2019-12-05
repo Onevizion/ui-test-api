@@ -111,6 +111,14 @@ public class Wait {
             .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed());
     }
 
+    public void waitPreviewLoad() {
+        waitWebElement(By.id(AbstractSeleniumCore.LOADING_PREVIEW_ID_BASE));
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for preview is failed.")
+            .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_PREVIEW_ID_BASE)).isDisplayed());
+    }
+
     public void waitAlert() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Timed out after " + seleniumSettings.getDefaultTimeout() + " seconds waiting for alert.")
