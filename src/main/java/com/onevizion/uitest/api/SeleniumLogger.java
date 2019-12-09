@@ -2,6 +2,7 @@ package com.onevizion.uitest.api;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -45,12 +46,20 @@ public class SeleniumLogger {
         log(msg);
     }
 
+    public void error(String msg, Throwable t) {
+        logger.error(seleniumSettings.getTestName() + " " + msg);
+        Reporter.log(seleniumSettings.getTestName() + " " + msg);
+        log(msg);
+        callstack(ExceptionUtils.getStackTrace(t));
+    }
+
     private void log(String msg) {
         msg = msg.replaceAll("\\\\", "\\\\\\\\");
         msg = msg.replaceAll("\\n", "\\\\n");
         msg = msg.replaceAll("\\t", "\\\\t");
         msg = msg.replaceAll("\\r", "\\\\r");
         msg = msg.replaceAll("\"", "'");
+
         String testLog = seleniumSettings.getTestLog();
         if (testLog == null) {
             testLog = msg;
@@ -58,6 +67,18 @@ public class SeleniumLogger {
             testLog = testLog + "\\n" + msg;
         }
         seleniumSettings.setTestLog(testLog);
+    }
+
+    private void callstack(String msg) {
+        msg = msg.replaceAll("\\\\", "\\\\\\\\");
+        msg = msg.replaceAll("\\n", "\\\\n");
+        msg = msg.replaceAll("\\t", "\\\\t");
+        msg = msg.replaceAll("\\r", "\\\\r");
+        msg = msg.replaceAll("\"", "'");
+
+        if (seleniumSettings.getTestCallstack() == null) {
+            seleniumSettings.setTestCallstack(msg);
+        }
     }
 
 }

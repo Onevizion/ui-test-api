@@ -24,6 +24,8 @@ public class SeleniumSettings {
 
     private ThreadLocal<String> testLog = new ThreadLocal<>();
 
+    private ThreadLocal<String> testCallstack = new ThreadLocal<>();
+
     private ThreadLocal<String> testFailScreenshot = new ThreadLocal<>();
 
     @Resource
@@ -129,6 +131,18 @@ public class SeleniumSettings {
 
     void setTestLog(String testLog) {
         this.testLog.set(testLog);
+    }
+
+    void clearTestCallstack() {
+        testCallstack.remove();
+    }
+
+    public String getTestCallstack() {
+        return testCallstack.get();
+    }
+
+    void setTestCallstack(String testCallstack) {
+        this.testCallstack.set(testCallstack);
     }
 
     void clearTestFailScreenshot() {

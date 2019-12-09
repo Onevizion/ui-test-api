@@ -454,6 +454,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         seleniumSettings.setTestName(getTestName());
         seleniumSettings.setTestStatus("success");
         seleniumSettings.clearTestLog();
+        seleniumSettings.clearTestCallstack();
         seleniumSettings.clearTestFailScreenshot();
 
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
@@ -543,7 +544,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.setTestStatus("fail");
 
             seleniumLogger.error("openBrowserAndLogin fail");
-            seleniumLogger.error("openBrowserAndLogin Unexpected exception: " + e.getMessage());
+            seleniumLogger.error("openBrowserAndLogin Unexpected exception: " + e.getMessage(), e);
 
             if (seleniumSettings.getWebDriver() != null) {
                 seleniumHelper.closeAfterErrorAndGetScreenshot();
@@ -637,7 +638,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         try {
             CreateProcess.updateBrowserVersion(seleniumSettings.getRestApiUrl(), seleniumSettings.getRestApiCredential(), processTrackorKey, browserVersion);
             createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName(), getBugs());
-            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getTestStatus(), durationMinutesStr, getBugs(), seleniumSettings.getTestLog(), getErrorReport(), seleniumSettings.getTestFailScreenshot());
+            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getTestStatus(), durationMinutesStr, getBugs(), seleniumSettings.getTestLog(), getErrorReport(), seleniumSettings.getTestCallstack(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
             seleniumLogger.error("call REST API Unexpected exception: " + e.getMessage());
         }
