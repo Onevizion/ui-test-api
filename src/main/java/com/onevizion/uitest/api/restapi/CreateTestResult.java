@@ -66,8 +66,8 @@ public class CreateTestResult {
                             "     \"STR_DURATION\": \"" + duration + "\", " + 
                             "     \"STR_BUGS\": \"" + bugs + "\", " + 
                             "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
-                            "     \"STR_ERROR_REPORT\": \"" + errorReport + "\" " + 
-                            "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\", " + 
+                            "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
+                            "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\" " + 
                             "   }, " + 
                             "   \"parents\": [ " + 
                             "     { " + 
