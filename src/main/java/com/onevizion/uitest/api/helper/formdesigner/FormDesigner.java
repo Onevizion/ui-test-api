@@ -99,7 +99,7 @@ public class FormDesigner {
     private void addElementToFormById(String id) {
         element.doubleClickById(id);
         if (seleniumSettings.getBrowser().equals("chrome")) {
-            AbstractSeleniumCore.sleep(450L); //TODO BUG Test-152076
+            AbstractSeleniumCore.sleep(500L); //TODO BUG Test-152076
         }
     }
 
