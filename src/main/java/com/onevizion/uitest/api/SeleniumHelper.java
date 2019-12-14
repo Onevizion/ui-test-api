@@ -61,10 +61,8 @@ public class SeleniumHelper {
     }
 
     private void resetAllChangesOnWindow() {
-        //TODO firefox 59 bug
-        //https://github.com/mozilla/geckodriver/issues/1151
-        //https://bugzilla.mozilla.org/show_bug.cgi?id=1434872
         js.resetFormChange();
+        js.resetCommentChange();
         js.resetGridChange();
     }
 
