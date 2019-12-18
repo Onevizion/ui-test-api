@@ -228,7 +228,7 @@ public class EntityConfigApp {
         if (isCanHaveRelatedTrackorType(configApp)) {
             assertElement.assertSelect(RELATED_TRACKOR_TYPE, configApp.getRelatedTrackorType());
         }
-        assertElement.assertRadioPsSelector(ICON, ICON_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx(), configApp.getIcon(), 1L, true);
+        assertElement.assertText(ICON, configApp.getIcon());
 
         tab.goToTab(2L); //Tabs
         List<ListboxElement> rightTabs = listbox.getElements("rightListBox");
