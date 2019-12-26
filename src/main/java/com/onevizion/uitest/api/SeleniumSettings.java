@@ -56,9 +56,6 @@ public class SeleniumSettings {
     private String testPassword;
 
     @Resource
-    private String testPasswordApiV3;
-
-    @Resource
     private String browser;
 
     @Resource
@@ -175,10 +172,6 @@ public class SeleniumSettings {
 
     public String getTestPassword() {
         return testPassword;
-    }
- 
-    public String getTestPasswordApiV3() {
-        return testPasswordApiV3;
     }
 
     public Boolean getRemoteWebDriver() {

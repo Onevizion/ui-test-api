@@ -138,7 +138,7 @@ public class Login {
     }
 
     public void loginIntoApiV3() {
-        login(seleniumSettings.getTestUser(), seleniumSettings.getTestPasswordApiV3());
+        login(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
 
         document.open(seleniumSettings.getServerUrl() + "/api/v3");
 
@@ -157,7 +157,7 @@ public class Login {
 
         WebElement passwordElem = seleniumSettings.getWebDriver().findElement(By.name("password"));
         passwordElem.clear();
-        passwordElem.sendKeys(seleniumSettings.getTestPasswordApiV3());
+        passwordElem.sendKeys(seleniumSettings.getTestPassword());
 
         seleniumSettings.getWebDriver().findElement(By.className("auth_submit__button")).click();
 
