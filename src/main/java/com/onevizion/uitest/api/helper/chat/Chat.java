@@ -10,13 +10,16 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.ElementWait;
 
 @Component
 public class Chat {
 
     private static final String ID_MAIN_BUTTON = "btnComments";
     private static final String ID_MAIN_PANEL = "slideChatPanel";
+    private static final String ID_MAIN_LOADER = "loaderChatLoader";
     private static final String ID_MANAGE = "btnManage";
+    private static final String ID_MANAGE_PANEL = "managePanel";
     private static final String ID_COMMENT_TEXT = "replyForm";
     private static final String ID_COMMENT_FILE = "btnAddFile";
     private static final String ID_COMMENT_SEND = "btnSend";
@@ -24,6 +27,9 @@ public class Chat {
 
     @Resource
     private SeleniumSettings seleniumSettings;
+
+    @Resource
+    private ElementWait elementWait;
 
     public void checkMainPanelOnFormExist() {
         checkElementExist(ID_MAIN_BUTTON);
@@ -46,43 +52,59 @@ public class Chat {
     }
 
     public void checkAddNewCommentOnFormExist() {
-        checkElementExist(ID_COMMENT_TEXT);
-        checkElementExist(ID_COMMENT_FILE);
-        checkElementExist(ID_COMMENT_SEND);
+        elementWait.waitElementVisibleById(ID_COMMENT_TEXT);
+        elementWait.waitElementDisplayById(ID_COMMENT_TEXT);
+        elementWait.waitElementVisibleById(ID_COMMENT_FILE);
+        elementWait.waitElementDisplayById(ID_COMMENT_FILE);
+        elementWait.waitElementVisibleById(ID_COMMENT_SEND);
+        elementWait.waitElementDisplayById(ID_COMMENT_SEND);
     }
 
     public void checkAddNewCommentOnFormNotExist() {
-        checkElementNotExist(ID_COMMENT_TEXT);
-        checkElementNotExist(ID_COMMENT_FILE);
-        checkElementNotExist(ID_COMMENT_SEND);
+        elementWait.waitElementNotVisibleById(ID_COMMENT_TEXT);
+        elementWait.waitElementNotDisplayById(ID_COMMENT_TEXT);
+        elementWait.waitElementNotVisibleById(ID_COMMENT_FILE);
+        elementWait.waitElementNotDisplayById(ID_COMMENT_FILE);
+        elementWait.waitElementNotVisibleById(ID_COMMENT_SEND);
+        elementWait.waitElementNotDisplayById(ID_COMMENT_SEND);
     }
 
     public void checkAddNewCommentInGridExist() {
-        checkElementExist(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx());
-        checkElementExist(ID_COMMENT_FILE + AbstractSeleniumCore.getGridIdx());
-        checkElementExist(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementVisibleById(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementDisplayById(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementVisibleById(ID_COMMENT_FILE + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementDisplayById(ID_COMMENT_FILE + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementVisibleById(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementDisplayById(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx());
     }
 
     public void checkAddNewCommentInGridNotExist() {
-        checkElementNotExist(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx());
-        checkElementNotExist(ID_COMMENT_FILE + AbstractSeleniumCore.getGridIdx());
-        checkElementNotExist(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotVisibleById(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotDisplayById(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotVisibleById(ID_COMMENT_FILE + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotDisplayById(ID_COMMENT_FILE + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotVisibleById(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotDisplayById(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx());
     }
 
     public void checkManageSubscribersOnFormExist() {
-        checkElementExist(ID_MANAGE);
+        elementWait.waitElementVisibleById(ID_MANAGE);
+        elementWait.waitElementDisplayById(ID_MANAGE);
     }
 
     public void checkManageSubscribersOnFormNotExist() {
-        checkElementNotExist(ID_MANAGE);
+        elementWait.waitElementNotVisibleById(ID_MANAGE);
+        elementWait.waitElementNotDisplayById(ID_MANAGE);
     }
 
     public void checkManageSubscribersInGridExist() {
-        checkElementExist(ID_MANAGE + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementVisibleById(ID_MANAGE + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementDisplayById(ID_MANAGE + AbstractSeleniumCore.getGridIdx());
     }
 
     public void checkManageSubscribersInGridNotExist() {
-        checkElementNotExist(ID_MANAGE + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotVisibleById(ID_MANAGE + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotDisplayById(ID_MANAGE + AbstractSeleniumCore.getGridIdx());
     }
 
     public void checkSubscribeToggleOnFormExists() {
@@ -107,26 +129,42 @@ public class Chat {
 
     public void openChatPanelOnForm() {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON)).click();
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL);
+        elementWait.waitElementNotVisibleById(ID_MAIN_LOADER);
+        elementWait.waitElementNotDisplayById(ID_MAIN_LOADER);
     }
 
     public void openChatPanelInGrid() {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + AbstractSeleniumCore.getGridIdx())).click();
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotVisibleById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotDisplayById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
     }
 
     public void closeChatPanelOnForm() {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON)).click();
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL);
     }
 
     public void closeChatPanelInGrid() {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + AbstractSeleniumCore.getGridIdx())).click();
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
     }
 
     public void openSubscribePanelOnForm() {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE)).click();
+        elementWait.waitElementVisibleById(ID_MANAGE_PANEL);
+        elementWait.waitElementDisplayById(ID_MANAGE_PANEL);
+        elementWait.waitElementNotVisibleById(ID_MAIN_LOADER);
+        elementWait.waitElementNotDisplayById(ID_MAIN_LOADER);
     }
 
     public void openSubscribePanelInGrid() {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE + AbstractSeleniumCore.getGridIdx())).click();
+        elementWait.waitElementVisibleById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementDisplayById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotVisibleById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotDisplayById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
     }
 
     private void checkElementExist(String id) {
