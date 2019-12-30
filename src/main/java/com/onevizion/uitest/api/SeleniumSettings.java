@@ -24,6 +24,8 @@ public class SeleniumSettings {
 
     private ThreadLocal<String> testLog = new ThreadLocal<>();
 
+    private ThreadLocal<String> testCallstack = new ThreadLocal<>();
+
     private ThreadLocal<String> testFailScreenshot = new ThreadLocal<>();
 
     @Resource
@@ -52,9 +54,6 @@ public class SeleniumSettings {
 
     @Resource
     private String testPassword;
-
-    @Resource
-    private String testPasswordApiV3;
 
     @Resource
     private String browser;
@@ -131,6 +130,18 @@ public class SeleniumSettings {
         this.testLog.set(testLog);
     }
 
+    void clearTestCallstack() {
+        testCallstack.remove();
+    }
+
+    public String getTestCallstack() {
+        return testCallstack.get();
+    }
+
+    void setTestCallstack(String testCallstack) {
+        this.testCallstack.set(testCallstack);
+    }
+
     void clearTestFailScreenshot() {
         testFailScreenshot.remove();
     }
@@ -161,10 +172,6 @@ public class SeleniumSettings {
 
     public String getTestPassword() {
         return testPassword;
-    }
- 
-    public String getTestPasswordApiV3() {
-        return testPasswordApiV3;
     }
 
     public Boolean getRemoteWebDriver() {

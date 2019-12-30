@@ -615,18 +615,15 @@ public class Js {
     }
 
     public void resetFormChange() {
-        //TODO firefox 59 bug
-        //https://github.com/mozilla/geckodriver/issues/1067
-        //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
         execJs("if (typeof ov !== 'undefined' && typeof ov.bFormChanged !== 'undefined') {ov.bFormChanged = false;}");
     }
 
+    public void resetCommentChange() {
+        execJs("if (typeof ov !== 'undefined' && typeof ov.unsavedComment !== 'undefined') {ov.unsavedComment = false;}");
+    }
+
     public void resetGridChange() {
-        execJs(""
-                + "var buttons = document.getElementsByClassName('btnSaveChanges');"
-                + "for (var i = 0; i < buttons.length; i++) {"
-                + "    buttons[i].classList.remove('btnSaveChanges');"
-                + "}");
+        execJs("if (typeof gridArr !== 'undefined') {for (gridIdx in gridArr) {if (typeof gridArr[gridIdx].btnSave !== 'undefined') {gridArr[gridIdx].btnSave.state.isDisabled = true;}}}");
     }
 
     public Boolean bplImportFileSubmitDone() {

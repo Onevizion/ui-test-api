@@ -180,6 +180,13 @@ public class Listbox {
         element.getWebElement().click();
     }
 
+    public void selectElementByLabel(List<ListboxElement> elements, String label) {
+        ListboxElement listboxElement = getElementByLabel(elements, label);
+        listboxJs.scrollToElementInListbox(listboxElement.getWebElement());
+        elementWait.waitElementVisible(listboxElement.getWebElement());
+        listboxElement.getWebElement().click();
+    }
+
     public void switchToRootSubgroup(String listboxId) {
         element.click(seleniumSettings.getWebDriver().findElement(By.id(NAV_PANEL)).findElement(By.tagName("input")));
         listboxWait.waitIsReadyListbox(listboxId);

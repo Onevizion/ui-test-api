@@ -3,11 +3,15 @@ package com.onevizion.uitest.api.restapi;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
@@ -21,12 +25,65 @@ public class CreateTestResult {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public void create(String process, String testName, String testStatus, String duration, String bugs, String errorLog, String errorReport, String errorScreenshot) {
+    public String create(String process, String testName, String bugs) {
         try {
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
+
+            String input = "{ " + 
+                    "   \"fields\": { " + 
+                    "     \"STR_STATUS\": \"in progress\", " + 
+                    "     \"STR_BUGS\": \"" + bugs + "\" " + 
+                    "   }, " + 
+                    "   \"parents\": [ " + 
+                    "     { " + 
+                    "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
+                    "       \"filter\": { " + 
+                    "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
+                    "       } " + 
+                    "     }, " + 
+                    "     { " + 
+                    "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
+                    "       \"filter\": { " + 
+                    "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
+                    "       } " + 
+                    "     } " + 
+                    "   ] " + 
+                    " }";
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                throw new SeleniumUnexpectedException("CreateTestResult.create Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
+            }
+
+            String result = IOUtils.toString(conn.getInputStream(), StandardCharsets.UTF_8.toString());
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(result);
+            String trackorKey = jsonNode.path("TRACKOR_KEY").asText();
+
+            conn.disconnect();
+
+            return trackorKey;
+        } catch (Exception e) {
+            throw new SeleniumUnexpectedException(e);
+        }
+    }
+
+    public void update(String trackorKey, String testStatus, String testResultNode, String errorLog, String errorReport, String errorCallstack, String errorScreenshot) {
+        try {
+            URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=\"" + trackorKey + "\"");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
@@ -37,73 +94,30 @@ public class CreateTestResult {
                     input = "{ " + 
                             "   \"fields\": { " + 
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
-                            "     \"STR_DURATION\": \"" + duration + "\", " + 
-                            "     \"STR_BUGS\": \"" + bugs + "\", " + 
+                            "     \"STR_NODE\": \"" + testResultNode + "\", " + 
                             "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
                             "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
+                            "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\", " + 
                             "     \"STR_ERROR_FILE\": {\"file_name\": \"screenshot.jpg\", \"data\": \"" + errorScreenshot + "\"} " + 
-                            "   }, " + 
-                            "   \"parents\": [ " + 
-                            "     { " + 
-                            "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
-                            "       \"filter\": { " + 
-                            "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
-                            "       } " + 
-                            "     }, " + 
-                            "     { " + 
-                            "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
-                            "       \"filter\": { " + 
-                            "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
-                            "       } " + 
-                            "     } " + 
-                            "   ] " + 
+                            "   } " + 
                             " }";
                 } else {
                     input = "{ " + 
                             "   \"fields\": { " + 
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
-                            "     \"STR_DURATION\": \"" + duration + "\", " + 
-                            "     \"STR_BUGS\": \"" + bugs + "\", " + 
+                            "     \"STR_NODE\": \"" + testResultNode + "\", " + 
                             "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
-                            "     \"STR_ERROR_REPORT\": \"" + errorReport + "\" " + 
-                            "   }, " + 
-                            "   \"parents\": [ " + 
-                            "     { " + 
-                            "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
-                            "       \"filter\": { " + 
-                            "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
-                            "       } " + 
-                            "     }, " + 
-                            "     { " + 
-                            "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
-                            "       \"filter\": { " + 
-                            "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
-                            "       } " + 
-                            "     } " + 
-                            "   ] " + 
+                            "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
+                            "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\" " + 
+                            "   } " + 
                             " }";
                 }
             } else {
                 input = "{ " + 
                         "   \"fields\": { " + 
                         "     \"STR_STATUS\": \"" + testStatus + "\", " + 
-                        "     \"STR_DURATION\": \"" + duration + "\", " + 
-                        "     \"STR_BUGS\": \"" + bugs + "\" " + 
-                        "   }, " + 
-                        "   \"parents\": [ " + 
-                        "     { " + 
-                        "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_TEST + "\", " + 
-                        "       \"filter\": { " + 
-                        "         \"XITOR_KEY\": \"\\\"" + testName + "\\\"\" " + 
-                        "       } " + 
-                        "     }, " + 
-                        "     { " + 
-                        "       \"trackor_type\": \"" + PARENT_TRACKOR_TYPE_NAME_PROCESS + "\", " + 
-                        "       \"filter\": { " + 
-                        "         \"XITOR_KEY\": \"\\\"" + process + "\\\"\" " + 
-                        "       } " + 
-                        "     } " + 
-                        "   ] " + 
+                        "     \"STR_NODE\": \"" + testResultNode + "\" " + 
+                        "   } " + 
                         " }";
             }
 
@@ -111,8 +125,8 @@ public class CreateTestResult {
             os.write(input.getBytes());
             os.flush();
 
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                throw new SeleniumUnexpectedException("CreateTestResult.create Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new SeleniumUnexpectedException("CreateTestResult.update Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
             }
 
             conn.disconnect();

@@ -19,7 +19,7 @@ public class CreateProcess {
 
     private static final String TRACKOR_TYPE_NAME = "SELENIUM_PROCESS";
 
-    public static String create(String restApiUrl, String restApiCredential, String restApiVersion, String browserName, String date) {
+    public static String create(String restApiUrl, String restApiCredential, String restApiVersion, String browserName) {
         try {
             URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -33,7 +33,7 @@ public class CreateProcess {
                     "   \"fields\": { " + 
                     "     \"SPRC_VERSION\": \"" + restApiVersion + "\", " + 
                     "     \"SPRC_BROWSER\": \"" + browserName + "\", " + 
-                    "     \"SPRC_START_DATE\": \"" + date + "\" " + 
+                    "     \"SPRC_STATUS\": \"in progress\" " + 
                     "   } " + 
                     " }";
 
@@ -61,7 +61,7 @@ public class CreateProcess {
 
     public static void updateTestsCount(String restApiUrl, String restApiCredential, String processTrackorKey, int testsCount) {
         try {
-            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
+            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=\"" + processTrackorKey + "\"");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
@@ -89,9 +89,9 @@ public class CreateProcess {
         }
     }
 
-    public static void updateDuration(String restApiUrl, String restApiCredential, String processTrackorKey, String duration) {
+    public static void update(String restApiUrl, String restApiCredential, String processTrackorKey) {
         try {
-            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
+            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=\"" + processTrackorKey + "\"");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
@@ -101,7 +101,7 @@ public class CreateProcess {
 
             String input = "{ " + 
                     "   \"fields\": { " + 
-                    "     \"SPRC_DURATION\": \"" + duration + "\" " + 
+                    "     \"SPRC_STATUS\": \"completed\" " + 
                     "   } " + 
                     " }";
 
@@ -110,7 +110,7 @@ public class CreateProcess {
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new SeleniumUnexpectedException("CreateProcess.updateDuration Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
+                throw new SeleniumUnexpectedException("CreateProcess.update Failed : HTTP error code : " + conn.getResponseCode() + " HTTP error message : " + conn.getResponseMessage());
             }
 
             conn.disconnect();
@@ -121,7 +121,7 @@ public class CreateProcess {
 
     public static void updateBrowserVersion(String restApiUrl, String restApiCredential, String processTrackorKey, String browserVersion) {
         try {
-            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=" + processTrackorKey);
+            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=\"" + processTrackorKey + "\"");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");

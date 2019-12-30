@@ -849,7 +849,7 @@ public class Tb {
             List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
             if (buttons.size() == 3) {
                 gridCell.findElement(By.id(EFILE_DELETE_BUTTON)).click();
-                element.moveToElementById("btnSaveGrid" + gridIndex);
+                element.moveToElementById(AbstractSeleniumCore.BUTTON_SAVE_GRID_ID_BASE + gridIndex);
                 element.moveToElement(gridCell);
             } else if (buttons.size() < 1 || 3 < buttons.size()) {
                 throw new SeleniumUnexpectedException("Wrong efile buttons size");

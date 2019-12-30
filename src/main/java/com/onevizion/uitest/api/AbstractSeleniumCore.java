@@ -2,8 +2,6 @@ package com.onevizion.uitest.api;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
@@ -60,6 +58,7 @@ import com.onevizion.uitest.api.helper.api.v3.ApiV3Endpoint;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3Parameter;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3Resource;
 import com.onevizion.uitest.api.helper.bpl.export.BplExport;
+import com.onevizion.uitest.api.helper.chat.Chat;
 import com.onevizion.uitest.api.helper.clipboard.Clipboard;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.helper.comment.Comment;
@@ -285,6 +284,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected Favorites favorites;
+
+    @Resource
+    protected Chat chat;
     /* Helpers End */
 
     /* Entity Helpers Begin */
@@ -385,13 +387,18 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     @Resource
     protected SeleniumLogger seleniumLogger;
 
-    private Date startDate;
+    @Resource
+    private SeleniumNode seleniumNode;
+
+    private String testResultTrackorKey;
+    private String testResultNode;
 
     public static final String GRID_ID_BASE = "gridbox";
     public static final String TREE_ID_BASE = "treeBox";
     public static final String LOADING_ID_BASE = "loading";
     public static final String LOADING_SPLIT_GRID_RIGHT_ID_BASE = "loadingSplitGridRight";
     public static final String SAVING_ID_BASE = "saving";
+    public static final String LOADING_PREVIEW_ID_BASE = "layerLoading";
 
     public static final String BUTTON_EDIT_ID_BASE = "btnEdit";
     public static final String BUTTON_DELETE_ID_BASE = "btnDelete";
@@ -446,13 +453,13 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     }
 
     protected void seleniumOpenBrowserAndLogin(ITestContext context) {
-        Calendar cal = Calendar.getInstance();
-        startDate = cal.getTime();
-
         seleniumSettings.setTestName(getTestName());
         seleniumSettings.setTestStatus("success");
         seleniumSettings.clearTestLog();
+        seleniumSettings.clearTestCallstack();
         seleniumSettings.clearTestFailScreenshot();
+
+        testResultTrackorKey = createTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"));
 
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
 
@@ -498,6 +505,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 //}
 
                 seleniumSettings.setWebDriver(new Augmenter().augment(seleniumSettings.getWebDriver()));
+                testResultNode = seleniumNode.getNodeHostAndPort();
             } else {
                 if (seleniumSettings.getBrowser().equals("firefox")) {
                     FirefoxOptions firefoxOptions = BrowserFirefox.create(seleniumSettings);
@@ -549,7 +557,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.setTestStatus("fail");
 
             seleniumLogger.error("openBrowserAndLogin fail");
-            seleniumLogger.error("openBrowserAndLogin Unexpected exception: " + e.getMessage());
+            seleniumLogger.error("openBrowserAndLogin Unexpected exception: " + e.getMessage(), e);
 
             if (seleniumSettings.getWebDriver() != null) {
                 seleniumHelper.closeAfterErrorAndGetScreenshot();
@@ -569,28 +577,14 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 seleniumLogger.info("browser close finish");
             }
 
-            Calendar cal = Calendar.getInstance();
-            Date finishDate = cal.getTime();
-            long duration = finishDate.getTime() - startDate.getTime();
-            long durationMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-            String durationMinutesStr = Long.toString(durationMinutes);
-            seleniumLogger.info("executed in " + durationMinutesStr + " minutes");
-
-            saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
+            updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
         } catch (Throwable e) {
             seleniumSettings.setTestStatus("fail");
 
             seleniumLogger.error("closeBrowser fail");
             seleniumLogger.error("closeBrowser Unexpected exception: " + e.getMessage());
 
-            Calendar cal = Calendar.getInstance();
-            Date finishDate = cal.getTime();
-            long duration = finishDate.getTime() - startDate.getTime();
-            long durationMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-            String durationMinutesStr = Long.toString(durationMinutes);
-            seleniumLogger.info("executed in " + durationMinutesStr + " minutes");
-
-            saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
+            updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
 
             throw new SeleniumUnexpectedException(e);
         }
@@ -633,8 +627,27 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         }
     }
 
-    private void saveTestResult(String processTrackorKey, String durationMinutesStr) {
+    private String createTestResult(String processTrackorKey) {
         if (seleniumSettings.getRestApiUrl().isEmpty() || seleniumSettings.getRestApiCredential().isEmpty()) {
+            return null;
+        }
+
+        try {
+            createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName(), getBugs());
+            return createTestResult.create(processTrackorKey, getTestName(), getBugs());
+        } catch (Exception e) {
+            seleniumLogger.error("call REST API Unexpected exception: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    private void updateTestResult(String processTrackorKey, String testResultTrackorKey) {
+        if (seleniumSettings.getRestApiUrl().isEmpty() || seleniumSettings.getRestApiCredential().isEmpty()) {
+            return;
+        }
+
+        if (testResultTrackorKey == null) {
             return;
         }
 
@@ -642,8 +655,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         try {
             CreateProcess.updateBrowserVersion(seleniumSettings.getRestApiUrl(), seleniumSettings.getRestApiCredential(), processTrackorKey, browserVersion);
-            createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName(), getBugs());
-            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getTestStatus(), durationMinutesStr, getBugs(), seleniumSettings.getTestLog(), getErrorReport(), seleniumSettings.getTestFailScreenshot());
+            createTestResult.update(testResultTrackorKey, seleniumSettings.getTestStatus(), testResultNode, seleniumSettings.getTestLog(), getErrorReport(), seleniumSettings.getTestCallstack(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
             seleniumLogger.error("call REST API Unexpected exception: " + e.getMessage());
         }
