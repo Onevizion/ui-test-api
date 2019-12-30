@@ -19,6 +19,11 @@ public class BrowserEdge {
 
         CustomEdgeOptions options = new CustomEdgeOptions();
         options.setBinary("C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\Edge SxS\\Application\\msedge.exe");
+
+        if (seleniumSettings.getHeadlessMode()) {
+            options.addArguments("--headless");
+        }
+
         return options;
     }
 
