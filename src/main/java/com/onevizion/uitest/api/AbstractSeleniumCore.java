@@ -514,7 +514,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                     ChromeOptions chromeOptions = BrowserChrome.create(seleniumSettings);
                     seleniumSettings.setWebDriver(new ChromeDriver(chromeOptions));
                 } else if (seleniumSettings.getBrowser().equals("edge")) {
-                    EdgeOptions edgeOptions = BrowserEdge.create(seleniumSettings);
+                    CustomEdgeOptions edgeOptions = BrowserEdge.create(seleniumSettings);
                     seleniumSettings.setWebDriver(new EdgeDriver(edgeOptions));
                 } else {
                     throw new SeleniumUnexpectedException("Not support browser " + seleniumSettings.getBrowser());

@@ -1,11 +1,8 @@
 package com.onevizion.uitest.api;
 
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-
 public class BrowserEdge {
 
-    public static EdgeOptions create(SeleniumSettings seleniumSettings) {
+    public static CustomEdgeOptions create(SeleniumSettings seleniumSettings) {
 //        //https://stackoverflow.com/questions/58590613/msedgedriver-chromium-does-not-work-after-version-79-0-309-0
 //
 //        System.setProperty("webdriver.edge.driver", "C:\\workspace2\\msedgedriver.exe");
@@ -20,8 +17,8 @@ public class BrowserEdge {
 //
 //        return options;
 
-        System.setProperty("webdriver.edge.driver", "C:\\selenium\\msedgedriver.exe");
-        EdgeOptions options = new EdgeOptions();
+        CustomEdgeOptions options = new CustomEdgeOptions();
+        options.setBinary("C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\Edge SxS\\Application\\msedge.exe");
         return options;
     }
 
