@@ -505,7 +505,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 //}
 
                 seleniumSettings.setWebDriver(new Augmenter().augment(seleniumSettings.getWebDriver()));
-                testResultNode = seleniumNode.getNodeHostAndPort();
+                //testResultNode = seleniumNode.getNodeHostAndPort();
             } else {
                 if (seleniumSettings.getBrowser().equals("firefox")) {
                     FirefoxOptions firefoxOptions = BrowserFirefox.create(seleniumSettings);
