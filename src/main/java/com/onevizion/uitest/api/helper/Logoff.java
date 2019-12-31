@@ -72,7 +72,6 @@ public class Logoff {
         document.open(seleniumSettings.getServerUrl());
 
         wait.waitWebElement(By.id("mainContainer"));
-        wait.waitWebElement(By.id("Table1"));
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
 

@@ -67,7 +67,6 @@ public class UsersSettings {
         elementWait.waitElementNotExist(this.html.get());
 
         wait.waitWebElement(By.id("mainContainer"));
-        wait.waitWebElement(By.id("Table1"));
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
 

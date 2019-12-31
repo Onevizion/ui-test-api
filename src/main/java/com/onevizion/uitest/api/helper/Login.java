@@ -57,7 +57,6 @@ public class Login {
         jquery.waitLoad();
 
         wait.waitWebElement(By.id("mainContainer"));
-        wait.waitWebElement(By.id("Table1"));
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
 
