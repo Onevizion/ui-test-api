@@ -40,7 +40,7 @@ public class MainMenu {
     @Resource
     private Element element;
 
-    private static final String ID_FAVORITES = "btnFavorites";
+    private static final String ID_MENU_BUTTON = "mainLogo";
     private static final String ID_MENU = "menu";
     private static final String CLASS_MENU_SEARCH = "in_input";
     private static final String CLASS_MENU_ITEM = "item_menu";
@@ -53,7 +53,7 @@ public class MainMenu {
     private static final String CLASS_TREE_SEARCH = "in_input";
 
     public void showMenu() {
-        WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id(ID_FAVORITES));
+        WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id(ID_MENU_BUTTON));
         elementWait.waitElementVisible(menuButton);
         menuButton.click();
 
@@ -63,7 +63,7 @@ public class MainMenu {
     }
 
     public void hideMenu() {
-        WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id(ID_FAVORITES));
+        WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id(ID_MENU_BUTTON));
         elementWait.waitElementVisible(menuButton);
         menuButton.click();
 
