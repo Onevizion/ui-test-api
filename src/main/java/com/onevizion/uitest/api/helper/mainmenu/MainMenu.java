@@ -1,15 +1,20 @@
 package com.onevizion.uitest.api.helper.mainmenu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
-import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
 public class MainMenu {
@@ -21,9 +26,6 @@ public class MainMenu {
     private Wait wait;
 
     @Resource
-    private Js js;
-
-    @Resource
     private Grid2 grid2;
 
     @Resource
@@ -32,38 +34,53 @@ public class MainMenu {
     @Resource
     private MainMenuWait mainMenuWait;
 
-    public static final String SHOW_MENU_BUTTON_CLASS = "showMenuBtn";
-    public static final String HIDE_MENU_BUTTON_CLASS = "hideMenuBtn";
+    @Resource
+    private Tree tree;
+
+    @Resource
+    private Element element;
+
+    private static final String ID_FAVORITES = "btnFavorites";
+    private static final String ID_MENU = "menu";
+    private static final String CLASS_MENU_SEARCH = "in_input";
+    private static final String CLASS_MENU_ITEM = "item_menu";
+    private static final String CLASS_MENU_ITEM_PAGE = "link";
+    private static final String CLASS_MENU_ITEM_PAGE_HIDDEN = "hidden";
+    private static final String CLASS_MENU_ITEM_PAGE_NAME = "im_name";
+    private static final String CLASS_MENU_ITEM_PAGE_TT = "im_ttype";
+    private static final String CLASS_MENU_ITEM_TREE = "btn_input";
+    private static final String ID_TREE = "tree";
+    private static final String CLASS_TREE_SEARCH = "in_input";
 
     public void showMenu() {
-        WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id("newGui")).findElement(By.className(SHOW_MENU_BUTTON_CLASS));
+        WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id(ID_FAVORITES));
         elementWait.waitElementVisible(menuButton);
         menuButton.click();
 
-        elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
-
-        //WebElement menu = seleniumSettings.getWebDriver().findElement(By.id("leftMenuContainer")).findElement(By.id("leftMenu"));
-        //elementWaitHelper.waitElementVisible(menu);
-        //elementWaitHelper.waitElementVisible(menu.findElement(By.className(HIDE_MENU_BUTTON_CLASS)));
-        //elementWaitHelper.waitElementVisible(menu.findElement(By.id("leftSearchMenuInput")));
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
+        elementWait.waitElementVisibleById(ID_MENU);
+        elementWait.waitElementDisplayById(ID_MENU);
     }
 
     public void hideMenu() {
-        WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id("leftMenuContainer")).findElement(By.className(HIDE_MENU_BUTTON_CLASS));
+        WebElement menuButton = seleniumSettings.getWebDriver().findElement(By.id(ID_FAVORITES));
         elementWait.waitElementVisible(menuButton);
         menuButton.click();
 
-        elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
-
-        //elementWaitHelper.waitElementVisible(seleniumSettings.getWebDriver().findElement(By.id("newGui")).findElement(By.className(SHOW_MENU_BUTTON_CLASS)));
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
+        elementWait.waitElementNotVisibleById(ID_MENU);
+        elementWait.waitElementNotDisplayById(ID_MENU);
     }
 
     public void selectMenuItem(String item) {
         showMenu();
 
         WebElement menuItem = findMenuItem(item);
+        element.moveToElement(menuItem);
         menuItem.click();
-        elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
+        elementWait.waitElementNotVisibleById(ID_MENU);
+        elementWait.waitElementNotDisplayById(ID_MENU);
         waitPageTitle(item);
         grid2.waitLoad();
     }
@@ -72,49 +89,87 @@ public class MainMenu {
         showMenu();
 
         WebElement menuItem = findMenuItem(item);
-        if (menuItem.findElement(By.className("trackorTypeLabel")).getText().equals(treeItem)) {
+        element.moveToElement(menuItem);
+        String menuPageTt = menuItem.findElement(By.className(CLASS_MENU_ITEM_PAGE_TT)).getAttribute("textContent");
+        if (treeItem.equals(menuPageTt)) {
             menuItem.click();
         } else {
-            menuItem.findElement(By.className("newBtnWrapper")).click();
-            elementWait.waitElementVelocityAnimatedFinishById("leftMenuTrackorTree");
-            WebElement menuTreeItem = findMenuTreeItem(menuItem, treeItem);
+            menuItem.findElement(By.className(CLASS_MENU_ITEM_TREE)).click();
+            elementWait.waitElementVelocityAnimatedFinishById(ID_TREE);
+            elementWait.waitElementVisibleById(ID_TREE);
+            elementWait.waitElementDisplayById(ID_TREE);
+            WebElement menuTreeItem = findMenuTreeItem(treeItem);
+            element.moveToElement(menuTreeItem);
             menuTreeItem.click();
-            elementWait.waitElementVelocityAnimatedFinishById("leftMenuTrackorTree");
+            elementWait.waitElementVelocityAnimatedFinishById(ID_TREE);
+            elementWait.waitElementNotVisibleById(ID_TREE);
+            elementWait.waitElementNotDisplayById(ID_TREE);
         }
-        elementWait.waitElementVelocityAnimatedFinishById("leftMenu");
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
+        elementWait.waitElementNotVisibleById(ID_MENU);
+        elementWait.waitElementNotDisplayById(ID_MENU);
         waitPageTitle(item + " - " + treeItem);
         grid2.waitLoad();
     }
 
     private WebElement findMenuItem(String item) {
-        WebElement searchField = seleniumSettings.getWebDriver().findElement(By.id("leftSearchMenuInput"));
+        WebElement searchField = seleniumSettings.getWebDriver().findElement(By.id(ID_MENU)).findElement(By.className(CLASS_MENU_SEARCH));
 
         elementWait.waitElementVisible(searchField);
         searchField.clear();
         searchField.sendKeys(item);
 
-        mainMenuWait.waitLeftMenuSearchUpdated();
+        List<WebElement> menuPages = new ArrayList<WebElement>();
+        List<WebElement> menuItems = seleniumSettings.getWebDriver().findElements(By.className(CLASS_MENU_ITEM));
+        for (WebElement menuItem : menuItems) {
+            String menuItemClass = menuItem.getAttribute("class");
+            if (menuItemClass.contains(CLASS_MENU_ITEM_PAGE) && !menuItemClass.contains(CLASS_MENU_ITEM_PAGE_HIDDEN)) {
+                menuPages.add(menuItem);
+            }
+        }
 
-        return seleniumSettings.getWebDriver().findElement(By.xpath(
-                "//div[contains(@class, 'newGuiMenuRowContainer') and string(@showing)='1']"
-              + "//a[contains(@class, 'aMenu')]"
-              + "//span[contains(@class, 'menuItemWidthWrapper') and text()='" + item + "']"
-              + "/ancestor::*[contains(@class, 'newGuiMenuRowContainer')]"));
+        WebElement result = null;
+        for (WebElement menuPage : menuPages) {
+            String menuPageName = menuPage.findElement(By.className(CLASS_MENU_ITEM_PAGE_NAME)).getAttribute("textContent");
+            if (item.equals(menuPageName)) {
+                result = menuPage;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Menu Page [" + item + "] not found");
+        }
+
+        return result;
     }
 
-    private WebElement findMenuTreeItem(WebElement item, String treeItem) {
-        WebElement treeSearchField = seleniumSettings.getWebDriver().findElement(By.id("treeSearchMenuInput"));
+    private WebElement findMenuTreeItem(String treeItem) {
+        WebElement treeSearchField = seleniumSettings.getWebDriver().findElement(By.id(ID_TREE)).findElement(By.className(CLASS_TREE_SEARCH));
 
         elementWait.waitElementVisible(treeSearchField);
         treeSearchField.clear();
         treeSearchField.sendKeys(treeItem);
 
-        
+        String webElementId = null;
+        String itemsStr = tree.getAllSubItems("MT", "-1");
+        String[] items = itemsStr.split(",");
+        for (String item : items) {
+            String itemText = tree.getItemTextById("MT", item);
+            itemText = itemText.replaceAll("^<[iI][nN][pP][uU][tT].*?>", "");
+            itemText = itemText.replaceAll("&nbsp;", "");
+            itemText = itemText.replaceAll("^<[lL][aA][bB][eE][lL].*?>", "").replaceAll("</[lL][aA][bB][eE][lL]>$", "");
+            if (treeItem.equals(itemText)) {
+                if (webElementId == null) {
+                    webElementId = item;
+                }
+            }
+        }
 
-        return seleniumSettings.getWebDriver().findElement(By.xpath(
-                "//div[@id='leftMenuTrackorTree' and @menurowid='" + item.getAttribute("rowid") + "']"
-              + "//span[contains(@class, 'standartTreeRow') and not(contains(@class, 'disabled'))]"
-              + "//label[text()='" + treeItem + "']"));
+        if (webElementId == null) {
+            throw new SeleniumUnexpectedException("Trackor Type [" + treeItem + "] in Menu Page not found");
+        }
+
+        return seleniumSettings.getWebDriver().findElement(By.id("lblRdTree_" + webElementId));
     }
 
     public void waitPageAndTabTitle(String pageTitle, String tabTitle) {

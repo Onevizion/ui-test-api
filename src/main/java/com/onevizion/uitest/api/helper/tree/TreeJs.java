@@ -18,8 +18,8 @@ class TreeJs extends Js {
         return Boolean.valueOf(execJs("return typeof window.treeArr !== 'undefined';"));
     }
 
-    String getAllSubItems(Long treeId, String itemId) {
-        return execJs("return treeArr[" + treeId + "].tree.getAllSubItems('" + itemId + "');");
+    String getAllSubItems(String treeId, String itemId) {
+        return execJs("return treeArr['" + treeId + "'].tree.getAllSubItems('" + itemId + "');");
     }
 
     String getSubItems(Long treeId, String itemId) {
@@ -34,8 +34,8 @@ class TreeJs extends Js {
         execJs("treeArr[" + treeId + "].tree.setCheck('" + itemId + "', 1);");
     }
 
-    String getItemTextById(Long treeId, String itemId) {
-        return execJs("return treeArr[" + treeId + "].tree.getItemText('" + itemId + "');");
+    String getItemTextById(String treeId, String itemId) {
+        return execJs("return treeArr['" + treeId + "'].tree.getItemText('" + itemId + "');");
     }
 
     String getSelectedItem(Long treeId) {
