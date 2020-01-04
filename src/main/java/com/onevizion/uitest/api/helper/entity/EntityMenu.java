@@ -53,9 +53,9 @@ public class EntityMenu {
 
         assertElement.assertText("name", menu.getName());
         assertElement.assertText("description", menu.getDescription());
-        assertElement.assertSelect("defaultMenuItemId", menu.getDefaultMenuItem());
+        assertElement.assertText("orderNumber", menu.getOrderNumber());
         assertElement.assertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
-        assertElement.assertCheckbox("showTipOfTheDay", menu.getShowTipOfTheDay());
+        //assertElement.assertText("icon", menu.getIconName()); TODO
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

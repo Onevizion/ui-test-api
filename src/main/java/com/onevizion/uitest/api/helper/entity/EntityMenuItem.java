@@ -87,10 +87,6 @@ public class EntityMenuItem {
             assertElement.assertSelect(FILTER, menuItem.getFilter());
             assertElement.assertCheckbox(HIDE_FILTER, menuItem.getHideFilter());
             assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
-        } else if (MenuItemType.ACTION.equals(menuItem.getMenuItemType())) {
-            assertElement.assertSelectById(ITEM_TYPE, menuItem.getItemType());
-            assertElement.assertText(LABEL, menuItem.getLabel());
-            assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
         } else {
             throw new SeleniumUnexpectedException("Not support MenuItemType. MenuItemType=" + menuItem.getMenuItemType());
         }
