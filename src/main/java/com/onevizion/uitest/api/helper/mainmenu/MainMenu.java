@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
@@ -122,27 +123,33 @@ public class MainMenu {
         grid2.waitLoad();
     }
 
+    public void checkMenuItemExist(String item) {
+        showMenu();
+        searchMenuItem(item);
+        List<WebElement> menuItems = getMenuItems();
+        boolean result = isMenuItemExist(menuItems, item);
+        Assert.assertEquals(result, true);
+        hideMenu();
+    }
+
+    public void checkMenuItemNotExist(String item) {
+        showMenu();
+        searchMenuItem(item);
+        List<WebElement> menuItems = getMenuItems();
+        boolean result = isMenuItemExist(menuItems, item);
+        Assert.assertEquals(result, false);
+        hideMenu();
+    }
+
     private WebElement findMenuItem(String item) {
-        WebElement searchField = seleniumSettings.getWebDriver().findElement(By.id(ID_MENU)).findElement(By.className(CLASS_MENU_SEARCH));
-
-        elementWait.waitElementVisible(searchField);
-        searchField.clear();
-        searchField.sendKeys(item);
-
-        List<WebElement> menuPages = new ArrayList<WebElement>();
-        List<WebElement> menuItems = seleniumSettings.getWebDriver().findElements(By.className(CLASS_MENU_ITEM));
-        for (WebElement menuItem : menuItems) {
-            String menuItemClass = menuItem.getAttribute("class");
-            if (menuItemClass.contains(CLASS_MENU_ITEM_PAGE) && !menuItemClass.contains(CLASS_MENU_ITEM_PAGE_HIDDEN)) {
-                menuPages.add(menuItem);
-            }
-        }
+        searchMenuItem(item);
+        List<WebElement> menuItems = getMenuItems();
 
         WebElement result = null;
-        for (WebElement menuPage : menuPages) {
-            String menuPageName = menuPage.findElement(By.className(CLASS_MENU_ITEM_PAGE_NAME)).getAttribute("textContent");
-            if (item.equals(menuPageName)) {
-                result = menuPage;
+        for (WebElement menuItem : menuItems) {
+            String menuItemName = menuItem.findElement(By.className(CLASS_MENU_ITEM_PAGE_NAME)).getAttribute("textContent");
+            if (item.equals(menuItemName)) {
+                result = menuItem;
             }
         }
 
@@ -153,12 +160,43 @@ public class MainMenu {
         return result;
     }
 
-    private WebElement findMenuTreeItem(String treeItem) {
-        WebElement treeSearchField = seleniumSettings.getWebDriver().findElement(By.id(ID_TREE)).findElement(By.className(CLASS_TREE_SEARCH));
+    private void searchMenuItem(String item) {
+        WebElement searchField = seleniumSettings.getWebDriver().findElement(By.id(ID_MENU)).findElement(By.className(CLASS_MENU_SEARCH));
 
-        elementWait.waitElementVisible(treeSearchField);
-        treeSearchField.clear();
-        treeSearchField.sendKeys(treeItem);
+        elementWait.waitElementVisible(searchField);
+        searchField.clear();
+        searchField.sendKeys(item);
+    }
+
+    private List<WebElement> getMenuItems() {
+        List<WebElement> result = new ArrayList<WebElement>();
+
+        List<WebElement> menuItems = seleniumSettings.getWebDriver().findElements(By.className(CLASS_MENU_ITEM));
+        for (WebElement menuItem : menuItems) {
+            String menuItemClass = menuItem.getAttribute("class");
+            if (menuItemClass.contains(CLASS_MENU_ITEM_PAGE) && !menuItemClass.contains(CLASS_MENU_ITEM_PAGE_HIDDEN)) {
+                result.add(menuItem);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean isMenuItemExist(List<WebElement> menuItems, String item) {
+        boolean result = false;
+
+        for (WebElement menuItem : menuItems) {
+            String menuItemName = menuItem.findElement(By.className(CLASS_MENU_ITEM_PAGE_NAME)).getAttribute("textContent");
+            if (item.equals(menuItemName)) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+
+    private WebElement findMenuTreeItem(String treeItem) {
+        searchMenuTreeItem(treeItem);
 
         String webElementId = null;
         String itemsStr = tree.getAllSubItems("MT", "-1");
@@ -180,6 +218,14 @@ public class MainMenu {
         }
 
         return seleniumSettings.getWebDriver().findElement(By.id("lblRdTree_" + webElementId));
+    }
+
+    private void searchMenuTreeItem(String treeItem) {
+        WebElement treeSearchField = seleniumSettings.getWebDriver().findElement(By.id(ID_TREE)).findElement(By.className(CLASS_TREE_SEARCH));
+
+        elementWait.waitElementVisible(treeSearchField);
+        treeSearchField.clear();
+        treeSearchField.sendKeys(treeItem);
     }
 
     public void waitPageAndTabTitle(String pageTitle, String tabTitle) {
