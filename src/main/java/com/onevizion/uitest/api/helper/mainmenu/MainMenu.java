@@ -72,7 +72,13 @@ public class MainMenu {
         elementWait.waitElementNotDisplayById(ID_MENU);
     }
 
-    public void selectMenuItem(String item) {
+    public void openMenuItemAndWaitGridLoad(String item) {
+        openMenuItem(item);
+        waitPageTitle(item);
+        grid2.waitLoad();
+    }
+
+    public void openMenuItem(String item) {
         showMenu();
 
         WebElement menuItem = findMenuItem(item);
@@ -81,11 +87,15 @@ public class MainMenu {
         elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
         elementWait.waitElementNotVisibleById(ID_MENU);
         elementWait.waitElementNotDisplayById(ID_MENU);
-        waitPageTitle(item);
+    }
+
+    public void openMenuItemWithTreeAndWaitGridLoad(String item, String treeItem) {
+        openMenuItemWithTree(item, treeItem);
+        waitPageTitle(item + " - " + treeItem);
         grid2.waitLoad();
     }
 
-    public void selectMenuItemWithTree(String item, String treeItem) {
+    public void openMenuItemWithTree(String item, String treeItem) {
         showMenu();
 
         WebElement menuItem = findMenuItem(item);
