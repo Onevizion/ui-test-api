@@ -1,6 +1,7 @@
 package com.onevizion.uitest.api.helper.tab;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
@@ -39,7 +40,17 @@ public class Tab {
     }
 
     public String getTabLabel(Long tabIndex) {
-        return seleniumSettings.getWebDriver().findElement(By.name("tabLbl" + tabIndex.intValue())).getAttribute("textContent");
+        String tabLabel = seleniumSettings.getWebDriver().findElement(By.id("tabLabel" + tabIndex.intValue())).getAttribute("textContent");
+        String tabRows = "";
+
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id("tabRows" + tabIndex.intValue())).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if (count > 0) {
+            tabRows = " (" + seleniumSettings.getWebDriver().findElement(By.id("tabRows" + tabIndex.intValue())).getAttribute("textContent") + ")";
+        }
+
+        return tabLabel + tabRows;
     }
 
     public Long getTabIndex(String tabLabel) {
