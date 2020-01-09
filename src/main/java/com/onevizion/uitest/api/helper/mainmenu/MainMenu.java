@@ -41,6 +41,8 @@ public class MainMenu {
     @Resource
     private Element element;
 
+    public static final String MENU_FAVORITES = "Favorites";
+
     private static final String ID_MENU_BUTTON = "mainLogo";
     private static final String ID_MENU = "menu";
     private static final String CLASS_MENU_SEARCH = "in_input";
@@ -71,6 +73,17 @@ public class MainMenu {
         elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
         elementWait.waitElementNotVisibleById(ID_MENU);
         elementWait.waitElementNotDisplayById(ID_MENU);
+    }
+
+    //TODO need get all menus and work with menu by name
+    public void showMenu(String menuName) {
+        if (menuName.equals("Favorites")) {
+            seleniumSettings.getWebDriver().findElement(By.id("btnFavorites")).click();
+
+            elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
+            elementWait.waitElementVisibleById(ID_MENU);
+            elementWait.waitElementDisplayById(ID_MENU);
+        }
     }
 
     public void openMenuItemAndWaitGridLoad(String item) {
@@ -168,7 +181,7 @@ public class MainMenu {
         searchField.sendKeys(item);
     }
 
-    private List<WebElement> getMenuItems() {
+    public List<WebElement> getMenuItems() {
         List<WebElement> result = new ArrayList<WebElement>();
 
         List<WebElement> menuItems = seleniumSettings.getWebDriver().findElements(By.className(CLASS_MENU_ITEM));

@@ -1,7 +1,6 @@
 package com.onevizion.uitest.api.helper;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
@@ -14,15 +13,14 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
+import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
 public class Favorites {
 
-    private static final String ID_FAVORITES = "topPanelBtnFavorites";
-    private static final String ID_FAVORITESMENU = "favoritesPopupMenu";
-    private static final String ID_FAVORITESMENU_ADD = "btnAddPageToFavorites";
-    private static final String ID_FAVORITESMENU_ORGANIZE = "btnOrganizeFavorites";
+    private static final String ID_ADD = "addToFavoritesButton";
+    private static final String ID_ORGANIZE = "btnOrganizeFavorites";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -48,36 +46,26 @@ public class Favorites {
     @Resource
     private Jquery jquery;
 
-    public void checkFavoritesCount(int expectedCount) {
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int actualCount = seleniumSettings.getWebDriver().findElements(By.className("item_favorites")).size();
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    @Resource
+    private MainMenu mainMenu;
 
-        Assert.assertEquals(actualCount, expectedCount);
+    public void checkFavoritesCount(int expectedCount) {
+        mainMenu.showMenu(MainMenu.MENU_FAVORITES);
+        List<WebElement> favorites = mainMenu.getMenuItems();
+        Assert.assertEquals(favorites.size(), expectedCount);
+        mainMenu.hideMenu();
     }
 
     public void checkFavorite(int position, String expectedLabel) {
-        String actualLabel = seleniumSettings.getWebDriver().findElements(By.className("item_favorites")).get(position - 1).getAttribute("innerText");
-
-        Assert.assertEquals(actualLabel, expectedLabel);
+        mainMenu.showMenu(MainMenu.MENU_FAVORITES);
+        List<WebElement> favorites = mainMenu.getMenuItems();
+        String menuItemName = favorites.get(position - 1).findElement(By.className("im_name")).getAttribute("textContent");
+        Assert.assertEquals(menuItemName, expectedLabel);
+        mainMenu.hideMenu();
     }
 
     public void add(String name, boolean useView, boolean useFilter) {
-        elementWait.waitElementById(ID_FAVORITES);
-        elementWait.waitElementVisibleById(ID_FAVORITES);
-        elementWait.waitElementDisplayById(ID_FAVORITES);
-
-        element.clickById(ID_FAVORITES);
-
-        elementWait.waitElementById(ID_FAVORITESMENU);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU);
-
-        elementWait.waitElementById(ID_FAVORITESMENU_ADD);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU_ADD);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU_ADD);
-
-        window.openModal(By.id(ID_FAVORITESMENU_ADD));
+        window.openModal(By.id(ID_ADD));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
@@ -98,37 +86,9 @@ public class Favorites {
         jquery.waitLoad();
     }
 
-    public void open(String name) {
-        elementWait.waitElementById(ID_FAVORITES);
-        elementWait.waitElementVisibleById(ID_FAVORITES);
-        elementWait.waitElementDisplayById(ID_FAVORITES);
-
-        element.clickById(ID_FAVORITES);
-
-        elementWait.waitElementById(ID_FAVORITESMENU);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU);
-
-        WebElement favorite = getFavorite(name);
-        favorite.click();
-    }
-
     public void reorderMoveUp(String name) {
-        elementWait.waitElementById(ID_FAVORITES);
-        elementWait.waitElementVisibleById(ID_FAVORITES);
-        elementWait.waitElementDisplayById(ID_FAVORITES);
-
-        element.clickById(ID_FAVORITES);
-
-        elementWait.waitElementById(ID_FAVORITESMENU);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU);
-
-        elementWait.waitElementById(ID_FAVORITESMENU_ORGANIZE);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU_ORGANIZE);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU_ORGANIZE);
-
-        window.openModal(By.id(ID_FAVORITESMENU_ORGANIZE));
+        mainMenu.showMenu(MainMenu.MENU_FAVORITES);
+        window.openModal(By.id(ID_ORGANIZE));
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         wait.waitFormLoad();
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -143,21 +103,8 @@ public class Favorites {
     }
 
     public void reorderMoveDown(String name) {
-        elementWait.waitElementById(ID_FAVORITES);
-        elementWait.waitElementVisibleById(ID_FAVORITES);
-        elementWait.waitElementDisplayById(ID_FAVORITES);
-
-        element.clickById(ID_FAVORITES);
-
-        elementWait.waitElementById(ID_FAVORITESMENU);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU);
-
-        elementWait.waitElementById(ID_FAVORITESMENU_ORGANIZE);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU_ORGANIZE);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU_ORGANIZE);
-
-        window.openModal(By.id(ID_FAVORITESMENU_ORGANIZE));
+        mainMenu.showMenu(MainMenu.MENU_FAVORITES);
+        window.openModal(By.id(ID_ORGANIZE));
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         wait.waitFormLoad();
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -172,21 +119,8 @@ public class Favorites {
     }
 
     public void delete(String name) {
-        elementWait.waitElementById(ID_FAVORITES);
-        elementWait.waitElementVisibleById(ID_FAVORITES);
-        elementWait.waitElementDisplayById(ID_FAVORITES);
-
-        element.clickById(ID_FAVORITES);
-
-        elementWait.waitElementById(ID_FAVORITESMENU);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU);
-
-        elementWait.waitElementById(ID_FAVORITESMENU_ORGANIZE);
-        elementWait.waitElementVisibleById(ID_FAVORITESMENU_ORGANIZE);
-        elementWait.waitElementDisplayById(ID_FAVORITESMENU_ORGANIZE);
-
-        window.openModal(By.id(ID_FAVORITESMENU_ORGANIZE));
+        mainMenu.showMenu(MainMenu.MENU_FAVORITES);
+        window.openModal(By.id(ID_ORGANIZE));
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         wait.waitFormLoad();
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -200,16 +134,6 @@ public class Favorites {
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         jquery.waitLoad();
-    }
-
-    private WebElement getFavorite(String name) {
-        List<WebElement> favorites = seleniumSettings.getWebDriver().findElements(By.className("item_favorites"));
-        for (WebElement favorite : favorites) {
-            if (name.equals(favorite.getAttribute("innerText"))) {
-                return favorite;
-            }
-        }
-        return null;
     }
 
     private void selectFavoriteInOrganize(String name) {
