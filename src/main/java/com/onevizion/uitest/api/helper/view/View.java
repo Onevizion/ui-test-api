@@ -1,5 +1,6 @@
 package com.onevizion.uitest.api.helper.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -33,18 +34,18 @@ public class View {
     public static final String UNSAVED_VIEW_NAME = "Unsaved View";
     public static final String GENERAL_INFO_VIEW_NAME = "G:General Info";
 
-    private static final String VIEW_MAIN_ELEMENT_ID_BASE = "newDropdownView";
+////    private static final String VIEW_MAIN_ELEMENT_ID_BASE = "newDropdownView";
 
     private static final String VIEW_SELECT = "ddView";
     private static final String VIEW_CONTAINER = "ddViewContainer";
-    private static final String VIEW_SEARCH = "ddViewSearch";
-    private static final String BUTTON_CLEAR_SEARCH = "ddViewClearSearch";
+////    private static final String VIEW_SEARCH = "ddViewSearch";
+////    private static final String BUTTON_CLEAR_SEARCH = "ddViewClearSearch";
     private static final String BUTTON_ORGANIZE = "ddViewBtnOrganize";
 
-    private static final String BUTTON_OPEN = "btnView";
+////    private static final String BUTTON_OPEN = "btnView";
     private static final String FIELD_VIEW_NAME = "txtViewName";
-    private static final String BUTTON_SAVE = "unsavedViewIcon";
-    private static final String UNSAVED_VIEW = "unsavedViewId";
+////    private static final String BUTTON_SAVE = "unsavedViewIcon";
+////    private static final String UNSAVED_VIEW = "unsavedViewId";
 
     private static final String VIEW_DIALOG_CONTAINER = "dialogViewDialogContainer";
     private static final String VIEW_DIALOG_OK = "viewDialogOk";
@@ -62,6 +63,19 @@ public class View {
     private static final String RIGHT_COLUMNS_DIV_ID = "rightListBox";
     private static final String ADD_BUTTON_ID = "addItem";
     private static final String REMOVE_BUTTON_ID = "removeItem";
+
+
+
+
+
+    private static final String ID_MAIN_BUTTON = "viewFilterDropDown";
+    private static final String ID_MAIN_PANEL = "viewFilterPopup";
+    private static final String ID_APPLY_BUTTON = "buttonApply";
+    private static final String ID_EDIT_BUTTON = "viewEditButton";
+    private static final String ID_CURRENT_NAME = "viewCaption";
+    private static final String ID_TREE = "viewTree";
+    private static final String CLASS_TREE_ITEM = "item_tree";
+    private static final String CLASS_TREE_ITEM_GROUP = "group";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -99,31 +113,61 @@ public class View {
     @Resource
     private Listbox listbox;
 
-    public void checkIsExistViewControl(Long gridIdx, boolean isExist) {
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id(VIEW_MAIN_ELEMENT_ID_BASE + gridIdx)).size();
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    public void openMainPanel(Long gridIdx) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
+    }
 
+    public void closeMainPanel(Long gridIdx) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL + gridIdx);
+    }
+
+    public void checkIsExistViewControl(Long gridIdx, boolean isExist) {
         boolean actualIsExist;
+
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(ID_CURRENT_NAME + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         if (count > 0) {
             actualIsExist = true;
         } else {
             actualIsExist = false;
         }
+        Assert.assertEquals(actualIsExist, isExist);
 
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        count = seleniumSettings.getWebDriver().findElements(By.id(ID_TREE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if (count > 0) {
+            actualIsExist = true;
+        } else {
+            actualIsExist = false;
+        }
         Assert.assertEquals(actualIsExist, isExist);
     }
 
     public int getViewsCount(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).findElements(By.className("leaf")).size();
+        return getViews(gridIdx).size();
     }
 
     public List<WebElement> getViews(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).findElements(By.className("leaf"));
+        List<WebElement> result = new ArrayList<WebElement>();
+
+        List<WebElement> views = seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElements(By.className(CLASS_TREE_ITEM));
+        for (WebElement view : views) {
+            String viewClass = view.getAttribute("class");
+            if (!viewClass.contains(CLASS_TREE_ITEM_GROUP)) {
+                result.add(view);
+            }
+        }
+        return result;
     }
 
     public String getCurrentViewName(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
+        return seleniumSettings.getWebDriver().findElement(By.id(ID_CURRENT_NAME + gridIdx)).getText();
     }
 
     public void selectViewInOrganize(String viewName) {
@@ -153,33 +197,40 @@ public class View {
     }
 
     public void selectByVisibleText(Long gridIdx, String entityPrefix) {
-        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
 
-        elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
-
-        if (entityPrefix.equals(UNSAVED_VIEW_NAME)) {
-            seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_VIEW + gridIdx)).click();
-            grid2.waitLoad(gridIdx);
-        } else {
-            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
-
-            WebElement viewElem = (WebElement) js.getNewDropDownElement(VIEW_CONTAINER + gridIdx, SCROLL_CONTAINER, "newGenericDropDownRow", entityPrefix);
-            elementWait.waitElementVisible(viewElem);
-            viewElem.click();
-
-            grid2.waitLoad(gridIdx);
-
-            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
-
-            elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
-            elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-            elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
-
-            seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
-            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
+        List<WebElement> views = getViews(gridIdx);
+        for (WebElement view : views) {
+            if (entityPrefix.equals(view.getAttribute("textContent"))) {
+                view.click();
+            }
         }
+        seleniumSettings.getWebDriver().findElement(By.id(ID_APPLY_BUTTON)).click(); //TODO NEW grid index
+        grid2.waitLoad(gridIdx);
+
+//        if (entityPrefix.equals(UNSAVED_VIEW_NAME)) {
+//            seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_VIEW + gridIdx)).click();
+//            grid2.waitLoad(gridIdx);
+//        } else {
+//            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
+//
+//            WebElement viewElem = (WebElement) js.getNewDropDownElement(VIEW_CONTAINER + gridIdx, SCROLL_CONTAINER, "newGenericDropDownRow", entityPrefix);
+//            elementWait.waitElementVisible(viewElem);
+//            viewElem.click();
+//
+//            grid2.waitLoad(gridIdx);
+//
+//            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
+//
+//            elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
+//            elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
+//            elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
+//
+//            seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
+//            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
+//        }
     }
 
     private void selectFolderForSaveViewByVisibleText(Long gridIdx, String folderName) {
@@ -226,7 +277,11 @@ public class View {
     }
 
     public void openViewForm(Long gridIdx) {
-        window.openModal(By.id(BUTTON_OPEN + gridIdx));
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
+
+        window.openModal(By.id(ID_EDIT_BUTTON + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
@@ -240,24 +295,33 @@ public class View {
 
         viewWait.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
         grid2.waitLoad(gridIdx);
+
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL + gridIdx);
     }
 
-    public void closeViewFormCancel() {
+    public void closeViewFormCancel(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL + gridIdx);
     }
 
     public void openSaveViewForm(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
 
-        elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
+        seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElement(By.className("newButtons")).click(); //TODO NEW
 
-        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE + gridIdx)).click();
-
-        elementWait.waitElementById(VIEW_DIALOG_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
+        //elementWait.waitElementById(VIEW_DIALOG_CONTAINER + gridIdx); TODO NEW
+        //elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx); TODO NEW
+        //elementWait.waitElementDisplayById(VIEW_DIALOG_CONTAINER + gridIdx); TODO NEW
+        elementWait.waitElementById(VIEW_DIALOG_CONTAINER);
+        elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER);
+        elementWait.waitElementDisplayById(VIEW_DIALOG_CONTAINER);
 
         wait.waitWebElement(By.id(VIEW_TYPE + gridIdx));
         wait.waitWebElement(By.id(FIELD_VIEW_NAME + gridIdx));
@@ -515,7 +579,7 @@ public class View {
             listbox.checkElementByLabel(actualRightColumns, i + 1, rightColumns.get(i));
         }
 
-        closeViewFormCancel();
+        closeViewFormCancel(gridIdx);
     }
 
     public void switchToRootSubgroup() {

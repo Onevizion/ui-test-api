@@ -106,6 +106,7 @@ public class UserpageFilter {
         }
 
         window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE), null);
+        filter.closeMainPanel(AbstractSeleniumCore.getGridIdx());
     }
 
     //we can use fieldName instead of columnIndex.
@@ -596,7 +597,7 @@ public class UserpageFilter {
 
         assertElement.assertSelect(FILTER_ROW_OPER + row, operator.getValue());
 
-        filter.closeFilterFormCancel();
+        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
     }
 
     private void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator, String value) {
@@ -608,7 +609,7 @@ public class UserpageFilter {
 
         assertElement.assertText(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + row, value);
 
-        filter.closeFilterFormCancel();
+        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
     }
 
     public void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
@@ -713,7 +714,7 @@ public class UserpageFilter {
             }
         }
 
-        filter.closeFilterFormCancel();
+        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
     }
 
     public void checkGridTextColumnEquals(Long gridId, Long columnIndex, List<String> values) {
