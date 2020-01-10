@@ -42,12 +42,17 @@ public class MainMenu {
     private Element element;
 
     public static final String MENU_FAVORITES = "Favorites";
+    public static final String MENU_HELP = "Help";
+    public static final String MENU_INFO_CENTER = "Info Center";
+    public static final String MENU_DEV_CENTER = "Dev Center";
+    public static final String MENU_ADMIN_CENTER = "Admin Center";
 
     private static final String ID_MENU_BUTTON = "mainLogo";
+    private static final String NAME_MENU_BUTTON = "mainMenuButton";
+
     private static final String ID_MENU = "menu";
     private static final String CLASS_MENU_SEARCH = "in_input";
-    private static final String CLASS_MENU_ITEM = "item_menu";
-    private static final String CLASS_MENU_ITEM_PAGE = "link";
+    private static final String NAME_MENU_ITEM = "menuItem";
     private static final String CLASS_MENU_ITEM_PAGE_HIDDEN = "hidden";
     private static final String CLASS_MENU_ITEM_PAGE_NAME = "im_name";
     private static final String CLASS_MENU_ITEM_PAGE_TT = "im_ttype";
@@ -75,15 +80,28 @@ public class MainMenu {
         elementWait.waitElementNotDisplayById(ID_MENU);
     }
 
-    //TODO need get all menus and work with menu by name
-    public void showMenu(String menuName) {
-        if (menuName.equals("Favorites")) {
-            seleniumSettings.getWebDriver().findElement(By.id("btnFavorites")).click();
+    public void showMenu(String name) {
+        WebElement result = null;
 
-            elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
-            elementWait.waitElementVisibleById(ID_MENU);
-            elementWait.waitElementDisplayById(ID_MENU);
+        List<WebElement> menus = seleniumSettings.getWebDriver().findElements(By.name(NAME_MENU_BUTTON));
+        for (WebElement menu : menus) {
+            if (name.equals(menu.getAttribute("title"))) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Menu with name [" + name + "] found many times");
+                }
+                result = menu;
+            }
         }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Menu with name [" + name + "] not found");
+        }
+
+        result.click();
+
+        elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
+        elementWait.waitElementVisibleById(ID_MENU);
+        elementWait.waitElementDisplayById(ID_MENU);
     }
 
     public void openMenuItemAndWaitGridLoad(String item) {
@@ -184,10 +202,10 @@ public class MainMenu {
     public List<WebElement> getMenuItems() {
         List<WebElement> result = new ArrayList<WebElement>();
 
-        List<WebElement> menuItems = seleniumSettings.getWebDriver().findElements(By.className(CLASS_MENU_ITEM));
+        List<WebElement> menuItems = seleniumSettings.getWebDriver().findElements(By.name(NAME_MENU_ITEM));
         for (WebElement menuItem : menuItems) {
             String menuItemClass = menuItem.getAttribute("class");
-            if (menuItemClass.contains(CLASS_MENU_ITEM_PAGE) && !menuItemClass.contains(CLASS_MENU_ITEM_PAGE_HIDDEN)) {
+            if (!menuItemClass.contains(CLASS_MENU_ITEM_PAGE_HIDDEN)) {
                 result.add(menuItem);
             }
         }
