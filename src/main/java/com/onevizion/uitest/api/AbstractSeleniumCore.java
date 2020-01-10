@@ -396,6 +396,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     public static final String GRID_ID_BASE = "gridbox";
     public static final String TREE_ID_BASE = "treeBox";
+    public static final String LOADER_ID_BASE = "loader";
     public static final String LOADING_ID_BASE = "loading";
     public static final String LOADING_SPLIT_GRID_RIGHT_ID_BASE = "loadingSplitGridRight";
     public static final String SAVING_ID_BASE = "saving";
