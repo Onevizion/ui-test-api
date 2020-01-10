@@ -1,15 +1,18 @@
 package com.onevizion.uitest.api.helper.chat;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementWait;
 
 @Component
@@ -24,6 +27,10 @@ public class Chat {
     private static final String ID_COMMENT_FILE = "btnAddFile";
     private static final String ID_COMMENT_SEND = "btnSend";
     private static final String CLASS_TOGGLE = "toggle";
+    private static final String ID_SUBSCRIBE = "btnSubscribe";
+    private static final String ID_CLOSE_MANAGE_PANEL = "btnOffManagePanel";
+    private static final String CLASS_USER_ON_MANAGE_PANEL = "user_item";
+    private static final String CLASS_USER_NAME_ON_MANAGE_PANEL = "ui_name";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -165,6 +172,153 @@ public class Chat {
         elementWait.waitElementDisplayById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotVisibleById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotDisplayById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void closeSubscribePanelOnForm() {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_CLOSE_MANAGE_PANEL)).click();
+        elementWait.waitElementNotVisibleById(ID_MANAGE_PANEL);
+        elementWait.waitElementNotDisplayById(ID_MANAGE_PANEL);
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL);
+    }
+
+    public void closeSubscribePanelInGrid() {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_CLOSE_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).click();
+        elementWait.waitElementNotVisibleById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotDisplayById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void subscribeCurrentUserOnForm() {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE)).click();
+        elementWait.waitElementNotVisibleById(ID_SUBSCRIBE);
+    }
+
+    public void subscribeCurrentUserInGrid() {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE + AbstractSeleniumCore.getGridIdx())).click();
+        elementWait.waitElementNotVisibleById(ID_SUBSCRIBE + AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void subscribeUserOnForm(String userName) {
+        WebElement user = getUserFromManagePanelOnForm(userName);
+        user.click();
+        WebElement toggle = user.findElement(By.className(CLASS_TOGGLE));
+        elementWait.waitElementEnabled(toggle); //TODO Chat-152516
+    }
+
+    public void subscribeUserInGrid(String userName) {
+        WebElement user = getUserFromManagePanelInGrid(userName);
+        user.click();
+        WebElement toggle = user.findElement(By.className(CLASS_TOGGLE));
+        elementWait.waitElementEnabled(toggle); //TODO Chat-152516
+    }
+
+    public void unsubscribeUserOnForm(String userName) {
+        WebElement user = getUserFromManagePanelOnForm(userName);
+        user.click();
+        WebElement toggle = user.findElement(By.className(CLASS_TOGGLE));
+        elementWait.waitElementEnabled(toggle); //TODO Chat-152516
+    }
+
+    public void unsubscribeUserInGrid(String userName) {
+        WebElement user = getUserFromManagePanelInGrid(userName);
+        user.click();
+        WebElement toggle = user.findElement(By.className(CLASS_TOGGLE));
+        elementWait.waitElementEnabled(toggle); //TODO Chat-152516
+    }
+
+    public void checkCurrentUserIsSubscribedOnForm() {
+        boolean isSubscribe = !seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE)).isDisplayed();
+        Assert.assertEquals(isSubscribe, true);
+    }
+
+    public void checkCurrentUserIsSubscribedInGrid() {
+        boolean isSubscribe = !seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE + AbstractSeleniumCore.getGridIdx())).isDisplayed();
+        Assert.assertEquals(isSubscribe, true);
+    }
+
+    public void checkCurrentUserIsUnsubscribedOnForm() {
+        boolean isSubscribe = !seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE)).isDisplayed();
+        Assert.assertEquals(isSubscribe, false);
+    }
+
+    public void checkCurrentUserIsUnsubscribedInGrid() {
+        boolean isSubscribe = !seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE + AbstractSeleniumCore.getGridIdx())).isDisplayed();
+        Assert.assertEquals(isSubscribe, false);
+    }
+
+    public void checkUserIsSubscribedOnForm(String userName) {
+        WebElement user = getUserFromManagePanelOnForm(userName);
+        boolean isSubscribe = isUserSubscribed(user);
+        Assert.assertEquals(isSubscribe, true);
+    }
+
+    public void checkUserIsSubscribedInGrid(String userName) {
+        WebElement user = getUserFromManagePanelInGrid(userName);
+        boolean isSubscribe = isUserSubscribed(user);
+        Assert.assertEquals(isSubscribe, true);
+    }
+
+    public void checkUserIsUnsubscribedOnForm(String userName) {
+        WebElement user = getUserFromManagePanelOnForm(userName);
+        boolean isSubscribe = isUserSubscribed(user);
+        Assert.assertEquals(isSubscribe, false);
+    }
+
+    public void checkUserIsUnsubscribedInGrid(String userName) {
+        WebElement user = getUserFromManagePanelInGrid(userName);
+        boolean isSubscribe = isUserSubscribed(user);
+        Assert.assertEquals(isSubscribe, false);
+    }
+
+    private WebElement getUserFromManagePanelOnForm(String userName) {
+        WebElement result = null;
+
+        List<WebElement> users = seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE_PANEL)).findElements(By.className(CLASS_USER_ON_MANAGE_PANEL));
+        for (WebElement user : users) {
+            if (userName.equals(user.findElement(By.className(CLASS_USER_NAME_ON_MANAGE_PANEL)).getAttribute("textContent"))) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("User [" + userName + "] found many times");
+                }
+                result = user;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("User [" + userName + "] not found");
+        }
+
+        return result;
+    }
+
+    private WebElement getUserFromManagePanelInGrid(String userName) {
+        WebElement result = null;
+
+        List<WebElement> users = seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).findElements(By.className(CLASS_USER_ON_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx()));
+        for (WebElement user : users) {
+            if (userName.equals(user.findElement(By.className(CLASS_USER_NAME_ON_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).getAttribute("textContent"))) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("User [" + userName + "] found many times");
+                }
+                result = user;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("User [" + userName + "] not found");
+        }
+
+        return result;
+    }
+
+    private boolean isUserSubscribed(WebElement user) {
+        String userClass = user.getAttribute("class");
+        String toggleClass = user.findElement(By.className(CLASS_TOGGLE)).getAttribute("class");
+        if (userClass.contains("selected") && toggleClass.contains("toggle_on")) {
+            return true;
+        }
+        return false;
     }
 
     private void checkElementExist(String id) {
