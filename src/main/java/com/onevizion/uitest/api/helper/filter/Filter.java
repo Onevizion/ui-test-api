@@ -48,7 +48,7 @@ public class Filter {
 
 ////    private static final String BUTTON_OPEN = "btnFilter";
     private static final String FIELD_FILTER_NAME = "txtFilterName";
-    private static final String BUTTON_SAVE = "unsavedFilterIcon";
+////    private static final String BUTTON_SAVE = "unsavedFilterIcon";
 ////    private static final String UNSAVED_FILTER = "unsavedFilterId";
 
     private static final String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
@@ -331,13 +331,11 @@ public class Filter {
     }
 
     public void openSaveFilterForm(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
 
-        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
-
-        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE + gridIdx)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElement(By.className("newButtons")).click(); //TODO GUI-151919-5851
 
         elementWait.waitElementById(FILTER_DIALOG_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);

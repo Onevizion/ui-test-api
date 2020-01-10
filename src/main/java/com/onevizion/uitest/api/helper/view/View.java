@@ -314,14 +314,11 @@ public class View {
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
         elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElement(By.className("newButtons")).click(); //TODO NEW
+        seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElement(By.className("newButtons")).click(); //TODO GUI-151919-5851
 
-        //elementWait.waitElementById(VIEW_DIALOG_CONTAINER + gridIdx); TODO NEW
-        //elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx); TODO NEW
-        //elementWait.waitElementDisplayById(VIEW_DIALOG_CONTAINER + gridIdx); TODO NEW
-        elementWait.waitElementById(VIEW_DIALOG_CONTAINER);
-        elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER);
-        elementWait.waitElementDisplayById(VIEW_DIALOG_CONTAINER);
+        elementWait.waitElementById(VIEW_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
 
         wait.waitWebElement(By.id(VIEW_TYPE + gridIdx));
         wait.waitWebElement(By.id(FIELD_VIEW_NAME + gridIdx));
