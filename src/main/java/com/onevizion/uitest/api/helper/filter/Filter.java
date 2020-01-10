@@ -71,7 +71,7 @@ public class Filter {
 
     private static final String ID_MAIN_BUTTON = "viewFilterDropDown";
     private static final String ID_MAIN_PANEL = "viewFilterPopup";
-    private static final String ID_APPLY_BUTTON = "buttonApply";
+    private static final String ID_APPLY_BUTTON = "applyVFTerminal";
     private static final String ID_EDIT_BUTTON = "filterEditButton";
     private static final String ID_CURRENT_NAME = "filterCaption";
     private static final String ID_TREE = "filterTree";
@@ -211,7 +211,7 @@ public class Filter {
                 filter.click();
             }
         }
-        seleniumSettings.getWebDriver().findElement(By.id(ID_APPLY_BUTTON)).click(); //TODO NEW grid index
+        seleniumSettings.getWebDriver().findElement(By.id(ID_APPLY_BUTTON + gridIdx)).click();
         grid2.waitLoad(gridIdx);
 
 //        if (entityPrefix.equals(UNSAVED_FILTER_NAME)) {
