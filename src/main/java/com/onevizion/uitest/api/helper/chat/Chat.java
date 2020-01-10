@@ -295,9 +295,9 @@ public class Chat {
     private WebElement getUserFromManagePanelInGrid(String userName) {
         WebElement result = null;
 
-        List<WebElement> users = seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).findElements(By.className(CLASS_USER_ON_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx()));
+        List<WebElement> users = seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).findElements(By.className(CLASS_USER_ON_MANAGE_PANEL));
         for (WebElement user : users) {
-            if (userName.equals(user.findElement(By.className(CLASS_USER_NAME_ON_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).getAttribute("textContent"))) {
+            if (userName.equals(user.findElement(By.className(CLASS_USER_NAME_ON_MANAGE_PANEL)).getAttribute("textContent"))) {
                 if (result != null) {
                     throw new SeleniumUnexpectedException("User [" + userName + "] found many times");
                 }
