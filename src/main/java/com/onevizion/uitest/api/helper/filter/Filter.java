@@ -42,13 +42,13 @@ public class Filter {
 
     private static final String FILTER_SELECT = "ddFilter";
     private static final String FILTER_CONTAINER = "ddFilterContainer";
-////    private static final String FILTER_SEARCH = "ddFilterSearch";
-////    private static final String BUTTON_CLEAR_SEARCH = "ddFilterClearSearch";
+    private static final String FILTER_SEARCH = "search_filterSearch";
+    private static final String BUTTON_CLEAR_SEARCH = "clear_search_filterSearch";
     private static final String BUTTON_ORGANIZE = "ddFilterBtnOrganize";
 
 ////    private static final String BUTTON_OPEN = "btnFilter";
     private static final String FIELD_FILTER_NAME = "txtFilterName";
-////    private static final String BUTTON_SAVE = "unsavedFilterIcon";
+    private static final String BUTTON_SAVE = "unsavedFilter";
 ////    private static final String UNSAVED_FILTER = "unsavedFilterId";
 
     private static final String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
@@ -170,6 +170,26 @@ public class Filter {
         return result;
     }
 
+    public WebElement getFilter(String filterName, Long gridIdx) {
+        WebElement result = null;
+
+        List<WebElement> filters = getFilters(gridIdx);
+        for (WebElement filter : filters) {
+            if (filterName.equals(filter.getAttribute("textContent"))) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Filter [" + filterName + "] found many times");
+                }
+                result = filter;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Filter [" + filterName + "] not found");
+        }
+
+        return result;
+    }
+
     public String getCurrentFilterName(Long gridIdx) {
         return seleniumSettings.getWebDriver().findElement(By.id(ID_CURRENT_NAME + gridIdx)).getText();
     }
@@ -205,36 +225,15 @@ public class Filter {
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
         elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
 
-        List<WebElement> filters = getFilters(gridIdx);
-        for (WebElement filter : filters) {
-            if (entityPrefix.equals(filter.getAttribute("textContent"))) {
-                filter.click();
-            }
-        }
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
+
+        WebElement filter = getFilter(entityPrefix, gridIdx);
+        filter.click();
+
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
+
         seleniumSettings.getWebDriver().findElement(By.id(ID_APPLY_BUTTON + gridIdx)).click();
         grid2.waitLoad(gridIdx);
-
-//        if (entityPrefix.equals(UNSAVED_FILTER_NAME)) {
-//            seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_FILTER + gridIdx)).click();
-//            grid2.waitLoad(gridIdx);
-//        } else {
-//            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
-//
-//            WebElement filterElem = (WebElement) js.getNewDropDownElement(FILTER_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
-//            elementWait.waitElementVisible(filterElem);
-//            filterElem.click();
-//
-//            grid2.waitLoad(gridIdx);
-//
-//            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
-//
-//            elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
-//            elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-//            elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
-//
-//            seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
-//            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
-//        }
     }
 
     public void saveFilterField(String fieldName, FilterFieldType filterFieldType, String cellValue, Long gridIdx) {
@@ -316,10 +315,6 @@ public class Filter {
 
         filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
         grid2.waitLoad(gridIdx);
-
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
-        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL + gridIdx);
-        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL + gridIdx);
     }
 
     public void closeFilterFormCancel(Long gridIdx) {
@@ -335,7 +330,7 @@ public class Filter {
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
         elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElement(By.className("newButtons")).click(); //TODO GUI-151919-5851
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE + gridIdx)).click();
 
         elementWait.waitElementById(FILTER_DIALOG_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);

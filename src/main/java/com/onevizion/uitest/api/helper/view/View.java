@@ -38,13 +38,13 @@ public class View {
 
     private static final String VIEW_SELECT = "ddView";
     private static final String VIEW_CONTAINER = "ddViewContainer";
-////    private static final String VIEW_SEARCH = "ddViewSearch";
-////    private static final String BUTTON_CLEAR_SEARCH = "ddViewClearSearch";
+    private static final String VIEW_SEARCH = "search_viewSearch";
+    private static final String BUTTON_CLEAR_SEARCH = "clear_search_viewSearch";
     private static final String BUTTON_ORGANIZE = "ddViewBtnOrganize";
 
 ////    private static final String BUTTON_OPEN = "btnView";
     private static final String FIELD_VIEW_NAME = "txtViewName";
-////    private static final String BUTTON_SAVE = "unsavedViewIcon";
+    private static final String BUTTON_SAVE = "unsavedView";
 ////    private static final String UNSAVED_VIEW = "unsavedViewId";
 
     private static final String VIEW_DIALOG_CONTAINER = "dialogViewDialogContainer";
@@ -166,6 +166,26 @@ public class View {
         return result;
     }
 
+    public WebElement getView(String viewName, Long gridIdx) {
+        WebElement result = null;
+
+        List<WebElement> views = getViews(gridIdx);
+        for (WebElement view : views) {
+            if (viewName.equals(view.getAttribute("textContent"))) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("View [" + viewName + "] found many times");
+                }
+                result = view;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("View [" + viewName + "] not found");
+        }
+
+        return result;
+    }
+
     public String getCurrentViewName(Long gridIdx) {
         return seleniumSettings.getWebDriver().findElement(By.id(ID_CURRENT_NAME + gridIdx)).getText();
     }
@@ -201,36 +221,15 @@ public class View {
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
         elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
 
-        List<WebElement> views = getViews(gridIdx);
-        for (WebElement view : views) {
-            if (entityPrefix.equals(view.getAttribute("textContent"))) {
-                view.click();
-            }
-        }
+        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
+
+        WebElement view = getView(entityPrefix, gridIdx);
+        view.click();
+
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
+
         seleniumSettings.getWebDriver().findElement(By.id(ID_APPLY_BUTTON + gridIdx)).click();
         grid2.waitLoad(gridIdx);
-
-//        if (entityPrefix.equals(UNSAVED_VIEW_NAME)) {
-//            seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_VIEW + gridIdx)).click();
-//            grid2.waitLoad(gridIdx);
-//        } else {
-//            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
-//
-//            WebElement viewElem = (WebElement) js.getNewDropDownElement(VIEW_CONTAINER + gridIdx, SCROLL_CONTAINER, "newGenericDropDownRow", entityPrefix);
-//            elementWait.waitElementVisible(viewElem);
-//            viewElem.click();
-//
-//            grid2.waitLoad(gridIdx);
-//
-//            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
-//
-//            elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
-//            elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-//            elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
-//
-//            seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
-//            seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
-//        }
     }
 
     private void selectFolderForSaveViewByVisibleText(Long gridIdx, String folderName) {
@@ -295,10 +294,6 @@ public class View {
 
         viewWait.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
         grid2.waitLoad(gridIdx);
-
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
-        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL + gridIdx);
-        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL + gridIdx);
     }
 
     public void closeViewFormCancel(Long gridIdx) {
@@ -314,7 +309,7 @@ public class View {
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
         elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElement(By.className("newButtons")).click(); //TODO GUI-151919-5851
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE + gridIdx)).click();
 
         elementWait.waitElementById(VIEW_DIALOG_CONTAINER + gridIdx);
         elementWait.waitElementVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
