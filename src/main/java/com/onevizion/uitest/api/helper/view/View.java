@@ -36,11 +36,11 @@ public class View {
 
 ////    private static final String VIEW_MAIN_ELEMENT_ID_BASE = "newDropdownView";
 
-    private static final String VIEW_SELECT = "ddView";
-    private static final String VIEW_CONTAINER = "ddViewContainer";
+////    private static final String VIEW_SELECT = "ddView";
+////    private static final String VIEW_CONTAINER = "ddViewContainer";
     private static final String VIEW_SEARCH = "search_viewSearch";
     private static final String BUTTON_CLEAR_SEARCH = "clear_search_viewSearch";
-    private static final String BUTTON_ORGANIZE = "ddViewBtnOrganize";
+    private static final String BUTTON_ORGANIZE = "viewOrganizeButton";
 
 ////    private static final String BUTTON_OPEN = "btnView";
     private static final String FIELD_VIEW_NAME = "txtViewName";
@@ -217,9 +217,7 @@ public class View {
     }
 
     public void selectByVisibleText(Long gridIdx, String entityPrefix) {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
-        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
-        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
+        openMainPanel(gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(VIEW_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
@@ -261,24 +259,24 @@ public class View {
     }
 
     private void isExistAndSelectedView(Long gridIdx, String entityPrefix) {
+        openMainPanel(gridIdx);
+
         boolean isSavedView = false;
-        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
         for (WebElement view : getViews(gridIdx)) {
-            if (view.getText().equals(entityPrefix)) {
+            if (entityPrefix.equals(view.getAttribute("textContent"))) {
                 isSavedView = true;
             }
         }
-        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
         Assert.assertEquals(isSavedView, true, "View " + entityPrefix + " isn't saved");
+
+        closeMainPanel(gridIdx);
 
         viewWait.waitCurrentViewName(gridIdx, entityPrefix);
         grid2.waitLoad(gridIdx);
     }
 
     public void openViewForm(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
-        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
-        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
+        openMainPanel(gridIdx);
 
         window.openModal(By.id(ID_EDIT_BUTTON + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -299,15 +297,11 @@ public class View {
     public void closeViewFormCancel(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
-        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL + gridIdx);
-        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL + gridIdx);
+        closeMainPanel(gridIdx);
     }
 
     public void openSaveViewForm(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
-        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
-        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
+        openMainPanel(gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE + gridIdx)).click();
 
@@ -375,11 +369,7 @@ public class View {
 
         int beforeDeleteSize = getViewsCount(gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
-
-        elementWait.waitElementById(VIEW_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(VIEW_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(VIEW_CONTAINER + gridIdx);
+        openMainPanel(gridIdx);
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
         tree.waitLoad(0L);
@@ -399,13 +389,14 @@ public class View {
         wait.waitViewsCount(gridIdx, beforeDeleteSize - 1);
 
         boolean isDeletedView = false;
-        seleniumSettings.getWebDriver().findElement(By.id(VIEW_SELECT + gridIdx)).click();
         for (WebElement view : getViews(gridIdx)) {
-            if (view.getText().equals(entityPrefix)) {
+            if (entityPrefix.equals(view.getAttribute("textContent"))) {
                 isDeletedView = true;
             }
         }
         Assert.assertEquals(isDeletedView, false, "View " + entityPrefix + " isn't deleted");
+
+        closeMainPanel(gridIdx);
 
         if (currentViewName.equals(entityPrefix)) {
             viewWait.waitCurrentViewName(gridIdx, UNSAVED_VIEW_NAME);
