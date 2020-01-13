@@ -28,9 +28,9 @@ public class Privilegies {
         if (isDisplayAdd != null) {
             wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx));
             if (isDisplayAdd.booleanValue()) {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"), ";");
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList(""), ";");
             } else {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"), ";");
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("display: none"), ";");
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -40,9 +40,9 @@ public class Privilegies {
         if (isDisplayClone != null) {
             wait.waitWebElement(By.id(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx));
             if (isDisplayClone.booleanValue()) {
-                elementWait.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"), ";");
+                elementWait.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList(""), ";");
             } else {
-                elementWait.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"), ";");
+                elementWait.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("display: none"), ";");
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -52,9 +52,9 @@ public class Privilegies {
         if (isDisplayEdit != null) {
             wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx));
             if (isDisplayEdit.booleanValue()) {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"), ";");
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList(""), ";");
             } else {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"), ";");
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("display: none"), ";");
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -64,9 +64,9 @@ public class Privilegies {
         if (isDisplayDel != null) {
             wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx));
             if (isDisplayDel.booleanValue()) {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none"), ";");
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList(""), ";");
             } else {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("background-image: none", "display: none"), ";");
+                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("display: none"), ";");
             }
         } else {
             seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
