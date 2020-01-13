@@ -1,6 +1,5 @@
 package com.onevizion.uitest.api.helper.filter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -76,7 +75,6 @@ public class Filter {
     private static final String ID_CURRENT_NAME = "filterCaption";
     private static final String ID_TREE = "filterTree";
     private static final String CLASS_TREE_ITEM = "item_tree";
-    private static final String CLASS_TREE_ITEM_GROUP = "group";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -158,16 +156,7 @@ public class Filter {
     }
 
     public List<WebElement> getFilters(Long gridIdx) {
-        List<WebElement> result = new ArrayList<WebElement>();
-
-        List<WebElement> filters = seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElements(By.className(CLASS_TREE_ITEM));
-        for (WebElement filter : filters) {
-            String filtersClass = filter.getAttribute("class");
-            if (!filtersClass.contains(CLASS_TREE_ITEM_GROUP)) {
-                result.add(filter);
-            }
-        }
-        return result;
+        return seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElements(By.className(CLASS_TREE_ITEM));
     }
 
     public WebElement getFilter(String filterName, Long gridIdx) {

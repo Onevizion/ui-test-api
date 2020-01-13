@@ -1,6 +1,5 @@
 package com.onevizion.uitest.api.helper.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -75,7 +74,6 @@ public class View {
     private static final String ID_CURRENT_NAME = "viewCaption";
     private static final String ID_TREE = "viewTree";
     private static final String CLASS_TREE_ITEM = "item_tree";
-    private static final String CLASS_TREE_ITEM_GROUP = "group";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -154,16 +152,7 @@ public class View {
     }
 
     public List<WebElement> getViews(Long gridIdx) {
-        List<WebElement> result = new ArrayList<WebElement>();
-
-        List<WebElement> views = seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElements(By.className(CLASS_TREE_ITEM));
-        for (WebElement view : views) {
-            String viewClass = view.getAttribute("class");
-            if (!viewClass.contains(CLASS_TREE_ITEM_GROUP)) {
-                result.add(view);
-            }
-        }
-        return result;
+        return seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElements(By.className(CLASS_TREE_ITEM));
     }
 
     public WebElement getView(String viewName, Long gridIdx) {
