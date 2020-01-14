@@ -78,6 +78,10 @@ public class Grid {
         return rowsCnt.longValue();
     }
 
+    public void selectFirstRow(Long gridId) {
+        js.selectGridRow(gridId, 0L);
+    }
+
     public void selectLastRow(Long gridId) {
         js.selectGridRow(gridId, getGridRowsCount(gridId) - 1L);
     }
