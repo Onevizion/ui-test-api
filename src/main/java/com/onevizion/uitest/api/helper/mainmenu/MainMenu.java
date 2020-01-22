@@ -274,4 +274,12 @@ public class MainMenu {
         mainMenuWait.waitTabTitle(title);
     }
 
+    public int getDinamicMenusCount() {
+        return seleniumSettings.getWebDriver().findElements(By.className("dynamic_menu")).size();
+    }
+
+    public void waitDinamicMenusCount(int dinamicMenusCount) {
+        mainMenuWait.waitDinamicMenusCount(dinamicMenusCount);
+    }
+
 }
