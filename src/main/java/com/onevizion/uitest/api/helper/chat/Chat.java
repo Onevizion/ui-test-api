@@ -19,6 +19,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 public class Chat {
 
     private static final String ID_MAIN_BUTTON = "btnComments";
+    private static final String ID_CLOSE_BUTTON = "btnCloseChat";
     private static final String ID_MAIN_PANEL = "slideChatPanel";
     private static final String ID_MAIN_LOADER = "loaderChatLoader";
     private static final String ID_MANAGE = "btnManage";
@@ -154,7 +155,7 @@ public class Chat {
     }
 
     public void closeChatPanelInGrid() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + AbstractSeleniumCore.getGridIdx())).click();
+        seleniumSettings.getWebDriver().findElement(By.id(ID_CLOSE_BUTTON + AbstractSeleniumCore.getGridIdx())).click();
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
     }
 
