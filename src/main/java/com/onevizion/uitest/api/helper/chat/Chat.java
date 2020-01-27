@@ -24,6 +24,7 @@ public class Chat {
     private static final String ID_MAIN_LOADER = "loaderChatLoader";
     private static final String ID_MANAGE = "btnManage";
     private static final String ID_MANAGE_PANEL = "managePanel";
+    private static final String CLASS_MANAGE_PANEL_SUBTITLE = "p_subtitle";
     private static final String ID_COMMENT_TEXT = "replyForm";
     private static final String ID_COMMENT_FILE = "btnAddFile";
     private static final String ID_COMMENT_SEND = "btnSend";
@@ -203,31 +204,31 @@ public class Chat {
     }
 
     public void subscribeUserOnForm(String userName) {
+        int beforeCount = getSubscribedUsersCount();
         WebElement user = getUserFromManagePanelOnForm(userName);
         user.click();
-        WebElement toggle = user.findElement(By.className(CLASS_TOGGLE));
-        elementWait.waitElementEnabled(toggle); //TODO Chat-152516
+        chatWait.waitSubscribedUsersCount(beforeCount + 1);
     }
 
     public void subscribeUserInGrid(String userName) {
+        int beforeCount = getSubscribedUsersCount();
         WebElement user = getUserFromManagePanelInGrid(userName);
         user.click();
-        WebElement toggle = user.findElement(By.className(CLASS_TOGGLE));
-        elementWait.waitElementEnabled(toggle); //TODO Chat-152516
+        chatWait.waitSubscribedUsersCount(beforeCount + 1);
     }
 
     public void unsubscribeUserOnForm(String userName) {
+        int beforeCount = getSubscribedUsersCount();
         WebElement user = getUserFromManagePanelOnForm(userName);
         user.click();
-        WebElement toggle = user.findElement(By.className(CLASS_TOGGLE));
-        elementWait.waitElementEnabled(toggle); //TODO Chat-152516
+        chatWait.waitSubscribedUsersCount(beforeCount - 1);
     }
 
     public void unsubscribeUserInGrid(String userName) {
+        int beforeCount = getSubscribedUsersCount();
         WebElement user = getUserFromManagePanelInGrid(userName);
         user.click();
-        WebElement toggle = user.findElement(By.className(CLASS_TOGGLE));
-        elementWait.waitElementEnabled(toggle); //TODO Chat-152516
+        chatWait.waitSubscribedUsersCount(beforeCount - 1);
     }
 
     public void checkCurrentUserIsSubscribedOnForm() {
@@ -272,6 +273,12 @@ public class Chat {
         WebElement user = getUserFromManagePanelInGrid(userName);
         boolean isSubscribe = isUserSubscribed(user);
         Assert.assertEquals(isSubscribe, false);
+    }
+
+    public int getSubscribedUsersCount() {
+        String subtitle = seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE_PANEL)).findElement(By.className(CLASS_MANAGE_PANEL_SUBTITLE)).getText();
+        String subscribedUsersCount = subtitle.substring(0, subtitle.indexOf(" of ")).trim();
+        return Integer.parseInt(subscribedUsersCount);
     }
 
     private WebElement getUserFromManagePanelOnForm(String userName) {

@@ -1,5 +1,8 @@
 package com.onevizion.uitest.api.helper.chat;
 
+import java.util.function.IntSupplier;
+import java.util.function.Supplier;
+
 import javax.annotation.Resource;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,10 +19,23 @@ class ChatWait {
     @Resource
     private ChatJs chatJs;
 
+    @Resource
+    private Chat chat;
+
     void waitIsReadySubscribePanel() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Subscribe Panel loading is failed")
             .until(webdriver -> chatJs.isReadySubscribePanel());
+    }
+
+    void waitSubscribedUsersCount(int subscribedUsersCount) {
+        IntSupplier actualValueSupplier = ()-> chat.getSubscribedUsersCount();
+
+        Supplier<String> messageSupplier = ()-> "Waiting subscribed users count expectedVal=[" + subscribedUsersCount + "] actualVal=[" + actualValueSupplier.getAsInt() + "] is failed";
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage(messageSupplier)
+            .until(webdriver -> subscribedUsersCount == actualValueSupplier.getAsInt());
     }
 
 }
