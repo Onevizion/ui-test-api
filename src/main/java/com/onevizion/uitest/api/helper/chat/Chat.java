@@ -39,6 +39,9 @@ public class Chat {
     @Resource
     private ElementWait elementWait;
 
+    @Resource
+    private ChatWait chatWait;
+
     public void checkMainPanelOnFormExist() {
         checkElementExist(ID_MAIN_BUTTON);
         checkElementExist(ID_MAIN_PANEL);
@@ -163,16 +166,14 @@ public class Chat {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE)).click();
         elementWait.waitElementVisibleById(ID_MANAGE_PANEL);
         elementWait.waitElementDisplayById(ID_MANAGE_PANEL);
-        elementWait.waitElementNotVisibleById(ID_MAIN_LOADER);
-        elementWait.waitElementNotDisplayById(ID_MAIN_LOADER);
+        chatWait.waitIsReadySubscribePanel();
     }
 
     public void openSubscribePanelInGrid() {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE + AbstractSeleniumCore.getGridIdx())).click();
         elementWait.waitElementVisibleById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementDisplayById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
-        elementWait.waitElementNotVisibleById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
-        elementWait.waitElementNotDisplayById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
+        chatWait.waitIsReadySubscribePanel();
     }
 
     public void closeSubscribePanelOnForm() {
