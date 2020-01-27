@@ -204,31 +204,31 @@ public class Chat {
     }
 
     public void subscribeUserOnForm(String userName) {
-        int beforeCount = getSubscribedUsersCount();
+        int beforeCount = getSubscribedUsersCountOnForm();
         WebElement user = getUserFromManagePanelOnForm(userName);
         user.click();
-        chatWait.waitSubscribedUsersCount(beforeCount + 1);
+        chatWait.waitSubscribedUsersCountOnForm(beforeCount + 1);
     }
 
     public void subscribeUserInGrid(String userName) {
-        int beforeCount = getSubscribedUsersCount();
+        int beforeCount = getSubscribedUsersCountInGrid();
         WebElement user = getUserFromManagePanelInGrid(userName);
         user.click();
-        chatWait.waitSubscribedUsersCount(beforeCount + 1);
+        chatWait.waitSubscribedUsersCountInGrid(beforeCount + 1);
     }
 
     public void unsubscribeUserOnForm(String userName) {
-        int beforeCount = getSubscribedUsersCount();
+        int beforeCount = getSubscribedUsersCountOnForm();
         WebElement user = getUserFromManagePanelOnForm(userName);
         user.click();
-        chatWait.waitSubscribedUsersCount(beforeCount - 1);
+        chatWait.waitSubscribedUsersCountOnForm(beforeCount - 1);
     }
 
     public void unsubscribeUserInGrid(String userName) {
-        int beforeCount = getSubscribedUsersCount();
+        int beforeCount = getSubscribedUsersCountInGrid();
         WebElement user = getUserFromManagePanelInGrid(userName);
         user.click();
-        chatWait.waitSubscribedUsersCount(beforeCount - 1);
+        chatWait.waitSubscribedUsersCountInGrid(beforeCount - 1);
     }
 
     public void checkCurrentUserIsSubscribedOnForm() {
@@ -275,9 +275,15 @@ public class Chat {
         Assert.assertEquals(isSubscribe, false);
     }
 
-    public int getSubscribedUsersCount() {
+    public int getSubscribedUsersCountOnForm() {
         String subtitle = seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE_PANEL)).findElement(By.className(CLASS_MANAGE_PANEL_SUBTITLE)).getText();
-        String subscribedUsersCount = subtitle.substring(0, subtitle.indexOf(" of ")).trim();
+        String subscribedUsersCount = subtitle.substring(0, subtitle.indexOf("of")).trim();
+        return Integer.parseInt(subscribedUsersCount);
+    }
+
+    public int getSubscribedUsersCountInGrid() {
+        String subtitle = seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).findElement(By.className(CLASS_MANAGE_PANEL_SUBTITLE)).getText();
+        String subscribedUsersCount = subtitle.substring(0, subtitle.indexOf("of")).trim();
         return Integer.parseInt(subscribedUsersCount);
     }
 

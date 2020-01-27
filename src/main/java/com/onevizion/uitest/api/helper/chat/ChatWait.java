@@ -28,8 +28,18 @@ class ChatWait {
             .until(webdriver -> chatJs.isReadySubscribePanel());
     }
 
-    void waitSubscribedUsersCount(int subscribedUsersCount) {
-        IntSupplier actualValueSupplier = ()-> chat.getSubscribedUsersCount();
+    void waitSubscribedUsersCountOnForm(int subscribedUsersCount) {
+        IntSupplier actualValueSupplier = ()-> chat.getSubscribedUsersCountOnForm();
+
+        Supplier<String> messageSupplier = ()-> "Waiting subscribed users count expectedVal=[" + subscribedUsersCount + "] actualVal=[" + actualValueSupplier.getAsInt() + "] is failed";
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage(messageSupplier)
+            .until(webdriver -> subscribedUsersCount == actualValueSupplier.getAsInt());
+    }
+
+    void waitSubscribedUsersCountInGrid(int subscribedUsersCount) {
+        IntSupplier actualValueSupplier = ()-> chat.getSubscribedUsersCountInGrid();
 
         Supplier<String> messageSupplier = ()-> "Waiting subscribed users count expectedVal=[" + subscribedUsersCount + "] actualVal=[" + actualValueSupplier.getAsInt() + "] is failed";
 
