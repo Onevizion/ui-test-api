@@ -74,6 +74,7 @@ public class View {
     private static final String ID_CURRENT_NAME = "viewCaption";
     private static final String ID_TREE = "viewTree";
     private static final String CLASS_TREE_ITEM = "item_tree";
+    private static final String GROUP_BY_DEFAULT_ITEM = "Select column for grouping";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -285,6 +286,12 @@ public class View {
 
     public void closeViewFormCancel(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+
+        closeMainPanel(gridIdx);
+    }
+
+    public void closeViewFormCancelWithAlert(Long gridIdx) {
+        window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE), null);
 
         closeMainPanel(gridIdx);
     }
@@ -504,10 +511,34 @@ public class View {
         closeViewFormOk(gridIdx);
     }
 
+    public void selectColumn(String column) {
+        List<ListboxElement> actualRightColumns = listbox.getElements(LEFT_COLUMNS_DIV_ID);
+        boolean isRemoved = false;
+        for (ListboxElement actualRightColumn : actualRightColumns) {
+            if (actualRightColumn.getLabel().equals(column)) {
+                listbox.moveElementByLabel(actualRightColumns, actualRightColumn.getLabel(), ADD_BUTTON_ID);
+                isRemoved = true;
+            }
+        }
+        Assert.assertEquals(isRemoved, true, "Column [" + column + "] not available for selecting");
+    }
+
     public void removeAllColumns() {
         while (seleniumSettings.getWebDriver().findElement(By.id(REMOVE_BUTTON_ID)).isEnabled()) {
             seleniumSettings.getWebDriver().findElement(By.id(REMOVE_BUTTON_ID)).click();
         }
+    }
+
+    public void removeColumn(String column) {
+        List<ListboxElement> actualRightColumns = listbox.getElements(RIGHT_COLUMNS_DIV_ID);
+        boolean isRemoved = false;
+        for (ListboxElement actualRightColumn : actualRightColumns) {
+            if (actualRightColumn.getLabel().equals(column)) {
+                listbox.moveElementByLabel(actualRightColumns, actualRightColumn.getLabel(), REMOVE_BUTTON_ID);
+                isRemoved = true;
+            }
+        }
+        Assert.assertEquals(isRemoved, true, "Column [" + column + "] not available for removing from selected");
     }
 
     public void selectAndCheckColumns(Long gridIdx, Long gridColumns, List<String> leftColumns, List<String> rightColumns) {
@@ -690,6 +721,49 @@ public class View {
         int count = seleniumSettings.getWebDriver().findElements(By.id("mult_sort" + position)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(count, 0);
+    }
+
+    public void changeGroupColumn(String newValue) {
+        seleniumSettings.getWebDriver().findElement(By.id("groupByBox")).click();
+        WebElement element = (WebElement) js.getNewDropDownElement("groupByBox", "customscroll", "item_select", newValue);
+        Long elementPosition = js.getNewDropDownElementPosition("groupByBox", "customscroll", "item_select", newValue);
+        js.scrollNewDropDownTop("groupByBox", "customscroll", elementPosition * 28L);
+        elementWait.waitElementVisible(element);
+        element.click();
+    }
+
+    public void removeGroupColumn() {
+        seleniumSettings.getWebDriver().findElement(By.id("groupByBox")).click();
+        WebElement element = (WebElement) js.getNewDropDownElement("groupByBox", "customscroll", "item_select", GROUP_BY_DEFAULT_ITEM);
+        Long elementPosition = js.getNewDropDownElementPosition("groupByBox", "customscroll", "item_select", GROUP_BY_DEFAULT_ITEM);
+        js.scrollNewDropDownTop("groupByBox", "customscroll", elementPosition * 28L);
+        elementWait.waitElementVisible(element);
+        element.click();
+    }
+
+    public void checkGroupColumn(String expectedValue) {
+        String actualValue = seleniumSettings.getWebDriver().findElement(By.id("groupByBox")).findElement(By.className("dl_selected")).findElement(By.tagName("input")).getAttribute("value");
+        Assert.assertEquals(actualValue, expectedValue);
+    }
+
+    public void checkGroupColumnNotSelected() {
+        String actualValue = seleniumSettings.getWebDriver().findElement(By.id("groupByBox")).findElement(By.className("dl_selected")).findElement(By.tagName("input")).getAttribute("value");
+        Assert.assertEquals(actualValue, GROUP_BY_DEFAULT_ITEM);
+    }
+
+    public void checkGroupAvailableColumns(List<String> expectedColumns) {
+        List<WebElement> actualColumns = seleniumSettings.getWebDriver().findElement(By.id("groupByBox")).findElements(By.className("item_select"));
+        Assert.assertEquals(actualColumns.size()-1, expectedColumns.size());
+        for (int i = 0; i < expectedColumns.size(); i++) {
+            boolean isExist = false;
+            for (int j=0; j < actualColumns.size(); j++) {
+                if (expectedColumns.get(i).equals(actualColumns.get(j).getAttribute("innerHTML"))) {
+                    isExist = true;
+                    break;
+                }
+            }
+            Assert.assertEquals(isExist, true, "Column [" + expectedColumns.get(i) + "] not available for Group By");
+        }
     }
 
 }

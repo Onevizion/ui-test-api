@@ -42,6 +42,9 @@ public class Grid {
     @Resource
     private ElementWait elementWait;
 
+    private static final String NEXT_BUTTON_ID = "navNext";
+    private static final String PREV_BUTTON_ID = "navPrev";
+
     public boolean isGridEmpty(Long gridId) {
         Long rowsCnt = js.getGridRowsCount(gridId);
         if (rowsCnt.equals(1L)) {
@@ -398,6 +401,26 @@ public class Grid {
         Assert.assertEquals(js.isGridColumnHidden(gridIndex, columnIndex).booleanValue(), false, "Grid have wrong columns");
         Assert.assertEquals(js.getGridColumnLabelByColIndex(gridIndex, columnIndex, 0L), columnName, "Grid have wrong columns");
         return columnIndex;
+    }
+
+    public void checkColumnIsVisibleByIndex(Long gridIndex, Long columnIndex) {
+        Assert.assertEquals(js.isGridColumnHidden(gridIndex, columnIndex).booleanValue(), false, "Grid column with index=[" + columnIndex + "] is hidden");
+    }
+
+    public void checkColumnIsHiddenByIndex(Long gridIndex, Long columnIndex) {
+        Assert.assertEquals(js.isGridColumnHidden(gridIndex, columnIndex).booleanValue(), true, "Grid column with index=[" + columnIndex + "] is displayed");
+    }
+
+    public void goToNextPage(Long gridIdx) {
+        if (seleniumSettings.getWebDriver().findElement(By.id(NEXT_BUTTON_ID + gridIdx)).isEnabled()) {
+            seleniumSettings.getWebDriver().findElement(By.id(NEXT_BUTTON_ID + gridIdx)).click();
+        }
+    }
+
+    public void goToPrevPage(Long gridIdx) {
+        if (seleniumSettings.getWebDriver().findElement(By.id(PREV_BUTTON_ID + gridIdx)).isEnabled()) {
+            seleniumSettings.getWebDriver().findElement(By.id(PREV_BUTTON_ID + gridIdx)).click();
+        }
     }
 
 }
