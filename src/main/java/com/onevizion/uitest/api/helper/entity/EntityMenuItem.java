@@ -20,7 +20,7 @@ public class EntityMenuItem {
 
     private static final String LABEL = "label";
     private static final String VISIBLE = "visible";
-    private static final String URL = "visibleURL";
+    private static final String URL = "url";
     private static final String ITEM_TYPE = "OnClick";
     private static final String VIEW = "viewOptId";
     private static final String HIDE_VIEW = "hideView";
