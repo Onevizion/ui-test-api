@@ -74,6 +74,9 @@ public class Tb {
     @Resource
     private FckEditor fckEditor;
 
+    @Resource
+    private TbJs tbJs;
+
     String getLastFieldIndex(String name, int elementPosition) {
         List<WebElement> elems = seleniumSettings.getWebDriver().findElements(By.name(name));
         List<Integer> idx = new ArrayList<>();
@@ -1415,6 +1418,29 @@ public class Tb {
         }
 
         assertElement.assertElementDisabled(webElement);
+    }
+
+    public void checkGroupColumnIndex(Long gridIdx, Long expectedIndexGroupColumn) {
+        Assert.assertEquals(tbJs.getGroupColumnIndex(gridIdx), expectedIndexGroupColumn);
+    }
+
+    public void checkRowsInGroup(Long gridIdx, String group, List<Long> rowIndexes) {
+        List<String> expectedRowIds = new ArrayList<String>();
+        for (int i=0; i < rowIndexes.size(); i++ ) {
+            expectedRowIds.add(js.getGridRowIdByIndex(gridIdx, rowIndexes.get(i)));
+        }
+        List<String> actualRowIds = tbJs.getGridRowsIdInGroup(gridIdx, group);
+        Assert.assertEquals(actualRowIds.size(), expectedRowIds.size());
+        for (int i = 0; i < expectedRowIds.size(); i++) {
+            boolean isExist = false;
+            for (int j=0; j < actualRowIds.size(); j++) {
+                if (expectedRowIds.get(i).equals(actualRowIds.get(j))) {
+                    isExist = true;
+                    break;
+                }
+            }
+            Assert.assertEquals(isExist, true);
+        }
     }
 
 }
