@@ -29,6 +29,7 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.CloneButton;
 import com.onevizion.uitest.api.helper.CompAuditLog;
+import com.onevizion.uitest.api.helper.DropDown;
 import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementJs;
@@ -288,6 +289,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected Chat chat;
+
+    @Resource
+    protected DropDown dropDown;
     /* Helpers End */
 
     /* Entity Helpers Begin */
