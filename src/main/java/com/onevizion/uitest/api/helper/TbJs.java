@@ -29,24 +29,16 @@ public class TbJs extends Js {
                 "var rowIds = \"\";\n" + 
                 "for (var i=0; i<groups.length; i++) {\n" + 
                 "    if (gridArr[" + gridIdx + "].grid._groups[groups[i]]) {\n" + 
-                "        var h = gridArr[" + gridIdx + "].grid._groups[groups[i]].row.nextSibling;\n" + 
-                "        if (h) {\n" + 
-                "            while (h && !h._cntr) {\n" + 
-                "                rowIds = rowIds + h.idd + \",\";\n" + 
-                "                h = h.nextSibling\n" + 
-                "            }\n" + 
-                "        } else {\n" + 
-                "            var e = gridArr[" + gridIdx + "].grid._groups[groups[i]]._childs;\n" + 
-                "            if (e) {\n" + 
-                "                for (var c = 0; c < e.length; c++) {\n" + 
-                "                    rowIds = rowIds + h.idd + \",\";\n" + 
-                "                }\n" + 
-                "            }\n" + 
-                "        }\n" + 
+                "        gridArr[" + gridIdx + "].grid.forEachRowInGroup(groups[i], function(rowId) {\r\n" + 
+                "            concatRowIds(rowId);\r\n" + 
+                "        });\n" + 
                 "    }\n" + 
                 "}\n" + 
-                "rowIds = rowIds.substring(0, rowIds.length-1);\n" + 
-                "return rowIds;";
+                "return rowIds;" + 
+                "rowIds = rowIds.substring(0, rowIds.length-1);\n" +
+                "function concatRowIds(rowId){\n" + 
+                "    rowIds = rowIds + rowId + \",\";\n" + 
+                "}";
 
         String resultStr = (String) execJs2(script);
         List<String> result = Arrays.asList(resultStr.split(","));

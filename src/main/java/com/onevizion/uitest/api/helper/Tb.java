@@ -1420,8 +1420,13 @@ public class Tb {
         assertElement.assertElementDisabled(webElement);
     }
 
-    public void checkGroupColumnIndex(Long gridIdx, Long expectedIndexGroupColumn) {
+    public void checkGroupColumn(Long gridIdx, String groupColumn) {
+        Long expectedIndexGroupColumn = js.getColumnFirstRowIndex(gridIdx, groupColumn);
         Assert.assertEquals(tbJs.getGroupColumnIndex(gridIdx), expectedIndexGroupColumn);
+    }
+
+    public void checkGroupColumnNotSelected(Long gridIdx) {
+        Assert.assertEquals(tbJs.getGroupColumnIndex(gridIdx), null);
     }
 
     public void checkRowsInGroup(Long gridIdx, String group, List<Long> rowIndexes) {

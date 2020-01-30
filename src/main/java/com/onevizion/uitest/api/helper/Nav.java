@@ -117,8 +117,9 @@ public class Nav {
         }
     }
 
-    private void goToNextPageButton(Long gridIdx) {
+    public void goToNextPageButton(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_NEXT + gridIdx)).click();
+        grid2.waitLoad();
     }
 
     private void goToNextPageList(Long gridIdx, int nextPageNum) {
@@ -147,8 +148,9 @@ public class Nav {
         }
     }
 
-    private void goToPrevPageButton(Long gridIdx) {
+    public void goToPrevPageButton(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_PREV + gridIdx)).click();
+        grid2.waitLoad();
     }
 
     private void goToPrevPageList(Long gridIdx, int prevPageNum) {

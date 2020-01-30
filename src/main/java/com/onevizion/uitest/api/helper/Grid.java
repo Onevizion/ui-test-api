@@ -411,16 +411,4 @@ public class Grid {
         Assert.assertEquals(js.isGridColumnHidden(gridIndex, columnIndex).booleanValue(), true, "Grid column with index=[" + columnIndex + "] is displayed");
     }
 
-    public void goToNextPage(Long gridIdx) {
-        if (seleniumSettings.getWebDriver().findElement(By.id(NEXT_BUTTON_ID + gridIdx)).isEnabled()) {
-            seleniumSettings.getWebDriver().findElement(By.id(NEXT_BUTTON_ID + gridIdx)).click();
-        }
-    }
-
-    public void goToPrevPage(Long gridIdx) {
-        if (seleniumSettings.getWebDriver().findElement(By.id(PREV_BUTTON_ID + gridIdx)).isEnabled()) {
-            seleniumSettings.getWebDriver().findElement(By.id(PREV_BUTTON_ID + gridIdx)).click();
-        }
-    }
-
 }
