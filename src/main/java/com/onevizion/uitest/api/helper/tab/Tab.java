@@ -40,6 +40,7 @@ public class Tab {
     }
 
     public String getTabLabel(Long tabIndex) {
+        String tabPrefix = seleniumSettings.getWebDriver().findElement(By.id("tabPrefix" + tabIndex.intValue())).getAttribute("textContent");
         String tabLabel = seleniumSettings.getWebDriver().findElement(By.id("tabLabel" + tabIndex.intValue())).getAttribute("textContent");
         String tabRows = "";
 
@@ -50,7 +51,7 @@ public class Tab {
             tabRows = " (" + seleniumSettings.getWebDriver().findElement(By.id("tabRows" + tabIndex.intValue())).getAttribute("textContent") + ")";
         }
 
-        return tabLabel + tabRows;
+        return tabPrefix + tabLabel + tabRows;
     }
 
     public Long getTabIndex(String tabLabel) {
