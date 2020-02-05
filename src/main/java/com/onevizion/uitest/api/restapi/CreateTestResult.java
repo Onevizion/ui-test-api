@@ -80,7 +80,7 @@ public class CreateTestResult {
 
     public void update(String trackorKey, String testStatus, String testResultNode, String errorLog, String errorReport, String errorCallstack, String errorScreenshot) {
         try {
-            URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=\"" + trackorKey + "\"");
+            URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=%22" + trackorKey + "%22");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");

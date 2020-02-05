@@ -40,17 +40,25 @@ public class Tab {
     }
 
     public String getTabLabel(Long tabIndex) {
-        String tabLabel = seleniumSettings.getWebDriver().findElement(By.id("tabLabel" + tabIndex.intValue())).getAttribute("textContent");
-        String tabRows = "";
-
+        String tabPrefix = "";
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id("tabRows" + tabIndex.intValue())).size();
+        int tabPrefixCount = seleniumSettings.getWebDriver().findElements(By.id("tabPrefix" + tabIndex.intValue())).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        if (count > 0) {
+        if (tabPrefixCount > 0) {
+            tabPrefix = seleniumSettings.getWebDriver().findElement(By.id("tabPrefix" + tabIndex.intValue())).getAttribute("textContent");
+        }
+
+        String tabLabel = seleniumSettings.getWebDriver().findElement(By.id("tabLabel" + tabIndex.intValue())).getAttribute("textContent");
+
+        String tabRows = "";
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int tabRowsCount = seleniumSettings.getWebDriver().findElements(By.id("tabRows" + tabIndex.intValue())).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if (tabRowsCount > 0) {
             tabRows = " (" + seleniumSettings.getWebDriver().findElement(By.id("tabRows" + tabIndex.intValue())).getAttribute("textContent") + ")";
         }
 
-        return tabLabel + tabRows;
+        return tabPrefix + tabLabel + tabRows;
     }
 
     public Long getTabIndex(String tabLabel) {

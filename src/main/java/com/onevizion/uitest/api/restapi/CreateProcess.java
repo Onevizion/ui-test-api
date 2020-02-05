@@ -61,7 +61,7 @@ public class CreateProcess {
 
     public static void updateTestsCount(String restApiUrl, String restApiCredential, String processTrackorKey, int testsCount) {
         try {
-            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=\"" + processTrackorKey + "\"");
+            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=%22" + processTrackorKey + "%22");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
@@ -91,7 +91,7 @@ public class CreateProcess {
 
     public static void update(String restApiUrl, String restApiCredential, String processTrackorKey) {
         try {
-            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=\"" + processTrackorKey + "\"");
+            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=%22" + processTrackorKey + "%22");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
@@ -121,7 +121,7 @@ public class CreateProcess {
 
     public static void updateBrowserVersion(String restApiUrl, String restApiCredential, String processTrackorKey, String browserVersion) {
         try {
-            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=\"" + processTrackorKey + "\"");
+            URL url = new URL(restApiUrl + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=%22" + processTrackorKey + "%22");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
