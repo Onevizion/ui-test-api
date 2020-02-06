@@ -29,6 +29,9 @@ import com.onevizion.uitest.api.vo.ListboxElement;
 @Component
 public class View {
 
+    public static final String GROUP_BY_EMPTY_VALUE = "Select column for grouping";
+    public static final String GROUP_BY_DROPDOWN_ID = "groupByBox";
+
     public static final String VIEW_NAME = "TestViewOption";
     public static final String UNSAVED_VIEW_NAME = "Unsaved View";
     public static final String GENERAL_INFO_VIEW_NAME = "G:General Info";
