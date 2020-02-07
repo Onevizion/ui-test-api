@@ -29,13 +29,9 @@ public class GridGroup {
     @Resource
     private GridGroupJs gridGroupJs;
 
-    public void checkGridIsGrouped(Long gridIdx, String columnLabel) {
+    public void checkGridIsGrouped(Long gridIdx) {
         int count = getGroups(gridIdx).size();
         Assert.assertEquals(count > 0, true, "Grid is not grouped");
-
-        String groupText = getGroups(gridIdx).get(0).getAttribute("innerText");
-        groupText = groupText.substring(0, groupText.lastIndexOf(": ")).trim();
-        Assert.assertEquals(groupText, columnLabel, "Grid not grouped by column [" + columnLabel + "]");
     }
 
     public void checkGridIsUngrouped(Long gridIdx) {
@@ -46,6 +42,11 @@ public class GridGroup {
     public void checkGroupsCount(Long gridIdx, int groupsCount) {
         int count = getGroups(gridIdx).size();
         Assert.assertEquals(count, groupsCount, "Wrong groups count");
+    }
+
+    public void checkGroupLabel(Long gridIdx, int position, String groupLabel) {
+        String actualGroupLabel = getGroups(gridIdx).get(position - 1).getAttribute("innerText").trim();
+        Assert.assertEquals(actualGroupLabel, groupLabel, "Wrong group label");
     }
 
     private List<WebElement> getGroups(Long gridIdx) {
