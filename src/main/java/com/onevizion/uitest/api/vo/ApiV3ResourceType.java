@@ -4,6 +4,7 @@ public enum ApiV3ResourceType {
 
     CHATS("chats"),
     EXPORTS("exports"),
+    FIELD_COLORS("field-colors"),
     FILES("files"),
     FILTERS("filters"),
     IMPORTS("imports"),
