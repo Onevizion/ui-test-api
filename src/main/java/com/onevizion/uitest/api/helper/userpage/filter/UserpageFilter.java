@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -92,6 +94,7 @@ public class UserpageFilter {
         filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
 
         selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + 1), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
+
         if (dateTypes != null) {
             List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER_TASK + 1))).getOptions();
             Assert.assertEquals(options.size(), dateTypes.size());
@@ -99,7 +102,12 @@ public class UserpageFilter {
                 Assert.assertEquals(options.get(i).getText(), dateTypes.get(i));
             }
         }
+
         List<WebElement> options = new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + 1))).getOptions();
+        options = options.stream()
+                .filter(option -> !FilterOperatorType.FIELD_LOCK.getValue().equals(option.getText()))
+                .filter(option -> !FilterOperatorType.FIELD_UNLOCK.getValue().equals(option.getText()))
+                .collect(Collectors.toList());
         Assert.assertEquals(options.size(), operators.size());
         for (int i = 0; i < operators.size(); i++) {
             Assert.assertEquals(options.get(i).getText(), operators.get(i).getValue());
@@ -272,6 +280,24 @@ public class UserpageFilter {
         checkGridColumnMultiTrackorSelectorIsNotNew(AbstractSeleniumCore.getGridIdx(), fieldName, oldTrackors);
 
         checkAndClearFilter(fieldName, FilterOperatorType.NOT_NEW, randomIndex);
+    }
+
+    public void checkFilterIsFieldLocked(String fieldName, String trackorFieldName, List<String> trackorCellVals, List<String> trackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.FIELD_LOCK);
+
+        checkGridRowsCountIsFieldLocked(trackorCellVals, trackors);
+        checkGridColumnIsNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.FIELD_LOCK, randomIndex);
+    }
+
+    public void checkFilterIsFieldUnlocked(String fieldName, String trackorFieldName, List<String> trackorCellVals, List<String> trackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.FIELD_UNLOCK);
+
+        checkGridRowsCountIsFieldUnlocked(trackorCellVals, trackors);
+        checkGridColumnIsNotNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.FIELD_UNLOCK, randomIndex);
     }
 
     @SuppressWarnings("unchecked")
@@ -1611,6 +1637,26 @@ public class UserpageFilter {
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
                     oldTrackors.stream().anyMatch(s -> cellVal.contains(s))) {
+                cnt = cnt + 1L;
+            }
+        }
+        Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
+    }
+
+    private void checkGridRowsCountIsFieldLocked(List<String> trackorCellVals, List<String> trackors) {
+        Long cnt = 0L;
+        for (String trackorCellVal : trackorCellVals) {
+            if (trackors.contains(trackorCellVal)) {
+                cnt = cnt + 1L;
+            }
+        }
+        Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
+    }
+
+    private void checkGridRowsCountIsFieldUnlocked(List<String> trackorCellVals, List<String> trackors) {
+        Long cnt = 0L;
+        for (String trackorCellVal : trackorCellVals) {
+            if (!trackors.contains(trackorCellVal)) {
                 cnt = cnt + 1L;
             }
         }
