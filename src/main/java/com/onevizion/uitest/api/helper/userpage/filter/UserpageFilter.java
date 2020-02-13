@@ -107,6 +107,8 @@ public class UserpageFilter {
         options = options.stream()
                 .filter(option -> !FilterOperatorType.FIELD_LOCK.getValue().equals(option.getText()))
                 .filter(option -> !FilterOperatorType.FIELD_UNLOCK.getValue().equals(option.getText()))
+                .filter(option -> !FilterOperatorType.RELATION_LOCK.getValue().equals(option.getText()))
+                .filter(option -> !FilterOperatorType.RELATION_UNLOCK.getValue().equals(option.getText()))
                 .collect(Collectors.toList());
         Assert.assertEquals(options.size(), operators.size());
         for (int i = 0; i < operators.size(); i++) {
@@ -298,6 +300,24 @@ public class UserpageFilter {
         checkGridColumnIsNotNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
 
         checkAndClearFilter(fieldName, FilterOperatorType.FIELD_UNLOCK, randomIndex);
+    }
+
+    public void checkFilterIsRelationLocked(String fieldName, String trackorFieldName, List<String> trackorCellVals, List<String> trackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.RELATION_LOCK);
+
+        checkGridRowsCountIsFieldLocked(trackorCellVals, trackors);
+        checkGridColumnIsNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.RELATION_LOCK, randomIndex);
+    }
+
+    public void checkFilterIsRelationUnlocked(String fieldName, String trackorFieldName, List<String> trackorCellVals, List<String> trackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.RELATION_UNLOCK);
+
+        checkGridRowsCountIsFieldUnlocked(trackorCellVals, trackors);
+        checkGridColumnIsNotNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.RELATION_UNLOCK, randomIndex);
     }
 
     @SuppressWarnings("unchecked")
