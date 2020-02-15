@@ -320,6 +320,14 @@ public class UserpageFilter {
         checkAndClearFilter(fieldName, FilterOperatorType.RELATION_UNLOCK, randomIndex);
     }
 
+    public void checkFilterHasComments(String fieldName, Long expectedRowsCnt) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.HAS_COMMENTS);
+
+        Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), expectedRowsCnt, "Grid have wrong rows count");
+
+        checkAndClearFilter(fieldName, FilterOperatorType.HAS_COMMENTS, randomIndex);
+    }
+
     @SuppressWarnings("unchecked")
     public void checkFilterTrackorSelectorByText(String fieldName, FilterOperatorType operator, String value, Long columnIndex, List<String> cellVals, List<String> ... cellValsKeys) {
         Long rowsCntBefore = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
