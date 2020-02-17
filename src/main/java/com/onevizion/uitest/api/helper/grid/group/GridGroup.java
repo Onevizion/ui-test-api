@@ -73,6 +73,8 @@ public class GridGroup {
             }
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldType)) {
             return gridGroupJs.getGroupId(gridIdx, group);
+        } else if (group.toLowerCase().equals("undefined")) {
+            return " ";
         } else {
             return group;
         }
