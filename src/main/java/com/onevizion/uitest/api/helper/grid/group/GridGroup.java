@@ -65,7 +65,9 @@ public class GridGroup {
     }
 
     private String getGroupId(Long gridIdx, ConfigFieldType configFieldType, String group) {
-        if (ConfigFieldType.CHECKBOX.equals(configFieldType)) {
+        if (group.toLowerCase().equals("undefined")) {
+            return " ";
+        } else if (ConfigFieldType.CHECKBOX.equals(configFieldType)) {
             if ("Yes".equals(group)) {
                 return "1";
             } else {
@@ -73,8 +75,6 @@ public class GridGroup {
             }
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldType)) {
             return gridGroupJs.getGroupId(gridIdx, group);
-        } else if (group.toLowerCase().equals("undefined")) {
-            return " ";
         } else {
             return group;
         }
