@@ -8,7 +8,7 @@ public enum RuleTypeType {
     EFILE_BLOB_DATA_UPDATE("EFile BLOB_DATA Updated (After)"),
     BY_TIME_HOURLY("Execute Hourly"),
     BY_TIME_MIDNIGHT("Execute Nightly"),
-    CONFIG_FIELD_UPDATE("Field Updated (After)"),
+    FIELD_UPDATE("Field Updated (After)"),
     IMPORT_COMPLETE("Import Completed (After)"),
     IMPORT_START("Import Started (After)"),
     RELATION_CREATE("Relation Created (After)"),
