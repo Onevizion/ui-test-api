@@ -34,7 +34,7 @@ public enum ApiV3EndpointType {
     LOCKS_READ_FOR_TRACKORS("GET", "/v3/trackor_types/{trackor_type}/trackors/locks", "Read locks by Trackor Type and Trackor ids"),
     LOCKS_READ_FOR_TRACKOR("GET", "/v3/trackors/{trackor_id}/locks", "Read locks by Trackor id"),
 
-    OPTIONS_READ("GET", "/v3/trackors/{trackor_id}/options/{field_name}", "Read Config Field options"),
+    OPTIONS_READ("GET", "/v3/trackors/{trackor_id}/options/{field_name}", "Read Field options"),
 
     PARAMS_READ_PROGRAM_PARAM("GET", "/v3/params/program/{param_name}", "Read Program Parameter"),
     PARAMS_READ_SYSTEM_PARAM("GET", "/v3/params/system/{param_name}", "Read System Parameter"),
@@ -53,7 +53,7 @@ public enum ApiV3EndpointType {
     TASKS_UPDATE_TASK_PART_BY_WP_ID("PATCH", "/v3/wps/{workplan_id}/tasks", "Update Task Partial by Workplan id"),
     TASKS_UPDATE_TASK_FULL("PUT", "/v3/tasks/{task_id}", "Update Task"),
 
-    TRACKOR_TYPE_SPECS_READ_FIELDS("GET", "/v3/trackor_types/{trackor_type}", "Read Config Fields specs"),
+    TRACKOR_TYPE_SPECS_READ_FIELDS("GET", "/v3/trackor_types/{trackor_type}", "Read Fields specs"),
     TRACKOR_TYPE_SPECS_READ_TAB("GET", "/v3/trackor_types/applets/{applet_id}/tabs/{tab_id}", "Read Tab spec"),
     TRACKOR_TYPE_SPECS_READ_TABS("GET", "/v3/trackor_types/{trackor_type}/applets/{applet_id}/tabs", "Read Tabs specs"),
     TRACKOR_TYPE_SPECS_READ_APPLET("GET", "/v3/trackor_types/{trackor_type}/applets/{applet_id}", "Read Applet spec"),

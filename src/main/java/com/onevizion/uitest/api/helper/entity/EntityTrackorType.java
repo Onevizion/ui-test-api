@@ -208,7 +208,7 @@ public class EntityTrackorType {
         gridVals.put(js.getColumnIndexByLabel(gridId, "\"Class\" Label"), trackorType.getLabelClass());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Is ePM User?"), trackorType.getUser());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Can be a Template"), trackorType.getTemplate());
-        gridVals.put(js.getColumnIndexByLabel(gridId, "Enable Comments"), trackorType.getComments());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Enable Chat"), trackorType.getComments());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

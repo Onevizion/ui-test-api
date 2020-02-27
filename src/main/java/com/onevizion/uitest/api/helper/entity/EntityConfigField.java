@@ -1359,37 +1359,37 @@ public class EntityConfigField {
         }
 
         if (ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldText().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldText().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldText().getValidationEnabled());
         } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldNumber().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldNumber().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldNumber().getValidationEnabled());
         } else if (ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldDate().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldDate().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldDate().getValidationEnabled());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldMemo().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldMemo().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldMemo().getValidationEnabled());
         } else if (ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldWiki().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldWiki().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldWiki().getValidationEnabled());
         } else if (ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldHyperlink().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldHyperlink().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldHyperlink().getValidationEnabled());
         } else if (ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldLongitude().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldLongitude().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldLongitude().getValidationEnabled());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldLatitude().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldLatitude().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldLatitude().getValidationEnabled());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldDateTime().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldDateTime().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldDateTime().getValidationEnabled());
         } else if (ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), configFieldVo.getConfigFieldTime().getValidation());
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), configFieldVo.getConfigFieldTime().getValidation());
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), configFieldVo.getConfigFieldTime().getValidationEnabled());
         } else {
-            gridVals.put(js.getColumnIndexByLabel(gridId, "Config Field Validation"), "");
+            gridVals.put(js.getColumnIndexByLabel(gridId, "Field Validation"), "");
             gridVals.put(js.getColumnIndexByLabel(gridId, "Is Validation Enabled?"), "NO");
         }
 

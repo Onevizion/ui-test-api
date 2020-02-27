@@ -23,10 +23,10 @@ public class SecurityRoleDefaultPrivs {
     private String chatCommentE;
     private String chatCommentA;
     private String chatCommentD;
-    private String configuredAppletR;
-    private String configuredAppletE;
-    private String configuredTabR;
-    private String configuredTabE;
+    private String appletR;
+    private String appletE;
+    private String tabR;
+    private String tabE;
     private String dashboardR;
     private String dashboardE;
     private String dataIngestionR;
@@ -178,20 +178,20 @@ public class SecurityRoleDefaultPrivs {
         return chatCommentD;
     }
 
-    public String getConfiguredAppletR() {
-        return configuredAppletR;
+    public String getAppletR() {
+        return appletR;
     }
 
-    public String getConfiguredAppletE() {
-        return configuredAppletE;
+    public String getAppletE() {
+        return appletE;
     }
 
-    public String getConfiguredTabR() {
-        return configuredTabR;
+    public String getTabR() {
+        return tabR;
     }
 
-    public String getConfiguredTabE() {
-        return configuredTabE;
+    public String getTabE() {
+        return tabE;
     }
 
     public String getDashboardR() {
@@ -484,10 +484,10 @@ public class SecurityRoleDefaultPrivs {
                     SecurityRoleDefaultPrivs.this.chatCommentE == null ||
                     SecurityRoleDefaultPrivs.this.chatCommentA == null ||
                     SecurityRoleDefaultPrivs.this.chatCommentD == null ||
-                    SecurityRoleDefaultPrivs.this.configuredAppletR == null ||
-                    SecurityRoleDefaultPrivs.this.configuredAppletE == null ||
-                    SecurityRoleDefaultPrivs.this.configuredTabR == null ||
-                    SecurityRoleDefaultPrivs.this.configuredTabE == null ||
+                    SecurityRoleDefaultPrivs.this.appletR == null ||
+                    SecurityRoleDefaultPrivs.this.appletE == null ||
+                    SecurityRoleDefaultPrivs.this.tabR == null ||
+                    SecurityRoleDefaultPrivs.this.tabE == null ||
                     SecurityRoleDefaultPrivs.this.dashboardR == null ||
                     SecurityRoleDefaultPrivs.this.dashboardE == null ||
                     SecurityRoleDefaultPrivs.this.dataIngestionR == null ||
@@ -654,23 +654,23 @@ public class SecurityRoleDefaultPrivs {
             return this;
         }
 
-        public Builder setConfiguredAppletR(String configuredAppletR) {
-            SecurityRoleDefaultPrivs.this.configuredAppletR = configuredAppletR;
+        public Builder setAppletR(String appletR) {
+            SecurityRoleDefaultPrivs.this.appletR = appletR;
             return this;
         }
 
-        public Builder setConfiguredAppletE(String configuredAppletE) {
-            SecurityRoleDefaultPrivs.this.configuredAppletE = configuredAppletE;
+        public Builder setAppletE(String appletE) {
+            SecurityRoleDefaultPrivs.this.appletE = appletE;
             return this;
         }
 
-        public Builder setConfiguredTabR(String configuredTabR) {
-            SecurityRoleDefaultPrivs.this.configuredTabR = configuredTabR;
+        public Builder setTabR(String tabR) {
+            SecurityRoleDefaultPrivs.this.tabR = tabR;
             return this;
         }
 
-        public Builder setConfiguredTabE(String configuredTabE) {
-            SecurityRoleDefaultPrivs.this.configuredTabE = configuredTabE;
+        public Builder setTabE(String tabE) {
+            SecurityRoleDefaultPrivs.this.tabE = tabE;
             return this;
         }
 
