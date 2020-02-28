@@ -8,18 +8,18 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class MapperWait {
+class MapWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
     @Resource
-    private MapperJs mapperJs;
+    private MapJs mapJs;
 
     public void waitIsMapLoaded() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Map loading is failed")
-            .until(webdriver -> mapperJs.isMapLoaded());
+            .until(webdriver -> mapJs.isMapLoaded());
     }
 
 }

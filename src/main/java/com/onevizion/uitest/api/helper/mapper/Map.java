@@ -8,7 +8,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.ElementWait;
 
 @Component
-public class Mapper {
+public class Map {
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -17,11 +17,11 @@ public class Mapper {
     private ElementWait elementWait;
 
     @Resource
-    protected MapperWait mapperWait;
+    protected MapWait mapWait;
 
     public void loadMap() {
         elementWait.waitElementNotDisplayById("processing");
-        mapperWait.waitIsMapLoaded();
+        mapWait.waitIsMapLoaded();
     }
 
 }
