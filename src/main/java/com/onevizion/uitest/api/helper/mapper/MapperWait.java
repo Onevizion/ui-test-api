@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class MapperWait {
+class MapperWait {
 
     @Resource
     private SeleniumSettings seleniumSettings;
