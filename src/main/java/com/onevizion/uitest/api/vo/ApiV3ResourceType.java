@@ -2,6 +2,7 @@ package com.onevizion.uitest.api.vo;
 
 public enum ApiV3ResourceType {
 
+    AUTH_TOKEN("auth-token"),
     CHATS("chats"),
     EXPORTS("exports"),
     FIELD_COLORS("field-colors"),
