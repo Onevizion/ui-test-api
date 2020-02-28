@@ -102,6 +102,8 @@ import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
+import com.onevizion.uitest.api.helper.mapper.Mapper;
+import com.onevizion.uitest.api.helper.mapper.MapperWait;
 import com.onevizion.uitest.api.helper.notification.Notification;
 import com.onevizion.uitest.api.helper.portal.Portal;
 import com.onevizion.uitest.api.helper.tab.Tab;
@@ -296,6 +298,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected GridGroup gridGroup;
+
+    @Resource
+    protected Mapper mapper;
+
+    @Resource
+    protected MapperWait mapperWait;
     /* Helpers End */
 
     /* Entity Helpers Begin */
