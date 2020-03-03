@@ -15,7 +15,11 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementJs;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
+import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.vo.DashAxisType;
 import com.onevizion.uitest.api.vo.DashColumn;
 import com.onevizion.uitest.api.vo.DashColumnCalcMethodType;
@@ -40,6 +44,36 @@ public class Dashboard {
 
     @Resource
     private Js js;
+
+    @Resource
+    private ElementWait elementWait;
+
+    @Resource
+    private Wait wait;
+
+    @Resource
+    private Window window;
+
+    @Resource
+    private Jquery jquery;
+
+    public void openAddDashboardForm() {
+        seleniumSettings.getWebDriver().findElement(By.id("new_lbDashboard")).click();
+        elementWait.waitElementById("new_rows_lbDashboard");
+        elementWait.waitElementVisibleById("new_rows_lbDashboard");
+        elementWait.waitElementDisplayById("new_rows_lbDashboard");
+
+        window.openModal(By.id("btnAddDashboard"));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void closeAddDashboardFormOk() {
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+
+        jquery.waitLoad();
+        waitDashboardLoad();
+    }
 
     public String getDashletXAxisLabel(int dashletIdx) {
         return seleniumSettings.getWebDriver().findElements(By.className("lm_stack")).get(dashletIdx).findElement(By.className("highcharts-xaxis")).getAttribute("textContent");
