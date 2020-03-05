@@ -102,7 +102,7 @@ import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
-import com.onevizion.uitest.api.helper.mapper.Map;
+import com.onevizion.uitest.api.helper.map.Map;
 import com.onevizion.uitest.api.helper.notification.Notification;
 import com.onevizion.uitest.api.helper.portal.Portal;
 import com.onevizion.uitest.api.helper.tab.Tab;

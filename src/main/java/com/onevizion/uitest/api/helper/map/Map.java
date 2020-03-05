@@ -1,4 +1,4 @@
-package com.onevizion.uitest.api.helper.mapper;
+package com.onevizion.uitest.api.helper.map;
 
 import javax.annotation.Resource;
 
@@ -17,9 +17,9 @@ public class Map {
     private ElementWait elementWait;
 
     @Resource
-    protected MapWait mapWait;
+    private MapWait mapWait;
 
-    public void loadMap() {
+    public void waitLoad() {
         elementWait.waitElementNotDisplayById("processing");
         mapWait.waitIsMapLoaded();
     }

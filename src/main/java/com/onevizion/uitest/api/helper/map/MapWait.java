@@ -1,4 +1,4 @@
-package com.onevizion.uitest.api.helper.mapper;
+package com.onevizion.uitest.api.helper.map;
 
 import javax.annotation.Resource;
 
@@ -16,7 +16,7 @@ class MapWait {
     @Resource
     private MapJs mapJs;
 
-    public void waitIsMapLoaded() {
+    void waitIsMapLoaded() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Map loading is failed")
             .until(webdriver -> mapJs.isMapLoaded());
