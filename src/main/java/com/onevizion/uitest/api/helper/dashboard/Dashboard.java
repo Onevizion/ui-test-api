@@ -99,10 +99,6 @@ public class Dashboard {
         dashboardWait.waitDashboardLoad();
     }
 
-    public void waitDashletLoad() {
-        dashboardWait.waitDashletLoad();
-    }
-
     public List<String> getDashlets() {
         return dashboardJs.getDashlets();
     }
@@ -307,7 +303,8 @@ public class Dashboard {
 
     public void saveDashlet() {
         seleniumSettings.getWebDriver().findElement(By.id("ed_ok_")).click();
-        waitDashletLoad();
+
+        jquery.waitLoad();
         waitDashboardPageLoaded();
         waitDashboardLoad();
     }
