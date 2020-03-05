@@ -5,10 +5,13 @@ import java.util.function.Supplier;
 
 import javax.annotation.Resource;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.vo.LockType;
 
 @Component
@@ -19,6 +22,9 @@ class Grid2Wait {
 
     @Resource
     private Grid2Js grid2Js;
+
+    @Resource
+    private Wait wait;
 
     void waitLoadAllRows(Long gridIdx) {
         BooleanSupplier actualValueSupplier = ()-> grid2Js.isLoadAllRowsDone(gridIdx);
@@ -38,6 +44,15 @@ class Grid2Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
             .until(webdriver -> lockType.equals(actualValueSupplier.get()));
+    }
+
+    void waitSavePanelHidden(Long gridId) {
+        wait.waitWebElement(By.id("savePanel" + gridId));
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting save panel hidden is failed")
+            .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> !webdriver.findElement(By.id("savePanel" + gridId)).isDisplayed());
     }
 
 }

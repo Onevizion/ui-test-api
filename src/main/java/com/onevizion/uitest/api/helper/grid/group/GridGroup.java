@@ -18,6 +18,8 @@ import com.onevizion.uitest.api.vo.ConfigFieldType;
 @Component
 public class GridGroup {
 
+    public static final String EMPTY_GROUP_NAME = "Undefined";
+
     private static final String CLASS_GROUP = "group_row";
 
     @Resource
@@ -65,6 +67,10 @@ public class GridGroup {
     }
 
     private String getGroupId(Long gridIdx, ConfigFieldType configFieldType, String group) {
+        if (EMPTY_GROUP_NAME.equals(group)) {
+            return " ";
+        }
+
         if (ConfigFieldType.CHECKBOX.equals(configFieldType)) {
             if ("Yes".equals(group)) {
                 return "1";
