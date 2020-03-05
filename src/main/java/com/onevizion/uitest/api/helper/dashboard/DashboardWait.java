@@ -40,13 +40,4 @@ class DashboardWait {
             .until(webdriver -> !webdriver.findElement(By.id("loaderDashboard")).isDisplayed());
     }
 
-    boolean isDashletLoaderDisplayed() {
-        if (seleniumSettings.getWebDriver().findElements(By.id("loaderDashlet")).size()==1) {
-            if (seleniumSettings.getWebDriver().findElement(By.id("loaderDashlet")).isDisplayed()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
