@@ -8,7 +8,7 @@ public enum RuleTypeType {
     EFILE_BLOB_DATA_UPDATE("EFile BLOB_DATA Updated (After)"),
     BY_TIME_HOURLY("Execute Hourly"),
     BY_TIME_MIDNIGHT("Execute Nightly"),
-    CONFIG_FIELD_UPDATE("Configured Field Updated (After)"),
+    FIELD_UPDATE("Field Updated (After)"),
     IMPORT_COMPLETE("Import Completed (After)"),
     IMPORT_START("Import Started (After)"),
     RELATION_CREATE("Relation Created (After)"),
@@ -31,7 +31,9 @@ public enum RuleTypeType {
     WP_DELETE("WorkPlan Deleted (Before)"),
     WP_UPDATE("WorkPlan Updated (After)"),
     WP_TASK_UPDATE("Task Updated (After)"),
-    WP_TASK_DATE_UPDATE("Task Date Updated (After)");
+    WP_TASK_DATE_UPDATE("Task Date Updated (After)"),
+    COMMENT_CREATE_TRACKOR("Trackor Comment Created (After)"),
+    COMMENT_CREATE_TASK("Task Comment Created (After)");
 
     private String name;
 

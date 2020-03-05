@@ -43,7 +43,7 @@ public class Tree {
     }
 
     private TreeNode getNode(Long treeId, String itemId) {
-        String name = treeJs.getItemTextById(treeId, itemId);
+        String name = treeJs.getItemTextById(treeId.toString(), itemId);
         name = name.replaceAll("^<[lL][aA][bB][eE][lL].*?>", "").replaceAll("</[lL][aA][bB][eE][lL]>$", "");
 
         TreeNode tree = new TreeNode(name);
@@ -70,6 +70,10 @@ public class Tree {
     }
 
     public String getAllSubItems(Long treeId, String itemId) {
+        return getAllSubItems(treeId.toString(), itemId);
+    }
+
+    public String getAllSubItems(String treeId, String itemId) {
         return treeJs.getAllSubItems(treeId, itemId);
     }
 
@@ -78,6 +82,10 @@ public class Tree {
     }
 
     public String getItemTextById(Long treeId, String itemId) {
+        return getItemTextById(treeId.toString(), itemId);
+    }
+
+    public String getItemTextById(String treeId, String itemId) {
         return treeJs.getItemTextById(treeId, itemId);
     }
 

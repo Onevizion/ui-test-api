@@ -1,6 +1,7 @@
 package com.onevizion.uitest.api.helper.tab;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
@@ -35,12 +36,29 @@ public class Tab {
 
         List<WebElement> tabs = seleniumSettings.getWebDriver().findElement(By.id("formMenuTree")).findElement(By.className("scrollContent")).findElements(By.className("newGuiMenuRowContainer"));
         WebElement tab = tabs.get(tabIndex.intValue() - 1);
-        WebElement tabLabel = tab.findElement(By.className("menuItemWidthWrapper"));
-        tabLabel.click();
+        tab.click();
     }
 
     public String getTabLabel(Long tabIndex) {
-        return seleniumSettings.getWebDriver().findElement(By.name("tabLbl" + tabIndex.intValue())).getAttribute("textContent");
+        String tabPrefix = "";
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int tabPrefixCount = seleniumSettings.getWebDriver().findElements(By.id("tabPrefix" + tabIndex.intValue())).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if (tabPrefixCount > 0) {
+            tabPrefix = seleniumSettings.getWebDriver().findElement(By.id("tabPrefix" + tabIndex.intValue())).getAttribute("textContent");
+        }
+
+        String tabLabel = seleniumSettings.getWebDriver().findElement(By.id("tabLabel" + tabIndex.intValue())).getAttribute("textContent");
+
+        String tabRows = "";
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int tabRowsCount = seleniumSettings.getWebDriver().findElements(By.id("tabRows" + tabIndex.intValue())).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if (tabRowsCount > 0) {
+            tabRows = " (" + seleniumSettings.getWebDriver().findElement(By.id("tabRows" + tabIndex.intValue())).getAttribute("textContent") + ")";
+        }
+
+        return tabPrefix + tabLabel + tabRows;
     }
 
     public Long getTabIndex(String tabLabel) {

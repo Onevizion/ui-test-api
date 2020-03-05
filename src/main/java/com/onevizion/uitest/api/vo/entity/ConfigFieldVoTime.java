@@ -6,6 +6,8 @@ public class ConfigFieldVoTime {
 
     private String defValueSql;
     private String showSeconds;
+    private String validation;
+    private String validationEnabled;
 
     private ConfigFieldVoTime() {
         
@@ -23,6 +25,14 @@ public class ConfigFieldVoTime {
         return showSeconds;
     }
 
+    public String getValidation() {
+        return validation;
+    }
+
+    public String getValidationEnabled() {
+        return validationEnabled;
+    }
+
     public class Builder {
 
         private Builder() {
@@ -31,7 +41,9 @@ public class ConfigFieldVoTime {
 
         public ConfigFieldVoTime build() {
             if (ConfigFieldVoTime.this.defValueSql == null ||
-                    ConfigFieldVoTime.this.showSeconds == null) {
+                    ConfigFieldVoTime.this.showSeconds == null ||
+                    ConfigFieldVoTime.this.validation == null ||
+                    ConfigFieldVoTime.this.validationEnabled == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return ConfigFieldVoTime.this;
@@ -44,6 +56,16 @@ public class ConfigFieldVoTime {
 
         public Builder setShowSeconds(String showSeconds) {
             ConfigFieldVoTime.this.showSeconds = showSeconds;
+            return this;
+        }
+
+        public Builder setValidation(String validation) {
+            ConfigFieldVoTime.this.validation = validation;
+            return this;
+        }
+
+        public Builder setValidationEnabled(String validationEnabled) {
+            ConfigFieldVoTime.this.validationEnabled = validationEnabled;
             return this;
         }
 

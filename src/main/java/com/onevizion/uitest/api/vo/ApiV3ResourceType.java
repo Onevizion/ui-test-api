@@ -2,7 +2,10 @@ package com.onevizion.uitest.api.vo;
 
 public enum ApiV3ResourceType {
 
+    AUTH_TOKEN("auth-token"),
+    CHATS("chats"),
     EXPORTS("exports"),
+    FIELD_COLORS("field-colors"),
     FILES("files"),
     FILTERS("filters"),
     IMPORTS("imports"),
@@ -15,6 +18,7 @@ public enum ApiV3ResourceType {
     PRIVILEGES("privileges"),
     PROGRAMS("programs"),
     REPORTS("reports"),
+    SECURITY_ROLES("security-roles"),
     TASKS("tasks"),
     TRACKOR_TYPE_SPECS("trackor-type-specs"),
     TRACKOR_TYPES_TREE("trackor-types-tree"),

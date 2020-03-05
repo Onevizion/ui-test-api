@@ -33,7 +33,12 @@ public enum FilterOperatorType {
     THIS_WK_TO_DT("This Wk to Dt", "this_week_to_date"),
     THIS_MO_TO_DT("This Mo to Dt", "this_month_to_date"),
     THIS_FQ_TO_DT("This FQ to Dt", "this_quarter_to_date"),
-    THIS_FY_TO_DT("This FY to Dt", "this_year_to_date");
+    THIS_FY_TO_DT("This FY to Dt", "this_year_to_date"),
+    FIELD_LOCK("Is Field Locked", "field_locked"),
+    FIELD_UNLOCK("Is Field Unlocked", "field_unlocked"),
+    RELATION_LOCK("Is Relation Locked", "relation_locked"),
+    RELATION_UNLOCK("Is Relation Unlocked", "relation_unlocked"),
+    HAS_COMMENTS("Has Comments", "has_comments");
 
     private String value;
     private String valueApiV3;

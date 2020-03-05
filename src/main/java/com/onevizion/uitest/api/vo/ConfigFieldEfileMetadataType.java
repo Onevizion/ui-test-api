@@ -18,7 +18,9 @@ public enum ConfigFieldEfileMetadataType {
     FOCAL_LENGTH("Focal Length"),
     COLOR_SPACE("Color Space"),
     FILE_TYPE("File Type"),
-    VIDEO_DURATION("Video Duration(seconds)");
+    VIDEO_DURATION("Video Duration(seconds)"),
+    AZIMUTH_ANGLE("Azimuth Angle"),
+    IS_TRUE_NORTH_AZIMUTH("Is True North Azimuth");
 
     private String label;
 

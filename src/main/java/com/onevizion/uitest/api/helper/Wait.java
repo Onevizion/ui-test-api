@@ -111,6 +111,14 @@ public class Wait {
             .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed());
     }
 
+    public void waitPreviewLoad() {
+        waitWebElement(By.id(AbstractSeleniumCore.LOADING_PREVIEW_ID_BASE));
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for preview is failed.")
+            .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_PREVIEW_ID_BASE)).isDisplayed());
+    }
+
     public void waitAlert() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Timed out after " + seleniumSettings.getDefaultTimeout() + " seconds waiting for alert.")
@@ -212,7 +220,7 @@ public class Wait {
     public void waitTabLoad(final Long tabIndex) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0"));
+            .until(webdriver -> "2".equals(webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loadingstate")));
     }
 
     public void waitConfigTabLoad(String tabLabel) {
@@ -224,9 +232,7 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
             .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("innerHTML").contains("Loading Tab. Please wait..."));
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loaded").equals("0"));
+        waitTabLoad(tabIndex);
     }
 
     public void waitGridRowEditorLoad() {

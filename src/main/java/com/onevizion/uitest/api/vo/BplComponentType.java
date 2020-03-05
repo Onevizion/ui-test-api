@@ -4,7 +4,7 @@ public enum BplComponentType {
 
     APPLET("Applet", "Description"),
     FIELD("Field", "Field Name"),
-    TAB("Configured Tab", "Description"),
+    TAB("Tab", "Description"),
     VTABLE("Dynamic V_Tables", "Table Name"),
     DB_PACKAGE("DB Package", "DB Package Name"),
     FILTER("Filter", "Filter Name"),

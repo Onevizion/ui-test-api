@@ -97,9 +97,9 @@ public class EntityTrackorTour {
 
         if ("Page".equals(trackorTour.getStartPlace())) {
             selector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
-        } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
+        } else if ("Applet".equals(trackorTour.getStartPlace())) {
             selector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
-        } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
+        } else if ("Tab".equals(trackorTour.getStartPlace())) {
             selector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
@@ -142,9 +142,9 @@ public class EntityTrackorTour {
 
         if ("Page".equals(trackorTour.getStartPlace())) {
             selector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
-        } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
+        } else if ("Applet".equals(trackorTour.getStartPlace())) {
             selector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
-        } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
+        } else if ("Tab".equals(trackorTour.getStartPlace())) {
             selector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
@@ -201,9 +201,9 @@ public class EntityTrackorTour {
 
         if ("Page".equals(trackorTour.getStartPlace())) {
             assertElement.assertRadioPsSelector("gridPageName", "btngridPageName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getPageName(), 1L, true);
-        } else if ("Config Applet".equals(trackorTour.getStartPlace())) {
+        } else if ("Applet".equals(trackorTour.getStartPlace())) {
             assertElement.assertRadioPsSelector("configAppName", "btnconfigAppName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getAppletName(), 1L, true);
-        } else if ("Config Tab".equals(trackorTour.getStartPlace())) {
+        } else if ("Tab".equals(trackorTour.getStartPlace())) {
             assertElement.assertRadioPsSelector("configGroupName", "btnconfigGroupName", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorTour.getTabName(), 1L, true);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
@@ -229,8 +229,8 @@ public class EntityTrackorTour {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Tour Label"), trackorTour.getLabel());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Type"), trackorTour.getTrackorType());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Page Name"), trackorTour.getPageName());
-        gridVals.put(js.getColumnIndexByLabel(gridId, "Config App Name"), trackorTour.getAppletName());
-        gridVals.put(js.getColumnIndexByLabel(gridId, "Config Tab Name"), trackorTour.getTabName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "App Name"), trackorTour.getAppletName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Tab Name"), trackorTour.getTabName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Order Number"), trackorTour.getOrderNumber());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), trackorTour.getDescription());
 

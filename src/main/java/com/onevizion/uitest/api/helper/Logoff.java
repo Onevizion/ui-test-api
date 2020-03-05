@@ -3,7 +3,6 @@ package com.onevizion.uitest.api.helper;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -13,11 +12,18 @@ import com.onevizion.uitest.api.helper.jquery.Jquery;
 @Component
 public class Logoff {
 
+    private static final String ID_USER = "topPanelUserNameLbl";
+    private static final String ID_USERMENU = "userPopupMenu";
+    private static final String ID_USERMENU_LOGOFF = "itemLogoff";
+
     @Resource
     private Wait wait;
 
     @Resource
     private ElementWait elementWait;
+
+    @Resource
+    private Element element;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -32,23 +38,21 @@ public class Logoff {
     private Jquery jquery;
 
     public void logoff() {
-        elementWait.waitElementById("topPanelUserNameBtn");
-        elementWait.waitElementVisibleById("topPanelUserNameBtn");
-        elementWait.waitElementDisplayById("topPanelUserNameBtn");
+        elementWait.waitElementById(ID_USER);
+        elementWait.waitElementVisibleById(ID_USER);
+        elementWait.waitElementDisplayById(ID_USER);
 
-        WebElement userNameBtn = seleniumSettings.getWebDriver().findElement(By.id("topPanelUserNameBtn"));
-        userNameBtn.click();
+        element.clickById(ID_USER);
 
-        elementWait.waitElementById("userNameMenu");
-        elementWait.waitElementVisibleById("userNameMenu");
-        elementWait.waitElementDisplayById("userNameMenu");
+        elementWait.waitElementById(ID_USERMENU);
+        elementWait.waitElementVisibleById(ID_USERMENU);
+        elementWait.waitElementDisplayById(ID_USERMENU);
 
-        elementWait.waitElementById("userNameMenuItemlogoff");
-        elementWait.waitElementVisibleById("userNameMenuItemlogoff");
-        elementWait.waitElementDisplayById("userNameMenuItemlogoff");
+        elementWait.waitElementById(ID_USERMENU_LOGOFF);
+        elementWait.waitElementVisibleById(ID_USERMENU_LOGOFF);
+        elementWait.waitElementDisplayById(ID_USERMENU_LOGOFF);
 
-        WebElement logoffBtn = seleniumSettings.getWebDriver().findElement(By.id("userNameMenuItemlogoff"));
-        logoffBtn.click();
+        element.clickById(ID_USERMENU_LOGOFF);
 
         seleniumSettings.getWebDriver().switchTo().alert().accept();
 
@@ -68,15 +72,14 @@ public class Logoff {
         document.open(seleniumSettings.getServerUrl());
 
         wait.waitWebElement(By.id("mainContainer"));
-        wait.waitWebElement(By.id("Table1"));
         wait.waitWebElement(By.id("messageInfoDivContainer"));
         wait.waitWebElement(By.id("messageErrorDivContainer"));
 
-        elementWait.waitElementById("topPanelUserNameLbl");
-        elementWait.waitElementVisibleById("topPanelUserNameLbl");
-        elementWait.waitElementDisplayById("topPanelUserNameLbl");
+        elementWait.waitElementById(ID_USER);
+        elementWait.waitElementVisibleById(ID_USER);
+        elementWait.waitElementDisplayById(ID_USER);
 
-        wait.waitWebElement(By.id("userNameMenuItemlogoff"));
+        wait.waitWebElement(By.id(ID_USERMENU_LOGOFF));
 
         logoff();
     }

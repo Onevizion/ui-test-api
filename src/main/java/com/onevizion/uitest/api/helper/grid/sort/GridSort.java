@@ -270,6 +270,8 @@ public class GridSort {
                     checkColumnNumber(curVal, prevVal, sortType, columnIndex, curRowNum);
                 } else if (GridColumnType.TIMESTAMP.equals(gridColumnType)) {
                     checkColumnTimestamp(curVal, prevVal, sortType, columnIndex, curRowNum);
+                } else if (GridColumnType.TIMESTAMP_WITHOUT_SECONDS.equals(gridColumnType)) {
+                    checkColumnTimestampWithoutSeconds(curVal, prevVal, sortType, columnIndex, curRowNum);
                 } else if (GridColumnType.BOOLEAN.equals(gridColumnType)) {
                     checkColumnBoolean(curVal, prevVal, sortType, columnIndex, curRowNum);
                 } else if (GridColumnType.TEXT.equals(gridColumnType)) {
@@ -308,7 +310,29 @@ public class GridSort {
             curValDate = dateFormat.parse(curVal);
             prevValDate = dateFormat.parse(prevVal);
         } catch (ParseException e) {
-            throw new SeleniumUnexpectedException("Exception while parsing date value for [" + columnIdx + "] column. Cur row num [" + curRowNum +"] val [" + curVal + "], prev row num [" + (curRowNum - 1) + "] val [" + prevVal +"]");
+            throw new SeleniumUnexpectedException("Exception while parsing timestamp value for [" + columnIdx + "] column. Cur row num [" + curRowNum +"] val [" + curVal + "], prev row num [" + (curRowNum - 1) + "] val [" + prevVal +"]");
+        }
+
+        if (SortType.ASC.equals(sortType)) {
+            Assert.assertEquals(prevValDate.compareTo(curValDate) <= 0, true, "Sort asc for [" + columnIdx + "] column is wrong. Cur row num [" + curRowNum +"] val [" + curValDate + "], prev row num [" + (curRowNum - 1) + "] val [" + prevValDate +"]");
+        } else if (SortType.DESC.equals(sortType)) {
+            Assert.assertEquals(curValDate.compareTo(prevValDate) <= 0, true, "Sort desc for [" + columnIdx + "] column is wrong. Cur row num [" + curRowNum +"] val [" + curValDate + "], prev row num [" + (curRowNum - 1) + "] val [" + prevValDate +"]");
+        } else {
+            throw new SeleniumUnexpectedException("Not support SortType. SortType=" + sortType);
+        }
+    }
+
+    private void checkColumnTimestampWithoutSeconds(String curVal, String prevVal, SortType sortType, Long columnIdx, Long curRowNum) {
+        //TODO Date format should depend on user Settings
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+
+        Date curValDate;
+        Date prevValDate;
+        try {
+            curValDate = dateFormat.parse(curVal);
+            prevValDate = dateFormat.parse(prevVal);
+        } catch (ParseException e) {
+            throw new SeleniumUnexpectedException("Exception while parsing timestamp value for [" + columnIdx + "] column. Cur row num [" + curRowNum +"] val [" + curVal + "], prev row num [" + (curRowNum - 1) + "] val [" + prevVal +"]");
         }
 
         if (SortType.ASC.equals(sortType)) {

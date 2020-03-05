@@ -32,8 +32,8 @@ import com.onevizion.uitest.api.vo.ConfigFieldType;
 @Component
 public class Tb {
 
-    private static final String EFILE_EDIT_BUTTON = "btnEditEfile1";
-    private static final String EFILE_DELETE_BUTTON = "btnDeleteEfile1";
+    private static final String EFILE_EDIT_BUTTON = "btnEditEfile";
+    private static final String EFILE_DELETE_BUTTON = "btnDeleteEfile";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -847,11 +847,11 @@ public class Tb {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.moveToElement(gridCell);
             List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
-            if (buttons.size() == 2) {
+            if (buttons.size() == 3) {
                 gridCell.findElement(By.id(EFILE_DELETE_BUTTON)).click();
-                element.moveToElementById("btnSaveGrid" + gridIndex);
+                element.moveToElementById(AbstractSeleniumCore.BUTTON_SAVE_GRID_ID_BASE + gridIndex);
                 element.moveToElement(gridCell);
-            } else if (buttons.size() < 1 || 2 < buttons.size()) {
+            } else if (buttons.size() < 1 || 3 < buttons.size()) {
                 throw new SeleniumUnexpectedException("Wrong efile buttons size");
             }
             htmlInputFile.beforeUploadOnGrid(gridIndex);
@@ -946,9 +946,9 @@ public class Tb {
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.moveToElement(gridCell);
             List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
-            if (buttons.size() == 2) {
+            if (buttons.size() == 3) {
                 gridCell.findElement(By.id(EFILE_DELETE_BUTTON)).click();
-            } else if (buttons.size() < 1 || 2 < buttons.size()) {
+            } else if (buttons.size() < 1 || 3 < buttons.size()) {
                 throw new SeleniumUnexpectedException("Wrong efile buttons size");
             }
             gridExpVals.put(gridColumnId, "");

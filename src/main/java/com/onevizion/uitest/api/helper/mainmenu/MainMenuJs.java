@@ -7,8 +7,6 @@ import com.onevizion.uitest.api.helper.Js;
 @Component
 class MainMenuJs extends Js {
 
-    Boolean isLeftMenuSearchUpdated() {
-        return Boolean.valueOf(execJs("return leftMenuSearchUpdatedCount == 0;"));
-    }
+    
 
 }

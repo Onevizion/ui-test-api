@@ -79,7 +79,6 @@ public class Nav {
             checkCountRowsOnPage(gridIdx);
 
             goToNextPage(gridIdx, pageNum + 1);
-            grid2.waitLoad(gridIdx);
         }
 
         Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1 + (countPages - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
@@ -88,7 +87,6 @@ public class Nav {
 
         for (int pageNum = countPages; pageNum > 1; pageNum--) {
             goToPrevPage(gridIdx, pageNum - 1);
-            grid2.waitLoad(gridIdx);
 
             Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf((pageNum - 2) * actualVisibleRecordsCount + 1), "First num row in grid is wrong");
             Assert.assertEquals(getLastRowNum(gridIdx), Long.valueOf((pageNum - 1) * actualVisibleRecordsCount), "Last num row in grid is wrong");
@@ -117,8 +115,9 @@ public class Nav {
         }
     }
 
-    private void goToNextPageButton(Long gridIdx) {
+    public void goToNextPageButton(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_NEXT + gridIdx)).click();
+        grid2.waitLoad(gridIdx);
     }
 
     private void goToNextPageList(Long gridIdx, int nextPageNum) {
@@ -133,6 +132,7 @@ public class Nav {
         js.scrollNewDropDownTop("navSelect" + gridIdx, "scrollContainer", (nextPageNum - 1) * 24L + ((nextPageNum - 1) / 10) * 14L);
         elementWait.waitElementVisible(navRanges.get(nextPageNum - 1));
         navRanges.get(nextPageNum - 1).click();
+        grid2.waitLoad(gridIdx);
     }
 
     private void goToPrevPage(Long gridIdx, int prevPageNum) {
@@ -147,8 +147,9 @@ public class Nav {
         }
     }
 
-    private void goToPrevPageButton(Long gridIdx) {
+    public void goToPrevPageButton(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_PREV + gridIdx)).click();
+        grid2.waitLoad(gridIdx);
     }
 
     private void goToPrevPageList(Long gridIdx, int prevPageNum) {
@@ -163,6 +164,7 @@ public class Nav {
         js.scrollNewDropDownTop("navSelect" + gridIdx, "scrollContainer", (prevPageNum - 1) * 24L + ((prevPageNum - 1) / 10) * 14L);
         elementWait.waitElementVisible(navRanges.get(prevPageNum - 1));
         navRanges.get(prevPageNum - 1).click();
+        grid2.waitLoad(gridIdx);
     }
 
 }

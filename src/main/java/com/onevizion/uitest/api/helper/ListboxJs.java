@@ -10,4 +10,8 @@ class ListboxJs extends Js {
         execJs3("arguments[0].parentNode.parentNode.scrollTop = arguments[0].offsetTop;", webElement);
     }
 
+    Boolean isReadyListbox(String listboxId) {
+        return Boolean.valueOf(execJs("return " + listboxId + ".listBox.isReady == true;"));
+    }
+
 }

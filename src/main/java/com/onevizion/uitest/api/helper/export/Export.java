@@ -28,6 +28,8 @@ import com.onevizion.uitest.api.vo.entity.ExportRun;
 @Component
 public class Export {
 
+    private static final String BUTTON_EXPORT_ID_BASE = "btnExport";
+
     @Resource
     private Window window;
 
@@ -117,7 +119,10 @@ public class Export {
     }
 
     private void runExport(Long gridIndex, ExportMenu exportMenu, ExportRun exportRun) {
-        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click(); //TODO move AbstractSelenium.BUTTON_EXPORT_ID_BASE
+        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_GRID_OPTIONS_ID_BASE + gridIndex)).click();
+        elementWait.waitElementVisibleById(BUTTON_EXPORT_ID_BASE + gridIndex);
+        elementWait.waitElementDisplayById(BUTTON_EXPORT_ID_BASE + gridIndex);
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_EXPORT_ID_BASE + gridIndex)).click();
         elementWait.waitElementVisible(exportMenu.getRun());
         elementWait.waitElementDisplay(exportMenu.getRun());
         window.openModal(exportMenu.getRun());
@@ -158,7 +163,10 @@ public class Export {
     }
 
     private void checkExport(Long gridIndex, ExportMenu exportMenu, ExportRun exportRun) {
-        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_GRID_OPTIONS_ID_BASE + gridIndex)).click();
+        elementWait.waitElementVisibleById(BUTTON_EXPORT_ID_BASE + gridIndex);
+        elementWait.waitElementDisplayById(BUTTON_EXPORT_ID_BASE + gridIndex);
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_EXPORT_ID_BASE + gridIndex)).click();
         elementWait.waitElementVisible(exportMenu.getHistory());
         elementWait.waitElementDisplay(exportMenu.getHistory());
         window.openModal(exportMenu.getHistory());
@@ -184,7 +192,10 @@ public class Export {
     }
 
     private void deleteExport(Long gridIndex, ExportMenu exportMenu, String processId) {
-        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EXPORT_ID_BASE + gridIndex)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_GRID_OPTIONS_ID_BASE + gridIndex)).click();
+        elementWait.waitElementVisibleById(BUTTON_EXPORT_ID_BASE + gridIndex);
+        elementWait.waitElementDisplayById(BUTTON_EXPORT_ID_BASE + gridIndex);
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_EXPORT_ID_BASE + gridIndex)).click();
         elementWait.waitElementVisible(exportMenu.getHistory());
         elementWait.waitElementDisplay(exportMenu.getHistory());
         window.openModal(exportMenu.getHistory());

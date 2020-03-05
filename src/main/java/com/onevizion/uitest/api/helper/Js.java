@@ -449,10 +449,16 @@ public class Js {
         text = text.replaceAll("'", "\\\\'");
 
         return execJs2("var elem = null;"
-                + "var elements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
-                + "for (var i = 0; i < elements.length; i++) {"
-                + "    if (elements[i].innerText == '" + text +"' || elements[i].textContent == '" + text +"') {"
-                + "        elem = elements[i];"
+                + "var allElements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
+                + "var visibleElements = [];"
+                + "for (var i = 0; i < allElements.length; i++) {"
+                + "    if (!allElements[i].className.includes('hidden')) {"
+                + "        visibleElements.push(allElements[i]);"
+                + "    }"
+                + "}"
+                + "for (var i = 0; i < visibleElements.length; i++) {"
+                + "    if (visibleElements[i].innerText == '" + text +"' || visibleElements[i].textContent == '" + text +"') {"
+                + "        elem = visibleElements[i];"
                 + "        break;"
                 + "    }"
                 + "}"
@@ -463,9 +469,15 @@ public class Js {
         text = text.replaceAll("'", "\\\\'");
 
         return NumberUtils.createLong(execJs("var j = 0;"
-                + "var elements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
-                + "for (var i = 0; i < elements.length; i++) {"
-                + "    if (elements[i].innerText == '" + text +"' || elements[i].textContent == '" + text +"') {"
+                + "var allElements = document.getElementById('" + id + "').getElementsByClassName('" + containerClass + "')[0].getElementsByClassName('" + containerItemClass + "');"
+                + "var visibleElements = [];"
+                + "for (var i = 0; i < allElements.length; i++) {"
+                + "    if (!allElements[i].className.includes('hidden')) {"
+                + "        visibleElements.push(allElements[i]);"
+                + "    }"
+                + "}"
+                + "for (var i = 0; i < visibleElements.length; i++) {"
+                + "    if (visibleElements[i].innerText == '" + text +"' || visibleElements[i].textContent == '" + text +"') {"
                 + "        j = i;"
                 + "        break;"
                 + "    }"
@@ -541,6 +553,11 @@ public class Js {
                 + "return columnIdx;"));
     }
 
+    @Deprecated
+    public void setColumnLabel(Long gridId, String columnIndex, String columnLabel) {
+        execJs("gridArr['" + gridId + "'].grid.setColLabel('" + columnIndex + "', '" + columnLabel + "');");
+    }
+
     public Long getColumnFirstRowIndex(Long gridId, String columnLabel) {
         columnLabel = columnLabel.replaceAll("'", "\\\\'");
 
@@ -598,18 +615,15 @@ public class Js {
     }
 
     public void resetFormChange() {
-        //TODO firefox 59 bug
-        //https://github.com/mozilla/geckodriver/issues/1067
-        //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
         execJs("if (typeof ov !== 'undefined' && typeof ov.bFormChanged !== 'undefined') {ov.bFormChanged = false;}");
     }
 
+    public void resetCommentChange() {
+        execJs("if (typeof ov !== 'undefined' && typeof ov.unsavedComment !== 'undefined') {ov.unsavedComment = false;}");
+    }
+
     public void resetGridChange() {
-        execJs(""
-                + "var buttons = document.getElementsByClassName('btnSaveChanges');"
-                + "for (var i = 0; i < buttons.length; i++) {"
-                + "    buttons[i].classList.remove('btnSaveChanges');"
-                + "}");
+        execJs("if (typeof gridArr !== 'undefined') {for (gridIdx in gridArr) {if (typeof gridArr[gridIdx].btnSave !== 'undefined') {gridArr[gridIdx].btnSave.state.isDisabled = true;}}}");
     }
 
     public Boolean bplImportFileSubmitDone() {

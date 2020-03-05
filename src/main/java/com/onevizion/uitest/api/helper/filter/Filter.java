@@ -37,18 +37,18 @@ public class Filter {
     public static final String UNSAVED_FILTER_NAME = "Unsaved Filter";
     public static final String ALL_FILTER_NAME = "G:All";
 
-    private static final String FILTER_MAIN_ELEMENT_ID_BASE = "newDropdownFilter";
+////    private static final String FILTER_MAIN_ELEMENT_ID_BASE = "newDropdownFilter";
 
-    private static final String FILTER_SELECT = "ddFilter";
-    private static final String FILTER_CONTAINER = "ddFilterContainer";
-    private static final String FILTER_SEARCH = "ddFilterSearch";
-    private static final String BUTTON_CLEAR_SEARCH = "ddFilterClearSearch";
-    private static final String BUTTON_ORGANIZE = "ddFilterBtnOrganize";
+////    private static final String FILTER_SELECT = "ddFilter";
+////    private static final String FILTER_CONTAINER = "ddFilterContainer";
+    private static final String FILTER_SEARCH = "search_filterSearch";
+    private static final String BUTTON_CLEAR_SEARCH = "clear_search_filterSearch";
+    private static final String BUTTON_ORGANIZE = "filterOrganizeButton";
 
-    private static final String BUTTON_OPEN = "btnFilter";
+////    private static final String BUTTON_OPEN = "btnFilter";
     private static final String FIELD_FILTER_NAME = "txtFilterName";
-    private static final String BUTTON_SAVE = "unsavedFilterIcon";
-    private static final String UNSAVED_FILTER = "unsavedFilterId";
+    private static final String BUTTON_SAVE = "unsavedFilter";
+////    private static final String UNSAVED_FILTER = "unsavedFilterId";
 
     private static final String FILTER_DIALOG_CONTAINER = "dialogFilterDialogContainer";
     private static final String FILTER_DIALOG_OK = "filterDialogOk";
@@ -63,6 +63,18 @@ public class Filter {
     private static final String FILTER_TYPE = "lbFilterType";
 
     private static final String BUTTON_CLEAR = "btnClear";
+
+
+
+
+
+    private static final String ID_MAIN_BUTTON = "viewFilterDropDown";
+    private static final String ID_MAIN_PANEL = "viewFilterPopup";
+    private static final String ID_APPLY_BUTTON = "applyVFTerminal";
+    private static final String ID_EDIT_BUTTON = "filterEditButton";
+    private static final String ID_CURRENT_NAME = "filterCaption";
+    private static final String ID_TREE = "filterTree";
+    private static final String CLASS_TREE_ITEM = "item_tree";
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -103,31 +115,72 @@ public class Filter {
     @Resource
     private Grid2 grid2;
 
-    public void checkIsExistFilterControl(Long gridIdx, boolean isExist) {
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id(FILTER_MAIN_ELEMENT_ID_BASE + gridIdx)).size();
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    public void openMainPanel(Long gridIdx) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL + gridIdx);
+    }
 
+    public void closeMainPanel(Long gridIdx) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
+        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL + gridIdx);
+        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL + gridIdx);
+    }
+
+    public void checkIsExistFilterControl(Long gridIdx, boolean isExist) {
         boolean actualIsExist;
+
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(ID_CURRENT_NAME + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         if (count > 0) {
             actualIsExist = true;
         } else {
             actualIsExist = false;
         }
+        Assert.assertEquals(actualIsExist, isExist);
 
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        count = seleniumSettings.getWebDriver().findElements(By.id(ID_TREE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if (count > 0) {
+            actualIsExist = true;
+        } else {
+            actualIsExist = false;
+        }
         Assert.assertEquals(actualIsExist, isExist);
     }
 
     public int getFiltersCount(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).findElements(By.className("leaf")).size();
+        return getFilters(gridIdx).size();
     }
 
     public List<WebElement> getFilters(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).findElements(By.className("leaf"));
+        return seleniumSettings.getWebDriver().findElement(By.id(ID_TREE + gridIdx)).findElements(By.className(CLASS_TREE_ITEM));
+    }
+
+    public WebElement getFilter(String filterName, Long gridIdx) {
+        WebElement result = null;
+
+        List<WebElement> filters = getFilters(gridIdx);
+        for (WebElement filter : filters) {
+            if (filterName.equals(filter.getAttribute("textContent"))) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("Filter [" + filterName + "] found many times");
+                }
+                result = filter;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("Filter [" + filterName + "] not found");
+        }
+
+        return result;
     }
 
     public String getCurrentFilterName(Long gridIdx) {
-        return seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).findElement(By.className("newGenericDropDownLabel")).getText();
+        return seleniumSettings.getWebDriver().findElement(By.id(ID_CURRENT_NAME + gridIdx)).getText();
     }
 
     public void selectFilterInOrganize(String filterName) {
@@ -157,33 +210,17 @@ public class Filter {
     }
 
     public void selectByVisibleText(String entityPrefix, Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
+        openMainPanel(gridIdx);
 
-        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
+        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
 
-        if (entityPrefix.equals(UNSAVED_FILTER_NAME)) {
-            seleniumSettings.getWebDriver().findElement(By.id(UNSAVED_FILTER + gridIdx)).click();
-            grid2.waitLoad(gridIdx);
-        } else {
-            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SEARCH + gridIdx)).sendKeys(entityPrefix);
+        WebElement filter = getFilter(entityPrefix, gridIdx);
+        filter.click();
 
-            WebElement filterElem = (WebElement) js.getNewDropDownElement(FILTER_CONTAINER + gridIdx, "scrollContainer", "newGenericDropDownRow", entityPrefix);
-            elementWait.waitElementVisible(filterElem);
-            filterElem.click();
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
 
-            grid2.waitLoad(gridIdx);
-
-            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
-
-            elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
-            elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-            elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
-
-            seleniumSettings.getWebDriver().findElement(By.id(BUTTON_CLEAR_SEARCH + gridIdx)).click();
-            seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
-        }
+        seleniumSettings.getWebDriver().findElement(By.id(ID_APPLY_BUTTON + gridIdx)).click();
+        grid2.waitLoad(gridIdx);
     }
 
     public void saveFilterField(String fieldName, FilterFieldType filterFieldType, String cellValue, Long gridIdx) {
@@ -235,22 +272,26 @@ public class Filter {
     }
 
     private void isExistAndSelectedFilter(Long gridIdx, String entityPrefix) {
+        openMainPanel(gridIdx);
+
         boolean isSavedFilter = false;
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
         for (WebElement filter : getFilters(gridIdx)) {
-            if (filter.getText().equals(entityPrefix)) {
+            if (entityPrefix.equals(filter.getAttribute("textContent"))) {
                 isSavedFilter = true;
             }
         }
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
         Assert.assertEquals(isSavedFilter, true, "Filter " + entityPrefix + " isn't saved");
+
+        closeMainPanel(gridIdx);
 
         filterWait.waitCurrentFilterName(gridIdx, entityPrefix);
         grid2.waitLoad(gridIdx);
     }
 
     public void openFilterForm(Long gridIdx) {
-        window.openModal(By.id(BUTTON_OPEN + gridIdx));
+        openMainPanel(gridIdx);
+
+        window.openModal(By.id(ID_EDIT_BUTTON + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
@@ -263,16 +304,14 @@ public class Filter {
         grid2.waitLoad(gridIdx);
     }
 
-    public void closeFilterFormCancel() {
+    public void closeFilterFormCancel(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+
+        closeMainPanel(gridIdx);
     }
 
     public void openSaveFilterForm(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
-
-        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
+        openMainPanel(gridIdx);
 
         seleniumSettings.getWebDriver().findElement(By.id(BUTTON_SAVE + gridIdx)).click();
 
@@ -340,11 +379,7 @@ public class Filter {
 
         int beforeDeleteSize = getFiltersCount(gridIdx);
 
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
-
-        elementWait.waitElementById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementVisibleById(FILTER_CONTAINER + gridIdx);
-        elementWait.waitElementDisplayById(FILTER_CONTAINER + gridIdx);
+        openMainPanel(gridIdx);
 
         window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
         tree.waitLoad(0L);
@@ -364,13 +399,14 @@ public class Filter {
         wait.waitFiltersCount(gridIdx, beforeDeleteSize - 1);
 
         boolean isDeletedFilter = false;
-        seleniumSettings.getWebDriver().findElement(By.id(FILTER_SELECT + gridIdx)).click();
         for (WebElement filter : getFilters(gridIdx)) {
-            if (filter.getText().equals(entityPrefix)) {
+            if (entityPrefix.equals(filter.getAttribute("textContent"))) {
                 isDeletedFilter = true;
             }
         }
         Assert.assertEquals(isDeletedFilter, false, "Filter " + entityPrefix + " isn't deleted");
+
+        closeMainPanel(gridIdx);
 
         if (currentFilterName.equals(entityPrefix)) {
             filterWait.waitCurrentFilterName(gridIdx, UNSAVED_FILTER_NAME);
@@ -441,7 +477,7 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
             assertElement.assertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(""), 1L, true);
         }
-        closeFilterFormCancel();
+        closeFilterFormCancel(gridIdx);
     }
 
     public void assertFilterField(String fieldName, FilterFieldType filterFieldType, String cellValue, Long gridIdx) {
@@ -457,7 +493,7 @@ public class Filter {
         } else if (filterFieldType.equals(FilterFieldType.CHECKBOX_PS_SELECTOR)) {
             assertElement.assertCheckboxPsSelector(fieldName, "btn" + fieldName, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(cellValue), 1L, true);
         }
-        closeFilterFormCancel();
+        closeFilterFormCancel(gridIdx);
     }
 
     public void checkRowsInGrid(String rowIds, List<String> columnNames) {

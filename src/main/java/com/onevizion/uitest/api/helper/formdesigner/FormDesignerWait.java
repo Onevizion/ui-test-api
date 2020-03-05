@@ -19,21 +19,13 @@ class FormDesignerWait {
     @Resource
     private Wait wait;
 
-    @Resource
-    private FormDesignerJs formDesignerJs;
-
     void waitFormDesignerLoad() {
         wait.waitWebElement(By.id("loaderformDes"));
+
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for form is failed.")
             .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> !webdriver.findElement(By.id("loaderformDes")).isDisplayed());
-    }
-
-    void waitListBoxReady() {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for listBox loading is failed")
-            .until(webdriver -> formDesignerJs.isReadyListBox());
     }
 
 }

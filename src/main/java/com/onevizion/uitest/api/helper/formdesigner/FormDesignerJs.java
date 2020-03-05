@@ -14,30 +14,23 @@ import com.onevizion.uitest.api.vo.FormDesignerField;
 @Component
 class FormDesignerJs extends Js {
 
-    Boolean isReadyListBox() {
-        //TODO firefox 59 bug
-        //https://github.com/mozilla/geckodriver/issues/1067
-        //https://bugzilla.mozilla.org/show_bug.cgi?id=1420923
-        //return Boolean.valueOf(execJs("return window.listBox.isReady == true;"));
-        return Boolean.valueOf(execJs("return getListBox().isReady == true;"));
-    }
-
     List<FormDesignerField> getElementsOnForm() {
         String resultStr = (String) execJs2("" + 
-                "var formDesigner = getFormDesigner();" + 
                 "var result = \"\";" + 
                 "result = result + \"[\";" + 
-                "for (var key in  formDesigner.selectedValues) {" + 
+                "for (var field of formDesigner.getFields()) {" + 
                 "    result = result + \"{\";" + 
-                "    result = result + \"\\\"id\\\": \\\"\" + formDesigner.selectedValues[key].getId() + \"\\\", \";" + 
-                "    result = result + \"\\\"name\\\": \\\"\" + formDesigner.selectedValues[key].getName() + \"\\\", \";" + 
-                "    result = result + \"\\\"label\\\": \\\"\" + formDesigner.selectedValues[key].getLbl() + \"\\\", \";" + 
-                "    result = result + \"\\\"prefix\\\": \\\"\" + formDesigner.selectedValues[key].getPrefLbl() + \"\\\", \";" + 
-                "    result = result + \"\\\"row\\\": \\\"\" + formDesigner.selectedValues[key].getRow() + \"\\\", \";" + 
-                "    result = result + \"\\\"col\\\": \\\"\" + formDesigner.selectedValues[key].getCol() + \"\\\"\";" + 
+                "    result = result + \"\\\"id\\\": \\\"\" + field.getId() + \"\\\", \";" + 
+                "    result = result + \"\\\"name\\\": \\\"\" + field.getName() + \"\\\", \";" + 
+                "    result = result + \"\\\"label\\\": \\\"\" + field.getLbl() + \"\\\", \";" + 
+                "    result = result + \"\\\"prefix\\\": \\\"\" + field.getPrefix() + \"\\\", \";" + 
+                "    result = result + \"\\\"row\\\": \\\"\" + field.getRow() + \"\\\", \";" + 
+                "    result = result + \"\\\"col\\\": \\\"\" + field.getCol() + \"\\\"\";" + 
                 "    result = result + \"},\";" + 
                 "}" + 
-                "result = result.substring(0, result.length - 1);" + 
+                "if (result.length > 1) {" + 
+                "    result = result.substring(0, result.length - 1);" + 
+                "}" + 
                 "result = result + \"]\";" + 
                 "return result;");
 

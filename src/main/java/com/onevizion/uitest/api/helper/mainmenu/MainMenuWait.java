@@ -1,5 +1,6 @@
 package com.onevizion.uitest.api.helper.mainmenu;
 
+import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
 import javax.annotation.Resource;
@@ -18,6 +19,9 @@ class MainMenuWait {
 
     @Resource
     private MainMenuJs mainMenuJs;
+
+    @Resource
+    private MainMenu mainMenu;
 
     void waitPageTitle(String title) {
         Supplier<String> actualValueSupplier = ()-> seleniumSettings.getWebDriver().findElement(By.id("ttlPage")).getAttribute("textContent");
@@ -39,10 +43,14 @@ class MainMenuWait {
             .until(webdriver -> title.equals(actualValueSupplier.get()));
     }
 
-    void waitLeftMenuSearchUpdated() {
+    void waitDinamicMenusCount(int dinamicMenusCount) {
+        IntSupplier actualValueSupplier = ()-> mainMenu.getDinamicMenusCount();
+
+        Supplier<String> messageSupplier = ()-> "Waiting dinamic menus count expectedVal=[" + dinamicMenusCount + "] actualVal=[" + actualValueSupplier.getAsInt() + "] is failed";
+
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for JQuery loading is failed")
-            .until(webdriver -> mainMenuJs.isLeftMenuSearchUpdated());
+            .withMessage(messageSupplier)
+            .until(webdriver -> dinamicMenusCount == actualValueSupplier.getAsInt());
     }
 
 }

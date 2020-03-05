@@ -1,9 +1,6 @@
 package com.onevizion.uitest.api;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -11,22 +8,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.SessionId;
 import org.springframework.stereotype.Component;
 
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
-import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
 @Component
 public class BrowserCodeCoverage {
@@ -36,6 +25,9 @@ public class BrowserCodeCoverage {
 
     @Resource
     private SeleniumLogger seleniumLogger;
+
+    @Resource
+    private SeleniumNode seleniumNode;
 
     private ThreadLocal<String> wsUrl = new ThreadLocal<>();
 
@@ -55,9 +47,7 @@ public class BrowserCodeCoverage {
 
         ws.remove();
 
-        SessionId sessionId = ((RemoteWebDriver) seleniumSettings.getWebDriver()).getSessionId();
-        String host = getHost(seleniumSettings.getRemoteAddress(), sessionId);
-        wsUrl.set(getWebSocketDebuggerUrl(host));
+        wsUrl.set(seleniumNode.getWebSocketDebuggerUrl());
 
         try {
             seleniumLogger.error("coverage sendWSMessage 1");
@@ -272,62 +262,6 @@ public class BrowserCodeCoverage {
         for (int i = scriptsToRemove.size() - 1; i >= 0; i--) {
             scriptArray.remove(scriptsToRemove.get(i));
         }
-    }
-
-    private String getWebSocketDebuggerUrl(String host) {
-        String webSocketDebuggerUrl = "";
-        try {
-            HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpGet request = new HttpGet("http://" + host + ":9223/json");
-            request.addHeader("accept", "application/json");
-            HttpResponse response = httpClient.execute(request);
-            JSONArray jsonArray = new JSONArray(extractObject(response));
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (jsonObject.getString("type").equals("page")) {
-                    webSocketDebuggerUrl = jsonObject.getString("webSocketDebuggerUrl");
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            seleniumLogger.error("exception in getWebSocketDebuggerUrl " + e.getMessage());
-        }
-
-        if (webSocketDebuggerUrl.equals("")) {
-            throw new SeleniumUnexpectedException("webSocketDebuggerUrl not found");
-        }
-
-        return webSocketDebuggerUrl;
-    }
-
-    private String getHost(String hostName, SessionId session) {
-        String host = null;
-        try {
-            HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpGet request = new HttpGet("http://" + hostName + ":5555/grid/api/testsession?session=" + session);
-            request.addHeader("accept", "application/json");
-            HttpResponse response = httpClient.execute(request);
-            JSONObject object = new JSONObject(extractObject(response));
-            URL myURL = new URL(object.getString("proxyId"));
-            if ((myURL.getHost() != null) && (myURL.getPort() != -1)) {
-                host = myURL.getHost();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        return host;
-    }
-
-    private String extractObject(HttpResponse resp) throws IOException, JSONException {
-        BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
-        StringBuffer s = new StringBuffer();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            s.append(line);
-        }
-        rd.close();
-        return s.toString();
     }
 
 }

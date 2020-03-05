@@ -153,12 +153,12 @@ public class EntityTrackorType {
         assertElement.assertText("autokeyStartAt", trackorType.getAutoKeyStartAt());
         assertElement.assertSelect("lbOwner1", trackorType.getOwner1());
         assertElement.assertRadioPsSelector("Field1", "btnField1", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField1(), 1L, true);
-        assertElement.assertSelect("lbSeparator1", trackorType.getSeparator1());
+        assertElement.assertText("txtSeparator1", trackorType.getSeparator1());
         assertElement.assertSelect("lbOwner2", trackorType.getOwner2());
         assertElement.assertRadioPsSelector("Field2", "btnField2", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, trackorType.getField2(), 1L, true);
-        assertElement.assertSelect("lbSeparator2", trackorType.getSeparator2());
+        assertElement.assertText("txtSeparator2", trackorType.getSeparator2());
         assertElement.assertText("staticText3", trackorType.getStaticText3());
-        assertElement.assertSelect("lbSeparator3", trackorType.getSeparator3());
+        assertElement.assertText("txtSeparator3", trackorType.getSeparator3());
         assertElement.assertSelect("lbDigits", trackorType.getDigits4());
         assertElement.assertSelect("lbUnique", trackorType.getUniqueAcross4());
 
@@ -208,7 +208,7 @@ public class EntityTrackorType {
         gridVals.put(js.getColumnIndexByLabel(gridId, "\"Class\" Label"), trackorType.getLabelClass());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Is ePM User?"), trackorType.getUser());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Can be a Template"), trackorType.getTemplate());
-        gridVals.put(js.getColumnIndexByLabel(gridId, "Enable Comments"), trackorType.getComments());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Enable Chat"), trackorType.getComments());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

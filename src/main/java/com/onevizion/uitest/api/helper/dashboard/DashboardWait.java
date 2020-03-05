@@ -22,6 +22,7 @@ class DashboardWait {
 
     void waitDashboardPageLoaded() {
         wait.waitWebElement(By.id("dashContainer"));
+
         wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + 0L));
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())

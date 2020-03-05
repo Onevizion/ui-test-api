@@ -13,6 +13,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.clipboard.Clipboard;
 
 @Component
 public class FckEditor {
@@ -28,6 +29,9 @@ public class FckEditor {
 
     @Resource
     private FckEditorWait fckEditorWait;
+
+    @Resource
+    private Clipboard clipboard;
 
     public void setValue(String name, String value) {
         if (value.startsWith("<p>") && value.endsWith("</p>")) {
@@ -56,6 +60,28 @@ public class FckEditor {
             actionObject.sendKeys(" ").perform();
             actionObject.sendKeys(Keys.BACK_SPACE).perform();
         }
+
+        seleniumSettings.getWebDriver().switchTo().parentFrame();
+    }
+
+    public void setValueFromClipboard(String name, String value) {
+        clipboard.pasteTextToClipboard(value);
+
+        if (value.startsWith("<p>") && value.endsWith("</p>")) {
+            value = value.substring(3, value.length() - 4);
+        }
+
+        wait.waitWebElement(By.id(name));
+        wait.waitWebElement(By.id("cke_" + name));
+        element.moveToElementById("cke_" + name);
+        fckEditorWait.waitReady(name);
+        WebElement div = seleniumSettings.getWebDriver().findElement(By.id("cke_" + name));
+        WebElement iframe = div.findElement(By.tagName("iframe"));
+        seleniumSettings.getWebDriver().switchTo().frame(iframe);
+
+        seleniumSettings.getWebDriver().findElement(By.tagName("body")).click();
+        Actions action = new Actions(seleniumSettings.getWebDriver());
+        action.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).perform();
 
         seleniumSettings.getWebDriver().switchTo().parentFrame();
     }

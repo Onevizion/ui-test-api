@@ -20,7 +20,7 @@ public class EntityMenuItem {
 
     private static final String LABEL = "label";
     private static final String VISIBLE = "visible";
-    private static final String URL = "visibleURL";
+    private static final String URL = "url";
     private static final String ITEM_TYPE = "OnClick";
     private static final String VIEW = "viewOptId";
     private static final String HIDE_VIEW = "hideView";
@@ -86,10 +86,6 @@ public class EntityMenuItem {
             assertElement.assertCheckbox(HIDE_VIEW, menuItem.getHideView());
             assertElement.assertSelect(FILTER, menuItem.getFilter());
             assertElement.assertCheckbox(HIDE_FILTER, menuItem.getHideFilter());
-            assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
-        } else if (MenuItemType.ACTION.equals(menuItem.getMenuItemType())) {
-            assertElement.assertSelectById(ITEM_TYPE, menuItem.getItemType());
-            assertElement.assertText(LABEL, menuItem.getLabel());
             assertElement.assertCheckbox(VISIBLE, menuItem.getVisible());
         } else {
             throw new SeleniumUnexpectedException("Not support MenuItemType. MenuItemType=" + menuItem.getMenuItemType());

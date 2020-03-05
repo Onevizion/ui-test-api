@@ -13,6 +13,8 @@ public class ConfigFieldVoNumber {
     private String positiveColor;
     private String parensForNegative;
     private String separateThousands;
+    private String validation;
+    private String validationEnabled;
 
     private ConfigFieldVoNumber() {
         
@@ -58,6 +60,14 @@ public class ConfigFieldVoNumber {
         return separateThousands;
     }
 
+    public String getValidation() {
+        return validation;
+    }
+
+    public String getValidationEnabled() {
+        return validationEnabled;
+    }
+
     public class Builder {
 
         private Builder() {
@@ -73,7 +83,9 @@ public class ConfigFieldVoNumber {
                     ConfigFieldVoNumber.this.negativeColor == null ||
                     ConfigFieldVoNumber.this.positiveColor == null ||
                     ConfigFieldVoNumber.this.parensForNegative == null ||
-                    ConfigFieldVoNumber.this.separateThousands == null) {
+                    ConfigFieldVoNumber.this.separateThousands == null ||
+                    ConfigFieldVoNumber.this.validation == null ||
+                    ConfigFieldVoNumber.this.validationEnabled == null) {
                 throw new SeleniumUnexpectedException("");
             }
             return ConfigFieldVoNumber.this;
@@ -121,6 +133,16 @@ public class ConfigFieldVoNumber {
 
         public Builder setSeparateThousands(String separateThousands) {
             ConfigFieldVoNumber.this.separateThousands = separateThousands;
+            return this;
+        }
+
+        public Builder setValidation(String validation) {
+            ConfigFieldVoNumber.this.validation = validation;
+            return this;
+        }
+
+        public Builder setValidationEnabled(String validationEnabled) {
+            ConfigFieldVoNumber.this.validationEnabled = validationEnabled;
             return this;
         }
 

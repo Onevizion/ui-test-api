@@ -4,16 +4,16 @@ public class Menu {
 
     private String name;
     private String description;
-    private String defaultMenuItem;
+    private String orderNumber;
     private String dropgridFolder;
-    private String showTipOfTheDay;
+    private String iconLabel;
 
-    public Menu(String name, String description, String defaultMenuItem, String dropgridFolder, String showTipOfTheDay) {
+    public Menu(String name, String description, String orderNumber, String dropgridFolder, String iconLabel) {
         this.name = name;
         this.description = description;
-        this.defaultMenuItem = defaultMenuItem;
+        this.orderNumber = orderNumber;
         this.dropgridFolder = dropgridFolder;
-        this.showTipOfTheDay = showTipOfTheDay;
+        this.iconLabel = iconLabel;
     }
 
     public String getName() {
@@ -24,16 +24,16 @@ public class Menu {
         return description;
     }
 
-    public String getDefaultMenuItem() {
-        return defaultMenuItem;
+    public String getOrderNumber() {
+        return orderNumber;
     }
 
     public String getDropgridFolder() {
         return dropgridFolder;
     }
 
-    public String getShowTipOfTheDay() {
-        return showTipOfTheDay;
+    public String getIconLabel() {
+        return iconLabel;
     }
 
 }

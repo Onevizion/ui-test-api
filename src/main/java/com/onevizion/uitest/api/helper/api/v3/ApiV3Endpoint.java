@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.vo.ApiV3EndpointType;
 
 @Component
 public class ApiV3Endpoint {
@@ -34,7 +35,7 @@ public class ApiV3Endpoint {
         return endpoints.size();
     }
 
-    public WebElement findEndpoint(WebElement resource, String method, String path, String description) {
+    public WebElement findEndpoint(WebElement resource, ApiV3EndpointType apiV3EndpointType) {
         WebElement ret = null;
         int count = 0;
 
@@ -45,7 +46,9 @@ public class ApiV3Endpoint {
             String actualPath = endpoint.findElement(By.className("heading")).findElement(By.className("path")).getText();
             String actualDescription = endpoint.findElement(By.className("heading")).findElement(By.tagName("li")).getText();
 
-            if (method.equals(actualMethod) && path.equals(actualPath) && description.equals(actualDescription)) {
+            if (apiV3EndpointType.getMethod().equals(actualMethod)
+                    && apiV3EndpointType.getPath().equals(actualPath)
+                    && apiV3EndpointType.getDescription().equals(actualDescription)) {
                 count = count + 1;
                 ret = endpoint;
             }
@@ -83,6 +86,22 @@ public class ApiV3Endpoint {
         elementWait.waitElementAnimatedFinish(response);
     }
 
+    public <T extends Comparable<? super T>> T getResponseAsObject(WebElement endpoint, Class<T> clazz) {
+        WebElement responseText = endpoint.findElement(By.className("response_body"));
+        element.moveToElement(responseText);
+        String actualResponseText = responseText.getText();
+
+        T actualResponse = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            actualResponse = mapper.readValue(actualResponseText, clazz);
+        } catch (IOException e) {
+            throw new SeleniumUnexpectedException(e);
+        }
+
+        return actualResponse;
+    }
+
     public <T extends Comparable<? super T>> List<T> getResponse(WebElement endpoint, Class<T> clazz) {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
         element.moveToElement(responseText);
@@ -99,22 +118,15 @@ public class ApiV3Endpoint {
         return actualResponse;
     }
 
+    public <T extends Comparable<? super T>> void checkResponseAsObject(WebElement endpoint, T expectedResponse, Class<T> clazz) {
+        T actualResponse = getResponseAsObject(endpoint, clazz);
+        Assert.assertEquals(actualResponse, expectedResponse);
+    }
+
     public <T extends Comparable<? super T>> void checkResponse(WebElement endpoint, List<T> expectedResponse, Class<T> clazz) {
-        WebElement responseText = endpoint.findElement(By.className("response_body"));
-        element.moveToElement(responseText);
-        String actualResponseText = responseText.getText();
-
-        List<T> actualResponse = null;
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            actualResponse = mapper.readValue(actualResponseText, mapper.getTypeFactory().constructCollectionType(List.class, clazz));
-        } catch (IOException e) {
-            throw new SeleniumUnexpectedException(e);
-        }
-
+        List<T> actualResponse = getResponse(endpoint, clazz);
         Collections.sort(expectedResponse);
         Collections.sort(actualResponse);
-
         Assert.assertEquals(actualResponse, expectedResponse);
     }
 
@@ -122,14 +134,6 @@ public class ApiV3Endpoint {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
         element.moveToElement(responseText);
         String actualResponseText = responseText.getText();
-        Assert.assertEquals(actualResponseText, expectedResponseText);
-    }
-
-    public void checkResponseTextWithErrorReportId(WebElement endpoint, String expectedResponseText) {
-        WebElement responseText = endpoint.findElement(By.className("response_body"));
-        element.moveToElement(responseText);
-        String actualResponseText = responseText.getText();
-        actualResponseText = actualResponseText.substring(0, actualResponseText.length() - 36);
         Assert.assertEquals(actualResponseText, expectedResponseText);
     }
 

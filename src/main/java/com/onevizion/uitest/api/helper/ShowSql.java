@@ -32,7 +32,17 @@ public class ShowSql {
     @Resource
     private Wait wait;
 
+    @Resource
+    private ElementWait elementWait;
+
+    @Resource
+    private ShowSqlWait showSqlWait;
+
     public void openShowSqlForm(Long gridIdx) {
+        showSqlWait.waitIsUsageLogUpdated(gridIdx);
+        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_GRID_OPTIONS_ID_BASE + gridIdx)).click();
+        elementWait.waitElementVisibleById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
         window.openModal(By.id(BUTTON_SHOW_SQL_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();

@@ -13,16 +13,23 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.jquery.Jquery;
 
 @Component
 public class RelationSelector {
 
-    @Resource
-    private SeleniumSettings seleniumSettings;
+    private static final String REL_SEL_BUTTON = "btnParentsChildren";
+
+    private static final String REL_SEL_CONTAINER = "new_rows_lbParentsChildren";
+    private static final String REL_SEL_CONTAINER_ITEM = "newDropDownRowContainer";
+    private static final String REL_SEL_CONTAINER_ITEM_TEXT = "newDropDownRow";
+    private static final String REL_SEL_CONTAINER_ITEM_COUNT = "newDropDownCount";
+
+    private static final String REL_SEL_MAIN_ELEMENT = "new_lbParentsChildren";
+    private static final String REL_SEL_MAIN_ELEMENT_CURRENT = "newDropDown";
+    private static final String REL_SEL_MAIN_ELEMENT_CURRENT_TEXT = "newDropDownLabel";
 
     @Resource
-    private Wait wait;
+    private SeleniumSettings seleniumSettings;
 
     @Resource
     private Js js;
@@ -31,34 +38,34 @@ public class RelationSelector {
     private ElementWait elementWait;
 
     @Resource
-    private Jquery jquery;
-
-    @Resource
     private Window window;
 
     @Resource
     private Grid2 grid2;
 
-    public static final String RELATION_ID_BASE = "lbParentsChildren";
-    public static final String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
+    @Resource
+    private RelationSelectorWait relationSelectorWait;
 
-    public void checkRelationSelectorValuesCount(int count) {
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id("new_rows_lbParentsChildren0")).findElements(By.className("newDropDownRowContainer"));
+    @Resource
+    private RelationSelectorJs relationSelectorJs;
+
+    public void checkRelationSelectorValuesCount(Long gridIdx, int count) {
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_CONTAINER + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         Assert.assertEquals(rowNames.size(), count);
     }
 
-    public void checkRelationSelectorValue(String trackorType, int count) {
+    public void checkRelationSelectorValue(Long gridIdx, String trackorType, int count) {
         int cnt = 0;
 
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id("new_rows_lbParentsChildren0")).findElements(By.className("newDropDownRowContainer"));
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_CONTAINER + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         for (WebElement rowName : rowNames) {
-            String actualRowName = rowName.findElement(By.className("newDropDownRow")).getText();
+            String actualRowName = rowName.findElement(By.className(REL_SEL_CONTAINER_ITEM_TEXT)).getText();
 
             if (actualRowName.equals("Relations:") || actualRowName.equals("-------------------------------------------")) {
                 continue;
             }
 
-            String actualCount = rowName.findElement(By.className("newDropDownCount")).getText();
+            String actualCount = rowName.findElement(By.className(REL_SEL_CONTAINER_ITEM_COUNT)).getText();
             int intActualCount = Integer.parseInt(actualCount);
 
             if (trackorType.equals(actualRowName) && count == intActualCount) {
@@ -74,58 +81,65 @@ public class RelationSelector {
     }
 
     public void selectGridRow(Long gridIdx, Long rowIndex) {
+        relationSelectorJs.setIsReadyToFalse(gridIdx);
         js.selectGridRow(gridIdx, rowIndex);
-        AbstractSeleniumCore.sleep(1000L);
-        jquery.waitLoad(); //wait reload relations
+        waitRelationSelector(gridIdx);
     }
 
     public void openRelationSelector(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id("new_lbParentsChildren" + gridIdx)).findElement(By.className("newDropDown")).click();
+        waitRelationSelector(gridIdx);
 
-        elementWait.waitElementById("new_rows_lbParentsChildren" + gridIdx);
-        elementWait.waitElementVisibleById("new_rows_lbParentsChildren" + gridIdx);
-        elementWait.waitElementDisplayById("new_rows_lbParentsChildren" + gridIdx);
+        seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElement(By.className(REL_SEL_MAIN_ELEMENT_CURRENT)).click();
+
+        elementWait.waitElementById(REL_SEL_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(REL_SEL_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(REL_SEL_CONTAINER + gridIdx);
     }
 
     public void closeRelationSelector(Long gridIdx) {
-        seleniumSettings.getWebDriver().findElement(By.id("new_lbParentsChildren" + gridIdx)).findElement(By.className("newDropDown")).click();
+        seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElement(By.className(REL_SEL_MAIN_ELEMENT_CURRENT)).click();
 
-        elementWait.waitElementById("new_rows_lbParentsChildren" + gridIdx);
-        elementWait.waitElementNotVisibleById("new_rows_lbParentsChildren" + gridIdx);
-        elementWait.waitElementNotDisplayById("new_rows_lbParentsChildren" + gridIdx);
+        elementWait.waitElementById(REL_SEL_CONTAINER + gridIdx);
+        elementWait.waitElementNotVisibleById(REL_SEL_CONTAINER + gridIdx);
+        elementWait.waitElementNotDisplayById(REL_SEL_CONTAINER + gridIdx);
     }
 
     public void openRelationGrid(Long gridIdx) {
-        grid2.waitLoad(gridIdx);
-        jquery.waitLoad(); //wait reload relations
-        window.openModal(By.id(BUTTON_RELATION_ID_BASE + gridIdx));
+        waitRelationSelector(gridIdx);
+        relationSelectorJs.setIsReadyToFalse(gridIdx);
+        window.openModal(By.id(REL_SEL_BUTTON + gridIdx));
         grid2.waitLoad(gridIdx);
     }
 
     public void closeRelationGrid(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + gridIdx));
         grid2.waitLoad(gridIdx);
-        jquery.waitLoad(); //wait reload relations
+        waitRelationSelector(gridIdx);
     }
 
-    public void chooseParentChildTrackorType(String trackorType) {
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id("new_rows_lbParentsChildren0")).findElements(By.className("newDropDownRowContainer"));
+    public void chooseParentChildTrackorType(Long gridIdx, String trackorType) {
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_CONTAINER + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         for (WebElement rowName : rowNames) {
-            String actualRowName = rowName.findElement(By.className("newDropDownRow")).getText();
+            String actualRowName = rowName.findElement(By.className(REL_SEL_CONTAINER_ITEM_TEXT)).getText();
             if (trackorType.equals(actualRowName)) {
                 rowName.click();
             }
         }
     }
 
-    public void checkCurrentValueInRelationSelector(String label, int count) {
-        String actualLabel = seleniumSettings.getWebDriver().findElement(By.id("new_lbParentsChildren0")).findElement(By.className("newDropDownLabel")).getText();
+    public void checkCurrentValueInRelationSelector(Long gridIdx, String label, int count) {
+        String actualLabel = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElement(By.className(REL_SEL_MAIN_ELEMENT_CURRENT_TEXT)).getText();
         Assert.assertEquals(actualLabel, label + count);
     }
 
-    public void checkCurrentValueInRelationSelector(String label) {
-        String actualLabel = seleniumSettings.getWebDriver().findElement(By.id("new_lbParentsChildren0")).findElement(By.className("newDropDownLabel")).getText();
+    public void checkCurrentValueInRelationSelector(Long gridIdx, String label) {
+        String actualLabel = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElement(By.className(REL_SEL_MAIN_ELEMENT_CURRENT_TEXT)).getText();
         Assert.assertEquals(actualLabel, label);
+    }
+
+    private void waitRelationSelector(Long gridIdx) {
+        relationSelectorWait.waitIsReadyRelationSelector(gridIdx);
+        relationSelectorWait.waitIsReadyMutationObserver(gridIdx);
     }
 
 }

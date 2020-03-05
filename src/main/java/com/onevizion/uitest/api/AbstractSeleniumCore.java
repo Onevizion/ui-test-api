@@ -3,15 +3,14 @@ package com.onevizion.uitest.api;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -30,10 +29,12 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.CloneButton;
 import com.onevizion.uitest.api.helper.CompAuditLog;
+import com.onevizion.uitest.api.helper.DropDown;
 import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.helper.Favorites;
 import com.onevizion.uitest.api.helper.FieldHistory;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.GridRowButton;
@@ -59,6 +60,7 @@ import com.onevizion.uitest.api.helper.api.v3.ApiV3Endpoint;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3Parameter;
 import com.onevizion.uitest.api.helper.api.v3.ApiV3Resource;
 import com.onevizion.uitest.api.helper.bpl.export.BplExport;
+import com.onevizion.uitest.api.helper.chat.Chat;
 import com.onevizion.uitest.api.helper.clipboard.Clipboard;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.helper.comment.Comment;
@@ -80,6 +82,7 @@ import com.onevizion.uitest.api.helper.entity.EntityIntegration;
 import com.onevizion.uitest.api.helper.entity.EntityMenu;
 import com.onevizion.uitest.api.helper.entity.EntityMenuItem;
 import com.onevizion.uitest.api.helper.entity.EntityReportGroup;
+import com.onevizion.uitest.api.helper.entity.EntityRuleType;
 import com.onevizion.uitest.api.helper.entity.EntitySecurityRole;
 import com.onevizion.uitest.api.helper.entity.EntityTrackorClass;
 import com.onevizion.uitest.api.helper.entity.EntityTrackorForm;
@@ -87,16 +90,19 @@ import com.onevizion.uitest.api.helper.entity.EntityTrackorTour;
 import com.onevizion.uitest.api.helper.entity.EntityTrackorTourStep;
 import com.onevizion.uitest.api.helper.entity.EntityTrackorTreeItem;
 import com.onevizion.uitest.api.helper.entity.EntityTrackorType;
+import com.onevizion.uitest.api.helper.entity.EntityValidation;
 import com.onevizion.uitest.api.helper.entity.EntityWpDatePair;
 import com.onevizion.uitest.api.helper.entity.EntityWpDiscipline;
 import com.onevizion.uitest.api.helper.export.Export;
 import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesigner;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.grid.group.GridGroup;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
+import com.onevizion.uitest.api.helper.mapper.Map;
 import com.onevizion.uitest.api.helper.notification.Notification;
 import com.onevizion.uitest.api.helper.portal.Portal;
 import com.onevizion.uitest.api.helper.tab.Tab;
@@ -105,6 +111,7 @@ import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
 import com.onevizion.uitest.api.helper.view.View;
 import com.onevizion.uitest.api.helper.wfvisualeditor.WfVisualEditor;
 import com.onevizion.uitest.api.helper.wiki.FckEditor;
+import com.onevizion.uitest.api.restapi.CreateProcess;
 import com.onevizion.uitest.api.restapi.CreateTest;
 import com.onevizion.uitest.api.restapi.CreateTestResult;
 
@@ -278,6 +285,21 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected SharePageLink sharePageLink;
+
+    @Resource
+    protected Favorites favorites;
+
+    @Resource
+    protected Chat chat;
+
+    @Resource
+    protected DropDown dropDown;
+
+    @Resource
+    protected GridGroup gridGroup;
+
+    @Resource
+    protected Map map;
     /* Helpers End */
 
     /* Entity Helpers Begin */
@@ -349,6 +371,12 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected EntityIntegration entityIntegration;
+
+    @Resource
+    protected EntityValidation entityValidation;
+
+    @Resource
+    protected EntityRuleType entityRuleType;
     /* Entity Helpers End */
 
     @Resource
@@ -372,13 +400,19 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     @Resource
     protected SeleniumLogger seleniumLogger;
 
-    private Date startDate;
+    @Resource
+    private SeleniumNode seleniumNode;
+
+    private String testResultTrackorKey;
+    private String testResultNode;
 
     public static final String GRID_ID_BASE = "gridbox";
     public static final String TREE_ID_BASE = "treeBox";
+    public static final String LOADER_ID_BASE = "loader";
     public static final String LOADING_ID_BASE = "loading";
     public static final String LOADING_SPLIT_GRID_RIGHT_ID_BASE = "loadingSplitGridRight";
     public static final String SAVING_ID_BASE = "saving";
+    public static final String LOADING_PREVIEW_ID_BASE = "layerLoading";
 
     public static final String BUTTON_EDIT_ID_BASE = "btnEdit";
     public static final String BUTTON_DELETE_ID_BASE = "btnDelete";
@@ -390,7 +424,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     public static final String BUTTON_NEXT_ID_BASE = "btnNext";
     public static final String BUTTON_PRIOR_ID_BASE = "btnPrior";
     public static final String BUTTON_SAVE_GRID_ID_BASE = "btnSaveGrid";
-    public static final String BUTTON_EXPORT_ID_BASE = "btnExport";
+    public static final String BUTTON_GRID_APPLETS_ID_BASE = "listApplets";
+    public static final String BUTTON_GRID_OPTIONS_ID_BASE = "btnService";
     public static final String BUTTON_REPORT_WIZARD_ID_BASE = "btnReportWizard";
     public static final String BUTTON_REORDER_ID_BASE = "btnReorder";
 
@@ -413,9 +448,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     public static final String BUTTON_RULES_ID_BASE = "btnRules";
 
-    public static final String RELATION_ID_BASE = "lbParentsChildren";
-    public static final String BUTTON_RELATION_ID_BASE = "btnParentsChildren";
-
     public static final String BUTTON_TASKS_ID_BASE = "btnTasks";
     public static final String BUTTON_WF_ID_BASE = "btnWF";
 
@@ -436,13 +468,13 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     }
 
     protected void seleniumOpenBrowserAndLogin(ITestContext context) {
-        Calendar cal = Calendar.getInstance();
-        startDate = cal.getTime();
-
         seleniumSettings.setTestName(getTestName());
         seleniumSettings.setTestStatus("success");
         seleniumSettings.clearTestLog();
+        seleniumSettings.clearTestCallstack();
         seleniumSettings.clearTestFailScreenshot();
+
+        testResultTrackorKey = createTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"));
 
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
 
@@ -483,6 +515,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 //}
 
                 seleniumSettings.setWebDriver(new Augmenter().augment(seleniumSettings.getWebDriver()));
+                testResultNode = seleniumNode.getNodeHostAndPort();
             } else {
                 if (seleniumSettings.getBrowser().equals("firefox")) {
                     FirefoxOptions firefoxOptions = BrowserFirefox.create(seleniumSettings);
@@ -531,7 +564,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.setTestStatus("fail");
 
             seleniumLogger.error("openBrowserAndLogin fail");
-            seleniumLogger.error("openBrowserAndLogin Unexpected exception: " + e.getMessage());
+            seleniumLogger.error("openBrowserAndLogin Unexpected exception: " + e.getMessage(), e);
 
             if (seleniumSettings.getWebDriver() != null) {
                 seleniumHelper.closeAfterErrorAndGetScreenshot();
@@ -551,28 +584,14 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
                 seleniumLogger.info("browser close finish");
             }
 
-            Calendar cal = Calendar.getInstance();
-            Date finishDate = cal.getTime();
-            long duration = finishDate.getTime() - startDate.getTime();
-            long durationMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-            String durationMinutesStr = Long.toString(durationMinutes);
-            seleniumLogger.info("executed in " + durationMinutesStr + " minutes");
-
-            saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
+            updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
         } catch (Throwable e) {
             seleniumSettings.setTestStatus("fail");
 
             seleniumLogger.error("closeBrowser fail");
             seleniumLogger.error("closeBrowser Unexpected exception: " + e.getMessage());
 
-            Calendar cal = Calendar.getInstance();
-            Date finishDate = cal.getTime();
-            long duration = finishDate.getTime() - startDate.getTime();
-            long durationMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-            String durationMinutesStr = Long.toString(durationMinutes);
-            seleniumLogger.info("executed in " + durationMinutesStr + " minutes");
-
-            saveTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), durationMinutesStr);
+            updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
 
             throw new SeleniumUnexpectedException(e);
         }
@@ -615,14 +634,35 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         }
     }
 
-    private void saveTestResult(String processTrackorKey, String durationMinutesStr) {
+    private String createTestResult(String processTrackorKey) {
         if (seleniumSettings.getRestApiUrl().isEmpty() || seleniumSettings.getRestApiCredential().isEmpty()) {
-            return;
+            return null;
         }
 
         try {
             createTest.createOrUpdate(getTestName(), getFullTestName(), getModuleName(), getBugs());
-            createTestResult.create(processTrackorKey, getTestName(), seleniumSettings.getTestStatus(), durationMinutesStr, getBugs(), seleniumSettings.getTestLog(), getErrorReport(), seleniumSettings.getTestFailScreenshot());
+            return createTestResult.create(processTrackorKey, getTestName(), getBugs());
+        } catch (Exception e) {
+            seleniumLogger.error("call REST API Unexpected exception: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    private void updateTestResult(String processTrackorKey, String testResultTrackorKey) {
+        if (seleniumSettings.getRestApiUrl().isEmpty() || seleniumSettings.getRestApiCredential().isEmpty()) {
+            return;
+        }
+
+        if (testResultTrackorKey == null) {
+            return;
+        }
+
+        String browserVersion = ((HasCapabilities) seleniumSettings.getWebDriver()).getCapabilities().getVersion();
+
+        try {
+            CreateProcess.updateBrowserVersion(seleniumSettings.getRestApiUrl(), seleniumSettings.getRestApiCredential(), processTrackorKey, browserVersion);
+            createTestResult.update(testResultTrackorKey, seleniumSettings.getTestStatus(), testResultNode, seleniumSettings.getTestLog(), getErrorReport(), seleniumSettings.getTestCallstack(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
             seleniumLogger.error("call REST API Unexpected exception: " + e.getMessage());
         }

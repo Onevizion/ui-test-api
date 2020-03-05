@@ -18,9 +18,6 @@ class ViewWait {
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    @Resource
-    private ViewJs viewJs;
-
     void waitCurrentViewName(Long gridIdx, String viewName) {
         Supplier<String> actualValueSupplier = ()-> view.getCurrentViewName(gridIdx);
 
@@ -29,18 +26,6 @@ class ViewWait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
             .until(webdriver -> viewName.equals(actualValueSupplier.get()));
-    }
-
-    void waitLeftListBoxReady() {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for leftListBox loading is failed")
-            .until(webdriver -> viewJs.isReadyLeftListBox());
-    }
-
-    void waitRightListBoxReady() {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for rightListBox loading is failed")
-            .until(webdriver -> viewJs.isReadyRightListBox());
     }
 
 }

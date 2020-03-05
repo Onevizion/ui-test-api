@@ -77,7 +77,7 @@ public class NewDropDown {
         int failOpenWindowCnt = 1;
         do {
             try {
-                seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
+                seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
                 elementWait.waitElementById("new_rows_" + id);
                 elementWait.waitElementVisibleById("new_rows_" + id);
                 elementWait.waitElementDisplayById("new_rows_" + id);
@@ -94,7 +94,7 @@ public class NewDropDown {
             } catch (ElementNotVisibleException | StaleElementReferenceException | IndexOutOfBoundsException | TimeoutException e) {
                 failOpenWindowCnt++;
                 if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
+                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
                 }
             }
         } while (failOpenWindow && failOpenWindowCnt <= 10);
@@ -123,7 +123,7 @@ public class NewDropDown {
         int failOpenWindowCnt = 1;
         do {
             try {
-                seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
+                seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
                 elementWait.waitElementById("new_rows_" + id);
                 elementWait.waitElementVisibleById("new_rows_" + id);
                 elementWait.waitElementDisplayById("new_rows_" + id);
@@ -157,7 +157,7 @@ public class NewDropDown {
             } catch (ElementNotVisibleException | StaleElementReferenceException | IndexOutOfBoundsException | TimeoutException e) {
                 failOpenWindowCnt++;
                 if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
+                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
                 }
             }
         } while (failOpenWindow && failOpenWindowCnt <= 10);
@@ -192,7 +192,7 @@ public class NewDropDown {
         int failOpenWindowCnt = 1;
         do {
             try {
-                seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
+                seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
                 elementWait.waitElementById("new_rows_" + id);
                 elementWait.waitElementVisibleById("new_rows_" + id);
                 elementWait.waitElementDisplayById("new_rows_" + id);
@@ -224,7 +224,7 @@ public class NewDropDown {
             } catch (ElementNotVisibleException | StaleElementReferenceException | IndexOutOfBoundsException | TimeoutException e) {
                 failOpenWindowCnt++;
                 if (seleniumSettings.getWebDriver().findElement(By.id("new_rows_" + id)).isDisplayed()) {
-                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
+                    seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
                 }
             }
         } while (failOpenWindow && failOpenWindowCnt <= 10);
@@ -235,7 +235,7 @@ public class NewDropDown {
     }
 
     private void closeDropDown(String id) {
-        seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).click();
+        seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
         elementWait.waitElementById("new_rows_" + id);
         elementWait.waitElementNotVisibleById("new_rows_" + id);
         elementWait.waitElementNotDisplayById("new_rows_" + id);

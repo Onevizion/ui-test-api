@@ -79,7 +79,7 @@ public class EntityConfigFieldEfileMetadata {
         Map<Long, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Metadata Type"), configFieldVoEfileMetadata.getType().getLabel());
-        gridVals.put(js.getColumnIndexByLabel(gridId, "Metadata Config Field"), configFieldVoEfileMetadata.getConfigField());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Metadata Field"), configFieldVoEfileMetadata.getConfigField());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }

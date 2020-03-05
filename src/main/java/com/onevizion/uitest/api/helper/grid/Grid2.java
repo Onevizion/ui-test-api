@@ -3,11 +3,14 @@ package com.onevizion.uitest.api.helper.grid;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
@@ -27,6 +30,9 @@ public class Grid2 {
 
     @Resource
     private Js js;
+
+    @Resource
+    private ElementWait elementWait;
 
     @Resource
     private SeleniumSettings seleniumSettings;
@@ -61,6 +67,24 @@ public class Grid2 {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for grid with id=[" + gridId + "] is failed")
             .until(webdriver -> js.isGridDataLoaded(gridId));
+    }
+
+    public void saveChanges(Long gridId) {
+        elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_SAVE_GRID_ID_BASE + gridId);
+        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_SAVE_GRID_ID_BASE + gridId)).click();
+
+        wait.waitSavingLoad(gridId);
+        wait.waitLoadingLoad(gridId);
+        grid2Wait.waitSavePanelHidden(gridId);
+    }
+
+    public void saveChangesByCtrlS(Long gridId) {
+        Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+        actionObject.keyDown(Keys.CONTROL).sendKeys("s").keyUp(Keys.CONTROL).perform();
+
+        wait.waitSavingLoad(gridId);
+        wait.waitLoadingLoad(gridId);
+        grid2Wait.waitSavePanelHidden(gridId);
     }
 
     public void waitLoadAllRows(Long gridIdx) {

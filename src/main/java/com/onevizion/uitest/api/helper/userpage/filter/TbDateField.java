@@ -24,7 +24,7 @@ public class TbDateField {
     private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")
-    public void test(String columnId, String columnId2, String value, boolean supportOuterOperations, boolean supportFieldOperations, List<String> ... cellValsKeys) {
+    public void test(String columnId, String columnId2, String value, String valuePlusMinus, String valueWithin, boolean supportOuterOperations, boolean supportFieldOperations, List<String> ... cellValsKeys) {
         Long columnIndex = js.getGridColIndexById(0L, columnId);
         Long columnIndex2 = null;
         if (supportFieldOperations) {
@@ -52,18 +52,17 @@ public class TbDateField {
         userpageFilter.checkFilter(fieldName, fieldName2, value, null, FilterOperatorType.LESS, ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilter(fieldName, fieldName2, value, null, FilterOperatorType.MORE_AND_EQUAL, ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilter(fieldName, fieldName2, value, null, FilterOperatorType.LESS_AND_EQUAL, ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
-        //TODO
-        //>=Today
-        //<=Today
-        //Within
-        //This Wk
-        //This Mo
-        //This FQ
-        //This FY
-        //This Wk to Dt
-        //This Mo to Dt
-        //This FQ to Dt
-        //This FY to Dt
+        userpageFilter.checkFilterMoreAndEqualToday(fieldName, valuePlusMinus, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterLessAndEqualToday(fieldName, valuePlusMinus, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterWithin(fieldName, valueWithin, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterThisWeek(fieldName, valuePlusMinus, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterThisWeekToDate(fieldName, null, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterThisMonth(fieldName, valuePlusMinus, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterThisMonthToDate(fieldName, null, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterThisQuarter(fieldName, valuePlusMinus, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterThisQuarterToDate(fieldName, null, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterThisYear(fieldName, valuePlusMinus, null, ConfigFieldType.DATE);
+        userpageFilter.checkFilterThisYearToDate(fieldName, null, null, ConfigFieldType.DATE);
         userpageFilter.checkFilter(fieldName, fieldName2, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilter(fieldName, fieldName2, value, null, FilterOperatorType.NULL, ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
         userpageFilter.checkFilter(fieldName, fieldName2, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.DATE, columnIndex, columnIndex2, cellVals, cellVals2);
