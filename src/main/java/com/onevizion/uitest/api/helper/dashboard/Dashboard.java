@@ -303,15 +303,11 @@ public class Dashboard {
 
     public void saveDashlet() {
         seleniumSettings.getWebDriver().findElement(By.id("ed_ok_")).click();
-        AbstractSeleniumCore.sleep(5000L);
-        waitDashboardPageLoaded();
-        waitDashboardLoad();
+        jquery.waitLoad();
     }
 
     public void closeDashlet() {
         seleniumSettings.getWebDriver().findElement(By.id("ed_cancel_")).click();
-        waitDashboardPageLoaded();
-        waitDashboardLoad();
     }
 
     public void moveColumnToAxisX(String columnName) {
