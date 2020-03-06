@@ -1,5 +1,8 @@
 package com.onevizion.uitest.api;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -59,6 +62,8 @@ public class SeleniumLogger {
         msg = msg.replaceAll("\\t", "\\\\t");
         msg = msg.replaceAll("\\r", "\\\\r");
         msg = msg.replaceAll("\"", "'");
+
+        msg = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " " + msg;
 
         String testLog = seleniumSettings.getTestLog();
         if (testLog == null) {

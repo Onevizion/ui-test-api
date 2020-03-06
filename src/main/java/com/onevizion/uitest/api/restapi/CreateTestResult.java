@@ -116,7 +116,8 @@ public class CreateTestResult {
                 input = "{ " + 
                         "   \"fields\": { " + 
                         "     \"STR_STATUS\": \"" + testStatus + "\", " + 
-                        "     \"STR_NODE\": \"" + testResultNode + "\" " + 
+                        "     \"STR_NODE\": \"" + testResultNode + "\", " + 
+                        "     \"STR_ERROR_LOG\": \"" + errorLog + "\" " + 
                         "   } " + 
                         " }";
             }
