@@ -109,6 +109,10 @@ public class UserpageFilter {
                 .filter(option -> !FilterOperatorType.FIELD_UNLOCK.getValue().equals(option.getText()))
                 .filter(option -> !FilterOperatorType.RELATION_LOCK.getValue().equals(option.getText()))
                 .filter(option -> !FilterOperatorType.RELATION_UNLOCK.getValue().equals(option.getText()))
+                .filter(option -> !FilterOperatorType.EQUAL_COLOR.getValue().equals(option.getText()))
+                .filter(option -> !FilterOperatorType.NOT_EQUAL_COLOR.getValue().equals(option.getText()))
+                .filter(option -> !FilterOperatorType.COLOR.getValue().equals(option.getText()))
+                .filter(option -> !FilterOperatorType.NOT_COLOR.getValue().equals(option.getText()))
                 .collect(Collectors.toList());
         Assert.assertEquals(options.size(), operators.size());
         for (int i = 0; i < operators.size(); i++) {
@@ -318,6 +322,52 @@ public class UserpageFilter {
         checkGridColumnIsNotNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
 
         checkAndClearFilter(fieldName, FilterOperatorType.RELATION_UNLOCK, randomIndex);
+    }
+
+    public void checkFilterIsFieldColor(String fieldName, String trackorFieldName, List<String> trackorCellVals, Map<String, List<String>> colors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.COLOR);
+
+        List<String> trackors = new ArrayList<>();
+        for (List<String> color : colors.values()) {
+            trackors.addAll(color);
+        }
+
+        checkGridRowsCountIsFieldLocked(trackorCellVals, trackors);
+        checkGridColumnIsNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.COLOR, randomIndex);
+    }
+
+    public void checkFilterIsFieldNotColor(String fieldName, String trackorFieldName, List<String> trackorCellVals, Map<String, List<String>> colors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_COLOR);
+
+        List<String> trackors = new ArrayList<>();
+        for (List<String> color : colors.values()) {
+            trackors.addAll(color);
+        }
+
+        checkGridRowsCountIsFieldUnlocked(trackorCellVals, trackors);
+        checkGridColumnIsNotNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.NOT_COLOR, randomIndex);
+    }
+
+    public void checkFilterEqualColor(String fieldName, String trackorFieldName, String value, List<String> trackorCellVals, Map<String, List<String>> colors) {
+        int randomIndex = fillFilter(fieldName, null, value, null, FilterOperatorType.EQUAL_COLOR, ConfigFieldType.DROP_DOWN);
+
+        checkGridRowsCountIsFieldLocked(trackorCellVals, colors.get(value));
+        checkGridColumnIsNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, colors.get(value));
+
+        checkAndClearFilter(fieldName, null, value, null, FilterOperatorType.EQUAL_COLOR, ConfigFieldType.DROP_DOWN, randomIndex);
+    }
+
+    public void checkFilterNotEqualColor(String fieldName, String trackorFieldName, String value, List<String> trackorCellVals, Map<String, List<String>> colors) {
+        int randomIndex = fillFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL_COLOR, ConfigFieldType.DROP_DOWN);
+
+        checkGridRowsCountIsFieldUnlocked(trackorCellVals, colors.get(value));
+        checkGridColumnIsNotNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, colors.get(value));
+
+        checkAndClearFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL_COLOR, ConfigFieldType.DROP_DOWN, randomIndex);
     }
 
     public void checkFilterHasComments(String fieldName, Long expectedRowsCnt) {

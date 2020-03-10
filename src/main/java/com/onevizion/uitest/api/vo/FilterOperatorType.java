@@ -38,7 +38,11 @@ public enum FilterOperatorType {
     FIELD_UNLOCK("Is Field Unlocked", "field_unlocked"),
     RELATION_LOCK("Is Relation Locked", "relation_locked"),
     RELATION_UNLOCK("Is Relation Unlocked", "relation_unlocked"),
-    HAS_COMMENTS("Has Comments", "has_comments");
+    HAS_COMMENTS("Has Comments", "has_comments"),
+    EQUAL_COLOR("=Color", "equal_color"),
+    NOT_EQUAL_COLOR("<>Color", "not_equal_color"),
+    COLOR("Has Color", "has_color"),
+    NOT_COLOR("Has No Color", "no_color");
 
     private String value;
     private String valueApiV3;
