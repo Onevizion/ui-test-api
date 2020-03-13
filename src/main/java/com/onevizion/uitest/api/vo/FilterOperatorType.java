@@ -42,7 +42,9 @@ public enum FilterOperatorType {
     EQUAL_COLOR("=Color", "equal_color"),
     NOT_EQUAL_COLOR("<>Color", "not_equal_color"),
     COLOR("Has Color", "has_color"),
-    NOT_COLOR("Has No Color", "no_color");
+    NOT_COLOR("Has No Color", "no_color"),
+    EQUAL_MYSELF("=Myself", "equal_myself"),
+    NOT_EQUAL_MYSELF("<>Myself", "not_equal_myself");
 
     private String value;
     private String valueApiV3;

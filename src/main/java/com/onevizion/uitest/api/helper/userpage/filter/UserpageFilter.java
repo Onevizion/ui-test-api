@@ -378,6 +378,40 @@ public class UserpageFilter {
         checkAndClearFilter(fieldName, FilterOperatorType.HAS_COMMENTS, randomIndex);
     }
 
+    public void checkFilterEqualMyselfWithoutTrackor(String fieldName, Long expectedRowsCnt) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.EQUAL_MYSELF);
+
+        Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), expectedRowsCnt, "Grid have wrong rows count");
+
+        checkAndClearFilter(fieldName, FilterOperatorType.EQUAL_MYSELF, randomIndex);
+    }
+
+    public void checkFilterNotEqualMyselfWithoutTrackor(String fieldName, Long expectedRowsCnt) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_EQUAL_MYSELF);
+
+        Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), expectedRowsCnt, "Grid have wrong rows count");
+
+        checkAndClearFilter(fieldName, FilterOperatorType.NOT_EQUAL_MYSELF, randomIndex);
+    }
+
+    public void checkFilterEqualMyselfWithTrackor(String fieldName, String trackorFieldName, List<String> trackorCellVals, List<String> trackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.EQUAL_MYSELF);
+
+        checkGridRowsCountIsFieldLocked(trackorCellVals, trackors);
+        checkGridColumnIsNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.EQUAL_MYSELF, randomIndex);
+    }
+
+    public void checkFilterNotEqualMyselfWithTrackor(String fieldName, String trackorFieldName, List<String> trackorCellVals, List<String> trackors) {
+        int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_EQUAL_MYSELF);
+
+        checkGridRowsCountIsFieldUnlocked(trackorCellVals, trackors);
+        checkGridColumnIsNotNew(AbstractSeleniumCore.getGridIdx(), trackorFieldName, trackors);
+
+        checkAndClearFilter(fieldName, FilterOperatorType.NOT_EQUAL_MYSELF, randomIndex);
+    }
+
     @SuppressWarnings("unchecked")
     public void checkFilterTrackorSelectorByText(String fieldName, FilterOperatorType operator, String value, Long columnIndex, List<String> cellVals, List<String> ... cellValsKeys) {
         Long rowsCntBefore = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
