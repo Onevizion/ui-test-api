@@ -58,7 +58,7 @@ public class Logoff {
 
         elementWait.waitElementById("auth_header");
         elementWait.waitElementById("auth_login");
-        elementWait.waitElementById("auth_unable");
+        elementWait.waitElementById("auth_recovery");
 
         elementWait.waitElementById("username");
         elementWait.waitElementById("password");
