@@ -19,6 +19,7 @@ public enum ApiV3ResourceType {
     PROGRAMS("programs"),
     REPORTS("reports"),
     SECURITY_ROLES("security-roles"),
+    SERVER_INFO("server-info"),
     TASKS("tasks"),
     TRACKOR_TYPE_SPECS("trackor-type-specs"),
     TRACKOR_TYPES_TREE("trackor-types-tree"),
