@@ -52,6 +52,7 @@ public class MainMenu {
 
     private static final String ID_MENU = "menu";
     private static final String CLASS_MENU_SEARCH = "in_input";
+    private static final String ID_MENU_CLEAR_SEARCH_BUTTON = "clear_search_";
     private static final String NAME_MENU_ITEM = "menuItem";
     private static final String CLASS_MENU_ITEM_PAGE_HIDDEN = "hidden";
     private static final String CLASS_MENU_ITEM_PAGE_NAME = "im_name";
@@ -78,6 +79,12 @@ public class MainMenu {
         elementWait.waitElementVelocityAnimatedFinishById(ID_MENU);
         elementWait.waitElementNotVisibleById(ID_MENU);
         elementWait.waitElementNotDisplayById(ID_MENU);
+    }
+
+    public void clearSearch() {
+        showMenu();
+        clearSearchMenuItem();
+        hideMenu();
     }
 
     public void showMenu(String name) {
@@ -156,7 +163,7 @@ public class MainMenu {
 
     public void checkMenuItemExist(String item) {
         showMenu();
-        searchMenuItem(item);
+        setSearchMenuItem(item);
         List<WebElement> menuItems = getMenuItems();
         boolean result = isMenuItemExist(menuItems, item);
         Assert.assertEquals(result, true);
@@ -165,7 +172,7 @@ public class MainMenu {
 
     public void checkMenuItemNotExist(String item) {
         showMenu();
-        searchMenuItem(item);
+        setSearchMenuItem(item);
         List<WebElement> menuItems = getMenuItems();
         boolean result = isMenuItemExist(menuItems, item);
         Assert.assertEquals(result, false);
@@ -173,7 +180,7 @@ public class MainMenu {
     }
 
     private WebElement findMenuItem(String item) {
-        searchMenuItem(item);
+        setSearchMenuItem(item);
         List<WebElement> menuItems = getMenuItems();
 
         WebElement result = null;
@@ -191,12 +198,19 @@ public class MainMenu {
         return result;
     }
 
-    private void searchMenuItem(String item) {
+    private void setSearchMenuItem(String item) {
         WebElement searchField = seleniumSettings.getWebDriver().findElement(By.id(ID_MENU)).findElement(By.className(CLASS_MENU_SEARCH));
 
         elementWait.waitElementVisible(searchField);
         searchField.clear();
         searchField.sendKeys(item);
+    }
+
+    private void clearSearchMenuItem() {
+        WebElement clearSearchButton = seleniumSettings.getWebDriver().findElement(By.id(ID_MENU)).findElement(By.id(ID_MENU_CLEAR_SEARCH_BUTTON));
+
+        elementWait.waitElementVisible(clearSearchButton);
+        clearSearchButton.click();
     }
 
     public List<WebElement> getMenuItems() {
