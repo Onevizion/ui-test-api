@@ -75,7 +75,7 @@ public class GridGroup {
             if ("Yes".equals(group)) {
                 return "1";
             } else {
-                return " ";
+                return "0";
             }
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldType)) {
             return gridGroupJs.getGroupId(gridIdx, group);
