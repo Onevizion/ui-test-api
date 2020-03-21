@@ -3,7 +3,9 @@ package com.onevizion.uitest.api;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
@@ -478,11 +480,11 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
 
-        seleniumLogger.info("start");
-
         try {
-            fillGlobalSettings();
+            seleniumLogger.info("openBrowserAndLogin start");
 
+            Date startDate = Calendar.getInstance().getTime();
+            seleniumLogger.info("openBrowser start");
             if (seleniumSettings.getRemoteWebDriver()) {
                 Capabilities capabilities = null;
                 if (seleniumSettings.getBrowser().equals("firefox")) {
@@ -544,22 +546,47 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
             seleniumSettings.getWebDriver().manage().deleteAllCookies();
 
-            seleniumLogger.info("browser open");
-            browserCodeCoverage.start();
-            document.open2(seleniumSettings.getServerUrl());
-
-            String newTestUser = context.getCurrentXmlTest().getParameter("test.selenium.user");
-            seleniumSettings.setTestUser(newTestUser);
-
-            seleniumLogger.info("login as " + seleniumSettings.getTestUser());
-            loginIntoSystem(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
+            seleniumSettings.setTestUser(context.getCurrentXmlTest().getParameter("test.selenium.user"));
 
             seleniumSettings.setWindows(new LinkedList<String>());
             seleniumSettings.getWindows().add(seleniumSettings.getWebDriver().getWindowHandle());
+            long duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
+            seleniumLogger.info("openBrowser success elapsed time " + duration + " seconds");
 
+            startDate = Calendar.getInstance().getTime();
+            seleniumLogger.info("codeCoverageStart start");
+            browserCodeCoverage.start();
+            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
+            seleniumLogger.info("codeCoverageStart success elapsed time " + duration + " seconds");
+
+            startDate = Calendar.getInstance().getTime();
+            seleniumLogger.info("openLoginPage start");
+            document.open2(seleniumSettings.getServerUrl());
+            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
+            seleniumLogger.info("openLoginPage success elapsed time " + duration + " seconds");
+
+            startDate = Calendar.getInstance().getTime();
+            seleniumLogger.info("loginIntoSystem start");
+            seleniumLogger.info("login as " + seleniumSettings.getTestUser());
+            loginIntoSystem(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
+            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
+            seleniumLogger.info("loginIntoSystem success elapsed time " + duration + " seconds");
+
+            startDate = Calendar.getInstance().getTime();
+            seleniumLogger.info("dataPreparation start");
+            fillGlobalSettings();
+            fillUserSettings(seleniumSettings.getTestUser());
             dataPreparation();
+            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
+            seleniumLogger.info("dataPreparation success elapsed time " + duration + " seconds");
 
+            startDate = Calendar.getInstance().getTime();
+            seleniumLogger.info("openInternalPage start");
             openInternalPage();
+            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
+            seleniumLogger.info("openInternalPage success elapsed time " + duration + " seconds");
+
+            seleniumLogger.info("openBrowserAndLogin finish");
         } catch (Throwable e) {
             seleniumSettings.setTestStatus("fail");
 
@@ -577,11 +604,11 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected void seleniumCloseBrowser(ITestContext context) {
         try {
             if (seleniumSettings.getWebDriver() != null) {
-                seleniumLogger.info("browser close start");
+                seleniumLogger.info("closeBrowser start");
                 browserCodeCoverage.finish();
                 seleniumHelper.closeAfterError();
                 seleniumSettings.getWebDriver().quit();
-                seleniumLogger.info("browser close finish");
+                seleniumLogger.info("closeBrowser finish");
             }
 
             updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
@@ -598,6 +625,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     }
 
     protected abstract void fillGlobalSettings();
+
+    protected abstract void fillUserSettings(String userName);
 
     protected abstract void loginIntoSystem(String user, String password);
 
