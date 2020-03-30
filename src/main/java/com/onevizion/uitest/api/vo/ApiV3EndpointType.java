@@ -11,10 +11,10 @@ public enum ApiV3EndpointType {
     CHATS_CREATE_CHAT("POST", "/v3/chats", "Create new Chat"),
     CHATS_CREATE_MESSAGE("POST", "/v3/chats/{chat_id}/messages", "Create Chat Message"),
 
-    FIELD_COLORS_READ_FIELD_COLORS_BY_TRACKOR_TYPE_AND_TRACKOR_IDS("GET", "/v3/trackor_types/{trackor_type}/trackors/fields/colors", "Read Field Colors by Trackor Type and Trackor ids"),
-    FIELD_COLORS_READ_FIELD_COLOR_OPTIONS("GET", "/v3/trackor_types/{trackor_type}/fields/{field_name}/colors/options", "Read Field Color options"),
-    FIELD_COLORS_READ_FIELD_COLORS_BY_TRACKOR_ID("GET", "/v3/trackors/{trackor_id}/fields/colors", "Read Field Colors by Trackor id"),
-    FIELD_COLORS_READ_UPDATE_FIELD_COLOR_BY_TRACKOR_ID_AND_FIELD_NAME("PUT", "/v3/trackors/{trackor_id}/fields/{field_name}/colors", "Update Field Color by Trackor ID and Field name"),
+    FIELD_COLORS_READ_COLOR_BY_TT_AND_TIDS("GET", "/v3/trackor_types/{trackor_type}/trackors/fields/colors", "Read Field Colors by Trackor Type and Trackor ids"),
+    FIELD_COLORS_READ_OPTIONS("GET", "/v3/trackor_types/{trackor_type}/fields/{field_name}/colors/options", "Read Field Color options"),
+    FIELD_COLORS_READ_COLOR_BY_TID("GET", "/v3/trackors/{trackor_id}/fields/colors", "Read Field Colors by Trackor id"),
+    FIELD_COLORS_UPDATE("PUT", "/v3/trackors/{trackor_id}/fields/{field_name}/colors", "Update Field Color by Trackor ID and Field name"),
 
     IMPORTS_READ_RUN_BY_PROCESS_ID("GET", "/v3/imports/runs/{process_id}", "Read import run by process id"),
     IMPORTS_READ("GET", "/v3/imports", "Read imports specs"),
