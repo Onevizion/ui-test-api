@@ -25,6 +25,7 @@ public class EntityWpDatePair {
 
     private static final String NAME = "wpTaskDateType";
     private static final String LABEL = "label";
+    private static final String SHORT_NAME = "abbrName";
     private static final String SHORT_LABEL = "abbrLabel";
 
     @Resource
@@ -60,6 +61,8 @@ public class EntityWpDatePair {
 
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(wpDatePair.getLabel());
 
+        seleniumSettings.getWebDriver().findElement(By.name(SHORT_NAME)).sendKeys(wpDatePair.getShortName());
+
         seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).sendKeys(wpDatePair.getShortLabel());
 
         tab.goToTab(2L); //Role Privs
@@ -90,6 +93,9 @@ public class EntityWpDatePair {
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(wpDatePair.getLabel());
 
+        seleniumSettings.getWebDriver().findElement(By.name(SHORT_NAME)).clear();
+        seleniumSettings.getWebDriver().findElement(By.name(SHORT_NAME)).sendKeys(wpDatePair.getShortName());
+
         seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).sendKeys(wpDatePair.getShortLabel());
 
@@ -117,6 +123,7 @@ public class EntityWpDatePair {
 
         assertElement.assertText(NAME, wpDatePair.getName());
         assertElement.assertText(LABEL, wpDatePair.getLabel());
+        assertElement.assertText(SHORT_NAME, wpDatePair.getShortName());
         assertElement.assertText(SHORT_LABEL, wpDatePair.getShortLabel());
 
         if (!WpDatePairType.PROJECTED_DELTA.getName().equals(wpDatePair.getName())) {
@@ -141,6 +148,7 @@ public class EntityWpDatePair {
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Date Pair Name"), wpDatePair.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Label"), wpDatePair.getLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Short Name"), wpDatePair.getShortName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Short Label"), wpDatePair.getShortLabel());
         gridVals.put(js.getColumnIndexByLabel(gridId, "In Use"), wpDatePair.getUse());
 

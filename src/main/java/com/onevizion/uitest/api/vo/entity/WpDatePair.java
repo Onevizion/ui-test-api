@@ -8,6 +8,7 @@ public class WpDatePair {
 
     private String name;
     private String label;
+    private String shortName;
     private String shortLabel;
     private String use;
 
@@ -24,8 +25,13 @@ public class WpDatePair {
     public String getName() {
         return name;
     }
+
     public String getLabel() {
         return label;
+    }
+
+    public String getShortName() {
+        return shortName;
     }
 
     public String getShortLabel() {
@@ -49,6 +55,7 @@ public class WpDatePair {
         public WpDatePair build() {
             if (WpDatePair.this.name == null ||
                     WpDatePair.this.label == null ||
+                    WpDatePair.this.shortName == null ||
                     WpDatePair.this.shortLabel == null ||
                     WpDatePair.this.use == null ||
                     WpDatePair.this.roles == null) {
@@ -64,6 +71,11 @@ public class WpDatePair {
 
         public Builder setLabel(String label) {
             WpDatePair.this.label = label;
+            return this;
+        }
+
+        public Builder setShortName(String shortName) {
+            WpDatePair.this.shortName = shortName;
             return this;
         }
 
