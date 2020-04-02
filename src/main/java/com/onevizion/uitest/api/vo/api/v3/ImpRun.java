@@ -15,12 +15,10 @@ public class ImpRun implements Comparable<ImpRun> {
     private String rowsProcessed;
     private String gridCount;
     private String pkCount;
-    private String dataMapCount;
     private String importName;
     private String owner;
     private String csvParsingRuntime;
     private String pkSearchingRuntime;
-    private String dataMapGenerationRuntime;
     private String dataImportingRuntime;
     private String comments;
     private String errorMessage;
@@ -100,15 +98,6 @@ public class ImpRun implements Comparable<ImpRun> {
         this.pkCount = pkCount;
     }
 
-    @JsonProperty("data_map_count")
-    public String getDataMapCount() {
-        return dataMapCount;
-    }
-
-    public void setDataMapCount(String dataMapCount) {
-        this.dataMapCount = dataMapCount;
-    }
-
     @JsonProperty("import_name")
     public String getImportName() {
         return importName;
@@ -143,15 +132,6 @@ public class ImpRun implements Comparable<ImpRun> {
 
     public void setPkSearchingRuntime(String pkSearchingRuntime) {
         this.pkSearchingRuntime = pkSearchingRuntime;
-    }
-
-    @JsonProperty("data_map_generation_runtime")
-    public String getDataMapGenerationRuntime() {
-        return dataMapGenerationRuntime;
-    }
-
-    public void setDataMapGenerationRuntime(String dataMapGenerationRuntime) {
-        this.dataMapGenerationRuntime = dataMapGenerationRuntime;
     }
 
     @JsonProperty("data_importing_runtime")
@@ -215,8 +195,8 @@ public class ImpRun implements Comparable<ImpRun> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(action, comments, csvParsingRuntime, dataImportingRuntime, dataMapCount,
-                dataMapGenerationRuntime, errorMessage, finished, gridCount, importId, importName, owner, pkCount,
+        return Objects.hash(action, comments, csvParsingRuntime, dataImportingRuntime,
+                errorMessage, finished, gridCount, importId, importName, owner, pkCount,
                 pkSearchingRuntime, processId, rowsProcessed, scheduled, status, submitted, warnings);
     }
 
@@ -235,8 +215,6 @@ public class ImpRun implements Comparable<ImpRun> {
         return Objects.equals(action, other.action) && Objects.equals(comments, other.comments)
                 && Objects.equals(csvParsingRuntime, other.csvParsingRuntime)
                 && Objects.equals(dataImportingRuntime, other.dataImportingRuntime)
-                && Objects.equals(dataMapCount, other.dataMapCount)
-                && Objects.equals(dataMapGenerationRuntime, other.dataMapGenerationRuntime)
                 && Objects.equals(errorMessage, other.errorMessage) && Objects.equals(finished, other.finished)
                 && Objects.equals(gridCount, other.gridCount) && Objects.equals(importId, other.importId)
                 && Objects.equals(importName, other.importName) && Objects.equals(owner, other.owner)
@@ -251,9 +229,9 @@ public class ImpRun implements Comparable<ImpRun> {
     public String toString() {
         return "ImpRun [processId=" + processId + ", importId=" + importId + ", submitted=" + submitted + ", scheduled="
                 + scheduled + ", finished=" + finished + ", rowsProcessed=" + rowsProcessed + ", gridCount=" + gridCount
-                + ", pkCount=" + pkCount + ", dataMapCount=" + dataMapCount + ", importName=" + importName + ", owner="
+                + ", pkCount=" + pkCount + ", importName=" + importName + ", owner="
                 + owner + ", csvParsingRuntime=" + csvParsingRuntime + ", pkSearchingRuntime=" + pkSearchingRuntime
-                + ", dataMapGenerationRuntime=" + dataMapGenerationRuntime + ", dataImportingRuntime="
+                + ", dataImportingRuntime="
                 + dataImportingRuntime + ", comments=" + comments + ", errorMessage=" + errorMessage + ", status="
                 + status + ", action=" + action + ", warnings=" + warnings + "]";
     }
