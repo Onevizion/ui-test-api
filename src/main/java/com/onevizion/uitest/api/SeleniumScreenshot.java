@@ -89,6 +89,13 @@ public class SeleniumScreenshot {
     }
 
     public void compareScreenshot(WebElement webElement, String fileName) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            seleniumLogger.error("Interrupted!");
+            Thread.currentThread().interrupt();
+        }
+
         int imageWidth = webElement.getSize().getWidth();
         int imageHeight = webElement.getSize().getHeight();
         int xCoord = webElement.getLocation().getX();
