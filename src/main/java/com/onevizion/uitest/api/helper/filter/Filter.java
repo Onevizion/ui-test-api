@@ -68,7 +68,7 @@ public class Filter {
 
 
 
-    private static final String ID_MAIN_BUTTON = "viewFilterDropDown";
+    private static final String ID_MAIN_BUTTON = "viewFilterArrow";
     private static final String ID_MAIN_PANEL = "viewFilterPopup";
     private static final String ID_APPLY_BUTTON = "applyVFTerminal";
     private static final String ID_EDIT_BUTTON = "filterEditButton";
