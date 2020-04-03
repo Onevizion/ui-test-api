@@ -24,6 +24,7 @@ public class ImpRun implements Comparable<ImpRun> {
     private String errorMessage;
     private String status;
     private String action;
+    private String maxRuntime;
     private List<ImpRunError> warnings;
 
     @JsonProperty("process_id")
@@ -179,6 +180,15 @@ public class ImpRun implements Comparable<ImpRun> {
         this.action = action;
     }
 
+    @JsonProperty("max_runtime")
+    public String getMaxRuntime() {
+        return maxRuntime;
+    }
+
+    public void setMaxRuntime(String maxRuntime) {
+        this.maxRuntime = maxRuntime;
+    }
+
     @JsonProperty("warnings")
     public List<ImpRunError> getWarnings() {
         return warnings;
@@ -195,9 +205,9 @@ public class ImpRun implements Comparable<ImpRun> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(action, comments, csvParsingRuntime, dataImportingRuntime,
-                errorMessage, finished, gridCount, importId, importName, owner, pkCount,
-                pkSearchingRuntime, processId, rowsProcessed, scheduled, status, submitted, warnings);
+        return Objects.hash(action, comments, csvParsingRuntime, dataImportingRuntime, errorMessage, finished,
+                gridCount, importId, importName, maxRuntime, owner, pkCount, pkSearchingRuntime, processId,
+                rowsProcessed, scheduled, status, submitted, warnings);
     }
 
     @Override
@@ -205,10 +215,7 @@ public class ImpRun implements Comparable<ImpRun> {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof ImpRun)) {
             return false;
         }
         ImpRun other = (ImpRun) obj;
@@ -217,8 +224,8 @@ public class ImpRun implements Comparable<ImpRun> {
                 && Objects.equals(dataImportingRuntime, other.dataImportingRuntime)
                 && Objects.equals(errorMessage, other.errorMessage) && Objects.equals(finished, other.finished)
                 && Objects.equals(gridCount, other.gridCount) && Objects.equals(importId, other.importId)
-                && Objects.equals(importName, other.importName) && Objects.equals(owner, other.owner)
-                && Objects.equals(pkCount, other.pkCount)
+                && Objects.equals(importName, other.importName) && Objects.equals(maxRuntime, other.maxRuntime)
+                && Objects.equals(owner, other.owner) && Objects.equals(pkCount, other.pkCount)
                 && Objects.equals(pkSearchingRuntime, other.pkSearchingRuntime)
                 && Objects.equals(processId, other.processId) && Objects.equals(rowsProcessed, other.rowsProcessed)
                 && Objects.equals(scheduled, other.scheduled) && Objects.equals(status, other.status)
@@ -229,11 +236,10 @@ public class ImpRun implements Comparable<ImpRun> {
     public String toString() {
         return "ImpRun [processId=" + processId + ", importId=" + importId + ", submitted=" + submitted + ", scheduled="
                 + scheduled + ", finished=" + finished + ", rowsProcessed=" + rowsProcessed + ", gridCount=" + gridCount
-                + ", pkCount=" + pkCount + ", importName=" + importName + ", owner="
-                + owner + ", csvParsingRuntime=" + csvParsingRuntime + ", pkSearchingRuntime=" + pkSearchingRuntime
-                + ", dataImportingRuntime="
+                + ", pkCount=" + pkCount + ", importName=" + importName + ", owner=" + owner + ", csvParsingRuntime="
+                + csvParsingRuntime + ", pkSearchingRuntime=" + pkSearchingRuntime + ", dataImportingRuntime="
                 + dataImportingRuntime + ", comments=" + comments + ", errorMessage=" + errorMessage + ", status="
-                + status + ", action=" + action + ", warnings=" + warnings + "]";
+                + status + ", action=" + action + ", maxRuntime=" + maxRuntime + ", warnings=" + warnings + "]";
     }
 
 }

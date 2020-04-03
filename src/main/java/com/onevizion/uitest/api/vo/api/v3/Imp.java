@@ -19,6 +19,7 @@ public class Imp implements Comparable<Imp> {
     private String dateFormat;
     private String stringQuote;
     private String daysToKeepParsedData;
+    private String maxRuntime;
 
     @JsonProperty("id")
     public String getId() {
@@ -128,6 +129,15 @@ public class Imp implements Comparable<Imp> {
         this.daysToKeepParsedData = daysToKeepParsedData;
     }
 
+    @JsonProperty("max_runtime")
+    public String getMaxRuntime() {
+        return maxRuntime;
+    }
+
+    public void setMaxRuntime(String maxRuntime) {
+        this.maxRuntime = maxRuntime;
+    }
+
     @Override
     public int compareTo(Imp o) {
         return this.id.compareTo(o.id);
@@ -136,7 +146,7 @@ public class Imp implements Comparable<Imp> {
     @Override
     public int hashCode() {
         return Objects.hash(actions, dateFormat, daysToKeepParsedData, defaultAction, description, externalProcedure,
-                fieldDelimiter, id, lineDelimiter, name, stringQuote, validationMode);
+                fieldDelimiter, id, lineDelimiter, maxRuntime, name, stringQuote, validationMode);
     }
 
     @Override
@@ -144,10 +154,7 @@ public class Imp implements Comparable<Imp> {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Imp)) {
             return false;
         }
         Imp other = (Imp) obj;
@@ -156,8 +163,8 @@ public class Imp implements Comparable<Imp> {
                 && Objects.equals(defaultAction, other.defaultAction) && Objects.equals(description, other.description)
                 && Objects.equals(externalProcedure, other.externalProcedure)
                 && Objects.equals(fieldDelimiter, other.fieldDelimiter) && Objects.equals(id, other.id)
-                && Objects.equals(lineDelimiter, other.lineDelimiter) && Objects.equals(name, other.name)
-                && Objects.equals(stringQuote, other.stringQuote)
+                && Objects.equals(lineDelimiter, other.lineDelimiter) && Objects.equals(maxRuntime, other.maxRuntime)
+                && Objects.equals(name, other.name) && Objects.equals(stringQuote, other.stringQuote)
                 && Objects.equals(validationMode, other.validationMode);
     }
 
@@ -167,7 +174,7 @@ public class Imp implements Comparable<Imp> {
                 + ", defaultAction=" + defaultAction + ", description=" + description + ", validationMode="
                 + validationMode + ", lineDelimiter=" + lineDelimiter + ", fieldDelimiter=" + fieldDelimiter
                 + ", dateFormat=" + dateFormat + ", stringQuote=" + stringQuote + ", daysToKeepParsedData="
-                + daysToKeepParsedData + "]";
+                + daysToKeepParsedData + ", maxRuntime=" + maxRuntime + "]";
     }
 
 }
