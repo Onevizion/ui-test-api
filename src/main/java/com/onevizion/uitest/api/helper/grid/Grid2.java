@@ -1,5 +1,7 @@
 package com.onevizion.uitest.api.helper.grid;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
@@ -97,6 +99,14 @@ public class Grid2 {
 
     public String getPageName(Long gridId) {
         return grid2Js.getPageName(gridId);
+    }
+
+    public String getGridCellLastChildFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+        return grid2Js.getGridCellLastChildFontColor(gridIdx, rowIndex, columnIndex);
+    }
+
+    public List<String> getGridCellAllChildsBackgroundColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+        return grid2Js.getGridCellAllChildsBackgroundColor(gridIdx, rowIndex, columnIndex);
     }
 
 }

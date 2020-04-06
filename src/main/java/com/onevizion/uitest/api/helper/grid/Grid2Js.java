@@ -1,5 +1,7 @@
 package com.onevizion.uitest.api.helper.grid;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.helper.Js;
@@ -19,6 +21,28 @@ class Grid2Js extends Js {
 
     String getPageName(Long gridId) {
         return execJs("return gridArr[" + gridId + "].PageName;");
+    }
+
+    String getGridCellLastChildFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+        return execJs(
+                "var lastChild = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
+                "while (0 < lastChild.children.length) {" + 
+                "    lastChild = lastChild.children[0];" + 
+                "}" + 
+                "return window.getComputedStyle(lastChild, null).getPropertyValue('color');");
+    }
+
+    @SuppressWarnings("unchecked")
+    List<String> getGridCellAllChildsBackgroundColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+        return (List<String>) execJs2(
+                "var colors = [];" + 
+                "var element = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
+                "colors.push(window.getComputedStyle(element, null).getPropertyValue('background-color'));" + 
+                "while (0 < element.children.length) {" + 
+                "    element = element.children[0];" + 
+                "    colors.push(window.getComputedStyle(element, null).getPropertyValue('background-color'));" + 
+                "}" + 
+                "return colors;");
     }
 
 }
