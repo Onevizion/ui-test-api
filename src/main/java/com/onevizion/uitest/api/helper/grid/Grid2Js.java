@@ -15,7 +15,7 @@ class Grid2Js extends Js {
     }
 
     LockType getGridCellLockTypeByRowIndexAndColIndex(Long gridId, Long rowIndex, Long columnIndex) {
-        String lockType = execJs("return gridArr[" + gridId + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.childNodes[0].className;");
+        String lockType = execJs("return gridArr[" + gridId + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.children[0].className;");
         return LockType.getByGridCellClass(lockType);
     }
 
