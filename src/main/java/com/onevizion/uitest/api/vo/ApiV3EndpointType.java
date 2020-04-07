@@ -50,6 +50,8 @@ public enum ApiV3EndpointType {
 
     SECURITY_ROLES_READ("GET", "/v3/security-roles/{role_name}/users", "Read Users assigned to Security Role"),
 
+    SERVER_INFO_READ("GET", "/v3/server_info", "Read server information"),
+
     TASKS_READ_TASK("GET", "/v3/tasks", "Read Task"),
     TASKS_READ_TASK_BY_ID("GET", "/v3/tasks/{task_id}", "Read Task by Task id"),
     TASKS_READ_TASKS("GET", "/v3/wps/{workplan_id}/tasks", "Read Tasks by Workplan id"),
