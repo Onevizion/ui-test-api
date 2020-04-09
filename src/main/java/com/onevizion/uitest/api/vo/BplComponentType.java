@@ -2,7 +2,7 @@ package com.onevizion.uitest.api.vo;
 
 public enum BplComponentType {
 
-    APPLET("Applet", "Description"),
+    APPLET("Applet", "Applet Name"),
     FIELD("Field", "Field Name"),
     TAB("Tab", "Description"),
     VTABLE("Dynamic V_Tables", "Table Name"),
