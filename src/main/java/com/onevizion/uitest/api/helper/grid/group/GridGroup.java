@@ -12,6 +12,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
@@ -31,6 +32,9 @@ public class GridGroup {
     @Resource
     private GridGroupJs gridGroupJs;
 
+    @Resource
+    private Element element;
+
     public void checkGridIsGrouped(Long gridIdx) {
         int count = getGroups(gridIdx).size();
         Assert.assertEquals(count > 0, true, "Grid is not grouped");
@@ -49,6 +53,11 @@ public class GridGroup {
     public void checkGroupLabel(Long gridIdx, int position, String groupLabel) {
         String actualGroupLabel = getGroups(gridIdx).get(position - 1).getAttribute("innerText").trim();
         Assert.assertEquals(actualGroupLabel, groupLabel, "Wrong group label");
+    }
+
+    public void collapseOrExpandGroup(Long gridIdx, int position) {
+        WebElement group = getGroups(gridIdx).get(position - 1);
+        element.click(group);
     }
 
     private List<WebElement> getGroups(Long gridIdx) {
