@@ -182,6 +182,10 @@ public class SeleniumSettings {
         return headlessMode;
     }
 
+    public void setHeadlessMode(Boolean headlessMode) {
+        this.headlessMode = headlessMode;
+    }
+
     public Boolean getCodeCoverage() {
         return codeCoverage;
     }
