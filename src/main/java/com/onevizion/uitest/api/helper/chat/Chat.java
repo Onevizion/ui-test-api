@@ -18,9 +18,10 @@ import com.onevizion.uitest.api.helper.ElementWait;
 @Component
 public class Chat {
 
+    static final String ID_MAIN_PANEL = "slideChatPanel";
+
     private static final String ID_MAIN_BUTTON = "btnComments";
     private static final String ID_CLOSE_BUTTON = "btnCloseChat";
-    private static final String ID_MAIN_PANEL = "slideChatPanel";
     private static final String ID_MAIN_LOADER = "loaderChatLoader";
     private static final String ID_MANAGE = "btnManage";
     private static final String ID_MANAGE_PANEL = "managePanel";
@@ -28,6 +29,7 @@ public class Chat {
     private static final String ID_COMMENT_TEXT = "replyForm";
     private static final String ID_COMMENT_FILE = "btnAddFile";
     private static final String ID_COMMENT_SEND = "btnSend";
+    private static final String ID_COMMENT_LOADER = "loaderReply";
     private static final String CLASS_TOGGLE = "toggle";
     private static final String ID_SUBSCRIBE = "btnSubscribe";
     private static final String ID_CLOSE_MANAGE_PANEL = "btnOffManagePanel";
@@ -285,6 +287,18 @@ public class Chat {
         String subtitle = seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).findElement(By.className(CLASS_MANAGE_PANEL_SUBTITLE)).getText();
         String subscribedUsersCount = subtitle.substring(0, subtitle.indexOf("of")).trim();
         return Integer.parseInt(subscribedUsersCount);
+    }
+
+    public void sendMessageOnForm(String message) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_TEXT)).sendKeys(message);
+        seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_SEND)).click();
+        elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER);
+    }
+
+    public void sendMessageInGrid(String message) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx())).sendKeys(message);
+        seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx())).click();
+        elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER + AbstractSeleniumCore.getGridIdx());
     }
 
     private WebElement getUserFromManagePanelOnForm(String userName) {
