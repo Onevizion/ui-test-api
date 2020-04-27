@@ -16,54 +16,54 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-public class ListboxChatMessage {
+public class ListboxChatSearchMessage {
 
     //TODO need create AbstractListbox
 
     @Resource
     private SeleniumSettings seleniumSettings;
 
-    public List<ListboxElementChatMessage> getMessagesOnForm() {
+    public List<ListboxElementChatSearchMessage> getSearchMessagesOnForm() {
         return getItems(Chat.ID_MAIN_PANEL);
     }
 
-    public List<ListboxElementChatMessage> getMessagesInGrid() {
+    public List<ListboxElementChatSearchMessage> getSearchMessagesInGrid() {
         return getItems(Chat.ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
     }
 
-    private List<ListboxElementChatMessage> getItems(String listboxId) {
-        List<ListboxElementChatMessage> elements = new ArrayList<>();
+    private List<ListboxElementChatSearchMessage> getItems(String listboxId) {
+        List<ListboxElementChatSearchMessage> elements = new ArrayList<>();
 
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        List<WebElement> webElements = seleniumSettings.getWebDriver().findElement(By.id(listboxId)).findElements(By.className("comment_item"));
+        List<WebElement> webElements = seleniumSettings.getWebDriver().findElement(By.id(listboxId)).findElements(By.className("filterComment_item"));
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         for (WebElement webElement : webElements) {
-            ListboxElementChatMessage listboxElementChatMessage = new ListboxElementChatMessage();
-            listboxElementChatMessage.setWebElement(webElement);
-            listboxElementChatMessage.setId(webElement.getAttribute("id"));
-            listboxElementChatMessage.setText(webElement.findElement(By.className("ci_textMessage")).getAttribute("innerText"));
-            listboxElementChatMessage.setDate(webElement.findElement(By.className("ci_date")).getAttribute("innerText"));
-            listboxElementChatMessage.setAuthor(webElement.findElement(By.className("ci_author")).getAttribute("innerText"));
-            elements.add(listboxElementChatMessage);
+            ListboxElementChatSearchMessage listboxElementChatSearchMessage = new ListboxElementChatSearchMessage();
+            listboxElementChatSearchMessage.setWebElement(webElement);
+            listboxElementChatSearchMessage.setId(webElement.getAttribute("id"));
+            listboxElementChatSearchMessage.setText(webElement.findElement(By.className("fci_text")).getAttribute("innerText"));
+            listboxElementChatSearchMessage.setDate(webElement.findElement(By.className("fci_date")).getAttribute("innerText"));
+            listboxElementChatSearchMessage.setAuthor(webElement.findElement(By.className("fci_author")).getAttribute("innerText"));
+            elements.add(listboxElementChatSearchMessage);
         }
 
         return elements;
     }
 
-    public void checkElementsCount(List<ListboxElementChatMessage> elements, int size) {
+    public void checkElementsCount(List<ListboxElementChatSearchMessage> elements, int size) {
         Assert.assertEquals(elements.size(), size);
     }
 
-    public void checkElementByText(List<ListboxElementChatMessage> elements, int position, String text) {
+    public void checkElementByText(List<ListboxElementChatSearchMessage> elements, int position, String text) {
         Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getText().equals(text) && p == position - 1).count(), 1L, "Element with text [" + text + "] not found in position [" + position + "] in Listbox");
     }
 
-    public void checkElementByAuthor(List<ListboxElementChatMessage> elements, int position, String author) {
+    public void checkElementByAuthor(List<ListboxElementChatSearchMessage> elements, int position, String author) {
         Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getAuthor().equals(author) && p == position - 1).count(), 1L, "Element with author [" + author + "] not found in position [" + position + "] in Listbox");
     }
 
-    public void checkElementByDate(List<ListboxElementChatMessage> elements, int position, String date) {
+    public void checkElementByDate(List<ListboxElementChatSearchMessage> elements, int position, String date) {
         Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getDate().equals(date) && p == position - 1).count(), 1L, "Element with date [" + date + "] not found in position [" + position + "] in Listbox");
     }
 

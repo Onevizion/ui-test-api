@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 
 @Component
 public class Chat {
@@ -36,6 +37,14 @@ public class Chat {
     private static final String CLASS_USER_ON_MANAGE_PANEL = "user_item";
     private static final String CLASS_USER_NAME_ON_MANAGE_PANEL = "ui_name";
 
+    private static final String ID_SEARCH_PANEL = "filterPanel";
+    private static final String ID_SEARCH_PANEL_OPEN = "btnToSearchPanel";
+    private static final String ID_SEARCH_PANEL_CLOSE = "btnOffFilterPanel";
+
+    private static final String ID_SEARCH_TEXT = "chatFilterSearch";
+    private static final String ID_SEARCH_SEARCH = "filterStartSearch";
+    private static final String ID_SEARCH_CLEAR = "filterClearSearch";
+
     @Resource
     private SeleniumSettings seleniumSettings;
 
@@ -44,6 +53,9 @@ public class Chat {
 
     @Resource
     private ChatWait chatWait;
+
+    @Resource
+    private Jquery jquery;
 
     public void checkMainPanelOnFormExist() {
         checkElementExist(ID_MAIN_BUTTON);
@@ -195,6 +207,34 @@ public class Chat {
         elementWait.waitElementDisplayById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
     }
 
+    public void openSearchPanelOnForm() {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_OPEN)).click();
+        elementWait.waitElementVisibleById(ID_SEARCH_PANEL);
+        elementWait.waitElementDisplayById(ID_SEARCH_PANEL);
+    }
+
+    public void openSearchPanelInGrid() {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_OPEN + AbstractSeleniumCore.getGridIdx())).click();
+        elementWait.waitElementVisibleById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementDisplayById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void closeSearchPanelOnForm() {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_CLOSE)).click();
+        elementWait.waitElementNotVisibleById(ID_SEARCH_PANEL);
+        elementWait.waitElementNotDisplayById(ID_SEARCH_PANEL);
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL);
+    }
+
+    public void closeSearchPanelInGrid() {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_CLOSE + AbstractSeleniumCore.getGridIdx())).click();
+        elementWait.waitElementNotVisibleById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotDisplayById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+    }
+
     public void subscribeCurrentUserOnForm() {
         seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE)).click();
         elementWait.waitElementNotVisibleById(ID_SUBSCRIBE);
@@ -299,6 +339,20 @@ public class Chat {
         seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx())).sendKeys(message);
         seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx())).click();
         elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER + AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void searchMessageOnForm(String text) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_CLEAR)).click();
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_TEXT)).sendKeys(text);
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_SEARCH)).click();
+        jquery.waitLoad();
+    }
+
+    public void searchMessageInGrid(String text) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_CLEAR + AbstractSeleniumCore.getGridIdx())).click();
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_TEXT + AbstractSeleniumCore.getGridIdx())).sendKeys(text);
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_SEARCH + AbstractSeleniumCore.getGridIdx())).click();
+        jquery.waitLoad();
     }
 
     private WebElement getUserFromManagePanelOnForm(String userName) {
