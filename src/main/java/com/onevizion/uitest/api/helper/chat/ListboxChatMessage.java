@@ -18,6 +18,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class ListboxChatMessage {
 
+    //TODO need create AbstractListbox
+
     @Resource
     private SeleniumSettings seleniumSettings;
 

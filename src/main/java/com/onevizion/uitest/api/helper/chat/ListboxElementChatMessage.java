@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 
 public class ListboxElementChatMessage {
 
+    //TODO need create AbstractListboxElement
+
     private WebElement webElement;
     private String id;
     private String text;
