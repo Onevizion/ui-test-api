@@ -253,11 +253,11 @@ public enum FilterOperatorType {
     }
 
     public static List<FilterOperatorType> getWpNameOperators() {
-        return Arrays.asList(EQUAL);
+        return Arrays.asList(EQUAL, NOT_EQUAL, NULL, NOT_NULL);
     }
 
     public static List<FilterOperatorType> getWpTemplateNameOperators() {
-        return Arrays.asList(EQUAL);
+        return Arrays.asList(EQUAL, NOT_EQUAL, NULL, NOT_NULL);
     }
 
     public static List<FilterOperatorType> getXitorClassOperators(boolean supportOuterOperations) {

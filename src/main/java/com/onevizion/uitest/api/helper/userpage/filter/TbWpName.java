@@ -36,6 +36,9 @@ public class TbWpName {
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
         userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.TEXT, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.TEXT, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.TEXT, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.TEXT, columnIndex, null, cellVals, null);
     }
 
 }
