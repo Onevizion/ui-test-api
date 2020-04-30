@@ -71,6 +71,14 @@ public class Grid2 {
             .until(webdriver -> js.isGridDataLoaded(gridId));
     }
 
+    public void waitUpdate() {
+        waitUpdate(AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void waitUpdate(Long gridId) {
+        grid2Wait.waitUpdate(gridId);
+    }
+
     public void saveChanges(Long gridId) {
         elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_SAVE_GRID_ID_BASE + gridId);
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_SAVE_GRID_ID_BASE + gridId)).click();

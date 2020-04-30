@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -145,6 +146,36 @@ public class Element {
         } else {
             throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
         }
+    }
+
+    public void checkBackgroundColor(WebElement element, String backgroundColor) {
+        String actualBackgroundColor = elementJs.getBackgroundColor(element);
+        Assert.assertEquals(actualBackgroundColor, backgroundColor);
+    }
+
+    public void checkBackgroundColorByName(String name, String backgroundColor) {
+        String actualBackgroundColor = elementJs.getBackgroundColorByName(name);
+        Assert.assertEquals(actualBackgroundColor, backgroundColor);
+    }
+
+    public void checkBackgroundColorById(String id, String backgroundColor) {
+        String actualBackgroundColor = elementJs.getBackgroundColorById(id);
+        Assert.assertEquals(actualBackgroundColor, backgroundColor);
+    }
+
+    public void checkFontColor(WebElement element, String fontColor) {
+        String actualFontColor = elementJs.getFontColor(element);
+        Assert.assertEquals(actualFontColor, fontColor);
+    }
+
+    public void checkFontColorByName(String name, String fontColor) {
+        String actualFontColor = elementJs.getFontColorByName(name);
+        Assert.assertEquals(actualFontColor, fontColor);
+    }
+
+    public void checkFontColorById(String id, String fontColor) {
+        String actualFontColor = elementJs.getFontColorById(id);
+        Assert.assertEquals(actualFontColor, fontColor);
     }
 
 }

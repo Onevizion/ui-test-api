@@ -173,4 +173,28 @@ public class ElementJs extends Js {
                 "arguments[0].dispatchEvent(event);", source);
     }
 
+    public String getBackgroundColor(WebElement element) {
+        return execJs4("return window.getComputedStyle(arguments[0], null).getPropertyValue('background-color');", element);
+    }
+
+    public String getBackgroundColorByName(String name) {
+        return execJs("return window.getComputedStyle(document.getElementsByName('" + name + "')[0], null).getPropertyValue('background-color');");
+    }
+
+    public String getBackgroundColorById(String id) {
+        return execJs("return window.getComputedStyle(document.getElementById('" + id + "'), null).getPropertyValue('background-color');");
+    }
+
+    public String getFontColor(WebElement element) {
+        return execJs4("return window.getComputedStyle(arguments[0], null).getPropertyValue('color');", element);
+    }
+
+    public String getFontColorByName(String name) {
+        return execJs("return window.getComputedStyle(document.getElementsByName('" + name + "')[0], null).getPropertyValue('color');");
+    }
+
+    public String getFontColorById(String id) {
+        return execJs("return window.getComputedStyle(document.getElementById('" + id + "'), null).getPropertyValue('color');");
+    }
+
 }

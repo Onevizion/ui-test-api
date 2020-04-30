@@ -26,6 +26,16 @@ class Grid2Wait {
     @Resource
     private Wait wait;
 
+    void waitUpdate(Long gridIdx) {
+        BooleanSupplier actualValueSupplier = ()-> grid2Js.isUpdateDone(gridIdx);
+
+        Supplier<String> messageSupplier = ()-> "Waiting for grid update is failed";
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage(messageSupplier)
+            .until(webdriver -> actualValueSupplier.getAsBoolean());
+    }
+
     void waitLoadAllRows(Long gridIdx) {
         BooleanSupplier actualValueSupplier = ()-> grid2Js.isLoadAllRowsDone(gridIdx);
 

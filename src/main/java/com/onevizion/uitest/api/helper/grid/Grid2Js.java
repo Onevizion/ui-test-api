@@ -10,6 +10,10 @@ import com.onevizion.uitest.api.vo.LockType;
 @Component
 class Grid2Js extends Js {
 
+    Boolean isUpdateDone(Long gridIdx) {
+        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].isUpdating == false;"));
+    }
+
     Boolean isLoadAllRowsDone(Long gridIdx) {
         return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].grid.isLoadingParsing == false;"));
     }
