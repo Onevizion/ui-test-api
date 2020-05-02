@@ -362,7 +362,7 @@ public class Wait {
 
     public void waitBplImportFileSubmitDone() {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for DropGrid Verification is failed")
+            .withMessage("Waiting for Bpl Import File Submit Done is failed")
             .until(webdriver -> js.bplImportFileSubmitDone());
     }
 
