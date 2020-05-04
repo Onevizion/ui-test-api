@@ -13,6 +13,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 
@@ -51,6 +52,9 @@ public class Chat {
 
     @Resource
     private SeleniumSettings seleniumSettings;
+
+    @Resource
+    private Element element;
 
     @Resource
     private ElementWait elementWait;
@@ -252,28 +256,28 @@ public class Chat {
     public void subscribeUserOnForm(String userName) {
         int beforeCount = getSubscribedUsersCountOnForm();
         WebElement user = getUserFromManagePanelOnForm(userName);
-        user.click();
+        element.click(user);
         chatWait.waitSubscribedUsersCountOnForm(beforeCount + 1);
     }
 
     public void subscribeUserInGrid(String userName) {
         int beforeCount = getSubscribedUsersCountInGrid();
         WebElement user = getUserFromManagePanelInGrid(userName);
-        user.click();
+        element.click(user);
         chatWait.waitSubscribedUsersCountInGrid(beforeCount + 1);
     }
 
     public void unsubscribeUserOnForm(String userName) {
         int beforeCount = getSubscribedUsersCountOnForm();
         WebElement user = getUserFromManagePanelOnForm(userName);
-        user.click();
+        element.click(user);
         chatWait.waitSubscribedUsersCountOnForm(beforeCount - 1);
     }
 
     public void unsubscribeUserInGrid(String userName) {
         int beforeCount = getSubscribedUsersCountInGrid();
         WebElement user = getUserFromManagePanelInGrid(userName);
-        user.click();
+        element.click(user);
         chatWait.waitSubscribedUsersCountInGrid(beforeCount - 1);
     }
 
