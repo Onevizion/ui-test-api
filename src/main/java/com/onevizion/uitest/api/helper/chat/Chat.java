@@ -37,6 +37,10 @@ public class Chat {
     private static final String CLASS_USER_ON_MANAGE_PANEL = "user_item";
     private static final String CLASS_USER_NAME_ON_MANAGE_PANEL = "ui_name";
 
+    private static final String ID_MY_TEAM = "myTeam";
+
+    private static final String ID_SUBSCRIBE_LIST = "chatListUsers";
+
     private static final String ID_SEARCH_PANEL = "filterPanel";
     private static final String ID_SEARCH_PANEL_OPEN = "btnToSearchPanel";
     private static final String ID_SEARCH_PANEL_CLOSE = "btnOffFilterPanel";
@@ -134,22 +138,22 @@ public class Chat {
     }
 
     public void checkSubscribeToggleOnFormExists() {
-        int count = getToggleCount(ID_MAIN_PANEL);
+        int count = getToggleCount(ID_SUBSCRIBE_LIST);
         Assert.assertEquals(count > 0, true, "Toggles not found");
     }
 
     public void checkSubscribeToggleOnFormNotExists() {
-        int count = getToggleCount(ID_MAIN_PANEL);
+        int count = getToggleCount(ID_SUBSCRIBE_LIST);
         Assert.assertEquals(count == 0, true, "Toggles found");
     }
 
     public void checkSubscribeToggleInGridExists() {
-        int count = getToggleCount(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+        int count = getToggleCount(ID_SUBSCRIBE_LIST + AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(count > 0, true, "Toggles not found");
     }
 
     public void checkSubscribeToggleInGridNotExists() {
-        int count = getToggleCount(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+        int count = getToggleCount(ID_SUBSCRIBE_LIST + AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(count == 0, true, "Toggles found");
     }
 
@@ -355,6 +359,30 @@ public class Chat {
         jquery.waitLoad();
     }
 
+    public void checkMyTeamIsOnOnForm() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL)).findElement(By.id(ID_MY_TEAM));
+        boolean toggleIsOn = isToggleOn(toggle);
+        Assert.assertEquals(toggleIsOn, true);
+    }
+
+    public void checkMyTeamIsOnInGrid() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx())).findElement(By.id(ID_MY_TEAM));
+        boolean toggleIsOn = isToggleOn(toggle);
+        Assert.assertEquals(toggleIsOn, true);
+    }
+
+    public void checkMyTeamIsOffOnForm() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL)).findElement(By.id(ID_MY_TEAM));
+        boolean toggleIsOn = isToggleOn(toggle);
+        Assert.assertEquals(toggleIsOn, false);
+    }
+
+    public void checkMyTeamIsOffInGrid() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx())).findElement(By.id(ID_MY_TEAM));
+        boolean toggleIsOn = isToggleOn(toggle);
+        Assert.assertEquals(toggleIsOn, false);
+    }
+
     private WebElement getUserFromManagePanelOnForm(String userName) {
         WebElement result = null;
 
@@ -426,6 +454,10 @@ public class Chat {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         return count;
+    }
+
+    private boolean isToggleOn(WebElement webElement) {
+        return webElement.getAttribute("class").contains("toggle_on");
     }
 
 }
