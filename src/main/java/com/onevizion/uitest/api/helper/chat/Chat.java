@@ -162,45 +162,45 @@ public class Chat {
     }
 
     public void openChatPanelOnForm() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON)).click();
+        element.clickById(ID_MAIN_BUTTON);
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL);
         elementWait.waitElementNotVisibleById(ID_MAIN_LOADER);
         elementWait.waitElementNotDisplayById(ID_MAIN_LOADER);
     }
 
     public void openChatPanelInGrid() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_MAIN_BUTTON + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotVisibleById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotDisplayById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
     }
 
     public void closeChatPanelOnForm() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON)).click();
+        element.clickById(ID_MAIN_BUTTON);
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL);
     }
 
     public void closeChatPanelInGrid() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_CLOSE_BUTTON + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_CLOSE_BUTTON + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
     }
 
     public void openSubscribePanelOnForm() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE)).click();
+        element.clickById(ID_MANAGE);
         elementWait.waitElementVisibleById(ID_MANAGE_PANEL);
         elementWait.waitElementDisplayById(ID_MANAGE_PANEL);
         chatWait.waitIsReadySubscribePanel();
     }
 
     public void openSubscribePanelInGrid() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_MANAGE + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_MANAGE + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVisibleById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementDisplayById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
         chatWait.waitIsReadySubscribePanel();
     }
 
     public void closeSubscribePanelOnForm() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_CLOSE_MANAGE_PANEL)).click();
+        element.clickById(ID_CLOSE_MANAGE_PANEL);
         elementWait.waitElementNotVisibleById(ID_MANAGE_PANEL);
         elementWait.waitElementNotDisplayById(ID_MANAGE_PANEL);
         elementWait.waitElementVisibleById(ID_MAIN_PANEL);
@@ -208,7 +208,7 @@ public class Chat {
     }
 
     public void closeSubscribePanelInGrid() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_CLOSE_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_CLOSE_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotVisibleById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotDisplayById(ID_MANAGE_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
@@ -216,19 +216,19 @@ public class Chat {
     }
 
     public void openSearchPanelOnForm() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_OPEN)).click();
+        element.clickById(ID_SEARCH_PANEL_OPEN);
         elementWait.waitElementVisibleById(ID_SEARCH_PANEL);
         elementWait.waitElementDisplayById(ID_SEARCH_PANEL);
     }
 
     public void openSearchPanelInGrid() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_OPEN + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_SEARCH_PANEL_OPEN + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVisibleById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementDisplayById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
     }
 
     public void closeSearchPanelOnForm() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_CLOSE)).click();
+        element.clickById(ID_SEARCH_PANEL_CLOSE);
         elementWait.waitElementNotVisibleById(ID_SEARCH_PANEL);
         elementWait.waitElementNotDisplayById(ID_SEARCH_PANEL);
         elementWait.waitElementVisibleById(ID_MAIN_PANEL);
@@ -236,7 +236,7 @@ public class Chat {
     }
 
     public void closeSearchPanelInGrid() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_CLOSE + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_SEARCH_PANEL_CLOSE + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotVisibleById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotDisplayById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
@@ -244,12 +244,12 @@ public class Chat {
     }
 
     public void subscribeCurrentUserOnForm() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE)).click();
+        element.clickById(ID_SUBSCRIBE);
         elementWait.waitElementNotVisibleById(ID_SUBSCRIBE);
     }
 
     public void subscribeCurrentUserInGrid() {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SUBSCRIBE + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_SUBSCRIBE + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotVisibleById(ID_SUBSCRIBE + AbstractSeleniumCore.getGridIdx());
     }
 
@@ -339,27 +339,27 @@ public class Chat {
 
     public void sendMessageOnForm(String message) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_TEXT)).sendKeys(message);
-        seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_SEND)).click();
+        element.clickById(ID_COMMENT_SEND);
         elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER);
     }
 
     public void sendMessageInGrid(String message) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx())).sendKeys(message);
-        seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER + AbstractSeleniumCore.getGridIdx());
     }
 
     public void searchMessageOnForm(String text) {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_CLEAR)).click();
+        element.clickById(ID_SEARCH_CLEAR);
         seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_TEXT)).sendKeys(text);
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_SEARCH)).click();
+        element.clickById(ID_SEARCH_SEARCH);
         jquery.waitLoad();
     }
 
     public void searchMessageInGrid(String text) {
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_CLEAR + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_SEARCH_CLEAR + AbstractSeleniumCore.getGridIdx());
         seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_TEXT + AbstractSeleniumCore.getGridIdx())).sendKeys(text);
-        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_SEARCH + AbstractSeleniumCore.getGridIdx())).click();
+        element.clickById(ID_SEARCH_SEARCH + AbstractSeleniumCore.getGridIdx());
         jquery.waitLoad();
     }
 
