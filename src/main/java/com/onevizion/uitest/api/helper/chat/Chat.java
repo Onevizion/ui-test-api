@@ -164,6 +164,8 @@ public class Chat {
     public void openChatPanelOnForm() {
         element.clickById(ID_MAIN_BUTTON);
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL);
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL);
         elementWait.waitElementNotVisibleById(ID_MAIN_LOADER);
         elementWait.waitElementNotDisplayById(ID_MAIN_LOADER);
     }
@@ -171,6 +173,8 @@ public class Chat {
     public void openChatPanelInGrid() {
         element.clickById(ID_MAIN_BUTTON + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementVisibleById(ID_MAIN_PANEL);
+        elementWait.waitElementDisplayById(ID_MAIN_PANEL);
         elementWait.waitElementNotVisibleById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementNotDisplayById(ID_MAIN_LOADER + AbstractSeleniumCore.getGridIdx());
     }
@@ -178,11 +182,15 @@ public class Chat {
     public void closeChatPanelOnForm() {
         element.clickById(ID_MAIN_BUTTON);
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL);
+        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL);
+        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL);
     }
 
     public void closeChatPanelInGrid() {
         element.clickById(ID_CLOSE_BUTTON + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+        elementWait.waitElementNotVisibleById(ID_MAIN_PANEL);
+        elementWait.waitElementNotDisplayById(ID_MAIN_PANEL);
     }
 
     public void openSubscribePanelOnForm() {
