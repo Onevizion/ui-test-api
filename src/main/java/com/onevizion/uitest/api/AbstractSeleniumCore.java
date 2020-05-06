@@ -65,6 +65,7 @@ import com.onevizion.uitest.api.helper.bpl.export.BplExport;
 import com.onevizion.uitest.api.helper.chat.Chat;
 import com.onevizion.uitest.api.helper.chat.ListboxChatMessage;
 import com.onevizion.uitest.api.helper.chat.ListboxChatSearchMessage;
+import com.onevizion.uitest.api.helper.chat.ListboxChatSubscriber;
 import com.onevizion.uitest.api.helper.clipboard.Clipboard;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
 import com.onevizion.uitest.api.helper.comment.Comment;
@@ -148,6 +149,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Resource
     protected ListboxChatSearchMessage listboxChatSearchMessage;
+
+    @Resource
+    protected ListboxChatSubscriber listboxChatSubscriber;
 
     @Resource
     protected Filter filter;

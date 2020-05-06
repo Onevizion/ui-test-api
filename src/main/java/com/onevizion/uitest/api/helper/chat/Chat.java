@@ -13,6 +13,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
@@ -64,6 +65,9 @@ public class Chat {
 
     @Resource
     private Jquery jquery;
+
+    @Resource
+    private AssertElement assertElement;
 
     public void checkMainPanelOnFormExist() {
         checkElementExist(ID_MAIN_BUTTON);
@@ -395,6 +399,42 @@ public class Chat {
         Assert.assertEquals(toggleIsOn, false);
     }
 
+    public void checkMyTeamEnabledOnForm() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL)).findElement(By.id(ID_MY_TEAM));
+        WebElement toggleCheckbox = getToggleCheckbox(toggle);
+        assertElement.assertElementEnabled(toggleCheckbox);
+    }
+
+    public void checkMyTeamEnabledInGrid() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx())).findElement(By.id(ID_MY_TEAM));
+        WebElement toggleCheckbox = getToggleCheckbox(toggle);
+        assertElement.assertElementEnabled(toggleCheckbox);
+    }
+
+    public void checkMyTeamDisabledOnForm() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL)).findElement(By.id(ID_MY_TEAM));
+        WebElement toggleCheckbox = getToggleCheckbox(toggle);
+        assertElement.assertElementDisabled(toggleCheckbox);
+    }
+
+    public void checkMyTeamDisabledInGrid() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx())).findElement(By.id(ID_MY_TEAM));
+        WebElement toggleCheckbox = getToggleCheckbox(toggle);
+        assertElement.assertElementDisabled(toggleCheckbox);
+    }
+
+    public void switchMyTeamOnForm() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL)).findElement(By.id(ID_MY_TEAM));
+        element.click(toggle);
+        chatWait.waitIsReadySubscribePanel();
+    }
+
+    public void switchMyTeamInGrid() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx())).findElement(By.id(ID_MY_TEAM));
+        element.click(toggle);
+        chatWait.waitIsReadySubscribePanel();
+    }
+
     private WebElement getUserFromManagePanelOnForm(String userName) {
         WebElement result = null;
 
@@ -468,8 +508,12 @@ public class Chat {
         return count;
     }
 
-    private boolean isToggleOn(WebElement webElement) {
-        return webElement.getAttribute("class").contains("toggle_on");
+    private boolean isToggleOn(WebElement toggle) {
+        return toggle.getAttribute("class").contains("toggle_on");
+    }
+
+    private WebElement getToggleCheckbox(WebElement toggle) {
+        return toggle.findElement(By.className("tg_checkbox"));
     }
 
 }
