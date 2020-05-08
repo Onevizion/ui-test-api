@@ -607,7 +607,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     }
 
     protected void seleniumCloseBrowser(ITestContext context) {
-        seleniumSettings.getProfilerTestMethods().stop();
+        if (seleniumSettings.getProfilerTestMethods() != null) {
+            seleniumSettings.getProfilerTestMethods().stop();
+        }
 
         try {
             if (seleniumSettings.getWebDriver() != null) {
@@ -708,7 +710,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         try {
             CreateProcess.updateBrowserVersion(seleniumSettings.getRestApiUrl(), seleniumSettings.getRestApiCredential(), processTrackorKey, browserVersion);
             createTestResult.update(testResultTrackorKey, seleniumSettings.getTestStatus(), testResultNode, seleniumSettings.getTestLog(),
-                    seleniumSettings.getProfiler().toString(), seleniumSettings.getProfilerTestMethods().toString(), seleniumSettings.getProfilerTestMethods().elapsedTime(),
+                    seleniumSettings.getProfiler(), seleniumSettings.getProfilerTestMethods(),
                     getErrorReport(), seleniumSettings.getTestCallstack(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
             seleniumLogger.error("call REST API Unexpected exception: " + e.getMessage());

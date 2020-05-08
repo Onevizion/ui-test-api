@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import javax.annotation.Resource;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.profiler.Profiler;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -79,23 +80,31 @@ public class CreateTestResult {
     }
 
     public void update(String trackorKey, String testStatus, String testResultNode, String testLog,
-            String profiler, String profilerTestMethods, double runtimeTestMethods,
+            Profiler profiler, Profiler profilerTestMethods,
             String errorReport, String errorCallstack, String errorScreenshot) {
         try {
-            profiler = profiler.replaceAll("\\\\", "\\\\\\\\");
-            profiler = profiler.replaceAll("\\n", "\\\\n");
-            profiler = profiler.replaceAll("\\t", "\\\\t");
-            profiler = profiler.replaceAll("\\r", "\\\\r");
-            profiler = profiler.replaceAll("\"", "'");
+            String profilerOutput = profiler.toString();
+            profilerOutput = profilerOutput.replaceAll("\\\\", "\\\\\\\\");
+            profilerOutput = profilerOutput.replaceAll("\\n", "\\\\n");
+            profilerOutput = profilerOutput.replaceAll("\\t", "\\\\t");
+            profilerOutput = profilerOutput.replaceAll("\\r", "\\\\r");
+            profilerOutput = profilerOutput.replaceAll("\"", "'");
 
-            profilerTestMethods = profilerTestMethods.replaceAll("\\\\", "\\\\\\\\");
-            profilerTestMethods = profilerTestMethods.replaceAll("\\n", "\\\\n");
-            profilerTestMethods = profilerTestMethods.replaceAll("\\t", "\\\\t");
-            profilerTestMethods = profilerTestMethods.replaceAll("\\r", "\\\\r");
-            profilerTestMethods = profilerTestMethods.replaceAll("\"", "'");
+            String profilerTestMethodsOutput = "";
+            double runtimeTestMethods = -1;
+            if (profilerTestMethods != null) {
+                profilerTestMethodsOutput = profilerTestMethods.toString();
+                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\\\\", "\\\\\\\\");
+                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\\n", "\\\\n");
+                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\\t", "\\\\t");
+                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\\r", "\\\\r");
+                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\"", "'");
 
-            runtimeTestMethods = (double) runtimeTestMethods / 1_000_000_000;
-            runtimeTestMethods = (double) Math.round(runtimeTestMethods * 1000) / 1000;
+                runtimeTestMethods = profilerTestMethods.elapsedTime();
+                runtimeTestMethods = (double) runtimeTestMethods / 1_000_000_000;
+                runtimeTestMethods = (double) Math.round(runtimeTestMethods * 1000) / 1000;
+            }
+            
 
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=%22" + trackorKey + "%22");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -113,8 +122,8 @@ public class CreateTestResult {
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                             "     \"STR_NODE\": \"" + testResultNode + "\", " + 
                             "     \"STR_ERROR_LOG\": \"" + testLog + "\", " + 
-                            "     \"STR_PROFILER\": \"" + profiler + "\", " + 
-                            "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethods + "\", " + 
+                            "     \"STR_PROFILER\": \"" + profilerOutput + "\", " + 
+                            "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethodsOutput + "\", " + 
                             "     \"STR_RUNTIME_TEST_METHO_SECONDS\": \"" + runtimeTestMethods + "\", " + 
                             "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
                             "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\", " + 
@@ -127,8 +136,8 @@ public class CreateTestResult {
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                             "     \"STR_NODE\": \"" + testResultNode + "\", " + 
                             "     \"STR_ERROR_LOG\": \"" + testLog + "\", " + 
-                            "     \"STR_PROFILER\": \"" + profiler + "\", " + 
-                            "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethods + "\", " + 
+                            "     \"STR_PROFILER\": \"" + profilerOutput + "\", " + 
+                            "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethodsOutput + "\", " + 
                             "     \"STR_RUNTIME_TEST_METHO_SECONDS\": \"" + runtimeTestMethods + "\", " + 
                             "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
                             "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\" " + 
@@ -141,8 +150,8 @@ public class CreateTestResult {
                         "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                         "     \"STR_NODE\": \"" + testResultNode + "\", " + 
                         "     \"STR_ERROR_LOG\": \"" + testLog + "\", " + 
-                        "     \"STR_PROFILER\": \"" + profiler + "\", " + 
-                        "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethods + "\", " + 
+                        "     \"STR_PROFILER\": \"" + profilerOutput + "\", " + 
+                        "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethodsOutput + "\", " + 
                         "     \"STR_RUNTIME_TEST_METHO_SECONDS\": \"" + runtimeTestMethods + "\" " + 
                         "   } " + 
                         " }";
