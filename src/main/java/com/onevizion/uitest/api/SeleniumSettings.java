@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.openqa.selenium.WebDriver;
+import org.slf4j.profiler.Profiler;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -27,6 +28,10 @@ public class SeleniumSettings {
     private ThreadLocal<String> testCallstack = new ThreadLocal<>();
 
     private ThreadLocal<String> testFailScreenshot = new ThreadLocal<>();
+
+    private ThreadLocal<Profiler> profiler = new ThreadLocal<>();
+
+    private ThreadLocal<Profiler> profilerTestMethods = new ThreadLocal<>();
 
     @Resource
     private Long defaultTimeout;
@@ -152,6 +157,24 @@ public class SeleniumSettings {
 
     void setTestFailScreenshot(String testFailScreenshot) {
         this.testFailScreenshot.set(testFailScreenshot);
+    }
+
+    public Profiler getProfiler() {
+        return profiler.get();
+    }
+
+    void setProfiler(Profiler profiler) {
+        this.profiler.remove();
+        this.profiler.set(profiler);
+    }
+
+    public Profiler getProfilerTestMethods() {
+        return profilerTestMethods.get();
+    }
+
+    void setProfilerTestMethods(Profiler profilerTestMethods) {
+        this.profilerTestMethods.remove();
+        this.profilerTestMethods.set(profilerTestMethods);
     }
 
     public Long getDefaultTimeout() {

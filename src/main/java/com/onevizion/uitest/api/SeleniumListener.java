@@ -17,6 +17,8 @@ public class SeleniumListener extends TestListenerAdapter {
 
         AbstractSeleniumCore test = ((AbstractSeleniumCore) tr.getTestClass().getInstances(false)[0]);
         test.seleniumLogger.info("method " + tr.getName() + " start");
+        test.seleniumSettings.getProfiler().start(tr.getName());
+        test.seleniumSettings.getProfilerTestMethods().start(tr.getName());
     }
 
     @Override

@@ -78,8 +78,25 @@ public class CreateTestResult {
         }
     }
 
-    public void update(String trackorKey, String testStatus, String testResultNode, String errorLog, String errorReport, String errorCallstack, String errorScreenshot) {
+    public void update(String trackorKey, String testStatus, String testResultNode, String testLog,
+            String profiler, String profilerTestMethods, double runtimeTestMethods,
+            String errorReport, String errorCallstack, String errorScreenshot) {
         try {
+            profiler = profiler.replaceAll("\\\\", "\\\\\\\\");
+            profiler = profiler.replaceAll("\\n", "\\\\n");
+            profiler = profiler.replaceAll("\\t", "\\\\t");
+            profiler = profiler.replaceAll("\\r", "\\\\r");
+            profiler = profiler.replaceAll("\"", "'");
+
+            profilerTestMethods = profilerTestMethods.replaceAll("\\\\", "\\\\\\\\");
+            profilerTestMethods = profilerTestMethods.replaceAll("\\n", "\\\\n");
+            profilerTestMethods = profilerTestMethods.replaceAll("\\t", "\\\\t");
+            profilerTestMethods = profilerTestMethods.replaceAll("\\r", "\\\\r");
+            profilerTestMethods = profilerTestMethods.replaceAll("\"", "'");
+
+            runtimeTestMethods = (double) runtimeTestMethods / 1_000_000_000;
+            runtimeTestMethods = (double) Math.round(runtimeTestMethods * 1000) / 1000;
+
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=%22" + trackorKey + "%22");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
@@ -95,7 +112,10 @@ public class CreateTestResult {
                             "   \"fields\": { " + 
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                             "     \"STR_NODE\": \"" + testResultNode + "\", " + 
-                            "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
+                            "     \"STR_ERROR_LOG\": \"" + testLog + "\", " + 
+                            "     \"STR_PROFILER\": \"" + profiler + "\", " + 
+                            "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethods + "\", " + 
+                            "     \"STR_RUNTIME_TEST_METHO_SECONDS\": \"" + runtimeTestMethods + "\", " + 
                             "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
                             "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\", " + 
                             "     \"STR_ERROR_FILE\": {\"file_name\": \"screenshot.jpg\", \"data\": \"" + errorScreenshot + "\"} " + 
@@ -106,7 +126,10 @@ public class CreateTestResult {
                             "   \"fields\": { " + 
                             "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                             "     \"STR_NODE\": \"" + testResultNode + "\", " + 
-                            "     \"STR_ERROR_LOG\": \"" + errorLog + "\", " + 
+                            "     \"STR_ERROR_LOG\": \"" + testLog + "\", " + 
+                            "     \"STR_PROFILER\": \"" + profiler + "\", " + 
+                            "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethods + "\", " + 
+                            "     \"STR_RUNTIME_TEST_METHO_SECONDS\": \"" + runtimeTestMethods + "\", " + 
                             "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
                             "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\" " + 
                             "   } " + 
@@ -117,7 +140,10 @@ public class CreateTestResult {
                         "   \"fields\": { " + 
                         "     \"STR_STATUS\": \"" + testStatus + "\", " + 
                         "     \"STR_NODE\": \"" + testResultNode + "\", " + 
-                        "     \"STR_ERROR_LOG\": \"" + errorLog + "\" " + 
+                        "     \"STR_ERROR_LOG\": \"" + testLog + "\", " + 
+                        "     \"STR_PROFILER\": \"" + profiler + "\", " + 
+                        "     \"STR_PROFILER_TEST_METHODS\": \"" + profilerTestMethods + "\", " + 
+                        "     \"STR_RUNTIME_TEST_METHO_SECONDS\": \"" + runtimeTestMethods + "\" " + 
                         "   } " + 
                         " }";
             }

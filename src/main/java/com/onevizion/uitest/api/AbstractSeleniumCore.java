@@ -22,6 +22,7 @@ import org.openqa.selenium.remote.CommandInfo;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.internal.OkHttpClient;
+import org.slf4j.profiler.Profiler;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestContext;
 
@@ -482,6 +483,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     }
 
     protected void seleniumOpenBrowserAndLogin(ITestContext context) {
+        seleniumSettings.setProfiler(new Profiler(getTestName()));
         seleniumSettings.setTestName(getTestName());
         seleniumSettings.setTestStatus("success");
         seleniumSettings.clearTestLog();
@@ -493,6 +495,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
 
         try {
+            seleniumSettings.getProfiler().start("openBrowser");
             Date startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("openBrowser start");
             if (seleniumSettings.getRemoteWebDriver()) {
@@ -563,18 +566,21 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             long duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
             seleniumLogger.info("openBrowser success elapsed time " + duration + " seconds");
 
+            seleniumSettings.getProfiler().start("codeCoverageStart");
             startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("codeCoverageStart start");
             browserCodeCoverage.start();
             duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
             seleniumLogger.info("codeCoverageStart success elapsed time " + duration + " seconds");
 
+            seleniumSettings.getProfiler().start("openLoginPage");
             startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("openLoginPage start");
             document.open2(seleniumSettings.getServerUrl());
             duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
             seleniumLogger.info("openLoginPage success elapsed time " + duration + " seconds");
 
+            seleniumSettings.getProfiler().start("loginIntoSystem");
             startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("loginIntoSystem start");
             seleniumLogger.info("login as " + seleniumSettings.getTestUser());
@@ -582,6 +588,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
             seleniumLogger.info("loginIntoSystem success elapsed time " + duration + " seconds");
 
+            seleniumSettings.getProfiler().start("dataPreparation");
             startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("dataPreparation start");
             fillGlobalSettings();
@@ -590,6 +597,10 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
             seleniumLogger.info("dataPreparation success elapsed time " + duration + " seconds");
 
+            seleniumSettings.setProfilerTestMethods(new Profiler(getTestName()));
+
+            seleniumSettings.getProfiler().start("openInternalPage");
+            seleniumSettings.getProfilerTestMethods().start("openInternalPage");
             startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("openInternalPage start");
             openInternalPage();
@@ -610,17 +621,23 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     }
 
     protected void seleniumCloseBrowser(ITestContext context) {
+        seleniumSettings.getProfilerTestMethods().stop();
+
         try {
             if (seleniumSettings.getWebDriver() != null) {
+                seleniumSettings.getProfiler().start("codeCoverageFinish");
                 seleniumLogger.info("codeCoverageFinish start");
                 browserCodeCoverage.finish();
                 seleniumLogger.info("codeCoverageFinish success");
 
+                seleniumSettings.getProfiler().start("closeBrowser");
                 seleniumLogger.info("closeBrowser start");
                 seleniumHelper.closeAfterError();
                 seleniumSettings.getWebDriver().quit();
                 seleniumLogger.info("closeBrowser success");
             }
+
+            seleniumSettings.getProfiler().stop();
 
             updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
         } catch (Throwable e) {
@@ -628,6 +645,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
             seleniumLogger.error("seleniumCloseBrowser fail");
             seleniumLogger.error("seleniumCloseBrowser Unexpected exception: " + e.getMessage());
+
+            seleniumSettings.getProfiler().stop();
 
             updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
 
@@ -702,7 +721,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         try {
             CreateProcess.updateBrowserVersion(seleniumSettings.getRestApiUrl(), seleniumSettings.getRestApiCredential(), processTrackorKey, browserVersion);
-            createTestResult.update(testResultTrackorKey, seleniumSettings.getTestStatus(), testResultNode, seleniumSettings.getTestLog(), getErrorReport(), seleniumSettings.getTestCallstack(), seleniumSettings.getTestFailScreenshot());
+            createTestResult.update(testResultTrackorKey, seleniumSettings.getTestStatus(), testResultNode, seleniumSettings.getTestLog(),
+                    seleniumSettings.getProfiler().toString(), seleniumSettings.getProfilerTestMethods().toString(), seleniumSettings.getProfilerTestMethods().elapsedTime(),
+                    getErrorReport(), seleniumSettings.getTestCallstack(), seleniumSettings.getTestFailScreenshot());
         } catch (Exception e) {
             seleniumLogger.error("call REST API Unexpected exception: " + e.getMessage());
         }
