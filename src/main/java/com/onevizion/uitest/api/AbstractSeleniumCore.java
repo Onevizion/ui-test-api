@@ -493,8 +493,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
 
         try {
-            seleniumLogger.info("openBrowserAndLogin start");
-
             Date startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("openBrowser start");
             if (seleniumSettings.getRemoteWebDriver()) {
@@ -597,13 +595,11 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             openInternalPage();
             duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
             seleniumLogger.info("openInternalPage success elapsed time " + duration + " seconds");
-
-            seleniumLogger.info("openBrowserAndLogin finish");
         } catch (Throwable e) {
             seleniumSettings.setTestStatus("fail");
 
-            seleniumLogger.error("openBrowserAndLogin fail");
-            seleniumLogger.error("openBrowserAndLogin Unexpected exception: " + e.getMessage(), e);
+            seleniumLogger.error("seleniumOpenBrowserAndLogin fail");
+            seleniumLogger.error("seleniumOpenBrowserAndLogin Unexpected exception: " + e.getMessage(), e);
 
             if (seleniumSettings.getWebDriver() != null) {
                 seleniumHelper.closeAfterErrorAndGetScreenshot();
@@ -616,19 +612,22 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected void seleniumCloseBrowser(ITestContext context) {
         try {
             if (seleniumSettings.getWebDriver() != null) {
-                seleniumLogger.info("closeBrowser start");
+                seleniumLogger.info("codeCoverageFinish start");
                 browserCodeCoverage.finish();
+                seleniumLogger.info("codeCoverageFinish success");
+
+                seleniumLogger.info("closeBrowser start");
                 seleniumHelper.closeAfterError();
                 seleniumSettings.getWebDriver().quit();
-                seleniumLogger.info("closeBrowser finish");
+                seleniumLogger.info("closeBrowser success");
             }
 
             updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
         } catch (Throwable e) {
             seleniumSettings.setTestStatus("fail");
 
-            seleniumLogger.error("closeBrowser fail");
-            seleniumLogger.error("closeBrowser Unexpected exception: " + e.getMessage());
+            seleniumLogger.error("seleniumCloseBrowser fail");
+            seleniumLogger.error("seleniumCloseBrowser Unexpected exception: " + e.getMessage());
 
             updateTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"), testResultTrackorKey);
 
