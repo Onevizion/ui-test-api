@@ -3,9 +3,7 @@ package com.onevizion.uitest.api;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
@@ -496,7 +494,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         try {
             seleniumSettings.getProfiler().start("openBrowser");
-            Date startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("openBrowser start");
             if (seleniumSettings.getRemoteWebDriver()) {
                 Capabilities capabilities = null;
@@ -563,49 +560,38 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
             seleniumSettings.setWindows(new LinkedList<String>());
             seleniumSettings.getWindows().add(seleniumSettings.getWebDriver().getWindowHandle());
-            long duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
-            seleniumLogger.info("openBrowser success elapsed time " + duration + " seconds");
+            seleniumLogger.info("openBrowser success");
 
             seleniumSettings.getProfiler().start("codeCoverageStart");
-            startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("codeCoverageStart start");
             browserCodeCoverage.start();
-            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
-            seleniumLogger.info("codeCoverageStart success elapsed time " + duration + " seconds");
+            seleniumLogger.info("codeCoverageStart success");
 
             seleniumSettings.getProfiler().start("openLoginPage");
-            startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("openLoginPage start");
             document.open2(seleniumSettings.getServerUrl());
-            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
-            seleniumLogger.info("openLoginPage success elapsed time " + duration + " seconds");
+            seleniumLogger.info("openLoginPage success");
 
             seleniumSettings.getProfiler().start("loginIntoSystem");
-            startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("loginIntoSystem start");
             seleniumLogger.info("login as " + seleniumSettings.getTestUser());
             loginIntoSystem(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
-            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
-            seleniumLogger.info("loginIntoSystem success elapsed time " + duration + " seconds");
+            seleniumLogger.info("loginIntoSystem success");
 
             seleniumSettings.getProfiler().start("dataPreparation");
-            startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("dataPreparation start");
             fillGlobalSettings();
             fillUserSettings(seleniumSettings.getTestUser());
             dataPreparation();
-            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
-            seleniumLogger.info("dataPreparation success elapsed time " + duration + " seconds");
+            seleniumLogger.info("dataPreparation success");
 
             seleniumSettings.setProfilerTestMethods(new Profiler(getTestName()));
 
             seleniumSettings.getProfiler().start("openInternalPage");
             seleniumSettings.getProfilerTestMethods().start("openInternalPage");
-            startDate = Calendar.getInstance().getTime();
             seleniumLogger.info("openInternalPage start");
             openInternalPage();
-            duration = TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().getTime().getTime() - startDate.getTime());
-            seleniumLogger.info("openInternalPage success elapsed time " + duration + " seconds");
+            seleniumLogger.info("openInternalPage success");
         } catch (Throwable e) {
             seleniumSettings.setTestStatus("fail");
 
