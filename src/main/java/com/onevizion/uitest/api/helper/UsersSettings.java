@@ -39,6 +39,8 @@ public class UsersSettings {
     private ThreadLocal<WebElement> html = new ThreadLocal<>();
 
     public void openUserSettings() {
+        this.html.remove();
+
         WebElement html = seleniumSettings.getWebDriver().findElement(By.tagName("html"));
         this.html.set(html);
 
