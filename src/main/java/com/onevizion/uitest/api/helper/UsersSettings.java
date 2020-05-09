@@ -36,13 +36,13 @@ public class UsersSettings {
     @Resource
     private AssertElement assertElement;
 
-    private ThreadLocal<WebElement> html = new ThreadLocal<>();
+    private ThreadLocal<WebElement> page = new ThreadLocal<>();
 
     public void openUserSettings() {
-        this.html.remove();
+        page.remove();
 
         WebElement html = seleniumSettings.getWebDriver().findElement(By.tagName("html"));
-        this.html.set(html);
+        page.set(html);
 
         elementWait.waitElementById(ID_USER);
         elementWait.waitElementVisibleById(ID_USER);
@@ -66,7 +66,7 @@ public class UsersSettings {
     public void closeUserSettingsOkWithReloadPage() {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
 
-        elementWait.waitElementNotExist(this.html.get());
+        elementWait.waitElementNotExist(page.get());
 
         wait.waitWebElement(By.id("mainContainer"));
         wait.waitWebElement(By.id("messageInfoDivContainer"));
