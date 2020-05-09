@@ -159,13 +159,20 @@ public class SeleniumSettings {
         this.testFailScreenshot.set(testFailScreenshot);
     }
 
+    void clearProfiler() {
+        profiler.remove();
+    }
+
     public Profiler getProfiler() {
         return profiler.get();
     }
 
     void setProfiler(Profiler profiler) {
-        this.profiler.remove();
         this.profiler.set(profiler);
+    }
+
+    void clearProfilerTestMethods() {
+        profilerTestMethods.remove();
     }
 
     public Profiler getProfilerTestMethods() {
@@ -173,7 +180,6 @@ public class SeleniumSettings {
     }
 
     void setProfilerTestMethods(Profiler profilerTestMethods) {
-        this.profilerTestMethods.remove();
         this.profilerTestMethods.set(profilerTestMethods);
     }
 

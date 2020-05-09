@@ -481,12 +481,15 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     }
 
     protected void seleniumOpenBrowserAndLogin(ITestContext context) {
-        seleniumSettings.setProfiler(new Profiler(getTestName()));
         seleniumSettings.setTestName(getTestName());
         seleniumSettings.setTestStatus("success");
         seleniumSettings.clearTestLog();
         seleniumSettings.clearTestCallstack();
         seleniumSettings.clearTestFailScreenshot();
+        seleniumSettings.clearProfiler();
+        seleniumSettings.clearProfilerTestMethods();
+
+        seleniumSettings.setProfiler(new Profiler(getTestName()));
 
         testResultTrackorKey = createTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"));
 
