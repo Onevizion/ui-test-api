@@ -75,12 +75,20 @@ public class SeleniumSettings {
     @Resource
     private String serverUrl;
 
+    void clearWebDriver() {
+        webDriver.remove();
+    }
+
     public WebDriver getWebDriver() {
         return webDriver.get();
     }
 
     public void setWebDriver(WebDriver webDriver) {
         this.webDriver.set(webDriver);
+    }
+
+    void clearUserProperties() {
+        userProperties.remove();
     }
 
     public UserProperties getUserProperties() {
@@ -91,12 +99,20 @@ public class SeleniumSettings {
         this.userProperties.set(userProperties);
     }
 
+    void clearWindows() {
+        windows.remove();
+    }
+
     public List<String> getWindows() {
         return windows.get();
     }
 
     public void setWindows(List<String> windows) {
         this.windows.set(windows);
+    }
+
+    void clearTestUser() {
+        testUser.remove();
     }
 
     public String getTestUser() {
@@ -107,12 +123,20 @@ public class SeleniumSettings {
         this.testUser.set(testUser);
     }
 
+    void clearTestStatus() {
+        testStatus.remove();
+    }
+
     public String getTestStatus() {
         return testStatus.get();
     }
 
     void setTestStatus(String testStatus) {
         this.testStatus.set(testStatus);
+    }
+
+    void clearTestName() {
+        testName.remove();
     }
 
     public String getTestName() {
