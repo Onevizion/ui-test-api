@@ -33,12 +33,7 @@ public class BrowserCodeCoverage {
 
     private ThreadLocal<WebSocket> ws = new ThreadLocal<>();
 
-    private ThreadLocal<Object> waitCoordinator = new ThreadLocal<Object>() {
-        @Override
-        public Object initialValue() {
-            return new Object();
-        }
-    };
+    private ThreadLocal<Object> waitCoordinator = new ThreadLocal<>();
 
     public void start() {
         if (skipCodeCoverage()) {
@@ -47,8 +42,10 @@ public class BrowserCodeCoverage {
 
         ws.remove();
         wsUrl.remove();
+        waitCoordinator.remove();
 
         wsUrl.set(seleniumNode.getWebSocketDebuggerUrl());
+        waitCoordinator.set(new Object());
 
         try {
             seleniumLogger.error("coverage sendWSMessage 1");
