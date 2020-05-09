@@ -46,6 +46,7 @@ public class BrowserCodeCoverage {
         }
 
         ws.remove();
+        wsUrl.remove();
 
         wsUrl.set(seleniumNode.getWebSocketDebuggerUrl());
 
