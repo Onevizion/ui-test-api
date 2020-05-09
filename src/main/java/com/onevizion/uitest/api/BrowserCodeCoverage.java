@@ -170,7 +170,7 @@ public class BrowserCodeCoverage {
 
         synchronized (object1) {
             //object1.wait();
-            object1.wait(300 * 1000);
+            object1.wait(300L * 1000L);
         }
     }
 
