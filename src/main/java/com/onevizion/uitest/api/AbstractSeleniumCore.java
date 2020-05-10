@@ -714,10 +714,16 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             return;
         }
 
-        String browserVersion = ((HasCapabilities) seleniumSettings.getWebDriver()).getCapabilities().getVersion();
+        if (seleniumSettings.getWebDriver() != null) {
+            String browserVersion = ((HasCapabilities) seleniumSettings.getWebDriver()).getCapabilities().getVersion();
+            try {
+                CreateProcess.updateBrowserVersion(seleniumSettings.getRestApiUrl(), seleniumSettings.getRestApiCredential(), processTrackorKey, browserVersion);
+            } catch (Exception e) {
+                seleniumLogger.error("call REST API Unexpected exception: " + e.getMessage());
+            }
+        }
 
         try {
-            CreateProcess.updateBrowserVersion(seleniumSettings.getRestApiUrl(), seleniumSettings.getRestApiCredential(), processTrackorKey, browserVersion);
             createTestResult.update(testResultTrackorKey, seleniumSettings.getTestStatus(), testResultNode, seleniumSettings.getTestLog(),
                     seleniumSettings.getProfiler(), seleniumSettings.getProfilerTestMethods(),
                     getErrorReport(), seleniumSettings.getTestCallstack(), seleniumSettings.getTestFailScreenshot());
