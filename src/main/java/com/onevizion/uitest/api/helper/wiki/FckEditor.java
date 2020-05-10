@@ -67,10 +67,6 @@ public class FckEditor {
     public void setValueFromClipboard(String name, String value) {
         clipboard.pasteTextToClipboard(value);
 
-        if (value.startsWith("<p>") && value.endsWith("</p>")) {
-            value = value.substring(3, value.length() - 4);
-        }
-
         wait.waitWebElement(By.id(name));
         wait.waitWebElement(By.id("cke_" + name));
         element.moveToElementById("cke_" + name);
