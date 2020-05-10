@@ -27,7 +27,7 @@ public class CreateProcess {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + restApiCredential);
+            conn.setRequestProperty("Authorization", "Bearer " + restApiCredential);
 
             String input = "{ " + 
                     "   \"fields\": { " + 
@@ -67,7 +67,7 @@ public class CreateProcess {
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + restApiCredential);
+            conn.setRequestProperty("Authorization", "Bearer " + restApiCredential);
 
             String input = "{ " + 
                     "   \"fields\": { " + 
@@ -97,7 +97,7 @@ public class CreateProcess {
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + restApiCredential);
+            conn.setRequestProperty("Authorization", "Bearer " + restApiCredential);
 
             String input = "{ " + 
                     "   \"fields\": { " + 
@@ -127,7 +127,7 @@ public class CreateProcess {
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + restApiCredential);
+            conn.setRequestProperty("Authorization", "Bearer " + restApiCredential);
 
             String input = "{ " + 
                     "   \"fields\": { " + 

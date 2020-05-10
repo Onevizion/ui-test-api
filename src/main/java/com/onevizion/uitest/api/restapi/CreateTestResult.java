@@ -34,7 +34,7 @@ public class CreateTestResult {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
+            conn.setRequestProperty("Authorization", "Bearer " + seleniumSettings.getRestApiCredential());
 
             String input = "{ " + 
                     "   \"fields\": { " + 
@@ -104,7 +104,6 @@ public class CreateTestResult {
                 runtimeTestMethods = (double) runtimeTestMethods / 1_000_000_000;
                 runtimeTestMethods = (double) Math.round(runtimeTestMethods * 1000) / 1000;
             }
-            
 
             URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME +".TRACKOR_KEY=%22" + trackorKey + "%22");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -112,7 +111,7 @@ public class CreateTestResult {
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
+            conn.setRequestProperty("Authorization", "Bearer " + seleniumSettings.getRestApiCredential());
 
             String input;
             if ("fail".equals(testStatus)) {

@@ -43,7 +43,7 @@ public class CreateTest {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
+            conn.setRequestProperty("Authorization", "Bearer " + seleniumSettings.getRestApiCredential());
 
             String input = "equal(XITOR_KEY, \"\\\"" + testName + "\\\"\")";
 
@@ -88,7 +88,7 @@ public class CreateTest {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
+            conn.setRequestProperty("Authorization", "Bearer " + seleniumSettings.getRestApiCredential());
 
             String input = "{ " + 
                     "   \"fields\": { " + 
@@ -122,7 +122,7 @@ public class CreateTest {
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Basic " + seleniumSettings.getRestApiCredential());
+            conn.setRequestProperty("Authorization", "Bearer " + seleniumSettings.getRestApiCredential());
 
             String input = "{ " + 
                     "   \"fields\": { " + 
