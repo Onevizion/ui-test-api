@@ -32,4 +32,12 @@ public class OnevizionUtils {
         }
     }
 
+    public static String escapeStringForRestApiV3(String originalString) {
+        String escapedString = originalString.replaceAll("\\\\", "\\\\\\\\");
+        escapedString = escapedString.replaceAll("\\n", "\\\\n");
+        escapedString = escapedString.replaceAll("\\t", "\\\\t");
+        escapedString = escapedString.replaceAll("\\r", "\\\\r");
+        return escapedString.replaceAll("\"", "'");
+    }
+
 }

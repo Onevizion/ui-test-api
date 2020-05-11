@@ -57,32 +57,22 @@ public class SeleniumLogger {
     }
 
     private void log(String msg) {
-        msg = msg.replaceAll("\\\\", "\\\\\\\\");
-        msg = msg.replaceAll("\\n", "\\\\n");
-        msg = msg.replaceAll("\\t", "\\\\t");
-        msg = msg.replaceAll("\\r", "\\\\r");
-        msg = msg.replaceAll("\"", "'");
-
-        msg = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " " + msg;
+        String escapedMsg = OnevizionUtils.escapeStringForRestApiV3(msg);
+        escapedMsg = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " " + escapedMsg;
 
         String testLog = seleniumSettings.getTestLog();
         if (testLog == null) {
-            testLog = msg;
+            testLog = escapedMsg;
         } else {
-            testLog = testLog + "\\n" + msg;
+            testLog = testLog + "\\n" + escapedMsg;
         }
         seleniumSettings.setTestLog(testLog);
     }
 
     private void callstack(String msg) {
-        msg = msg.replaceAll("\\\\", "\\\\\\\\");
-        msg = msg.replaceAll("\\n", "\\\\n");
-        msg = msg.replaceAll("\\t", "\\\\t");
-        msg = msg.replaceAll("\\r", "\\\\r");
-        msg = msg.replaceAll("\"", "'");
-
         if (seleniumSettings.getTestCallstack() == null) {
-            seleniumSettings.setTestCallstack(msg);
+            String escapedMsg = OnevizionUtils.escapeStringForRestApiV3(msg);
+            seleniumSettings.setTestCallstack(escapedMsg);
         }
     }
 

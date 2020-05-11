@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.onevizion.uitest.api.OnevizionUtils;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
@@ -83,22 +84,12 @@ public class CreateTestResult {
             Profiler profiler, Profiler profilerTestMethods,
             String errorReport, String errorCallstack, String errorScreenshot) {
         try {
-            String profilerOutput = profiler.toString();
-            profilerOutput = profilerOutput.replaceAll("\\\\", "\\\\\\\\");
-            profilerOutput = profilerOutput.replaceAll("\\n", "\\\\n");
-            profilerOutput = profilerOutput.replaceAll("\\t", "\\\\t");
-            profilerOutput = profilerOutput.replaceAll("\\r", "\\\\r");
-            profilerOutput = profilerOutput.replaceAll("\"", "'");
+            String profilerOutput = OnevizionUtils.escapeStringForRestApiV3(profiler.toString());
 
             String profilerTestMethodsOutput = "";
             double runtimeTestMethods = -1;
             if (profilerTestMethods != null) {
-                profilerTestMethodsOutput = profilerTestMethods.toString();
-                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\\\\", "\\\\\\\\");
-                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\\n", "\\\\n");
-                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\\t", "\\\\t");
-                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\\r", "\\\\r");
-                profilerTestMethodsOutput = profilerTestMethodsOutput.replaceAll("\"", "'");
+                profilerTestMethodsOutput = OnevizionUtils.escapeStringForRestApiV3(profilerTestMethods.toString());
 
                 runtimeTestMethods = profilerTestMethods.elapsedTime();
                 runtimeTestMethods = (double) runtimeTestMethods / 1_000_000_000;
