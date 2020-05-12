@@ -25,7 +25,7 @@ class PortalWait {
 
     void waitFramesCount(int framesCount) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for listBox loading is failed")
+            .withMessage("Waiting for portal frames count is failed")
             .until(webdriver -> {
                 int size = webdriver.findElements(By.className("dhx_cell_layout")).size();
                 return size == framesCount;
@@ -34,7 +34,7 @@ class PortalWait {
 
     void waitFrame(int frameNumber) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-        .withMessage("Waiting for listBox loading is failed")
+        .withMessage("Waiting for portal frame loading is failed")
         .until(webdriver -> webdriver.findElements(By.className("dhx_cell_layout")).get(frameNumber).findElement(By.tagName("iframe")));
     }
 
