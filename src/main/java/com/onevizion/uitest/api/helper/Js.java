@@ -630,6 +630,17 @@ public class Js {
         return Boolean.valueOf(execJs("return bplImportFileSubmitDone;"));
     }
 
+    public Boolean allImagesLoad() {
+        return Boolean.valueOf(execJs(""
+                + "var images = document.getElementsByTagName('IMG');"
+                + "for (var i = 0; i < images.length; i++) {"
+                + "    if (images[i].complete == false) {"
+                + "        return false;"
+                + "    }"
+                + "}"
+                + "return true;"));
+    }
+
     public Boolean getIsSubGrid(Long gridIdx) {
         return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].IsSubGrid;"));
     }

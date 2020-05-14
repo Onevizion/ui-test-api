@@ -233,6 +233,7 @@ public class Wait {
             .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
             .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("innerHTML").contains("Loading Tab. Please wait..."));
         waitTabLoad(tabIndex);
+        waitAllImagesLoad();
     }
 
     public void waitGridRowEditorLoad() {
@@ -364,6 +365,12 @@ public class Wait {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Bpl Import File Submit Done is failed")
             .until(webdriver -> js.bplImportFileSubmitDone());
+    }
+
+    public void waitAllImagesLoad() {
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for all images load is failed")
+            .until(webdriver -> js.allImagesLoad());
     }
 
 }
