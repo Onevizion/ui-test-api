@@ -48,14 +48,12 @@ public class BrowserCodeCoverage {
         waitCoordinator.set(new Object());
 
         try {
-            seleniumLogger.error("coverage sendWSMessage 1");
             sendWSMessage(wsUrl.get(), "{\"id\":1, \"method\":\"Profiler.enable\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverage sendWSMessage 1 " + e.getMessage());
         }
 
         try {
-            seleniumLogger.error("coverage sendWSMessage 2");
             sendWSMessage(wsUrl.get(), "{\"id\":2, \"method\":\"Profiler.startPreciseCoverage\", \"params\":{\"callCount\":true, \"detailed\":true}}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverage sendWSMessage 2 " + e.getMessage());
@@ -68,14 +66,12 @@ public class BrowserCodeCoverage {
         }
 
         try {
-            seleniumLogger.error("coverage sendWSMessage 3");
             sendWSMessage(wsUrl.get(), "{\"id\":3, \"method\":\"Profiler.takePreciseCoverage\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverage sendWSMessage 3 " + e.getMessage());
         }
 
         try {
-            seleniumLogger.error("coverage sendWSMessage 4");
             sendWSMessage(wsUrl.get(), "{\"id\":4, \"method\":\"Profiler.stopPreciseCoverage\"}");
         } catch (Exception e) {
             seleniumLogger.error("exception in coverage sendWSMessage 4 " + e.getMessage());
