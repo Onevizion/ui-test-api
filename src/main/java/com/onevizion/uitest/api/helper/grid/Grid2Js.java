@@ -36,6 +36,19 @@ class Grid2Js extends Js {
                 "return window.getComputedStyle(lastChild, null).getPropertyValue('color');");
     }
 
+    //TODO need implement more correct solution
+    String getGridCellTaskDateLastChildFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+        return execJs(
+                "var lastChild = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
+                "while (0 < lastChild.children.length) {" + 
+                "    if (lastChild.children[0].outerHTML == '<div class=\"divBc2 hiddenContent\">BC</div>') {" + 
+                "        break;" + 
+                "    }" + 
+                "    lastChild = lastChild.children[0];" + 
+                "}" + 
+                "return window.getComputedStyle(lastChild, null).getPropertyValue('color');");
+    }
+
     @SuppressWarnings("unchecked")
     List<String> getGridCellAllChildsBackgroundColor(Long gridIdx, Long rowIndex, Long columnIndex) {
         return (List<String>) execJs2(
