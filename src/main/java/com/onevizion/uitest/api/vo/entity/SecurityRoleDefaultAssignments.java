@@ -13,6 +13,7 @@ public class SecurityRoleDefaultAssignments {
     private String importt;
     private String report;
     private String globalNotif;
+    private String chatNotif;
     private String trackorTour;
 
     private SecurityRoleDefaultAssignments() {
@@ -58,6 +59,10 @@ public class SecurityRoleDefaultAssignments {
         return globalNotif;
     }
 
+    public String getChatNotif() {
+        return chatNotif;
+    }
+
     public String getTrackorTour() {
         return trackorTour;
     }
@@ -78,6 +83,7 @@ public class SecurityRoleDefaultAssignments {
                     SecurityRoleDefaultAssignments.this.importt == null ||
                     SecurityRoleDefaultAssignments.this.report == null ||
                     SecurityRoleDefaultAssignments.this.globalNotif == null ||
+                    SecurityRoleDefaultAssignments.this.chatNotif == null ||
                     SecurityRoleDefaultAssignments.this.trackorTour == null) {
                 throw new SeleniumUnexpectedException("");
             }
@@ -126,6 +132,11 @@ public class SecurityRoleDefaultAssignments {
 
         public Builder setGlobalNotif(String globalNotif) {
             SecurityRoleDefaultAssignments.this.globalNotif = globalNotif;
+            return this;
+        }
+
+        public Builder setChatNotif(String chatNotif) {
+            SecurityRoleDefaultAssignments.this.chatNotif = chatNotif;
             return this;
         }
 

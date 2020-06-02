@@ -23,6 +23,7 @@ public class SecurityRoleDefaultPrivs {
     private String chatCommentE;
     private String chatCommentA;
     private String chatCommentD;
+    private String cellColorE;
     private String appletR;
     private String appletE;
     private String tabR;
@@ -176,6 +177,10 @@ public class SecurityRoleDefaultPrivs {
 
     public String getChatCommentD() {
         return chatCommentD;
+    }
+
+    public String getCellColorE() {
+        return cellColorE;
     }
 
     public String getAppletR() {
@@ -484,6 +489,7 @@ public class SecurityRoleDefaultPrivs {
                     SecurityRoleDefaultPrivs.this.chatCommentE == null ||
                     SecurityRoleDefaultPrivs.this.chatCommentA == null ||
                     SecurityRoleDefaultPrivs.this.chatCommentD == null ||
+                    SecurityRoleDefaultPrivs.this.cellColorE == null ||
                     SecurityRoleDefaultPrivs.this.appletR == null ||
                     SecurityRoleDefaultPrivs.this.appletE == null ||
                     SecurityRoleDefaultPrivs.this.tabR == null ||
@@ -651,6 +657,11 @@ public class SecurityRoleDefaultPrivs {
 
         public Builder setChatCommentD(String chatCommentD) {
             SecurityRoleDefaultPrivs.this.chatCommentD = chatCommentD;
+            return this;
+        }
+
+        public Builder setCellColorE(String cellColorE) {
+            SecurityRoleDefaultPrivs.this.cellColorE = cellColorE;
             return this;
         }
 

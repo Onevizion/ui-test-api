@@ -44,6 +44,7 @@ public class EntitySecurityRole {
     private static final String DEF_PRIV_CHAT_COMMENT_E = "cbPrivE70";
     private static final String DEF_PRIV_CHAT_COMMENT_A = "cbPrivA70";
     private static final String DEF_PRIV_CHAT_COMMENT_D = "cbPrivD70";
+    private static final String DEF_PRIV_CELL_COLOR_E = "cbPrivE9";
     private static final String DEF_PRIV_APPLET_R = "cbPrivR2";
     private static final String DEF_PRIV_APPLET_E = "cbPrivE2";
     private static final String DEF_PRIV_TAB_R = "cbPrivR3";
@@ -129,6 +130,7 @@ public class EntitySecurityRole {
     private static final String DEF_ASSIGN_IMPORT = "autoImportAssign";
     private static final String DEF_ASSIGN_REPORT = "autoReportAssign";
     private static final String DEF_ASSIGN_GLOBAL_NOTIF = "autoNotifAssign";
+    private static final String DEF_ASSIGN_CHAT_NOTIF = "autoChatAssign";
     private static final String DEF_ASSIGN_TRACKOR_TOUR = "autoTourAssign";
 
     @Resource
@@ -183,6 +185,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultPrivs().getChatCommentE(), DEF_PRIV_CHAT_COMMENT_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getChatCommentA(), DEF_PRIV_CHAT_COMMENT_A);
         setCheckboxValue(securityRole.getDefaultPrivs().getChatCommentD(), DEF_PRIV_CHAT_COMMENT_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getCellColorE(), DEF_PRIV_CELL_COLOR_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getAppletR(), DEF_PRIV_APPLET_R);
         setCheckboxValue(securityRole.getDefaultPrivs().getAppletE(), DEF_PRIV_APPLET_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getTabR(), DEF_PRIV_TAB_R);
@@ -268,6 +271,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getImportt(), DEF_ASSIGN_IMPORT);
         setCheckboxValue(securityRole.getDefaultAssignments().getReport(), DEF_ASSIGN_REPORT);
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), DEF_ASSIGN_GLOBAL_NOTIF);
+        setCheckboxValue(securityRole.getDefaultAssignments().getChatNotif(), DEF_ASSIGN_CHAT_NOTIF);
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -304,6 +308,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultPrivs().getChatCommentE(), DEF_PRIV_CHAT_COMMENT_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getChatCommentA(), DEF_PRIV_CHAT_COMMENT_A);
         setCheckboxValue(securityRole.getDefaultPrivs().getChatCommentD(), DEF_PRIV_CHAT_COMMENT_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getCellColorE(), DEF_PRIV_CELL_COLOR_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getAppletR(), DEF_PRIV_APPLET_R);
         setCheckboxValue(securityRole.getDefaultPrivs().getAppletE(), DEF_PRIV_APPLET_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getTabR(), DEF_PRIV_TAB_R);
@@ -389,6 +394,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getImportt(), DEF_ASSIGN_IMPORT);
         setCheckboxValue(securityRole.getDefaultAssignments().getReport(), DEF_ASSIGN_REPORT);
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), DEF_ASSIGN_GLOBAL_NOTIF);
+        setCheckboxValue(securityRole.getDefaultAssignments().getChatNotif(), DEF_ASSIGN_CHAT_NOTIF);
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -422,6 +428,7 @@ public class EntitySecurityRole {
         assertElement.assertCheckbox(DEF_PRIV_CHAT_COMMENT_E, securityRole.getDefaultPrivs().getChatCommentE());
         assertElement.assertCheckbox(DEF_PRIV_CHAT_COMMENT_A, securityRole.getDefaultPrivs().getChatCommentA());
         assertElement.assertCheckbox(DEF_PRIV_CHAT_COMMENT_D, securityRole.getDefaultPrivs().getChatCommentD());
+        assertElement.assertCheckbox(DEF_PRIV_CELL_COLOR_E, securityRole.getDefaultPrivs().getCellColorE());
         assertElement.assertCheckbox(DEF_PRIV_APPLET_R, securityRole.getDefaultPrivs().getAppletR());
         assertElement.assertCheckbox(DEF_PRIV_APPLET_E, securityRole.getDefaultPrivs().getAppletE());
         assertElement.assertCheckbox(DEF_PRIV_TAB_R, securityRole.getDefaultPrivs().getTabR());
@@ -507,6 +514,7 @@ public class EntitySecurityRole {
         assertElement.assertCheckbox(DEF_ASSIGN_IMPORT, securityRole.getDefaultAssignments().getImportt());
         assertElement.assertCheckbox(DEF_ASSIGN_REPORT, securityRole.getDefaultAssignments().getReport());
         assertElement.assertCheckbox(DEF_ASSIGN_GLOBAL_NOTIF, securityRole.getDefaultAssignments().getGlobalNotif());
+        assertElement.assertCheckbox(DEF_ASSIGN_CHAT_NOTIF, securityRole.getDefaultAssignments().getChatNotif());
         assertElement.assertCheckbox(DEF_ASSIGN_TRACKOR_TOUR, securityRole.getDefaultAssignments().getTrackorTour());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
