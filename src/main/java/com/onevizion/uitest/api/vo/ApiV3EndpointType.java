@@ -2,6 +2,8 @@ package com.onevizion.uitest.api.vo;
 
 public enum ApiV3EndpointType {
 
+    AUTH_TOKEN_GENERATE_API_AUTHENTICATION_TOKEN("POST", "/v3/auth_token", "Generate API Authentication Token"),
+
     CHATS_UNSUBSCRIBE("DELETE", "/v3/chats/{chat_id}/subscribers", "Unsubscribe users to Chat"),
     CHATS_READ_SUBSCRIBERS("GET", "/v3/chats/{chat_id}/subscribers", "Read Chat subscribers"),
     CHATS_READ_CHATS("GET", "/v3/chats", "Find Chats by Trackor ID or Task ID"),
