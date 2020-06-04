@@ -164,4 +164,32 @@ public class Login {
         wait.waitWebElement(By.className("authorize__btn"));
     }
 
+    public void loginIntoApiV3ByToken(String accessKey, String secretKey) {
+        login(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
+
+        document.open(seleniumSettings.getServerUrl() + "/api/v3");
+
+        wait.waitWebElement(By.className("info_title"));
+        wait.waitWebElement(By.className("authorize__btn"));
+
+        WebElement authorizeBtn = seleniumSettings.getWebDriver().findElement(By.className("authorize__btn"));
+        authorizeBtn.click();
+
+        wait.waitWebElement(By.name("accessKey"));
+        wait.waitWebElement(By.name("secretKey"));
+
+        WebElement accessKeyElem = seleniumSettings.getWebDriver().findElement(By.name("accessKey"));
+        accessKeyElem.clear();
+        accessKeyElem.sendKeys(accessKey);
+
+        WebElement secretKeyElem = seleniumSettings.getWebDriver().findElement(By.name("secretKey"));
+        secretKeyElem.clear();
+        secretKeyElem.sendKeys(secretKey);
+
+        seleniumSettings.getWebDriver().findElements(By.className("auth_submit__button")).get(1).click();
+
+        wait.waitWebElement(By.className("info_title"));
+        wait.waitWebElement(By.className("authorize__btn"));
+    }
+
 }
