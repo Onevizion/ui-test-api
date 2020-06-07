@@ -167,7 +167,7 @@ public class SeleniumScreenshot {
                 if (actualImage.getRGB(x, y) != expectedImage.getRGB(x, y)) {
                     differentImage.setRGB(x, y, Color.BLACK.getRGB());
                 } else {
-                    differentImage.setRGB(x, y, actualImage.getRGB(x, y));
+                    differentImage.setRGB(x, y, Color.WHITE.getRGB());
                 }
             }
         }
