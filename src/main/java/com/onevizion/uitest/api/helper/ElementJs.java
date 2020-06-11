@@ -197,4 +197,20 @@ public class ElementJs extends Js {
         return execJs("return window.getComputedStyle(document.getElementById('" + id + "'), null).getPropertyValue('color');");
     }
 
+    public void remove(WebElement element) {
+        execJs3("arguments[0].remove();", element);
+    }
+
+    public void removeByName(String name) {
+        execJs("document.getElementsByName('" + name + "')[0].remove();");
+    }
+
+    public void removeById(String id) {
+        execJs("document.getElementById('" + id + "').remove();");
+    }
+
+    public void removeByClass(String className) {
+        execJs("document.getElementsByClassName('" + className + "')[0].remove();");
+    }
+
 }

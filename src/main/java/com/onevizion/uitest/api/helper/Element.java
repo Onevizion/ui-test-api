@@ -178,4 +178,20 @@ public class Element {
         Assert.assertEquals(actualFontColor, fontColor);
     }
 
+    public void remove(WebElement element) {
+        elementJs.remove(element);
+    }
+
+    public void removeByName(String name) {
+        elementJs.removeByName(name);
+    }
+
+    public void removeById(String id) {
+        elementJs.removeById(id);
+    }
+
+    public void removeByClass(String className) {
+        elementJs.removeByClass(className);
+    }
+
 }
