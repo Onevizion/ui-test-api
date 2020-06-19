@@ -2,9 +2,8 @@ package com.onevizion.uitest.api.helper.bpl.export;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -22,22 +21,22 @@ public class BplExport {
 
     private static final String COLUMN_LABEL = "Component Name";
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Qs qs;
 
-    @Resource
+    @Autowired
     private Checkbox checkbox;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
     public void openSubGrid(Long gridIdx, BplComponentType bplComponentType) {

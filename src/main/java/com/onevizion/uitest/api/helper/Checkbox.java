@@ -3,10 +3,9 @@ package com.onevizion.uitest.api.helper;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -14,16 +13,16 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class Checkbox {
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
     public void clickByName(String checkboxName) {

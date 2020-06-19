@@ -3,10 +3,9 @@ package com.onevizion.uitest.api.helper.grid.group;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -23,16 +22,16 @@ public class GridGroup {
 
     private static final String CLASS_GROUP = "group_row";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private GridGroupJs gridGroupJs;
 
-    @Resource
+    @Autowired
     private Element element;
 
     public void checkGridIsGrouped(Long gridIdx) {

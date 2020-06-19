@@ -3,9 +3,8 @@ package com.onevizion.uitest.api.helper.chat;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -13,13 +12,13 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 class ChatWait {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private ChatJs chatJs;
 
-    @Resource
+    @Autowired
     private Chat chat;
 
     void waitIsReadySubscribePanel() {

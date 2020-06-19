@@ -1,7 +1,5 @@
 package com.onevizion.uitest.api.helper;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -10,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -24,28 +23,28 @@ import com.onevizion.uitest.api.helper.tree.Tree;
 @Component
 public class Window {
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Tree tree;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private SeleniumLogger seleniumLogger;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private Document document;
 
-    @Resource
+    @Autowired
     private Jquery jquery;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
     public void openModal(final By elemenLocator) {

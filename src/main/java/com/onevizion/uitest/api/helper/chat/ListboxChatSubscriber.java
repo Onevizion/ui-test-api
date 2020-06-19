@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -20,7 +19,7 @@ public class ListboxChatSubscriber {
 
     //TODO need create AbstractListbox
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public List<ListboxElementChatSubscriber> getSubscribersOnForm() {

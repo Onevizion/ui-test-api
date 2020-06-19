@@ -6,11 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -30,25 +29,25 @@ public class GridSort {
 
     private static final String COLUMN_SORT_TYPE_NA = "na";
 
-    @Resource
+    @Autowired
     private GridSortJs gridSortJs;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void sortColumn(SortType sortType, String columnLabel) {

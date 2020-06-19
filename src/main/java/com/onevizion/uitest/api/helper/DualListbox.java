@@ -1,11 +1,10 @@
 package com.onevizion.uitest.api.helper;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -14,10 +13,10 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 @Component
 public class DualListbox {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private HtmlSelect htmlSelect;
 
     public void addValueByText(Select select, String btnId, String text) {

@@ -3,10 +3,9 @@ package com.onevizion.uitest.api.helper.mainmenu;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -14,13 +13,13 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 class MainMenuWait {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private MainMenuJs mainMenuJs;
 
-    @Resource
+    @Autowired
     private MainMenu mainMenu;
 
     void waitPageTitle(String title) {

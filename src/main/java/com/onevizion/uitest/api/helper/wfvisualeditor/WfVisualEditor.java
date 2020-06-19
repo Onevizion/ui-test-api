@@ -2,10 +2,9 @@ package com.onevizion.uitest.api.helper.wfvisualeditor;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -18,19 +17,19 @@ import com.onevizion.uitest.api.helper.grid.Grid2;
 @Component
 public class WfVisualEditor {
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     private WebElement getStepNode(String text) {

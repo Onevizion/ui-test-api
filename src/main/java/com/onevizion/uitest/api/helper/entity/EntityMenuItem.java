@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper.entity;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -30,19 +29,19 @@ public class EntityMenuItem {
     private static final String DASHBOARD = "dashboardId";
     private static final String TRACKOR_TYPE = "primaryXitorTypeId";
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Jquery jquery;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private Tree tree;
 
     public void testOnForm(MenuItem menuItem) {

@@ -2,9 +2,8 @@ package com.onevizion.uitest.api.helper.view;
 
 import java.util.function.Supplier;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -12,10 +11,10 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 class ViewWait {
 
-    @Resource
+    @Autowired
     private View view;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     void waitCurrentViewName(Long gridIdx, String viewName) {

@@ -2,10 +2,9 @@ package com.onevizion.uitest.api.helper;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -27,22 +26,22 @@ public class Help {
     private static final String HELP_FORM_NUMBER = "formNumber";
     private static final String HELP_TYPE = "itemTypeId";
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void checkHelp(final String name, final String number, final String type) {

@@ -1,10 +1,9 @@
 package com.onevizion.uitest.api.helper.dashboard;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -14,10 +13,10 @@ import com.onevizion.uitest.api.helper.Wait;
 @Component
 class DashboardWait {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
     void waitDashboardPageLoaded() {

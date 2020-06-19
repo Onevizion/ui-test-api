@@ -5,9 +5,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -20,7 +19,7 @@ public class CreateTest {
 
     private static final String TRACKOR_TYPE_NAME = "SELENIUM_TEST";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void createOrUpdate(String testName, String fullTestName, String moduleName, String bugs) {

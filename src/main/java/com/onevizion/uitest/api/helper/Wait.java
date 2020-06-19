@@ -4,14 +4,13 @@ import java.util.function.IntSupplier;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -24,25 +23,25 @@ import com.onevizion.uitest.api.helper.view.View;
 @Component
 public class Wait {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Filter filter;
 
-    @Resource
+    @Autowired
     private View view;
 
-    @Resource
+    @Autowired
     private Tab tab;
 
-    @Resource
+    @Autowired
     private HtmlSelect htmlSelect;
 
     public void waitWebElement(final By elementLocator) {

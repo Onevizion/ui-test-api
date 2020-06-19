@@ -1,13 +1,12 @@
 package com.onevizion.uitest.api.helper.jquery;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Jquery {
 
-    @Resource
+    @Autowired
     private JqueryWait jqueryWait;
 
     public void waitLoad() {

@@ -4,10 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -39,40 +38,40 @@ public class EntityConfigApp {
     private static final String BUTTON_ADD_TAB = "addItem";
     private static final String BUTTON_REMOVE_ALL_TABS = "removeAllItems";
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private View view;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Selector selector;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Tab tab;
 
-    @Resource
+    @Autowired
     private Listbox listbox;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
     public void add(ConfigApp configApp) {

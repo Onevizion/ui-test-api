@@ -5,13 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -19,10 +18,10 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class ElementWait {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private ElementJs elementJs;
 
     /*public void waitElement(WebElement element) {

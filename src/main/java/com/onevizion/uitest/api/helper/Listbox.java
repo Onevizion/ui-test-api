@@ -6,10 +6,9 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -27,19 +26,19 @@ public class Listbox {
     private static final String BUTTON_GROUP_DATE_PAIR = "datepairs";
     private static final String BUTTON_GROUP_MARKUP= "markup";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private ListboxJs listboxJs;
 
-    @Resource
+    @Autowired
     private ListboxWait listboxWait;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private Element element;
 
     public List<ListboxElement> getElements(String listboxId) {

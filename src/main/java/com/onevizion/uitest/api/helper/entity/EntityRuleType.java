@@ -3,9 +3,8 @@ package com.onevizion.uitest.api.helper.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -27,25 +26,25 @@ public class EntityRuleType {
     private static final String START_DATE_TIME = "startDate";
     private static final String REPEAT_INTERVAL = "repeatInterval";
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
     public void add(RuleType ruleType) {

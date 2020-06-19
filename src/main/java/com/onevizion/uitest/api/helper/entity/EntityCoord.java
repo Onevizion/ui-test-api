@@ -3,9 +3,8 @@ package com.onevizion.uitest.api.helper.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -28,28 +27,28 @@ public class EntityCoord {
     private static final String LONGITUDE = "longitudeField";
     private static final String LONGITUDE_BUTTON = "btnlongitudeField";
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Selector selector;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
     public void add(Coord coord) {

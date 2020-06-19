@@ -3,10 +3,9 @@ package com.onevizion.uitest.api.helper.chat;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -51,22 +50,22 @@ public class Chat {
     private static final String ID_SEARCH_SEARCH = "filterStartSearch";
     private static final String ID_SEARCH_CLEAR = "filterClearSearch";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private ChatWait chatWait;
 
-    @Resource
+    @Autowired
     private Jquery jquery;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
     public void checkMainPanelOnFormExist() {

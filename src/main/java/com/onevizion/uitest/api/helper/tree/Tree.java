@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper.tree;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -14,16 +13,16 @@ import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
 @Component
 public class Tree {
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private TreeJs treeJs;
 
-    @Resource
+    @Autowired
     private TreeWait treeWait;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void selectItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {

@@ -1,16 +1,15 @@
 package com.onevizion.uitest.api.helper.colorpicker;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ColorPicker {
 
-    @Resource
+    @Autowired
     private ColorPickerWait colorPickerWait;
 
-    @Resource
+    @Autowired
     private ColorPickerJs colorPickerJs;
 
     public void setValue(String value) {

@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper.dropgrid;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -12,10 +11,10 @@ import com.onevizion.uitest.api.helper.ElementWait;
 @Component
 public class DropGrid {
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void checkDropGridGroupCount(int expectedCount) {

@@ -1,9 +1,8 @@
 package com.onevizion.uitest.api.helper.document;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -13,16 +12,16 @@ import com.onevizion.uitest.api.helper.jquery.Jquery;
 @Component
 public class Document {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private DocumentWait documentWait;
 
-    @Resource
+    @Autowired
     private Jquery jquery;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     public void open(String page) {

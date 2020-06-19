@@ -2,12 +2,11 @@ package com.onevizion.uitest.api.helper.grid;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -21,25 +20,25 @@ import com.onevizion.uitest.api.vo.LockType;
 @Component
 public class Grid2 {
 
-    @Resource
+    @Autowired
     private Grid2Wait grid2Wait;
 
-    @Resource
+    @Autowired
     private Grid2Js grid2Js;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource //TODO bug in Grid-115098 load views/filters before load grid
+    @Autowired //TODO bug in Grid-115098 load views/filters before load grid
     private Jquery jquery; //TODO bug in Grid-115098 load views/filters before load grid
 
     public void waitLoad() {

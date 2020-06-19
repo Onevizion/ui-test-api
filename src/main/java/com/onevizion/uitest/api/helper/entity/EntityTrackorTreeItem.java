@@ -2,10 +2,9 @@ package com.onevizion.uitest.api.helper.entity;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -34,34 +33,34 @@ public class EntityTrackorTreeItem {
     private static final String LOCKABLE = "lockable";
     private static final String SHOW_ALL = "showAllInTrcontainer";
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Selector selector;
 
-    @Resource
+    @Autowired
     private Checkbox checkbox;
 
-    @Resource
+    @Autowired
     private Tab tab;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private Tree tree;
 
     public void add(TrackorTreeItem trackorTreeItem) {

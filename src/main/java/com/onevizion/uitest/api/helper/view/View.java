@@ -3,11 +3,10 @@ package com.onevizion.uitest.api.helper.view;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -78,40 +77,40 @@ public class View {
     private static final String ID_TREE = "viewTree";
     private static final String CLASS_TREE_ITEM = "item_tree";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private Tree tree;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private ViewWait viewWait;
 
-    @Resource
+    @Autowired
     private Jquery jquery;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Listbox listbox;
 
     public void openMainPanel(Long gridIdx) {

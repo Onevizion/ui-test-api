@@ -2,10 +2,9 @@ package com.onevizion.uitest.api;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.WebDriver;
 import org.slf4j.profiler.Profiler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,46 +32,46 @@ public class SeleniumSettings {
 
     private ThreadLocal<Profiler> profilerTestMethods = new ThreadLocal<>();
 
-    @Resource
+    @Autowired
     private Long defaultTimeout;
 
-    @Resource
+    @Autowired
     private String uploadFilesPath;
 
-    @Resource
+    @Autowired
     private String remoteAddress;
 
-    @Resource
+    @Autowired
     private Boolean remoteWebDriver;
 
-    @Resource
+    @Autowired
     private Boolean headlessMode;
 
-    @Resource
+    @Autowired
     private Boolean codeCoverage;
 
-    @Resource
+    @Autowired
     private String screenshotsPath;
 
-    @Resource
+    @Autowired
     private String ciAddr;
 
-    @Resource
+    @Autowired
     private String testPassword;
 
-    @Resource
+    @Autowired
     private String browser;
 
-    @Resource
+    @Autowired
     private String restApiCredential;
 
-    @Resource
+    @Autowired
     private String restApiUrl;
 
-    @Resource
+    @Autowired
     private String restApiVersion;
 
-    @Resource
+    @Autowired
     private String serverUrl;
 
     void clearWebDriver() {

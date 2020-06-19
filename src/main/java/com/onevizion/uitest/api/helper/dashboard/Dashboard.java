@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -30,31 +29,31 @@ import com.onevizion.uitest.api.vo.DashDisplayModeType;
 @Component
 public class Dashboard {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private DashboardWait dashboardWait;
 
-    @Resource
+    @Autowired
     private DashboardJs dashboardJs;
 
-    @Resource
+    @Autowired
     private ElementJs elementJs;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Jquery jquery;
 
     public void openAddDashboardForm() {

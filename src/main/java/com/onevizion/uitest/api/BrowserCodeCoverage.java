@@ -6,10 +6,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.neovisionaries.ws.client.WebSocket;
@@ -20,13 +19,13 @@ import com.neovisionaries.ws.client.WebSocketFactory;
 @Component
 public class BrowserCodeCoverage {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private SeleniumLogger seleniumLogger;
 
-    @Resource
+    @Autowired
     private SeleniumNode seleniumNode;
 
     private ThreadLocal<String> wsUrl = new ThreadLocal<>();

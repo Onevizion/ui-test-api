@@ -2,8 +2,7 @@ package com.onevizion.uitest.api.helper.userpage.filter;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.helper.Grid;
@@ -14,13 +13,13 @@ import com.onevizion.uitest.api.vo.FilterOperatorType;
 @Component
 public class TbNumberField {
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private UserpageFilter userpageFilter;
 
     @SuppressWarnings("unchecked")

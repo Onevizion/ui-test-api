@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper.document;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -10,10 +9,10 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 class DocumentWait {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private DocumentJs documentJs;
 
     void waitReadyStateComplete() {

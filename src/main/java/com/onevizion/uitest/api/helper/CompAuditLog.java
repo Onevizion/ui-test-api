@@ -3,8 +3,7 @@ package com.onevizion.uitest.api.helper;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -19,10 +18,10 @@ public class CompAuditLog {
     private static final String COLUMN_ID_NEW_VAL = "9";
     private static final String COLUMN_ID_OLD_VAL = "10";
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void checkGridRowsByRowIndex(Long gridId, Long rowIndexStart, Long rowIndexEnd, String action, String table) {

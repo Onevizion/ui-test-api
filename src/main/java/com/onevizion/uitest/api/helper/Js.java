@@ -1,13 +1,12 @@
 package com.onevizion.uitest.api.helper;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -17,7 +16,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 @Component
 public class Js {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     protected String execJs(String script) {

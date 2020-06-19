@@ -1,10 +1,9 @@
 package com.onevizion.uitest.api;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.helper.Js;
@@ -12,16 +11,16 @@ import com.onevizion.uitest.api.helper.Js;
 @Component
 public class SeleniumHelper {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private SeleniumLogger seleniumLogger;
 
-    @Resource
+    @Autowired
     private SeleniumScreenshot seleniumScreenshot;
 
-    @Resource
+    @Autowired
     private Js js;
 
     void closeAfterErrorAndGetScreenshot() {

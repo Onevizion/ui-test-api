@@ -1,9 +1,8 @@
 package com.onevizion.uitest.api.helper.tree;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -14,16 +13,16 @@ import com.onevizion.uitest.api.helper.Wait;
 @Component
 class TreeWait {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private TreeJs treeJs;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     void waitLoad(Long treeId) {

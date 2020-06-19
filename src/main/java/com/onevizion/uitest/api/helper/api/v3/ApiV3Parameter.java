@@ -1,10 +1,10 @@
 package com.onevizion.uitest.api.helper.api.v3;
 
 import java.util.List;
-import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -14,10 +14,10 @@ import com.onevizion.uitest.api.helper.Element;
 @Component
 public class ApiV3Parameter {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Element element;
 
     public int getParametersCount(WebElement endpoint) {

@@ -5,10 +5,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.io.IOUtils;
 import org.slf4j.profiler.Profiler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,7 +23,7 @@ public class CreateTestResult {
     private static final String PARENT_TRACKOR_TYPE_NAME_TEST = "SELENIUM_TEST";
     private static final String PARENT_TRACKOR_TYPE_NAME_PROCESS = "SELENIUM_PROCESS";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public String create(String process, String testName, String bugs) {

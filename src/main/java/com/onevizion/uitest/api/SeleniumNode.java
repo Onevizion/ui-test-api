@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import javax.annotation.Resource;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -16,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
@@ -23,10 +22,10 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 @Component
 public class SeleniumNode {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private SeleniumLogger seleniumLogger;
 
     public String getNodeHostAndPort() {

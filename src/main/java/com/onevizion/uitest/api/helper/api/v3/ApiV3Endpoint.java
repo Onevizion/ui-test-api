@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -21,13 +20,13 @@ import com.onevizion.uitest.api.vo.ApiV3EndpointType;
 @Component
 public class ApiV3Endpoint {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     public int getEndpointsCount(WebElement resource) {

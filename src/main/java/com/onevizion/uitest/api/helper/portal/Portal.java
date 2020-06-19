@@ -1,17 +1,16 @@
 package com.onevizion.uitest.api.helper.portal;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Portal {
 
-    @Resource
+    @Autowired
     private PortalWait portalWait;
 
-    @Resource
+    @Autowired
     private PortalJs portalJs;
 
     public void waitPortal(String name, int framesCount) {

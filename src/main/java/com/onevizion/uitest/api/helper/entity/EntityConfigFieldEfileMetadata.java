@@ -3,10 +3,9 @@ package com.onevizion.uitest.api.helper.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -27,28 +26,28 @@ public class EntityConfigFieldEfileMetadata {
     private static final String FIELD = "metadataCfid";
     private static final String FIELD_BUTTON = "btnmetadataCfid";
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Selector selector;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private Js js;
 
     public void add(ConfigFieldVoEfileMetadata configFieldVoEfileMetadata) {

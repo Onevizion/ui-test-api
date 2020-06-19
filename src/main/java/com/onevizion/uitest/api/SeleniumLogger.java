@@ -3,11 +3,10 @@ package com.onevizion.uitest.api;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Reporter;
 
@@ -16,7 +15,7 @@ public class SeleniumLogger {
 
     private final Logger logger = LoggerFactory.getLogger(SeleniumLogger.class);
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void trace(String msg) {

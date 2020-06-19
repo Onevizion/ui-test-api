@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -14,16 +13,16 @@ public class GridRowButton {
     private static final String BUTTON_LIST_EDIT_ID_BASE = "listEdit";
     private static final String BUTTON_EDIT_ROW_ID_BASE = "btnEditRow";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     public void openGridRowForm(Long gridIdx) {

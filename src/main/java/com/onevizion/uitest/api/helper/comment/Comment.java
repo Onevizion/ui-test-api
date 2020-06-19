@@ -1,10 +1,9 @@
 package com.onevizion.uitest.api.helper.comment;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumLogger;
@@ -21,34 +20,34 @@ import com.onevizion.uitest.api.helper.grid.Grid2;
 @Component
 public class Comment {
 
-    @Resource
+    @Autowired
     private Tb tb;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private SeleniumLogger seleniumLogger;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private CommentJs commentJs;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     public void openCommentFormFromForm(String fieldId, boolean isShowMenu, int elementPosition) {

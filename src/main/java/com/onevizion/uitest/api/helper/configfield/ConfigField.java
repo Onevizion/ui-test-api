@@ -1,13 +1,12 @@
 package com.onevizion.uitest.api.helper.configfield;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ConfigField {
 
-    @Resource
+    @Autowired
     private ConfigFieldWait configFieldWait;
 
     public void waitFieldNameUpdated() {

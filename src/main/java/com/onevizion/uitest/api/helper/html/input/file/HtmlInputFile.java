@@ -1,9 +1,8 @@
 package com.onevizion.uitest.api.helper.html.input.file;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -27,13 +26,13 @@ public class HtmlInputFile {
 
     private static final String FRAME_ID_ON_FORM = "ifrmHideForm";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private HtmlInputFileJs htmlInputFileJs;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     public void uploadOnBplImport(String value) {

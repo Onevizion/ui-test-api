@@ -1,7 +1,6 @@
 package com.onevizion.uitest.api.helper.userpage.filter;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.helper.Grid;
@@ -10,13 +9,13 @@ import com.onevizion.uitest.api.helper.Js;
 @Component
 public class TbFieldMyselfWithoutTrackor {
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private UserpageFilter userpageFilter;
 
     public void test(String columnId) {

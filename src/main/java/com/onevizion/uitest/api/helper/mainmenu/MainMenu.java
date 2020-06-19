@@ -3,9 +3,9 @@ package com.onevizion.uitest.api.helper.mainmenu;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -20,25 +20,25 @@ import com.onevizion.uitest.api.helper.tree.Tree;
 @Component
 public class MainMenu {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private MainMenuWait mainMenuWait;
 
-    @Resource
+    @Autowired
     private Tree tree;
 
-    @Resource
+    @Autowired
     private Element element;
 
     public static final String MENU_FAVORITES = "Favorites";

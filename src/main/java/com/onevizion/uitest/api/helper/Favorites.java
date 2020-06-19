@@ -2,10 +2,9 @@ package com.onevizion.uitest.api.helper;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -22,31 +21,31 @@ public class Favorites {
     private static final String ID_ADD = "addToFavoritesButton";
     private static final String ID_ORGANIZE = "btnOrganizeFavorites";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Checkbox checkbox;
 
-    @Resource
+    @Autowired
     private Tree tree;
 
-    @Resource
+    @Autowired
     private Jquery jquery;
 
-    @Resource
+    @Autowired
     private MainMenu mainMenu;
 
     public void checkFavoritesCount(int expectedCount) {

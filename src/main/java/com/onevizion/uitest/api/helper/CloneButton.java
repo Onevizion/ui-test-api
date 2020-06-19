@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -14,16 +13,16 @@ public class CloneButton {
     private static final String BUTTON_LIST_ADD_ID_BASE = "listAdd";
     static final String BUTTON_CLONE_ID_BASE = "btnClone";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     public void openCloneForm(Long gridIdx) {

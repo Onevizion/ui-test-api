@@ -9,13 +9,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -63,31 +62,31 @@ public class UserpageFilter {
     private static final String FILTER_ROW_VALUE_DATE_BEFORE = "withinBeforeWPAttribValue";
     private static final String FILTER_ROW_VALUE_DATE_AFTER = "withinAfterWPAttribValue";
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Selector selector;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Filter filter;
 
-    @Resource
+    @Autowired
     private Tb tb;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void checkFilterOperators(String fieldName, List<String> dateTypes, List<FilterOperatorType> operators) {

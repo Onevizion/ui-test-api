@@ -7,8 +7,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,6 +19,7 @@ import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.internal.OkHttpClient;
 import org.slf4j.profiler.Profiler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestContext;
 
@@ -122,298 +121,298 @@ import com.onevizion.uitest.api.restapi.CreateTestResult;
 public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTests {
 
     /* Helpers Begin */
-    @Resource
+    @Autowired
     protected Grid2 grid2;
 
-    @Resource
+    @Autowired
     protected Tb tb;
 
-    @Resource
+    @Autowired
     protected AssertElement assertElement;
 
-    @Resource
+    @Autowired
     protected FckEditor fckEditor;
 
-    @Resource
+    @Autowired
     protected Js js;
 
-    @Resource
+    @Autowired
     protected DualListbox dualListbox;
 
-    @Resource
+    @Autowired
     protected Listbox listbox;
 
-    @Resource
+    @Autowired
     protected ListboxChatMessage listboxChatMessage;
 
-    @Resource
+    @Autowired
     protected ListboxChatSearchMessage listboxChatSearchMessage;
 
-    @Resource
+    @Autowired
     protected ListboxChatSubscriber listboxChatSubscriber;
 
-    @Resource
+    @Autowired
     protected Filter filter;
 
-    @Resource
+    @Autowired
     protected Wait wait;
 
-    @Resource
+    @Autowired
     protected Tab tab;
 
-    @Resource
+    @Autowired
     protected Window window;
 
-    @Resource
+    @Autowired
     protected Grid grid;
 
-    @Resource
+    @Autowired
     protected Nav nav;
 
-    @Resource
+    @Autowired
     protected View view;
 
-    @Resource
+    @Autowired
     protected Privilegies privilegies;
 
-    @Resource
+    @Autowired
     protected FieldHistory fieldHistory;
 
-    @Resource
+    @Autowired
     protected Selector selector;
 
-    @Resource
+    @Autowired
     protected Element element;
 
-    @Resource
+    @Autowired
     protected ElementWait elementWait;
 
-    @Resource
+    @Autowired
     protected Qs qs;
 
-    @Resource
+    @Autowired
     protected CloneButton cloneButton;
 
-    @Resource
+    @Autowired
     protected GridRowButton gridRowButton;
 
-    @Resource
+    @Autowired
     protected Checkbox checkbox;
 
-    @Resource
+    @Autowired
     protected MainMenu mainMenu;
 
-    @Resource
+    @Autowired
     protected CompAuditLog compAuditLog;
 
-    @Resource
+    @Autowired
     protected HtmlSelect htmlSelect;
 
-    @Resource
+    @Autowired
     protected UsersSettings usersSettings;
 
-    @Resource
+    @Autowired
     protected ElementJs elementJs;
 
-    @Resource
+    @Autowired
     protected Login login;
 
-    @Resource
+    @Autowired
     protected Logoff logoff;
 
-    @Resource
+    @Autowired
     protected Jquery jquery;
 
-    @Resource
+    @Autowired
     protected Document document;
 
-    @Resource
+    @Autowired
     protected Dashboard dashboard;
 
-    @Resource
+    @Autowired
     protected Tree tree;
 
-    @Resource
+    @Autowired
     protected Help help;
 
-    @Resource
+    @Autowired
     protected Export export;
 
-    @Resource
+    @Autowired
     protected FormDesigner formDesigner;
 
-    @Resource
+    @Autowired
     protected UserpageFilter userpageFilter;
 
-    @Resource
+    @Autowired
     protected WfVisualEditor wfVisualEditor;
 
-    @Resource
+    @Autowired
     protected ApiV3Resource apiV3Resource;
 
-    @Resource
+    @Autowired
     protected ApiV3Endpoint apiV3Endpoint;
 
-    @Resource
+    @Autowired
     protected ApiV3Parameter apiV3Parameter;
 
-    @Resource
+    @Autowired
     protected NewDropDown newDropDown;
 
-    @Resource
+    @Autowired
     protected ConfigField configField;
 
-    @Resource
+    @Autowired
     protected ColorPicker colorPicker;
 
-    @Resource
+    @Autowired
     protected RelationSelector relationSelector;
 
-    @Resource
+    @Autowired
     protected Clipboard clipboard;
 
-    @Resource
+    @Autowired
     protected Comment comment;
 
-    @Resource
+    @Autowired
     protected HtmlInputFile htmlInputFile;
 
-    @Resource
+    @Autowired
     protected BplExport bplExport;
 
-    @Resource
+    @Autowired
     protected GridSort gridSort;
 
-    @Resource
+    @Autowired
     protected Notification notification;
 
-    @Resource
+    @Autowired
     protected DropGrid dropGrid;
 
-    @Resource
+    @Autowired
     protected Portal portal;
 
-    @Resource
+    @Autowired
     protected ShowSql showSql;
 
-    @Resource
+    @Autowired
     protected SharePageLink sharePageLink;
 
-    @Resource
+    @Autowired
     protected Favorites favorites;
 
-    @Resource
+    @Autowired
     protected Chat chat;
 
-    @Resource
+    @Autowired
     protected DropDown dropDown;
 
-    @Resource
+    @Autowired
     protected GridGroup gridGroup;
 
-    @Resource
+    @Autowired
     protected Map map;
     /* Helpers End */
 
     /* Entity Helpers Begin */
-    @Resource
+    @Autowired
     protected EntityDynamicVtable entityDynamicVtable;
 
-    @Resource
+    @Autowired
     protected EntityDynamicVtableValue entityDynamicVtableValue;
 
-    @Resource
+    @Autowired
     protected EntityTrackorType entityTrackorType;
 
-    @Resource
+    @Autowired
     protected EntityTrackorTreeItem entityTrackorTreeItem;
 
-    @Resource
+    @Autowired
     protected EntityMenu entityMenu;
 
-    @Resource
+    @Autowired
     protected EntityMenuItem entityMenuItem;
 
-    @Resource
+    @Autowired
     protected EntityConfigField entityConfigField;
 
-    @Resource
+    @Autowired
     protected EntityComponentPackage entityComponentPackage;
 
-    @Resource
+    @Autowired
     protected EntityColor entityColor;
 
-    @Resource
+    @Autowired
     protected EntityClientFile entityClientFile;
 
-    @Resource
+    @Autowired
     protected EntityReportGroup entityReportGroup;
 
-    @Resource
+    @Autowired
     protected EntityTrackorForm entityTrackorForm;
 
-    @Resource
+    @Autowired
     protected EntityTrackorTour entityTrackorTour;
 
-    @Resource
+    @Autowired
     protected EntityTrackorTourStep entityTrackorTourStep;
 
-    @Resource
+    @Autowired
     protected EntityConfigAppExt entityConfigAppExt;
 
-    @Resource
+    @Autowired
     protected EntityConfigAppExtParam entityConfigAppExtParam;
 
-    @Resource
+    @Autowired
     protected EntityTrackorClass entityTrackorClass;
 
-    @Resource
+    @Autowired
     protected EntitySecurityRole entitySecurityRole;
 
-    @Resource
+    @Autowired
     protected EntityWpDiscipline entityWpDiscipline;
 
-    @Resource
+    @Autowired
     protected EntityWpDatePair entityWpDatePair;
 
-    @Resource
+    @Autowired
     protected EntityCoord entityCoord;
 
-    @Resource
+    @Autowired
     protected EntityConfigApp entityConfigApp;
 
-    @Resource
+    @Autowired
     protected EntityIntegration entityIntegration;
 
-    @Resource
+    @Autowired
     protected EntityValidation entityValidation;
 
-    @Resource
+    @Autowired
     protected EntityRuleType entityRuleType;
     /* Entity Helpers End */
 
-    @Resource
+    @Autowired
     private BrowserCodeCoverage browserCodeCoverage;
 
-    @Resource
+    @Autowired
     private CreateTest createTest;
 
-    @Resource
+    @Autowired
     private CreateTestResult createTestResult;
 
-    @Resource
+    @Autowired
     protected SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     protected SeleniumScreenshot seleniumScreenshot;
 
-    @Resource
+    @Autowired
     protected SeleniumHelper seleniumHelper;
 
-    @Resource
+    @Autowired
     protected SeleniumLogger seleniumLogger;
 
-    @Resource
+    @Autowired
     private SeleniumNode seleniumNode;
 
     private String testResultTrackorKey;

@@ -3,6 +3,7 @@ package com.onevizion.uitest.api.helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -12,30 +13,28 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 @Component
 public class AssertElement {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Selector selector;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Checkbox checkbox;
 
-    @Resource
+    @Autowired
     private Tb tb;
 
     public void assertLink(String id, String expectedVal) {

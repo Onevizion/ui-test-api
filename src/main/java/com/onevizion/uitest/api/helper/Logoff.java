@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -16,25 +15,25 @@ public class Logoff {
     private static final String ID_USERMENU = "userPopupMenu";
     private static final String ID_USERMENU_LOGOFF = "itemLogoff";
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Document document;
 
-    @Resource
+    @Autowired
     private Jquery jquery;
 
     public void logoff() {

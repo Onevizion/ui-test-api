@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper.entity;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
@@ -18,25 +17,25 @@ import com.onevizion.uitest.api.vo.entity.ComponentPackage;
 @Component
 public class EntityComponentPackage {
 
-    @Resource
+    @Autowired
     private NewDropDown newDropDown;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     public void add(ComponentPackage componentPackage) {

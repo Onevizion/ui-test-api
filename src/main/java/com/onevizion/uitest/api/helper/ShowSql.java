@@ -1,8 +1,7 @@
 package com.onevizion.uitest.api.helper;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -23,19 +22,19 @@ public class ShowSql {
     private static final String RUNTIME_USER = "runtime_user";
     private static final String RESPONSE_SIZE = "response_size";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private ShowSqlWait showSqlWait;
 
     public void openShowSqlForm(Long gridIdx) {

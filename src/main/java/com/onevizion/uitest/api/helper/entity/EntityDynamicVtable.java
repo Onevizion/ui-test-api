@@ -3,9 +3,8 @@ package com.onevizion.uitest.api.helper.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -30,37 +29,37 @@ public class EntityDynamicVtable {
     private static final String NAME = "attribVtableName";
     private static final String DESCRIPTION = "attribVtableDesc";
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private AssertElement assertElement;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Tab tab;
 
-    @Resource
+    @Autowired
     private EntityDynamicVtableValue entityDynamicVtableValue;
 
-    @Resource
+    @Autowired
     private GridSort gridSort;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
     public void addWithChilds(DynamicVtable dynamicVtable) {

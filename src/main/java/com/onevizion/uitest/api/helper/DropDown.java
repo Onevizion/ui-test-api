@@ -6,10 +6,9 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -20,16 +19,16 @@ import com.onevizion.uitest.api.vo.DropDownElement;
 @Component
 public class DropDown {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
-    @Resource
+    @Autowired
     private DropDownJs dropDownJs;
 
-    @Resource
+    @Autowired
     private DropDownWait dropDownWait;
 
     public List<DropDownElement> getElements(String dropDownId) {

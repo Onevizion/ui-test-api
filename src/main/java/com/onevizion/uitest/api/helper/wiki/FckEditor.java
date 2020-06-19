@@ -1,11 +1,10 @@
 package com.onevizion.uitest.api.helper.wiki;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -18,19 +17,19 @@ import com.onevizion.uitest.api.helper.clipboard.Clipboard;
 @Component
 public class FckEditor {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private FckEditorWait fckEditorWait;
 
-    @Resource
+    @Autowired
     private Clipboard clipboard;
 
     public void setValue(String name, String value) {

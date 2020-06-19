@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -24,28 +23,28 @@ public class FieldHistory {
 
     private static Pattern regexHrefContent = Pattern.compile("<A.+?>(.+?)</A>", Pattern.DOTALL | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Grid grid;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Tb tb;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public void checkFieldsHistory(List<String> fieldIds, boolean isShowMenu, int elementPosition, @SuppressWarnings("unchecked") List<String> ... vals) {

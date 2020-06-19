@@ -2,10 +2,9 @@ package com.onevizion.uitest.api.helper;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -17,28 +16,28 @@ import com.onevizion.uitest.api.helper.grid.Grid2;
 @Component
 public class Selector {
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Window window;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Checkbox checkbox;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Qs qs;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
     public void selectRadio(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {

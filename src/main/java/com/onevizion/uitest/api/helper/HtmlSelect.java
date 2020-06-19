@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -20,7 +19,7 @@ import com.onevizion.uitest.api.vo.HtmlSelectElement;
 @Component
 public class HtmlSelect {
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
     public boolean isSelectOptionPresent(Select select, String visibleText) {

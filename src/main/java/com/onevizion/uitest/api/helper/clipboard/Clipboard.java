@@ -1,10 +1,9 @@
 package com.onevizion.uitest.api.helper.clipboard;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -14,10 +13,10 @@ public class Clipboard {
 
     private static final String ID = "textarea for qs";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private ClipboardJs clipboardJs;
 
     public void pasteTextToClipboard(String text) {

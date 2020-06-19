@@ -3,10 +3,9 @@ package com.onevizion.uitest.api.helper;
 import java.security.SecureRandom;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -20,19 +19,19 @@ public class Nav {
     private static final String BUTTON_NEXT = "navNext";
     private static final String BUTTON_PREV = "navPrev";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private Wait wait;
 
-    @Resource
+    @Autowired
     private Grid2 grid2;
 
-    @Resource
+    @Autowired
     private ElementWait elementWait;
 
     public Long getAllRecordsCount(Long gridIdx) {

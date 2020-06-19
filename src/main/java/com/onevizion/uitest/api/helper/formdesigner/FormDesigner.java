@@ -1,10 +1,10 @@
 package com.onevizion.uitest.api.helper.formdesigner;
 
 import java.util.List;
-import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
@@ -30,25 +30,25 @@ public class FormDesigner {
     private static final String FORM = "formContent";
     private static final String FORM_ELEMENT = "item_form";
 
-    @Resource
+    @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Resource
+    @Autowired
     private Element element;
 
-    @Resource
+    @Autowired
     private Js js;
 
-    @Resource
+    @Autowired
     private FormDesignerWait formDesignerWait;
 
-    @Resource
+    @Autowired
     private FormDesignerJs formDesignerJs;
 
-    @Resource
+    @Autowired
     private ElementJs elementJs;
 
-    @Resource
+    @Autowired
     private Listbox listbox;
 
     public void fillSearch(String name) {
