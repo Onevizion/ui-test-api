@@ -191,4 +191,66 @@ public class Login {
         wait.waitWebElement(By.className("authorize__btn"));
     }
 
+    public void loginSsoFirstTime(String userName, String password, Long ssoId) {
+        WebElement samlButtonElem = seleniumSettings.getWebDriver().findElement(By.id("btn_" + ssoId));
+        samlButtonElem.click();
+        elementWait.waitElementNotExist(samlButtonElem);
+
+        elementWait.waitElementById("IDToken1");
+        elementWait.waitElementVisibleById("IDToken1");
+        elementWait.waitElementDisplayById("IDToken1");
+        elementWait.waitElementById("IDToken2");
+        elementWait.waitElementVisibleById("IDToken2");
+        elementWait.waitElementDisplayById("IDToken2");
+        elementWait.waitElementByName("Login.Submit");
+        elementWait.waitElementVisibleByName("Login.Submit");
+        elementWait.waitElementDisplayByName("Login.Submit");
+        document.waitReadyStateComplete();
+
+        WebElement userNameElem = seleniumSettings.getWebDriver().findElement(By.id("IDToken1"));
+        userNameElem.clear();
+        userNameElem.sendKeys(userName);
+
+        WebElement passwordElem = seleniumSettings.getWebDriver().findElement(By.id("IDToken2"));
+        passwordElem.clear();
+        passwordElem.sendKeys(password);
+
+        seleniumSettings.getWebDriver().findElement(By.name("Login.Submit")).click();
+
+        elementWait.waitElementNotExist(userNameElem);
+        elementWait.waitElementNotExist(passwordElem);
+
+        wait.waitWebElement(By.id("mainContainer"));
+        wait.waitWebElement(By.id("messageInfoDivContainer"));
+        wait.waitWebElement(By.id("messageErrorDivContainer"));
+
+        elementWait.waitElementById(ID_USER);
+        elementWait.waitElementVisibleById(ID_USER);
+        elementWait.waitElementDisplayById(ID_USER);
+
+        wait.waitWebElement(By.id(ID_USERMENU_LOGOFF));
+
+        document.waitReadyStateComplete();
+        jquery.waitLoad();
+    }
+
+    public void loginSsoSecondTime(Long ssoId) {
+        WebElement samlButtonElem = seleniumSettings.getWebDriver().findElement(By.id("btn_" + ssoId));
+        samlButtonElem.click();
+        elementWait.waitElementNotExist(samlButtonElem);
+
+        wait.waitWebElement(By.id("mainContainer"));
+        wait.waitWebElement(By.id("messageInfoDivContainer"));
+        wait.waitWebElement(By.id("messageErrorDivContainer"));
+
+        elementWait.waitElementById(ID_USER);
+        elementWait.waitElementVisibleById(ID_USER);
+        elementWait.waitElementDisplayById(ID_USER);
+
+        wait.waitWebElement(By.id(ID_USERMENU_LOGOFF));
+
+        document.waitReadyStateComplete();
+        jquery.waitLoad();
+    }
+
 }
