@@ -165,6 +165,7 @@ public class Chat {
     }
 
     public void openChatPanelOnForm() {
+        elementWait.waitElementEnabledById(ID_MAIN_BUTTON);
         element.clickById(ID_MAIN_BUTTON);
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL);
         elementWait.waitElementVisibleById(ID_MAIN_PANEL);
@@ -174,6 +175,7 @@ public class Chat {
     }
 
     public void openChatPanelInGrid() {
+        elementWait.waitElementEnabledById(ID_MAIN_BUTTON + AbstractSeleniumCore.getGridIdx());
         element.clickById(ID_MAIN_BUTTON + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVelocityAnimatedFinishById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
