@@ -545,7 +545,9 @@ public class UserpageFilter {
         int randomIndex = generator.nextInt(2);
 
         if (randomIndex == 1) {
+            filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
             selectFilterAttributeAndOperatorAndValue(1, fieldName, operator);
+            filter.closeFilterFormOk(AbstractSeleniumCore.getGridIdx());
         } else if (randomIndex == 0) {
             filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue(), AbstractSeleniumCore.getGridIdx());
         } else {
@@ -560,7 +562,9 @@ public class UserpageFilter {
         int randomIndex = generator.nextInt(2);
 
         if (randomIndex == 1) {
+            filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
             selectFilterAttributeAndOperatorAndValue(1, fieldName, operator, value);
+            filter.closeFilterFormOk(AbstractSeleniumCore.getGridIdx());
         } else if (randomIndex == 0) {
             filter.selectByVisibleText("G:" + fieldName + " " + "ByText " + operator.getValue(), AbstractSeleniumCore.getGridIdx());
         } else {
@@ -575,7 +579,9 @@ public class UserpageFilter {
         int randomIndex = generator.nextInt(2);
 
         if (randomIndex == 1) {
+            filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
             selectFilterAttributeAndOperatorAndValue(1, fieldName, fieldName2, value, dateType, operator, fieldDataType);
+            filter.closeFilterFormOk(AbstractSeleniumCore.getGridIdx());
         } else if (randomIndex == 0) {
             if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
                 filter.selectByVisibleText("G:" + fieldName + " " + operator.getValue() + " " + value, AbstractSeleniumCore.getGridIdx());
@@ -592,7 +598,9 @@ public class UserpageFilter {
     }
 
     private void checkAndClearFilter(String fieldName, FilterOperatorType operator, int randomIndex) {
+        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
         checkFilterAttributeAndOperatorAndValue(1, fieldName, operator);
+        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
 
         if (randomIndex == 1) {
             filter.clearFilter(AbstractSeleniumCore.getGridIdx());
@@ -604,7 +612,9 @@ public class UserpageFilter {
     }
 
     private void checkAndClearFilter(String fieldName, FilterOperatorType operator, String value, int randomIndex) {
+        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
         checkFilterAttributeAndOperatorAndValue(1, fieldName, operator, value);
+        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
 
         if (randomIndex == 1) {
             filter.clearFilter(AbstractSeleniumCore.getGridIdx());
@@ -616,7 +626,9 @@ public class UserpageFilter {
     }
 
     private void checkAndClearFilter(String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType, int randomIndex) {
+        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
         checkFilterAttributeAndOperatorAndValue(1, fieldName, fieldName2, value, dateType, operator, fieldDataType);
+        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
 
         if (randomIndex == 1) {
             filter.clearFilter(AbstractSeleniumCore.getGridIdx());
@@ -628,30 +640,20 @@ public class UserpageFilter {
     }
 
     private void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator) {
-        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
-
         selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + row))).selectByVisibleText(operator.getValue());
-
-        filter.closeFilterFormOk(AbstractSeleniumCore.getGridIdx());
     }
 
     private void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator, String value) {
-        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
-
         selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + row))).selectByVisibleText(operator.getValue());
 
         seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + row)).sendKeys(value);
-
-        filter.closeFilterFormOk(AbstractSeleniumCore.getGridIdx());
     }
 
     public void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
-        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
-
         selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1L, fieldName, 1L);
 
         if (dateType != null) {
@@ -723,35 +725,23 @@ public class UserpageFilter {
                 seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_VALUE_TEXT_TEXT + row)).sendKeys("*" + value + "*");
             }
         }
-
-        filter.closeFilterFormOk(AbstractSeleniumCore.getGridIdx());
     }
 
     private void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator) {
-        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
-
         assertElement.assertRadioPsSelector(FILTER_ROW_ATTRIB_TEXT + row, FILTER_ROW_ATTRIB_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
 
         assertElement.assertSelect(FILTER_ROW_OPER + row, operator.getValue());
-
-        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
     }
 
     private void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator, String value) {
-        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
-
         assertElement.assertRadioPsSelector(FILTER_ROW_ATTRIB_TEXT + row, FILTER_ROW_ATTRIB_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
 
         assertElement.assertSelect(FILTER_ROW_OPER + row, operator.getValue());
 
         assertElement.assertText(FILTER_ROW_VALUE_TRACKOR_SELECTOR_TEXT + row, value);
-
-        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
     }
 
     public void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, String fieldName2, String value, String dateType, FilterOperatorType operator, ConfigFieldType fieldDataType) {
-        filter.openFilterForm(AbstractSeleniumCore.getGridIdx());
-
         assertElement.assertRadioPsSelector(FILTER_ROW_ATTRIB_TEXT + row, FILTER_ROW_ATTRIB_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
 
         if (dateType != null) {
@@ -850,8 +840,6 @@ public class UserpageFilter {
                 assertElement.assertText(FILTER_ROW_VALUE_TEXT_TEXT + row, "");
             }
         }
-
-        filter.closeFilterFormCancel(AbstractSeleniumCore.getGridIdx());
     }
 
     public void checkGridTextColumnEquals(Long gridId, Long columnIndex, List<String> values) {
