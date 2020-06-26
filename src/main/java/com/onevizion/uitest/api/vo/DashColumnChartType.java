@@ -7,7 +7,8 @@ public enum DashColumnChartType {
     COLUMN(2L),
     LINE(3L),
     PIE(4L),
-    SPLINE(5L);
+    SPLINE(5L),
+    WATERFALL(8L);
 
     private Long idx;
 
