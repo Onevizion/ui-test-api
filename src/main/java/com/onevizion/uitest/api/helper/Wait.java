@@ -155,11 +155,15 @@ public class Wait {
             .until(webdriver -> !webElement.getAttribute("value").equals("loading..."));
     }
 
-    public void waitListBoxLoadCnt(final Select select, final int cnt) {
+    public void waitListBoxLoadCnt(Select select, int cnt) {
+        IntSupplier actualValueSupplier = ()-> select.getOptions().size();
+
+        Supplier<String> messageSupplier = ()-> "Loading items in ListBox failed. Expected count=[" + cnt + "] but Actual count=[" + actualValueSupplier.getAsInt() + "]";
+
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Loading items in ListBox failed. Expected count=[" + cnt + "] but Actual count=[" + select.getOptions().size() + "]")
+            .withMessage(messageSupplier)
             .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> select.getOptions().size() == cnt);
+            .until(webdriver -> cnt == actualValueSupplier.getAsInt());
     }
 
     /*new void to support new duallist box*/
