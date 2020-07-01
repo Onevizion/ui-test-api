@@ -114,6 +114,7 @@ import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
 import com.onevizion.uitest.api.helper.view.View;
 import com.onevizion.uitest.api.helper.wfvisualeditor.WfVisualEditor;
 import com.onevizion.uitest.api.helper.wiki.FckEditor;
+import com.onevizion.uitest.api.helper.workplan.Workplan;
 import com.onevizion.uitest.api.restapi.CreateProcess;
 import com.onevizion.uitest.api.restapi.CreateTest;
 import com.onevizion.uitest.api.restapi.CreateTestResult;
@@ -312,6 +313,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected Map map;
+
+    @Autowired
+    protected Workplan workplan;
     /* Helpers End */
 
     /* Entity Helpers Begin */
