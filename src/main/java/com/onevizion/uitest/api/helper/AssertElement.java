@@ -31,12 +31,6 @@ public class AssertElement {
     @Autowired
     private Element element;
 
-    @Autowired
-    private Checkbox checkbox;
-
-    @Autowired
-    private Tb tb;
-
     public void assertLink(String id, String expectedVal) {
         element.moveToElementById(id);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).getText();

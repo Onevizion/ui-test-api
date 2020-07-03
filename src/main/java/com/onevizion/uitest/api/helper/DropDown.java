@@ -28,9 +28,6 @@ public class DropDown {
     @Autowired
     private DropDownJs dropDownJs;
 
-    @Autowired
-    private DropDownWait dropDownWait;
-
     public List<DropDownElement> getElements(String dropDownId) {
         return getItems(dropDownId);
     }

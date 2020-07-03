@@ -25,12 +25,6 @@ public class Favorites {
     private SeleniumSettings seleniumSettings;
 
     @Autowired
-    private ElementWait elementWait;
-
-    @Autowired
-    private Element element;
-
-    @Autowired
     private Window window;
 
     @Autowired

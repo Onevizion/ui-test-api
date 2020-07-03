@@ -12,7 +12,6 @@ import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Qs;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.BplComponentType;
 
@@ -23,9 +22,6 @@ public class BplExport {
 
     @Autowired
     private Js js;
-
-    @Autowired
-    private Wait wait;
 
     @Autowired
     private Qs qs;

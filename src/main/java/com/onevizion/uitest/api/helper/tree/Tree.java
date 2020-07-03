@@ -4,8 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.vo.TreeNode;
 import com.onevizion.uitest.api.vo.entity.MenuItem;
 import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
@@ -14,16 +12,10 @@ import com.onevizion.uitest.api.vo.entity.TrackorTreeItem;
 public class Tree {
 
     @Autowired
-    private Element element;
-
-    @Autowired
     private TreeJs treeJs;
 
     @Autowired
     private TreeWait treeWait;
-
-    @Autowired
-    private SeleniumSettings seleniumSettings;
 
     public void selectItem(Long treeId, String rootItemId, TrackorTreeItem trackorTreeItem) {
         treeJs.selectItem(treeId, rootItemId, trackorTreeItem.getTreePath());

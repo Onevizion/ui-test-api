@@ -26,8 +26,6 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Selector;
-import com.onevizion.uitest.api.helper.Tb;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
@@ -66,9 +64,6 @@ public class UserpageFilter {
     private Js js;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private Window window;
 
     @Autowired
@@ -82,9 +77,6 @@ public class UserpageFilter {
 
     @Autowired
     private Filter filter;
-
-    @Autowired
-    private Tb tb;
 
     @Autowired
     private SeleniumSettings seleniumSettings;

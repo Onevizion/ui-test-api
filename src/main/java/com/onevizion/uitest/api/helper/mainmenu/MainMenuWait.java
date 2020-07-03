@@ -17,9 +17,6 @@ class MainMenuWait {
     private SeleniumSettings seleniumSettings;
 
     @Autowired
-    private MainMenuJs mainMenuJs;
-
-    @Autowired
     private MainMenu mainMenu;
 
     void waitPageTitle(String title) {

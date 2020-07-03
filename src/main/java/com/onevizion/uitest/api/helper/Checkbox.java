@@ -19,12 +19,6 @@ public class Checkbox {
     @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Autowired
-    private Window window;
-
-    @Autowired
-    private Wait wait;
-
     public void clickByName(String checkboxName) {
         WebElement checkbox = seleniumSettings.getWebDriver().findElement(By.name(checkboxName));
         WebElement label = js.getParentElement(checkbox);

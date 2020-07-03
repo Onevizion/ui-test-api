@@ -13,15 +13,12 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.ListboxElement;
 
@@ -87,9 +84,6 @@ public class View {
     private Wait wait;
 
     @Autowired
-    private AssertElement assertElement;
-
-    @Autowired
     private Tree tree;
 
     @Autowired
@@ -103,12 +97,6 @@ public class View {
 
     @Autowired
     private ViewWait viewWait;
-
-    @Autowired
-    private Jquery jquery;
-
-    @Autowired
-    private Element element;
 
     @Autowired
     private Listbox listbox;

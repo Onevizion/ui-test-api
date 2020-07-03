@@ -27,9 +27,6 @@ public class Qs {
     private Js js;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private ElementWait elementWait;
 
     @Autowired

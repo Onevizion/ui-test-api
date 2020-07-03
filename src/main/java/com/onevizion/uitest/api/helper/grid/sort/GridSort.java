@@ -19,7 +19,6 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.GridColumnType;
 import com.onevizion.uitest.api.vo.SortType;
@@ -40,9 +39,6 @@ public class GridSort {
 
     @Autowired
     private ElementWait elementWait;
-
-    @Autowired
-    private Wait wait;
 
     @Autowired
     private Grid2 grid2;

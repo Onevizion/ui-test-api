@@ -26,9 +26,6 @@ public class Nav {
     private Js js;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private Grid2 grid2;
 
     @Autowired

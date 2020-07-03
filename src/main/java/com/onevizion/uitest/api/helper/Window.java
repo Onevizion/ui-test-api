@@ -17,7 +17,6 @@ import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.document.Document;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
@@ -40,9 +39,6 @@ public class Window {
 
     @Autowired
     private Document document;
-
-    @Autowired
-    private Jquery jquery;
 
     @Autowired
     private Grid2 grid2;

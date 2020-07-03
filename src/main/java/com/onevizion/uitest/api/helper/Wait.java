@@ -41,9 +41,6 @@ public class Wait {
     @Autowired
     private Tab tab;
 
-    @Autowired
-    private HtmlSelect htmlSelect;
-
     public void waitWebElement(final By elementLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for WebElement [" + elementLocator.toString() + "] is failed.")

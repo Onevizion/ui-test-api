@@ -5,21 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
-import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
 public class SharePageLink {
 
     private static final String ID_SHARE = "shareButton";
-
-    @Autowired
-    private SeleniumSettings seleniumSettings;
-
-    @Autowired
-    private ElementWait elementWait;
-
-    @Autowired
-    private Element element;
 
     @Autowired
     private Window window;

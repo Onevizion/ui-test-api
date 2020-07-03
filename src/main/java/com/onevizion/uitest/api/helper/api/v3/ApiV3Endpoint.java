@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
@@ -19,9 +18,6 @@ import com.onevizion.uitest.api.vo.ApiV3EndpointType;
 
 @Component
 public class ApiV3Endpoint {
-
-    @Autowired
-    private SeleniumSettings seleniumSettings;
 
     @Autowired
     private Element element;

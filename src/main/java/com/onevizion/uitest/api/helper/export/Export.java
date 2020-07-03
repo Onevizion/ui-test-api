@@ -43,9 +43,6 @@ public class Export {
     private ElementWait elementWait;
 
     @Autowired
-    private ExportJs exportJs;
-
-    @Autowired
     private ExportWait exportWait;
 
     @Autowired

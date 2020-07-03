@@ -28,9 +28,6 @@ public class Logoff {
     private SeleniumSettings seleniumSettings;
 
     @Autowired
-    private Window window;
-
-    @Autowired
     private Document document;
 
     @Autowired

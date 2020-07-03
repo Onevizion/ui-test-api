@@ -50,9 +50,6 @@ public class Tb {
     private Wait wait;
 
     @Autowired
-    private FieldHistory fieldHistory;
-
-    @Autowired
     private Selector selector;
 
     @Autowired
@@ -63,9 +60,6 @@ public class Tb {
 
     @Autowired
     private ElementWait elementWait;
-
-    @Autowired
-    private ElementJs elementJs;
 
     @Autowired
     private HtmlInputFile htmlInputFile;

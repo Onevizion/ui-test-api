@@ -25,9 +25,6 @@ public class SeleniumNode {
     @Autowired
     private SeleniumSettings seleniumSettings;
 
-    @Autowired
-    private SeleniumLogger seleniumLogger;
-
     public String getNodeHostAndPort() {
         String[] hostAndPort = getNode();
         return hostAndPort[0] + ":" + hostAndPort[1];
