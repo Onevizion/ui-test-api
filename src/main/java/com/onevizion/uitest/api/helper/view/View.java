@@ -407,95 +407,6 @@ public class View {
         listbox.selectElement(actualRightColumns.get(actualRightColumns.size() - 1));
     }
 
-    public void checkViewOptionsNew(Long gridIdx, String entityPrefix,
-            Long gridColumnsUnsavedView, List<String> leftColumnsUnsavedView, List<String> rightColumnsUnsavedView,
-            Long gridColumnsLocalView1, List<String> leftColumnsLocalView1, List<String> rightColumnsLocalView1,
-            Long gridColumnsGlobalView1, List<String> leftColumnsGlobalView1, List<String> rightColumnsGlobalView1,
-            Long gridColumnsLocalView2, List<String> leftColumnsLocalView2, List<String> rightColumnsLocalView2,
-            Long gridColumnsGlobalView2, List<String> leftColumnsGlobalView2, List<String> rightColumnsGlobalView2) {
-        //Save Local View 1
-        selectColumns(gridIdx, rightColumnsLocalView1);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
-        checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
-        saveViewAsNewLocal(gridIdx, entityPrefix + VIEW_NAME + "1", FOLDER_LOCAL);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
-        checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
-
-        //Save Global View 1
-        selectColumns(gridIdx, rightColumnsGlobalView1);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
-        checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
-        saveViewAsNewGlobal(gridIdx, entityPrefix + VIEW_NAME + "1", FOLDER_GLOBAL);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
-        checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
-
-        //Save Local View 2
-        selectColumns(gridIdx, rightColumnsLocalView2);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
-        checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
-        saveViewAsNewLocal(gridIdx, entityPrefix + VIEW_NAME + "2", FOLDER_LOCAL);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
-        checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
-
-        //Save Global View 2
-        selectColumns(gridIdx, rightColumnsGlobalView2);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
-        checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-        saveViewAsNewGlobal(gridIdx, entityPrefix + VIEW_NAME + "2", FOLDER_GLOBAL);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
-        checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-
-        //Unsaved View
-        selectColumns(gridIdx, rightColumnsUnsavedView);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsUnsavedView);
-        checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
-
-        //Select Local View 1
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + VIEW_NAME + "1");
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
-        checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
-
-        //Select Global View 1
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + VIEW_NAME + "1");
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
-        checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
-
-        //Select Unsaved View
-        selectByVisibleText(gridIdx, UNSAVED_VIEW_NAME);
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsUnsavedView);
-        checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
-
-        //Select Local View 2
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + VIEW_NAME + "2");
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
-        checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
-
-        //Select Global View 2
-        selectByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + VIEW_NAME + "2");
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
-        checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-
-        //Delete Local 1
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + VIEW_NAME + "1");
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
-        checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-
-        //Delete Global 1
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + VIEW_NAME + "1");
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
-        checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-
-        //Delete Local 2
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix + VIEW_NAME + "2");
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
-        checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-
-        //Delete Global 2
-        deleteView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix + VIEW_NAME + "2");
-        Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsUnsavedView);
-        checkColumns(gridIdx, leftColumnsUnsavedView, rightColumnsUnsavedView);
-    }
-
     public void selectAllColumns(Long gridIdx) {
         openViewForm(gridIdx);
 
@@ -522,7 +433,7 @@ public class View {
         checkColumns(gridIdx, leftColumns, rightColumns);
     }
 
-    private void selectColumns(Long gridIdx, List<String> rightColumns) {
+    public void selectColumns(Long gridIdx, List<String> rightColumns) {
         openViewForm(gridIdx);
 
         List<ListboxElement> actualRightColumns = listbox.getElements(RIGHT_COLUMNS_DIV_ID);
@@ -542,7 +453,7 @@ public class View {
         closeViewFormOk(gridIdx);
     }
 
-    private void checkColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
+    public void checkColumns(Long gridIdx, List<String> leftColumns, List<String> rightColumns) {
         openViewForm(gridIdx);
 
         List<ListboxElement> actualLeftColumns = listbox.getElements(LEFT_COLUMNS_DIV_ID);
