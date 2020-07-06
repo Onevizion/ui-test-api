@@ -52,8 +52,8 @@ public class Filter {
     private static final String FILTER_DIALOG_OK = "filterDialogOk";
     private static final String FILTER_DIALOG_CANCEL = "filterDialogCancel";
 
-    private static final String FOLDER_LOCAL = "Local Filters";
-    private static final String FOLDER_GLOBAL = "Global Filters";
+    public static final String FOLDER_LOCAL = "Local Filters";
+    public static final String FOLDER_GLOBAL = "Global Filters";
 
     private static final String SCROLL_CONTAINER = "scrollContainer";
     private static final String EXISTING_FILTERS = "ddExistingFilters";
@@ -321,52 +321,68 @@ public class Filter {
 
     public void closeSaveFilterFormOk(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(FILTER_DIALOG_OK + gridIdx)).click();
+        elementWait.waitElementNotVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementNotDisplayById(FILTER_DIALOG_CONTAINER + gridIdx);
     }
 
     public void closeSaveFilterFormCancel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(FILTER_DIALOG_CANCEL + gridIdx)).click();
+        elementWait.waitElementNotVisibleById(FILTER_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementNotDisplayById(FILTER_DIALOG_CONTAINER + gridIdx);
     }
 
-    public void saveFilter(Long gridIdx, String entityPrefix, boolean isLocal, boolean isNew) {
+    public void saveFilterAsNewLocal(Long gridIdx, String filterName, String folderName) {
         int beforeSaveSize = getFiltersCount(gridIdx);
 
         openSaveFilterForm(gridIdx);
-
-        if (isNew) {
-            new Select(seleniumSettings.getWebDriver().findElement(By.id(FILTER_TYPE + gridIdx))).selectByVisibleText("New");
-        } else {
-            new Select(seleniumSettings.getWebDriver().findElement(By.id(FILTER_TYPE + gridIdx))).selectByVisibleText("Existing");
-        }
-
-        if (isLocal) {
-            selectFolderForSaveFilterByVisibleText(gridIdx, FOLDER_LOCAL);
-        } else {
-            selectFolderForSaveFilterByVisibleText(gridIdx, FOLDER_GLOBAL);
-        }
-
-        if (isNew) {
-            seleniumSettings.getWebDriver().findElement(By.id(FIELD_FILTER_NAME + gridIdx)).sendKeys(entityPrefix);
-        } else {
-            if (isLocal) {//TODO
-                new Select(seleniumSettings.getWebDriver().findElement(By.id("lbFilterName"))).selectByVisibleText(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix);//TODO
-            } else {//TODO
-                new Select(seleniumSettings.getWebDriver().findElement(By.id("lbGFilterName"))).selectByVisibleText(AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix);//TODO
-            }
-        }
-
+        new Select(seleniumSettings.getWebDriver().findElement(By.id(FILTER_TYPE + gridIdx))).selectByVisibleText("New");
+        selectFolderForSaveFilterByVisibleText(gridIdx, folderName);
+        seleniumSettings.getWebDriver().findElement(By.id(FIELD_FILTER_NAME + gridIdx)).sendKeys(filterName);
         closeSaveFilterFormOk(gridIdx);
 
-        if (isNew) {
-            wait.waitFiltersCount(gridIdx, beforeSaveSize + 1);
-        } else {
-            wait.waitFiltersCount(gridIdx, beforeSaveSize);
-        }
+        wait.waitFiltersCount(gridIdx, beforeSaveSize + 1);
 
-        if (isLocal) {
-            isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix);
-        } else {
-            isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix);
-        }
+        isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + filterName);
+    }
+
+    public void saveFilterAsNewGlobal(Long gridIdx, String filterName, String folderName) {
+        int beforeSaveSize = getFiltersCount(gridIdx);
+
+        openSaveFilterForm(gridIdx);
+        new Select(seleniumSettings.getWebDriver().findElement(By.id(FILTER_TYPE + gridIdx))).selectByVisibleText("New");
+        selectFolderForSaveFilterByVisibleText(gridIdx, folderName);
+        seleniumSettings.getWebDriver().findElement(By.id(FIELD_FILTER_NAME + gridIdx)).sendKeys(filterName);
+        closeSaveFilterFormOk(gridIdx);
+
+        wait.waitFiltersCount(gridIdx, beforeSaveSize + 1);
+
+        isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + filterName);
+    }
+
+    public void saveFilterAsExistingLocal(Long gridIdx, String filterName) {
+        int beforeSaveSize = getFiltersCount(gridIdx);
+
+        openSaveFilterForm(gridIdx);
+        new Select(seleniumSettings.getWebDriver().findElement(By.id(FILTER_TYPE + gridIdx))).selectByVisibleText("Existing");
+        selectFolderForSaveFilterByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + filterName);
+        closeSaveFilterFormOk(gridIdx);
+
+        wait.waitFiltersCount(gridIdx, beforeSaveSize);
+
+        isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + filterName);
+    }
+
+    public void saveFilterAsExistingGlobal(Long gridIdx, String filterName) {
+        int beforeSaveSize = getFiltersCount(gridIdx);
+
+        openSaveFilterForm(gridIdx);
+        new Select(seleniumSettings.getWebDriver().findElement(By.id(FILTER_TYPE + gridIdx))).selectByVisibleText("Existing");
+        selectFolderForSaveFilterByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + filterName);
+        closeSaveFilterFormOk(gridIdx);
+
+        wait.waitFiltersCount(gridIdx, beforeSaveSize);
+
+        isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + filterName);
     }
 
     public void deleteFilter(Long gridIdx, String entityPrefix) {

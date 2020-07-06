@@ -49,8 +49,8 @@ public class View {
     private static final String VIEW_DIALOG_OK = "viewDialogOk";
     private static final String VIEW_DIALOG_CANCEL = "viewDialogCancel";
 
-    private static final String FOLDER_LOCAL = "Local Views";
-    private static final String FOLDER_GLOBAL = "Global Views";
+    public static final String FOLDER_LOCAL = "Local Views";
+    public static final String FOLDER_GLOBAL = "Global Views";
 
     private static final String SCROLL_CONTAINER = "scrollContainer";
     private static final String EXISTING_VIEWS = "ddExistingViews";
@@ -295,52 +295,68 @@ public class View {
 
     public void closeSaveViewFormOk(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(VIEW_DIALOG_OK + gridIdx)).click();
+        elementWait.waitElementNotVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementNotDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
     }
 
     public void closeSaveViewFormCancel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(VIEW_DIALOG_CANCEL + gridIdx)).click();
+        elementWait.waitElementNotVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
+        elementWait.waitElementNotDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
     }
 
-    public void saveView(Long gridIdx, String entityPrefix, boolean isLocal, boolean isNew) {
+    public void saveViewAsNewLocal(Long gridIdx, String viewName, String folderName) {
         int beforeSaveSize = getViewsCount(gridIdx);
 
         openSaveViewForm(gridIdx);
-
-        if (isNew) {
-            new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("New");
-        } else {
-            new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("Existing");
-        }
-
-        if (isLocal) {
-            selectFolderForSaveViewByVisibleText(gridIdx, FOLDER_LOCAL);
-        } else {
-            selectFolderForSaveViewByVisibleText(gridIdx, FOLDER_GLOBAL);
-        }
-
-        if (isNew) {
-            seleniumSettings.getWebDriver().findElement(By.id(FIELD_VIEW_NAME + gridIdx)).sendKeys(entityPrefix);
-        } else {
-            if (isLocal) {//TODO
-                new Select(seleniumSettings.getWebDriver().findElement(By.id("lbViewName"))).selectByVisibleText(AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix);//TODO
-            } else {//TODO
-                new Select(seleniumSettings.getWebDriver().findElement(By.id("lbGViewName"))).selectByVisibleText(AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix);//TODO
-            }
-        }
-
+        new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("New");
+        selectFolderForSaveViewByVisibleText(gridIdx, folderName);
+        seleniumSettings.getWebDriver().findElement(By.id(FIELD_VIEW_NAME + gridIdx)).sendKeys(viewName);
         closeSaveViewFormOk(gridIdx);
 
-        if (isNew) {
-            wait.waitViewsCount(gridIdx, beforeSaveSize + 1);
-        } else {
-            wait.waitViewsCount(gridIdx, beforeSaveSize);
-        }
+        wait.waitViewsCount(gridIdx, beforeSaveSize + 1);
 
-        if (isLocal) {
-            isExistAndSelectedView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + entityPrefix);
-        } else {
-            isExistAndSelectedView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + entityPrefix);
-        }
+        isExistAndSelectedView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + viewName);
+    }
+
+    public void saveViewAsNewGlobal(Long gridIdx, String viewName, String folderName) {
+        int beforeSaveSize = getViewsCount(gridIdx);
+
+        openSaveViewForm(gridIdx);
+        new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("New");
+        selectFolderForSaveViewByVisibleText(gridIdx, folderName);
+        seleniumSettings.getWebDriver().findElement(By.id(FIELD_VIEW_NAME + gridIdx)).sendKeys(viewName);
+        closeSaveViewFormOk(gridIdx);
+
+        wait.waitViewsCount(gridIdx, beforeSaveSize + 1);
+
+        isExistAndSelectedView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + viewName);
+    }
+
+    public void saveViewAsExistingLocal(Long gridIdx, String viewName) {
+        int beforeSaveSize = getViewsCount(gridIdx);
+
+        openSaveViewForm(gridIdx);
+        new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("Existing");
+        selectFolderForSaveViewByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + viewName);
+        closeSaveViewFormOk(gridIdx);
+
+        wait.waitViewsCount(gridIdx, beforeSaveSize);
+
+        isExistAndSelectedView(gridIdx, AbstractSeleniumCore.PREFIX_LOCAL + viewName);
+    }
+
+    public void saveViewAsExistingGlobal(Long gridIdx, String viewName) {
+        int beforeSaveSize = getViewsCount(gridIdx);
+
+        openSaveViewForm(gridIdx);
+        new Select(seleniumSettings.getWebDriver().findElement(By.id(VIEW_TYPE + gridIdx))).selectByVisibleText("Existing");
+        selectFolderForSaveViewByVisibleText(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + viewName);
+        closeSaveViewFormOk(gridIdx);
+
+        wait.waitViewsCount(gridIdx, beforeSaveSize);
+
+        isExistAndSelectedView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + viewName);
     }
 
     public void deleteView(Long gridIdx, String entityPrefix) {
@@ -401,7 +417,7 @@ public class View {
         selectColumns(gridIdx, rightColumnsLocalView1);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
-        saveView(gridIdx, entityPrefix + VIEW_NAME + "1", true, true);
+        saveViewAsNewLocal(gridIdx, entityPrefix + VIEW_NAME + "1", FOLDER_LOCAL);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView1);
         checkColumns(gridIdx, leftColumnsLocalView1, rightColumnsLocalView1);
 
@@ -409,7 +425,7 @@ public class View {
         selectColumns(gridIdx, rightColumnsGlobalView1);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
-        saveView(gridIdx, entityPrefix + VIEW_NAME + "1", false, true);
+        saveViewAsNewGlobal(gridIdx, entityPrefix + VIEW_NAME + "1", FOLDER_GLOBAL);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView1);
         checkColumns(gridIdx, leftColumnsGlobalView1, rightColumnsGlobalView1);
 
@@ -417,7 +433,7 @@ public class View {
         selectColumns(gridIdx, rightColumnsLocalView2);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
-        saveView(gridIdx, entityPrefix + VIEW_NAME + "2", true, true);
+        saveViewAsNewLocal(gridIdx, entityPrefix + VIEW_NAME + "2", FOLDER_LOCAL);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsLocalView2);
         checkColumns(gridIdx, leftColumnsLocalView2, rightColumnsLocalView2);
 
@@ -425,7 +441,7 @@ public class View {
         selectColumns(gridIdx, rightColumnsGlobalView2);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
-        saveView(gridIdx, entityPrefix + VIEW_NAME + "2", false, true);
+        saveViewAsNewGlobal(gridIdx, entityPrefix + VIEW_NAME + "2", FOLDER_GLOBAL);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumnsGlobalView2);
         checkColumns(gridIdx, leftColumnsGlobalView2, rightColumnsGlobalView2);
 
