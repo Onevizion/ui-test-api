@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ChatSubscriber implements Comparable<ChatSubscriber> {
+public class ChatUser implements Comparable<ChatUser> {
 
     private String userId;
     private String userName;
@@ -28,7 +28,7 @@ public class ChatSubscriber implements Comparable<ChatSubscriber> {
     }
 
     @Override
-    public int compareTo(ChatSubscriber o) {
+    public int compareTo(ChatUser o) {
         return this.userId.compareTo(o.userId);
     }
 
@@ -48,7 +48,7 @@ public class ChatSubscriber implements Comparable<ChatSubscriber> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ChatSubscriber other = (ChatSubscriber) obj;
+        ChatUser other = (ChatUser) obj;
         return Objects.equals(userId, other.userId) && Objects.equals(userName, other.userName);
     }
 
