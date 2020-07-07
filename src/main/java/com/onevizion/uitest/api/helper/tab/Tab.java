@@ -39,13 +39,13 @@ public class Tab {
 
     public void hideTabMenu() {
         if (!tabJs.isTabMenuHidden()) {
-            seleniumSettings.getWebDriver().findElement(By.className("showMenuBtn")).click();
+            seleniumSettings.getWebDriver().findElement(By.id("formTabsBtn")).click();
         }
     }
 
     public void showTabMenu() {
         if (tabJs.isTabMenuHidden()) {
-            seleniumSettings.getWebDriver().findElement(By.className("showMenuBtn")).click();
+            seleniumSettings.getWebDriver().findElement(By.id("formTabsBtn")).click();
         }
     }
 
