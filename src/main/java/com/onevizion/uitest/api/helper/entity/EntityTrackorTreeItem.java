@@ -165,7 +165,7 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(2L); //Role Privs
+        tab.goToTab(2); //Role Privs
         grid2.waitLoad(2L);
         grid.checkAssignmentGridColumn(2L, 1L, rolePrivsRead);
         grid.checkAssignmentGridColumn(2L, 2L, rolePrivsEdit);
@@ -181,7 +181,7 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(3L); //Role Lock Privs
+        tab.goToTab(3); //Role Lock Privs
         grid2.waitLoad(3L);
         grid.checkAssignmentGridColumn(3L, 1L, roleLockPrivsLock);
         grid.checkAssignmentGridColumn(3L, 2L, roleLockPrivsUnlock);

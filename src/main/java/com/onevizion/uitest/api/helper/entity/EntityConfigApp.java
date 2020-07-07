@@ -98,13 +98,13 @@ public class EntityConfigApp {
         view.waitLeftListBoxReady();
         view.waitRightListBoxReady();
 
-        tab.goToTab(2L); //Tabs
+        tab.goToTab(2); //Tabs
         List<ListboxElement> leftTabs = listbox.getElements("leftListBox");
         for (String tab : configApp.getTabs()) {
             listbox.moveElementByLabel(leftTabs, tab, BUTTON_ADD_TAB);
         }
 
-        tab.goToTab(3L); //Role Privs
+        tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn(3L, 1L);
         grid.clearAssignmentGridColumn(3L, 2L);
@@ -118,14 +118,14 @@ public class EntityConfigApp {
         grid.selectAssignmentGridColumnNew(3L, 5L, 0L, configApp.getRoles(), "N");
 
         if (isDynamicTrackorType(configApp)) {
-            tab.goToTab(4L); //Trackor Classes
+            tab.goToTab(4); //Trackor Classes
             grid2.waitLoad(4L);
             grid.clearAssignmentGridColumn2(4L, 0L);
             grid.selectAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
-            tab.goToTab(5L); //ePM Pages
+            tab.goToTab(5); //ePM Pages
             grid2.waitLoad(5L);
             grid.clearAssignmentGridColumn2(5L, 0L);
             grid.selectAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
@@ -137,7 +137,7 @@ public class EntityConfigApp {
         } else {
             packagesTabIndex = 4L;
         }
-        tab.goToTab(packagesTabIndex); //Components Package
+        tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
         grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
@@ -154,7 +154,7 @@ public class EntityConfigApp {
         view.waitLeftListBoxReady();
         view.waitRightListBoxReady();
 
-        tab.goToTab(2L); //Tabs
+        tab.goToTab(2); //Tabs
         if (seleniumSettings.getWebDriver().findElement(By.id(BUTTON_REMOVE_ALL_TABS)).isEnabled()) {
             seleniumSettings.getWebDriver().findElement(By.id(BUTTON_REMOVE_ALL_TABS)).click();
         }
@@ -167,7 +167,7 @@ public class EntityConfigApp {
             }
         }
 
-        tab.goToTab(3L); //Role Privs
+        tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn(3L, 1L);
         grid.clearAssignmentGridColumn(3L, 2L);
@@ -185,14 +185,14 @@ public class EntityConfigApp {
         grid.selectAssignmentGridColumnNew(3L, 5L, 0L, configApp.getRoles(), "N");
 
         if (isDynamicTrackorType(configApp)) {
-            tab.goToTab(4L); //Trackor Classes
+            tab.goToTab(4); //Trackor Classes
             grid2.waitLoad(4L);
             grid.clearAssignmentGridColumn2(4L, 0L);
             grid.selectAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
-            tab.goToTab(5L); //ePM Pages
+            tab.goToTab(5); //ePM Pages
             grid2.waitLoad(5L);
             grid.clearAssignmentGridColumn2(5L, 0L);
             grid.selectAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
@@ -204,7 +204,7 @@ public class EntityConfigApp {
         } else {
             packagesTabIndex = 4L;
         }
-        tab.goToTab(packagesTabIndex); //Components Package
+        tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
         grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
@@ -229,14 +229,14 @@ public class EntityConfigApp {
         }
         assertElement.assertText(ICON, configApp.getIcon());
 
-        tab.goToTab(2L); //Tabs
+        tab.goToTab(2); //Tabs
         List<ListboxElement> rightTabs = listbox.getElements("rightListBox");
         listbox.checkElementsCount(rightTabs, configApp.getTabs().size());
         for (int i = 0; i < configApp.getTabs().size(); i++) {
             listbox.checkElementByLabel(rightTabs, i + 1, configApp.getTabs().get(i));
         }
 
-        tab.goToTab(3L); //Role Privs
+        tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
         grid.checkAssignmentGridColumnNew(3L, 1L, 0L, configApp.getRoles(), "R");
         grid.checkAssignmentGridColumnNew(3L, 2L, 0L, configApp.getRoles(), "E");
@@ -247,13 +247,13 @@ public class EntityConfigApp {
         grid.checkAssignmentGridColumnNew(3L, 5L, 0L, configApp.getRoles(), "N");
 
         if (isDynamicTrackorType(configApp)) {
-            tab.goToTab(4L); //Trackor Classes
+            tab.goToTab(4); //Trackor Classes
             grid2.waitLoad(4L);
             grid.checkAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
-            tab.goToTab(5L); //ePM Pages
+            tab.goToTab(5); //ePM Pages
             grid2.waitLoad(5L);
             grid.checkAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
         }
@@ -264,7 +264,7 @@ public class EntityConfigApp {
         } else {
             packagesTabIndex = 4L;
         }
-        tab.goToTab(packagesTabIndex); //Components Package
+        tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.checkAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
 

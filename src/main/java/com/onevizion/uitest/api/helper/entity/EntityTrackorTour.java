@@ -73,7 +73,7 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(2L); //Tour Steps
+        tab.goToTab(2); //Tour Steps
         grid2.waitLoad(2L);
 
         for (TrackorTourStep trackorTourStep : trackorTour.getSteps()) {
@@ -108,7 +108,7 @@ public class EntityTrackorTour {
 
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(trackorTour.getDescription());
 
-        tab.goToTab(2L); //Role Assignments
+        tab.goToTab(2); //Role Assignments
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
@@ -118,7 +118,7 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(4L); //Components Package
+        tab.goToTab(4); //Components Package
         grid2.waitLoad(4L);
         grid.clearAssignmentGridColumn2(4L, 0L);
         grid.selectAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
@@ -154,12 +154,12 @@ public class EntityTrackorTour {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(trackorTour.getDescription());
 
-        tab.goToTab(3L);//Role Assignments
+        tab.goToTab(3);//Role Assignments
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn2(3L, 0L);
         grid.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
-        tab.goToTab(4L); //Components Package
+        tab.goToTab(4); //Components Package
         grid2.waitLoad(4L);
         grid.clearAssignmentGridColumn2(4L, 0L);
         grid.selectAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
@@ -176,7 +176,7 @@ public class EntityTrackorTour {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(2L); //Tour Steps
+        tab.goToTab(2); //Tour Steps
         grid2.waitLoad(2L);
 
         Assert.assertEquals(grid.getGridRowsCount(2L), Long.valueOf(trackorTour.getSteps().size()));
@@ -211,11 +211,11 @@ public class EntityTrackorTour {
         assertElement.assertSelect(ORDER_NUMBER, trackorTour.getOrderNumber());
         assertElement.assertText(DESCRIPTION, trackorTour.getDescription());
 
-        tab.goToTab(3L); //Role Assignments
+        tab.goToTab(3); //Role Assignments
         grid2.waitLoad(3L);
         grid.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
 
-        tab.goToTab(4L); //Components Package
+        tab.goToTab(4); //Components Package
         grid2.waitLoad(4L);
         grid.checkAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
 

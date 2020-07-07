@@ -1,13 +1,8 @@
 package com.onevizion.uitest.api.helper.tab;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.Js;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,62 +15,26 @@ public class Tab {
     private SeleniumSettings seleniumSettings;
 
     @Autowired
-    private Js js;
-
-    @Autowired
     private TabJs tabJs;
 
-    public void goToTab(String tabLabel) {
-        Long tabIndex = getTabIndex(tabLabel);
-        goToTab(tabIndex);
+    @Autowired
+    private TabWait tabWait;
+
+    @Autowired
+    private ListboxTab listboxTab;
+
+    public void goToTab(String label) {
+        List<ListboxElementTab> tabs = listboxTab.getTabs();
+        ListboxElementTab tab = listboxTab.getTabByLabel(tabs, label);
+        listboxTab.selectTab(tab);
+        tabWait.waitLoad(tabs.indexOf(tab) + 1);
     }
 
-    public void goToTab(Long tabIndex) {
-        js.scrollNewDropDownTop("newFormMenu", "scrollContainer", tabIndex * 28L);
-
-        List<WebElement> tabs = seleniumSettings.getWebDriver().findElement(By.id("formMenuTree")).findElement(By.className("scrollContent")).findElements(By.className("newGuiMenuRowContainer"));
-        WebElement tab = tabs.get(tabIndex.intValue() - 1);
-        tab.click();
-    }
-
-    public String getTabLabel(Long tabIndex) {
-        String tabPrefix = "";
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int tabPrefixCount = seleniumSettings.getWebDriver().findElements(By.id("tabPrefix" + tabIndex.intValue())).size();
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        if (tabPrefixCount > 0) {
-            tabPrefix = seleniumSettings.getWebDriver().findElement(By.id("tabPrefix" + tabIndex.intValue())).getAttribute("textContent");
-        }
-
-        String tabLabel = seleniumSettings.getWebDriver().findElement(By.id("tabLabel" + tabIndex.intValue())).getAttribute("textContent");
-
-        String tabRows = "";
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int tabRowsCount = seleniumSettings.getWebDriver().findElements(By.id("tabRows" + tabIndex.intValue())).size();
-        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        if (tabRowsCount > 0) {
-            tabRows = " (" + seleniumSettings.getWebDriver().findElement(By.id("tabRows" + tabIndex.intValue())).getAttribute("textContent") + ")";
-        }
-
-        return tabPrefix + tabLabel + tabRows;
-    }
-
-    public Long getTabIndex(String tabLabel) {
-        Long tabIndex = null;
-        for (int i = 1; i <= getTabsCnt(); i++) {
-            if (tabLabel.equals(getTabLabel((long) i))) {
-                if (tabIndex != null) {
-                    throw new SeleniumUnexpectedException("Tab with text[" + tabLabel + "] found many times");
-                }
-                tabIndex = (long) i;
-            }
-        }
-
-        if (tabIndex == null) {
-            throw new SeleniumUnexpectedException("Tab with text[" + tabLabel + "] not found");
-        }
-
-        return tabIndex;
+    public void goToTab(int position) {
+        List<ListboxElementTab> tabs = listboxTab.getTabs();
+        ListboxElementTab tab = listboxTab.getTabByPosition(tabs, position);
+        listboxTab.selectTab(tab);
+        tabWait.waitLoad(position);
     }
 
     public void hideTabMenu() {
@@ -90,9 +49,8 @@ public class Tab {
         }
     }
 
-    public int getTabsCnt() {
-        List<WebElement> tabs = seleniumSettings.getWebDriver().findElement(By.id("formMenuTree")).findElement(By.className("scrollContent")).findElements(By.className("newGuiMenuRowContainer"));
-        return tabs.size();
+    public void waitLoad(int position) {
+        tabWait.waitLoad(position);
     }
 
 }

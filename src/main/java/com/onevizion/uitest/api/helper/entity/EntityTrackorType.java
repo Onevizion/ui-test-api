@@ -108,7 +108,7 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(6L); //Components Package
+        tab.goToTab(6); //Components Package
         grid2.waitLoad(6L);
         grid.clearAssignmentGridColumn2(6L, 0L);
         grid.selectAssignmentGridColumn2New(6L, 0L, 2L, trackorType.getPackages());
@@ -147,7 +147,7 @@ public class EntityTrackorType {
         assertElement.assertCheckbox(EFILE_CONTAINER, trackorType.getEfileContainer());
         assertElement.assertCheckbox(COMMENTS, trackorType.getComments());
 
-        tab.goToTab(2L); // Key Generation
+        tab.goToTab(2); // Key Generation
         assertElement.assertCheckbox("autokey", trackorType.getAutoKey());
         assertElement.assertText("autokeyStartAt", trackorType.getAutoKeyStartAt());
         assertElement.assertSelect("lbOwner1", trackorType.getOwner1());
@@ -161,7 +161,7 @@ public class EntityTrackorType {
         assertElement.assertSelect("lbDigits", trackorType.getDigits4());
         assertElement.assertSelect("lbUnique", trackorType.getUniqueAcross4());
 
-        tab.goToTab(6L); //Components Package
+        tab.goToTab(6); //Components Package
         grid2.waitLoad(6L);
         grid.checkAssignmentGridColumn2New(6L, 0L, 2L, trackorType.getPackages());
 
@@ -173,7 +173,7 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(3L); //Role Privs
+        tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
         grid.checkAssignmentGridColumn(3L, 1L, secGroupsRead);
         grid.checkAssignmentGridColumn(3L, 2L, secGroupsEdit);
@@ -189,7 +189,7 @@ public class EntityTrackorType {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(4L); //Role Restrictions
+        tab.goToTab(4); //Role Restrictions
         grid2.waitLoad(4L);
         grid.checkPrivilegieGridColumn(4L, 1L, rolesRest, roleRest);
 

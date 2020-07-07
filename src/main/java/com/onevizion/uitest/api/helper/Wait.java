@@ -17,7 +17,6 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.filter.Filter;
-import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.view.View;
 
 @Component
@@ -37,9 +36,6 @@ public class Wait {
 
     @Autowired
     private View view;
-
-    @Autowired
-    private Tab tab;
 
     public void waitWebElement(final By elementLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -215,25 +211,6 @@ public class Wait {
             .withMessage("Waiting for form is failed.")
             .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> webdriver.getCurrentUrl().contains(str));
-    }
-
-    public void waitTabLoad(final Long tabIndex) {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> "2".equals(webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("loadingstate")));
-    }
-
-    public void waitConfigTabLoad(String tabLabel) {
-        Long tabIndex = tab.getTabIndex(tabLabel);
-        waitConfigTabLoad(tabIndex);
-    }
-
-    public void waitConfigTabLoad(Long tabIndex) {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting for tab with index=[" + tabIndex + "] is failed")
-            .until(webdriver -> !webdriver.findElement(By.id("divPage" + tabIndex)).getAttribute("innerHTML").contains("Loading Tab. Please wait..."));
-        waitTabLoad(tabIndex);
-        waitAllImagesLoad();
     }
 
     public void waitGridRowEditorLoad() {

@@ -64,7 +64,7 @@ public class EntityMenu {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(2L); // Roles
+        tab.goToTab(2); // Roles
         grid2.waitLoad(2L);
         grid.checkAssignmentGridColumn2(2L, 0L, roles);
 

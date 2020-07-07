@@ -57,7 +57,7 @@ public class EntityWpDiscipline {
 
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(wpDiscipline.getDescription());
 
-        tab.goToTab(2L); //Role Assignments
+        tab.goToTab(2); //Role Assignments
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
@@ -77,7 +77,7 @@ public class EntityWpDiscipline {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(wpDiscipline.getDescription());
 
-        tab.goToTab(2L);//Role Assignments
+        tab.goToTab(2);//Role Assignments
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
@@ -94,7 +94,7 @@ public class EntityWpDiscipline {
         assertElement.assertText(NAME, wpDiscipline.getName());
         assertElement.assertText(DESCRIPTION, wpDiscipline.getDescription());
 
-        tab.goToTab(2L); //Role Assignments
+        tab.goToTab(2); //Role Assignments
         grid2.waitLoad(2L);
         grid.checkAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
 

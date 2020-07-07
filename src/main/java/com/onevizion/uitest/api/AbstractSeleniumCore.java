@@ -108,6 +108,7 @@ import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.map.Map;
 import com.onevizion.uitest.api.helper.notification.Notification;
 import com.onevizion.uitest.api.helper.portal.Portal;
+import com.onevizion.uitest.api.helper.tab.ListboxTab;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.helper.userpage.filter.UserpageFilter;
@@ -151,6 +152,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected ListboxChatSubscriber listboxChatSubscriber;
+
+    @Autowired
+    protected ListboxTab listboxTab;
 
     @Autowired
     protected Filter filter;

@@ -69,7 +69,7 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(2L); //Values
+        tab.goToTab(2); //Values
         grid2.waitLoad(2L);
 
         for (DynamicVtableValue dynamicVtableValue : dynamicVtable.getValues()) {
@@ -94,7 +94,7 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(3L); //Components Package
+        tab.goToTab(3); //Components Package
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn2(3L, 0L);
         grid.selectAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
@@ -114,7 +114,7 @@ public class EntityDynamicVtable {
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(DESCRIPTION)).sendKeys(dynamicVtable.getDesc());
 
-        tab.goToTab(3L); //Components Package
+        tab.goToTab(3); //Components Package
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn2(3L, 0L);
         grid.selectAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
@@ -131,7 +131,7 @@ public class EntityDynamicVtable {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        tab.goToTab(2L); //Values
+        tab.goToTab(2); //Values
         grid2.waitLoad(2L);
 
         gridSort.sortColumn(2L, SortType.ASC, "Value");
@@ -154,7 +154,7 @@ public class EntityDynamicVtable {
         assertElement.assertText(NAME, dynamicVtable.getName());
         assertElement.assertText(DESCRIPTION, dynamicVtable.getDesc());
 
-        tab.goToTab(3L); //Components Package
+        tab.goToTab(3); //Components Package
         grid2.waitLoad(3L);
         grid.checkAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
 

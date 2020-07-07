@@ -64,7 +64,7 @@ public class EntityWpDatePair {
 
         seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).sendKeys(wpDatePair.getShortLabel());
 
-        tab.goToTab(2L); //Role Privs
+        tab.goToTab(2); //Role Privs
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn(2L, 1L);
         grid.clearAssignmentGridColumn(2L, 2L);
@@ -98,7 +98,7 @@ public class EntityWpDatePair {
         seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(SHORT_LABEL)).sendKeys(wpDatePair.getShortLabel());
 
-        tab.goToTab(2L); //Role Privs
+        tab.goToTab(2); //Role Privs
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn(2L, 1L);
         grid.clearAssignmentGridColumn(2L, 2L);
@@ -126,7 +126,7 @@ public class EntityWpDatePair {
         assertElement.assertText(SHORT_LABEL, wpDatePair.getShortLabel());
 
         if (!WpDatePairType.PROJECTED_DELTA.getName().equals(wpDatePair.getName())) {
-            tab.goToTab(2L); //Role Privs
+            tab.goToTab(2); //Role Privs
             grid2.waitLoad(2L);
             grid.checkAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
             if (!WpDatePairType.BASELINE.getName().equals(wpDatePair.getName())

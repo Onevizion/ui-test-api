@@ -119,7 +119,7 @@ public class EntityIntegration {
             checkbox.clickByName(ENABLED);
         }
 
-        tab.goToTab(2L); //Components Package
+        tab.goToTab(2); //Components Package
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, integration.getPackages());
@@ -165,7 +165,7 @@ public class EntityIntegration {
             checkbox.clickByName(ENABLED);
         }
 
-        tab.goToTab(2L); //Components Package
+        tab.goToTab(2); //Components Package
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
         grid.selectAssignmentGridColumn2New(2L, 0L, 2L, integration.getPackages());
@@ -189,7 +189,7 @@ public class EntityIntegration {
         assertElement.assertText(SCHEDULE, integration.getSchedule());
         assertElement.assertCheckbox(ENABLED, integration.getEnabled());
 
-        tab.goToTab(2L); //Components Package
+        tab.goToTab(2); //Components Package
         grid2.waitLoad(2L);
         grid.checkAssignmentGridColumn2New(2L, 0L, 2L, integration.getPackages());
 
