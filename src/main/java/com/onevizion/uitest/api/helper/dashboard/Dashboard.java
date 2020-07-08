@@ -210,8 +210,8 @@ public class Dashboard {
         seleniumSettings.getWebDriver().findElement(By.id("dashlet_options_")).click();
 
         WebElement dialog = getDialog();
-        dialog.findElement(By.className("in_input")).clear();
-        dialog.findElement(By.className("in_input")).sendKeys(name);
+        dialog.findElement(By.id("dashletName_input")).clear();
+        dialog.findElement(By.id("dashletName_input")).sendKeys(name);
         dialog.findElement(By.id("buttonOk")).click();
     }
 
