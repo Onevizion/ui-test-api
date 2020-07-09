@@ -25,6 +25,9 @@ public class ListboxTab {
     private SeleniumSettings seleniumSettings;
 
     @Autowired
+    private ListboxTabJs listboxTabJs;
+
+    @Autowired
     private ElementWait elementWait;
 
     public List<ListboxElementTab> getTabs() {
@@ -38,8 +41,8 @@ public class ListboxTab {
             ListboxElementTab listboxElementTab = new ListboxElementTab();
             listboxElementTab.setWebElement(webElement);
             listboxElementTab.setId(webElement.getAttribute("id"));
-            listboxElementTab.setLabel(webElement.findElement(By.className("tab_prefix")).getAttribute("textContent") + webElement.findElement(By.className("tab_label")).getAttribute("textContent"));
-            listboxElementTab.setRowsCount(webElement.findElement(By.className("tab_counter")).getAttribute("textContent"));
+            listboxElementTab.setLabel(webElement.findElement(By.className("tab_prefix")).getAttribute("innerText") + webElement.findElement(By.className("tab_label")).getAttribute("innerText"));
+            listboxElementTab.setRowsCount(webElement.findElement(By.className("tab_counter")).getAttribute("innerText"));
             tabs.add(listboxElementTab);
         }
 
@@ -68,7 +71,7 @@ public class ListboxTab {
     }
 
     public void selectTab(ListboxElementTab tab) {
-        //listboxJs.scrollToElementInListbox(tab.getWebElement()); //TODO TODO TODO
+        listboxTabJs.scrollToElementInListbox(tab.getWebElement());
         elementWait.waitElementVisible(tab.getWebElement());
         tab.getWebElement().click();
     }
