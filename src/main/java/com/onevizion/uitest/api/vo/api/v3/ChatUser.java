@@ -54,7 +54,7 @@ public class ChatUser implements Comparable<ChatUser> {
 
     @Override
     public String toString() {
-        return "ChatSubscriber [userId=" + userId + ", userName=" + userName + "]";
+        return "ChatUser [userId=" + userId + ", userName=" + userName + "]";
     }
 
 }
