@@ -123,19 +123,19 @@ public class SeleniumScreenshot {
 
         boolean isSizeEqual = bufferedImagesSizeEqual(actualImage, expectedImage);
         if (!isSizeEqual) {
-            byte[] actualScreen = convertBufferedImageToByteArray(actualImage);
-            saveScreenshot("_actual", actualScreen);
             byte[] expectedScreen = convertBufferedImageToByteArray(expectedImage);
             saveScreenshot("_expected", expectedScreen);
+            byte[] actualScreen = convertBufferedImageToByteArray(actualImage);
+            saveScreenshot("_actual", actualScreen);
             throw new SeleniumUnexpectedException("Size of images not equal. Actual[" + actualImage.getWidth() + "x" + actualImage.getHeight() + "] Expected[" + expectedImage.getWidth() + "x" + expectedImage.getHeight() + "]");
         }
 
         boolean isEqual = bufferedImagesEqual(actualImage, expectedImage);
         if (!isEqual) {
-            byte[] actualScreen = convertBufferedImageToByteArray(actualImage);
-            saveScreenshot("_actual", actualScreen);
             byte[] expectedScreen = convertBufferedImageToByteArray(expectedImage);
             saveScreenshot("_expected", expectedScreen);
+            byte[] actualScreen = convertBufferedImageToByteArray(actualImage);
+            saveScreenshot("_actual", actualScreen);
             BufferedImage differentImage = getDifferentImage(actualImage, expectedImage);
             byte[] differentScreen = convertBufferedImageToByteArray(differentImage);
             saveScreenshot("_different", differentScreen);
