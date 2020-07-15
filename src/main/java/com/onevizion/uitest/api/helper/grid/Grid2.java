@@ -108,12 +108,8 @@ public class Grid2 {
         return grid2Js.getPageName(gridId);
     }
 
-    public String getGridCellLastChildFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
-        return grid2Js.getGridCellLastChildFontColor(gridIdx, rowIndex, columnIndex);
-    }
-
-    public String getGridCellTaskDateLastChildFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
-        return grid2Js.getGridCellTaskDateLastChildFontColor(gridIdx, rowIndex, columnIndex);
+    public List<String> getGridCellAllChildsFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+        return grid2Js.getGridCellAllChildsFontColor(gridIdx, rowIndex, columnIndex);
     }
 
     public List<String> getGridCellAllChildsBackgroundColor(Long gridIdx, Long rowIndex, Long columnIndex) {

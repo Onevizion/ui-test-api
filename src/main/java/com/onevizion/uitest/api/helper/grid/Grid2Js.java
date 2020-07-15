@@ -27,26 +27,17 @@ class Grid2Js extends Js {
         return execJs("return gridArr[" + gridId + "].PageName;");
     }
 
-    String getGridCellLastChildFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
-        return execJs(
-                "var lastChild = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
-                "while (0 < lastChild.children.length) {" + 
-                "    lastChild = lastChild.children[0];" + 
+    @SuppressWarnings("unchecked")
+    List<String> getGridCellAllChildsFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+        return (List<String>) execJs2(
+                "var colors = [];" + 
+                "var element = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
+                "colors.push(window.getComputedStyle(element, null).getPropertyValue('color'));" + 
+                "var childs = element.getElementsByTagName('*');" + 
+                "for (var i = 0; i < childs.length; i++) {" + 
+                "    colors.push(window.getComputedStyle(childs[i], null).getPropertyValue('color'));" + 
                 "}" + 
-                "return window.getComputedStyle(lastChild, null).getPropertyValue('color');");
-    }
-
-    //TODO need implement more correct solution
-    String getGridCellTaskDateLastChildFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
-        return execJs(
-                "var lastChild = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
-                "while (0 < lastChild.children.length) {" + 
-                "    if (lastChild.children[0].outerHTML == '<div class=\"divBc2 hiddenContent\">BC</div>') {" + 
-                "        break;" + 
-                "    }" + 
-                "    lastChild = lastChild.children[0];" + 
-                "}" + 
-                "return window.getComputedStyle(lastChild, null).getPropertyValue('color');");
+                "return colors;");
     }
 
     @SuppressWarnings("unchecked")
@@ -55,9 +46,9 @@ class Grid2Js extends Js {
                 "var colors = [];" + 
                 "var element = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
                 "colors.push(window.getComputedStyle(element, null).getPropertyValue('background-color'));" + 
-                "while (0 < element.children.length) {" + 
-                "    element = element.children[0];" + 
-                "    colors.push(window.getComputedStyle(element, null).getPropertyValue('background-color'));" + 
+                "var childs = element.getElementsByTagName('*');" + 
+                "for (var i = 0; i < childs.length; i++) {" + 
+                "    colors.push(window.getComputedStyle(childs[i], null).getPropertyValue('background-color'));" + 
                 "}" + 
                 "return colors;");
     }
