@@ -99,6 +99,7 @@ import com.onevizion.uitest.api.helper.entity.EntityWpDiscipline;
 import com.onevizion.uitest.api.helper.export.Export;
 import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesigner;
+import com.onevizion.uitest.api.helper.gantt.Gantt;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.grid.group.GridGroup;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
@@ -320,6 +321,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected Workplan workplan;
+
+    @Autowired
+    protected Gantt gantt;
     /* Helpers End */
 
     /* Entity Helpers Begin */
