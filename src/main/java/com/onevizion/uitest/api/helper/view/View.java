@@ -19,6 +19,7 @@ import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.ListboxElement;
 
@@ -100,6 +101,9 @@ public class View {
 
     @Autowired
     private Listbox listbox;
+
+    @Autowired
+    private Jquery jquery;
 
     public void openMainPanel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
@@ -297,6 +301,7 @@ public class View {
         seleniumSettings.getWebDriver().findElement(By.id(VIEW_DIALOG_OK + gridIdx)).click();
         elementWait.waitElementNotVisibleById(VIEW_DIALOG_CONTAINER + gridIdx);
         elementWait.waitElementNotDisplayById(VIEW_DIALOG_CONTAINER + gridIdx);
+        jquery.waitLoad(); //TODO Dev Request 422
     }
 
     public void closeSaveViewFormCancel(Long gridIdx) {
