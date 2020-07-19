@@ -30,10 +30,4 @@ public class SeleniumListener extends TestListenerAdapter {
         test.seleniumHelper.closeAfterErrorAndGetScreenshot();
     }
 
-    @Override
-    public void onTestSkipped(ITestResult tr) {
-        AbstractSeleniumCore test = ((AbstractSeleniumCore) tr.getTestClass().getInstances(false)[0]);
-        test.seleniumLogger.info("method " + tr.getName() + " skip");
-    }
-
 }
