@@ -839,10 +839,9 @@ public class UserpageFilter {
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
-        boolean isError = true;
-        String gridValue = null;
         for (int i = 0; i < rowsCnt; i++) {
-            gridValue = vals.get(i);
+            boolean isError = true;
+            String gridValue = vals.get(i);
             if ("&nbsp;".equals(gridValue) || "".equals(gridValue)) {
                 gridValue = "";
             }
@@ -854,7 +853,7 @@ public class UserpageFilter {
             }
 
             if (isError) {
-                throw new SeleniumUnexpectedException("Check fails at column [" + columnIndex + "] row [" + i + "]. Cell value in grid [" + gridValue +"]");
+                throw new SeleniumUnexpectedException("Check fails at column [" + columnIndex + "] row [" + i + "]. Cell value in grid [" + gridValue +"]. Value in filter [" + values + "]");
             }
         }
     }
@@ -886,10 +885,9 @@ public class UserpageFilter {
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
-        boolean isError = false;
-        String gridValue = null;
         for (int i = 0; i < rowsCnt; i++) {
-            gridValue = vals.get(i);
+            boolean isError = false;
+            String gridValue = vals.get(i);
             if ("&nbsp;".equals(gridValue) || "".equals(gridValue)) {
                 gridValue = "NO";
             }
@@ -901,7 +899,7 @@ public class UserpageFilter {
             }
 
             if (isError) {
-                throw new SeleniumUnexpectedException("Check fails at column [" + columnIndex + "] row [" + i + "]. Cell value in grid [" + gridValue +"]");
+                throw new SeleniumUnexpectedException("Check fails at column [" + columnIndex + "] row [" + i + "]. Cell value in grid [" + gridValue +"]. Value in filter [" + values + "]");
             }
         }
     }
