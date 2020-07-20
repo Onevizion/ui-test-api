@@ -176,7 +176,7 @@ public class Qs {
         Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
 
         String gridPageName = grid2.getPageName(gridIdx);
-        if ("TRACKOR_BROWSER".equals(gridPageName)) {
+        if ("TRACKOR_BROWSER".equals(gridPageName) || "WORKFLOW".equals(gridPageName)) {
             checkUserpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
         } else {
             checkAdminpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
@@ -197,7 +197,7 @@ public class Qs {
         Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
 
         String gridPageName = grid2.getPageName(gridIdx);
-        if ("TRACKOR_BROWSER".equals(gridPageName)) {
+        if ("TRACKOR_BROWSER".equals(gridPageName) || "WORKFLOW".equals(gridPageName)) {
             checkUserpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
         } else {
             checkAdminpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
