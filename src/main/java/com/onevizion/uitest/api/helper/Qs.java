@@ -177,7 +177,7 @@ public class Qs {
 
         String gridPageName = grid2.getPageName(gridIdx);
         if ("TRACKOR_BROWSER".equals(gridPageName) || "WORKFLOW".equals(gridPageName)
-                || "ADMIN_WF".equals(gridPageName)) {
+                || "ADMIN_WF".equals(gridPageName) || "TASKS".equals(gridPageName)) {
             checkUserpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
         } else {
             checkAdminpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
@@ -199,7 +199,7 @@ public class Qs {
 
         String gridPageName = grid2.getPageName(gridIdx);
         if ("TRACKOR_BROWSER".equals(gridPageName) || "WORKFLOW".equals(gridPageName)
-                || "ADMIN_WF".equals(gridPageName)) {
+                || "ADMIN_WF".equals(gridPageName) || "TASKS".equals(gridPageName)) {
             checkUserpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
         } else {
             checkAdminpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
