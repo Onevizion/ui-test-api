@@ -656,4 +656,8 @@ public class Js {
         return execJs("return document.documentElement.innerText;");
     }
 
+    public int getToGridDatePairCount(Long gridIdx) {
+        return Integer.parseInt(execJs("return gridArr[" + gridIdx + "].grid.getUserData(null, 'datesCnt');"));
+    }
+
 }

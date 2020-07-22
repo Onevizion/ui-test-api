@@ -173,14 +173,17 @@ public class Qs {
 
         searchValue(gridIdx, fieldName, search);
 
-        Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
-
         String gridPageName = grid2.getPageName(gridIdx);
         if ("TRACKOR_BROWSER".equals(gridPageName) || "WORKFLOW".equals(gridPageName)
                 || "ADMIN_WF".equals(gridPageName) || "TASKS".equals(gridPageName)
                 || "SUMMARY".equals(gridPageName)) {
+            Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
             checkUserpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
+        } else if ("TASKS_OVERVIEW".equals(gridPageName)) {
+            Assert.assertEquals(grid.getTOGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
+            checkToGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
         } else {
+            Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
             checkAdminpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
         }
 
@@ -196,14 +199,17 @@ public class Qs {
 
         searchBooleanValue(gridIdx, fieldName, search);
 
-        Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
-
         String gridPageName = grid2.getPageName(gridIdx);
         if ("TRACKOR_BROWSER".equals(gridPageName) || "WORKFLOW".equals(gridPageName)
                 || "ADMIN_WF".equals(gridPageName) || "TASKS".equals(gridPageName)
                 || "SUMMARY".equals(gridPageName)) {
+            Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
             checkUserpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
+        } else if ("TASKS_OVERVIEW".equals(gridPageName)) {
+            Assert.assertEquals(grid.getTOGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
+            checkToGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
         } else {
+            Assert.assertEquals(grid.getGridRowsCount(gridIdx), rowsCnt, "Grid have wrong rows count");
             checkAdminpageGridTextColumnEquals(gridIdx, columnIndex, expectedValues);
         }
 
@@ -233,6 +239,33 @@ public class Qs {
         for (int i = 0; i < rowsCnt; i++) {
             boolean isError = true;
             String gridValue = vals.get(i);
+            for (String expectedValue : expectedValues) {
+                if (expectedValue.equalsIgnoreCase(gridValue)) {
+                    isError = false;
+                    break;
+                }
+            }
+
+            if (isError) {
+                throw new SeleniumUnexpectedException("Check fails at column [" + columnIndex + "] row [" + i + "]. Cell value in grid [" + gridValue +"]");
+            }
+        }
+    }
+
+    /*
+     * Not finish. Need think in future after create many tests.
+     * checkUserpageGridTextColumnEquals and checkAdminpageGridTextColumnEquals similar as userpageFilter.checkGridTextColumnEquals
+     */
+    private void checkToGridTextColumnEquals(Long gridId, Long columnIndex, List<String> expectedValues) {
+        int differenceInRows = js.getToGridDatePairCount(gridId);
+
+        Long rowsCnt = grid.getTOGridRowsCount(gridId);
+        @SuppressWarnings("unchecked")
+        List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt * differenceInRows, columnIndex);
+
+        for (int i = 0; i < rowsCnt; i++) {
+            boolean isError = true;
+            String gridValue = vals.get(i * differenceInRows);
             for (String expectedValue : expectedValues) {
                 if (expectedValue.equalsIgnoreCase(gridValue)) {
                     isError = false;
