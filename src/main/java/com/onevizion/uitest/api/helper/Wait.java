@@ -232,28 +232,12 @@ public class Wait {
             .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE)).isDisplayed());
     }
 
-    public void waitLoadingLoad(final Long gridId) {
-        waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId));
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting loading is failed")
-            .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId)).isDisplayed());
-    }
-
     public void waitSavingLoad() {
         waitWebElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE));
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting saving is failed")
             .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE)).isDisplayed());
-    }
-
-    public void waitSavingLoad(final Long gridId) {
-        waitWebElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE + gridId));
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Waiting saving is failed")
-            .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.SAVING_ID_BASE + gridId)).isDisplayed());
     }
 
     public void waitSplitGridRightLoad(final Long gridId) {

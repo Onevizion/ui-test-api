@@ -2,6 +2,7 @@ package com.onevizion.uitest.api.helper.grid;
 
 import java.util.List;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.helper.Js;
@@ -10,7 +11,23 @@ import com.onevizion.uitest.api.vo.LockType;
 @Component
 class Grid2Js extends Js {
 
-    Boolean isUpdateDone(Long gridIdx) {
+    Boolean getIsSubGrid(Long gridIdx) {
+        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].IsSubGrid;"));
+    }
+
+    Long getParentGridIdx(Long gridIdx) {
+        return NumberUtils.createLong(execJs("return gridArr[" + gridIdx + "].parentGridIdx;"));
+    }
+
+    Boolean isGridLoaded(Long gridIdx) {
+        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].PageLoaded == 1;"));
+    }
+
+    Boolean isGridDataLoaded(Long gridIdx) {
+        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].gridDataLoaded == true;"));
+    }
+
+    Boolean isGridUpdated(Long gridIdx) {
         return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].isUpdating == false;"));
     }
 
@@ -18,13 +35,13 @@ class Grid2Js extends Js {
         return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].grid.isLoadingParsing == false;"));
     }
 
-    LockType getGridCellLockTypeByRowIndexAndColIndex(Long gridId, Long rowIndex, Long columnIndex) {
-        String lockType = execJs("return gridArr[" + gridId + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.children[0].className;");
+    LockType getGridCellLockTypeByRowIndexAndColIndex(Long gridIdx, Long rowIndex, Long columnIndex) {
+        String lockType = execJs("return gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.children[0].className;");
         return LockType.getByGridCellClass(lockType);
     }
 
-    String getPageName(Long gridId) {
-        return execJs("return gridArr[" + gridId + "].PageName;");
+    String getPageName(Long gridIdx) {
+        return execJs("return gridArr[" + gridIdx + "].PageName;");
     }
 
     @SuppressWarnings("unchecked")

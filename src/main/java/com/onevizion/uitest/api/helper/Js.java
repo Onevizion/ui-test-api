@@ -247,14 +247,6 @@ public class Js {
         execJs3("return arguments[0].getElementsByClassName('" + containerClass + "')[0].scrollTop = '" + top + "';", element);
     }
 
-    public String isGridLoaded(Long gridId) {
-        return execJs("return gridArr[" + gridId + "].PageLoaded;");
-    }
-
-    public Boolean isGridDataLoaded(Long gridId) {
-        return Boolean.valueOf(execJs("return gridArr[" + gridId + "].gridDataLoaded;"));
-    }
-
     public Boolean isCodeMirrorLoaded(String name) {
         return Boolean.valueOf(execJs("return sqlEditorArr.hasOwnProperty('" + name + "') && sqlEditorArr['" + name + "'][1].getTextArea() == document.getElementById('" + name + "');"));
     }
@@ -638,14 +630,6 @@ public class Js {
                 + "    }"
                 + "}"
                 + "return true;"));
-    }
-
-    public Boolean getIsSubGrid(Long gridIdx) {
-        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].IsSubGrid;"));
-    }
-
-    public Long getParentGridIdx(Long gridIdx) {
-        return NumberUtils.createLong(execJs("return gridArr[" + gridIdx + "].parentGridIdx;"));
     }
 
     public Long getDate() {
