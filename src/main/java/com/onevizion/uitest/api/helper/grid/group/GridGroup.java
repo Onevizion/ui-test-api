@@ -61,7 +61,7 @@ public class GridGroup {
 
     private List<WebElement> getGroups(Long gridIdx) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        List<WebElement> groups = seleniumSettings.getWebDriver().findElements(By.xpath("//*[@id='" + AbstractSeleniumCore.GRID_ID_BASE + gridIdx + "']//*[@class='" + CLASS_GROUP + "'][label]"));
+        List<WebElement> groups = seleniumSettings.getWebDriver().findElements(By.xpath("//*[@id='" + AbstractSeleniumCore.GRID_ID_BASE + gridIdx + "']//*[contains(@class, '" + CLASS_GROUP + "')][label]"));
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return groups;
     }
