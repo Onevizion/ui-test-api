@@ -1,5 +1,6 @@
 package com.onevizion.uitest.api.vo.api.v3;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -76,6 +77,7 @@ public class ChatMessage implements Comparable<ChatMessage> {
     }
 
     public void setFiles(List<ChatMessageFile> files) {
+        Collections.sort(files);
         this.files = files;
     }
 
