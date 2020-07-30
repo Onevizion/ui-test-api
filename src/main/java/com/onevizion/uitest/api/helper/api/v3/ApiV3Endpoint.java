@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
@@ -81,7 +82,7 @@ public class ApiV3Endpoint {
         elementWait.waitElementAnimatedFinish(response);
     }
 
-    public <T extends Comparable<? super T>> T getResponseAsObject(WebElement endpoint, Class<T> clazz) {
+    public <T extends Comparable<? super T>> T getResponseAsObject(WebElement endpoint, TypeReference<T> valueTypeRef) {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
         element.moveToElement(responseText);
         String actualResponseText = responseText.getText();
@@ -89,7 +90,7 @@ public class ApiV3Endpoint {
         T actualResponse = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            actualResponse = mapper.readValue(actualResponseText, clazz);
+            actualResponse = mapper.readValue(actualResponseText, valueTypeRef);
         } catch (IOException e) {
             throw new SeleniumUnexpectedException(e);
         }
@@ -97,7 +98,23 @@ public class ApiV3Endpoint {
         return actualResponse;
     }
 
-    public <T extends Comparable<? super T>> List<T> getResponse(WebElement endpoint, Class<T> clazz) {
+    public <T extends Comparable<? super T>> T getResponseAsObject(WebElement endpoint, Class<T> valueType) {
+        WebElement responseText = endpoint.findElement(By.className("response_body"));
+        element.moveToElement(responseText);
+        String actualResponseText = responseText.getText();
+
+        T actualResponse = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            actualResponse = mapper.readValue(actualResponseText, valueType);
+        } catch (IOException e) {
+            throw new SeleniumUnexpectedException(e);
+        }
+
+        return actualResponse;
+    }
+
+    public <T extends Comparable<? super T>> List<T> getResponse(WebElement endpoint, Class<T> valueType) {
         WebElement responseText = endpoint.findElement(By.className("response_body"));
         element.moveToElement(responseText);
         String actualResponseText = responseText.getText();
@@ -105,12 +122,17 @@ public class ApiV3Endpoint {
         List<T> actualResponse = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            actualResponse = mapper.readValue(actualResponseText, mapper.getTypeFactory().constructCollectionType(List.class, clazz));
+            actualResponse = mapper.readValue(actualResponseText, mapper.getTypeFactory().constructCollectionType(List.class, valueType));
         } catch (IOException e) {
             throw new SeleniumUnexpectedException(e);
         }
 
         return actualResponse;
+    }
+
+    public <T extends Comparable<? super T>> void checkResponseAsObject(WebElement endpoint, T expectedResponse, TypeReference<T> clazz) {
+        T actualResponse = getResponseAsObject(endpoint, clazz);
+        Assert.assertEquals(actualResponse, expectedResponse);
     }
 
     public <T extends Comparable<? super T>> void checkResponseAsObject(WebElement endpoint, T expectedResponse, Class<T> clazz) {
