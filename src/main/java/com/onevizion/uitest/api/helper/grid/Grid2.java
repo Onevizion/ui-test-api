@@ -89,6 +89,16 @@ public class Grid2 {
         elementWait.waitElementNotDisplayById(SAVE_PANEL_ID_BASE + gridId);
     }
 
+    public void waitSavePanelVisible(Long gridId) {
+        elementWait.waitElementVisibleById(SAVE_PANEL_ID_BASE + gridId);
+        elementWait.waitElementDisplayById(SAVE_PANEL_ID_BASE + gridId);
+    }
+
+    public void waitSavePanelHidden(Long gridId) {
+        elementWait.waitElementNotVisibleById(SAVE_PANEL_ID_BASE + gridId);
+        elementWait.waitElementNotDisplayById(SAVE_PANEL_ID_BASE + gridId);
+    }
+
     public void waitLoadAllRows(Long gridIdx) {
         grid2Wait.waitLoadAllRows(gridIdx);
     }
