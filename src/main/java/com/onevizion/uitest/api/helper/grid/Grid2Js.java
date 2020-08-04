@@ -27,12 +27,13 @@ class Grid2Js extends Js {
         return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].gridDataLoaded == true;"));
     }
 
-    Boolean isGridUpdated(Long gridIdx) {
-        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].isUpdating == false;"));
+    Boolean isGridAllRowsLoaded(Long gridIdx) {
+        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].isEnabledDistributedParsing() == false ||"
+                + " (gridArr[" + gridIdx + "].isEnabledDistributedParsing() == true && gridArr[" + gridIdx + "].grid.isLoadingParsing == false);"));
     }
 
-    Boolean isLoadAllRowsDone(Long gridIdx) {
-        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].grid.isLoadingParsing == false;"));
+    Boolean isGridUpdated(Long gridIdx) {
+        return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].isUpdating == false;"));
     }
 
     LockType getGridCellLockTypeByRowIndexAndColIndex(Long gridIdx, Long rowIndex, Long columnIndex) {

@@ -62,6 +62,7 @@ public class Grid2 {
 
         grid2Wait.waitIsGridLoaded(gridId);
         grid2Wait.waitIsGridDataLoaded(gridId);
+        grid2Wait.waitIsGridAllRowsLoaded(gridId);
         grid2Wait.waitIsGridUpdated(gridId);
     }
 
@@ -97,10 +98,6 @@ public class Grid2 {
     public void waitSavePanelHidden(Long gridId) {
         elementWait.waitElementNotVisibleById(SAVE_PANEL_ID_BASE + gridId);
         elementWait.waitElementNotDisplayById(SAVE_PANEL_ID_BASE + gridId);
-    }
-
-    public void waitLoadAllRows(Long gridIdx) {
-        grid2Wait.waitLoadAllRows(gridIdx);
     }
 
     public void waitGridCellLockType(Long gridId, Long columnIndex, Long rowIndex, LockType lockType) {
