@@ -17,6 +17,7 @@ public class GridButton {
 
     private static final String BUTTON_COLORS_ID_BASE = "itemColors";
     private static final String BUTTON_COORDINATES_ID_BASE = "itemCoordLinks";
+    private static final String BUTTON_VALIDATIONS_ID_BASE = "itemValidation";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -49,6 +50,17 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_COORDINATES_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_COORDINATES_ID_BASE + gridIdx));
+        grid2.waitLoad(gridIdx);
+    }
+
+    public void openValidationsGrid(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_VALIDATIONS_ID_BASE + gridIdx));
         grid2.waitLoad(gridIdx);
     }
 
