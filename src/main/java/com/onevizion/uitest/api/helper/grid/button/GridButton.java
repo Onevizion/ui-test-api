@@ -16,6 +16,7 @@ public class GridButton {
     private static final String BUTTON_OPTIONS_PANEL_ID_BASE = "optionsGrouppopupMenu";
 
     private static final String BUTTON_COLORS_ID_BASE = "itemColors";
+    private static final String BUTTON_COORDINATES_ID_BASE = "itemCoordLinks";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -37,7 +38,18 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_COLORS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_COLORS_ID_BASE + gridIdx));
-        grid2.waitLoad();
+        grid2.waitLoad(gridIdx);
+    }
+
+    public void openCoordinatesGrid(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_COORDINATES_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_COORDINATES_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_COORDINATES_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_COORDINATES_ID_BASE + gridIdx));
+        grid2.waitLoad(gridIdx);
     }
 
     private void openOptionsPanel(Long gridIdx) {
