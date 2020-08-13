@@ -21,6 +21,7 @@ public class GridButton {
     private static final String BUTTON_REPORT_GROUPS_ID_BASE = "itemReportGroup";
     private static final String BUTTON_WP_DISCIPLINES_ID_BASE = "itemDiscp";
     private static final String BUTTON_WP_DATE_PAIRS_ID_BASE = "itemDatePairs";
+    private static final String BUTTON_WP_CALENDARS_ID_BASE = "itemCalendar";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -97,6 +98,17 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx));
+        grid2.waitLoad(gridIdx);
+    }
+
+    public void openWpCalendarsGrid(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_WP_CALENDARS_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_WP_CALENDARS_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_WP_CALENDARS_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_WP_CALENDARS_ID_BASE + gridIdx));
         grid2.waitLoad(gridIdx);
     }
 
