@@ -7,14 +7,12 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.grid.button.GridButton;
 
 @Component
 public class ShowSql {
 
-    private static final String BUTTON_SHOW_SQL_ID_BASE = "btnSQL";
-
     private static final String SQL = "divPage1";
-
     private static final String RUNTIME_DB = "runtime_db";
     private static final String RUNTIME_SERVER = "runtime_server";
     private static final String RUNTIME_RESPONSE = "runtime_response";
@@ -29,22 +27,14 @@ public class ShowSql {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
-    private ElementWait elementWait;
-
-    @Autowired
     private ShowSqlWait showSqlWait;
+
+    @Autowired
+    private GridButton gridButton;
 
     public void openShowSqlForm(Long gridIdx) {
         showSqlWait.waitIsUsageLogUpdated(gridIdx);
-        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_GRID_OPTIONS_ID_BASE + gridIdx)).click();
-        elementWait.waitElementVisibleById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
-        window.openModal(By.id(BUTTON_SHOW_SQL_ID_BASE + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        wait.waitFormLoad();
+        gridButton.openShowSqlForm(gridIdx);
     }
 
     public void checkShowSqlForm() {

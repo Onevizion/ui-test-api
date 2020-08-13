@@ -18,6 +18,7 @@ public class GridButton {
     private static final String BUTTON_OPTIONS_PANEL_ID_BASE = "optionsGrouppopupMenu";
 
     private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
+    private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
     private static final String BUTTON_COLORS_ID_BASE = "itemColors";
     private static final String BUTTON_COORDINATES_ID_BASE = "itemCoordLinks";
     private static final String BUTTON_VALIDATIONS_ID_BASE = "itemValidation";
@@ -51,6 +52,18 @@ public class GridButton {
         window.openModal(By.id(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitGridRowEditorLoad();
+    }
+
+    public void openShowSqlForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_SHOW_SQL_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        wait.waitFormLoad();
     }
 
     public void openColorsGrid(Long gridIdx) {
