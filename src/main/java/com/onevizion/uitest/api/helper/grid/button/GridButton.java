@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 
@@ -15,6 +17,7 @@ public class GridButton {
     private static final String BUTTON_OPTIONS_ID_BASE = "btnoptions";
     private static final String BUTTON_OPTIONS_PANEL_ID_BASE = "optionsGrouppopupMenu";
 
+    private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
     private static final String BUTTON_COLORS_ID_BASE = "itemColors";
     private static final String BUTTON_COORDINATES_ID_BASE = "itemCoordLinks";
     private static final String BUTTON_VALIDATIONS_ID_BASE = "itemValidation";
@@ -35,6 +38,21 @@ public class GridButton {
     @Autowired
     private Grid2 grid2;
 
+    @Autowired
+    private Wait wait;
+
+    public void openGridRowEditorForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitGridRowEditorLoad();
+    }
+
     public void openColorsGrid(Long gridIdx) {
         openOptionsPanel(gridIdx);
 
@@ -43,7 +61,7 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_COLORS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_COLORS_ID_BASE + gridIdx));
-        grid2.waitLoad(gridIdx);
+        grid2.waitLoad();
     }
 
     public void openCoordinatesGrid(Long gridIdx) {
@@ -54,7 +72,7 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_COORDINATES_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_COORDINATES_ID_BASE + gridIdx));
-        grid2.waitLoad(gridIdx);
+        grid2.waitLoad();
     }
 
     public void openValidationsGrid(Long gridIdx) {
@@ -65,7 +83,7 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_VALIDATIONS_ID_BASE + gridIdx));
-        grid2.waitLoad(gridIdx);
+        grid2.waitLoad();
     }
 
     public void openReportGroupsGrid(Long gridIdx) {
@@ -76,7 +94,7 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_REPORT_GROUPS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_REPORT_GROUPS_ID_BASE + gridIdx));
-        grid2.waitLoad(gridIdx);
+        grid2.waitLoad();
     }
 
     public void openWpDisciplinesGrid(Long gridIdx) {
@@ -87,7 +105,7 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_WP_DISCIPLINES_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_WP_DISCIPLINES_ID_BASE + gridIdx));
-        grid2.waitLoad(gridIdx);
+        grid2.waitLoad();
     }
 
     public void openWpDatePairsGrid(Long gridIdx) {
@@ -98,7 +116,7 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx));
-        grid2.waitLoad(gridIdx);
+        grid2.waitLoad();
     }
 
     public void openWpCalendarsGrid(Long gridIdx) {
@@ -109,7 +127,7 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_WP_CALENDARS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_WP_CALENDARS_ID_BASE + gridIdx));
-        grid2.waitLoad(gridIdx);
+        grid2.waitLoad();
     }
 
     private void openOptionsPanel(Long gridIdx) {
