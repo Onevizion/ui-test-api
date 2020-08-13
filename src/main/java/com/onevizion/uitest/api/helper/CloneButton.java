@@ -10,8 +10,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 @Component
 public class CloneButton {
 
-    private static final String BUTTON_LIST_ADD_ID_BASE = "listAdd";
-    static final String BUTTON_CLONE_ID_BASE = "btnClone";
+    private static final String BUTTON_OPTIONS_ID_BASE = "btnoptions";
+    static final String BUTTON_CLONE_ID_BASE = "itemClone";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -34,8 +34,8 @@ public class CloneButton {
     }
 
     private void showCloneButton(Long gridIdx) {
-        elementWait.waitElementById(BUTTON_LIST_ADD_ID_BASE + gridIdx);
-        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_LIST_ADD_ID_BASE + gridIdx)).click();
+        elementWait.waitElementById(BUTTON_OPTIONS_ID_BASE + gridIdx);
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_OPTIONS_ID_BASE + gridIdx)).click();
 
         elementWait.waitElementById(BUTTON_CLONE_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_CLONE_ID_BASE + gridIdx);
