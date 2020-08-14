@@ -18,6 +18,11 @@ public class GridButton {
     private static final String BUTTON_OPTIONS_ID_BASE = "btnoptions";
     private static final String BUTTON_OPTIONS_PANEL_ID_BASE = "optionsGrouppopupMenu";
 
+    private static final String BUTTON_APPLETS_ID_BASE = "btnedit";
+    private static final String BUTTON_APPLETS_PANEL_ID_BASE = "editGrouppopupMenu";
+
+    
+
     private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
     private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
@@ -47,6 +52,19 @@ public class GridButton {
 
     @Autowired
     private Element element;
+
+    public void openAppletForm(Long gridIdx, Long configAppId) {
+        openAppletsPanel(gridIdx);
+
+        element.moveToElementById("item" + configAppId);
+
+        elementWait.waitElementById("item" + configAppId);
+        elementWait.waitElementVisibleById("item" + configAppId);
+        elementWait.waitElementDisplayById("item" + configAppId);
+
+        window.openModal(By.id("item" + configAppId));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+    }
 
     public void openGridRowEditorForm(Long gridIdx) {
         openOptionsPanel(gridIdx);
@@ -180,6 +198,15 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_OPTIONS_PANEL_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_OPTIONS_PANEL_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_OPTIONS_PANEL_ID_BASE + gridIdx);
+    }
+
+    private void openAppletsPanel(Long gridIdx) {
+        elementWait.waitElementById(BUTTON_APPLETS_ID_BASE + gridIdx);
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_APPLETS_ID_BASE + gridIdx)).click();
+
+        elementWait.waitElementById(BUTTON_APPLETS_PANEL_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_APPLETS_PANEL_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_APPLETS_PANEL_ID_BASE + gridIdx);
     }
 
 }
