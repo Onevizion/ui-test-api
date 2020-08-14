@@ -471,7 +471,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     public static final String BUTTON_RULES_ID_BASE = "btnRules";
 
-    public static final String BUTTON_TASKS_ID_BASE = "btnTasks";
     public static final String BUTTON_WF_ID_BASE = "btnWF";
 
     public static final String SPECIAL_CHARACTERS_1 = "<";

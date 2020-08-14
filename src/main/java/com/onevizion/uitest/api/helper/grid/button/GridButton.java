@@ -21,7 +21,7 @@ public class GridButton {
     private static final String BUTTON_APPLETS_ID_BASE = "btnedit";
     private static final String BUTTON_APPLETS_PANEL_ID_BASE = "editGrouppopupMenu";
 
-    
+    private static final String BUTTON_APPLET_TASKS_ID_BASE = "itemTask";
 
     private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
     private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
@@ -66,6 +66,20 @@ public class GridButton {
 
         window.openModal(By.id("item" + configAppId));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+    }
+
+    public void openAppletTasks(Long gridIdx) {
+        openAppletsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_APPLET_TASKS_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_APPLET_TASKS_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_APPLET_TASKS_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_APPLET_TASKS_ID_BASE + gridIdx));
+        //wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        //wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        grid2.waitLoad();
+        //wait.waitFormLoad();
     }
 
     public void openGridRowEditorForm(Long gridIdx) {
