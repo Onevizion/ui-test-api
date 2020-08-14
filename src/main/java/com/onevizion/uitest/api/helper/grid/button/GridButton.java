@@ -25,6 +25,8 @@ public class GridButton {
 
     private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
     private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
+    private static final String BUTTON_RULES_ID_BASE = "itemRules";
+
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
     private static final String BUTTON_COMPONENT_IMPORT_ID_BASE = "itemImportRun";
     private static final String BUTTON_COLORS_ID_BASE = "itemColors";
@@ -104,6 +106,18 @@ public class GridButton {
         window.openModal(By.id(BUTTON_SHOW_SQL_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
+    }
+
+    public void openRulesForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_RULES_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_RULES_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_RULES_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_RULES_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        grid2.waitLoad(1L);
     }
 
     public void openComponentExportForm(Long gridIdx) {

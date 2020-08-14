@@ -469,8 +469,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     public static final String BUTTON_APPLY_ID = "btnApply";
     public static final String CHECKBOX_SELECT_ALL_ID = "SelectCheckboxes";
 
-    public static final String BUTTON_RULES_ID_BASE = "btnRules";
-
     public static final String BUTTON_WF_ID_BASE = "btnWF";
 
     public static final String SPECIAL_CHARACTERS_1 = "<";
