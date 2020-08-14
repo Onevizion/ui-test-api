@@ -15,10 +15,10 @@ import com.onevizion.uitest.api.helper.grid.Grid2;
 @Component
 public class GridButton {
 
-    private static final String BUTTON_OPTIONS_ID_BASE = "btnoptions";
+    private static final String BUTTON_OPTIONS_ID_BASE = "btnoptionsGroupOpener";
     private static final String BUTTON_OPTIONS_PANEL_ID_BASE = "optionsGrouppopupMenu";
 
-    private static final String BUTTON_APPLETS_ID_BASE = "btnedit";
+    private static final String BUTTON_APPLETS_ID_BASE = "btneditGroupOpener";
     private static final String BUTTON_APPLETS_PANEL_ID_BASE = "editGrouppopupMenu";
 
     private static final String BUTTON_APPLET_TASKS_ID_BASE = "itemTask";
