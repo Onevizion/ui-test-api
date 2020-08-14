@@ -22,13 +22,11 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.vo.entity.ExportRun;
 
 @Component
 public class Export {
-
-    private static final String BUTTON_EXPORT_RUN_ID_BASE = "btnExport";
-    private static final String BUTTON_EXPORT_HISTORY_ID_BASE = "btnExportHistory";
 
     @Autowired
     private Window window;
@@ -62,6 +60,9 @@ public class Export {
 
     @Autowired
     private SeleniumLogger seleniumLogger;
+
+    @Autowired
+    private GridButton gridButton;
 
     public void export(Long gridIndex, ExportRun exportRun, List<Integer> uniqueColumns, CheckExportFile checkExportFile) {
         runExport(gridIndex, exportRun);
@@ -111,13 +112,8 @@ public class Export {
         deleteExport(gridIndex, processId);
     }
 
-    private void runExport(Long gridIndex, ExportRun exportRun) {
-        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_GRID_OPTIONS_ID_BASE + gridIndex)).click();
-        elementWait.waitElementVisibleById(BUTTON_EXPORT_RUN_ID_BASE + gridIndex);
-        elementWait.waitElementDisplayById(BUTTON_EXPORT_RUN_ID_BASE + gridIndex);
-        window.openModal(By.id(BUTTON_EXPORT_RUN_ID_BASE + gridIndex));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+    private void runExport(Long gridIdx, ExportRun exportRun) {
+        gridButton.openExportRunForm(gridIdx);
         new Select(seleniumSettings.getWebDriver().findElement(By.name("GridExportMode"))).selectByVisibleText(exportRun.getMode());
         new Select(seleniumSettings.getWebDriver().findElement(By.name("GridExportDelivery"))).selectByVisibleText(exportRun.getDelivery());
         seleniumSettings.getWebDriver().findElement(By.name("GridExportComment")).sendKeys(exportRun.getComments());
@@ -152,13 +148,8 @@ public class Export {
         return processId;
     }
 
-    private void checkExport(Long gridIndex, ExportRun exportRun) {
-        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_GRID_OPTIONS_ID_BASE + gridIndex)).click();
-        elementWait.waitElementVisibleById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIndex);
-        elementWait.waitElementDisplayById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIndex);
-        window.openModal(By.id(BUTTON_EXPORT_HISTORY_ID_BASE + gridIndex));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        grid2.waitLoad();
+    private void checkExport(Long gridIdx, ExportRun exportRun) {
+        gridButton.openExportHistoryGrid(gridIdx);
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
@@ -178,13 +169,8 @@ public class Export {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
     }
 
-    private void deleteExport(Long gridIndex, String processId) {
-        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_GRID_OPTIONS_ID_BASE + gridIndex)).click();
-        elementWait.waitElementVisibleById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIndex);
-        elementWait.waitElementDisplayById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIndex);
-        window.openModal(By.id(BUTTON_EXPORT_HISTORY_ID_BASE + gridIndex));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        grid2.waitLoad();
+    private void deleteExport(Long gridIdx, String processId) {
+        gridButton.openExportHistoryGrid(gridIdx);
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 

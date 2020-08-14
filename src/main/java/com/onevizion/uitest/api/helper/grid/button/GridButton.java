@@ -27,6 +27,8 @@ public class GridButton {
     private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
     private static final String BUTTON_RULES_ID_BASE = "itemRules";
     private static final String BUTTON_CLONE_ID_BASE = "itemClone";
+    private static final String BUTTON_EXPORT_RUN_ID_BASE = "itemGridExport";
+    private static final String BUTTON_EXPORT_HISTORY_ID_BASE = "itemExportHistory";
 
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
     private static final String BUTTON_COMPONENT_IMPORT_ID_BASE = "itemImportRun";
@@ -131,6 +133,30 @@ public class GridButton {
         window.openModal(By.id(BUTTON_CLONE_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
+    }
+
+    public void openExportRunForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_EXPORT_RUN_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_EXPORT_RUN_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_EXPORT_RUN_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_EXPORT_RUN_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void openExportHistoryGrid(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        grid2.waitLoad();
     }
 
     public void openComponentExportForm(Long gridIdx) {
