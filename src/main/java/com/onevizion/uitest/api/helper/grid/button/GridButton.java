@@ -11,6 +11,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
 public class GridButton {
@@ -29,6 +30,7 @@ public class GridButton {
     private static final String BUTTON_CLONE_ID_BASE = "itemClone";
     private static final String BUTTON_EXPORT_RUN_ID_BASE = "itemGridExport";
     private static final String BUTTON_EXPORT_HISTORY_ID_BASE = "itemExportHistory";
+    private static final String BUTTON_DELETE_TREE_ID_BASE = "itemDeleteTree";
 
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
     private static final String BUTTON_COMPONENT_IMPORT_ID_BASE = "itemImportRun";
@@ -59,6 +61,9 @@ public class GridButton {
 
     @Autowired
     private Element element;
+
+    @Autowired
+    private Tree tree;
 
     public void openAppletForm(Long gridIdx, Long configAppId) {
         openAppletsPanel(gridIdx);
@@ -157,6 +162,19 @@ public class GridButton {
         window.openModal(By.id(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         grid2.waitLoad();
+    }
+
+    public void clickDeleteTree(Long treeIdx) {
+        openOptionsPanel(treeIdx);
+
+        elementWait.waitElementById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
+        elementWait.waitElementVisibleById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
+        elementWait.waitElementDisplayById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
+
+        element.clickById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
+        wait.waitAlert();
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        tree.waitLoad(treeIdx);
     }
 
     public void openComponentExportForm(Long gridIdx) {

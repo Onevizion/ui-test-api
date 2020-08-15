@@ -11,6 +11,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.tree.Tree;
@@ -41,6 +42,9 @@ public class Favorites {
 
     @Autowired
     private MainMenu mainMenu;
+
+    @Autowired
+    private GridButton gridButton;
 
     public void checkFavoritesCount(int expectedCount) {
         mainMenu.showMenu(MainMenu.MENU_FAVORITES);
@@ -119,11 +123,7 @@ public class Favorites {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         selectFavoriteInOrganize(name);
-
-        seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx())).click();
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+        gridButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         jquery.waitLoad();

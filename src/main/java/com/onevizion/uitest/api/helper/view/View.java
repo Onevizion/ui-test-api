@@ -19,6 +19,7 @@ import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.ListboxElement;
@@ -104,6 +105,9 @@ public class View {
 
     @Autowired
     private Jquery jquery;
+
+    @Autowired
+    private GridButton gridButton;
 
     public void openMainPanel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
@@ -378,10 +382,7 @@ public class View {
 
         selectViewInOrganize(entityPrefix);
 
-        seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DELETE_TREE_ID_BASE + 0L)).click();
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
-        tree.waitLoad(0L);
+        gridButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         grid2.waitLoad(gridIdx);
