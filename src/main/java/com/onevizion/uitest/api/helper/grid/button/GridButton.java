@@ -43,6 +43,7 @@ public class GridButton {
     private static final String BUTTON_WP_CALENDARS_ID_BASE = "itemCalendar";
     private static final String BUTTON_APPLET_REORDER_ID_BASE = "itemReorder";
     private static final String BUTTON_WF_EDITOR_ID_BASE = "itemVisualEditor";
+    private static final String BUTTON_DG_DELETE_CONFIG_ID_BASE = "itemDelConfig";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -300,6 +301,19 @@ public class GridButton {
         window.openModal(By.id(BUTTON_WF_EDITOR_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
+    }
+
+    public void openDgDeleteConfigForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+        grid2.waitLoad(1L);
     }
 
     private void openOptionsPanel(Long gridIdx) {
