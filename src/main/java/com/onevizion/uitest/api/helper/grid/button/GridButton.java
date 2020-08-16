@@ -44,6 +44,7 @@ public class GridButton {
     private static final String BUTTON_APPLET_REORDER_ID_BASE = "itemReorder";
     private static final String BUTTON_WF_EDITOR_ID_BASE = "itemVisualEditor";
     private static final String BUTTON_DG_DELETE_CONFIG_ID_BASE = "itemDelConfig";
+    private static final String BUTTON_LABEL_REPLACE_TEXT_ID_BASE = "itemReplace";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -314,6 +315,18 @@ public class GridButton {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
         grid2.waitLoad(1L);
+    }
+
+    public void openLabelReplaceTextForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
     }
 
     private void openOptionsPanel(Long gridIdx) {
