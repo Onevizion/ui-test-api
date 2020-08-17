@@ -45,6 +45,7 @@ public class GridButton {
     private static final String BUTTON_COORDINATES_ID_BASE = "itemCoordLinks";
     private static final String BUTTON_VALIDATIONS_ID_BASE = "itemValidation";
     private static final String BUTTON_REPORT_GROUPS_ID_BASE = "itemReportGroup";
+    private static final String BUTTON_REPORT_SCAN_PARAMS_ID_BASE = "itemScanParams";
     private static final String BUTTON_WP_DISCIPLINES_ID_BASE = "itemDiscp";
     private static final String BUTTON_WP_DATE_PAIRS_ID_BASE = "itemDatePairs";
     private static final String BUTTON_WP_CALENDARS_ID_BASE = "itemCalendar";
@@ -309,6 +310,17 @@ public class GridButton {
 
         window.openModal(By.id(BUTTON_REPORT_GROUPS_ID_BASE + gridIdx));
         grid2.waitLoad();
+    }
+
+    public void clickReportScanParams(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
+
+        element.clickById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
+        grid2.waitLoad(gridIdx);
     }
 
     public void openWpDisciplinesGrid(Long gridIdx) {
