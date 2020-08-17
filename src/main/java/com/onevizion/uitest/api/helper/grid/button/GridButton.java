@@ -1,8 +1,11 @@
 package com.onevizion.uitest.api.helper.grid.button;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -78,6 +81,18 @@ public class GridButton {
 
         window.openModal(By.id("item" + configAppId));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+    }
+
+    public void checkAppletNotExist(Long gridIdx, Long configAppId) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id("item" + configAppId)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
+
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        count = seleniumSettings.getWebDriver().findElements(By.id("btn" + configAppId)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
     }
 
     public void openAppletTasks(Long gridIdx) {
