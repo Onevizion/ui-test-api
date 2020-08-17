@@ -34,6 +34,8 @@ public class GridButton {
     private static final String BUTTON_EXPORT_RUN_ID_BASE = "itemGridExport";
     private static final String BUTTON_EXPORT_HISTORY_ID_BASE = "itemExportHistory";
     private static final String BUTTON_DELETE_TREE_ID_BASE = "itemDeleteTree";
+    private static final String BUTTON_UP_TREE_ID_BASE = "itemUpTree";
+    private static final String BUTTON_DOWN_TREE_ID_BASE = "itemDownTree";
 
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
     private static final String BUTTON_COMPONENT_IMPORT_ID_BASE = "itemImportRun";
@@ -191,6 +193,28 @@ public class GridButton {
         element.clickById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
+        tree.waitLoad(treeIdx);
+    }
+
+    public void clickUpTree(Long treeIdx) {
+        openOptionsPanel(treeIdx);
+
+        elementWait.waitElementById(BUTTON_UP_TREE_ID_BASE + treeIdx);
+        elementWait.waitElementVisibleById(BUTTON_UP_TREE_ID_BASE + treeIdx);
+        elementWait.waitElementDisplayById(BUTTON_UP_TREE_ID_BASE + treeIdx);
+
+        element.clickById(BUTTON_UP_TREE_ID_BASE + treeIdx);
+        tree.waitLoad(treeIdx);
+    }
+
+    public void clickDownTree(Long treeIdx) {
+        openOptionsPanel(treeIdx);
+
+        elementWait.waitElementById(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
+        elementWait.waitElementVisibleById(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
+        elementWait.waitElementDisplayById(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
+
+        element.clickById(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
         tree.waitLoad(treeIdx);
     }
 

@@ -91,9 +91,7 @@ public class Favorites {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         selectFavoriteInOrganize(name);
-
-        seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_UP_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx())).click();
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+        gridButton.clickUpTree(AbstractSeleniumCore.getTreeIdx());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         jquery.waitLoad();
@@ -107,9 +105,7 @@ public class Favorites {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         selectFavoriteInOrganize(name);
-
-        seleniumSettings.getWebDriver().findElement(By.name(AbstractSeleniumCore.BUTTON_DOWN_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx())).click();
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+        gridButton.clickDownTree(AbstractSeleniumCore.getTreeIdx());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         jquery.waitLoad();
