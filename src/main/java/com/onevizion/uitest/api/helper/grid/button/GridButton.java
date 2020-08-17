@@ -82,7 +82,6 @@ public class GridButton {
         elementWait.waitElementDisplayById("item" + configAppId);
 
         window.openModal(By.id("item" + configAppId));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
 
     public void checkAppletNotExist(Long gridIdx, Long configAppId) {
