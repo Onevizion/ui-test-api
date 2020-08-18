@@ -54,6 +54,7 @@ public class GridButton {
     private static final String BUTTON_DG_DELETE_CONFIG_ID_BASE = "itemDelConfig";
     private static final String BUTTON_LABEL_REPLACE_TEXT_ID_BASE = "itemReplace";
     private static final String BUTTON_INTEGRATION_ADD_ID_BASE = "itemAddIntegration";
+    private static final String BUTTON_V_TABLE_REORDER_ID_BASE = "itemReorder";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -416,6 +417,20 @@ public class GridButton {
         window.openModal(By.id(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
+    }
+
+    public void clickVtableReorder(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
+
+        element.clickById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
+        wait.waitAlert();
+        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to reorder the entries based on alphabetically sorting the values?");
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        grid2.waitLoad(gridIdx);
     }
 
     private void openOptionsPanel(Long gridIdx) {

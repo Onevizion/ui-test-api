@@ -449,7 +449,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     public static final String BUTTON_PRIOR_ID_BASE = "btnPrior";
     public static final String BUTTON_SAVE_GRID_ID_BASE = "btnSaveGrid";
     public static final String BUTTON_REPORT_WIZARD_ID_BASE = "btnReportWizard";
-    public static final String BUTTON_REORDER_ID_BASE = "btnReorder";
 
     public static final String BUTTON_ADD_TREE_ID_BASE = "btnAddTree";
     public static final String BUTTON_EDIT_TREE_ID_BASE = "btnEditTree";
