@@ -53,6 +53,7 @@ public class GridButton {
     private static final String BUTTON_WF_EDITOR_ID_BASE = "itemVisualEditor";
     private static final String BUTTON_DG_DELETE_CONFIG_ID_BASE = "itemDelConfig";
     private static final String BUTTON_LABEL_REPLACE_TEXT_ID_BASE = "itemReplace";
+    private static final String BUTTON_INTEGRATION_ADD_ID_BASE = "itemAddIntegration";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -401,6 +402,18 @@ public class GridButton {
         elementWait.waitElementDisplayById(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void openIntegrationAddForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }

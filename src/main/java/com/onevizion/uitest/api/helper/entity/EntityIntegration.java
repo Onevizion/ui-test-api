@@ -13,21 +13,18 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Element;
-import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.Integration;
 
 @Component
 public class EntityIntegration {
-
-    private static final String BUTTON_LIST_ADD_ID_BASE = "listAdd";
-    private static final String BUTTON_ADD_MANUAL_ID_BASE = "btnAddIntegration";
 
     private static final String URL = "gitRepoUrl";
     private static final String NAME = "integrationName";
@@ -45,9 +42,6 @@ public class EntityIntegration {
 
     @Autowired
     private Wait wait;
-
-    @Autowired
-    private ElementWait elementWait;
 
     @Autowired
     private AssertElement assertElement;
@@ -76,12 +70,11 @@ public class EntityIntegration {
     @Autowired
     private HtmlInputFile htmlInputFile;
 
-    public void add(Integration integration) {
-        showAddManualButton(AbstractSeleniumCore.getGridIdx());
+    @Autowired
+    private GridButton gridButton;
 
-        window.openModal(By.id(BUTTON_ADD_MANUAL_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+    public void add(Integration integration) {
+        gridButton.openIntegrationAddForm(AbstractSeleniumCore.getGridIdx());
 
         seleniumSettings.getWebDriver().findElement(By.name(URL)).sendKeys(integration.getUrl());
 
@@ -211,15 +204,6 @@ public class EntityIntegration {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Enabled"), integration.getEnabled());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
-    }
-
-    private void showAddManualButton(Long gridIdx) {
-        elementWait.waitElementById(BUTTON_LIST_ADD_ID_BASE + gridIdx);
-        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_LIST_ADD_ID_BASE + gridIdx)).click();
-
-        elementWait.waitElementById(BUTTON_ADD_MANUAL_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_ADD_MANUAL_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_ADD_MANUAL_ID_BASE + gridIdx);
     }
 
 }
