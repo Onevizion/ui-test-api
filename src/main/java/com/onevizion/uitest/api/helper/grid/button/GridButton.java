@@ -57,6 +57,7 @@ public class GridButton {
     private static final String BUTTON_LABEL_REPLACE_TEXT_ID_BASE = "itemReplace";
     private static final String BUTTON_INTEGRATION_ADD_ID_BASE = "itemAddIntegration";
     private static final String BUTTON_V_TABLE_REORDER_ID_BASE = "itemReorder";
+    private static final String BUTTON_IMPORT_RECOVER_ID_BASE = "itemRecover";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -456,6 +457,20 @@ public class GridButton {
         Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to reorder the entries based on alphabetically sorting the values?");
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         grid2.waitLoad(gridIdx);
+    }
+
+    public void clickImportRecover(Long gridIdx, String processId) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_IMPORT_RECOVER_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_IMPORT_RECOVER_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_IMPORT_RECOVER_ID_BASE + gridIdx);
+        //elementWait.waitElementAttributeById("btnRecover", "class", Arrays.asList("newButtons", "btnRecover"), " "); wait button enabled
+
+        element.clickById(BUTTON_IMPORT_RECOVER_ID_BASE + gridIdx);
+        wait.waitAlert();
+        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to recover selected import (Process ID = " + processId + ")?", "Alert have wrong message");
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
     }
 
     private void openOptionsPanel(Long gridIdx) {
