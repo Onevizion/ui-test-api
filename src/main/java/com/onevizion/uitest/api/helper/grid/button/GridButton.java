@@ -47,6 +47,7 @@ public class GridButton {
     private static final String BUTTON_REPORT_GROUPS_ID_BASE = "itemReportGroup";
     private static final String BUTTON_REPORT_TEST_SQL_ID_BASE = "itemTestSql";
     private static final String BUTTON_REPORT_SCAN_PARAMS_ID_BASE = "itemScanParams";
+    private static final String BUTTON_REPORT_DETAILS_ID_BASE = "btnDetails";
     private static final String BUTTON_WP_DISCIPLINES_ID_BASE = "itemDiscp";
     private static final String BUTTON_WP_DATE_PAIRS_ID_BASE = "itemDatePairs";
     private static final String BUTTON_WP_CALENDARS_ID_BASE = "itemCalendar";
@@ -341,6 +342,12 @@ public class GridButton {
 
         element.clickById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
         grid2.waitLoad(gridIdx);
+    }
+
+    public void openReportDetailsForm(Long gridIdx) {
+        window.openModal(By.id(BUTTON_REPORT_DETAILS_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
     }
 
     public void openWpDisciplinesGrid(Long gridIdx) {
