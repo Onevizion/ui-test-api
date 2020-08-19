@@ -59,6 +59,7 @@ public class GridButton {
     private static final String BUTTON_V_TABLE_REORDER_ID_BASE = "itemReorder";
     private static final String BUTTON_IMPORT_RECOVERY_ID_BASE = "itemRecover";
     private static final String BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE = "itemRecoveryHistory";
+    private static final String BUTTON_IMPORT_INTERRUPT_ID_BASE = "itemImpStop";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -484,6 +485,20 @@ public class GridButton {
         window.openModal(By.id(BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         grid2.waitLoad();
+    }
+
+    public void clickImportInterrupt(Long gridIdx, String processId) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
+        //elementWait.waitElementAttributeById("btnImpStop", "class", Arrays.asList("newButtons", "btnImpStop"), " "); wait button enabled
+
+        element.clickById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
+        wait.waitAlert();
+        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to interrupt selected import (Process ID = " + processId + ")?", "Alert have wrong message");
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
     }
 
     private void openOptionsPanel(Long gridIdx) {
