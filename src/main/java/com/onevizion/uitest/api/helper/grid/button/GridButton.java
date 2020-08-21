@@ -51,7 +51,7 @@ public class GridButton {
     private static final String BUTTON_WP_DISCIPLINES_ID_BASE = "itemDiscp";
     private static final String BUTTON_WP_DATE_PAIRS_ID_BASE = "itemDatePairs";
     private static final String BUTTON_WP_CALENDARS_ID_BASE = "itemCalendar";
-    private static final String BUTTON_APPLET_REORDER_ID_BASE = "itemReorder";
+    private static final String BUTTON_APPLET_REORDER_ID_BASE = "itemReorderApplets";
     private static final String BUTTON_WF_EDITOR_ID_BASE = "itemVisualEditor";
     private static final String BUTTON_DG_DELETE_CONFIG_ID_BASE = "itemDelConfig";
     private static final String BUTTON_LABEL_REPLACE_TEXT_ID_BASE = "itemReplace";
