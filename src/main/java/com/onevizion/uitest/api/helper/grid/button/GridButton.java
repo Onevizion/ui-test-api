@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
@@ -26,6 +27,7 @@ public class GridButton {
     private static final String BUTTON_APPLETS_PANEL_ID_BASE = "editGrouppopupMenu";
 
     private static final String BUTTON_APPLET_TASKS_ID_BASE = "itemTask";
+    private static final String BUTTON_APPLET_WF_ID_BASE = "itemWF";
 
     private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
     private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
@@ -82,6 +84,9 @@ public class GridButton {
     @Autowired
     private Tree tree;
 
+    @Autowired
+    private Tab tab;
+
     public void openAppletForm(Long gridIdx, Long configAppId) {
         openAppletsPanel(gridIdx);
 
@@ -118,6 +123,18 @@ public class GridButton {
         //wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         grid2.waitLoad();
         //wait.waitFormLoad();
+    }
+
+    public void openAppletWf(Long gridIdx) {
+        openAppletsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_APPLET_WF_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_APPLET_WF_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_APPLET_WF_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_APPLET_WF_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id("Close"));
+        tab.waitLoad(1);
     }
 
     public void openGridRowEditorForm(Long gridIdx) {
