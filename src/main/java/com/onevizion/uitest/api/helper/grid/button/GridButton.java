@@ -42,6 +42,7 @@ public class GridButton {
     private static final String BUTTON_DOWN_TREE_ID_BASE = "itemDownTree";
     private static final String BUTTON_UP_ID_BASE = "itemUp";
     private static final String BUTTON_DOWN_ID_BASE = "itemDown";
+    private static final String BUTTON_CALL_STACK_ID_BASE = "itemCallStack";
 
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
     private static final String BUTTON_COMPONENT_IMPORT_ID_BASE = "itemImportRun";
@@ -285,6 +286,19 @@ public class GridButton {
 
         element.clickById(BUTTON_DOWN_ID_BASE + gridIdx);
         grid2.waitLoad(gridIdx);
+    }
+
+    public void openCallStackGrid(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_CALL_STACK_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_CALL_STACK_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_CALL_STACK_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_CALL_STACK_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_CALL_STACK_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
+        grid2.waitLoad();
     }
 
     public void openComponentExportForm(Long gridIdx) {
