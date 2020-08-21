@@ -20,6 +20,8 @@ import com.onevizion.uitest.api.helper.tree.Tree;
 @Component
 public class GridButton {
 
+    private static final String BUTTON_EDIT_ID_BASE = "btnEdit";
+
     private static final String BUTTON_OPTIONS_ID_BASE = "btnoptionsGroupOpener";
     private static final String BUTTON_OPTIONS_PANEL_ID_BASE = "optionsGrouppopupMenu";
 
@@ -87,6 +89,9 @@ public class GridButton {
     @Autowired
     private Tab tab;
 
+    @Autowired
+    private GridButtonWait gridButtonWait;
+
     public void openAppletForm(Long gridIdx, Long configAppId) {
         openAppletsPanel(gridIdx);
 
@@ -95,6 +100,7 @@ public class GridButton {
         elementWait.waitElementById("item" + configAppId);
         elementWait.waitElementVisibleById("item" + configAppId);
         elementWait.waitElementDisplayById("item" + configAppId);
+        gridButtonWait.waitButtonEnabled("item" + configAppId);
 
         window.openModal(By.id("item" + configAppId));
     }
@@ -117,6 +123,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_APPLET_TASKS_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_APPLET_TASKS_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_APPLET_TASKS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_APPLET_TASKS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_APPLET_TASKS_ID_BASE + gridIdx));
         //wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -131,6 +138,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_APPLET_WF_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_APPLET_WF_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_APPLET_WF_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_APPLET_WF_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_APPLET_WF_ID_BASE + gridIdx));
         wait.waitWebElement(By.id("Close"));
@@ -143,6 +151,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_GRID_ROW_EDITOR_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -155,6 +164,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_SHOW_SQL_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_SHOW_SQL_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -167,6 +177,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_RULES_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_RULES_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_RULES_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_RULES_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_RULES_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -179,6 +190,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_CLONE_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_CLONE_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_CLONE_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_CLONE_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_CLONE_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -191,6 +203,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_EXPORT_RUN_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_EXPORT_RUN_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_EXPORT_RUN_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_EXPORT_RUN_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_EXPORT_RUN_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -203,6 +216,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -215,6 +229,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
         elementWait.waitElementVisibleById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
         elementWait.waitElementDisplayById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
 
         element.clickById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
         wait.waitAlert();
@@ -228,6 +243,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_UP_TREE_ID_BASE + treeIdx);
         elementWait.waitElementVisibleById(BUTTON_UP_TREE_ID_BASE + treeIdx);
         elementWait.waitElementDisplayById(BUTTON_UP_TREE_ID_BASE + treeIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_UP_TREE_ID_BASE + treeIdx);
 
         element.clickById(BUTTON_UP_TREE_ID_BASE + treeIdx);
         tree.waitLoad(treeIdx);
@@ -239,6 +255,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
         elementWait.waitElementVisibleById(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
         elementWait.waitElementDisplayById(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
 
         element.clickById(BUTTON_DOWN_TREE_ID_BASE + treeIdx);
         tree.waitLoad(treeIdx);
@@ -250,7 +267,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_UP_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_UP_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_UP_ID_BASE + gridIdx);
-        //elementWait.waitElementEnabledByName(BUTTON_UP_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_UP_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_UP_ID_BASE + gridIdx);
         grid2.waitLoad(gridIdx);
@@ -262,7 +279,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_DOWN_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_DOWN_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_DOWN_ID_BASE + gridIdx);
-        //elementWait.waitElementEnabledByName(BUTTON_DOWN_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_DOWN_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_DOWN_ID_BASE + gridIdx);
         grid2.waitLoad(gridIdx);
@@ -274,6 +291,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_COMPONENT_EXPORT_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_COMPONENT_EXPORT_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_COMPONENT_EXPORT_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_COMPONENT_EXPORT_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_COMPONENT_EXPORT_ID_BASE + gridIdx));
         wait.waitReloadForm("form=1");
@@ -287,6 +305,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_COMPONENT_IMPORT_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_COMPONENT_IMPORT_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_COMPONENT_IMPORT_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_COMPONENT_IMPORT_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_COMPONENT_IMPORT_ID_BASE + gridIdx);
         grid2.waitLoad(gridIdx);
@@ -298,6 +317,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_COLORS_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_COLORS_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_COLORS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_COLORS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_COLORS_ID_BASE + gridIdx));
         grid2.waitLoad();
@@ -309,6 +329,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_COORDINATES_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_COORDINATES_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_COORDINATES_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_COORDINATES_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_COORDINATES_ID_BASE + gridIdx));
         grid2.waitLoad();
@@ -320,6 +341,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_VALIDATIONS_ID_BASE + gridIdx));
         grid2.waitLoad();
@@ -331,6 +353,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_REPORT_GROUPS_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_REPORT_GROUPS_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_REPORT_GROUPS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_REPORT_GROUPS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_REPORT_GROUPS_ID_BASE + gridIdx));
         grid2.waitLoad();
@@ -342,6 +365,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_REPORT_TEST_SQL_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_REPORT_TEST_SQL_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_REPORT_TEST_SQL_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_REPORT_TEST_SQL_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_REPORT_TEST_SQL_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -359,6 +383,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_REPORT_SCAN_PARAMS_ID_BASE + gridIdx);
         grid2.waitLoad(gridIdx);
@@ -376,6 +401,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_WP_DISCIPLINES_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_WP_DISCIPLINES_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_WP_DISCIPLINES_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_WP_DISCIPLINES_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_WP_DISCIPLINES_ID_BASE + gridIdx));
         grid2.waitLoad();
@@ -387,6 +413,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_WP_DATE_PAIRS_ID_BASE + gridIdx));
         grid2.waitLoad();
@@ -398,6 +425,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_WP_CALENDARS_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_WP_CALENDARS_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_WP_CALENDARS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_WP_CALENDARS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_WP_CALENDARS_ID_BASE + gridIdx));
         grid2.waitLoad();
@@ -409,6 +437,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_APPLET_REORDER_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_APPLET_REORDER_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_APPLET_REORDER_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_APPLET_REORDER_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_APPLET_REORDER_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -421,6 +450,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_WF_EDITOR_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_WF_EDITOR_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_WF_EDITOR_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_WF_EDITOR_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_WF_EDITOR_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -433,6 +463,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_DG_DELETE_CONFIG_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -446,6 +477,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_LABEL_REPLACE_TEXT_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -458,6 +490,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_INTEGRATION_ADD_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
@@ -470,6 +503,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
         wait.waitAlert();
@@ -484,7 +518,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_IMPORT_RECOVERY_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_IMPORT_RECOVERY_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_IMPORT_RECOVERY_ID_BASE + gridIdx);
-        //elementWait.waitElementAttributeById("btnRecover", "class", Arrays.asList("newButtons", "btnRecover"), " "); wait button enabled
+        gridButtonWait.waitButtonEnabled(BUTTON_IMPORT_RECOVERY_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_IMPORT_RECOVERY_ID_BASE + gridIdx);
         wait.waitAlert();
@@ -498,6 +532,7 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -510,12 +545,20 @@ public class GridButton {
         elementWait.waitElementById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
         elementWait.waitElementVisibleById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
         elementWait.waitElementDisplayById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
-        //elementWait.waitElementAttributeById("btnImpStop", "class", Arrays.asList("newButtons", "btnImpStop"), " "); wait button enabled
+        gridButtonWait.waitButtonEnabled(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
         wait.waitAlert();
         Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to interrupt selected import (Process ID = " + processId + ")?", "Alert have wrong message");
         seleniumSettings.getWebDriver().switchTo().alert().accept();
+    }
+
+    public void waitButtonEditDisabled(Long gridIdx) {
+        gridButtonWait.waitButtonDisabled(BUTTON_EDIT_ID_BASE + gridIdx);
+    }
+
+    public void waitButtonEditEnabled(Long gridIdx) {
+        gridButtonWait.waitButtonEnabled(BUTTON_EDIT_ID_BASE + gridIdx);
     }
 
     private void openOptionsPanel(Long gridIdx) {
