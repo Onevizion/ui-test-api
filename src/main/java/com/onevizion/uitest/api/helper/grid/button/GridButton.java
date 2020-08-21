@@ -64,6 +64,8 @@ public class GridButton {
     private static final String BUTTON_IMPORT_RECOVERY_ID_BASE = "itemRecover";
     private static final String BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE = "itemRecoveryHistory";
     private static final String BUTTON_IMPORT_INTERRUPT_ID_BASE = "itemImpStop";
+    private static final String BUTTON_TF_EMAIL_ACCOUNT_ID_BASE = "itemTmSetup";
+    private static final String BUTTON_TT_TRACKOR_MAIL_ID_BASE = "itemTmSetup";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -551,6 +553,32 @@ public class GridButton {
         wait.waitAlert();
         Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to interrupt selected import (Process ID = " + processId + ")?", "Alert have wrong message");
         seleniumSettings.getWebDriver().switchTo().alert().accept();
+    }
+
+    public void openTfEmailAccountForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_TF_EMAIL_ACCOUNT_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_TF_EMAIL_ACCOUNT_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_TF_EMAIL_ACCOUNT_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_TF_EMAIL_ACCOUNT_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_TF_EMAIL_ACCOUNT_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void openTtTrackorMailForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_TT_TRACKOR_MAIL_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_TT_TRACKOR_MAIL_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_TT_TRACKOR_MAIL_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_TT_TRACKOR_MAIL_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_TT_TRACKOR_MAIL_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
     }
 
     public void waitButtonEditDisabled(Long gridIdx) {
