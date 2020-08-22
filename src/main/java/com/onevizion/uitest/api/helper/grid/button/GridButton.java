@@ -38,6 +38,7 @@ public class GridButton {
     private static final String BUTTON_EXPORT_RUN_ID_BASE = "itemGridExport";
     private static final String BUTTON_EXPORT_HISTORY_ID_BASE = "itemExportHistory";
     private static final String BUTTON_DELETE_TREE_ID_BASE = "itemDeleteTree";
+    private static final String BUTTON_DELETE_ID_BASE = "itemDelete";
     private static final String BUTTON_UP_TREE_ID_BASE = "itemUpTree";
     private static final String BUTTON_DOWN_TREE_ID_BASE = "itemDownTree";
     private static final String BUTTON_UP_ID_BASE = "itemUp";
@@ -238,6 +239,21 @@ public class GridButton {
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         tree.waitLoad(treeIdx);
+    }
+
+    public void clickDeleteGrid(Long gridIdx, String message) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_DELETE_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_DELETE_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_DELETE_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_DELETE_ID_BASE + gridIdx);
+
+        element.clickById(BUTTON_DELETE_ID_BASE + gridIdx);
+        wait.waitAlert();
+        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        grid2.waitLoad(gridIdx);
     }
 
     public void clickUpTree(Long treeIdx) {
