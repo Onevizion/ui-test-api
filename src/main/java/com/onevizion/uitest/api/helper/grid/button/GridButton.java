@@ -65,7 +65,7 @@ public class GridButton {
     private static final String BUTTON_IMPORT_RECOVERY_ID_BASE = "itemRecover";
     private static final String BUTTON_IMPORT_RECOVERY_HISTORY_ID_BASE = "itemRecoveryHistory";
     private static final String BUTTON_IMPORT_INTERRUPT_ID_BASE = "itemImpStop";
-    private static final String BUTTON_TF_EMAIL_ACCOUNT_ID_BASE = "itemTmSetup";
+    private static final String BUTTON_TF_EMAIL_ACCOUNT_ID_BASE = "itemEmailAccountSettings";
     private static final String BUTTON_TT_TRACKOR_MAIL_ID_BASE = "itemTmSetup";
 
     @Autowired
