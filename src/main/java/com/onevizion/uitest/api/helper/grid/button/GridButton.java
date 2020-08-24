@@ -50,6 +50,9 @@ public class GridButton {
     private static final String BUTTON_COLORS_ID_BASE = "itemColors";
     private static final String BUTTON_COORDINATES_ID_BASE = "itemCoordLinks";
     private static final String BUTTON_VALIDATIONS_ID_BASE = "itemValidation";
+    private static final String BUTTON_FIELD_CASCADING_FIELDS_ID_BASE = "itemFieldsMap";
+    private static final String BUTTON_CASCADE_FIELDS_IMPORT_RELATIONS_ID_BASE = "itemVtableLinksValueTree";
+    private static final String BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE = "itemVtableLinksTree";
     private static final String BUTTON_REPORT_GROUPS_ID_BASE = "itemReportGroup";
     private static final String BUTTON_REPORT_TEST_SQL_ID_BASE = "itemTestSql";
     private static final String BUTTON_REPORT_SCAN_PARAMS_ID_BASE = "itemScanParams";
@@ -378,6 +381,44 @@ public class GridButton {
 
         window.openModal(By.id(BUTTON_VALIDATIONS_ID_BASE + gridIdx));
         grid2.waitLoad();
+    }
+
+    public void openFieldCascadingFieldsForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_FIELD_CASCADING_FIELDS_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_FIELD_CASCADING_FIELDS_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_FIELD_CASCADING_FIELDS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_FIELD_CASCADING_FIELDS_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_FIELD_CASCADING_FIELDS_ID_BASE + gridIdx));
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+    }
+
+    public void openCascadeFieldsImportRelationsForm(Long treeIdx) {
+        openOptionsPanel(treeIdx);
+
+        elementWait.waitElementById(BUTTON_CASCADE_FIELDS_IMPORT_RELATIONS_ID_BASE + treeIdx);
+        elementWait.waitElementVisibleById(BUTTON_CASCADE_FIELDS_IMPORT_RELATIONS_ID_BASE + treeIdx);
+        elementWait.waitElementDisplayById(BUTTON_CASCADE_FIELDS_IMPORT_RELATIONS_ID_BASE + treeIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_CASCADE_FIELDS_IMPORT_RELATIONS_ID_BASE + treeIdx);
+
+        window.openModal(By.id(BUTTON_CASCADE_FIELDS_IMPORT_RELATIONS_ID_BASE + treeIdx));
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+        wait.waitFormLoad();
+    }
+
+    public void openCascadeFieldsRelationsForm(Long treeIdx) {
+        openOptionsPanel(treeIdx);
+
+        elementWait.waitElementById(BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE + treeIdx);
+        elementWait.waitElementVisibleById(BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE + treeIdx);
+        elementWait.waitElementDisplayById(BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE + treeIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE + treeIdx);
+
+        window.openModal(By.id(BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE + treeIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
     }
 
     public void openReportGroupsGrid(Long gridIdx) {
