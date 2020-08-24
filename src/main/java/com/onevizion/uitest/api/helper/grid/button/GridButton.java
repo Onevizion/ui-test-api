@@ -68,6 +68,7 @@ public class GridButton {
     private static final String BUTTON_IMPORT_INTERRUPT_ID_BASE = "itemImpStop";
     private static final String BUTTON_TF_EMAIL_ACCOUNT_ID_BASE = "itemEmailAccountSettings";
     private static final String BUTTON_TT_TRACKOR_MAIL_ID_BASE = "itemTmSetup";
+    private static final String BUTTON_AUDIT_LOG_RECOVERY_ID_BASE = "itemRecover";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -607,6 +608,19 @@ public class GridButton {
         gridButtonWait.waitButtonEnabled(BUTTON_TT_TRACKOR_MAIL_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_TT_TRACKOR_MAIL_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void openAuditLogRecoverForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_AUDIT_LOG_RECOVERY_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_AUDIT_LOG_RECOVERY_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_AUDIT_LOG_RECOVERY_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_AUDIT_LOG_RECOVERY_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_AUDIT_LOG_RECOVERY_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
