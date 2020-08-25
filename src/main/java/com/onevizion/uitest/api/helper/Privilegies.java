@@ -1,6 +1,5 @@
 package com.onevizion.uitest.api.helper;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -10,6 +9,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.grid.button.GridButton;
 
 @Component
 public class Privilegies {
@@ -18,59 +18,34 @@ public class Privilegies {
     private SeleniumSettings seleniumSettings;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private ElementWait elementWait;
 
-    public void checkAddCloneEditDelButtons(Long gridIdx, Boolean isDisplayAdd, Boolean isDisplayClone, Boolean isDisplayEdit, Boolean isDisplayDel) {
-        if (isDisplayAdd != null) {
-            wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx));
-            if (isDisplayAdd.booleanValue()) {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList(""), ";");
-            } else {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx, "style", Arrays.asList("display: none"), ";");
-            }
+    @Autowired
+    private GridButton gridButton;
+
+    public void checkAddCloneEditDelButtons(Long gridIdx, boolean isDisplayAdd, boolean isDisplayClone, boolean isDisplayEdit, boolean isDisplayDel) {
+        if (isDisplayAdd) {
+            gridButton.checkAddButtonExist(gridIdx);
         } else {
-            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx)).size(), 0, AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx + " found");
-            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            gridButton.checkAddButtonNotExist(gridIdx);
         }
-        if (isDisplayClone != null) {
-            wait.waitWebElement(By.id(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx));
-            if (isDisplayClone.booleanValue()) {
-                elementWait.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList(""), ";");
-            } else {
-                elementWait.waitElementAttributeById(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx, "style", Arrays.asList("display: none"), ";");
-            }
+
+        if (isDisplayClone) {
+            gridButton.checkCloneButtonExist(gridIdx);
         } else {
-            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.id(CloneButton.BUTTON_CLONE_ID_BASE + gridIdx)).size(), 0, CloneButton.BUTTON_CLONE_ID_BASE + gridIdx + " found");
-            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            gridButton.checkCloneButtonNotExist(gridIdx);
         }
-        if (isDisplayEdit != null) {
-            wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx));
-            if (isDisplayEdit.booleanValue()) {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList(""), ";");
-            } else {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx, "style", Arrays.asList("display: none"), ";");
-            }
+
+        if (isDisplayEdit) {
+            gridButton.checkEditButtonExist(gridIdx);
         } else {
-            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx)).size(), 0, AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx + " found");
-            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            gridButton.checkEditButtonNotExist(gridIdx);
         }
-        if (isDisplayDel != null) {
-            wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx));
-            if (isDisplayDel.booleanValue()) {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList(""), ";");
-            } else {
-                elementWait.waitElementAttributeById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx, "style", Arrays.asList("display: none"), ";");
-            }
+
+        if (isDisplayDel) {
+            gridButton.checkDeleteButtonExist(gridIdx);
         } else {
-            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx)).size(), 0, AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridIdx + " found");
-            seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            gridButton.checkDeleteButtonNotExist(gridIdx);
         }
     }
 
