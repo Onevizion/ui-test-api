@@ -31,6 +31,7 @@ public class GridButton {
     private static final String BUTTON_APPLET_TASKS_ID_BASE = "itemTask";
     private static final String BUTTON_APPLET_WF_ID_BASE = "itemWF";
 
+    private static final String BUTTON_ADD_ID_BASE = "itemAdd";
     private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
     private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
     private static final String BUTTON_RULES_ID_BASE = "itemRules";
@@ -700,6 +701,76 @@ public class GridButton {
         window.openModal(By.id(BUTTON_BPDOC_ITEM_PREVIEW_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
+    }
+
+    public void checkAddButtonExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_ADD_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 1);
+    }
+
+    public void checkAddButtonNotExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_ADD_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
+    }
+
+    public void checkCloneButtonExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_CLONE_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 1);
+    }
+
+    public void checkCloneButtonNotExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_CLONE_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
+    }
+
+    public void checkEditButtonExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_EDIT_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 1);
+    }
+
+    public void checkEditButtonNotExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_EDIT_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
+    }
+
+    public void checkDeleteButtonExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_DELETE_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 1);
+    }
+
+    public void checkDeleteButtonNotExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_DELETE_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
+    }
+
+    public void checkAppletReorderButtonExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_APPLET_REORDER_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 1);
+    }
+
+    public void checkAppletReorderButtonNotExist(Long gridIdx) {
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_APPLET_REORDER_ID_BASE + gridIdx)).size();
+        seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(count, 0);
     }
 
     public void waitButtonEditDisabled(Long gridIdx) {
