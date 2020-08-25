@@ -56,6 +56,7 @@ public class GridButton {
     private static final String BUTTON_REPORT_GROUPS_ID_BASE = "itemReportGroup";
     private static final String BUTTON_REPORT_TEST_SQL_ID_BASE = "itemTestSql";
     private static final String BUTTON_REPORT_SCAN_PARAMS_ID_BASE = "itemScanParams";
+    private static final String BUTTON_REPORT_INSERT_RANGE_ID_BASE = "itemInsertRange";
     private static final String BUTTON_WP_DISCIPLINES_ID_BASE = "itemDiscp";
     private static final String BUTTON_WP_DATE_PAIRS_ID_BASE = "itemDatePairs";
     private static final String BUTTON_WP_CALENDARS_ID_BASE = "itemCalendar";
@@ -452,6 +453,19 @@ public class GridButton {
         elementWait.waitElementNotDisplayById("lblSuccess");
         elementWait.waitElementNotVisibleById("lblFailure");
         elementWait.waitElementNotDisplayById("lblFailure");
+    }
+
+    public void openReportInsertRangeForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_REPORT_INSERT_RANGE_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_REPORT_INSERT_RANGE_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_REPORT_INSERT_RANGE_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_REPORT_INSERT_RANGE_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_REPORT_INSERT_RANGE_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
     }
 
     public void clickReportScanParams(Long gridIdx) {
