@@ -45,12 +45,13 @@ public class EntityMenu {
     private Jquery jquery;
 
     public void testOnForm(Menu menu) {
-        newDropDown.openEditMenuForm(menu.getName());
+        newDropDown.openEditMenuForm(menu.getLabel());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
         jquery.waitLoad();
 
         assertElement.assertText("name", menu.getName());
+        assertElement.assertText("label", menu.getLabel());
         assertElement.assertText("description", menu.getDescription());
         assertElement.assertText("orderNumber", menu.getOrderNumber());
         assertElement.assertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
@@ -60,7 +61,7 @@ public class EntityMenu {
     }
 
     public void testRoleAssignments(Menu menu, List<String> roles) {
-        newDropDown.openEditMenuForm(menu.getName());
+        newDropDown.openEditMenuForm(menu.getLabel());
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 

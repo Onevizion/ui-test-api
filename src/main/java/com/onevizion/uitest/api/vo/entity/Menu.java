@@ -3,13 +3,15 @@ package com.onevizion.uitest.api.vo.entity;
 public class Menu {
 
     private String name;
+    private String label;
     private String description;
     private String orderNumber;
     private String dropgridFolder;
     private String iconLabel;
 
-    public Menu(String name, String description, String orderNumber, String dropgridFolder, String iconLabel) {
+    public Menu(String name, String label, String description, String orderNumber, String dropgridFolder, String iconLabel) {
         this.name = name;
+        this.label = label;
         this.description = description;
         this.orderNumber = orderNumber;
         this.dropgridFolder = dropgridFolder;
@@ -18,6 +20,10 @@ public class Menu {
 
     public String getName() {
         return name;
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public String getDescription() {
