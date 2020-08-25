@@ -56,7 +56,6 @@ public class GridButton {
     private static final String BUTTON_REPORT_GROUPS_ID_BASE = "itemReportGroup";
     private static final String BUTTON_REPORT_TEST_SQL_ID_BASE = "itemTestSql";
     private static final String BUTTON_REPORT_SCAN_PARAMS_ID_BASE = "itemScanParams";
-    private static final String BUTTON_REPORT_DETAILS_ID_BASE = "btnDetails";
     private static final String BUTTON_WP_DISCIPLINES_ID_BASE = "itemDiscp";
     private static final String BUTTON_WP_DATE_PAIRS_ID_BASE = "itemDatePairs";
     private static final String BUTTON_WP_CALENDARS_ID_BASE = "itemCalendar";
@@ -73,6 +72,9 @@ public class GridButton {
     private static final String BUTTON_TT_TRACKOR_MAIL_ID_BASE = "itemTmSetup";
     private static final String BUTTON_AUDIT_LOG_RECOVERY_ID_BASE = "itemRecover";
     private static final String BUTTON_BPDOC_ITEM_PREVIEW_ID_BASE = "itemReport";
+
+    private static final String BUTTON_REPORT_DETAILS_ID_BASE = "btnDetails";
+    private static final String BUTTON_PROCESS_DETAILS_ID_BASE = "btnDetails";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -466,6 +468,12 @@ public class GridButton {
 
     public void openReportDetailsForm(Long gridIdx) {
         window.openModal(By.id(BUTTON_REPORT_DETAILS_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void openProcessDetailsForm(Long gridIdx) {
+        window.openModal(By.id(BUTTON_PROCESS_DETAILS_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
