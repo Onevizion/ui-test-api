@@ -23,6 +23,7 @@ public class ConfigFieldVo {
     private String notCloneValue;
     private String notCloneLock;
     private String barcode;
+    private String showExpandedList;
 
     private List<String> packages;
 
@@ -79,6 +80,7 @@ public class ConfigFieldVo {
                     ConfigFieldVo.this.notCloneValue == null ||
                     ConfigFieldVo.this.notCloneLock == null ||
                     ConfigFieldVo.this.barcode == null ||
+                    ConfigFieldVo.this.showExpandedList == null ||
                     ConfigFieldVo.this.packages == null) {
                 throw new SeleniumUnexpectedException("");
             }
@@ -157,6 +159,11 @@ public class ConfigFieldVo {
 
         public Builder setBarcode(String barcode) {
             ConfigFieldVo.this.barcode = barcode;
+            return this;
+        }
+
+        public Builder setShowExpandedList(String showExpandedList) {
+            ConfigFieldVo.this.showExpandedList = showExpandedList;
             return this;
         }
 
@@ -335,6 +342,10 @@ public class ConfigFieldVo {
 
     public String getBarcode() {
         return barcode;
+    }
+
+    public String getShowExpandedList() {
+        return showExpandedList;
     }
 
     public List<String> getPackages() {
