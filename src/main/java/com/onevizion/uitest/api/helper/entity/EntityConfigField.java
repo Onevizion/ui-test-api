@@ -65,6 +65,7 @@ public class EntityConfigField {
     private static final String NOT_CLONE_VALUE = "notCloneFieldValue";
     private static final String NOT_CLONE_LOCK = "notCloneLocks";
     private static final String BARCODE = "supportBarcode";
+    private static final String SHOW_EXPANDED_LIST = "showExpanded";
 
     private static final String VALIDATION_ENABLED = "validationEnabled";
 
@@ -533,6 +534,11 @@ public class EntityConfigField {
             checkbox.clickByName(BARCODE);
         }
 
+        if ((configFieldVo.getShowExpandedList().equals("YES") && !checkbox.isCheckedByName(SHOW_EXPANDED_LIST))
+                || (configFieldVo.getShowExpandedList().equals("NO") && checkbox.isCheckedByName(SHOW_EXPANDED_LIST))) {
+            checkbox.clickByName(SHOW_EXPANDED_LIST);
+        }
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
 
@@ -958,6 +964,11 @@ public class EntityConfigField {
             checkbox.clickByName(BARCODE);
         }
 
+        if ((configFieldVo.getShowExpandedList().equals("YES") && !checkbox.isCheckedByName(SHOW_EXPANDED_LIST))
+                || (configFieldVo.getShowExpandedList().equals("NO") && checkbox.isCheckedByName(SHOW_EXPANDED_LIST))) {
+            checkbox.clickByName(SHOW_EXPANDED_LIST);
+        }
+
         Long packagesTabIndex;
         if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType()) ||
                 ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
@@ -1216,6 +1227,7 @@ public class EntityConfigField {
         assertElement.assertCheckbox(NOT_CLONE_VALUE, configFieldVo.getNotCloneValue());
         assertElement.assertCheckbox(NOT_CLONE_LOCK, configFieldVo.getNotCloneLock());
         assertElement.assertCheckbox(BARCODE, configFieldVo.getBarcode());
+        assertElement.assertCheckbox(SHOW_EXPANDED_LIST, configFieldVo.getShowExpandedList());
 
         Long packagesTabIndex;
         if (ConfigFieldType.CALCULATED.equals(configFieldVo.getConfigFieldType()) ||
