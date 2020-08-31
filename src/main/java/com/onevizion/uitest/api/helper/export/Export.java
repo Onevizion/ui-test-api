@@ -21,7 +21,6 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
-import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.vo.entity.ExportRun;
 
@@ -45,9 +44,6 @@ public class Export {
 
     @Autowired
     private Grid grid;
-
-    @Autowired
-    private Grid2 grid2;
 
     @Autowired
     private AssertElement assertElement;
@@ -175,11 +171,7 @@ public class Export {
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
         checkbox.clickById("lblcb" + processId);
-        elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx());
-        element.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + AbstractSeleniumCore.getGridIdx())));
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
-        grid2.waitLoad();
+        gridButton.clickDeleteGrid(AbstractSeleniumCore.getGridIdx());
         gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(0L), "Grid have wrong rows count");
 

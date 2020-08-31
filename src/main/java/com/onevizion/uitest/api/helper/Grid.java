@@ -13,9 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
-import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.grid.button.GridButton;
 
 @Component
 public class Grid {
@@ -33,13 +32,7 @@ public class Grid {
     private Checkbox checkbox;
 
     @Autowired
-    private Element element;
-
-    @Autowired
-    private Grid2 grid2;
-
-    @Autowired
-    private ElementWait elementWait;
+    private GridButton gridButton;
 
     public boolean isGridEmpty(Long gridId) {
         Long rowsCnt = js.getGridRowsCount(gridId);
@@ -159,11 +152,9 @@ public class Grid {
         if (oldCnt > 1) {
             oldCnt = oldCnt - 1L;
         }
-        elementWait.waitElementEnabledById(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId);
-        element.click(seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_DELETE_ID_BASE + gridId)));
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
-        grid2.waitLoad(gridId);
+
+        gridButton.clickDeleteGrid(gridId);
+
         Long newCnt = js.getGridRowsCount(gridId);
         Assert.assertEquals(newCnt, oldCnt, "Delete row is wrong");
     }

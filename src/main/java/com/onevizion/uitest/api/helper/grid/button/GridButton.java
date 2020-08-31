@@ -252,6 +252,20 @@ public class GridButton {
         tree.waitLoad(treeIdx);
     }
 
+    public void clickDeleteGrid(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+
+        elementWait.waitElementById(BUTTON_DELETE_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_DELETE_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_DELETE_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabled(BUTTON_DELETE_ID_BASE + gridIdx);
+
+        element.clickById(BUTTON_DELETE_ID_BASE + gridIdx);
+        wait.waitAlert();
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        grid2.waitLoad(gridIdx);
+    }
+
     public void clickDeleteGrid(Long gridIdx, String message) {
         openOptionsPanel(gridIdx);
 
