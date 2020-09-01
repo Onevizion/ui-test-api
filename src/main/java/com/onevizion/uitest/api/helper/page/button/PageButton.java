@@ -48,9 +48,9 @@ public class PageButton {
 
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
     private static final String BUTTON_COMPONENT_IMPORT_ID_BASE = "itemImportRun";
-    private static final String BUTTON_COLORS_ID_BASE = "itemColors";
-    private static final String BUTTON_COORDINATES_ID_BASE = "itemCoordLinks";
-    private static final String BUTTON_VALIDATIONS_ID_BASE = "itemValidation";
+    private static final String BUTTON_FIELD_COLORS_ID_BASE = "itemColors";
+    private static final String BUTTON_FIELD_COORDINATES_ID_BASE = "itemCoordLinks";
+    private static final String BUTTON_FIELD_VALIDATIONS_ID_BASE = "itemValidation";
     private static final String BUTTON_FIELD_CASCADING_FIELDS_ID_BASE = "itemFieldsMap";
     private static final String BUTTON_CASCADE_FIELDS_IMPORT_RELATIONS_ID_BASE = "itemVtableLinksValueTree";
     private static final String BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE = "itemVtableLinksTree";
@@ -379,39 +379,39 @@ public class PageButton {
         grid2.waitLoad(gridIdx);
     }
 
-    public void openColorsGrid(Long gridIdx) {
+    public void openFieldColorsGrid(Long gridIdx) {
         openOptionsPanel(gridIdx);
 
-        elementWait.waitElementById(BUTTON_COLORS_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_COLORS_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_COLORS_ID_BASE + gridIdx);
-        gridButtonWait.waitButtonEnabledById(BUTTON_COLORS_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_FIELD_COLORS_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_FIELD_COLORS_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_FIELD_COLORS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabledById(BUTTON_FIELD_COLORS_ID_BASE + gridIdx);
 
-        window.openModal(By.id(BUTTON_COLORS_ID_BASE + gridIdx));
+        window.openModal(By.id(BUTTON_FIELD_COLORS_ID_BASE + gridIdx));
         grid2.waitLoad();
     }
 
-    public void openCoordinatesGrid(Long gridIdx) {
+    public void openFieldCoordinatesGrid(Long gridIdx) {
         openOptionsPanel(gridIdx);
 
-        elementWait.waitElementById(BUTTON_COORDINATES_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_COORDINATES_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_COORDINATES_ID_BASE + gridIdx);
-        gridButtonWait.waitButtonEnabledById(BUTTON_COORDINATES_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_FIELD_COORDINATES_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_FIELD_COORDINATES_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_FIELD_COORDINATES_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabledById(BUTTON_FIELD_COORDINATES_ID_BASE + gridIdx);
 
-        window.openModal(By.id(BUTTON_COORDINATES_ID_BASE + gridIdx));
+        window.openModal(By.id(BUTTON_FIELD_COORDINATES_ID_BASE + gridIdx));
         grid2.waitLoad();
     }
 
-    public void openValidationsGrid(Long gridIdx) {
+    public void openFieldValidationsGrid(Long gridIdx) {
         openOptionsPanel(gridIdx);
 
-        elementWait.waitElementById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
-        gridButtonWait.waitButtonEnabledById(BUTTON_VALIDATIONS_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_FIELD_VALIDATIONS_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_FIELD_VALIDATIONS_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_FIELD_VALIDATIONS_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabledById(BUTTON_FIELD_VALIDATIONS_ID_BASE + gridIdx);
 
-        window.openModal(By.id(BUTTON_VALIDATIONS_ID_BASE + gridIdx));
+        window.openModal(By.id(BUTTON_FIELD_VALIDATIONS_ID_BASE + gridIdx));
         grid2.waitLoad();
     }
 
