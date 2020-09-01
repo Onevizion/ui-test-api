@@ -109,7 +109,6 @@ public class PageButton {
 
     public void openAppletForm(Long gridIdx, Long configAppId) {
         openAppletsPanel(gridIdx);
-        element.moveToElementById("item" + configAppId);
         waitButtonInPanel("item" + configAppId);
 
         window.openModal(By.id("item" + configAppId));
@@ -132,10 +131,7 @@ public class PageButton {
         waitButtonInPanel(BUTTON_APPLET_TASKS_ID_BASE + gridIdx);
 
         window.openModal(By.id(BUTTON_APPLET_TASKS_ID_BASE + gridIdx));
-        //wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        //wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         grid2.waitLoad();
-        //wait.waitFormLoad();
     }
 
     public void openAppletWf(Long gridIdx) {
@@ -660,6 +656,7 @@ public class PageButton {
     }
 
     private void waitButtonInPanel(String id) {
+        element.moveToElementById(id);
         elementWait.waitElementById(id);
         elementWait.waitElementVisibleById(id);
         elementWait.waitElementDisplayById(id);
