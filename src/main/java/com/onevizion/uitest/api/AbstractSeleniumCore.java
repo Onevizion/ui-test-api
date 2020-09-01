@@ -439,7 +439,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     public static final String LOADING_PREVIEW_ID_BASE = "layerLoading";
 
     public static final String BUTTON_EDIT_ID_BASE = "btnEdit";
-    public static final String BUTTON_DELETE_ID_BASE = "btnDelete";
     public static final String BUTTON_ADD_ID_BASE = "btnAdd";
     public static final String BUTTON_OK_ID_BASE = "btnOK";
     public static final String BUTTON_START_ID_BASE = "btnStartAt";

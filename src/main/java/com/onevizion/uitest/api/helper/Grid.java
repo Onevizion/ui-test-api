@@ -153,7 +153,7 @@ public class Grid {
             oldCnt = oldCnt - 1L;
         }
 
-        gridButton.clickDeleteGrid(gridId);
+        gridButton.clickDeleteGridAndWait(gridId);
 
         Long newCnt = js.getGridRowsCount(gridId);
         Assert.assertEquals(newCnt, oldCnt, "Delete row is wrong");

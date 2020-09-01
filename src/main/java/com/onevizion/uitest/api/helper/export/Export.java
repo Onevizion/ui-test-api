@@ -171,7 +171,7 @@ public class Export {
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
         checkbox.clickById("lblcb" + processId);
-        gridButton.clickDeleteGrid(AbstractSeleniumCore.getGridIdx());
+        gridButton.clickDeleteGridAndWait(AbstractSeleniumCore.getGridIdx());
         gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(0L), "Grid have wrong rows count");
 
