@@ -31,7 +31,7 @@ public class PageButton {
     private static final String BUTTON_APPLET_TASKS_ID_BASE = "itemTask";
     private static final String BUTTON_APPLET_WF_ID_BASE = "itemWF";
 
-    private static final String BUTTON_ADD_ID_BASE = "itemAdd";
+    private static final String BUTTON_ADD_GRID_ID_BASE = "itemAdd";
     private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
     private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
     private static final String BUTTON_RULES_ID_BASE = "itemRules";
@@ -39,11 +39,11 @@ public class PageButton {
     private static final String BUTTON_EXPORT_RUN_ID_BASE = "itemGridExport";
     private static final String BUTTON_EXPORT_HISTORY_ID_BASE = "itemExportHistory";
     private static final String BUTTON_DELETE_TREE_ID_BASE = "itemDeleteTree";
-    private static final String BUTTON_DELETE_ID_BASE = "itemDelete";
+    private static final String BUTTON_DELETE_GRID_ID_BASE = "itemDelete";
     private static final String BUTTON_UP_TREE_ID_BASE = "itemUpTree";
     private static final String BUTTON_DOWN_TREE_ID_BASE = "itemDownTree";
-    private static final String BUTTON_UP_ID_BASE = "itemUp";
-    private static final String BUTTON_DOWN_ID_BASE = "itemDown";
+    private static final String BUTTON_UP_GRID_ID_BASE = "itemUp";
+    private static final String BUTTON_DOWN_GRID_ID_BASE = "itemDown";
     private static final String BUTTON_CALL_STACK_ID_BASE = "itemCallStack";
 
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
@@ -255,23 +255,23 @@ public class PageButton {
     public void clickDeleteGrid(Long gridIdx) {
         openOptionsPanel(gridIdx);
 
-        elementWait.waitElementById(BUTTON_DELETE_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_DELETE_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_DELETE_ID_BASE + gridIdx);
-        gridButtonWait.waitButtonEnabledById(BUTTON_DELETE_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabledById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
 
-        element.clickById(BUTTON_DELETE_ID_BASE + gridIdx);
+        element.clickById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
     }
 
     public void clickDeleteGridAndWait(Long gridIdx) {
         openOptionsPanel(gridIdx);
 
-        elementWait.waitElementById(BUTTON_DELETE_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_DELETE_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_DELETE_ID_BASE + gridIdx);
-        gridButtonWait.waitButtonEnabledById(BUTTON_DELETE_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabledById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
 
-        element.clickById(BUTTON_DELETE_ID_BASE + gridIdx);
+        element.clickById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
         wait.waitAlert();
         seleniumSettings.getWebDriver().switchTo().alert().accept();
         grid2.waitLoad(gridIdx);
@@ -280,12 +280,12 @@ public class PageButton {
     public void clickDeleteGridAndWait(Long gridIdx, String message) {
         openOptionsPanel(gridIdx);
 
-        elementWait.waitElementById(BUTTON_DELETE_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_DELETE_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_DELETE_ID_BASE + gridIdx);
-        gridButtonWait.waitButtonEnabledById(BUTTON_DELETE_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabledById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
 
-        element.clickById(BUTTON_DELETE_ID_BASE + gridIdx);
+        element.clickById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
         wait.waitAlert();
         Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
         seleniumSettings.getWebDriver().switchTo().alert().accept();
@@ -316,27 +316,27 @@ public class PageButton {
         tree.waitLoad(treeIdx);
     }
 
-    public void clickUp(Long gridIdx) {
+    public void clickUpGrid(Long gridIdx) {
         openOptionsPanel(gridIdx);
 
-        elementWait.waitElementById(BUTTON_UP_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_UP_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_UP_ID_BASE + gridIdx);
-        gridButtonWait.waitButtonEnabledById(BUTTON_UP_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_UP_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_UP_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_UP_GRID_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabledById(BUTTON_UP_GRID_ID_BASE + gridIdx);
 
-        element.clickById(BUTTON_UP_ID_BASE + gridIdx);
+        element.clickById(BUTTON_UP_GRID_ID_BASE + gridIdx);
         grid2.waitLoad(gridIdx);
     }
 
-    public void clickDown(Long gridIdx) {
+    public void clickDownGrid(Long gridIdx) {
         openOptionsPanel(gridIdx);
 
-        elementWait.waitElementById(BUTTON_DOWN_ID_BASE + gridIdx);
-        elementWait.waitElementVisibleById(BUTTON_DOWN_ID_BASE + gridIdx);
-        elementWait.waitElementDisplayById(BUTTON_DOWN_ID_BASE + gridIdx);
-        gridButtonWait.waitButtonEnabledById(BUTTON_DOWN_ID_BASE + gridIdx);
+        elementWait.waitElementById(BUTTON_DOWN_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementVisibleById(BUTTON_DOWN_GRID_ID_BASE + gridIdx);
+        elementWait.waitElementDisplayById(BUTTON_DOWN_GRID_ID_BASE + gridIdx);
+        gridButtonWait.waitButtonEnabledById(BUTTON_DOWN_GRID_ID_BASE + gridIdx);
 
-        element.clickById(BUTTON_DOWN_ID_BASE + gridIdx);
+        element.clickById(BUTTON_DOWN_GRID_ID_BASE + gridIdx);
         grid2.waitLoad(gridIdx);
     }
 
@@ -758,14 +758,14 @@ public class PageButton {
 
     public void checkAddButtonExist(Long gridIdx) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_ADD_ID_BASE + gridIdx)).size();
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_ADD_GRID_ID_BASE + gridIdx)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(count, 1);
     }
 
     public void checkAddButtonNotExist(Long gridIdx) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_ADD_ID_BASE + gridIdx)).size();
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_ADD_GRID_ID_BASE + gridIdx)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(count, 0);
     }
@@ -800,14 +800,14 @@ public class PageButton {
 
     public void checkDeleteButtonExist(Long gridIdx) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_DELETE_ID_BASE + gridIdx)).size();
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_DELETE_GRID_ID_BASE + gridIdx)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(count, 1);
     }
 
     public void checkDeleteButtonNotExist(Long gridIdx) {
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_DELETE_ID_BASE + gridIdx)).size();
+        int count = seleniumSettings.getWebDriver().findElements(By.id(BUTTON_DELETE_GRID_ID_BASE + gridIdx)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(count, 0);
     }
