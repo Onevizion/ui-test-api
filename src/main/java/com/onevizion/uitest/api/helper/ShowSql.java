@@ -7,7 +7,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.grid.button.GridButton;
+import com.onevizion.uitest.api.helper.page.button.PageButton;
 
 @Component
 public class ShowSql {
@@ -30,11 +30,11 @@ public class ShowSql {
     private ShowSqlWait showSqlWait;
 
     @Autowired
-    private GridButton gridButton;
+    private PageButton pageButton;
 
     public void openShowSqlForm(Long gridIdx) {
         showSqlWait.waitIsUsageLogUpdated(gridIdx);
-        gridButton.openShowSqlForm(gridIdx);
+        pageButton.openShowSqlForm(gridIdx);
     }
 
     public void checkShowSqlForm() {

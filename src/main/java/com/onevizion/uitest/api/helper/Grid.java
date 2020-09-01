@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.grid.button.GridButton;
+import com.onevizion.uitest.api.helper.page.button.PageButton;
 
 @Component
 public class Grid {
@@ -32,7 +32,7 @@ public class Grid {
     private Checkbox checkbox;
 
     @Autowired
-    private GridButton gridButton;
+    private PageButton pageButton;
 
     public boolean isGridEmpty(Long gridId) {
         Long rowsCnt = js.getGridRowsCount(gridId);
@@ -153,7 +153,7 @@ public class Grid {
             oldCnt = oldCnt - 1L;
         }
 
-        gridButton.clickDeleteGridAndWait(gridId);
+        pageButton.clickDeleteGridAndWait(gridId);
 
         Long newCnt = js.getGridRowsCount(gridId);
         Assert.assertEquals(newCnt, oldCnt, "Delete row is wrong");

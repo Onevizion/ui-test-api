@@ -1,4 +1,4 @@
-package com.onevizion.uitest.api.helper.grid.button;
+package com.onevizion.uitest.api.helper.page.button;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +18,7 @@ import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
-public class GridButton {
+public class PageButton {
 
     private static final String BUTTON_EDIT_ID_BASE = "btnEdit";
 
@@ -105,7 +105,7 @@ public class GridButton {
     private Tab tab;
 
     @Autowired
-    private GridButtonWait gridButtonWait;
+    private PageButtonWait gridButtonWait;
 
     public void openAppletForm(Long gridIdx, Long configAppId) {
         openAppletsPanel(gridIdx);

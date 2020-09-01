@@ -21,7 +21,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
-import com.onevizion.uitest.api.helper.grid.button.GridButton;
+import com.onevizion.uitest.api.helper.page.button.PageButton;
 import com.onevizion.uitest.api.vo.entity.ExportRun;
 
 @Component
@@ -58,7 +58,7 @@ public class Export {
     private SeleniumLogger seleniumLogger;
 
     @Autowired
-    private GridButton gridButton;
+    private PageButton pageButton;
 
     public void export(Long gridIndex, ExportRun exportRun, List<Integer> uniqueColumns, CheckExportFile checkExportFile) {
         runExport(gridIndex, exportRun);
@@ -109,7 +109,7 @@ public class Export {
     }
 
     private void runExport(Long gridIdx, ExportRun exportRun) {
-        gridButton.openExportRunForm(gridIdx);
+        pageButton.openExportRunForm(gridIdx);
         new Select(seleniumSettings.getWebDriver().findElement(By.name("GridExportMode"))).selectByVisibleText(exportRun.getMode());
         new Select(seleniumSettings.getWebDriver().findElement(By.name("GridExportDelivery"))).selectByVisibleText(exportRun.getDelivery());
         seleniumSettings.getWebDriver().findElement(By.name("GridExportComment")).sendKeys(exportRun.getComments());
@@ -145,7 +145,7 @@ public class Export {
     }
 
     private void checkExport(Long gridIdx, ExportRun exportRun) {
-        gridButton.openExportHistoryGrid(gridIdx);
+        pageButton.openExportHistoryGrid(gridIdx);
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
@@ -166,12 +166,12 @@ public class Export {
     }
 
     private void deleteExport(Long gridIdx, String processId) {
-        gridButton.openExportHistoryGrid(gridIdx);
+        pageButton.openExportHistoryGrid(gridIdx);
         Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
 
         checkbox.clickById("lblcb" + processId);
-        gridButton.clickDeleteGridAndWait(AbstractSeleniumCore.getGridIdx());
+        pageButton.clickDeleteGridAndWait(AbstractSeleniumCore.getGridIdx());
         gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, Long.valueOf(0L), "Grid have wrong rows count");
 

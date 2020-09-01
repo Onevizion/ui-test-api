@@ -9,7 +9,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
-import com.onevizion.uitest.api.helper.grid.button.GridButton;
+import com.onevizion.uitest.api.helper.page.button.PageButton;
 
 @Component
 public class Privilegies {
@@ -21,31 +21,31 @@ public class Privilegies {
     private ElementWait elementWait;
 
     @Autowired
-    private GridButton gridButton;
+    private PageButton pageButton;
 
     public void checkAddCloneEditDelButtons(Long gridIdx, boolean isDisplayAdd, boolean isDisplayClone, boolean isDisplayEdit, boolean isDisplayDel) {
         if (isDisplayAdd) {
-            gridButton.checkAddButtonExist(gridIdx);
+            pageButton.checkAddButtonExist(gridIdx);
         } else {
-            gridButton.checkAddButtonNotExist(gridIdx);
+            pageButton.checkAddButtonNotExist(gridIdx);
         }
 
         if (isDisplayClone) {
-            gridButton.checkCloneButtonExist(gridIdx);
+            pageButton.checkCloneButtonExist(gridIdx);
         } else {
-            gridButton.checkCloneButtonNotExist(gridIdx);
+            pageButton.checkCloneButtonNotExist(gridIdx);
         }
 
         if (isDisplayEdit) {
-            gridButton.checkEditButtonExist(gridIdx);
+            pageButton.checkEditButtonExist(gridIdx);
         } else {
-            gridButton.checkEditButtonNotExist(gridIdx);
+            pageButton.checkEditButtonNotExist(gridIdx);
         }
 
         if (isDisplayDel) {
-            gridButton.checkDeleteButtonExist(gridIdx);
+            pageButton.checkDeleteButtonExist(gridIdx);
         } else {
-            gridButton.checkDeleteButtonNotExist(gridIdx);
+            pageButton.checkDeleteButtonNotExist(gridIdx);
         }
     }
 

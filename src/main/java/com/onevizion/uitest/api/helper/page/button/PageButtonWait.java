@@ -1,4 +1,4 @@
-package com.onevizion.uitest.api.helper.grid.button;
+package com.onevizion.uitest.api.helper.page.button;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.SeleniumSettings;
 
 @Component
-class GridButtonWait {
+class PageButtonWait {
 
     @Autowired
     private SeleniumSettings seleniumSettings;

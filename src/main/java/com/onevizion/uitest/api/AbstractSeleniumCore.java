@@ -100,7 +100,6 @@ import com.onevizion.uitest.api.helper.filter.Filter;
 import com.onevizion.uitest.api.helper.formdesigner.FormDesigner;
 import com.onevizion.uitest.api.helper.gantt.Gantt;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.helper.grid.group.GridGroup;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
@@ -108,6 +107,7 @@ import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.map.Map;
 import com.onevizion.uitest.api.helper.notification.Notification;
+import com.onevizion.uitest.api.helper.page.button.PageButton;
 import com.onevizion.uitest.api.helper.portal.Portal;
 import com.onevizion.uitest.api.helper.tab.ListboxTab;
 import com.onevizion.uitest.api.helper.tab.Tab;
@@ -323,7 +323,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected Gantt gantt;
 
     @Autowired
-    protected GridButton gridButton;
+    protected PageButton pageButton;
     /* Helpers End */
 
     /* Entity Helpers Begin */

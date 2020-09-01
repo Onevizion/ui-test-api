@@ -23,9 +23,9 @@ import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
+import com.onevizion.uitest.api.helper.page.button.PageButton;
 import com.onevizion.uitest.api.helper.tree.Tree;
 import com.onevizion.uitest.api.vo.FilterFieldType;
 import com.onevizion.uitest.api.vo.SortType;
@@ -116,7 +116,7 @@ public class Filter {
     private Jquery jquery;
 
     @Autowired
-    private GridButton gridButton;
+    private PageButton pageButton;
 
     public void openMainPanel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
@@ -408,7 +408,7 @@ public class Filter {
 
         selectFilterInOrganize(entityPrefix);
 
-        gridButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
+        pageButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         grid2.waitLoad(gridIdx);

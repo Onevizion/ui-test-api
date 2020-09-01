@@ -11,9 +11,9 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
+import com.onevizion.uitest.api.helper.page.button.PageButton;
 import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
@@ -44,7 +44,7 @@ public class Favorites {
     private MainMenu mainMenu;
 
     @Autowired
-    private GridButton gridButton;
+    private PageButton pageButton;
 
     public void checkFavoritesCount(int expectedCount) {
         mainMenu.showMenu(MainMenu.MENU_FAVORITES);
@@ -91,7 +91,7 @@ public class Favorites {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         selectFavoriteInOrganize(name);
-        gridButton.clickUpTree(AbstractSeleniumCore.getTreeIdx());
+        pageButton.clickUpTree(AbstractSeleniumCore.getTreeIdx());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         jquery.waitLoad();
@@ -105,7 +105,7 @@ public class Favorites {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         selectFavoriteInOrganize(name);
-        gridButton.clickDownTree(AbstractSeleniumCore.getTreeIdx());
+        pageButton.clickDownTree(AbstractSeleniumCore.getTreeIdx());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         jquery.waitLoad();
@@ -119,7 +119,7 @@ public class Favorites {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
 
         selectFavoriteInOrganize(name);
-        gridButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
+        pageButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         jquery.waitLoad();

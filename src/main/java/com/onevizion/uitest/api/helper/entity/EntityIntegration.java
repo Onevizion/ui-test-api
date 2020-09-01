@@ -18,8 +18,8 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.grid.button.GridButton;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
+import com.onevizion.uitest.api.helper.page.button.PageButton;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.Integration;
 
@@ -71,10 +71,10 @@ public class EntityIntegration {
     private HtmlInputFile htmlInputFile;
 
     @Autowired
-    private GridButton gridButton;
+    private PageButton pageButton;
 
     public void add(Integration integration) {
-        gridButton.openIntegrationAddForm(AbstractSeleniumCore.getGridIdx());
+        pageButton.openIntegrationAddForm(AbstractSeleniumCore.getGridIdx());
 
         seleniumSettings.getWebDriver().findElement(By.name(URL)).sendKeys(integration.getUrl());
 
