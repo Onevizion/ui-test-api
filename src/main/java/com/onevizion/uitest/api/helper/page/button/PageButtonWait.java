@@ -18,26 +18,26 @@ class PageButtonWait {
     @Autowired
     private SeleniumSettings seleniumSettings;
 
-    void waitButtonDisabled(String buttonId) {
+    void waitButtonDisabledById(String id) {
         BooleanSupplier actualValueSupplier = ()-> {
-            List<String> classes = Arrays.asList(seleniumSettings.getWebDriver().findElement(By.id(buttonId)).getAttribute("class").split(" "));
+            List<String> classes = Arrays.asList(seleniumSettings.getWebDriver().findElement(By.id(id)).getAttribute("class").split(" "));
             return classes.contains("disabled");
         };
 
-        Supplier<String> messageSupplier = ()-> "Waiting for Button with id=[" + buttonId + "] disabled is failed";
+        Supplier<String> messageSupplier = ()-> "Waiting for Button with id=[" + id + "] disabled is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
             .until(webdriver -> actualValueSupplier.getAsBoolean());
     }
 
-    void waitButtonEnabled(String buttonId) {
+    void waitButtonEnabledById(String id) {
         BooleanSupplier actualValueSupplier = ()-> {
-            List<String> classes = Arrays.asList(seleniumSettings.getWebDriver().findElement(By.id(buttonId)).getAttribute("class").split(" "));
+            List<String> classes = Arrays.asList(seleniumSettings.getWebDriver().findElement(By.id(id)).getAttribute("class").split(" "));
             return !classes.contains("disabled");
         };
 
-        Supplier<String> messageSupplier = ()-> "Waiting for Button with id=[" + buttonId + "] enabled is failed";
+        Supplier<String> messageSupplier = ()-> "Waiting for Button with id=[" + id + "] enabled is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
