@@ -585,10 +585,18 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             loginIntoSystem(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
             seleniumLogger.info("loginIntoSystem success");
 
+            seleniumSettings.getProfiler().start("fillGlobalSettings");
+            seleniumLogger.info("fillGlobalSettings start");
+            fillGlobalSettings();
+            seleniumLogger.info("fillGlobalSettings success");
+
+            seleniumSettings.getProfiler().start("fillUserSettings");
+            seleniumLogger.info("fillUserSettings start");
+            fillUserSettings(seleniumSettings.getTestUser());
+            seleniumLogger.info("fillUserSettings success");
+
             seleniumSettings.getProfiler().start("dataPreparation");
             seleniumLogger.info("dataPreparation start");
-            fillGlobalSettings();
-            fillUserSettings(seleniumSettings.getTestUser());
             dataPreparation();
             seleniumLogger.info("dataPreparation success");
 
