@@ -57,12 +57,12 @@ public class Dashboard {
     private Jquery jquery;
 
     public void openAddDashboardForm() {
-        seleniumSettings.getWebDriver().findElement(By.id("new_lbDashboard")).click();
-        elementWait.waitElementById("new_rows_lbDashboard");
-        elementWait.waitElementVisibleById("new_rows_lbDashboard");
-        elementWait.waitElementDisplayById("new_rows_lbDashboard");
+        seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dds_label")).click();
+        //elementWait.waitElementById("dd_content_" + id);//TODO
+        elementWait.waitElementVisible(seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dd_content")));
+        elementWait.waitElementDisplay(seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dd_content")));
 
-        window.openModal(By.id("btnAddDashboard"));
+        window.openModal(By.id("addDashboard"));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
@@ -71,6 +71,55 @@ public class Dashboard {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
 
         jquery.waitLoad();
+        waitDashboardLoad();
+    }
+
+    public void openEditForm(String name) {
+        //TODO
+    }
+
+    public void closeEditFormOk() {
+       //TODO
+    }
+
+    public void closeEditFormCancel() {
+       //TODO
+    }
+
+    public void delete(String name) {
+       //TODO
+    }
+
+    public void select(String name) {
+        WebElement currentDashboard = seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dds_label"));
+        String currentDashboardName = currentDashboard.getText();
+        if (name.equals(currentDashboardName)) {
+            return;
+        }
+
+        seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dds_label")).click();
+        //elementWait.waitElementById("dd_content_" + id);//TODO
+        elementWait.waitElementVisible(seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dd_content")));
+        elementWait.waitElementDisplay(seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dd_content")));
+
+        seleniumSettings.getWebDriver().findElement(By.id("search_dropDownDashboards")).clear();
+        seleniumSettings.getWebDriver().findElement(By.id("search_dropDownDashboards")).sendKeys(name);
+
+        WebElement dropDownItem = null;
+        List<WebElement> items = seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElements(By.className("drop_down_item"));
+        for (WebElement item : items) {
+            if (name.equals(item.findElement(By.className("ddi_label")).getAttribute("textContent"))) {
+                if (dropDownItem != null) {
+                    throw new SeleniumUnexpectedException("Dashboard [" + name + "] found many times");
+                }
+                dropDownItem = item;
+            }
+        }
+        if (dropDownItem == null) {
+            throw new SeleniumUnexpectedException("Dashboard [" + name + "] not found");
+        }
+        dropDownItem.click();
+
         waitDashboardLoad();
     }
 
