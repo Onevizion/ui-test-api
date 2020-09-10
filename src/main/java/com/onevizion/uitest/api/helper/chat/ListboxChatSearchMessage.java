@@ -41,7 +41,7 @@ public class ListboxChatSearchMessage {
             ListboxElementChatSearchMessage listboxElementChatSearchMessage = new ListboxElementChatSearchMessage();
             listboxElementChatSearchMessage.setWebElement(webElement);
             listboxElementChatSearchMessage.setId(webElement.getAttribute("id"));
-            listboxElementChatSearchMessage.setText(webElement.findElement(By.className("fci_text")).getAttribute("innerText"));
+            listboxElementChatSearchMessage.setText(webElement.findElement(By.className("fci_textMessage")).getAttribute("innerText"));
             listboxElementChatSearchMessage.setDate(webElement.findElement(By.className("fci_date")).getAttribute("innerText"));
             listboxElementChatSearchMessage.setAuthor(webElement.findElement(By.className("fci_author")).getAttribute("innerText"));
             elements.add(listboxElementChatSearchMessage);
