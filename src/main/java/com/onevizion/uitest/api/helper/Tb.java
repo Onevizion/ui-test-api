@@ -96,12 +96,12 @@ public class Tb {
         return idx.get(elementPosition - 1) + suffix;
     }
 
-    public Long getColumnCount(Long gridIdx) {
-        Long actualColumnsCnt = 0L;
+    public int getColumnCount(Long gridIdx) {
+        int actualColumnsCnt = 0;
         Long columnsCnt = js.getGridColumnsCount(gridIdx);
         for (long i = 0; i < columnsCnt; i++) {
             if (!js.isGridColumnHidden(gridIdx, i) && !js.getGridColIdByIndex(gridIdx, i).equals("-1")) {
-                actualColumnsCnt = actualColumnsCnt + 1L;
+                actualColumnsCnt = actualColumnsCnt + 1;
             }
         }
         return actualColumnsCnt;
