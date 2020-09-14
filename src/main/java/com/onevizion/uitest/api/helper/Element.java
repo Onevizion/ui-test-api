@@ -93,15 +93,18 @@ public class Element {
     }
 
     public void clickByName(String name) {
-        moveToElementByName(name);
-
-        seleniumSettings.getWebDriver().findElement(By.name(name)).click();
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
+        click(element);
     }
 
     public void clickById(String id) {
-        moveToElementById(id);
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.id(id));
+        click(element);
+    }
 
-        seleniumSettings.getWebDriver().findElement(By.id(id)).click();
+    public void clickByClass(String className) {
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.className(className));
+        click(element);
     }
 
     public void doubleClick(WebElement element) {
@@ -119,32 +122,17 @@ public class Element {
 
     public void doubleClickByName(String name) {
         WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
-
-        moveToElement(element);
-
-        if (seleniumSettings.getBrowser().equals("chrome")) {
-            Actions actionObject = new Actions(seleniumSettings.getWebDriver());
-            actionObject.doubleClick(element).perform();
-        } else if (seleniumSettings.getBrowser().equals("firefox")) { //TODO BUG firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1430851
-            elementJs.doubleClick(element);
-        } else {
-            throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
-        }
+        doubleClick(element);
     }
 
     public void doubleClickById(String id) {
         WebElement element = seleniumSettings.getWebDriver().findElement(By.id(id));
+        doubleClick(element);
+    }
 
-        moveToElement(element);
-
-        if (seleniumSettings.getBrowser().equals("chrome")) {
-            Actions actionObject = new Actions(seleniumSettings.getWebDriver());
-            actionObject.doubleClick(element).perform();
-        } else if (seleniumSettings.getBrowser().equals("firefox")) { //TODO BUG firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1430851
-            elementJs.doubleClick(element);
-        } else {
-            throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
-        }
+    public void doubleClickByClass(String className) {
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.className(className));
+        doubleClick(element);
     }
 
     public void checkBackgroundColor(WebElement element, String backgroundColor) {
