@@ -39,14 +39,14 @@ public class BplExport {
         Long rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
         Long subGridId = getComponentTypeGridId(gridIdx, bplComponentType);
 
-        js.openSubGrid(gridIdx, rowIndex, 0L);
+        js.openSubGrid(gridIdx, rowIndex, 0);
         grid2.waitLoad(subGridId);
     }
 
     public void closeSubGrid(Long gridIdx, BplComponentType bplComponentType) {
         Long rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
 
-        js.openSubGrid(gridIdx, rowIndex, 0L);
+        js.openSubGrid(gridIdx, rowIndex, 0);
     }
 
     public void checkComponentsCount(Long gridIdx, BplComponentType bplComponentType, Long count) {

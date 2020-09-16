@@ -97,7 +97,7 @@ public class Js {
     }
 
     // TODO remove trim
-    public String getGridCellValueByRowIndexAndColIndex2(WebElement element, Long rowIndex, Long columnIndex) {
+    public String getGridCellValueByRowIndexAndColIndex2(WebElement element, Long rowIndex, int columnIndex) {
         return execJs4("return arguments[0].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").getValue().trim();", element);
     }
 
@@ -106,7 +106,7 @@ public class Js {
         return execJs("return gridArr[" + gridId + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").getTxtValue().trim();");
     }
 
-    public String getGridCellFontSizeByRowIndexAndColIndex(Long gridId, Long rowIndex, Long columnIndex) {
+    public String getGridCellFontSizeByRowIndexAndColIndex(Long gridId, Long rowIndex, int columnIndex) {
         return execJs("return gridArr[" + gridId + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.style.fontSize;");
     }
 
@@ -263,7 +263,7 @@ public class Js {
         return execJs("return gridArr[" + gridId + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.children[" + childrenIndex + "].getAttribute('" + attributeName + "');");
     }
 
-    public String getChildrenAttributeInGridCellByRowIndexAndColIndex(Long gridId, Long rowIndex, Long columnIndex, Long firstChildrenIndex, Long secondChildrenIndex, String attributeName) {
+    public String getChildrenAttributeInGridCellByRowIndexAndColIndex(Long gridId, Long rowIndex, int columnIndex, Long firstChildrenIndex, Long secondChildrenIndex, String attributeName) {
         return execJs("return gridArr[" + gridId + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.children[" + firstChildrenIndex + "].children[" + secondChildrenIndex + "].getAttribute('" + attributeName + "');");
     }
 
@@ -279,11 +279,11 @@ public class Js {
         return execJs("return gridArr[" + gridId + "].grid.getColType(" + columnIndex + ");");
     }
 
-    public void openSubGrid(Long gridId, Long rowIndex, Long columnIndex) {
+    public void openSubGrid(Long gridId, Long rowIndex, int columnIndex) {
         execJs("gridArr[" + gridId + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.children[0].click();");
     }
 
-    public void openSubGridByRowIdAndColumnIndex(Long gridId, Long rowId, Long columnIndex) {
+    public void openSubGridByRowIdAndColumnIndex(Long gridId, Long rowId, int columnIndex) {
         execJs("gridArr[" + gridId + "].grid.cellById(" + rowId + ", " + columnIndex + ").cell.children[0].click();");
     }
 
@@ -299,11 +299,11 @@ public class Js {
         return NumberUtils.createLong(execJs("return document.getElementById('T2" + gridName + "').rows.length;"));
     }
 
-    public Object getHtmlGridCellByRowIndexAndColIndex(String gridName, Long rowIndex, Long colIndex) {
+    public Object getHtmlGridCellByRowIndexAndColIndex(String gridName, Long rowIndex, int colIndex) {
         return execJs2("return document.getElementById('T2" + gridName + "').children[0].children[" + rowIndex + "].children[" + colIndex + "];");
     }
 
-    public Object getChildrenInHtmlGridCellByRowIndexAndColIndex(String gridName, Long rowIndex, Long colIndex, Long childrenIndex) {
+    public Object getChildrenInHtmlGridCellByRowIndexAndColIndex(String gridName, Long rowIndex, int colIndex, Long childrenIndex) {
         return execJs2("return document.getElementById('T2" + gridName + "').children[0].children[" + rowIndex + "].children[" + colIndex + "].children[" + childrenIndex + "];");
     }
 
@@ -315,7 +315,7 @@ public class Js {
         return execJs("return gridArr[" + gridId + "].grid.getAllRowIds();");
     }
 
-    public Object getChildrenInMouthByRowIndexAndColIndex(Long mouthIndex, Long rowIndex, Long columnIndex) {
+    public Object getChildrenInMouthByRowIndexAndColIndex(Long mouthIndex, Long rowIndex, int columnIndex) {
         return execJs2("return document.getElementById('dayList" + mouthIndex + "').children[" + rowIndex + "].children[" + columnIndex + "];");
     }
 
@@ -569,7 +569,7 @@ public class Js {
     }
 
     @Deprecated
-    public void setColumnLabel(Long gridId, String columnIndex, String columnLabel) {
+    public void setColumnLabel(Long gridId, int columnIndex, String columnLabel) {
         execJs("gridArr['" + gridId + "'].grid.setColLabel('" + columnIndex + "', '" + columnLabel + "');");
     }
 
