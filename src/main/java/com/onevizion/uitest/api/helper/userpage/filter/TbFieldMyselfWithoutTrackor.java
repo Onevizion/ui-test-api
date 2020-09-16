@@ -19,7 +19,7 @@ public class TbFieldMyselfWithoutTrackor {
     private UserpageFilter userpageFilter;
 
     public void test(String columnId) {
-        int columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getColumnIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 

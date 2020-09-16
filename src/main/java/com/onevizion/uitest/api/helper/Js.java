@@ -490,12 +490,7 @@ public class Js {
         }
     }
 
-    /*public Long getGridColIndexById(Long gridId, String columnId) {
-        return NumberUtils.createLong(execJs("return gridArr[" + gridId + "].grid.getColIndexById('" + columnId + "');"));
-    }*/
-
-    //TODO rename to getColumnIndexById
-    public int getGridColIndexById(Long gridId, String columnId) {
+    public int getColumnIndexById(Long gridId, String columnId) {
         return Integer.parseInt(execJsColumnIndexById(gridId, columnId));
     }
 
@@ -506,22 +501,6 @@ public class Js {
     public String execJsColumnIndexById(Long gridId, String columnId) {
         return execJs("return gridArr[" + gridId + "].grid.getColIndexById('" + columnId + "');");
     }
-
-    /*public Long getColumnIndexByLabel(Long gridId, String columnLabel) {
-        columnLabel = columnLabel.replaceAll("'", "\\\\'");
-
-        return NumberUtils.createLong(execJs(""
-                + "var columnIdx = null;"
-                + "var columnsCount = gridArr['" + gridId + "'].grid.getColumnsNum();"
-                + "for (var i = 0; i < columnsCount; i++) {"
-                + "    var columnLabel = gridArr['" + gridId + "'].grid.getColLabel(i);"
-                + "    if ('" + columnLabel + "' == columnLabel) {"
-                + "        columnIdx = i;"
-                + "        break;"
-                + "    }"
-                + "}"
-                + "return columnIdx;"));
-    }*/
 
     public int getColumnIndexByLabel(Long gridId, String columnLabel) {
         return Integer.parseInt(execJsColumnIndexByLabel(gridId, columnLabel));
@@ -546,40 +525,6 @@ public class Js {
                 + "}"
                 + "return columnIdx;");
     }
-
-    /*public Long getColumnIndexByLabel(Long gridId, String columnLabel, String columnLabel2) {
-        columnLabel = columnLabel.replaceAll("'", "\\\\'");
-
-        return NumberUtils.createLong(execJs(""
-                + "var columnIdx = null;"
-                + "var columnIdxStart = null;"
-                + "var columnIdxFinish = null;"
-                + "var columnsCount = gridArr['" + gridId + "'].grid.getColumnsNum();"
-                + "for (var i = 0; i < columnsCount; i++) {"
-                + "    var columnLabel1 = gridArr['" + gridId + "'].grid.getColLabel(i, 0);"
-                + "    if ('" + columnLabel + "' == columnLabel1) {"
-                + "        columnIdxStart = i;"
-                + "    }"
-                + "    if (columnIdxStart != null) {"
-                + "        if ('" + columnLabel + "' != columnLabel1 && '' != columnLabel1) {"
-                + "            columnIdxFinish = i;"
-                + "            break;"
-                + "        }"
-                + "    }"
-                + "    columnIdxFinish = i + 1;"
-                + "}"
-                + "if (columnIdxStart == null || columnIdxFinish == null) {"
-                + "    return columnIdx;"
-                + "}"
-                + "for (var i = columnIdxStart; i < columnIdxFinish; i++) {"
-                + "    var columnLabel2 = gridArr['" + gridId + "'].grid.getColLabel(i, 1);"
-                + "    if ('" + columnLabel2 + "' == columnLabel2) {"
-                + "        columnIdx = i;"
-                + "        break;"
-                + "    }"
-                + "}"
-                + "return columnIdx;"));
-    }*/
 
     public int getColumnIndexByLabel(Long gridId, String columnLabel, String columnLabel2) {
         return Integer.parseInt(execJsColumnIndexByLabel(gridId, columnLabel, columnLabel2));

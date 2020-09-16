@@ -24,7 +24,7 @@ public class TbTrackorDropDownField {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, List<String> newTrackors) {
-        int columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getColumnIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 

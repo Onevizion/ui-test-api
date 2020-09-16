@@ -25,7 +25,7 @@ public class TbTaskDateOnTbPage {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, String valuePlusMinus, String valueWithin, String startFinish) {
-        int columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getColumnIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
         if ("F".equals(startFinish)) {

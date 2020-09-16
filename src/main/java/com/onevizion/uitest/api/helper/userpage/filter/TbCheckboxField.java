@@ -24,7 +24,7 @@ public class TbCheckboxField {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, boolean supportOuterOperations, List<String> ... cellValsKeys) {
-        int columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getColumnIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 

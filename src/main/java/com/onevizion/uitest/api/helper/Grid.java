@@ -80,7 +80,7 @@ public class Grid {
 
     public void checkTbGridRowByRowIndex(Long gridId, Long rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
-            int columnIndex = js.getGridColIndexById(gridId, val.getKey());
+            int columnIndex = js.getColumnIndexById(gridId, val.getKey());
             //String columnType = jsHelper.getGridColumnType(gridId, columnIndex);
             //String value = jsHelper.getGridCellValueTxtByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
             //if ("&nbsp;".equals(value)) {
@@ -116,14 +116,14 @@ public class Grid {
 
     public void checkGridRowByRowIndexAndWait(Long gridId, Long rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
-            int columnIndex = js.getGridColIndexById(gridId, val.getKey());
+            int columnIndex = js.getColumnIndexById(gridId, val.getKey());
             wait.waitGridCellValue(gridId, columnIndex, rowIndex, val.getValue());
         }
     }
 
     public void checkGridRowByRowIndex(Long gridId, Long rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
-            int columnIndex = js.getGridColIndexById(gridId, val.getKey());
+            int columnIndex = js.getColumnIndexById(gridId, val.getKey());
             String value = js.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
             value = value.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", "");
             value = StringUtils.substringBefore(value, "\n");
@@ -139,7 +139,7 @@ public class Grid {
 
     public void checkGridRowByRowId(Long gridId, String rowId, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
-            int columnIndex = js.getGridColIndexById(gridId, val.getKey());
+            int columnIndex = js.getColumnIndexById(gridId, val.getKey());
             String value = js.getGridCellValueByRowIdAndColIndex(gridId, rowId, columnIndex);
             value = value.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", "");
             value = StringUtils.substringBefore(value, "\n");

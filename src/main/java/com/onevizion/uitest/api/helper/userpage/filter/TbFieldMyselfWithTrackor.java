@@ -22,12 +22,12 @@ public class TbFieldMyselfWithTrackor {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String trackorColumnId, List<String> trackors) {
-        int columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getColumnIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 
         Long rowsCnt = grid.getGridRowsCount(0L);
-        int trackorColumnIndex = js.getGridColIndexById(0L, trackorColumnId);
+        int trackorColumnIndex = js.getColumnIndexById(0L, trackorColumnId);
         String trackorFieldName = js.getGridColumnLabelByColIndex(0L, trackorColumnIndex, 0L);
         List<String> trackorCellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, trackorColumnIndex);
 

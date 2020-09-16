@@ -441,7 +441,7 @@ public class Filter {
     }
 
     public String getGridCellValueForFilterTest(Long gridId, String columnId, FilterFieldType filterFieldType) {
-        int columnIndex = js.getGridColIndexById(gridId, columnId);
+        int columnIndex = js.getColumnIndexById(gridId, columnId);
         String columnLabel = js.getGridColumnLabelByColIndex(gridId, columnIndex, 0L);
 
         if (js.getGridIsSupportSortByGridId(gridId)) {
@@ -468,7 +468,7 @@ public class Filter {
     }
 
     public void checkGridColumnByFilterValue(Long gridId, String columnId, String value) {
-        int columnIndex = js.getGridColIndexById(gridId, columnId);
+        int columnIndex = js.getColumnIndexById(gridId, columnId);
         Long rowsCnt = js.getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
