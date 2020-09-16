@@ -94,7 +94,7 @@ public class EntityColor {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, Color color) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Color Code"), color.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "RGB Value"), color.getValue());

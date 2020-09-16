@@ -95,11 +95,11 @@ public class EntityTrackorTour {
         new Select(seleniumSettings.getWebDriver().findElement(By.name(START_PLACE))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            selector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
+            selector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorTour.getPageName(), 1L);
         } else if ("Applet".equals(trackorTour.getStartPlace())) {
-            selector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
+            selector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorTour.getAppletName(), 1L);
         } else if ("Tab".equals(trackorTour.getStartPlace())) {
-            selector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
+            selector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
@@ -111,7 +111,7 @@ public class EntityTrackorTour {
         tab.goToTab(2); //Role Assignments
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
-        grid.selectAssignmentGridColumn2New(2L, 0L, 2L, trackorTour.getRoles());
+        grid.selectAssignmentGridColumn2New(2L, 0, 2, trackorTour.getRoles());
 
         element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");
@@ -121,7 +121,7 @@ public class EntityTrackorTour {
         tab.goToTab(4); //Components Package
         grid2.waitLoad(4L);
         grid.clearAssignmentGridColumn2(4L, 0L);
-        grid.selectAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
+        grid.selectAssignmentGridColumn2New(4L, 0, 2, trackorTour.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -140,11 +140,11 @@ public class EntityTrackorTour {
         new Select(seleniumSettings.getWebDriver().findElement(By.name(START_PLACE))).selectByVisibleText(trackorTour.getStartPlace());
 
         if ("Page".equals(trackorTour.getStartPlace())) {
-            selector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getPageName(), 1L);
+            selector.selectRadio(By.name("btngridPageName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorTour.getPageName(), 1L);
         } else if ("Applet".equals(trackorTour.getStartPlace())) {
-            selector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getAppletName(), 1L);
+            selector.selectRadio(By.name("btnconfigAppName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorTour.getAppletName(), 1L);
         } else if ("Tab".equals(trackorTour.getStartPlace())) {
-            selector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorTour.getTabName(), 1L);
+            selector.selectRadio(By.name("btnconfigGroupName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorTour.getTabName(), 1L);
         } else {
             throw new SeleniumUnexpectedException("Not support StartPlace [" + trackorTour.getStartPlace() + "]");
         }
@@ -157,12 +157,12 @@ public class EntityTrackorTour {
         tab.goToTab(3);//Role Assignments
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn2(3L, 0L);
-        grid.selectAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
+        grid.selectAssignmentGridColumn2New(3L, 0, 2, trackorTour.getRoles());
 
         tab.goToTab(4); //Components Package
         grid2.waitLoad(4L);
         grid.clearAssignmentGridColumn2(4L, 0L);
-        grid.selectAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
+        grid.selectAssignmentGridColumn2New(4L, 0, 2, trackorTour.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -213,17 +213,17 @@ public class EntityTrackorTour {
 
         tab.goToTab(3); //Role Assignments
         grid2.waitLoad(3L);
-        grid.checkAssignmentGridColumn2New(3L, 0L, 2L, trackorTour.getRoles());
+        grid.checkAssignmentGridColumn2New(3L, 0, 2, trackorTour.getRoles());
 
         tab.goToTab(4); //Components Package
         grid2.waitLoad(4L);
-        grid.checkAssignmentGridColumn2New(4L, 0L, 2L, trackorTour.getPackages());
+        grid.checkAssignmentGridColumn2New(4L, 0, 2, trackorTour.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorTour trackorTour) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Tour Label"), trackorTour.getLabel());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Type"), trackorTour.getTrackorType());

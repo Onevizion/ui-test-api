@@ -97,7 +97,7 @@ public class EntityRuleType {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, RuleType ruleType) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Rule Type"), ruleType.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Rule Type Label"), ruleType.getLabel());

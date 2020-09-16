@@ -88,7 +88,7 @@ public class EntityConfigApp {
         if (isCanHaveRelatedTrackorType(configApp)) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RELATED_TRACKOR_TYPE))).selectByVisibleText(configApp.getRelatedTrackorType());
         }
-        selector.selectRadio(By.name(ICON_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configApp.getIcon(), 1L);
+        selector.selectRadio(By.name(ICON_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configApp.getIcon(), 1L);
 
         element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");
@@ -106,29 +106,29 @@ public class EntityConfigApp {
 
         tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
-        grid.clearAssignmentGridColumn(3L, 1L);
-        grid.clearAssignmentGridColumn(3L, 2L);
-        grid.clearAssignmentGridColumn(3L, 3L);
-        grid.clearAssignmentGridColumn(3L, 4L);
-        grid.clearAssignmentGridColumn(3L, 5L);
-        grid.selectAssignmentGridColumnNew(3L, 1L, 0L, configApp.getRoles(), "R");
-        grid.selectAssignmentGridColumnNew(3L, 2L, 0L, configApp.getRoles(), "E");
-        grid.selectAssignmentGridColumnNew(3L, 3L, 0L, configApp.getRoles(), "A");
-        grid.selectAssignmentGridColumnNew(3L, 4L, 0L, configApp.getRoles(), "D");
-        grid.selectAssignmentGridColumnNew(3L, 5L, 0L, configApp.getRoles(), "N");
+        grid.clearAssignmentGridColumn(3L, 1);
+        grid.clearAssignmentGridColumn(3L, 2);
+        grid.clearAssignmentGridColumn(3L, 3);
+        grid.clearAssignmentGridColumn(3L, 4);
+        grid.clearAssignmentGridColumn(3L, 5);
+        grid.selectAssignmentGridColumnNew(3L, 1, 0, configApp.getRoles(), "R");
+        grid.selectAssignmentGridColumnNew(3L, 2, 0, configApp.getRoles(), "E");
+        grid.selectAssignmentGridColumnNew(3L, 3, 0, configApp.getRoles(), "A");
+        grid.selectAssignmentGridColumnNew(3L, 4, 0, configApp.getRoles(), "D");
+        grid.selectAssignmentGridColumnNew(3L, 5, 0, configApp.getRoles(), "N");
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(4); //Trackor Classes
             grid2.waitLoad(4L);
             grid.clearAssignmentGridColumn2(4L, 0L);
-            grid.selectAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
+            grid.selectAssignmentGridColumn2New(4L, 0, 2, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(5); //ePM Pages
             grid2.waitLoad(5L);
             grid.clearAssignmentGridColumn2(5L, 0L);
-            grid.selectAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
+            grid.selectAssignmentGridColumn2New(5L, 0, 2, configApp.getPages());
         }
 
         Long packagesTabIndex;
@@ -140,7 +140,7 @@ public class EntityConfigApp {
         tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
-        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
+        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0, 2, configApp.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -169,33 +169,33 @@ public class EntityConfigApp {
 
         tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
-        grid.clearAssignmentGridColumn(3L, 1L);
-        grid.clearAssignmentGridColumn(3L, 2L);
+        grid.clearAssignmentGridColumn(3L, 1);
+        grid.clearAssignmentGridColumn(3L, 2);
         if (isDynamicTrackorType(configApp) && isMaster(configApp)) {
-            grid.clearAssignmentGridColumn(3L, 3L);
-            grid.clearAssignmentGridColumn(3L, 4L);
+            grid.clearAssignmentGridColumn(3L, 3);
+            grid.clearAssignmentGridColumn(3L, 4);
         }
-        grid.clearAssignmentGridColumn(3L, 5L);
-        grid.selectAssignmentGridColumnNew(3L, 1L, 0L, configApp.getRoles(), "R");
-        grid.selectAssignmentGridColumnNew(3L, 2L, 0L, configApp.getRoles(), "E");
+        grid.clearAssignmentGridColumn(3L, 5);
+        grid.selectAssignmentGridColumnNew(3L, 1, 0, configApp.getRoles(), "R");
+        grid.selectAssignmentGridColumnNew(3L, 2, 0, configApp.getRoles(), "E");
         if (isDynamicTrackorType(configApp) && isMaster(configApp)) {
-            grid.selectAssignmentGridColumnNew(3L, 3L, 0L, configApp.getRoles(), "A");
-            grid.selectAssignmentGridColumnNew(3L, 4L, 0L, configApp.getRoles(), "D");
+            grid.selectAssignmentGridColumnNew(3L, 3, 0, configApp.getRoles(), "A");
+            grid.selectAssignmentGridColumnNew(3L, 4, 0, configApp.getRoles(), "D");
         }
-        grid.selectAssignmentGridColumnNew(3L, 5L, 0L, configApp.getRoles(), "N");
+        grid.selectAssignmentGridColumnNew(3L, 5, 0, configApp.getRoles(), "N");
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(4); //Trackor Classes
             grid2.waitLoad(4L);
             grid.clearAssignmentGridColumn2(4L, 0L);
-            grid.selectAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
+            grid.selectAssignmentGridColumn2New(4L, 0, 2, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(5); //ePM Pages
             grid2.waitLoad(5L);
             grid.clearAssignmentGridColumn2(5L, 0L);
-            grid.selectAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
+            grid.selectAssignmentGridColumn2New(5L, 0, 2, configApp.getPages());
         }
 
         Long packagesTabIndex;
@@ -207,7 +207,7 @@ public class EntityConfigApp {
         tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
-        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
+        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0, 2, configApp.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -238,24 +238,24 @@ public class EntityConfigApp {
 
         tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
-        grid.checkAssignmentGridColumnNew(3L, 1L, 0L, configApp.getRoles(), "R");
-        grid.checkAssignmentGridColumnNew(3L, 2L, 0L, configApp.getRoles(), "E");
+        grid.checkAssignmentGridColumnNew(3L, 1, 0, configApp.getRoles(), "R");
+        grid.checkAssignmentGridColumnNew(3L, 2, 0, configApp.getRoles(), "E");
         if (isDynamicTrackorType(configApp) && isMaster(configApp)) {
-            grid.checkAssignmentGridColumnNew(3L, 3L, 0L, configApp.getRoles(), "A");
-            grid.checkAssignmentGridColumnNew(3L, 4L, 0L, configApp.getRoles(), "D");
+            grid.checkAssignmentGridColumnNew(3L, 3, 0, configApp.getRoles(), "A");
+            grid.checkAssignmentGridColumnNew(3L, 4, 0, configApp.getRoles(), "D");
         }
-        grid.checkAssignmentGridColumnNew(3L, 5L, 0L, configApp.getRoles(), "N");
+        grid.checkAssignmentGridColumnNew(3L, 5, 0, configApp.getRoles(), "N");
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(4); //Trackor Classes
             grid2.waitLoad(4L);
-            grid.checkAssignmentGridColumn2New(4L, 0L, 2L, configApp.getClasses());
+            grid.checkAssignmentGridColumn2New(4L, 0, 2, configApp.getClasses());
         }
 
         if (isDynamicTrackorType(configApp)) {
             tab.goToTab(5); //ePM Pages
             grid2.waitLoad(5L);
-            grid.checkAssignmentGridColumn2New(5L, 0L, 2L, configApp.getPages());
+            grid.checkAssignmentGridColumn2New(5L, 0, 2, configApp.getPages());
         }
 
         Long packagesTabIndex;
@@ -266,13 +266,13 @@ public class EntityConfigApp {
         }
         tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
-        grid.checkAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configApp.getPackages());
+        grid.checkAssignmentGridColumn2New(packagesTabIndex, 0, 2, configApp.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, ConfigApp configApp) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Type"), configApp.getTrackorType());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Applet Name"), configApp.getName());

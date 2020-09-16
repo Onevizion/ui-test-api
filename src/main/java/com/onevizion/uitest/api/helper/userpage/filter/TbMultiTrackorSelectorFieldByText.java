@@ -23,7 +23,7 @@ public class TbMultiTrackorSelectorFieldByText {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value) {
-        Long columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getGridColIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 

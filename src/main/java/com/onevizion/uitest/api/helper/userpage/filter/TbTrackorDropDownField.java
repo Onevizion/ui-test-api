@@ -24,7 +24,7 @@ public class TbTrackorDropDownField {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, List<String> newTrackors) {
-        Long columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getGridColIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 
@@ -34,10 +34,10 @@ public class TbTrackorDropDownField {
         List<FilterOperatorType> operators = FilterOperatorType.getTrackorDropDownOperators();
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.EQUAL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NULL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.TRACKOR_DROP_DOWN, columnIndex, cellVals);
         userpageFilter.checkFilterIsNew(fieldName, cellVals, newTrackors);
         userpageFilter.checkFilterIsNotNew(fieldName, cellVals, newTrackors);
     }

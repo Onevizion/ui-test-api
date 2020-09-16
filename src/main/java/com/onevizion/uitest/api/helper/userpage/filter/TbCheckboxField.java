@@ -24,7 +24,7 @@ public class TbCheckboxField {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, boolean supportOuterOperations, List<String> ... cellValsKeys) {
-        Long columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getGridColIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 
@@ -34,12 +34,12 @@ public class TbCheckboxField {
         List<FilterOperatorType> operators = FilterOperatorType.getCheckboxOperators(supportOuterOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilter(fieldName, null, "Yes", null, FilterOperatorType.EQUAL, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, "No", null, FilterOperatorType.EQUAL, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, "Yes", null, FilterOperatorType.EQUAL, ConfigFieldType.CHECKBOX, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, "No", null, FilterOperatorType.EQUAL, ConfigFieldType.CHECKBOX, columnIndex, cellVals);
 
         if (supportOuterOperations) {
-            userpageFilter.checkFilter(fieldName, null, "Yes", null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
-            userpageFilter.checkFilter(fieldName, null, "No", null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CHECKBOX, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilter(fieldName, "Yes", null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CHECKBOX, columnIndex, cellVals, cellValsKeys);
+            userpageFilter.checkFilter(fieldName, "No", null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.CHECKBOX, columnIndex, cellVals, cellValsKeys);
         }
     }
 

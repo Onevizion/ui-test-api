@@ -433,7 +433,7 @@ public class View {
         }
     }
 
-    public void selectAndCheckColumns(Long gridIdx, Long gridColumns, List<String> leftColumns, List<String> rightColumns) {
+    public void selectAndCheckColumns(Long gridIdx, int gridColumns, List<String> leftColumns, List<String> rightColumns) {
         selectColumns(gridIdx, rightColumns);
         Assert.assertEquals(js.getGridColumnsCount(gridIdx), gridColumns);
         checkColumns(gridIdx, leftColumns, rightColumns);

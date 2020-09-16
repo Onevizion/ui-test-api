@@ -60,7 +60,7 @@ public class EntityWpDiscipline {
         tab.goToTab(2); //Role Assignments
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
-        grid.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
+        grid.selectAssignmentGridColumn2New(2L, 0, 2, wpDiscipline.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -80,7 +80,7 @@ public class EntityWpDiscipline {
         tab.goToTab(2);//Role Assignments
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
-        grid.selectAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
+        grid.selectAssignmentGridColumn2New(2L, 0, 2, wpDiscipline.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -96,13 +96,13 @@ public class EntityWpDiscipline {
 
         tab.goToTab(2); //Role Assignments
         grid2.waitLoad(2L);
-        grid.checkAssignmentGridColumn2New(2L, 0L, 2L, wpDiscipline.getRoles());
+        grid.checkAssignmentGridColumn2New(2L, 0, 2, wpDiscipline.getRoles());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, WpDiscipline wpDiscipline) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Discipline"), wpDiscipline.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), wpDiscipline.getDescription());

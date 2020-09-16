@@ -24,7 +24,7 @@ public class TbWikiField {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value) {
-        Long columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getGridColIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 
@@ -34,10 +34,10 @@ public class TbWikiField {
         List<FilterOperatorType> operators = FilterOperatorType.getWikiOperators();
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.WIKI, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.WIKI, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.WIKI, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.WIKI, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.EQUAL, ConfigFieldType.WIKI, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.WIKI, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NULL, ConfigFieldType.WIKI, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.WIKI, columnIndex, cellVals);
     }
 
 }

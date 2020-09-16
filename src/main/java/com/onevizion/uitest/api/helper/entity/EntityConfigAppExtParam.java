@@ -92,7 +92,7 @@ public class EntityConfigAppExtParam {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, ConfigAppExtParam configAppExtParam) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "URL Param"), configAppExtParam.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), configAppExtParam.getDescription());

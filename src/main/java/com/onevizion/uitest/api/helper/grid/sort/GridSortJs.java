@@ -7,7 +7,7 @@ import com.onevizion.uitest.api.helper.Js;
 @Component
 class GridSortJs extends Js {
 
-    String getColumnSortType(Long gridIdx, Long columnIndex) {
+    String getColumnSortType(Long gridIdx, int columnIndex) {
         return execJs("return gridArr[" + gridIdx + "].grid.fldSort[" + columnIndex + "];");
     }
 

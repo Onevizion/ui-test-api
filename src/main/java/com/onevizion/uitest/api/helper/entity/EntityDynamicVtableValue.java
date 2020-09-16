@@ -132,7 +132,7 @@ public class EntityDynamicVtableValue {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, DynamicVtableValue dynamicVtableValue) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Value"), dynamicVtableValue.getValue());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Label"), dynamicVtableValue.getLabel());

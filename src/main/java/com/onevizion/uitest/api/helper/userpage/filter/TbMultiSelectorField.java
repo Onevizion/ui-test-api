@@ -24,7 +24,7 @@ public class TbMultiSelectorField {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value) {
-        Long columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getGridColIndexById(0L, columnId);
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 
         Long rowsCnt = grid.getGridRowsCount(0L);
@@ -33,10 +33,10 @@ public class TbMultiSelectorField {
         List<FilterOperatorType> operators = FilterOperatorType.getMultiSelectorOperators();
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.MULTI_SELECTOR, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.MULTI_SELECTOR, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.MULTI_SELECTOR, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.MULTI_SELECTOR, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.EQUAL, ConfigFieldType.MULTI_SELECTOR, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.MULTI_SELECTOR, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NULL, ConfigFieldType.MULTI_SELECTOR, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.MULTI_SELECTOR, columnIndex, cellVals);
     }
 
 }

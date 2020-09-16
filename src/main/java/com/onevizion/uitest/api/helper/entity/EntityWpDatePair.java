@@ -66,16 +66,16 @@ public class EntityWpDatePair {
 
         tab.goToTab(2); //Role Privs
         grid2.waitLoad(2L);
-        grid.clearAssignmentGridColumn(2L, 1L);
-        grid.clearAssignmentGridColumn(2L, 2L);
-        grid.clearAssignmentGridColumn(2L, 3L);
-        grid.clearAssignmentGridColumn(2L, 4L);
-        grid.clearAssignmentGridColumn(2L, 5L);
-        grid.selectAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
-        grid.selectAssignmentGridColumnNew(2L, 2L, 0L, wpDatePair.getRoles(), "E");
-        grid.selectAssignmentGridColumnNew(2L, 3L, 0L, wpDatePair.getRoles(), "A");
-        grid.selectAssignmentGridColumnNew(2L, 4L, 0L, wpDatePair.getRoles(), "D");
-        grid.selectAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
+        grid.clearAssignmentGridColumn(2L, 1);
+        grid.clearAssignmentGridColumn(2L, 2);
+        grid.clearAssignmentGridColumn(2L, 3);
+        grid.clearAssignmentGridColumn(2L, 4);
+        grid.clearAssignmentGridColumn(2L, 5);
+        grid.selectAssignmentGridColumnNew(2L, 1, 0, wpDatePair.getRoles(), "R");
+        grid.selectAssignmentGridColumnNew(2L, 2, 0, wpDatePair.getRoles(), "E");
+        grid.selectAssignmentGridColumnNew(2L, 3, 0, wpDatePair.getRoles(), "A");
+        grid.selectAssignmentGridColumnNew(2L, 4, 0, wpDatePair.getRoles(), "D");
+        grid.selectAssignmentGridColumnNew(2L, 5, 0, wpDatePair.getRoles(), "N");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -100,16 +100,16 @@ public class EntityWpDatePair {
 
         tab.goToTab(2); //Role Privs
         grid2.waitLoad(2L);
-        grid.clearAssignmentGridColumn(2L, 1L);
-        grid.clearAssignmentGridColumn(2L, 2L);
-        grid.clearAssignmentGridColumn(2L, 3L);
-        grid.clearAssignmentGridColumn(2L, 4L);
-        grid.clearAssignmentGridColumn(2L, 5L);
-        grid.selectAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
-        grid.selectAssignmentGridColumnNew(2L, 2L, 0L, wpDatePair.getRoles(), "E");
-        grid.selectAssignmentGridColumnNew(2L, 3L, 0L, wpDatePair.getRoles(), "A");
-        grid.selectAssignmentGridColumnNew(2L, 4L, 0L, wpDatePair.getRoles(), "D");
-        grid.selectAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
+        grid.clearAssignmentGridColumn(2L, 1);
+        grid.clearAssignmentGridColumn(2L, 2);
+        grid.clearAssignmentGridColumn(2L, 3);
+        grid.clearAssignmentGridColumn(2L, 4);
+        grid.clearAssignmentGridColumn(2L, 5);
+        grid.selectAssignmentGridColumnNew(2L, 1, 0, wpDatePair.getRoles(), "R");
+        grid.selectAssignmentGridColumnNew(2L, 2, 0, wpDatePair.getRoles(), "E");
+        grid.selectAssignmentGridColumnNew(2L, 3, 0, wpDatePair.getRoles(), "A");
+        grid.selectAssignmentGridColumnNew(2L, 4, 0, wpDatePair.getRoles(), "D");
+        grid.selectAssignmentGridColumnNew(2L, 5, 0, wpDatePair.getRoles(), "N");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -128,22 +128,22 @@ public class EntityWpDatePair {
         if (!WpDatePairType.PROJECTED_DELTA.getName().equals(wpDatePair.getName())) {
             tab.goToTab(2); //Role Privs
             grid2.waitLoad(2L);
-            grid.checkAssignmentGridColumnNew(2L, 1L, 0L, wpDatePair.getRoles(), "R");
+            grid.checkAssignmentGridColumnNew(2L, 1, 0, wpDatePair.getRoles(), "R");
             if (!WpDatePairType.BASELINE.getName().equals(wpDatePair.getName())
                     && !WpDatePairType.EARLY.getName().equals(wpDatePair.getName())
                     && !WpDatePairType.LATE.getName().equals(wpDatePair.getName())) {
-                grid.checkAssignmentGridColumnNew(2L, 2L, 0L, wpDatePair.getRoles(), "E");
-                grid.checkAssignmentGridColumnNew(2L, 3L, 0L, wpDatePair.getRoles(), "A");
-                grid.checkAssignmentGridColumnNew(2L, 4L, 0L, wpDatePair.getRoles(), "D");
+                grid.checkAssignmentGridColumnNew(2L, 2, 0, wpDatePair.getRoles(), "E");
+                grid.checkAssignmentGridColumnNew(2L, 3, 0, wpDatePair.getRoles(), "A");
+                grid.checkAssignmentGridColumnNew(2L, 4, 0, wpDatePair.getRoles(), "D");
             }
-            grid.checkAssignmentGridColumnNew(2L, 5L, 0L, wpDatePair.getRoles(), "N");
+            grid.checkAssignmentGridColumnNew(2L, 5, 0, wpDatePair.getRoles(), "N");
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, WpDatePair wpDatePair) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Date Pair Name"), wpDatePair.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Label"), wpDatePair.getLabel());

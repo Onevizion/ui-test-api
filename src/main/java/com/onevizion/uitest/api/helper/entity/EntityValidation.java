@@ -87,7 +87,7 @@ public class EntityValidation {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, Validation validation) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Name"), validation.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Pattern"), validation.getPattern());

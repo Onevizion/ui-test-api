@@ -24,7 +24,7 @@ public class TbXitorClass {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, boolean supportOuterOperations, List<String> ... cellValsKeys) {
-        Long columnIndex = js.getGridColIndexById(0L, columnId);
+        int columnIndex = js.getGridColIndexById(0L, columnId);
 
         String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
 
@@ -34,14 +34,14 @@ public class TbXitorClass {
         List<FilterOperatorType> operators = FilterOperatorType.getXitorClassOperators(supportOuterOperations);
         userpageFilter.checkFilterOperators(fieldName, null, operators);
 
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NULL, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
-        userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.EQUAL, ConfigFieldType.DROP_DOWN, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_EQUAL, ConfigFieldType.DROP_DOWN, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NULL, ConfigFieldType.DROP_DOWN, columnIndex, cellVals);
+        userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_NULL, ConfigFieldType.DROP_DOWN, columnIndex, cellVals);
 
         if (supportOuterOperations) {
-            userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
-            userpageFilter.checkFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.DROP_DOWN, columnIndex, null, cellVals, null, cellValsKeys);
+            userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.DROP_DOWN, columnIndex, cellVals, cellValsKeys);
+            userpageFilter.checkFilter(fieldName, value, null, FilterOperatorType.NOT_EQUAL_AND_EMPTY_FOR_OTHER, ConfigFieldType.DROP_DOWN, columnIndex, cellVals, cellValsKeys);
         }
     }
 

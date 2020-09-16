@@ -111,7 +111,7 @@ public class EntityTrackorType {
         tab.goToTab(6); //Components Package
         grid2.waitLoad(6L);
         grid.clearAssignmentGridColumn2(6L, 0L);
-        grid.selectAssignmentGridColumn2New(6L, 0L, 2L, trackorType.getPackages());
+        grid.selectAssignmentGridColumn2New(6L, 0, 2, trackorType.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -163,7 +163,7 @@ public class EntityTrackorType {
 
         tab.goToTab(6); //Components Package
         grid2.waitLoad(6L);
-        grid.checkAssignmentGridColumn2New(6L, 0L, 2L, trackorType.getPackages());
+        grid.checkAssignmentGridColumn2New(6L, 0, 2, trackorType.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -175,11 +175,11 @@ public class EntityTrackorType {
 
         tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
-        grid.checkAssignmentGridColumn(3L, 1L, secGroupsRead);
-        grid.checkAssignmentGridColumn(3L, 2L, secGroupsEdit);
-        grid.checkAssignmentGridColumn(3L, 3L, secGroupsAdd);
-        grid.checkAssignmentGridColumn(3L, 4L, secGroupsDelete);
-        grid.checkAssignmentGridColumn(3L, 5L, secGroupsNone);
+        grid.checkAssignmentGridColumn(3L, 1, secGroupsRead);
+        grid.checkAssignmentGridColumn(3L, 2, secGroupsEdit);
+        grid.checkAssignmentGridColumn(3L, 3, secGroupsAdd);
+        grid.checkAssignmentGridColumn(3L, 4, secGroupsDelete);
+        grid.checkAssignmentGridColumn(3L, 5, secGroupsNone);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -191,13 +191,13 @@ public class EntityTrackorType {
 
         tab.goToTab(4); //Role Restrictions
         grid2.waitLoad(4L);
-        grid.checkPrivilegieGridColumn(4L, 1L, rolesRest, roleRest);
+        grid.checkPrivilegieGridColumn(4L, 1, rolesRest, roleRest);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorType trackorType) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor-type Name"), trackorType.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Label"), trackorType.getLabel());

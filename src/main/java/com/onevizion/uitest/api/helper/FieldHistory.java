@@ -84,9 +84,9 @@ public class FieldHistory {
         for (String val : vals) {
             String value;
             if (isTaskDate) {
-                value = js.getGridCellValueByRowIndexAndColIndex(1L, i, 1L);
+                value = js.getGridCellValueByRowIndexAndColIndex(1L, i, 1);
             } else {
-                value = js.getGridCellValueByRowIndexAndColIndex(1L, i, 0L);
+                value = js.getGridCellValueByRowIndexAndColIndex(1L, i, 0);
             }
 
             Matcher regexTdMatcher = regexTdContent.matcher(value);

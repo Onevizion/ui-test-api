@@ -58,7 +58,7 @@ public class BplExport {
     public void selectComponent(Long gridIdx, BplComponentType bplComponentType, String componentName) {
         Long subGridId = getComponentTypeGridId(gridIdx, bplComponentType);
 
-        Long columnIndex = js.getColumnIndexByLabel(subGridId, bplComponentType.getColumnName());
+        int columnIndex = js.getColumnIndexByLabel(subGridId, bplComponentType.getColumnName());
         qs.searchValue(subGridId, bplComponentType.getColumnName(), "\"" + componentName + "\"");
         Assert.assertEquals(js.getGridCellValueByRowIndexAndColIndex(subGridId, 0L, columnIndex), componentName);
         checkbox.clickById("cb" + js.getGridSelectedRowId(subGridId));
@@ -75,7 +75,7 @@ public class BplExport {
     private Long getComponentTypeRowIndex(Long gridIdx, BplComponentType bplComponentType) {
         Long rowIndex = null;
         Long rowsCount = js.getGridRowsCount(gridIdx);
-        Long columnIndex = js.getColumnIndexByLabel(gridIdx, COLUMN_LABEL);
+        int columnIndex = js.getColumnIndexByLabel(gridIdx, COLUMN_LABEL);
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridIdx, rowsCount, columnIndex);
         for (int i = 0; i < rowsCount; i++) {
             if (vals.get(i).contains(bplComponentType.getName())) {

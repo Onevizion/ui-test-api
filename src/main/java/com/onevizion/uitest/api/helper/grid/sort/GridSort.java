@@ -55,7 +55,7 @@ public class GridSort {
 
         Long columnFirstRowIndex = js.getColumnFirstRowIndex(gridId, columnLabel);
 
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
         String columnId = js.getGridColIdByIndex(gridId, columnIndex);
 
         WebElement elem = seleniumSettings.getWebDriver().findElement(By.className("hdr")).findElement(By.tagName("tbody"))
@@ -98,7 +98,7 @@ public class GridSort {
 
         Long columnSecondRowIndex = js.getColumnSecondRowIndex(gridId, columnLabel, columnLabel2);
 
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
         String columnId = js.getGridColIdByIndex(gridId, columnIndex);
 
         WebElement elem = seleniumSettings.getWebDriver().findElement(By.className("hdr")).findElement(By.tagName("tbody"))
@@ -137,7 +137,7 @@ public class GridSort {
     }
 
     public void checkCurrentGridSort(Long gridId, SortType sortType, String columnLabel) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
         String columnId = js.getGridColIdByIndex(gridId, columnIndex);
 
         checkCurrentGridSort(gridId, sortType, columnIndex, columnId);
@@ -148,16 +148,16 @@ public class GridSort {
     }
 
     public void checkCurrentGridSort(Long gridId, SortType sortType, String columnLabel, String columnLabel2) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
         String columnId = js.getGridColIdByIndex(gridId, columnIndex);
 
         checkCurrentGridSort(gridId, sortType, columnIndex, columnId);
     }
 
-    private void checkCurrentGridSort(Long gridId, SortType sortType, Long columnIndex, String columnId) {
+    private void checkCurrentGridSort(Long gridId, SortType sortType, int columnIndex, String columnId) {
         @SuppressWarnings("unchecked")
         List<Object> elements = (List<Object>) gridSortJs.getGridSort(gridId);
-        Assert.assertEquals((Long) elements.get(0), columnIndex, "Sorting working is not correct");
+        Assert.assertEquals((int) elements.get(0), columnIndex, "Sorting working is not correct");
         Assert.assertEquals((String) elements.get(1), sortType.getTypeString(), "Sorting working is not correct");
 
         String sortColumnId = gridSortJs.getGridSortColumnIdByGridId(gridId);
@@ -171,7 +171,7 @@ public class GridSort {
     }
 
     public void checkColumnSortAvailable(Long gridId, String columnLabel) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
         String columnId = js.getGridColIdByIndex(gridId, columnIndex);
 
         String columnSortType = gridSortJs.getColumnSortType(gridId, columnIndex);
@@ -185,7 +185,7 @@ public class GridSort {
     }
 
     public void checkColumnSortAvailable(Long gridId, String columnLabel, String columnLabel2) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
         String columnId = js.getGridColIdByIndex(gridId, columnIndex);
 
         String columnSortType = gridSortJs.getColumnSortType(gridId, columnIndex);
@@ -199,7 +199,7 @@ public class GridSort {
     }
 
     public void checkColumnSortNotAvailable(Long gridId, String columnLabel) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
         String columnId = js.getGridColIdByIndex(gridId, columnIndex);
 
         String columnSortType = gridSortJs.getColumnSortType(gridId, columnIndex);
@@ -213,7 +213,7 @@ public class GridSort {
     }
 
     public void checkColumnSortNotAvailable(Long gridId, String columnLabel, String columnLabel2) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel, columnLabel2);
         String columnId = js.getGridColIdByIndex(gridId, columnIndex);
 
         String columnSortType = gridSortJs.getColumnSortType(gridId, columnIndex);
@@ -233,7 +233,7 @@ public class GridSort {
     }
 
     public void checkColumn(Long gridId, SortType sortType, GridColumnType gridColumnType, String columnLabel) {
-        Long columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
+        int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
 
         Long rowsNum = js.getGridRowsCount(gridId);
 
@@ -282,7 +282,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnNumber(String curVal, String prevVal, SortType sortType, Long columnIdx, Long curRowNum) {
+    private void checkColumnNumber(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
         Long curValNum = Long.valueOf(curVal);
         Long prevValNum = Long.valueOf(prevVal);
 
@@ -295,7 +295,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnTimestamp(String curVal, String prevVal, SortType sortType, Long columnIdx, Long curRowNum) {
+    private void checkColumnTimestamp(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
         //TODO Date format should depend on user Settings
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
@@ -317,7 +317,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnTimestampWithoutSeconds(String curVal, String prevVal, SortType sortType, Long columnIdx, Long curRowNum) {
+    private void checkColumnTimestampWithoutSeconds(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
         //TODO Date format should depend on user Settings
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
@@ -339,7 +339,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnDate(String curVal, String prevVal, SortType sortType, Long columnIdx, Long curRowNum) {
+    private void checkColumnDate(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
         //TODO Date format should depend on user Settings
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -361,7 +361,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnBoolean(String curVal, String prevVal, SortType sortType, Long columnIdx, Long curRowNum) {
+    private void checkColumnBoolean(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
         if (SortType.ASC.equals(sortType)) {
             Assert.assertEquals(prevVal.compareTo(curVal) <= 0, true, "Sort asc for [" + columnIdx + "] column is wrong. Cur row num [" + curRowNum +"] val [" + curVal + "], prev row num [" + (curRowNum - 1) + "] val [" + prevVal +"]");
         } else if (SortType.DESC.equals(sortType)) {

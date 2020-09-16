@@ -80,7 +80,7 @@ public class Grid {
 
     public void checkTbGridRowByRowIndex(Long gridId, Long rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
-            Long columnIndex = js.getGridColIndexById(gridId, val.getKey());
+            int columnIndex = js.getGridColIndexById(gridId, val.getKey());
             //String columnType = jsHelper.getGridColumnType(gridId, columnIndex);
             //String value = jsHelper.getGridCellValueTxtByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
             //if ("&nbsp;".equals(value)) {
@@ -97,8 +97,8 @@ public class Grid {
         }
     }
 
-    public void checkGridRowByRowIndexAndColIndex(Long gridId, Long rowIndex, Map<Long, String> vals) {
-        for (Entry<Long, String> val : vals.entrySet()) {
+    public void checkGridRowByRowIndexAndColIndex(Long gridId, Long rowIndex, Map<Integer, String> vals) {
+        for (Entry<Integer, String> val : vals.entrySet()) {
             String value = js.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, val.getKey());
             value = value.replaceAll("<[aA].*?>", "").replaceAll("</[aA]>", "");
             value = value.replaceAll("<[tT][aA][bB][lL][eE].*?>", "").replaceAll("</[tT][aA][bB][lL][eE]>", "");
@@ -116,14 +116,14 @@ public class Grid {
 
     public void checkGridRowByRowIndexAndWait(Long gridId, Long rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
-            Long columnIndex = js.getGridColIndexById(gridId, val.getKey());
+            int columnIndex = js.getGridColIndexById(gridId, val.getKey());
             wait.waitGridCellValue(gridId, columnIndex, rowIndex, val.getValue());
         }
     }
 
     public void checkGridRowByRowIndex(Long gridId, Long rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
-            Long columnIndex = js.getGridColIndexById(gridId, val.getKey());
+            int columnIndex = js.getGridColIndexById(gridId, val.getKey());
             String value = js.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
             value = value.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", "");
             value = StringUtils.substringBefore(value, "\n");
@@ -139,7 +139,7 @@ public class Grid {
 
     public void checkGridRowByRowId(Long gridId, String rowId, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
-            Long columnIndex = js.getGridColIndexById(gridId, val.getKey());
+            int columnIndex = js.getGridColIndexById(gridId, val.getKey());
             String value = js.getGridCellValueByRowIdAndColIndex(gridId, rowId, columnIndex);
             value = value.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", "");
             value = StringUtils.substringBefore(value, "\n");
@@ -159,7 +159,7 @@ public class Grid {
         Assert.assertEquals(newCnt, oldCnt, "Delete row is wrong");
     }
 
-    public List<String> selectPrivilegieGridColumn(Long gridId, Long colIdx, Long firstRowIndex, Long lastRowIndex, String val) {
+    public List<String> selectPrivilegieGridColumn(Long gridId, int colIdx, Long firstRowIndex, Long lastRowIndex, String val) {
         List<String> ret = new ArrayList<>();
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
@@ -169,7 +169,7 @@ public class Grid {
         return ret;
     }
 
-    public List<String> selectAssignmentGridColumn(Long gridId, Long colIdx, Long firstRowIndex, Long lastRowIndex) {
+    public List<String> selectAssignmentGridColumn(Long gridId, int colIdx, Long firstRowIndex, Long lastRowIndex) {
         List<String> ret = new ArrayList<>();
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
@@ -180,7 +180,7 @@ public class Grid {
         return ret;
     }
 
-    public void selectAssignmentGridColumnNew(Long gridId, Long colIdxCheckbox, Long colIdxName, Map<String, String> values, String priv) {
+    public void selectAssignmentGridColumnNew(Long gridId, int colIdxCheckbox, int colIdxName, Map<String, String> values, String priv) {
         Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
@@ -198,7 +198,7 @@ public class Grid {
     }
 
     //TODO remove when getValue will be return 1 and 0 instead of html
-    public List<String> selectAssignmentGridColumn2(Long gridId, Long colIdx, Long firstRowIndex, Long lastRowIndex) {
+    public List<String> selectAssignmentGridColumn2(Long gridId, int colIdx, Long firstRowIndex, Long lastRowIndex) {
         List<String> ret = new ArrayList<>();
         for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
@@ -209,7 +209,7 @@ public class Grid {
         return ret;
     }
 
-    public void selectAssignmentGridColumn2New(Long gridId, Long colIdxCheckbox, Long colIdxName, List<String> values) {
+    public void selectAssignmentGridColumn2New(Long gridId, int colIdxCheckbox, int colIdxName, List<String> values) {
         Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
@@ -226,7 +226,7 @@ public class Grid {
         }
     }
 
-    public void clearPrivilegieGridColumn(Long gridId, Long colIdx) {
+    public void clearPrivilegieGridColumn(Long gridId, int colIdx) {
         Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
@@ -239,7 +239,7 @@ public class Grid {
         }
     }
 
-    public void clearAssignmentGridColumn(Long gridId, Long colIdx) {
+    public void clearAssignmentGridColumn(Long gridId, int colIdx) {
         Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
@@ -263,7 +263,7 @@ public class Grid {
         }
     }
 
-    public void checkPrivilegieGridColumn(Long gridId, Long colIdx, List<String> vals, String val) {
+    public void checkPrivilegieGridColumn(Long gridId, int colIdx, List<String> vals, String val) {
         Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
@@ -278,7 +278,7 @@ public class Grid {
         }
     }
 
-    public void checkAssignmentGridColumn(Long gridId, Long colIdx, List<String> vals) {
+    public void checkAssignmentGridColumn(Long gridId, int colIdx, List<String> vals) {
         Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
@@ -293,7 +293,7 @@ public class Grid {
         }
     }
 
-    public void checkAssignmentGridColumnNew(Long gridId, Long colIdxCheckbox, Long colIdxName, Map<String, String> values, String priv) {
+    public void checkAssignmentGridColumnNew(Long gridId, int colIdxCheckbox, int colIdxName, Map<String, String> values, String priv) {
         Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
@@ -328,7 +328,7 @@ public class Grid {
         }
     }
 
-    public void checkAssignmentGridColumn2New(Long gridId, Long colIdxCheckbox, Long colIdxName, List<String> values) {
+    public void checkAssignmentGridColumn2New(Long gridId, int colIdxCheckbox, int colIdxName, List<String> values) {
         Long cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
@@ -347,7 +347,7 @@ public class Grid {
         }
     }
 
-    public Long checkColumns(Long gridIndex, Long columnIndex, List<String> columnNames) {
+    public int checkColumns(Long gridIndex, int columnIndex, List<String> columnNames) {
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(0)); //CHECKBOX
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(1)); //DATE
         columnIndex = checkColumnByIndex(gridIndex, columnIndex, columnNames.get(2)); //DB_DROP_DOWN
@@ -376,15 +376,15 @@ public class Grid {
         return columnIndex;
     }
 
-    public Long checkColumnByIndex(Long gridIndex, Long columnIndex, String columnIdx) {
-        columnIndex = columnIndex + 1L;
+    public int checkColumnByIndex(Long gridIndex, int columnIndex, String columnIdx) {
+        columnIndex = columnIndex + 1;
         Assert.assertEquals(js.isGridColumnHidden(gridIndex, columnIndex).booleanValue(), false, "Grid have wrong columns");
         Assert.assertEquals(js.getGridColIdByIndex(gridIndex, columnIndex), columnIdx, "Grid have wrong columns");
         return columnIndex;
     }
 
-    public Long checkColumnByName(Long gridIndex, Long columnIndex, String columnName) {
-        columnIndex = columnIndex + 1L;
+    public int checkColumnByName(Long gridIndex, int columnIndex, String columnName) {
+        columnIndex = columnIndex + 1;
         Assert.assertEquals(js.isGridColumnHidden(gridIndex, columnIndex).booleanValue(), false, "Grid have wrong columns");
         Assert.assertEquals(js.getGridColumnLabelByColIndex(gridIndex, columnIndex, 0L), columnName, "Grid have wrong columns");
         return columnIndex;

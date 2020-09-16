@@ -40,7 +40,7 @@ public class Selector {
     @Autowired
     private Grid2 grid2;
 
-    public void selectRadio(By btnOpen, By btnClose, Long colNum, String value, Long filterFiledNum) {
+    public void selectRadio(By btnOpen, By btnClose, int colNum, String value, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(btnClose);
         grid2.waitLoad();
@@ -59,7 +59,7 @@ public class Selector {
             Long cnt = js.getGridRowsCount(0L);
             for (Long i = 0L; i < cnt; i++) {
                 if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
-                    WebElement rb = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                    WebElement rb = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0);
                     element.moveToElement(rb);
                     rb.click();
                     break;
@@ -70,7 +70,7 @@ public class Selector {
         window.closeModal(btnClose);
     }
 
-    public void selectCheckbox(By btnOpen, Long colNum, List<String> values, Long filterFiledNum) {
+    public void selectCheckbox(By btnOpen, int colNum, List<String> values, Long filterFiledNum) {
         window.openModal(btnOpen);
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L));
         grid2.waitLoad();
@@ -92,7 +92,7 @@ public class Selector {
             for (String value : values) {
                 for (Long i = 0L; i < cnt; i++) {
                     if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
-                        WebElement cell = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                        WebElement cell = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
                         WebElement label = checkbox.findLabelByElement(cb);
                         element.moveToElement(label);
@@ -127,8 +127,8 @@ public class Selector {
         } else {
             Long cnt = js.getGridRowsCount(0L);
             for (Long i = 0L; i < cnt; i++) {
-                if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
-                    WebElement rb = ((WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0L)).findElement(By.name("rb0"));
+                if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1).equals(value)) {
+                    WebElement rb = ((WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0)).findElement(By.name("rb0"));
                     String checked = rb.getAttribute("checked");
                     if (checked != null && checked.equals("true")) {
                         isChecked = true;
@@ -169,8 +169,8 @@ public class Selector {
                 boolean isChecked = false;
 
                 for (Long i = 0L; i < cnt; i++) {
-                    if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1L).equals(value)) {
-                        WebElement cell = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0L);
+                    if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1).equals(value)) {
+                        WebElement cell = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
                         if (checkbox.isElementChecked(cb)) {
                             isChecked = true;

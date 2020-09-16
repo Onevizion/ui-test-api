@@ -169,7 +169,7 @@ public class Qs {
     }
 
     public void searchValueAndCheck(Long gridIdx, String fieldName, String search, Long rowsCnt, List<String> expectedValues) {
-        Long columnIndex = js.getColumnIndexByLabel(gridIdx, fieldName);
+        int columnIndex = js.getColumnIndexByLabel(gridIdx, fieldName);
 
         searchValue(gridIdx, fieldName, search);
 
@@ -195,7 +195,7 @@ public class Qs {
     }
 
     public void searchBooleanValueAndCheck(Long gridIdx, String fieldName, String search, Long rowsCnt, List<String> expectedValues) {
-        Long columnIndex = js.getColumnIndexByLabel(gridIdx, fieldName);
+        int columnIndex = js.getColumnIndexByLabel(gridIdx, fieldName);
 
         searchBooleanValue(gridIdx, fieldName, search);
 
@@ -231,7 +231,7 @@ public class Qs {
      * Not finish. Need think in future after create many tests.
      * checkUserpageGridTextColumnEquals and checkAdminpageGridTextColumnEquals similar as userpageFilter.checkGridTextColumnEquals
      */
-    private void checkUserpageGridTextColumnEquals(Long gridId, Long columnIndex, List<String> expectedValues) {
+    private void checkUserpageGridTextColumnEquals(Long gridId, int columnIndex, List<String> expectedValues) {
         Long rowsCnt = grid.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
@@ -256,7 +256,7 @@ public class Qs {
      * Not finish. Need think in future after create many tests.
      * checkUserpageGridTextColumnEquals and checkAdminpageGridTextColumnEquals similar as userpageFilter.checkGridTextColumnEquals
      */
-    private void checkToGridTextColumnEquals(Long gridId, Long columnIndex, List<String> expectedValues) {
+    private void checkToGridTextColumnEquals(Long gridId, int columnIndex, List<String> expectedValues) {
         int differenceInRows = js.getToGridDatePairCount(gridId);
 
         Long rowsCnt = grid.getTOGridRowsCount(gridId);
@@ -283,7 +283,7 @@ public class Qs {
      * Not finish. Need think in future after create many tests.
      * checkUserpageGridTextColumnEquals and checkAdminpageGridTextColumnEquals similar as userpageFilter.checkGridTextColumnEquals
      */
-    private void checkAdminpageGridTextColumnEquals(Long gridId, Long columnIndex, List<String> expectedValues) {
+    private void checkAdminpageGridTextColumnEquals(Long gridId, int columnIndex, List<String> expectedValues) {
         Long rowsCnt = grid.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, rowsCnt, columnIndex);

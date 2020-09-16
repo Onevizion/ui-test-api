@@ -63,11 +63,11 @@ public class EntityTrackorForm {
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorForm.getName());
 
-        selector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
+        selector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorForm.getReportName(), 1L);
 
-        selector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
+        selector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorForm.getImportName(), 1L);
 
-        selector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
+        selector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorForm.getUserName(), 1L);
 
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).sendKeys(trackorForm.getInterval());
@@ -101,11 +101,11 @@ public class EntityTrackorForm {
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorForm.getName());
 
-        selector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getReportName(), 1L);
+        selector.selectRadio(By.name("btnreportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorForm.getReportName(), 1L);
 
-        selector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getImportName(), 1L);
+        selector.selectRadio(By.name("btnimportName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorForm.getImportName(), 1L);
 
-        selector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, trackorForm.getUserName(), 1L);
+        selector.selectRadio(By.name("btnuserName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, trackorForm.getUserName(), 1L);
 
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(INTERVAL)).sendKeys(trackorForm.getInterval());
@@ -151,7 +151,7 @@ public class EntityTrackorForm {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorForm trackorForm) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Form Name"), trackorForm.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Report Name"), trackorForm.getReportName());

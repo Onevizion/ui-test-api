@@ -100,7 +100,7 @@ public class Grid2 {
         elementWait.waitElementNotDisplayById(SAVE_PANEL_ID_BASE + gridId);
     }
 
-    public void waitGridCellLockType(Long gridId, Long columnIndex, Long rowIndex, LockType lockType) {
+    public void waitGridCellLockType(Long gridId, int columnIndex, Long rowIndex, LockType lockType) {
         grid2Wait.waitGridCellLockType(gridId, columnIndex, rowIndex, lockType);
     }
 
@@ -108,11 +108,11 @@ public class Grid2 {
         return grid2Js.getPageName(gridId);
     }
 
-    public List<String> getGridCellAllChildsFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+    public List<String> getGridCellAllChildsFontColor(Long gridIdx, Long rowIndex, int columnIndex) {
         return grid2Js.getGridCellAllChildsFontColor(gridIdx, rowIndex, columnIndex);
     }
 
-    public List<String> getGridCellAllChildsBackgroundColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+    public List<String> getGridCellAllChildsBackgroundColor(Long gridIdx, Long rowIndex, int columnIndex) {
         return grid2Js.getGridCellAllChildsBackgroundColor(gridIdx, rowIndex, columnIndex);
     }
 

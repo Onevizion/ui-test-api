@@ -87,7 +87,7 @@ public class Comment {
         //waitHelper.waitGridLoad(1L, 1L);
     }
 
-    public void openCommentFormFromGrid(Long rowIndex, Long columnIndex) {
+    public void openCommentFormFromGrid(Long rowIndex, int columnIndex) {
         tb.rightClickCell(0L, rowIndex, columnIndex);
 
         int i = 0;
@@ -146,7 +146,7 @@ public class Comment {
 
         Long rowIndex = null;
         for (Long i = 0L; i < rowsCntBefore; i++) {
-            String value = js.getGridCellValueByRowIndexAndColIndex(0L, i, 0L);
+            String value = js.getGridCellValueByRowIndexAndColIndex(0L, i, 0);
             if (text.equals(value)) {
                 if (rowIndex != null) {
                     throw new SeleniumUnexpectedException("Found many rows with same value[" + text + "]");

@@ -247,7 +247,7 @@ public class Wait {
             .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_SPLIT_GRID_RIGHT_ID_BASE + gridId)).isDisplayed());
     }
 
-    public void waitGridCellValue(final Long gridId, final Long columnIndex, final Long rowIndex, final String val) {
+    public void waitGridCellValue(final Long gridId, final int columnIndex, final Long rowIndex, final String val) {
         Supplier<String> actualValueSupplier = ()-> {
             String value = js.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
             if ("&nbsp;".equals(value)) {
@@ -273,7 +273,7 @@ public class Wait {
             .until(webdriver -> val.equals(actualValueSupplier.get()));
     }
 
-    public void waitGridCellTxtValue(final Long gridId, final Long columnIndex, final Long rowIndex, final String val) {
+    public void waitGridCellTxtValue(final Long gridId, final int columnIndex, final Long rowIndex, final String val) {
         Supplier<String> actualValueSupplier = ()-> {
             String columnType = js.getGridColumnType(gridId, columnIndex);
             String value = js.getGridCellValueTxtByRowIndexAndColIndex(gridId, rowIndex, columnIndex);

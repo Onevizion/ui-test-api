@@ -155,7 +155,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldText().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldText().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldText().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldText().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldText().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -198,7 +198,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldNumber().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldNumber().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldNumber().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldNumber().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldNumber().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -218,7 +218,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldDate().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldDate().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldDate().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldDate().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldDate().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -231,7 +231,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldDropDown().getTable(), 2L);
+            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3, configFieldVo.getConfigFieldDropDown().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
@@ -249,7 +249,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldMemo().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldMemo().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldMemo().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldMemo().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldMemo().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -272,7 +272,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldWiki().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldWiki().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldWiki().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldWiki().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldWiki().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -287,7 +287,7 @@ public class EntityConfigField {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldDbSelector().getSql());
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDbSelector().getDefValueSql());
         } else if (ConfigFieldType.SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldSelector().getTable(), 2L);
+            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3, configFieldVo.getConfigFieldSelector().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
@@ -302,7 +302,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldLatitude().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldLatitude().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldLatitude().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldLatitude().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldLatitude().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -322,7 +322,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldLongitude().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldLongitude().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldLongitude().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldLongitude().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldLongitude().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -359,7 +359,7 @@ public class EntityConfigField {
                     || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkbox.isCheckedByName(UPLOAD_TO_AWS))) {
                 checkbox.clickByName(UPLOAD_TO_AWS);
             }
-            selector.selectRadio(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
+            selector.selectRadio(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
             tab.goToTab(3); //File Metadata
             grid2.waitLoad(3L);
@@ -385,7 +385,7 @@ public class EntityConfigField {
                 checkbox.clickByName("myThingsMarket");
             }
 
-            selector.selectRadio(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
+            selector.selectRadio(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorSelector().getDefValueSql());
         } else if (ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
@@ -422,7 +422,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldHyperlink().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldHyperlink().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldHyperlink().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldHyperlink().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldHyperlink().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -438,7 +438,7 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldMultiSelector().getLines());
 
-            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
+            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
@@ -458,7 +458,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldDateTime().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldDateTime().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldDateTime().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldDateTime().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldDateTime().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -483,7 +483,7 @@ public class EntityConfigField {
 
             tab.goToTab(2); //Validation
             if (!"".equals(configFieldVo.getConfigFieldTime().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTime().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldTime().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldTime().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldTime().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -573,7 +573,7 @@ public class EntityConfigField {
         tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
-        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configFieldVo.getPackages());
+        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0, 2, configFieldVo.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -609,7 +609,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldText().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldText().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldText().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldText().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldText().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -649,7 +649,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldNumber().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldNumber().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldNumber().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldNumber().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldNumber().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -666,7 +666,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldDate().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldDate().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldDate().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldDate().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldDate().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -679,7 +679,7 @@ public class EntityConfigField {
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldCheckbox().getDefValueSql());
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType())) {
-            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldDropDown().getTable(), 2L);
+            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3, configFieldVo.getConfigFieldDropDown().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDropDown().getDefValueSql());
         } else if (ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType())) {
@@ -694,7 +694,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldMemo().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldMemo().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldMemo().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldMemo().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldMemo().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -714,7 +714,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldWiki().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldWiki().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldWiki().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldWiki().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldWiki().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -729,7 +729,7 @@ public class EntityConfigField {
             setSqlToCodeMirror("btnSQL", configFieldVo.getConfigFieldDbSelector().getSql());
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldDbSelector().getDefValueSql());
         } else if (ConfigFieldType.SELECTOR.equals(configFieldVo.getConfigFieldType())) {
-            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldSelector().getTable(), 2L);
+            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3, configFieldVo.getConfigFieldSelector().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldSelector().getDefValueSql());
         } else if (ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType())) {
@@ -741,7 +741,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldLatitude().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldLatitude().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldLatitude().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldLatitude().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldLatitude().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -758,7 +758,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldLongitude().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldLongitude().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldLongitude().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldLongitude().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldLongitude().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -790,7 +790,7 @@ public class EntityConfigField {
                     || (configFieldVo.getConfigFieldEfile().getUploadToAws().equals("NO") && checkbox.isCheckedByName(UPLOAD_TO_AWS))) {
                 checkbox.clickByName(UPLOAD_TO_AWS);
             }
-            selector.selectRadio(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
+            selector.selectRadio(By.id("btnautocaptionClientFile"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldEfile().getAutocaptionTemplate(), 1L);
 
             tab.goToTab(3); //File Metadata
             grid2.waitLoad(3L);
@@ -818,7 +818,7 @@ public class EntityConfigField {
                 checkbox.clickByName("myThingsMarket");
             }
 
-            selector.selectRadio(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
+            selector.selectRadio(By.id("btnobjCf"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldTrackorSelector().getDisplayField(), 1L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldTrackorSelector().getDefValueSql());
         } else if (ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType())) {
@@ -852,7 +852,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldHyperlink().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldHyperlink().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldHyperlink().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldHyperlink().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldHyperlink().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -868,7 +868,7 @@ public class EntityConfigField {
             seleniumSettings.getWebDriver().findElement(By.name(LINES)).clear();
             seleniumSettings.getWebDriver().findElement(By.name(LINES)).sendKeys(configFieldVo.getConfigFieldMultiSelector().getLines());
 
-            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3L, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
+            selector.selectRadio(By.id("btntableName"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 3, configFieldVo.getConfigFieldMultiSelector().getTable(), 2L);
 
             setSqlToCodeMirror("btnDefSQL", configFieldVo.getConfigFieldMultiSelector().getDefValueSql());
         } else if (ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
@@ -885,7 +885,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldDateTime().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldDateTime().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldDateTime().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldDateTime().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldDateTime().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -907,7 +907,7 @@ public class EntityConfigField {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("configFieldValidation"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             if (!"".equals(configFieldVo.getConfigFieldTime().getValidation())) {
-                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, configFieldVo.getConfigFieldTime().getValidation(), 1L);
+                selector.selectRadio(By.id("btnconfigFieldValidation"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configFieldVo.getConfigFieldTime().getValidation(), 1L);
             }
             if ((configFieldVo.getConfigFieldTime().getValidationEnabled().equals("YES") && !checkbox.isCheckedByName(VALIDATION_ENABLED))
                     || (configFieldVo.getConfigFieldTime().getValidationEnabled().equals("NO") && checkbox.isCheckedByName(VALIDATION_ENABLED))) {
@@ -992,7 +992,7 @@ public class EntityConfigField {
         tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
         grid.clearAssignmentGridColumn2(packagesTabIndex, 0L);
-        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configFieldVo.getPackages());
+        grid.selectAssignmentGridColumn2New(packagesTabIndex, 0, 2, configFieldVo.getPackages());
 
         if (removeLockable) {
             window.closeModalWithAlert(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), AbstractSeleniumCore.MESSAGE_DELETE_LOCKABLE);
@@ -1251,13 +1251,13 @@ public class EntityConfigField {
         }
         tab.goToTab(packagesTabIndex.intValue()); //Components Package
         grid2.waitLoad(packagesTabIndex);
-        grid.checkAssignmentGridColumn2New(packagesTabIndex, 0L, 2L, configFieldVo.getPackages());
+        grid.checkAssignmentGridColumn2New(packagesTabIndex, 0, 2, configFieldVo.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, ConfigFieldVo configFieldVo) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Field Name"), configFieldVo.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Field Label"), configFieldVo.getLabel());

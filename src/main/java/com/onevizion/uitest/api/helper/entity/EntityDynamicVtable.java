@@ -97,7 +97,7 @@ public class EntityDynamicVtable {
         tab.goToTab(3); //Components Package
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn2(3L, 0L);
-        grid.selectAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
+        grid.selectAssignmentGridColumn2New(3L, 0, 2, dynamicVtable.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -117,7 +117,7 @@ public class EntityDynamicVtable {
         tab.goToTab(3); //Components Package
         grid2.waitLoad(3L);
         grid.clearAssignmentGridColumn2(3L, 0L);
-        grid.selectAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
+        grid.selectAssignmentGridColumn2New(3L, 0, 2, dynamicVtable.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -156,13 +156,13 @@ public class EntityDynamicVtable {
 
         tab.goToTab(3); //Components Package
         grid2.waitLoad(3L);
-        grid.checkAssignmentGridColumn2New(3L, 0L, 2L, dynamicVtable.getPackages());
+        grid.checkAssignmentGridColumn2New(3L, 0, 2, dynamicVtable.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, DynamicVtable dynamicVtable) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Table Name"), dynamicVtable.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Description"), dynamicVtable.getDesc());

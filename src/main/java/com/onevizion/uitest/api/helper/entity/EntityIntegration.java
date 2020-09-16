@@ -115,7 +115,7 @@ public class EntityIntegration {
         tab.goToTab(2); //Components Package
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
-        grid.selectAssignmentGridColumn2New(2L, 0L, 2L, integration.getPackages());
+        grid.selectAssignmentGridColumn2New(2L, 0, 2, integration.getPackages());
 
         window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
@@ -161,7 +161,7 @@ public class EntityIntegration {
         tab.goToTab(2); //Components Package
         grid2.waitLoad(2L);
         grid.clearAssignmentGridColumn2(2L, 0L);
-        grid.selectAssignmentGridColumn2New(2L, 0L, 2L, integration.getPackages());
+        grid.selectAssignmentGridColumn2New(2L, 0, 2, integration.getPackages());
 
         window.closeModalAndWaitGridLoad(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
     }
@@ -184,13 +184,13 @@ public class EntityIntegration {
 
         tab.goToTab(2); //Components Package
         grid2.waitLoad(2L);
-        grid.checkAssignmentGridColumn2New(2L, 0L, 2L, integration.getPackages());
+        grid.checkAssignmentGridColumn2New(2L, 0, 2, integration.getPackages());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
     public void testInGrid(Long gridId, Long rowIndex, Integration integration) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Repository URL"), integration.getUrl());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Integration Name"), integration.getName());

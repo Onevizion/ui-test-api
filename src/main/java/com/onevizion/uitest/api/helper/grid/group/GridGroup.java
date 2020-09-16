@@ -68,7 +68,7 @@ public class GridGroup {
 
     public void checkRowsInGroup(Long gridIdx, ConfigFieldType configFieldType, String group, String columnLabel, List<String> columnVals) {
         String groupId = getGroupId(gridIdx, configFieldType, group);
-        Long columnIndex = js.getColumnIndexByLabel(gridIdx, columnLabel);
+        int columnIndex = js.getColumnIndexByLabel(gridIdx, columnLabel);
 
         List<String> actualColumnVals = gridGroupJs.getColumnValsInGroup(gridIdx, columnIndex, groupId);
         Assert.assertEquals(actualColumnVals, columnVals);

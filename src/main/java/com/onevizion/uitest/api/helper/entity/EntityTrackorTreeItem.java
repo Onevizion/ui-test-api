@@ -70,7 +70,7 @@ public class EntityTrackorTreeItem {
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
 
-        selector.selectRadio(By.name("btntrackorType"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, trackorTreeItem.getTrackorType(), 1L);
+        selector.selectRadio(By.name("btntrackorType"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, trackorTreeItem.getTrackorType(), 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(CARDINALITY))).selectByVisibleText(trackorTreeItem.getCardinality());
 
@@ -167,11 +167,11 @@ public class EntityTrackorTreeItem {
 
         tab.goToTab(2); //Role Privs
         grid2.waitLoad(2L);
-        grid.checkAssignmentGridColumn(2L, 1L, rolePrivsRead);
-        grid.checkAssignmentGridColumn(2L, 2L, rolePrivsEdit);
-        grid.checkAssignmentGridColumn(2L, 3L, rolePrivsAdd);
-        grid.checkAssignmentGridColumn(2L, 4L, rolePrivsDelete);
-        grid.checkAssignmentGridColumn(2L, 5L, rolePrivsNone);
+        grid.checkAssignmentGridColumn(2L, 1, rolePrivsRead);
+        grid.checkAssignmentGridColumn(2L, 2, rolePrivsEdit);
+        grid.checkAssignmentGridColumn(2L, 3, rolePrivsAdd);
+        grid.checkAssignmentGridColumn(2L, 4, rolePrivsDelete);
+        grid.checkAssignmentGridColumn(2L, 5, rolePrivsNone);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -183,9 +183,9 @@ public class EntityTrackorTreeItem {
 
         tab.goToTab(3); //Role Lock Privs
         grid2.waitLoad(3L);
-        grid.checkAssignmentGridColumn(3L, 1L, roleLockPrivsLock);
-        grid.checkAssignmentGridColumn(3L, 2L, roleLockPrivsUnlock);
-        grid.checkAssignmentGridColumn(3L, 3L, roleLockPrivsNone);
+        grid.checkAssignmentGridColumn(3L, 1, roleLockPrivsLock);
+        grid.checkAssignmentGridColumn(3L, 2, roleLockPrivsUnlock);
+        grid.checkAssignmentGridColumn(3L, 3, roleLockPrivsNone);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }

@@ -98,8 +98,8 @@ public class Tb {
 
     public int getColumnCount(Long gridIdx) {
         int actualColumnsCnt = 0;
-        Long columnsCnt = js.getGridColumnsCount(gridIdx);
-        for (long i = 0; i < columnsCnt; i++) {
+        int columnsCnt = js.getGridColumnsCount(gridIdx);
+        for (int i = 0; i < columnsCnt; i++) {
             if (!js.isGridColumnHidden(gridIdx, i) && !js.getGridColIdByIndex(gridIdx, i).equals("-1")) {
                 actualColumnsCnt = actualColumnsCnt + 1;
             }
@@ -292,10 +292,10 @@ public class Tb {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
                 By btnOpen = By.id("idx" + idx + "_but");
                 element.moveToElementById("idx" + idx + "_but");
-                selector.selectRadio(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                selector.selectRadio(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, value, 1L);
             } else {
                 element.moveToElementByName(fieldName + "_but");
-                selector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                selector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, value, 1L);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -307,10 +307,10 @@ public class Tb {
                     String idx = getLastFieldIndex(fieldName, elementPosition);
                     By btnOpen = By.id("idx" + idx + "_but");
                     element.moveToElementById("idx" + idx + "_but");
-                    selector.selectRadio(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                    selector.selectRadio(btnOpen, By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, value, 1L);
                 } else {
                     element.moveToElementByName(fieldName + "_but");
-                    selector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+                    selector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, value, 1L);
                 }
                 wait.waitFormLoad();
             } catch (UnhandledAlertException | SeleniumAlertException e) {
@@ -346,11 +346,11 @@ public class Tb {
                 element.moveToElementById("idx" + idx + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.id("idx" + idx + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
                 By btnOpen = By.id("idx" + idx + "_but");
-                selector.selectCheckbox(btnOpen, 1L, Arrays.asList(value.split(",")), 1L);
+                selector.selectCheckbox(btnOpen, 1, Arrays.asList(value.split(",")), 1L);
             } else {
                 element.moveToElementByName(fieldName + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(fieldName + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-                selector.selectCheckbox(By.name(fieldName + "_but"), 1L, Arrays.asList(value.split(",")), 1L);
+                selector.selectCheckbox(By.name(fieldName + "_but"), 1, Arrays.asList(value.split(",")), 1L);
             }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
@@ -689,7 +689,7 @@ public class Tb {
         return vals;
     }
 
-    public void editCells(Long gridIndex, Long rowIndex, List<Long> columns, List<String> vals,
+    public void editCells(Long gridIndex, Long rowIndex, List<Integer> columns, List<String> vals,
             Map<String, String> gridExpVals, Map<String, String> expVals, List<String> columnNames, List<String> fieldNames, Long tid, Long efileFieldId) {
         editCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, vals.get(0), columnNames.get(0), fieldNames != null ? fieldNames.get(0) : null, gridExpVals, expVals, null, null);
         editCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, vals.get(1), columnNames.get(1), fieldNames != null ? fieldNames.get(1) : null, gridExpVals, expVals, null, null);
@@ -715,7 +715,7 @@ public class Tb {
         editCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, vals.get(21), columnNames.get(21), fieldNames != null ? fieldNames.get(21) : null, gridExpVals, expVals, null, null);
     }
 
-    public void editCell(Long gridIndex, Long rowIndex, Long columnIndex, ConfigFieldType fieldDataType, String value,
+    public void editCell(Long gridIndex, Long rowIndex, int columnIndex, ConfigFieldType fieldDataType, String value,
             String gridColumnId, String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals, Long tid, Long fieldId) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
@@ -750,7 +750,7 @@ public class Tb {
                 expVals.put(fieldName, value);
             }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
-            selector.selectRadio(By.name("btn1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1L, value, 1L);
+            selector.selectRadio(By.name("btn1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, value, 1L);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);
@@ -758,7 +758,7 @@ public class Tb {
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("epmSelector1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-            selector.selectCheckbox(By.name("btn1"), 1L, Arrays.asList(value.split(",")), 1L);
+            selector.selectCheckbox(By.name("btn1"), 1, Arrays.asList(value.split(",")), 1L);
             gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
             if (fieldName != null) {
                 expVals.put(fieldName, value);
@@ -869,7 +869,7 @@ public class Tb {
         }
     }
 
-    public void clearCells(Long gridIndex, Long rowIndex, List<Long> columns, Map<String, String> gridExpVals,
+    public void clearCells(Long gridIndex, Long rowIndex, List<Integer> columns, Map<String, String> gridExpVals,
             Map<String, String> expVals, List<String> columnNames, List<String> fieldNames) {
         clearCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, columnNames.get(0), fieldNames != null ? fieldNames.get(0) : null, gridExpVals, expVals);
         clearCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, columnNames.get(1), fieldNames != null ? fieldNames.get(1) : null, gridExpVals, expVals);
@@ -895,7 +895,7 @@ public class Tb {
         clearCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, columnNames.get(21), fieldNames != null ? fieldNames.get(21) : null, gridExpVals, expVals);
     }
 
-    public void clearCell(Long gridIndex, Long rowIndex, Long columnIndex, ConfigFieldType fieldDataType, String gridColumnId,
+    public void clearCell(Long gridIndex, Long rowIndex, int columnIndex, ConfigFieldType fieldDataType, String gridColumnId,
             String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
@@ -1003,7 +1003,7 @@ public class Tb {
         }
     }
 
-    public void rightClickCell(Long gridIndex, Long rowIndex, Long columnIndex) {
+    public void rightClickCell(Long gridIndex, Long rowIndex, int columnIndex) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
@@ -1016,7 +1016,7 @@ public class Tb {
         action.contextClick(gridCell).perform();
     }
 
-    public void checkCellsEnabled(Long gridIndex, Long rowIndex, List<Long> columns) {
+    public void checkCellsEnabled(Long gridIndex, Long rowIndex, List<Integer> columns) {
         checkCellEnabled(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX);
         checkCellEnabled(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE);
         checkCellEnabled(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN);
@@ -1041,7 +1041,7 @@ public class Tb {
         checkCellEnabled(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR);
     }
 
-    public void checkCellEnabled(Long gridIndex, Long rowIndex, Long columnIndex, ConfigFieldType fieldDataType) {
+    public void checkCellEnabled(Long gridIndex, Long rowIndex, int columnIndex, ConfigFieldType fieldDataType) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
@@ -1089,7 +1089,7 @@ public class Tb {
         js.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
     }
 
-    public void checkCellsDisabled(Long gridIndex, Long rowIndex, List<Long> columns) {
+    public void checkCellsDisabled(Long gridIndex, Long rowIndex, List<Integer> columns) {
         checkCellDisabled(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX);
         checkCellDisabled(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE);
         checkCellDisabled(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN);
@@ -1114,7 +1114,7 @@ public class Tb {
         checkCellDisabled(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR);
     }
 
-    public void checkCellDisabled(Long gridIndex, Long rowIndex, Long columnIndex, ConfigFieldType fieldDataType) {
+    public void checkCellDisabled(Long gridIndex, Long rowIndex, int columnIndex, ConfigFieldType fieldDataType) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
@@ -1188,7 +1188,7 @@ public class Tb {
     }
 
     public void checkColumnExist(Long gridIndex, String columnLabel) {
-        Assert.assertEquals(js.getColumnIndexByLabel(gridIndex, columnLabel) != null, true, "Grid not have column");
+        Assert.assertEquals(js.existColumnIndexByLabel(gridIndex, columnLabel), true, "Grid not have column");
     }
 
     public void checkColumnsNotExist(Long gridIndex, String prefix) {
@@ -1217,11 +1217,11 @@ public class Tb {
     }
 
     public void checkColumnNotExist(Long gridIndex, String columnLabel) {
-        Assert.assertEquals(js.getColumnIndexByLabel(gridIndex, columnLabel) == null, true, "Grid have column");
+        Assert.assertEquals(js.existColumnIndexByLabel(gridIndex, columnLabel), false, "Grid have column");
     }
 
     public void checkColumnNotExist(Long gridIndex, String columnLabel, String columnLabel2) {
-        Assert.assertEquals(js.getColumnIndexByLabel(gridIndex, columnLabel, columnLabel2) == null, true, "Grid have column");
+        Assert.assertEquals(js.existColumnIndexByLabel(gridIndex, columnLabel, columnLabel2), false, "Grid have column");
     }
 
     public void checkFieldsExist(List<String> fieldIds) {

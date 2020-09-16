@@ -58,9 +58,9 @@ public class EntityCoord {
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(coord.getName());
 
-        selector.selectRadio(By.name(LATITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, coord.getLatFieldName(), 1L);
+        selector.selectRadio(By.name(LATITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, coord.getLatFieldName(), 1L);
 
-        selector.selectRadio(By.name(LONGITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1L, coord.getLongFieldName(), 1L);
+        selector.selectRadio(By.name(LONGITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, coord.getLongFieldName(), 1L);
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
@@ -101,7 +101,7 @@ public class EntityCoord {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, Coord coord) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Pair Name"), coord.getName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Latitude Field Name"), coord.getLatFieldName());

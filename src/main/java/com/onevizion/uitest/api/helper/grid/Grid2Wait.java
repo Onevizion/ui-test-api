@@ -73,7 +73,7 @@ class Grid2Wait {
         }
     }
 
-    void waitGridCellLockType(Long gridIdx, Long columnIndex, Long rowIndex, LockType lockType) {
+    void waitGridCellLockType(Long gridIdx, int columnIndex, Long rowIndex, LockType lockType) {
         Supplier<LockType> actualValueSupplier = ()-> grid2Js.getGridCellLockTypeByRowIndexAndColIndex(gridIdx, rowIndex, columnIndex);
 
         Supplier<String> messageSupplier = ()-> "Waiting for Grid Cell LockType gridId=[" + gridIdx + "] columnIndex=[" + columnIndex + "] rowIndex=[" + rowIndex + "] expectedVal=[" + lockType + "] actualVal=[" + actualValueSupplier.get() + "] is failed";

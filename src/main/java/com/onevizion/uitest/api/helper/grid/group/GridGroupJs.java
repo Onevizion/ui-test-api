@@ -16,7 +16,7 @@ class GridGroupJs extends Js {
     }
 
     @SuppressWarnings("unchecked")
-    List<String> getColumnValsInGroup(Long gridIdx, Long columnIndex, String groupId) {
+    List<String> getColumnValsInGroup(Long gridIdx, int columnIndex, String groupId) {
         return (List<String>) execJs2(
                 "var columnVals = [];" + 
                 "gridArr[" + gridIdx + "].grid.forEachRowInGroup('" + groupId + "', function(rowId) {" + 

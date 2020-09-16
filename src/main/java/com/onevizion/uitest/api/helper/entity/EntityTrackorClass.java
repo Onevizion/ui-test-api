@@ -89,7 +89,7 @@ public class EntityTrackorClass {
     }
 
     public void testInGrid(Long gridId, Long rowIndex, TrackorClass trackorClass) {
-        Map<Long, String> gridVals = new HashMap<>();
+        Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Type"), trackorClass.getTrackorType());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Class"), trackorClass.getName());

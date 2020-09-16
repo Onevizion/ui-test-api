@@ -36,7 +36,7 @@ class Grid2Js extends Js {
         return Boolean.valueOf(execJs("return gridArr[" + gridIdx + "].isUpdating == false;"));
     }
 
-    LockType getGridCellLockTypeByRowIndexAndColIndex(Long gridIdx, Long rowIndex, Long columnIndex) {
+    LockType getGridCellLockTypeByRowIndexAndColIndex(Long gridIdx, Long rowIndex, int columnIndex) {
         String lockType = execJs("return gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell.children[0].className;");
         return LockType.getByGridCellClass(lockType);
     }
@@ -46,7 +46,7 @@ class Grid2Js extends Js {
     }
 
     @SuppressWarnings("unchecked")
-    List<String> getGridCellAllChildsFontColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+    List<String> getGridCellAllChildsFontColor(Long gridIdx, Long rowIndex, int columnIndex) {
         return (List<String>) execJs2(
                 "var colors = [];" + 
                 "var element = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
@@ -59,7 +59,7 @@ class Grid2Js extends Js {
     }
 
     @SuppressWarnings("unchecked")
-    List<String> getGridCellAllChildsBackgroundColor(Long gridIdx, Long rowIndex, Long columnIndex) {
+    List<String> getGridCellAllChildsBackgroundColor(Long gridIdx, Long rowIndex, int columnIndex) {
         return (List<String>) execJs2(
                 "var colors = [];" + 
                 "var element = gridArr[" + gridIdx + "].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").cell;" + 
