@@ -1,7 +1,6 @@
 package com.onevizion.uitest.api.helper;
 
 import java.util.function.IntSupplier;
-import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
