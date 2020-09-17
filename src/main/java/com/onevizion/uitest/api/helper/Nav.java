@@ -61,9 +61,9 @@ public class Nav {
         int allRecordsCount = getAllRecordsCount(gridIdx);
         int actualVisibleRecordsCount = js.getGridRowsCount(gridIdx);
 
-        Assert.assertEquals(allRecordsCount <= actualVisibleRecordsCount, true, "Visible records count more than all records count");
+        Assert.assertEquals(actualVisibleRecordsCount <= allRecordsCount, true, "Visible records count more than all records count");
 
-        int countPages = allRecordsCount / actualVisibleRecordsCount;
+        int countPages = (allRecordsCount / actualVisibleRecordsCount) + 1;
 
         Assert.assertEquals(getFirstRowNum(gridIdx), 1, "First num row in grid is wrong");
         Assert.assertEquals(getLastRowNum(gridIdx), actualVisibleRecordsCount, "Last num row in grid is wrong");

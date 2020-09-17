@@ -28,10 +28,10 @@ public class TbTaskDateOnTbPage {
         int rowsCnt = grid.getGridRowsCount(0L);
 
         int columnIndex = js.getColumnIndexById(0L, columnId);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
         if ("F".equals(startFinish)) {
             columnIndex = columnIndex + 1;
         }
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         List<FilterOperatorType> operators = FilterOperatorType.getTaskDateOperators();
