@@ -63,7 +63,7 @@ public class Nav {
 
         Assert.assertEquals(allRecordsCount <= actualVisibleRecordsCount, true, "Visible records count more than all records count");
 
-        int countPages = (int) Math.ceil(allRecordsCount / actualVisibleRecordsCount);
+        int countPages = allRecordsCount / actualVisibleRecordsCount;
 
         Assert.assertEquals(getFirstRowNum(gridIdx), 1, "First num row in grid is wrong");
         Assert.assertEquals(getLastRowNum(gridIdx), actualVisibleRecordsCount, "Last num row in grid is wrong");
