@@ -23,13 +23,13 @@ public class TbFieldColor {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String trackorColumnId, String value, Map<String, List<String>> colors) {
+        int rowsCnt = grid.getGridRowsCount(0L);
+
         int columnIndex = js.getColumnIndexById(0L, columnId);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
 
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
-
-        Long rowsCnt = grid.getGridRowsCount(0L);
         int trackorColumnIndex = js.getColumnIndexById(0L, trackorColumnId);
-        String trackorFieldName = js.getGridColumnLabelByColIndex(0L, trackorColumnIndex, 0L);
+        String trackorFieldName = js.getGridColumnLabelByColIndex(0L, trackorColumnIndex, 0);
         List<String> trackorCellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, trackorColumnIndex);
 
         userpageFilter.checkFilterEqualColor(fieldName, trackorFieldName, value, trackorCellVals, colors);

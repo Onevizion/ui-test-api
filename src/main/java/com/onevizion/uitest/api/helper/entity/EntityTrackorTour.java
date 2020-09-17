@@ -169,7 +169,7 @@ public class EntityTrackorTour {
     }
 
     public void testWithChilds(TrackorTour trackorTour) {
-        testInGrid(AbstractSeleniumCore.getGridIdx(), 0L, trackorTour);
+        testInGrid(AbstractSeleniumCore.getGridIdx(), 0, trackorTour);
         testOnForm(trackorTour);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -179,10 +179,10 @@ public class EntityTrackorTour {
         tab.goToTab(2); //Tour Steps
         grid2.waitLoad(2L);
 
-        Assert.assertEquals(grid.getGridRowsCount(2L), Long.valueOf(trackorTour.getSteps().size()));
+        Assert.assertEquals(grid.getGridRowsCount(2L), trackorTour.getSteps().size());
         for (int i = 0; i < trackorTour.getSteps().size(); i++) {
-            js.selectGridRow(2L, Long.valueOf(i));
-            entityTrackorTourStep.testInGrid(2L, Long.valueOf(i), trackorTour.getSteps().get(i));
+            js.selectGridRow(2L, i);
+            entityTrackorTourStep.testInGrid(2L, i, trackorTour.getSteps().get(i));
             entityTrackorTourStep.testOnForm(trackorTour.getSteps().get(i));
         }
 
@@ -222,7 +222,7 @@ public class EntityTrackorTour {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, TrackorTour trackorTour) {
+    public void testInGrid(Long gridId, int rowIndex, TrackorTour trackorTour) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Tour Label"), trackorTour.getLabel());

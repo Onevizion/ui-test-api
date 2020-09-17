@@ -442,7 +442,7 @@ public class Filter {
 
     public String getGridCellValueForFilterTest(Long gridId, String columnId, FilterFieldType filterFieldType) {
         int columnIndex = js.getColumnIndexById(gridId, columnId);
-        String columnLabel = js.getGridColumnLabelByColIndex(gridId, columnIndex, 0L);
+        String columnLabel = js.getGridColumnLabelByColIndex(gridId, columnIndex, 0);
 
         if (js.getGridIsSupportSortByGridId(gridId)) {
             gridSort.sortColumn(gridId, SortType.ASC, columnLabel);
@@ -451,7 +451,7 @@ public class Filter {
         if (filterFieldType.equals(FilterFieldType.CHECKBOX)) {
             return "YES";
         } else {
-            for (Long i = 0L; i < js.getGridRowsCount(gridId); i = i + 1L) {
+            for (int i = 0; i < js.getGridRowsCount(gridId); i = i + 1) {
                 String value = js.getGridCellValueByRowIndexAndColIndex(gridId, i, columnIndex);
                 if (StringUtils.isNotBlank(value)) {
                     value = value.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", ""); /*Example: condition for link*/
@@ -469,13 +469,13 @@ public class Filter {
 
     public void checkGridColumnByFilterValue(Long gridId, String columnId, String value) {
         int columnIndex = js.getColumnIndexById(gridId, columnId);
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> vals =  (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
         String failMessage = null;
-        for (int i = 0; i < rowsCnt.intValue(); i++) {
+        for (int i = 0; i < rowsCnt; i++) {
             failMessage = String.format("Check fails at column [%s] row [%s]. Cell value in grid [%s]. Value in filter [%s]", columnIndex, i, vals.get(i), value);
             Assert.assertEquals(vals.get(i).toLowerCase().contains(value.toLowerCase()), true, failMessage);
         }

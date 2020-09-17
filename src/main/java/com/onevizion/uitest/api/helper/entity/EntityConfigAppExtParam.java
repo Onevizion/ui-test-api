@@ -91,7 +91,7 @@ public class EntityConfigAppExtParam {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, ConfigAppExtParam configAppExtParam) {
+    public void testInGrid(Long gridId, int rowIndex, ConfigAppExtParam configAppExtParam) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "URL Param"), configAppExtParam.getName());

@@ -189,7 +189,7 @@ public class EntityIntegration {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, Integration integration) {
+    public void testInGrid(Long gridId, int rowIndex, Integration integration) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Repository URL"), integration.getUrl());

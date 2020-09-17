@@ -77,7 +77,7 @@ public class EntityReportGroup {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, ReportGroup reportGroup) {
+    public void testInGrid(Long gridId, int rowIndex, ReportGroup reportGroup) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Report Group Name"), reportGroup.getName());

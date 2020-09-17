@@ -24,10 +24,10 @@ public class TbDateTimeField {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String columnId2, String value, String valuePlusMinus, String valueWithin, boolean supportFieldOperations) {
-        Long rowsCnt = grid.getGridRowsCount(0L);
+        int rowsCnt = grid.getGridRowsCount(0L);
 
         int columnIndex = js.getColumnIndexById(0L, columnId);
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         List<FilterOperatorType> operators = FilterOperatorType.getDateTimeOperators(supportFieldOperations);
@@ -55,7 +55,7 @@ public class TbDateTimeField {
 
         if (supportFieldOperations) {
             int columnIndex2 = js.getColumnIndexById(0L, columnId2);
-            String fieldName2 = js.getGridColumnLabelByColIndex(0L, columnIndex2, 0L);
+            String fieldName2 = js.getGridColumnLabelByColIndex(0L, columnIndex2, 0);
             List<String> cellVals2 = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex2);
 
             userpageFilter.checkFilterWithFieldOperation(fieldName, fieldName2, value, null, FilterOperatorType.EQUAL_FIELD, ConfigFieldType.DATE_TIME, columnIndex, columnIndex2, cellVals, cellVals2);

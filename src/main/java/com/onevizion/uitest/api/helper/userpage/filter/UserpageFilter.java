@@ -120,19 +120,19 @@ public class UserpageFilter {
     public void checkFilter(String fieldName, String value, String dateType,
             FilterOperatorType operator, ConfigFieldType fieldDataType, int columnIndex,
             List<String> cellVals, List<String> ... cellValsKeys) {
-        Long rowsCntBefore = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
+        int rowsCntBefore = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
 
         int randomIndex = fillFilter(fieldName, null, value, dateType, operator, fieldDataType);
 
         if ((fieldName.equals("FTB:FTB ID") || fieldName.equals("FT:FT ID")
                 || fieldName.equals("FTB:Rollup") || fieldName.equals("FT:Rollup")) && operator.equals(FilterOperatorType.NULL)) {
-            Long rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-            if (!rowsCntAfter.equals(Long.valueOf(0L))) {
+            int rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
+            if (rowsCntAfter != 0) {
                 throw new SeleniumUnexpectedException("Grid have wrong rows count. Should be 0 rows.");
             }
         } else {
-            Long rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-            if (rowsCntAfter.equals(Long.valueOf(0L))) {
+            int rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
+            if (rowsCntAfter == 0) {
                 throw new SeleniumUnexpectedException("Grid have wrong rows count. Should be more than 0 rows.");
             }
         }
@@ -226,8 +226,8 @@ public class UserpageFilter {
             List<String> cellVals, List<String> cellVals2) {
         int randomIndex = fillFilter(fieldName, fieldName2, value, dateType, operator, fieldDataType);
 
-        Long rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-        if (rowsCntAfter.equals(Long.valueOf(0L))) {
+        int rowsCntAfter = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
+        if (rowsCntAfter == 0) {
             throw new SeleniumUnexpectedException("Grid have wrong rows count. Should be more than 0 rows.");
         }
 
@@ -391,7 +391,7 @@ public class UserpageFilter {
         checkAndClearFilter(fieldName, null, value, null, FilterOperatorType.NOT_EQUAL_COLOR, ConfigFieldType.DROP_DOWN, randomIndex);
     }
 
-    public void checkFilterHasComments(String fieldName, Long expectedRowsCnt) {
+    public void checkFilterHasComments(String fieldName, int expectedRowsCnt) {
         int randomIndex = fillFilter(fieldName, FilterOperatorType.HAS_COMMENTS);
 
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), expectedRowsCnt, "Grid have wrong rows count");
@@ -399,7 +399,7 @@ public class UserpageFilter {
         checkAndClearFilter(fieldName, FilterOperatorType.HAS_COMMENTS, randomIndex);
     }
 
-    public void checkFilterEqualMyselfWithoutTrackor(String fieldName, Long expectedRowsCnt) {
+    public void checkFilterEqualMyselfWithoutTrackor(String fieldName, int expectedRowsCnt) {
         int randomIndex = fillFilter(fieldName, FilterOperatorType.EQUAL_MYSELF);
 
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), expectedRowsCnt, "Grid have wrong rows count");
@@ -407,7 +407,7 @@ public class UserpageFilter {
         checkAndClearFilter(fieldName, FilterOperatorType.EQUAL_MYSELF, randomIndex);
     }
 
-    public void checkFilterNotEqualMyselfWithoutTrackor(String fieldName, Long expectedRowsCnt) {
+    public void checkFilterNotEqualMyselfWithoutTrackor(String fieldName, int expectedRowsCnt) {
         int randomIndex = fillFilter(fieldName, FilterOperatorType.NOT_EQUAL_MYSELF);
 
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), expectedRowsCnt, "Grid have wrong rows count");
@@ -435,7 +435,7 @@ public class UserpageFilter {
 
     @SuppressWarnings("unchecked")
     public void checkFilterTrackorSelectorByText(String fieldName, FilterOperatorType operator, String value, int columnIndex, List<String> cellVals, List<String> ... cellValsKeys) {
-        Long rowsCntBefore = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
+        int rowsCntBefore = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
 
         int randomIndex = fillFilter(fieldName, operator, value);
 
@@ -865,7 +865,7 @@ public class UserpageFilter {
     }
 
     public void checkGridTextColumnEquals(Long gridId, int columnIndex, List<String> values) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -889,7 +889,7 @@ public class UserpageFilter {
     }
 
     private void checkGridTextColumnEqualsOrNull(Long gridId, int columnIndex, String value) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -911,7 +911,7 @@ public class UserpageFilter {
     }
 
     public void checkGridBooleanColumnEquals(Long gridId, int columnIndex, List<String> values) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -937,7 +937,7 @@ public class UserpageFilter {
     //it is temporary  solution
     //remove this method
     private void checkGridBooleanColumnEqualsOrNull(Long gridId, int columnIndex, String value) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -959,7 +959,7 @@ public class UserpageFilter {
     }
 
     private void checkGridTextColumnNotEquals(Long gridId, int columnIndex, String value) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -976,7 +976,7 @@ public class UserpageFilter {
     }
 
     private void checkGridTextColumnNotEqualsOrNull(Long gridId, int columnIndex, String value) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -997,7 +997,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnIsNull(Long gridId, int columnIndex) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1014,7 +1014,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnIsNotNull(Long gridId, int columnIndex) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1032,7 +1032,7 @@ public class UserpageFilter {
 
     private void checkGridColumnIsNew(Long gridId, String columnLabel, List<String> newTrackors) {
         int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1047,7 +1047,7 @@ public class UserpageFilter {
 
     private void checkGridColumnMultiTrackorSelectorIsNew(Long gridId, String columnLabel, List<String> newTrackors) {
         int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1061,7 +1061,7 @@ public class UserpageFilter {
 
     private void checkGridColumnIsNotNew(Long gridId, String columnLabel, List<String> newTrackors) {
         int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1076,7 +1076,7 @@ public class UserpageFilter {
 
     private void checkGridColumnMultiTrackorSelectorIsNotNew(Long gridId, String columnLabel, List<String> oldTrackors) {
         int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1089,7 +1089,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnEqualsField(Long gridId, int columnIndex, int columnIndex2) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
@@ -1113,7 +1113,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnNotEqualsField(Long gridId, int columnIndex, int columnIndex2) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
@@ -1137,7 +1137,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMore(Long gridId, int columnIndex, String value, ConfigFieldType fieldDataType) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1162,7 +1162,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLess(Long gridId, int columnIndex, String value, ConfigFieldType fieldDataType) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1187,7 +1187,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMoreEquals(Long gridId, int columnIndex, String value, ConfigFieldType fieldDataType) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1212,7 +1212,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLessEquals(Long gridId, int columnIndex, String value, ConfigFieldType fieldDataType) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
 
@@ -1237,7 +1237,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMoreField(Long gridId, int columnIndex, int columnIndex2, ConfigFieldType fieldDataType) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
@@ -1269,7 +1269,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLessField(Long gridId, int columnIndex, int columnIndex2, ConfigFieldType fieldDataType) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
@@ -1301,7 +1301,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnMoreEqualsField(Long gridId, int columnIndex, int columnIndex2, ConfigFieldType fieldDataType) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
@@ -1333,7 +1333,7 @@ public class UserpageFilter {
     }
 
     private void checkGridColumnLessEqualsField(Long gridId, int columnIndex, int columnIndex2, ConfigFieldType fieldDataType) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
+        int rowsCnt = js.getGridRowsCount(gridId);
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(gridId, rowsCnt, columnIndex);
         @SuppressWarnings("unchecked")
@@ -1373,23 +1373,23 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
-            Long cnt = 0L;
+            int cnt = 0;
             for (String cellVal : cellVals) {
                 if (cellVal.contains(value)) {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
             Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            Long cnt = 0L;
+            int cnt = 0;
             for (String cellVal : cellVals) {
                 if ("YES".equalsIgnoreCase(value)) {
                     if (cellVal.equals("YES")) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     if (!cellVal.equals("YES")) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 }
             }
@@ -1397,10 +1397,10 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            Long cnt = 0L;
+            int cnt = 0;
             for (String cellVal : cellVals) {
                 if (cellVal.equals(value)) {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
             Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
@@ -1410,16 +1410,16 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountNotEquals(List<String> cellVals, String value) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!cellVal.contains(value)) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
-    private void checkGridRowsCountEqualsOrNull(ConfigFieldType fieldDataType, List<String> cellVals, String value, Long rowsCntBefore, @SuppressWarnings("unchecked") List<String> ... cellValsKeys) {
+    private void checkGridRowsCountEqualsOrNull(ConfigFieldType fieldDataType, List<String> cellVals, String value, int rowsCntBefore, @SuppressWarnings("unchecked") List<String> ... cellValsKeys) {
         if (fieldDataType.equals(ConfigFieldType.TEXT) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.WIKI) || fieldDataType.equals(ConfigFieldType.SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.MEMO) || fieldDataType.equals(ConfigFieldType.ELECTRONIC_FILE)
@@ -1427,7 +1427,7 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-            Long cnt = 0L;
+            int cnt = 0;
             Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
             for (int i = 0; i < rowsCntBefore ;i++) {
@@ -1451,20 +1451,20 @@ public class UserpageFilter {
                     for (Long value2 : equalsKey.getValue()) {
                         if (cellVals.get(value2.intValue()).contains(value)) {
                             isAddRow = true;
-                            cnt = cnt + 1L;
+                            cnt = cnt + 1;
                         }
                     }
                     if (!isAddRow) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
 
             Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            Long cnt = 0L;
+            int cnt = 0;
             Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
             for (int i = 0; i < rowsCntBefore ;i++) {
@@ -1488,14 +1488,14 @@ public class UserpageFilter {
                     for (Long value2 : equalsKey.getValue()) {
                         if (cellVals.get(value2.intValue()).contains(value.toUpperCase())) {
                             isAddRow = true;
-                            cnt = cnt + 1L;
+                            cnt = cnt + 1;
                         }
                     }
                     if (!isAddRow) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
 
@@ -1503,7 +1503,7 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            Long cnt = 0L;
+            int cnt = 0;
             Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
             for (int i = 0; i < rowsCntBefore ;i++) {
@@ -1527,14 +1527,14 @@ public class UserpageFilter {
                     for (Long value2 : equalsKey.getValue()) {
                         if (cellVals.get(value2.intValue()).equals(value)) {
                             isAddRow = true;
-                            cnt = cnt + 1L;
+                            cnt = cnt + 1;
                         }
                     }
                     if (!isAddRow) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
 
@@ -1544,7 +1544,7 @@ public class UserpageFilter {
         }
     }
 
-    private void checkGridRowsCountNotEqualsOrNull(ConfigFieldType fieldDataType, List<String> cellVals, String value, Long rowsCntBefore, @SuppressWarnings("unchecked") List<String> ... cellValsKeys) {
+    private void checkGridRowsCountNotEqualsOrNull(ConfigFieldType fieldDataType, List<String> cellVals, String value, int rowsCntBefore, @SuppressWarnings("unchecked") List<String> ... cellValsKeys) {
         if (fieldDataType.equals(ConfigFieldType.TEXT) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.WIKI) || fieldDataType.equals(ConfigFieldType.SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.MEMO) || fieldDataType.equals(ConfigFieldType.ELECTRONIC_FILE)
@@ -1552,7 +1552,7 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-            Long cnt = 0L;
+            int cnt = 0;
             Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
             for (int i = 0; i < rowsCntBefore ;i++) {
@@ -1585,17 +1585,17 @@ public class UserpageFilter {
                         for (Long value2 : equalsKey.getValue()) {
                             if (!cellVals.get(value2.intValue()).contains(value)) {
                                 isAddRow = true;
-                                cnt = cnt + 1L;
+                                cnt = cnt + 1;
                             }
                         }
                         if (!isAddRow) {
-                            cnt = cnt + 1L;
+                            cnt = cnt + 1;
                         }
                     } else {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
 
@@ -1603,7 +1603,7 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            Long cnt = 0L;
+            int cnt = 0;
             Map<String, List<Long>> equalsKeyMap = new HashMap<>();
 
             for (int i = 0; i < rowsCntBefore ;i++) {
@@ -1636,17 +1636,17 @@ public class UserpageFilter {
                         for (Long value2 : equalsKey.getValue()) {
                             if (!cellVals.get(value2.intValue()).contains(value)) {
                                 isAddRow = true;
-                                cnt = cnt + 1L;
+                                cnt = cnt + 1;
                             }
                         }
                         if (!isAddRow) {
-                            cnt = cnt + 1L;
+                            cnt = cnt + 1;
                         }
                     } else {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
 
@@ -1665,20 +1665,20 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
-            Long cnt = 0L;
+            int cnt = 0;
             for (String cellVal : cellVals) {
                 if ("&nbsp;".equals(cellVal) || "".equals(cellVal)) {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
             Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            Long cnt = 0L;
+            int cnt = 0;
             for (String cellVal : cellVals) {
                 if ("&nbsp;".equals(cellVal) || "".equals(cellVal) || "Not Exist".equals(cellVal)) {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
             Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
@@ -1696,20 +1696,20 @@ public class UserpageFilter {
             || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
             || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)
             || fieldDataType.equals(ConfigFieldType.MULTI_TRACKOR_SELECTOR)) {
-            Long cnt = 0L;
+            int cnt = 0;
             for (String cellVal : cellVals) {
                 if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal)) {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
             Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            Long cnt = 0L;
+            int cnt = 0;
             for (String cellVal : cellVals) {
                 if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
-                    cnt = cnt + 1L;
+                    cnt = cnt + 1;
                 }
             }
             Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
@@ -1719,108 +1719,108 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountIsNew(List<String> cellVals, List<String> newTrackors) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
                     newTrackors.contains(cellVal)) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
     private void checkGridRowsCountMultiTrackorSelectorIsNew(List<String> cellVals, List<String> newTrackors) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
                     newTrackors.stream().anyMatch(s -> cellVal.contains(s))) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
     private void checkGridRowsCountIsNotNew(List<String> cellVals, List<String> newTrackors) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
                     !newTrackors.contains(cellVal)) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
     private void checkGridRowsCountMultiTrackorSelectorIsNotNew(List<String> cellVals, List<String> oldTrackors) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) &&
                     oldTrackors.stream().anyMatch(s -> cellVal.contains(s))) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
     private void checkGridRowsCountIsFieldLocked(List<String> trackorCellVals, List<String> trackors) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String trackorCellVal : trackorCellVals) {
             if (trackors.contains(trackorCellVal)) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
     private void checkGridRowsCountIsFieldUnlocked(List<String> trackorCellVals, List<String> trackors) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String trackorCellVal : trackorCellVals) {
             if (!trackors.contains(trackorCellVal)) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
     private void checkGridRowsCountEqualsField(List<String> cellVals, List<String> cellVals2) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (int i = 0; i < cellVals.size(); i++) {
             if (cellVals.get(i).equals(cellVals2.get(i))) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
     private void checkGridRowsCountNotEqualsField(List<String> cellVals, List<String> cellVals2) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (int i = 0; i < cellVals.size(); i++) {
             if (!cellVals.get(i).equals(cellVals2.get(i))) {
-                cnt = cnt + 1L;
+                cnt = cnt + 1;
             }
         }
         Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
     }
 
     private void checkGridRowsCountMore(ConfigFieldType fieldDataType, List<String> cellVals, String value) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() > OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getDateFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime() > OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime() > OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER) || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
                     if (NumberUtils.createDouble(cellVal).compareTo(NumberUtils.createDouble(value)) > 0) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
@@ -1831,24 +1831,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountLess(ConfigFieldType fieldDataType, List<String> cellVals, String value) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() < OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getDateFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime() < OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime() < OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER) || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
                     if (NumberUtils.createDouble(cellVal).compareTo(NumberUtils.createDouble(value)) < 0) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
@@ -1859,24 +1859,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountMoreEquals(ConfigFieldType fieldDataType, List<String> cellVals, String value) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() >= OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getDateFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime() >= OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime() >= OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER) || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
                     if (NumberUtils.createDouble(cellVal).compareTo(NumberUtils.createDouble(value)) >= 0) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
@@ -1887,24 +1887,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountLessEquals(ConfigFieldType fieldDataType, List<String> cellVals, String value) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (String cellVal : cellVals) {
             if (!"&nbsp;".equals(cellVal) && !"".equals(cellVal) && !"Not Exist".equals(cellVal)) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getDateFormat()).getTime() <= OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getDateFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime() <= OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
                     if (OnevizionUtils.strToDate(cellVal, seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime() <= OnevizionUtils.strToDate(value, seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER) || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
                     if (NumberUtils.createDouble(cellVal).compareTo(NumberUtils.createDouble(value)) <= 0) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
@@ -1915,24 +1915,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountMoreField(ConfigFieldType fieldDataType, List<String> cellVals, List<String> cellVals2) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (int i = 0; i < cellVals.size(); i++) {
             if (!"&nbsp;".equals(cellVals.get(i)) && !"".equals(cellVals.get(i)) && !"&nbsp;".equals(cellVals2.get(i)) && !"".equals(cellVals2.get(i))) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getDateFormat()).getTime() > OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getDateFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime() > OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime() > OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER) || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
                     if (NumberUtils.createDouble(cellVals.get(i)).compareTo(NumberUtils.createDouble(cellVals2.get(i))) > 0) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
@@ -1943,24 +1943,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountLessField(ConfigFieldType fieldDataType, List<String> cellVals, List<String> cellVals2) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (int i = 0; i < cellVals.size(); i++) {
             if (!"&nbsp;".equals(cellVals.get(i)) && !"".equals(cellVals.get(i)) && !"&nbsp;".equals(cellVals2.get(i)) && !"".equals(cellVals2.get(i))) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getDateFormat()).getTime() < OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getDateFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime() < OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime() < OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER) || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
                     if (NumberUtils.createDouble(cellVals.get(i)).compareTo(NumberUtils.createDouble(cellVals2.get(i))) < 0) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
@@ -1971,24 +1971,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountMoreEqualsField(ConfigFieldType fieldDataType, List<String> cellVals, List<String> cellVals2) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (int i = 0; i < cellVals.size(); i++) {
             if (!"&nbsp;".equals(cellVals.get(i)) && !"".equals(cellVals.get(i)) && !"&nbsp;".equals(cellVals2.get(i)) && !"".equals(cellVals2.get(i))) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getDateFormat()).getTime() >= OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getDateFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime() >= OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime() >= OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER) || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
                     if (NumberUtils.createDouble(cellVals.get(i)).compareTo(NumberUtils.createDouble(cellVals2.get(i))) >= 0) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");
@@ -1999,24 +1999,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountLessEqualsField(ConfigFieldType fieldDataType, List<String> cellVals, List<String> cellVals2) {
-        Long cnt = 0L;
+        int cnt = 0;
         for (int i = 0; i < cellVals.size(); i++) {
             if (!"&nbsp;".equals(cellVals.get(i)) && !"".equals(cellVals.get(i)) && !"&nbsp;".equals(cellVals2.get(i)) && !"".equals(cellVals2.get(i))) {
                 if (fieldDataType.equals(ConfigFieldType.DATE)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getDateFormat()).getTime() <= OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getDateFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.DATE_TIME)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime() <= OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getJavaDateTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.TIME)) {
                     if (OnevizionUtils.strToDate(cellVals.get(i), seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime() <= OnevizionUtils.strToDate(cellVals2.get(i), seleniumSettings.getUserProperties().getJavaTimeFormat()).getTime()) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else if (fieldDataType.equals(ConfigFieldType.NUMBER) || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
                     if (NumberUtils.createDouble(cellVals.get(i)).compareTo(NumberUtils.createDouble(cellVals2.get(i))) <= 0) {
-                        cnt = cnt + 1L;
+                        cnt = cnt + 1;
                     }
                 } else {
                     throw new SeleniumUnexpectedException("Not support field data type");

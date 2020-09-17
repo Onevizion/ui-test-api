@@ -124,7 +124,7 @@ public class EntityDynamicVtable {
     }
 
     public void testWithChilds(DynamicVtable dynamicVtable) {
-        testInGrid(AbstractSeleniumCore.getGridIdx(), 0L, dynamicVtable);
+        testInGrid(AbstractSeleniumCore.getGridIdx(), 0, dynamicVtable);
         testOnForm(dynamicVtable);
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
@@ -136,10 +136,10 @@ public class EntityDynamicVtable {
 
         gridSort.sortColumn(2L, SortType.ASC, "Value");
 
-        Assert.assertEquals(grid.getGridRowsCount(2L), Long.valueOf(dynamicVtable.getValues().size()));
+        Assert.assertEquals(grid.getGridRowsCount(2L), dynamicVtable.getValues().size());
         for (int i = 0; i < dynamicVtable.getValues().size(); i++) {
-            js.selectGridRow(2L, Long.valueOf(i));
-            entityDynamicVtableValue.testInGrid(2L, Long.valueOf(i), dynamicVtable.getValues().get(i));
+            js.selectGridRow(2L, i);
+            entityDynamicVtableValue.testInGrid(2L, i, dynamicVtable.getValues().get(i));
             entityDynamicVtableValue.testOnForm(dynamicVtable.getValues().get(i));
         }
 
@@ -161,7 +161,7 @@ public class EntityDynamicVtable {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, DynamicVtable dynamicVtable) {
+    public void testInGrid(Long gridId, int rowIndex, DynamicVtable dynamicVtable) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Table Name"), dynamicVtable.getName());

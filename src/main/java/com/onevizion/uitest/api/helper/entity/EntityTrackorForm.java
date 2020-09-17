@@ -150,7 +150,7 @@ public class EntityTrackorForm {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, TrackorForm trackorForm) {
+    public void testInGrid(Long gridId, int rowIndex, TrackorForm trackorForm) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Form Name"), trackorForm.getName());

@@ -19,11 +19,10 @@ public class TbFieldMyselfWithoutTrackor {
     private UserpageFilter userpageFilter;
 
     public void test(String columnId) {
+        int rowsCnt = grid.getGridRowsCount(0L);
+
         int columnIndex = js.getColumnIndexById(0L, columnId);
-
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
-
-        Long rowsCnt = grid.getGridRowsCount(0L);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
 
         userpageFilter.checkFilterEqualMyselfWithoutTrackor(fieldName, rowsCnt);
         userpageFilter.checkFilterNotEqualMyselfWithoutTrackor(fieldName, rowsCnt);

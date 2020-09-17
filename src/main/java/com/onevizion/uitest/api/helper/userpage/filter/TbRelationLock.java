@@ -22,13 +22,13 @@ public class TbRelationLock {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String trackorColumnId, List<String> trackors) {
+        int rowsCnt = grid.getGridRowsCount(0L);
+
         int columnIndex = js.getColumnIndexById(0L, columnId);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
 
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
-
-        Long rowsCnt = grid.getGridRowsCount(0L);
         int trackorColumnIndex = js.getColumnIndexById(0L, trackorColumnId);
-        String trackorFieldName = js.getGridColumnLabelByColIndex(0L, trackorColumnIndex, 0L);
+        String trackorFieldName = js.getGridColumnLabelByColIndex(0L, trackorColumnIndex, 0);
         List<String> trackorCellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, trackorColumnIndex);
 
         userpageFilter.checkFilterIsRelationLocked(fieldName, trackorFieldName, trackorCellVals, trackors);

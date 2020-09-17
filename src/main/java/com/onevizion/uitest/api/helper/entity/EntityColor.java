@@ -93,7 +93,7 @@ public class EntityColor {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, Color color) {
+    public void testInGrid(Long gridId, int rowIndex, Color color) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Color Code"), color.getName());

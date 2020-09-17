@@ -96,7 +96,7 @@ public class EntityRuleType {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, RuleType ruleType) {
+    public void testInGrid(Long gridId, int rowIndex, RuleType ruleType) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Rule Type"), ruleType.getName());

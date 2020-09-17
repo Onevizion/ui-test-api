@@ -83,7 +83,7 @@ public class EntityClientFile {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, ClientFile clientFile) {
+    public void testInGrid(Long gridId, int rowIndex, ClientFile clientFile) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "File Group"), clientFile.getFileGroup());

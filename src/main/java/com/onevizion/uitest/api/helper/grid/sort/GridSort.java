@@ -157,7 +157,7 @@ public class GridSort {
     private void checkCurrentGridSort(Long gridId, SortType sortType, int columnIndex, String columnId) {
         @SuppressWarnings("unchecked")
         List<Object> elements = (List<Object>) gridSortJs.getGridSort(gridId);
-        Assert.assertEquals((int) elements.get(0), columnIndex, "Sorting working is not correct");
+        Assert.assertEquals(((Long) elements.get(0)).intValue(), columnIndex, "Sorting working is not correct");
         Assert.assertEquals((String) elements.get(1), sortType.getTypeString(), "Sorting working is not correct");
 
         String sortColumnId = gridSortJs.getGridSortColumnIdByGridId(gridId);
@@ -235,24 +235,24 @@ public class GridSort {
     public void checkColumn(Long gridId, SortType sortType, GridColumnType gridColumnType, String columnLabel) {
         int columnIndex = js.getColumnIndexByLabel(gridId, columnLabel);
 
-        Long rowsNum = js.getGridRowsCount(gridId);
+        int rowsNum = js.getGridRowsCount(gridId);
 
-        if (rowsNum <= 1L) {
+        if (rowsNum <= 1) {
             return; //Nothing to check
             //TODO may be log with error or throw exception?
         }
 
-        Long curRowNum = 1L;
+        int curRowNum = 1;
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, rowsNum, columnIndex);
         while (curRowNum < rowsNum) {
-            String curVal = vals.get(curRowNum.intValue());
+            String curVal = vals.get(curRowNum);
             if (StringUtils.isNotBlank(curVal)) {
                 curVal = curVal.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", ""); /*Example: condition for link*/
                 curVal = StringUtils.substringBefore(curVal, "\n"); /*Example: condition for pl/sql block where value may have character of new line*/
             }
 
-            String prevVal = vals.get(curRowNum.intValue() - 1);
+            String prevVal = vals.get(curRowNum - 1);
             if (StringUtils.isNotBlank(prevVal)) {
                 prevVal = prevVal.replaceAll("^<[aA].*?>", "").replaceAll("</[aA]>$", ""); /*Example: condition for link*/
                 prevVal = StringUtils.substringBefore(prevVal, "\n"); /*Example: condition for pl/sql block where value may have character of new line*/
@@ -278,11 +278,11 @@ public class GridSort {
                 }
             }
 
-            curRowNum = curRowNum + 1L;
+            curRowNum = curRowNum + 1;
         }
     }
 
-    private void checkColumnNumber(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
+    private void checkColumnNumber(String curVal, String prevVal, SortType sortType, int columnIdx, int curRowNum) {
         Long curValNum = Long.valueOf(curVal);
         Long prevValNum = Long.valueOf(prevVal);
 
@@ -295,7 +295,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnTimestamp(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
+    private void checkColumnTimestamp(String curVal, String prevVal, SortType sortType, int columnIdx, int curRowNum) {
         //TODO Date format should depend on user Settings
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
@@ -317,7 +317,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnTimestampWithoutSeconds(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
+    private void checkColumnTimestampWithoutSeconds(String curVal, String prevVal, SortType sortType, int columnIdx, int curRowNum) {
         //TODO Date format should depend on user Settings
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
@@ -339,7 +339,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnDate(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
+    private void checkColumnDate(String curVal, String prevVal, SortType sortType, int columnIdx, int curRowNum) {
         //TODO Date format should depend on user Settings
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -361,7 +361,7 @@ public class GridSort {
         }
     }
 
-    private void checkColumnBoolean(String curVal, String prevVal, SortType sortType, int columnIdx, Long curRowNum) {
+    private void checkColumnBoolean(String curVal, String prevVal, SortType sortType, int columnIdx, int curRowNum) {
         if (SortType.ASC.equals(sortType)) {
             Assert.assertEquals(prevVal.compareTo(curVal) <= 0, true, "Sort asc for [" + columnIdx + "] column is wrong. Cur row num [" + curRowNum +"] val [" + curVal + "], prev row num [" + (curRowNum - 1) + "] val [" + prevVal +"]");
         } else if (SortType.DESC.equals(sortType)) {

@@ -24,10 +24,10 @@ public class TbMultiSelectorField {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value) {
-        int columnIndex = js.getColumnIndexById(0L, columnId);
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
+        int rowsCnt = grid.getGridRowsCount(0L);
 
-        Long rowsCnt = grid.getGridRowsCount(0L);
+        int columnIndex = js.getColumnIndexById(0L, columnId);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         List<FilterOperatorType> operators = FilterOperatorType.getMultiSelectorOperators();

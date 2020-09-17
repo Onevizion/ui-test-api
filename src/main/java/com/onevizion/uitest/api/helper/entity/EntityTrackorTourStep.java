@@ -173,7 +173,7 @@ public class EntityTrackorTourStep {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, TrackorTourStep trackorTourStep) {
+    public void testInGrid(Long gridId, int rowIndex, TrackorTourStep trackorTourStep) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Step Title Label"), trackorTourStep.getTitleLabel());

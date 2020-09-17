@@ -35,8 +35,8 @@ public class Grid {
     private PageButton pageButton;
 
     public boolean isGridEmpty(Long gridId) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
-        if (rowsCnt.equals(1L)) {
+        int rowsCnt = js.getGridRowsCount(gridId);
+        if (rowsCnt == 1) {
             String rowId = js.getGridSelectedRowId(gridId);
             if (rowId.equals("0")) {
                 return true;
@@ -46,39 +46,39 @@ public class Grid {
         return false;
     }
 
-    public Long getGridRowsCount(Long gridId) {
-        Long rowsCnt = js.getGridRowsCount(gridId);
-        if (rowsCnt.equals(1L)) {
+    public int getGridRowsCount(Long gridId) {
+        int rowsCnt = js.getGridRowsCount(gridId);
+        if (rowsCnt == 1) {
             String rowId = js.getGridSelectedRowId(gridId);
             if ("0".equals(rowId)) {
-                return 0L;
+                return 0;
             }
         }
 
         return rowsCnt;
     }
 
-    public Long getTOGridRowsCount(Long gridId) {
+    public int getTOGridRowsCount(Long gridId) {
         Double rowsCnt = js.getTOGridRowsCount(gridId);
         if (rowsCnt.equals(0.3333333333333333D)) {
             String rowId = js.getGridSelectedRowId(gridId);
             if ("0".equals(rowId)) {
-                return 0L;
+                return 0;
             }
         }
 
-        return rowsCnt.longValue();
+        return rowsCnt.intValue();
     }
 
     public void selectFirstRow(Long gridId) {
-        js.selectGridRow(gridId, 0L);
+        js.selectGridRow(gridId, 0);
     }
 
     public void selectLastRow(Long gridId) {
-        js.selectGridRow(gridId, getGridRowsCount(gridId) - 1L);
+        js.selectGridRow(gridId, getGridRowsCount(gridId) - 1);
     }
 
-    public void checkTbGridRowByRowIndex(Long gridId, Long rowIndex, Map<String, String> vals) {
+    public void checkTbGridRowByRowIndex(Long gridId, int rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
             int columnIndex = js.getColumnIndexById(gridId, val.getKey());
             //String columnType = jsHelper.getGridColumnType(gridId, columnIndex);
@@ -97,7 +97,7 @@ public class Grid {
         }
     }
 
-    public void checkGridRowByRowIndexAndColIndex(Long gridId, Long rowIndex, Map<Integer, String> vals) {
+    public void checkGridRowByRowIndexAndColIndex(Long gridId, int rowIndex, Map<Integer, String> vals) {
         for (Entry<Integer, String> val : vals.entrySet()) {
             String value = js.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, val.getKey());
             value = value.replaceAll("<[aA].*?>", "").replaceAll("</[aA]>", "");
@@ -114,14 +114,14 @@ public class Grid {
         }
     }
 
-    public void checkGridRowByRowIndexAndWait(Long gridId, Long rowIndex, Map<String, String> vals) {
+    public void checkGridRowByRowIndexAndWait(Long gridId, int rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
             int columnIndex = js.getColumnIndexById(gridId, val.getKey());
             wait.waitGridCellValue(gridId, columnIndex, rowIndex, val.getValue());
         }
     }
 
-    public void checkGridRowByRowIndex(Long gridId, Long rowIndex, Map<String, String> vals) {
+    public void checkGridRowByRowIndex(Long gridId, int rowIndex, Map<String, String> vals) {
         for (Entry<String, String> val : vals.entrySet()) {
             int columnIndex = js.getColumnIndexById(gridId, val.getKey());
             String value = js.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
@@ -131,8 +131,8 @@ public class Grid {
         }
     }
 
-    public void checkGridRowsByRowIndex(Long gridId, Long rowIndexStart, Long rowIndexEnd, Map<String, String> vals) {
-        for (Long i = rowIndexStart; i <= rowIndexEnd; i++) {
+    public void checkGridRowsByRowIndex(Long gridId, int rowIndexStart, int rowIndexEnd, Map<String, String> vals) {
+        for (int i = rowIndexStart; i <= rowIndexEnd; i++) {
             checkGridRowByRowIndex(gridId, i, vals);
         }
     }
@@ -148,20 +148,20 @@ public class Grid {
     }
 
     public void deleteCurrentRow(Long gridId) {
-        Long oldCnt = js.getGridRowsCount(gridId);
+        int oldCnt = js.getGridRowsCount(gridId);
         if (oldCnt > 1) {
-            oldCnt = oldCnt - 1L;
+            oldCnt = oldCnt - 1;
         }
 
         pageButton.clickDeleteGridAndWait(gridId);
 
-        Long newCnt = js.getGridRowsCount(gridId);
+        int newCnt = js.getGridRowsCount(gridId);
         Assert.assertEquals(newCnt, oldCnt, "Delete row is wrong");
     }
 
-    public List<String> selectPrivilegieGridColumn(Long gridId, int colIdx, Long firstRowIndex, Long lastRowIndex, String val) {
+    public List<String> selectPrivilegieGridColumn(Long gridId, int colIdx, int firstRowIndex, int lastRowIndex, String val) {
         List<String> ret = new ArrayList<>();
-        for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
+        for (int i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
             new Select(seleniumSettings.getWebDriver().findElement(By.id("lbpriv"))).selectByVisibleText(val);
             ret.add(js.getGridSelectedRowId(gridId));
@@ -169,9 +169,9 @@ public class Grid {
         return ret;
     }
 
-    public List<String> selectAssignmentGridColumn(Long gridId, int colIdx, Long firstRowIndex, Long lastRowIndex) {
+    public List<String> selectAssignmentGridColumn(Long gridId, int colIdx, int firstRowIndex, int lastRowIndex) {
         List<String> ret = new ArrayList<>();
-        for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
+        for (int i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
             WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
             checkbox.clickByElement(webElement);
@@ -181,15 +181,15 @@ public class Grid {
     }
 
     public void selectAssignmentGridColumnNew(Long gridId, int colIdxCheckbox, int colIdxName, Map<String, String> values, String priv) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
 
         Assert.assertEquals(names.containsAll(values.keySet()), true, "Some of expected values [" + values.keySet() + "] not exist in grid [" + names + "]");
 
-        for (Long i = 0L; i < cnt; i++) {
-            if (values.containsKey(names.get(i.intValue())) && values.get(names.get(i.intValue())).contains(priv)) {
+        for (int i = 0; i < cnt; i++) {
+            if (values.containsKey(names.get(i)) && values.get(names.get(i)).contains(priv)) {
                 js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
                 WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
                 checkbox.clickByElement(webElement);
@@ -198,9 +198,9 @@ public class Grid {
     }
 
     //TODO remove when getValue will be return 1 and 0 instead of html
-    public List<String> selectAssignmentGridColumn2(Long gridId, int colIdx, Long firstRowIndex, Long lastRowIndex) {
+    public List<String> selectAssignmentGridColumn2(Long gridId, int colIdx, int firstRowIndex, int lastRowIndex) {
         List<String> ret = new ArrayList<>();
-        for (Long i = firstRowIndex; i <= lastRowIndex; i++) {
+        for (int i = firstRowIndex; i <= lastRowIndex; i++) {
             js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
             WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
             checkbox.clickByElement(webElement);
@@ -210,15 +210,15 @@ public class Grid {
     }
 
     public void selectAssignmentGridColumn2New(Long gridId, int colIdxCheckbox, int colIdxName, List<String> values) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
 
         Assert.assertEquals(names.containsAll(values), true, "Some of expected values [" + values + "] not exist in grid [" + names + "]");
 
-        for (Long i = 0L; i < cnt; i++) {
-            if (values.contains(names.get(i.intValue()))) {
+        for (int i = 0; i < cnt; i++) {
+            if (values.contains(names.get(i))) {
                 js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
                 WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdxCheckbox);
                 checkbox.clickByElement(webElement);
@@ -227,12 +227,12 @@ public class Grid {
     }
 
     public void clearPrivilegieGridColumn(Long gridId, int colIdx) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
-        for (Long i = 0L; i < cnt; i++) {
-            if (!"".equals(vals.get(i.intValue()))) {
+        for (int i = 0; i < cnt; i++) {
+            if (!"".equals(vals.get(i))) {
                 js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
                 new Select(seleniumSettings.getWebDriver().findElement(By.id("lbpriv"))).selectByVisibleText("");
             }
@@ -240,12 +240,12 @@ public class Grid {
     }
 
     public void clearAssignmentGridColumn(Long gridId, int colIdx) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
-        for (Long i = 0L; i < cnt; i++) {
-            if ("1".equals(vals.get(i.intValue()))) {
+        for (int i = 0; i < cnt; i++) {
+            if ("1".equals(vals.get(i))) {
                 js.selectGridCellByRowIndexAndColIndex(gridId, i, colIdx);
                 WebElement webElement = (WebElement) js.getGridCellCheckboxByRowIndexAndColIndex(gridId, i, colIdx);
                 checkbox.clickByElement(webElement);
@@ -264,37 +264,37 @@ public class Grid {
     }
 
     public void checkPrivilegieGridColumn(Long gridId, int colIdx, List<String> vals, String val) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
-        for (Long i = 0L; i < cnt; i++) {
+        for (int i = 0; i < cnt; i++) {
             String rowId = js.getGridRowIdByIndex(gridId, i);
             if (vals.contains(rowId)) {
-                Assert.assertEquals(gridVals.get(i.intValue()), val, "Check priv for row id=[" + rowId + "] is failed");
+                Assert.assertEquals(gridVals.get(i), val, "Check priv for row id=[" + rowId + "] is failed");
             } else {
-                Assert.assertEquals(gridVals.get(i.intValue()), "", "Check priv for row id=[" + rowId + "] is failed");
+                Assert.assertEquals(gridVals.get(i), "", "Check priv for row id=[" + rowId + "] is failed");
             }
         }
     }
 
     public void checkAssignmentGridColumn(Long gridId, int colIdx, List<String> vals) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdx);
-        for (Long i = 0L; i < cnt; i++) {
+        for (int i = 0; i < cnt; i++) {
             String rowId = js.getGridRowIdByIndex(gridId, i);
             if (vals.contains(rowId)) {
-                Assert.assertEquals(gridVals.get(i.intValue()), "1", "Check priv for row id=[" + rowId + "] is failed");
+                Assert.assertEquals(gridVals.get(i), "1", "Check priv for row id=[" + rowId + "] is failed");
             } else {
-                Assert.assertEquals(gridVals.get(i.intValue()), "0", "Check priv for row id=[" + rowId + "] is failed");
+                Assert.assertEquals(gridVals.get(i), "0", "Check priv for row id=[" + rowId + "] is failed");
             }
         }
     }
 
     public void checkAssignmentGridColumnNew(Long gridId, int colIdxCheckbox, int colIdxName, Map<String, String> values, String priv) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
@@ -303,18 +303,18 @@ public class Grid {
 
         @SuppressWarnings("unchecked")
         List<String> gridVals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridId, cnt, colIdxCheckbox);
-        for (Long i = 0L; i < cnt; i++) {
-            if (values.containsKey(names.get(i.intValue())) && values.get(names.get(i.intValue())).contains(priv)) {
-                Assert.assertEquals(gridVals.get(i.intValue()), "1", "Check priv for row=[" + names.get(i.intValue()) + "] is failed");
+        for (int i = 0; i < cnt; i++) {
+            if (values.containsKey(names.get(i)) && values.get(names.get(i)).contains(priv)) {
+                Assert.assertEquals(gridVals.get(i), "1", "Check priv for row=[" + names.get(i) + "] is failed");
             } else {
-                Assert.assertEquals(gridVals.get(i.intValue()), "0", "Check priv for row=[" + names.get(i.intValue()) + "] is failed");
+                Assert.assertEquals(gridVals.get(i), "0", "Check priv for row=[" + names.get(i) + "] is failed");
             }
         }
     }
 
     //TODO remove when getValue will be return 1 and 0 instead of html
     public void checkAssignmentGridColumn2(Long gridId, Long colIdx, List<String> vals) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         List<WebElement> checkboxes = seleniumSettings.getWebDriver().findElements(By.name("cb" + gridId + "_" + colIdx));
         for (Long i = 0L; i < cnt; i++) {
@@ -329,7 +329,7 @@ public class Grid {
     }
 
     public void checkAssignmentGridColumn2New(Long gridId, int colIdxCheckbox, int colIdxName, List<String> values) {
-        Long cnt = getGridRowsCount(gridId);
+        int cnt = getGridRowsCount(gridId);
 
         @SuppressWarnings("unchecked")
         List<String> names = (List<String>) js.getGridCellsValuesForColumnByColIndexNew(gridId, cnt, colIdxName);
@@ -386,7 +386,7 @@ public class Grid {
     public int checkColumnByName(Long gridIndex, int columnIndex, String columnName) {
         columnIndex = columnIndex + 1;
         Assert.assertEquals(js.isGridColumnHidden(gridIndex, columnIndex).booleanValue(), false, "Grid have wrong columns");
-        Assert.assertEquals(js.getGridColumnLabelByColIndex(gridIndex, columnIndex, 0L), columnName, "Grid have wrong columns");
+        Assert.assertEquals(js.getGridColumnLabelByColIndex(gridIndex, columnIndex, 0), columnName, "Grid have wrong columns");
         return columnIndex;
     }
 

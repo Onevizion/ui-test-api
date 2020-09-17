@@ -146,8 +146,8 @@ public class Export {
 
     private void checkExport(Long gridIdx, ExportRun exportRun) {
         pageButton.openExportHistoryGrid(gridIdx);
-        Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-        Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
+        int gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
+        Assert.assertEquals(gridRows, 1, "Grid have wrong rows count");
 
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
@@ -167,13 +167,13 @@ public class Export {
 
     private void deleteExport(Long gridIdx, String processId) {
         pageButton.openExportHistoryGrid(gridIdx);
-        Long gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-        Assert.assertEquals(gridRows, Long.valueOf(1L), "Grid have wrong rows count");
+        int gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
+        Assert.assertEquals(gridRows, 1, "Grid have wrong rows count");
 
         checkbox.clickById("lblcb" + processId);
         pageButton.clickDeleteGridAndWait(AbstractSeleniumCore.getGridIdx());
         gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
-        Assert.assertEquals(gridRows, Long.valueOf(0L), "Grid have wrong rows count");
+        Assert.assertEquals(gridRows, 0, "Grid have wrong rows count");
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
     }

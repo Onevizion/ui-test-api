@@ -1136,10 +1136,10 @@ public class EntityConfigField {
             grid2.waitLoad(3L);
 
             List<ConfigFieldVoEfileMetadata> metadatas = configFieldVo.getConfigFieldEfile().getMetadatas();
-            Assert.assertEquals(grid.getGridRowsCount(3L), Long.valueOf(metadatas.size()));
+            Assert.assertEquals(grid.getGridRowsCount(3L), metadatas.size());
             for (int i = 0; i < metadatas.size(); i++) {
-                js.selectGridRow(3L, Long.valueOf(i));
-                entityConfigFieldEfileMetadata.testInGrid(3L, Long.valueOf(i), metadatas.get(i));
+                js.selectGridRow(3L, i);
+                entityConfigFieldEfileMetadata.testInGrid(3L, i, metadatas.get(i));
                 entityConfigFieldEfileMetadata.testOnForm(metadatas.get(i));
             }
 
@@ -1256,7 +1256,7 @@ public class EntityConfigField {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, ConfigFieldVo configFieldVo) {
+    public void testInGrid(Long gridId, int rowIndex, ConfigFieldVo configFieldVo) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Field Name"), configFieldVo.getName());

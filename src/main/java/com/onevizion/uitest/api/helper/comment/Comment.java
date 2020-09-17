@@ -87,7 +87,7 @@ public class Comment {
         //waitHelper.waitGridLoad(1L, 1L);
     }
 
-    public void openCommentFormFromGrid(Long rowIndex, int columnIndex) {
+    public void openCommentFormFromGrid(int rowIndex, int columnIndex) {
         tb.rightClickCell(0L, rowIndex, columnIndex);
 
         int i = 0;
@@ -125,7 +125,7 @@ public class Comment {
         elementWait.waitElementDisabledById("btnSubmit");
         elementWait.waitElementAttributeById("comment", "value", "");
 
-        Long rowsCntBefore = grid.getGridRowsCount(0L);
+        int rowsCntBefore = grid.getGridRowsCount(0L);
 
         seleniumSettings.getWebDriver().findElement(By.id("comment")).sendKeys(text);
         elementWait.waitElementEnabledById("btnSubmit");
@@ -133,7 +133,7 @@ public class Comment {
 
         grid2.waitLoad();
 
-        wait.waitGridRowsCount(0L, rowsCntBefore + 1L);
+        wait.waitGridRowsCount(0L, rowsCntBefore + 1);
 
         elementWait.waitElementDisabledById("btnSubmit");
         elementWait.waitElementAttributeById("comment", "value", "");
@@ -142,16 +142,16 @@ public class Comment {
     }
 
     public void deleteComment(String text) {
-        Long rowsCntBefore = grid.getGridRowsCount(0L);
+        int rowsCntBefore = grid.getGridRowsCount(0L);
 
         Long rowIndex = null;
-        for (Long i = 0L; i < rowsCntBefore; i++) {
+        for (int i = 0; i < rowsCntBefore; i++) {
             String value = js.getGridCellValueByRowIndexAndColIndex(0L, i, 0);
             if (text.equals(value)) {
                 if (rowIndex != null) {
                     throw new SeleniumUnexpectedException("Found many rows with same value[" + text + "]");
                 }
-                rowIndex = i;
+                rowIndex = (long) i;
             }
         }
 
@@ -159,8 +159,8 @@ public class Comment {
             throw new SeleniumUnexpectedException("Row with value[" + text + "] not found");
         }
 
-        js.selectGridRow(0L, rowIndex);
-        String rowId = js.getGridRowIdByIndex(0L, rowIndex);
+        js.selectGridRow(0L, rowIndex.intValue());
+        String rowId = js.getGridRowIdByIndex(0L, rowIndex.intValue());
 
         elementWait.waitElementById("btnDelete" + rowId);
         elementWait.waitElementVisibleById("btnDelete" + rowId);
@@ -173,7 +173,7 @@ public class Comment {
 
         grid2.waitLoad();
 
-        wait.waitGridRowsCount(0L, rowsCntBefore - 1L);
+        wait.waitGridRowsCount(0L, rowsCntBefore - 1);
     }
 
     public void closeCommentForm() {

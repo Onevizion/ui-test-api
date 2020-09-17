@@ -100,7 +100,7 @@ public class EntityCoord {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, Coord coord) {
+    public void testInGrid(Long gridId, int rowIndex, Coord coord) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Pair Name"), coord.getName());

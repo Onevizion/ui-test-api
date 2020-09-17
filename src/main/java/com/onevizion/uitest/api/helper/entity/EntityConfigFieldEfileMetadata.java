@@ -74,7 +74,7 @@ public class EntityConfigFieldEfileMetadata {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, ConfigFieldVoEfileMetadata configFieldVoEfileMetadata) {
+    public void testInGrid(Long gridId, int rowIndex, ConfigFieldVoEfileMetadata configFieldVoEfileMetadata) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Metadata Type"), configFieldVoEfileMetadata.getType().getLabel());

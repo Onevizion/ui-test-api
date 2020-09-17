@@ -77,10 +77,10 @@ public class FieldHistory {
     public void checkFieldHistory(boolean isTaskDate, String fieldId, List<String> vals, boolean isShowMenu, int elementPosition) {
         openFieldHistoryForm(fieldId, isShowMenu, elementPosition);
 
-        Long rowsCnt = grid.getGridRowsCount(1L);
-        Assert.assertEquals(rowsCnt.intValue(), vals.size(), "Field History wrong");
+        int rowsCnt = grid.getGridRowsCount(1L);
+        Assert.assertEquals(rowsCnt, vals.size(), "Field History wrong");
 
-        Long i = rowsCnt - 1L;
+        int i = rowsCnt - 1;
         for (String val : vals) {
             String value;
             if (isTaskDate) {
@@ -114,7 +114,7 @@ public class FieldHistory {
             //} else {
             //    Assert.assertEquals(value, val, "Field History wrong");
             //}
-            i = i - 1L;
+            i = i - 1;
         }
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

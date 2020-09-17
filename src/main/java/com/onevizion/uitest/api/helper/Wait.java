@@ -43,14 +43,14 @@ public class Wait {
             .until(webdriver -> webdriver.findElement(elementLocator));
     }
 
-    public void waitGridRowsCount(final Long gridId, final Long rowsCount) {
-        LongSupplier actualValueSupplier = ()-> grid.getGridRowsCount(gridId);
+    public void waitGridRowsCount(final Long gridId, final int rowsCount) {
+        IntSupplier actualValueSupplier = ()-> grid.getGridRowsCount(gridId);
 
-        Supplier<String> messageSupplier = ()-> "Waiting rows count for grid with id=[" + gridId + "] expectedVal=[" + rowsCount + "] actualVal=[" + actualValueSupplier.getAsLong() + "] is failed";
+        Supplier<String> messageSupplier = ()-> "Waiting rows count for grid with id=[" + gridId + "] expectedVal=[" + rowsCount + "] actualVal=[" + actualValueSupplier.getAsInt() + "] is failed";
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage(messageSupplier)
-            .until(webdriver -> rowsCount.equals(actualValueSupplier.getAsLong()));
+            .until(webdriver -> rowsCount == actualValueSupplier.getAsInt());
     }
 
     public void waitFiltersCount(final Long gridIdx, final int filtersCount) {
@@ -247,7 +247,7 @@ public class Wait {
             .until(webdriver -> !webdriver.findElement(By.id(AbstractSeleniumCore.LOADING_SPLIT_GRID_RIGHT_ID_BASE + gridId)).isDisplayed());
     }
 
-    public void waitGridCellValue(final Long gridId, final int columnIndex, final Long rowIndex, final String val) {
+    public void waitGridCellValue(final Long gridId, final int columnIndex, final int rowIndex, final String val) {
         Supplier<String> actualValueSupplier = ()-> {
             String value = js.getGridCellValueByRowIndexAndColIndex(gridId, rowIndex, columnIndex);
             if ("&nbsp;".equals(value)) {
@@ -273,7 +273,7 @@ public class Wait {
             .until(webdriver -> val.equals(actualValueSupplier.get()));
     }
 
-    public void waitGridCellTxtValue(final Long gridId, final int columnIndex, final Long rowIndex, final String val) {
+    public void waitGridCellTxtValue(final Long gridId, final int columnIndex, final int rowIndex, final String val) {
         Supplier<String> actualValueSupplier = ()-> {
             String columnType = js.getGridColumnType(gridId, columnIndex);
             String value = js.getGridCellValueTxtByRowIndexAndColIndex(gridId, rowIndex, columnIndex);

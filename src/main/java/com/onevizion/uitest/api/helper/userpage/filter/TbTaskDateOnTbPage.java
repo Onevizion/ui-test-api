@@ -25,14 +25,13 @@ public class TbTaskDateOnTbPage {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, String valuePlusMinus, String valueWithin, String startFinish) {
-        int columnIndex = js.getColumnIndexById(0L, columnId);
+        int rowsCnt = grid.getGridRowsCount(0L);
 
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
+        int columnIndex = js.getColumnIndexById(0L, columnId);
         if ("F".equals(startFinish)) {
             columnIndex = columnIndex + 1;
         }
-
-        Long rowsCnt = grid.getGridRowsCount(0L);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         List<FilterOperatorType> operators = FilterOperatorType.getTaskDateOperators();

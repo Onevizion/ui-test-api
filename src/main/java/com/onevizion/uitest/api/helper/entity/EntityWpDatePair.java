@@ -142,7 +142,7 @@ public class EntityWpDatePair {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, WpDatePair wpDatePair) {
+    public void testInGrid(Long gridId, int rowIndex, WpDatePair wpDatePair) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Date Pair Name"), wpDatePair.getName());

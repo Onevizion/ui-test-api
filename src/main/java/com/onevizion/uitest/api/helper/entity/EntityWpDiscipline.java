@@ -101,7 +101,7 @@ public class EntityWpDiscipline {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, WpDiscipline wpDiscipline) {
+    public void testInGrid(Long gridId, int rowIndex, WpDiscipline wpDiscipline) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Discipline"), wpDiscipline.getName());

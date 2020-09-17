@@ -23,11 +23,10 @@ public class TbXitorKeyByText {
 
     @SuppressWarnings("unchecked")
     public void test(String columnId, String value, boolean supportOuterOperations, List<String> ... cellValsKeys) {
+        int rowsCnt = grid.getGridRowsCount(0L);
+
         int columnIndex = js.getColumnIndexById(0L, columnId);
-
-        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0L);
-
-        Long rowsCnt = grid.getGridRowsCount(0L);
+        String fieldName = js.getGridColumnLabelByColIndex(0L, columnIndex, 0);
         List<String> cellVals = (List<String>) js.getGridCellsValuesTxtForColumnByColIndex(0L, rowsCnt, columnIndex);
 
         userpageFilter.checkFilterTrackorSelectorByText(fieldName, FilterOperatorType.EQUAL, value, columnIndex, cellVals);

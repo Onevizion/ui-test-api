@@ -519,7 +519,7 @@ public class EntitySecurityRole {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, SecurityRole securityRole) {
+    public void testInGrid(Long gridId, int rowIndex, SecurityRole securityRole) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Role Name"), securityRole.getName());

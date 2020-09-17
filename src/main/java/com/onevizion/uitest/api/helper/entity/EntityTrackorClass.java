@@ -88,7 +88,7 @@ public class EntityTrackorClass {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, TrackorClass trackorClass) {
+    public void testInGrid(Long gridId, int rowIndex, TrackorClass trackorClass) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Type"), trackorClass.getTrackorType());

@@ -31,71 +31,71 @@ public class Nav {
     @Autowired
     private ElementWait elementWait;
 
-    public Long getAllRecordsCount(Long gridIdx) {
+    public int getAllRecordsCount(Long gridIdx) {
         grid2.waitLoad(gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navTotal" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(recordsLabel.indexOf("of") + 2).trim();
         recordsLabel = recordsLabel.replace(",", "");
-        return Long.valueOf(recordsLabel);
+        return Integer.parseInt(recordsLabel);
     }
 
-    private Long getFirstRowNum(Long gridIdx) {
+    private int getFirstRowNum(Long gridIdx) {
         grid2.waitLoad(gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navRange" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(0, recordsLabel.indexOf("..")).trim();
         recordsLabel = recordsLabel.replace(",", "");
-        return Long.valueOf(recordsLabel);
+        return Integer.parseInt(recordsLabel);
     }
 
-    private Long getLastRowNum(Long gridIdx) {
+    private int getLastRowNum(Long gridIdx) {
         grid2.waitLoad(gridIdx);
         String recordsLabel = seleniumSettings.getWebDriver().findElement(By.id("navRange" + gridIdx)).getText();
         recordsLabel = recordsLabel.substring(recordsLabel.indexOf("..") + 2).trim();
         recordsLabel = recordsLabel.replace(",", "");
-        return Long.valueOf(recordsLabel);
+        return Integer.parseInt(recordsLabel);
     }
 
     public void checkNavigation(Long gridIdx) {
         grid2.waitLoad(gridIdx);
 
-        Long allRecordsCount = getAllRecordsCount(gridIdx);
-        Long actualVisibleRecordsCount = js.getGridRowsCount(gridIdx);
+        int allRecordsCount = getAllRecordsCount(gridIdx);
+        int actualVisibleRecordsCount = js.getGridRowsCount(gridIdx);
 
-        Assert.assertEquals(actualVisibleRecordsCount.compareTo(allRecordsCount) <= 0, true, "Visible records count more than all records count");
+        Assert.assertEquals(allRecordsCount <= actualVisibleRecordsCount, true, "Visible records count more than all records count");
 
-        int countPages = (int) Math.ceil(allRecordsCount.doubleValue() / actualVisibleRecordsCount.doubleValue());
+        int countPages = (int) Math.ceil(allRecordsCount / actualVisibleRecordsCount);
 
-        Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1L), "First num row in grid is wrong");
+        Assert.assertEquals(getFirstRowNum(gridIdx), 1, "First num row in grid is wrong");
         Assert.assertEquals(getLastRowNum(gridIdx), actualVisibleRecordsCount, "Last num row in grid is wrong");
         checkCountRowsOnPage(gridIdx);
 
         for (int pageNum = 1; pageNum < countPages; pageNum++) {
-            Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1 + (pageNum - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
-            Assert.assertEquals(getLastRowNum(gridIdx), Long.valueOf(pageNum * actualVisibleRecordsCount), "Last num row in grid is wrong");
+            Assert.assertEquals(getFirstRowNum(gridIdx), (1 + (pageNum - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
+            Assert.assertEquals(getLastRowNum(gridIdx), (pageNum * actualVisibleRecordsCount), "Last num row in grid is wrong");
             checkCountRowsOnPage(gridIdx);
 
             goToNextPage(gridIdx, pageNum + 1);
         }
 
-        Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1 + (countPages - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
+        Assert.assertEquals(getFirstRowNum(gridIdx), (1 + (countPages - 1) * actualVisibleRecordsCount), "First num row in grid is wrong");
         Assert.assertEquals(getLastRowNum(gridIdx), allRecordsCount, "Last num row in grid is wrong");
         checkCountRowsOnPage(gridIdx);
 
         for (int pageNum = countPages; pageNum > 1; pageNum--) {
             goToPrevPage(gridIdx, pageNum - 1);
 
-            Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf((pageNum - 2) * actualVisibleRecordsCount + 1), "First num row in grid is wrong");
-            Assert.assertEquals(getLastRowNum(gridIdx), Long.valueOf((pageNum - 1) * actualVisibleRecordsCount), "Last num row in grid is wrong");
+            Assert.assertEquals(getFirstRowNum(gridIdx), ((pageNum - 2) * actualVisibleRecordsCount + 1), "First num row in grid is wrong");
+            Assert.assertEquals(getLastRowNum(gridIdx), ((pageNum - 1) * actualVisibleRecordsCount), "Last num row in grid is wrong");
             checkCountRowsOnPage(gridIdx);
         }
 
-        Assert.assertEquals(getFirstRowNum(gridIdx), Long.valueOf(1L), "First num row in grid is wrong");
+        Assert.assertEquals(getFirstRowNum(gridIdx), 1, "First num row in grid is wrong");
         Assert.assertEquals(getLastRowNum(gridIdx), actualVisibleRecordsCount, "Last num row in grid is wrong");
         checkCountRowsOnPage(gridIdx);
     }
 
     private void checkCountRowsOnPage(Long gridIdx) {
-        Long count = getLastRowNum(gridIdx) - getFirstRowNum(gridIdx) + 1;
+        int count = getLastRowNum(gridIdx) - getFirstRowNum(gridIdx) + 1;
         Assert.assertEquals(js.getGridRowsCount(gridIdx), count, "Actual records count not equals expected records count");
     }
 

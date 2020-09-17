@@ -56,8 +56,8 @@ public class Selector {
             }
             seleniumSettings.getWebDriver().findElements(By.name("rb0")).get(0).click();
         } else {
-            Long cnt = js.getGridRowsCount(0L);
-            for (Long i = 0L; i < cnt; i++) {
+            int cnt = js.getGridRowsCount(0L);
+            for (int i = 0; i < cnt; i++) {
                 if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
                     WebElement rb = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0);
                     element.moveToElement(rb);
@@ -88,9 +88,9 @@ public class Selector {
                 checkbox.findLabelsByName("cb0_0").get(0).click();
             }
         } else {
-            Long cnt = js.getGridRowsCount(0L);
+            int cnt = js.getGridRowsCount(0L);
             for (String value : values) {
-                for (Long i = 0L; i < cnt; i++) {
+                for (int i = 0; i < cnt; i++) {
                     if (js.getGridCellValueByRowIndexAndColIndex(0L, i, colNum).equals(value)) {
                         WebElement cell = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0);
                         WebElement cb = cell.findElement(By.name("cb0_0"));
@@ -125,8 +125,8 @@ public class Selector {
                 }
             }
         } else {
-            Long cnt = js.getGridRowsCount(0L);
-            for (Long i = 0L; i < cnt; i++) {
+            int cnt = js.getGridRowsCount(0L);
+            for (int i = 0; i < cnt; i++) {
                 if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1).equals(value)) {
                     WebElement rb = ((WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0)).findElement(By.name("rb0"));
                     String checked = rb.getAttribute("checked");
@@ -164,11 +164,11 @@ public class Selector {
                 Assert.assertEquals(isChecked, true, "value not selected");
             }
         } else {
-            Long cnt = js.getGridRowsCount(0L);
+            int cnt = js.getGridRowsCount(0L);
             for (String value : values) {
                 boolean isChecked = false;
 
-                for (Long i = 0L; i < cnt; i++) {
+                for (int i = 0; i < cnt; i++) {
                     if (js.getGridCellValueByRowIndexAndColIndex(0L, i, 1).equals(value)) {
                         WebElement cell = (WebElement) js.getGridCellByRowIndexAndColIndex(0L, i, 0);
                         WebElement cb = cell.findElement(By.name("cb0_0"));

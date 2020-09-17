@@ -86,7 +86,7 @@ public class EntityValidation {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testInGrid(Long gridId, Long rowIndex, Validation validation) {
+    public void testInGrid(Long gridId, int rowIndex, Validation validation) {
         Map<Integer, String> gridVals = new HashMap<>();
 
         gridVals.put(js.getColumnIndexByLabel(gridId, "Name"), validation.getName());

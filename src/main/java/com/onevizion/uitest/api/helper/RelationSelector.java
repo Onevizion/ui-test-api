@@ -79,7 +79,7 @@ public class RelationSelector {
         }
     }
 
-    public void selectGridRow(Long gridIdx, Long rowIndex) {
+    public void selectGridRow(Long gridIdx, int rowIndex) {
         relationSelectorJs.setIsReadyToFalse(gridIdx);
         js.selectGridRow(gridIdx, rowIndex);
         waitRelationSelector(gridIdx);

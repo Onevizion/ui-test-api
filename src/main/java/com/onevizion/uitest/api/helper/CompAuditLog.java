@@ -24,7 +24,7 @@ public class CompAuditLog {
     @Autowired
     private SeleniumSettings seleniumSettings;
 
-    public void checkGridRowsByRowIndex(Long gridId, Long rowIndexStart, Long rowIndexEnd, String action, String table) {
+    public void checkGridRowsByRowIndex(Long gridId, int rowIndexStart, int rowIndexEnd, String action, String table) {
         Map<String, String> gridVals = new HashMap<>();
 
         gridVals.put(COLUMN_ID_USER, seleniumSettings.getTestUser());
@@ -34,7 +34,7 @@ public class CompAuditLog {
         grid.checkGridRowsByRowIndex(gridId, rowIndexStart, rowIndexEnd, gridVals);
     }
 
-    public Long checkGridRowByRowIndex(Long gridId, Long rowIndex, String action, String table, String field, String newVal, String oldVal) {
+    public int checkGridRowByRowIndex(Long gridId, int rowIndex, String action, String table, String field, String newVal, String oldVal) {
         Map<String, String> gridVals = new HashMap<>();
 
         gridVals.put(COLUMN_ID_USER, seleniumSettings.getTestUser());
@@ -46,7 +46,7 @@ public class CompAuditLog {
 
         grid.checkGridRowByRowIndex(gridId, rowIndex, gridVals);
 
-        rowIndex = rowIndex + 1L;
+        rowIndex = rowIndex + 1;
 
         return rowIndex;
     }

@@ -689,7 +689,7 @@ public class Tb {
         return vals;
     }
 
-    public void editCells(Long gridIndex, Long rowIndex, List<Integer> columns, List<String> vals,
+    public void editCells(Long gridIndex, int rowIndex, List<Integer> columns, List<String> vals,
             Map<String, String> gridExpVals, Map<String, String> expVals, List<String> columnNames, List<String> fieldNames, Long tid, Long efileFieldId) {
         editCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, vals.get(0), columnNames.get(0), fieldNames != null ? fieldNames.get(0) : null, gridExpVals, expVals, null, null);
         editCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, vals.get(1), columnNames.get(1), fieldNames != null ? fieldNames.get(1) : null, gridExpVals, expVals, null, null);
@@ -715,7 +715,7 @@ public class Tb {
         editCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, vals.get(21), columnNames.get(21), fieldNames != null ? fieldNames.get(21) : null, gridExpVals, expVals, null, null);
     }
 
-    public void editCell(Long gridIndex, Long rowIndex, int columnIndex, ConfigFieldType fieldDataType, String value,
+    public void editCell(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType, String value,
             String gridColumnId, String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals, Long tid, Long fieldId) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
@@ -869,7 +869,7 @@ public class Tb {
         }
     }
 
-    public void clearCells(Long gridIndex, Long rowIndex, List<Integer> columns, Map<String, String> gridExpVals,
+    public void clearCells(Long gridIndex, int rowIndex, List<Integer> columns, Map<String, String> gridExpVals,
             Map<String, String> expVals, List<String> columnNames, List<String> fieldNames) {
         clearCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, columnNames.get(0), fieldNames != null ? fieldNames.get(0) : null, gridExpVals, expVals);
         clearCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, columnNames.get(1), fieldNames != null ? fieldNames.get(1) : null, gridExpVals, expVals);
@@ -895,7 +895,7 @@ public class Tb {
         clearCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, columnNames.get(21), fieldNames != null ? fieldNames.get(21) : null, gridExpVals, expVals);
     }
 
-    public void clearCell(Long gridIndex, Long rowIndex, int columnIndex, ConfigFieldType fieldDataType, String gridColumnId,
+    public void clearCell(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType, String gridColumnId,
             String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
@@ -1003,7 +1003,7 @@ public class Tb {
         }
     }
 
-    public void rightClickCell(Long gridIndex, Long rowIndex, int columnIndex) {
+    public void rightClickCell(Long gridIndex, int rowIndex, int columnIndex) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
@@ -1016,7 +1016,7 @@ public class Tb {
         action.contextClick(gridCell).perform();
     }
 
-    public void checkCellsEnabled(Long gridIndex, Long rowIndex, List<Integer> columns) {
+    public void checkCellsEnabled(Long gridIndex, int rowIndex, List<Integer> columns) {
         checkCellEnabled(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX);
         checkCellEnabled(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE);
         checkCellEnabled(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN);
@@ -1041,7 +1041,7 @@ public class Tb {
         checkCellEnabled(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR);
     }
 
-    public void checkCellEnabled(Long gridIndex, Long rowIndex, int columnIndex, ConfigFieldType fieldDataType) {
+    public void checkCellEnabled(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
@@ -1089,7 +1089,7 @@ public class Tb {
         js.selectGridCellByRowIndexAndColIndex2(gridIndex, rowIndex, columnIndex);
     }
 
-    public void checkCellsDisabled(Long gridIndex, Long rowIndex, List<Integer> columns) {
+    public void checkCellsDisabled(Long gridIndex, int rowIndex, List<Integer> columns) {
         checkCellDisabled(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX);
         checkCellDisabled(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE);
         checkCellDisabled(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN);
@@ -1114,7 +1114,7 @@ public class Tb {
         checkCellDisabled(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR);
     }
 
-    public void checkCellDisabled(Long gridIndex, Long rowIndex, int columnIndex, ConfigFieldType fieldDataType) {
+    public void checkCellDisabled(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);

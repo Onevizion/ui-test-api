@@ -36,7 +36,7 @@ public class BplExport {
     private Grid2 grid2;
 
     public void openSubGrid(Long gridIdx, BplComponentType bplComponentType) {
-        Long rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
+        int rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
         Long subGridId = getComponentTypeGridId(gridIdx, bplComponentType);
 
         js.openSubGrid(gridIdx, rowIndex, 0);
@@ -44,12 +44,12 @@ public class BplExport {
     }
 
     public void closeSubGrid(Long gridIdx, BplComponentType bplComponentType) {
-        Long rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
+        int rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
 
         js.openSubGrid(gridIdx, rowIndex, 0);
     }
 
-    public void checkComponentsCount(Long gridIdx, BplComponentType bplComponentType, Long count) {
+    public void checkComponentsCount(Long gridIdx, BplComponentType bplComponentType, int count) {
         Long subGridId = getComponentTypeGridId(gridIdx, bplComponentType);
 
         Assert.assertEquals(grid.getGridRowsCount(subGridId), count);
@@ -60,21 +60,21 @@ public class BplExport {
 
         int columnIndex = js.getColumnIndexByLabel(subGridId, bplComponentType.getColumnName());
         qs.searchValue(subGridId, bplComponentType.getColumnName(), "\"" + componentName + "\"");
-        Assert.assertEquals(js.getGridCellValueByRowIndexAndColIndex(subGridId, 0L, columnIndex), componentName);
+        Assert.assertEquals(js.getGridCellValueByRowIndexAndColIndex(subGridId, 0, columnIndex), componentName);
         checkbox.clickById("cb" + js.getGridSelectedRowId(subGridId));
     }
 
     private Long getComponentTypeGridId(Long gridIdx, BplComponentType bplComponentType) {
-        Long rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
+        int rowIndex = getComponentTypeRowIndex(gridIdx, bplComponentType);
 
         js.selectGridRow(gridIdx, rowIndex);
         return NumberUtils.createLong(js.getGridSelectedRowId(gridIdx));
     }
 
     @SuppressWarnings("unchecked")
-    private Long getComponentTypeRowIndex(Long gridIdx, BplComponentType bplComponentType) {
+    private int getComponentTypeRowIndex(Long gridIdx, BplComponentType bplComponentType) {
         Long rowIndex = null;
-        Long rowsCount = js.getGridRowsCount(gridIdx);
+        int rowsCount = js.getGridRowsCount(gridIdx);
         int columnIndex = js.getColumnIndexByLabel(gridIdx, COLUMN_LABEL);
         List<String> vals = (List<String>) js.getGridCellsValuesForColumnByColIndex(gridIdx, rowsCount, columnIndex);
         for (int i = 0; i < rowsCount; i++) {
@@ -87,7 +87,7 @@ public class BplExport {
             throw new SeleniumUnexpectedException("Component Name [" + bplComponentType.getName() + "] not found");
         }
 
-        return rowIndex;
+        return rowIndex.intValue();
     }
 
 }
