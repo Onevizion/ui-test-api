@@ -19,11 +19,7 @@ public class DropDown {
     @Autowired
     private ElementWait elementWait;
 
-    public void selectPortal(String name) {
-        selectEntity("dropDownPortals", name);
-    }
-
-    private void selectEntity(String id, String name) {
+    public void selectEntity(String id, String name) {
         WebElement currentPortal = seleniumSettings.getWebDriver().findElement(By.id(id)).findElement(By.className("dds_label"));
         String currentPortalName = currentPortal.getText();
         if (name.equals(currentPortalName)) {

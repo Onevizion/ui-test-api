@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.onevizion.uitest.api.helper.DropDown;
+
 @Component
 public class Portal {
 
@@ -12,6 +14,13 @@ public class Portal {
 
     @Autowired
     private PortalJs portalJs;
+
+    @Autowired
+    private DropDown dropDown;
+
+    public void select(String name) {
+        dropDown.selectEntity("dropDownPortals", name);
+    }
 
     public void waitPortal(String name, int framesCount) {
         portalWait.waitPortal(name);
