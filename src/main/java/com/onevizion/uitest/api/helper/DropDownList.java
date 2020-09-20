@@ -17,7 +17,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.vo.DropDownElement;
 
 @Component
-public class DropDown {
+public class DropDownList {
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -26,7 +26,7 @@ public class DropDown {
     private ElementWait elementWait;
 
     @Autowired
-    private DropDownJs dropDownJs;
+    private DropDownListJs dropDownListJs;
 
     public List<DropDownElement> getElements(String dropDownId) {
         return getItems(dropDownId);
@@ -72,7 +72,7 @@ public class DropDown {
 
     public void selectElementByLabel(List<DropDownElement> elements, String label) {
         DropDownElement dropDownElement = getElementByLabel(elements, label);
-        dropDownJs.scrollToElementInDropDown(dropDownElement.getWebElement());
+        dropDownListJs.scrollToElementInDropDownList(dropDownElement.getWebElement());
         elementWait.waitElementVisible(dropDownElement.getWebElement());
         dropDownElement.getWebElement().click();
     }
