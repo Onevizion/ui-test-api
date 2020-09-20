@@ -29,6 +29,7 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.CloneButton;
 import com.onevizion.uitest.api.helper.CompAuditLog;
+import com.onevizion.uitest.api.helper.DropDown;
 import com.onevizion.uitest.api.helper.DropDownList;
 import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.Element;
@@ -328,6 +329,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected FilterLogic filterLogic;
+
+    @Autowired
+    protected DropDown dropDown;
     /* Helpers End */
 
     /* Entity Helpers Begin */
