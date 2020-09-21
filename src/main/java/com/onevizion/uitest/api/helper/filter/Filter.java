@@ -25,8 +25,7 @@ import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
-import com.onevizion.uitest.api.helper.page.button.PageButton;
-import com.onevizion.uitest.api.helper.tree.Tree;
+import com.onevizion.uitest.api.helper.organizer.Organizer;
 import com.onevizion.uitest.api.vo.FilterFieldType;
 import com.onevizion.uitest.api.vo.SortType;
 
@@ -86,9 +85,6 @@ public class Filter {
     private Js js;
 
     @Autowired
-    private Tree tree;
-
-    @Autowired
     private Wait wait;
 
     @Autowired
@@ -116,7 +112,7 @@ public class Filter {
     private Jquery jquery;
 
     @Autowired
-    private PageButton pageButton;
+    private Organizer organizer;
 
     public void openMainPanel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
@@ -184,32 +180,6 @@ public class Filter {
 
     public String getCurrentFilterName(Long gridIdx) {
         return seleniumSettings.getWebDriver().findElement(By.id(ID_CURRENT_NAME + gridIdx)).getText();
-    }
-
-    public void selectFilterInOrganize(String filterName) {
-        boolean filterFound = false;
-
-        String globalItemsStr = tree.getAllSubItems(0L, "-1");
-        String[] globalItems = globalItemsStr.split(",");
-        for (String globalItem : globalItems) {
-            if (filterName.equals(tree.getItemTextById(0L, globalItem))) {
-                filterFound = true;
-                tree.selectItem(0L, globalItem);
-            }
-        }
-
-        String localItemsStr = tree.getAllSubItems(0L, "-2");
-        String[] localItems = localItemsStr.split(",");
-        for (String localItem : localItems) {
-            if (filterName.equals(tree.getItemTextById(0L, localItem))) {
-                filterFound = true;
-                tree.selectItem(0L, localItem);
-            }
-        }
-
-        if (!filterFound) {
-            throw new SeleniumUnexpectedException("Filter not found in organize");
-        }
     }
 
     public void selectByVisibleText(String entityPrefix, Long gridIdx) {
@@ -394,6 +364,14 @@ public class Filter {
         isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + filterName);
     }
 
+    public void openFilterOrganizer(Long gridIdx) {
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
+    }
+
+    public void closeFilterOrganizer() {
+        organizer.closeOrganizer();
+    }
+
     public void deleteFilter(Long gridIdx, String entityPrefix) {
         String currentFilterName = getCurrentFilterName(gridIdx);
 
@@ -401,16 +379,10 @@ public class Filter {
 
         openMainPanel(gridIdx);
 
-        window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
-        tree.waitLoad(0L);
-        wait.waitFormLoad();
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        openFilterOrganizer(gridIdx);
+        organizer.deleteItem(entityPrefix);
+        closeFilterOrganizer();
 
-        selectFilterInOrganize(entityPrefix);
-
-        pageButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
-
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         grid2.waitLoad(gridIdx);
 
         wait.waitFiltersCount(gridIdx, beforeDeleteSize - 1);

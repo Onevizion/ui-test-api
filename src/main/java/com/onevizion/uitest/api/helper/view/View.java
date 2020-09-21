@@ -20,8 +20,7 @@ import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
-import com.onevizion.uitest.api.helper.page.button.PageButton;
-import com.onevizion.uitest.api.helper.tree.Tree;
+import com.onevizion.uitest.api.helper.organizer.Organizer;
 import com.onevizion.uitest.api.vo.ListboxElement;
 
 @Component
@@ -86,9 +85,6 @@ public class View {
     private Wait wait;
 
     @Autowired
-    private Tree tree;
-
-    @Autowired
     private Grid2 grid2;
 
     @Autowired
@@ -107,7 +103,7 @@ public class View {
     private Jquery jquery;
 
     @Autowired
-    private PageButton pageButton;
+    private Organizer organizer;
 
     public void openMainPanel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
@@ -175,32 +171,6 @@ public class View {
 
     public String getCurrentViewName(Long gridIdx) {
         return seleniumSettings.getWebDriver().findElement(By.id(ID_CURRENT_NAME + gridIdx)).getText();
-    }
-
-    public void selectViewInOrganize(String viewName) {
-        boolean viewFound = false;
-
-        String globalItemsStr = tree.getAllSubItems(0L, "-1");
-        String[] globalItems = globalItemsStr.split(",");
-        for (String globalItem : globalItems) {
-            if (viewName.equals(tree.getItemTextById(0L, globalItem))) {
-                viewFound = true;
-                tree.selectItem(0L, globalItem);
-            }
-        }
-
-        String localItemsStr = tree.getAllSubItems(0L, "-2");
-        String[] localItems = localItemsStr.split(",");
-        for (String localItem : localItems) {
-            if (viewName.equals(tree.getItemTextById(0L, localItem))) {
-                viewFound = true;
-                tree.selectItem(0L, localItem);
-            }
-        }
-
-        if (!viewFound) {
-            throw new SeleniumUnexpectedException("View not found in organize");
-        }
     }
 
     public void selectByVisibleText(Long gridIdx, String entityPrefix) {
@@ -368,6 +338,14 @@ public class View {
         isExistAndSelectedView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + viewName);
     }
 
+    public void openViewOrganizer(Long gridIdx) {
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
+    }
+
+    public void closeViewOrganizer() {
+        organizer.closeOrganizer();
+    }
+
     public void deleteView(Long gridIdx, String entityPrefix) {
         String currentViewName = getCurrentViewName(gridIdx);
 
@@ -375,16 +353,10 @@ public class View {
 
         openMainPanel(gridIdx);
 
-        window.openModal(By.id(BUTTON_ORGANIZE + gridIdx));
-        tree.waitLoad(0L);
-        wait.waitFormLoad();
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        openViewOrganizer(gridIdx);
+        organizer.deleteItem(entityPrefix);
+        closeViewOrganizer();
 
-        selectViewInOrganize(entityPrefix);
-
-        pageButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
-
-        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         grid2.waitLoad(gridIdx);
 
         wait.waitViewsCount(gridIdx, beforeDeleteSize - 1);
