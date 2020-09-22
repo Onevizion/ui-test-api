@@ -127,11 +127,11 @@ public class Dashboard {
         return dashboardJs.getDashlets();
     }
 
-    public Long getDashletAxesCount(String dashletId) {
+    public int getDashletAxesCount(String dashletId) {
         return dashboardJs.getDashletAxesCount(dashletId);
     }
 
-    public Long getDashletAxisFieldsCount(String dashletId, int asixIdx) {
+    public int getDashletAxisFieldsCount(String dashletId, int asixIdx) {
         return dashboardJs.getDashletAxisFieldsCount(dashletId, asixIdx);
     }
 
@@ -143,7 +143,7 @@ public class Dashboard {
         return dashboardJs.getDashletAxisFieldCalcMethod(dashletId, asixIdx, fieldIdx);
     }
 
-    public Long getDashletSeriesCount(String dashletId) {
+    public int getDashletSeriesCount(String dashletId) {
         return dashboardJs.getDashletSeriesCount(dashletId);
     }
 

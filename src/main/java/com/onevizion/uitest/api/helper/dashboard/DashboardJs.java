@@ -14,12 +14,12 @@ class DashboardJs extends Js {
         return (List<String>) execJs2("return Object.keys(dashboard.dashlets);");
     }
 
-    Long getDashletAxesCount(String dashletId) {
-        return Long.parseLong(execJs("return dashboard.dashlets[" + dashletId + "].axes.length;"));
+    int getDashletAxesCount(String dashletId) {
+        return Integer.parseInt(execJs("return dashboard.dashlets[" + dashletId + "].axes.length;"));
     }
 
-    Long getDashletAxisFieldsCount(String dashletId, int asixIdx) {
-        return Long.parseLong(execJs("return dashboard.dashlets[" + dashletId + "].axes[" + asixIdx + "].fields.length;"));
+    int getDashletAxisFieldsCount(String dashletId, int asixIdx) {
+        return Integer.parseInt(execJs("return dashboard.dashlets[" + dashletId + "].axes[" + asixIdx + "].fields.length;"));
     }
 
     Long getDashletAxisFieldChartType(String dashletId, int asixIdx, int fieldIdx) {
@@ -30,8 +30,8 @@ class DashboardJs extends Js {
         return Long.parseLong(execJs("return dashboard.dashlets[" + dashletId + "].axes[" + asixIdx + "].fields[" + fieldIdx + "].calcMethodId;"));
     }
 
-    Long getDashletSeriesCount(String dashletId) {
-        return Long.parseLong(execJs("return dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series.length;"));
+    int getDashletSeriesCount(String dashletId) {
+        return Integer.parseInt(execJs("return dashboard.dashlets[" + dashletId + "].chart.highChartsConfig.series.length;"));
     }
 
     String getDashletSerieDataX(String dashletId) {
