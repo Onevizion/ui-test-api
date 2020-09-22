@@ -364,27 +364,15 @@ public class Filter {
         isExistAndSelectedFilter(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + filterName);
     }
 
-    public void openFilterOrganizer(Long gridIdx) {
+    public void openOrganizer(Long gridIdx) {
         organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
     }
 
-    public void addFilterOrganizerGlobalFolder(String folderName, String folderParentName) {
-        if(folderParentName != null) {
-            organizer.addFolder(folderName, folderParentName);
-        } else {
-            organizer.addFolder(folderName, "Global Filters");
-        }
+    public void addFolder(String folderName, String folderParentName) {
+        organizer.addFolder(folderName, folderParentName);
     }
 
-    public void addFilterOrganizerLocalFolder(String folderName, String folderParentName) {
-        if(folderParentName != null) {
-            organizer.addFolder(folderName, folderParentName);
-        } else {
-            organizer.addFolder(folderName, "Local Filters");
-        }
-    }
-
-    public void closeFilterOrganizer() {
+    public void closeOrganizer() {
         organizer.closeOrganizer();
     }
 
@@ -395,9 +383,9 @@ public class Filter {
 
         openMainPanel(gridIdx);
 
-        openFilterOrganizer(gridIdx);
+        openOrganizer(gridIdx);
         organizer.deleteItem(entityPrefix);
-        closeFilterOrganizer();
+        closeOrganizer();
 
         grid2.waitLoad(gridIdx);
 
