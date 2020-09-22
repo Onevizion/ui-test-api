@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
+import com.onevizion.uitest.api.helper.NewNewDropDown;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
@@ -56,6 +57,9 @@ public class Dashboard {
     @Autowired
     private Jquery jquery;
 
+    @Autowired
+    private NewNewDropDown newNewDropDown;
+
     public void openAddDashboardForm() {
         seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dds_label")).click();
         //elementWait.waitElementById("dd_content_" + id);//TODO
@@ -91,35 +95,7 @@ public class Dashboard {
     }
 
     public void select(String name) {
-        WebElement currentDashboard = seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dds_label"));
-        String currentDashboardName = currentDashboard.getText();
-        if (name.equals(currentDashboardName)) {
-            return;
-        }
-
-        seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dds_label")).click();
-        //elementWait.waitElementById("dd_content_" + id);//TODO
-        elementWait.waitElementVisible(seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dd_content")));
-        elementWait.waitElementDisplay(seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElement(By.className("dd_content")));
-
-        seleniumSettings.getWebDriver().findElement(By.id("search_dropDownDashboards")).clear();
-        seleniumSettings.getWebDriver().findElement(By.id("search_dropDownDashboards")).sendKeys(name);
-
-        WebElement dropDownItem = null;
-        List<WebElement> items = seleniumSettings.getWebDriver().findElement(By.id("dropDownDashboards")).findElements(By.className("drop_down_item"));
-        for (WebElement item : items) {
-            if (name.equals(item.findElement(By.className("ddi_label")).getAttribute("textContent"))) {
-                if (dropDownItem != null) {
-                    throw new SeleniumUnexpectedException("Dashboard [" + name + "] found many times");
-                }
-                dropDownItem = item;
-            }
-        }
-        if (dropDownItem == null) {
-            throw new SeleniumUnexpectedException("Dashboard [" + name + "] not found");
-        }
-        dropDownItem.click();
-
+        newNewDropDown.selectDashboard(name);
         waitDashboardLoad();
     }
 
