@@ -51,14 +51,6 @@ public class NewDropDown {
         jquery.waitLoad();
     }
 
-    public void selectDashboard(String name) {
-        selectEntity("lbDashboard", name);
-    }
-
-    public void selectPortal(String name) {
-        selectEntity("lbPortal0", name);
-    }
-
     public void selectComponentPackage(String name) {
         selectEntity("lbCompPkg0", name);
         grid2.waitLoad();
