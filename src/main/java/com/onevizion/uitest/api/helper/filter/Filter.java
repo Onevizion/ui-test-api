@@ -368,6 +368,22 @@ public class Filter {
         organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
     }
 
+    public void addFilterOrganizerGlobalFolder(String folderName, String folderParentName) {
+        if(folderParentName != null) {
+            organizer.addFolder(folderName, folderParentName);
+        } else {
+            organizer.addFolder(folderName, "Global Filters");
+        }
+    }
+
+    public void addFilterOrganizerLocalFolder(String folderName, String folderParentName) {
+        if(folderParentName != null) {
+            organizer.addFolder(folderName, folderParentName);
+        } else {
+            organizer.addFolder(folderName, "Local Filters");
+        }
+    }
+
     public void closeFilterOrganizer() {
         organizer.closeOrganizer();
     }

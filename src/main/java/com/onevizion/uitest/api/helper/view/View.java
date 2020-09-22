@@ -342,6 +342,22 @@ public class View {
         organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
     }
 
+    public void addViewOrganizerGlobalFolder(String folderName, String folderParentName) {
+        if(folderParentName != null) {
+            organizer.addFolder(folderName, folderParentName);
+        } else {
+            organizer.addFolder(folderName, "Global Views");
+        }
+    }
+
+    public void addViewOrganizerLocalFolder(String folderName, String folderParentName) {
+        if(folderParentName != null) {
+            organizer.addFolder(folderName, folderParentName);
+        } else {
+            organizer.addFolder(folderName, "Local Views");
+        }
+    }
+
     public void closeViewOrganizer() {
         organizer.closeOrganizer();
     }

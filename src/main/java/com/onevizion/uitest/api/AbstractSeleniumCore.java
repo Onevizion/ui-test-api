@@ -329,9 +329,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected FilterLogic filterLogic;
-
-    @Autowired
-    protected Organizer organizer;
     /* Helpers End */
 
     /* Entity Helpers Begin */
@@ -458,7 +455,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     public static final String BUTTON_ADD_TREE_ID_BASE = "btnAddTree";
     public static final String BUTTON_EDIT_TREE_ID_BASE = "btnEditTree";
-    public static final String BUTTON_DELETE_TREE_ID_BASE = "btnDeleteTree";
 
     public static final String PREFIX_LOCAL = "L:";
     public static final String PREFIX_GLOBAL = "G:";

@@ -45,7 +45,7 @@ public class Organizer {
 
     public void openOrganizer(String id) {
         window.openModal(By.id(id));
-        tree.waitLoad(0L);
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
         wait.waitFormLoad();
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
@@ -54,23 +54,14 @@ public class Organizer {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void addFolder(String folderName, String folderParentName, boolean isGlobal) {
-        if(isGlobal) {
-            tree.selectItem(AbstractSeleniumCore.getTreeIdx(), "-1");
-        } else {
-            tree.selectItem(AbstractSeleniumCore.getTreeIdx(), "-2");
-        }
-
+    public void addFolder(String folderName, String folderParentName) {
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_ADD_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx())).click();
         WebElement dialog = seleniumSettings.getWebDriver().findElement(By.id(FORM_DIALOG_ID));
         elementWait.waitElementVisible(dialog);
         elementWait.waitElementDisplay(dialog);
 
         dialog.findElement(By.id(INPUT_FOLDER_NAME_ID)).sendKeys(folderName);
-        if(folderParentName != null) {
-            selectParentFolderByVisibleText(dialog, folderParentName);
-        }
-
+        selectParentFolderByVisibleText(dialog, folderParentName);
         dialog.findElement(By.id(BUTTON_DIALOG_OK_ID)).click();
 
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
@@ -78,6 +69,11 @@ public class Organizer {
 
     private void selectParentFolderByVisibleText(WebElement dialog, String folderParentName) {
         String dropDownId = dialog.findElement(By.className("newGenericDropDown")).getAttribute("id");
+
+        String selectedItem = dialog.findElement(By.className("newGenericDropDownLabel")).getText();
+        if(folderParentName.equals(selectedItem)) {
+            return;
+        }
 
         dialog.findElement(By.className("newGenericDropDownLabel")).click(); //TODO bug? when clicking on drop-down by id - element is not interactable exception
         elementWait.waitElementVisibleById(dropDownId + "Container");
@@ -90,7 +86,7 @@ public class Organizer {
         parentFolder.click();
     }
 
-    public void selectItem(String itemName) {
+    private void selectItem(String itemName) {
         boolean itemFound = false;
 
         String globalItemsStr = tree.getAllSubItems(0L, "-1");
