@@ -75,7 +75,7 @@ public class Organizer {
             return;
         }
 
-        dialog.findElement(By.className("newGenericDropDownLabel")).click(); //TODO bug? when clicking on drop-down by id - element is not interactable exception
+        dialog.findElement(By.id(dropDownId)).click();
         elementWait.waitElementVisibleById(dropDownId + "Container");
         elementWait.waitElementDisplayById(dropDownId + "Container");
 
