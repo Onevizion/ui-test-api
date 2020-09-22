@@ -18,7 +18,7 @@ public enum ApiV3EndpointType {
     FIELD_COLORS_READ_COLOR_BY_TID("GET", "/v3/trackors/{trackor_id}/fields/colors", "Read Field Colors by Trackor id"),
     FIELD_COLORS_UPDATE("PUT", "/v3/trackors/{trackor_id}/fields/{field_name}/colors", "Update Field Color by Trackor ID and Field name"),
 
-    FILTERS_READ_FILTERS_BY_TT("GET", "/v3/trackor_types/{trackor_type}/filters", "Read filters by Trackor Type"),
+    FILTERS_READ_FILTERS("GET", "/v3/trackor_types/{trackor_type}/filters", "Read filters by Trackor Type"),
     FILTERS_READ_FILTER_CONDITIONS("GET", "/v3/trackor_types/{trackor_type}/filters/{filter_name}", "Read filter conditions"),
     FILTERS_SET_FILTER_AS_CURRENT("POST", "/v3/trackor_types/{trackor_type}/filters/{filter_name}/set_as_current", "Set filter as current"),
     
