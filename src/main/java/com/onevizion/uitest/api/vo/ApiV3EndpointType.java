@@ -21,7 +21,7 @@ public enum ApiV3EndpointType {
     FILTERS_READ_FILTERS("GET", "/v3/trackor_types/{trackor_type}/filters", "Read filters by Trackor Type"),
     FILTERS_READ_FILTER_CONDITIONS("GET", "/v3/trackor_types/{trackor_type}/filters/{filter_name}", "Read filter conditions"),
     FILTERS_SET_FILTER_AS_CURRENT("POST", "/v3/trackor_types/{trackor_type}/filters/{filter_name}/set_as_current", "Set filter as current"),
-    
+
     IMPORTS_READ_RUN_BY_PROCESS_ID("GET", "/v3/imports/runs/{process_id}", "Read import run by process id"),
     IMPORTS_READ("GET", "/v3/imports", "Read imports specs"),
     IMPORTS_READ_RUNS("GET", "/v3/imports/runs", "Read import runs"),
