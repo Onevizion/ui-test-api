@@ -368,8 +368,13 @@ public class Filter {
         organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
     }
 
-    public void addFolder(String folderName, String folderParentName) {
+    public void addFolder(Long gridIdx, String folderName, String folderParentName) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
         organizer.addFolder(folderName, folderParentName);
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
     }
 
     public void closeOrganizer() {
