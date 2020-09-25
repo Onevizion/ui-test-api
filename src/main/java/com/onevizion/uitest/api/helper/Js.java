@@ -123,20 +123,6 @@ public class Js {
         execJs("gridArr[" + gridId + "].grid.selectRowById('" + rowId + "', false, true, true);");
     }
 
-    public Long getGridCurTid(Long gridId) {
-        return NumberUtils.createLong(execJs("return gridArr[" + gridId + "].curTid;"));
-    }
-
-    public Object getGridRowTids(Long gridId, String rowId) {
-        return execJs2("var obj = getRowTrackors(gridArr[" + gridId + "], '" + rowId + "');"
-                + "var tids = []; var i = 0;"
-                + "for (key in obj) {"
-                + "    tids[i] = obj[key];"
-                + "    i++;"
-                + "}"
-                + "return tids;");
-    }
-
     public String getGridColIdByIndex(Long gridId, int columnIdx) {
         return execJs("return gridArr[" + gridId + "].grid.getColumnId('" + columnIdx + "');");
     }
