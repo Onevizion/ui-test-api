@@ -9,19 +9,14 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
-import com.onevizion.uitest.api.helper.NewDropDown;
-import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.NewNewDropDown;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.Menu;
 
 @Component
 public class EntityMenu {
-
-    @Autowired
-    private Wait wait;
 
     @Autowired
     private Window window;
@@ -39,16 +34,10 @@ public class EntityMenu {
     private Grid2 grid2;
 
     @Autowired
-    private NewDropDown newDropDown;
-
-    @Autowired
-    private Jquery jquery;
+    private NewNewDropDown newNewDropDown;
 
     public void testOnForm(Menu menu) {
-        newDropDown.openEditMenuForm(menu.getLabel());
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-        jquery.waitLoad();
+        newNewDropDown.openEditMenuForm(menu.getLabel());
 
         assertElement.assertText("name", menu.getName());
         assertElement.assertText("label", menu.getLabel());
@@ -61,9 +50,7 @@ public class EntityMenu {
     }
 
     public void testRoleAssignments(Menu menu, List<String> roles) {
-        newDropDown.openEditMenuForm(menu.getLabel());
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        newNewDropDown.openEditMenuForm(menu.getLabel());
 
         tab.goToTab(2); // Roles
         grid2.waitLoad(2L);

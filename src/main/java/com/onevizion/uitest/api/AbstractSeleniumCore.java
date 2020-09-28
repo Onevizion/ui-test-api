@@ -45,6 +45,7 @@ import com.onevizion.uitest.api.helper.Login;
 import com.onevizion.uitest.api.helper.Logoff;
 import com.onevizion.uitest.api.helper.Nav;
 import com.onevizion.uitest.api.helper.NewDropDown;
+import com.onevizion.uitest.api.helper.NewNewDropDown;
 import com.onevizion.uitest.api.helper.Privilegies;
 import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Qs;
@@ -328,6 +329,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected FilterLogic filterLogic;
+
+    @Autowired
+    protected NewNewDropDown newNewDropDown;
     /* Helpers End */
 
     /* Entity Helpers Begin */
