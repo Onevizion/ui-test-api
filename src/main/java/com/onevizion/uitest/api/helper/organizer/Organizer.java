@@ -1,9 +1,14 @@
 package com.onevizion.uitest.api.helper.organizer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
@@ -54,7 +59,7 @@ public class Organizer {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void addFolder(String folderName, String folderParentName) {
+    public void addFolder(String folderName, String folderParentName) { //TODO make implementation for Favorites too
         seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_ADD_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx())).click();
         WebElement dialog = seleniumSettings.getWebDriver().findElement(By.id(FORM_DIALOG_ID));
         elementWait.waitElementVisible(dialog);
@@ -67,26 +72,63 @@ public class Organizer {
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
-    private void selectParentFolderByVisibleText(WebElement dialog, String folderParentName) {
-        String dropDownId = dialog.findElement(By.className("newGenericDropDown")).getAttribute("id");
+    public void edit(String oldfolderName, String newfolderName, String folderParentName) { //TODO make implementation for Favorites too
+        select(oldfolderName);
 
-        String selectedItem = dialog.findElement(By.className("newGenericDropDownLabel")).getText();
-        if(folderParentName.equals(selectedItem)) {
-            return;
-        }
+        seleniumSettings.getWebDriver().findElement(By.id(AbstractSeleniumCore.BUTTON_EDIT_TREE_ID_BASE + AbstractSeleniumCore.getTreeIdx())).click();
+        WebElement dialog = seleniumSettings.getWebDriver().findElement(By.id(FORM_DIALOG_ID));
+        elementWait.waitElementVisible(dialog);
+        elementWait.waitElementDisplay(dialog);
 
-        dialog.findElement(By.id(dropDownId)).click();
-        elementWait.waitElementVisibleById(dropDownId + "Container");
-        elementWait.waitElementDisplayById(dropDownId + "Container");
+        dialog.findElement(By.id(INPUT_FOLDER_NAME_ID)).clear();
+        dialog.findElement(By.id(INPUT_FOLDER_NAME_ID)).sendKeys(newfolderName);
 
-        dialog.findElement(By.id(dropDownId + "Search")).sendKeys(folderParentName);
+        selectParentFolderByVisibleText(dialog, folderParentName);
+        dialog.findElement(By.id(BUTTON_DIALOG_OK_ID)).click();
 
-        WebElement parentFolder = (WebElement) js.getNewDropDownElement(dropDownId, "newGenericDropDownContainer", "newGenericDropDownRow", folderParentName);
-        elementWait.waitElementVisible(parentFolder);
-        parentFolder.click();
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
-    private void selectItem(String itemName) {
+    public void delete(String itemName) {
+        select(itemName);
+        pageButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
+    }
+
+    public void moveUp(String itemName) {
+        select(itemName);
+        pageButton.clickUpTree(AbstractSeleniumCore.getTreeIdx());
+    }
+
+    public void moveDown(String itemName) {
+        select(itemName);
+        pageButton.clickDownTree(AbstractSeleniumCore.getTreeIdx());
+    }
+
+    public void promoteToGlobal(String itemName) {
+        select(itemName);
+        pageButton.clickSaveAsGlobalTree(AbstractSeleniumCore.getTreeIdx());
+    }
+
+    public void checkSubItems(String itemName, List<String> expectedItems) {
+        List<String> actualItems = getSubItems(itemName);
+        if(expectedItems==null) {
+            Assert.assertEquals(actualItems, "");
+        } else {
+            Assert.assertEquals(actualItems, expectedItems);
+        }
+    }
+
+    private List<String> getSubItems(String itemName) {
+        String treeObject = tree.getSubItems(AbstractSeleniumCore.getTreeIdx(), "-1");
+        List<String> treeItems = Arrays.asList(treeObject.split(","));
+        List<String> treeVals = new ArrayList<String>();
+        for (String itemId : treeItems) {
+            treeVals.add(tree.getItemTextById(AbstractSeleniumCore.getTreeIdx(), itemId));
+        }
+        return treeVals;
+    }
+
+    private void select(String itemName) {
         boolean itemFound = false;
 
         String globalItemsStr = tree.getAllSubItems(0L, "-1");
@@ -112,9 +154,23 @@ public class Organizer {
         }
     }
 
-    public void deleteItem(String itemName) {
-        selectItem(itemName);
-        pageButton.clickDeleteTree(AbstractSeleniumCore.getTreeIdx());
+    private void selectParentFolderByVisibleText(WebElement dialog, String folderParentName) {
+        String dropDownId = dialog.findElement(By.className("newGenericDropDown")).getAttribute("id");
+
+        String selectedItem = dialog.findElement(By.className("newGenericDropDownLabel")).getText();
+        if(folderParentName.equals(selectedItem)) {
+            return;
+        }
+
+        dialog.findElement(By.id(dropDownId)).click();
+        elementWait.waitElementVisibleById(dropDownId + "Container");
+        elementWait.waitElementDisplayById(dropDownId + "Container");
+
+        dialog.findElement(By.id(dropDownId + "Search")).sendKeys(folderParentName);
+
+        WebElement parentFolder = (WebElement) js.getNewDropDownElement(dropDownId, "newGenericDropDownContainer", "newGenericDropDownRow", folderParentName);
+        elementWait.waitElementVisible(parentFolder);
+        parentFolder.click();
     }
 
 }

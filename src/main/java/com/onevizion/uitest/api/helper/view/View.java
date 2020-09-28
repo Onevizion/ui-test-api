@@ -342,6 +342,17 @@ public class View {
         organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
     }
 
+    public void addFolders(Long gridIdx, List<String> folderNames, List<String> folderParentNames) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        for(int i=0; i<folderNames.size(); i++) {
+            organizer.addFolder(folderNames.get(i), folderParentNames.get(i));
+        }
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
     public void addFolder(Long gridIdx, String folderName, String folderParentName) {
         openMainPanel(gridIdx);
         openOrganizer(gridIdx);
@@ -351,8 +362,106 @@ public class View {
         closeMainPanel(gridIdx);
     }
 
+    public void editFolders(Long gridIdx, List<String> oldfolderNames, List<String> newfolderNames, List<String> newfolderParentNames) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        for(int i=0; i<oldfolderNames.size(); i++) {
+            organizer.edit(oldfolderNames.get(i), newfolderNames.get(i), newfolderParentNames.get(i));
+        }
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
+    public void editFolder(Long gridIdx, String oldfolderName, String newfolderName, String newfolderParentName) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        organizer.edit(oldfolderName, newfolderName, newfolderParentName);
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
+    public void deleteFolders(Long gridIdx, List<String> folderNames) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        for(int i=0; i<folderNames.size(); i++) {
+            organizer.delete(folderNames.get(i));
+        }
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
+    public void deleteFolder(Long gridIdx, String folderName) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        organizer.delete(folderName);
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
+    public void moveUpFolders(Long gridIdx, List<String> folderNames) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        for(int i=0; i<folderNames.size(); i++) {
+            organizer.moveUp(folderNames.get(i));
+        }
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
+    public void moveUpFolder(Long gridIdx, String folderName) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        organizer.moveUp(folderName);
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
+    public void moveDownFolders(Long gridIdx, List<String> folderNames) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        for(int i=0; i<folderNames.size(); i++) {
+            organizer.moveDown(folderNames.get(i));
+        }
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
+    public void moveDownFolder(Long gridIdx, String folderName) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        organizer.moveDown(folderName);
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
+    public void checkSubItemsInFolder(Long gridIdx, String folderName, List<String> subItems) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        organizer.checkSubItems(folderName, subItems);
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
+    }
+
     public void closeOrganizer() {
         organizer.closeOrganizer();
+    }
+
+    public void promoteToGlobal(Long gridIdx, String viewName) {
+        openMainPanel(gridIdx);
+        openOrganizer(gridIdx);
+        organizer.promoteToGlobal(viewName);
+        closeOrganizer();
+        jquery.waitLoad();
+        closeMainPanel(gridIdx);
     }
 
     public void deleteView(Long gridIdx, String entityPrefix) {
@@ -363,7 +472,7 @@ public class View {
         openMainPanel(gridIdx);
 
         openOrganizer(gridIdx);
-        organizer.deleteItem(entityPrefix);
+        organizer.delete(entityPrefix);
         closeOrganizer();
 
         grid2.waitLoad(gridIdx);

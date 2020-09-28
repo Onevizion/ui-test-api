@@ -38,6 +38,7 @@ public class PageButton {
     private static final String BUTTON_CLONE_ID_BASE = "itemClone";
     private static final String BUTTON_EXPORT_RUN_ID_BASE = "itemGridExport";
     private static final String BUTTON_EXPORT_HISTORY_ID_BASE = "itemExportHistory";
+    private static final String BUTTON_SAVE_AS_GLOBAL_TREE_ID_BASE = "itemSaveAsGlobalTree";
     private static final String BUTTON_DELETE_TREE_ID_BASE = "itemDeleteTree";
     private static final String BUTTON_DELETE_GRID_ID_BASE = "itemDelete";
     private static final String BUTTON_UP_TREE_ID_BASE = "itemUpTree";
@@ -195,6 +196,14 @@ public class PageButton {
         window.openModal(By.id(BUTTON_EXPORT_HISTORY_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         grid2.waitLoad();
+    }
+
+    public void clickSaveAsGlobalTree(Long treeIdx) {
+        openOptionsPanel(treeIdx);
+        waitButtonInPanel(BUTTON_SAVE_AS_GLOBAL_TREE_ID_BASE + treeIdx);
+
+        element.clickById(BUTTON_SAVE_AS_GLOBAL_TREE_ID_BASE + treeIdx);
+        tree.waitLoad(treeIdx);
     }
 
     public void clickDeleteTree(Long treeIdx) {

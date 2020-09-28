@@ -68,6 +68,10 @@ public class Tree {
         return treeJs.getAllSubItems(treeId, itemId);
     }
 
+    public String getSubItems(Long treeId, String itemId) {
+        return treeJs.getSubItems(treeId, itemId);
+    }
+
     public void selectItem(Long treeId, String itemId) {
         treeJs.selectItem(treeId, itemId);
     }
