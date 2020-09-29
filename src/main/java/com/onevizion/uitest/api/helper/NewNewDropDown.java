@@ -160,6 +160,8 @@ public class NewNewDropDown {
     private void searchEntity(String dropDownId, String name) {
         WebElement searchField = seleniumSettings.getWebDriver().findElement(By.id("search_" + dropDownId));
 
+        elementWait.waitElementVisible(searchField);
+        element.moveToElement(searchField);
         searchField.clear();
         searchField.sendKeys(name);
     }
