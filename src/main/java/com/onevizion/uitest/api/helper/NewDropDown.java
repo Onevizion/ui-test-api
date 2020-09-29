@@ -34,6 +34,22 @@ public class NewDropDown {
     @Autowired
     private Grid2 grid2;
 
+//    public void selectMenu(String name) {
+//        selectEntity("lbApplication", name);
+//        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+//        jquery.waitLoad();
+//        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+//        jquery.waitLoad();
+//    }
+
+//    public void selectDashboard(String name) {
+//        selectEntity("lbDashboard", name);
+//    }
+
+//    public void selectPortal(String name) {
+//        selectEntity("lbPortal0", name);
+//    }
+
     public void selectComponentPackage(String name) {
         selectEntity("lbCompPkg0", name);
         grid2.waitLoad();
@@ -77,6 +93,15 @@ public class NewDropDown {
             throw new SeleniumUnexpectedException("");
         }
     }
+
+//    public void deleteMenu(String name) {
+//        deleteEntity("lbApplication", "Application", 3, name);
+//        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+//        jquery.waitLoad();
+//        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+//        jquery.waitLoad();
+//        closeDropDown("lbApplication");
+//    }
 
     public void deleteComponentPackage(String name) {
         deleteEntity("lbCompPkg0", "CompPkg0", 2, name);
@@ -132,6 +157,10 @@ public class NewDropDown {
         }
     }
 
+//    public void openEditMenuForm(String name) {
+//        openEditEntityForm("lbApplication", "Application", 3, name);
+//    }
+
     public void openEditComponentPackageForm(String name) {
         openEditEntityForm("lbCompPkg0", "CompPkg0", 2, name);
     }
@@ -139,6 +168,14 @@ public class NewDropDown {
     private void openEditEntityForm(String id, String buttonId, int buttonsCnt, String name) {
         openEntityForm(id, "btnEdit" + buttonId, buttonsCnt, name);
     }
+
+//    public void openCloneMenuForm(String name) {
+//        openCloneEntityForm("lbApplication", "Application", 3, name);
+//    }
+
+//    private void openCloneEntityForm(String id, String buttonId, int buttonsCnt, String name) {
+//        openEntityForm(id, "btnClone" + buttonId, buttonsCnt, name);
+//    }
 
     private void openEntityForm(String id, String buttonId, int buttonsCnt, String name) {
         boolean failOpenWindow = true;
@@ -186,5 +223,12 @@ public class NewDropDown {
             throw new SeleniumUnexpectedException("");
         }
     }
+
+//    private void closeDropDown(String id) {
+//        seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
+//        elementWait.waitElementById("new_rows_" + id);
+//        elementWait.waitElementNotVisibleById("new_rows_" + id);
+//        elementWait.waitElementNotDisplayById("new_rows_" + id);
+//    }
 
 }
