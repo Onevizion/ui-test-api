@@ -46,9 +46,6 @@ public class Favorites {
     @Autowired
     private PageButton pageButton;
 
-    //@Autowired
-    //private Organizer organizer; //TODO transfer work with the organizer to the Organizer.java
-
     public void checkFavoritesCount(int expectedCount) {
         mainMenu.showMenu(MainMenu.MENU_FAVORITES);
         List<WebElement> favorites = mainMenu.getMenuItems();

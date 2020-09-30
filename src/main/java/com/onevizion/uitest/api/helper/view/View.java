@@ -342,32 +342,10 @@ public class View {
         organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
     }
 
-    public void addFolders(Long gridIdx, List<String> folderNames, List<String> folderParentNames) {
-        openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
-        for(int i=0; i<folderNames.size(); i++) {
-            organizer.addFolder(folderNames.get(i), folderParentNames.get(i));
-        }
-        closeOrganizer();
-        jquery.waitLoad();
-        closeMainPanel(gridIdx);
-    }
-
     public void addFolder(Long gridIdx, String folderName, String folderParentName) {
         openMainPanel(gridIdx);
         openOrganizer(gridIdx);
         organizer.addFolder(folderName, folderParentName);
-        closeOrganizer();
-        jquery.waitLoad();
-        closeMainPanel(gridIdx);
-    }
-
-    public void editFolders(Long gridIdx, List<String> oldfolderNames, List<String> newfolderNames, List<String> newfolderParentNames) {
-        openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
-        for(int i=0; i<oldfolderNames.size(); i++) {
-            organizer.edit(oldfolderNames.get(i), newfolderNames.get(i), newfolderParentNames.get(i));
-        }
         closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);
@@ -382,17 +360,6 @@ public class View {
         closeMainPanel(gridIdx);
     }
 
-    public void deleteFolders(Long gridIdx, List<String> folderNames) {
-        openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
-        for(int i=0; i<folderNames.size(); i++) {
-            organizer.delete(folderNames.get(i));
-        }
-        closeOrganizer();
-        jquery.waitLoad();
-        closeMainPanel(gridIdx);
-    }
-
     public void deleteFolder(Long gridIdx, String folderName) {
         openMainPanel(gridIdx);
         openOrganizer(gridIdx);
@@ -402,32 +369,10 @@ public class View {
         closeMainPanel(gridIdx);
     }
 
-    public void moveUpFolders(Long gridIdx, List<String> folderNames) {
-        openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
-        for(int i=0; i<folderNames.size(); i++) {
-            organizer.moveUp(folderNames.get(i));
-        }
-        closeOrganizer();
-        jquery.waitLoad();
-        closeMainPanel(gridIdx);
-    }
-
     public void moveUpFolder(Long gridIdx, String folderName) {
         openMainPanel(gridIdx);
         openOrganizer(gridIdx);
         organizer.moveUp(folderName);
-        closeOrganizer();
-        jquery.waitLoad();
-        closeMainPanel(gridIdx);
-    }
-
-    public void moveDownFolders(Long gridIdx, List<String> folderNames) {
-        openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
-        for(int i=0; i<folderNames.size(); i++) {
-            organizer.moveDown(folderNames.get(i));
-        }
         closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);
@@ -455,10 +400,10 @@ public class View {
         organizer.closeOrganizer();
     }
 
-    public void promoteToGlobal(Long gridIdx, String viewName) {
+    public void promoteToGlobal(Long gridIdx, String oldViewName, String newViewName, String folderParentName) {
         openMainPanel(gridIdx);
         openOrganizer(gridIdx);
-        organizer.promoteToGlobal(viewName);
+        organizer.promoteToGlobal(oldViewName, newViewName, folderParentName);
         closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);

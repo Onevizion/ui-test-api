@@ -30,6 +30,9 @@ public class Organizer {
     private Js js;
 
     @Autowired
+    private OrganizerJs organizerJs;
+
+    @Autowired
     private Wait wait;
 
     @Autowired
@@ -104,22 +107,43 @@ public class Organizer {
         pageButton.clickDownTree(AbstractSeleniumCore.getTreeIdx());
     }
 
-    public void promoteToGlobal(String itemName) {
-        select(itemName);
+    public void promoteToGlobal(String oldtemName, String newItemName, String folderParentName) {
+        select(oldtemName);
         pageButton.clickSaveAsGlobalTree(AbstractSeleniumCore.getTreeIdx());
+
+        WebElement dialog = seleniumSettings.getWebDriver().findElement(By.id(FORM_DIALOG_ID));
+        elementWait.waitElementVisible(dialog);
+        elementWait.waitElementDisplay(dialog);
+
+        dialog.findElement(By.id(INPUT_FOLDER_NAME_ID)).clear();
+        dialog.findElement(By.id(INPUT_FOLDER_NAME_ID)).sendKeys(newItemName);
+
+        selectParentFolderByVisibleText(dialog, folderParentName);
+        dialog.findElement(By.id(BUTTON_DIALOG_OK_ID)).click();
+
+        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
     public void checkSubItems(String itemName, List<String> expectedItems) {
         List<String> actualItems = getSubItems(itemName);
-        if(expectedItems==null) {
-            Assert.assertEquals(actualItems, "");
-        } else {
-            Assert.assertEquals(actualItems, expectedItems);
-        }
+        Assert.assertEquals(actualItems, expectedItems);
     }
 
     private List<String> getSubItems(String itemName) {
-        String treeObject = tree.getSubItems(AbstractSeleniumCore.getTreeIdx(), "-1");
+        String treeItemId = "";
+        if(itemName.equals("Global Filters") || itemName.equals("Global Views")) {
+            treeItemId = "-1";
+        } else if(itemName.equals("Local Filters") || itemName.equals("Local Views")) {
+            treeItemId = "-2";
+        } else {
+            treeItemId = organizerJs.getItemIdByText(itemName);
+        }
+
+        String treeObject = tree.getSubItems(AbstractSeleniumCore.getTreeIdx(), treeItemId);
+        if(treeObject.equals("")) {
+            return null;
+        }
+
         List<String> treeItems = Arrays.asList(treeObject.split(","));
         List<String> treeVals = new ArrayList<String>();
         for (String itemId : treeItems) {
