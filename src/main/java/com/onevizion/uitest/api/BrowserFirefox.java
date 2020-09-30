@@ -28,6 +28,7 @@ public class BrowserFirefox {
         options.addPreference("dom.max_script_run_time", 1000);
         options.addPreference("browser.download.folderList", 2);
         options.addPreference("browser.download.dir", seleniumSettings.getUploadFilesPath().replaceAll("\\\\", "\\\\\\\\"));
+        options.addPreference("browser.download.viewableInternally.enabledTypes", "");
         options.addPreference("browser.helperApps.neverAsk.saveToDisk", "text/xml");
         //options.addPreference("security.sandbox.content.level", 5);
         options.setPageLoadStrategy(PageLoadStrategy.NONE);

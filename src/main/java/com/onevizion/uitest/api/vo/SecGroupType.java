@@ -11,7 +11,8 @@ public enum SecGroupType {
     IMPORT("Import"),
     NOTIFICATION_TYPE("Notification Type"),
     VIEW("Global View"),
-    DISCIPLINE("Discipline");
+    DISCIPLINE("Discipline"),
+    FILTER("Global Filter");
 
     private String name;
 

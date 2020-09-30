@@ -357,7 +357,15 @@ public class Tb {
                 gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
-            htmlInputFile.uploadOnForm(fieldName, value);
+            if (elementPosition > 1) {
+                String idx = getLastFieldIndex(fieldName + "_disp", elementPosition);
+                idx = idx.replace("_disp", "");
+                String hiddenInputFile = seleniumSettings.getWebDriver().findElement(By.id("idx" + idx + "_disp")).getAttribute("hiddeninputfile");
+                htmlInputFile.uploadOnForm(hiddenInputFile, value);
+            } else {
+                String hiddenInputFile = seleniumSettings.getWebDriver().findElement(By.name(fieldName + "_disp")).getAttribute("hiddeninputfile");
+                htmlInputFile.uploadOnForm(hiddenInputFile, value);
+            }
             expVals.put(fieldName, value);
             if (gridColumnId != null) {
                 gridExpVals.put(gridColumnId, value);
@@ -690,33 +698,33 @@ public class Tb {
     }
 
     public void editCells(Long gridIndex, int rowIndex, List<Integer> columns, List<String> vals,
-            Map<String, String> gridExpVals, Map<String, String> expVals, List<String> columnNames, List<String> fieldNames, Long tid, Long efileFieldId) {
-        editCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, vals.get(0), columnNames.get(0), fieldNames != null ? fieldNames.get(0) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, vals.get(1), columnNames.get(1), fieldNames != null ? fieldNames.get(1) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN, vals.get(2), columnNames.get(2), fieldNames != null ? fieldNames.get(2) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR, vals.get(3), columnNames.get(3), fieldNames != null ? fieldNames.get(3) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN, vals.get(4), columnNames.get(4), fieldNames != null ? fieldNames.get(4) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE, vals.get(5), columnNames.get(5), fieldNames != null ? fieldNames.get(5) : null, gridExpVals, expVals, tid, efileFieldId);
+            Map<String, String> gridExpVals, Map<String, String> expVals, List<String> columnNames, List<String> fieldNames) {
+        editCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, vals.get(0), columnNames.get(0), fieldNames != null ? fieldNames.get(0) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, vals.get(1), columnNames.get(1), fieldNames != null ? fieldNames.get(1) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN, vals.get(2), columnNames.get(2), fieldNames != null ? fieldNames.get(2) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR, vals.get(3), columnNames.get(3), fieldNames != null ? fieldNames.get(3) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN, vals.get(4), columnNames.get(4), fieldNames != null ? fieldNames.get(4) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE, vals.get(5), columnNames.get(5), fieldNames != null ? fieldNames.get(5) : null, gridExpVals, expVals);
         //hyperlink
-        editCell(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE, vals.get(7), columnNames.get(7), fieldNames != null ? fieldNames.get(7) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE, vals.get(8), columnNames.get(8), fieldNames != null ? fieldNames.get(8) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO, vals.get(9), columnNames.get(9), fieldNames != null ? fieldNames.get(9) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(10), ConfigFieldType.NUMBER, vals.get(10), columnNames.get(10), fieldNames != null ? fieldNames.get(10) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(11), ConfigFieldType.SELECTOR, vals.get(11), columnNames.get(11), fieldNames != null ? fieldNames.get(11) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(12), ConfigFieldType.TEXT, vals.get(12), columnNames.get(12), fieldNames != null ? fieldNames.get(12) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(13), ConfigFieldType.TRACKOR_SELECTOR, vals.get(13), columnNames.get(13), fieldNames != null ? fieldNames.get(13) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(14), ConfigFieldType.WIKI, vals.get(14), columnNames.get(14), fieldNames != null ? fieldNames.get(14) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(15), ConfigFieldType.MULTI_SELECTOR, vals.get(15), columnNames.get(15), fieldNames != null ? fieldNames.get(15) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(16), ConfigFieldType.DATE_TIME, vals.get(16), columnNames.get(16), fieldNames != null ? fieldNames.get(16) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(17), ConfigFieldType.TIME, vals.get(17), columnNames.get(17), fieldNames != null ? fieldNames.get(17) : null, gridExpVals, expVals, null, null);
-        editCell(gridIndex, rowIndex, columns.get(18), ConfigFieldType.TRACKOR_DROP_DOWN, vals.get(18), columnNames.get(18), fieldNames != null ? fieldNames.get(18) : null, gridExpVals, expVals, null, null);
+        editCell(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE, vals.get(7), columnNames.get(7), fieldNames != null ? fieldNames.get(7) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE, vals.get(8), columnNames.get(8), fieldNames != null ? fieldNames.get(8) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO, vals.get(9), columnNames.get(9), fieldNames != null ? fieldNames.get(9) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(10), ConfigFieldType.NUMBER, vals.get(10), columnNames.get(10), fieldNames != null ? fieldNames.get(10) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(11), ConfigFieldType.SELECTOR, vals.get(11), columnNames.get(11), fieldNames != null ? fieldNames.get(11) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(12), ConfigFieldType.TEXT, vals.get(12), columnNames.get(12), fieldNames != null ? fieldNames.get(12) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(13), ConfigFieldType.TRACKOR_SELECTOR, vals.get(13), columnNames.get(13), fieldNames != null ? fieldNames.get(13) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(14), ConfigFieldType.WIKI, vals.get(14), columnNames.get(14), fieldNames != null ? fieldNames.get(14) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(15), ConfigFieldType.MULTI_SELECTOR, vals.get(15), columnNames.get(15), fieldNames != null ? fieldNames.get(15) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(16), ConfigFieldType.DATE_TIME, vals.get(16), columnNames.get(16), fieldNames != null ? fieldNames.get(16) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(17), ConfigFieldType.TIME, vals.get(17), columnNames.get(17), fieldNames != null ? fieldNames.get(17) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(18), ConfigFieldType.TRACKOR_DROP_DOWN, vals.get(18), columnNames.get(18), fieldNames != null ? fieldNames.get(18) : null, gridExpVals, expVals);
         //CALCULATED
         //ROLLUP
-        editCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, vals.get(21), columnNames.get(21), fieldNames != null ? fieldNames.get(21) : null, gridExpVals, expVals, null, null);
+        editCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, vals.get(21), columnNames.get(21), fieldNames != null ? fieldNames.get(21) : null, gridExpVals, expVals);
     }
 
     public void editCell(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType, String value,
-            String gridColumnId, String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals, Long tid, Long fieldId) {
+            String gridColumnId, String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
@@ -849,7 +857,8 @@ public class Tb {
             }
             htmlInputFile.beforeUploadOnGrid(gridIndex);
             gridCell.findElement(By.id(EFILE_EDIT_BUTTON)).click();
-            htmlInputFile.uploadOnGrid(gridIndex, "eFile_" + fieldId + "_" + tid, value);
+            String hiddenInputFile = gridCell.findElement(By.id(EFILE_EDIT_BUTTON)).getAttribute("hiddeninputfile");
+            htmlInputFile.uploadOnGrid(gridIndex, hiddenInputFile, value);
             gridExpVals.put(gridColumnId, value);
             if (fieldName != null) {
                 expVals.put(fieldName, value);

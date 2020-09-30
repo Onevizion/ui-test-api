@@ -9,12 +9,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.helper.jquery.Jquery;
-import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
 public class NewDropDown {
@@ -29,35 +26,29 @@ public class NewDropDown {
     private Js js;
 
     @Autowired
-    private Tree tree;
-
-    @Autowired
     private Wait wait;
 
     @Autowired
     private Window window;
 
     @Autowired
-    private Jquery jquery;
-
-    @Autowired
     private Grid2 grid2;
 
-    public void selectMenu(String name) {
-        selectEntity("lbApplication", name);
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jquery.waitLoad();
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jquery.waitLoad();
-    }
+//    public void selectMenu(String name) {
+//        selectEntity("lbApplication", name);
+//        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+//        jquery.waitLoad();
+//        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+//        jquery.waitLoad();
+//    }
 
-    public void selectDashboard(String name) {
-        selectEntity("lbDashboard", name);
-    }
+//    public void selectDashboard(String name) {
+//        selectEntity("lbDashboard", name);
+//    }
 
-    public void selectPortal(String name) {
-        selectEntity("lbPortal0", name);
-    }
+//    public void selectPortal(String name) {
+//        selectEntity("lbPortal0", name);
+//    }
 
     public void selectComponentPackage(String name) {
         selectEntity("lbCompPkg0", name);
@@ -103,14 +94,14 @@ public class NewDropDown {
         }
     }
 
-    public void deleteMenu(String name) {
-        deleteEntity("lbApplication", "Application", 3, name);
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jquery.waitLoad();
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jquery.waitLoad();
-        closeDropDown("lbApplication");
-    }
+//    public void deleteMenu(String name) {
+//        deleteEntity("lbApplication", "Application", 3, name);
+//        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+//        jquery.waitLoad();
+//        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
+//        jquery.waitLoad();
+//        closeDropDown("lbApplication");
+//    }
 
     public void deleteComponentPackage(String name) {
         deleteEntity("lbCompPkg0", "CompPkg0", 2, name);
@@ -166,9 +157,9 @@ public class NewDropDown {
         }
     }
 
-    public void openEditMenuForm(String name) {
-        openEditEntityForm("lbApplication", "Application", 3, name);
-    }
+//    public void openEditMenuForm(String name) {
+//        openEditEntityForm("lbApplication", "Application", 3, name);
+//    }
 
     public void openEditComponentPackageForm(String name) {
         openEditEntityForm("lbCompPkg0", "CompPkg0", 2, name);
@@ -178,13 +169,13 @@ public class NewDropDown {
         openEntityForm(id, "btnEdit" + buttonId, buttonsCnt, name);
     }
 
-    public void openCloneMenuForm(String name) {
-        openCloneEntityForm("lbApplication", "Application", 3, name);
-    }
+//    public void openCloneMenuForm(String name) {
+//        openCloneEntityForm("lbApplication", "Application", 3, name);
+//    }
 
-    private void openCloneEntityForm(String id, String buttonId, int buttonsCnt, String name) {
-        openEntityForm(id, "btnClone" + buttonId, buttonsCnt, name);
-    }
+//    private void openCloneEntityForm(String id, String buttonId, int buttonsCnt, String name) {
+//        openEntityForm(id, "btnClone" + buttonId, buttonsCnt, name);
+//    }
 
     private void openEntityForm(String id, String buttonId, int buttonsCnt, String name) {
         boolean failOpenWindow = true;
@@ -233,11 +224,11 @@ public class NewDropDown {
         }
     }
 
-    private void closeDropDown(String id) {
-        seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
-        elementWait.waitElementById("new_rows_" + id);
-        elementWait.waitElementNotVisibleById("new_rows_" + id);
-        elementWait.waitElementNotDisplayById("new_rows_" + id);
-    }
+//    private void closeDropDown(String id) {
+//        seleniumSettings.getWebDriver().findElement(By.id("new_" + id)).findElement(By.className("newDropDownLabel")).click();
+//        elementWait.waitElementById("new_rows_" + id);
+//        elementWait.waitElementNotVisibleById("new_rows_" + id);
+//        elementWait.waitElementNotDisplayById("new_rows_" + id);
+//    }
 
 }

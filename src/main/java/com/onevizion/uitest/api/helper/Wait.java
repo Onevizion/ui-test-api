@@ -116,13 +116,6 @@ public class Wait {
             .until(webdriver -> webdriver.switchTo().alert().getText() != null);
     }
 
-    public void waitGridCurrentTid(final Long gridIndex, final Long previosTid) {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("Loading items in ListBox failed.")
-            .ignoring(StaleElementReferenceException.class)
-            .until(webdriver -> !previosTid.equals(js.getGridCurTid(gridIndex)));
-    }
-
     public void waitBpDocHelpLoad(final String expectedValue, final boolean isPresent) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("BpDocHelp loading failed.")
