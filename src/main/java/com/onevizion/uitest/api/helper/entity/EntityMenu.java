@@ -37,7 +37,7 @@ public class EntityMenu {
     private NewNewDropDown newNewDropDown;
 
     public void testOnForm(MenuVo menu) {
-        newNewDropDown.openEditMenuForm(menu.getLabel());
+        newNewDropDown.openFormEditMenu(menu.getLabel());
 
         assertElement.assertText("name", menu.getName());
         assertElement.assertText("label", menu.getLabel());
@@ -50,7 +50,7 @@ public class EntityMenu {
     }
 
     public void testRoleAssignments(MenuVo menu, List<String> roles) {
-        newNewDropDown.openEditMenuForm(menu.getLabel());
+        newNewDropDown.openFormEditMenu(menu.getLabel());
 
         tab.goToTab(2); // Roles
         grid2.waitLoad(2L);

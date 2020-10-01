@@ -35,14 +35,14 @@ public class Menu {
     }
 
     public void openAddMenuForm() {
-        newNewDropDown.openAddMenuForm();
+        newNewDropDown.openFormAddMenu();
 
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
 
     public void openEditMenuForm(String name) {
-        newNewDropDown.openEditMenuForm(name);
+        newNewDropDown.openFormEditMenu(name);
 
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
@@ -50,7 +50,7 @@ public class Menu {
     }
 
     public void openCloneMenuForm(String name) {
-        newNewDropDown.openCloneMenuForm(name);
+        newNewDropDown.openFormCloneMenu(name);
 
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();

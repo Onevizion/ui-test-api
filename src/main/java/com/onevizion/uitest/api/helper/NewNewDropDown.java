@@ -29,54 +29,54 @@ public class NewNewDropDown {
     private Element element;
 
     public void selectDashboard(String name) {
-        selectEntity("dropDownDashboards", name);
+        select("dropDownDashboards", name);
     }
 
     public void selectPortal(String name) {
-        selectEntity("dropDownPortals", name);
+        select("dropDownPortals", name);
     }
 
     public void selectMenu(String name) {
-        selectEntity("dropDownMenu", name);
+        select("dropDownMenu", name);
     }
 
-    private void selectEntity(String dropDownId, String name) {
+    private void select(String dropDownId, String name) {
         open(dropDownId);
         searchEntity(dropDownId, name);
         WebElement entity = getEntity(dropDownId, name);
         element.click(entity);
     }
 
-    public void openAddDashboardForm() {
-        openAddEntityForm("dropDownDashboards", "Dashboard");
+    public void openFormAddDashboard() {
+        openFormAdd("dropDownDashboards", "Dashboard");
     }
 
-    public void openAddMenuForm() {
-        openAddEntityForm("dropDownMenu", "MenuApplication");
+    public void openFormAddMenu() {
+        openFormAdd("dropDownMenu", "MenuApplication");
     }
 
-    private void openAddEntityForm(String dropDownId, String addButtonId) {
+    private void openFormAdd(String dropDownId, String addButtonId) {
         open(dropDownId);
         window.openModal(By.id("add" + addButtonId));
     }
 
-    public void openEditMenuForm(String name) {
-        openEditEntityForm("dropDownMenu", "MenuApplication", name);
+    public void openFormEditMenu(String name) {
+        openFormEdit("dropDownMenu", "MenuApplication", name);
     }
 
-    private void openEditEntityForm(String dropDownId, String editButtonId, String name) {
-        openEntityForm(dropDownId, "edit" + editButtonId, name);
+    private void openFormEdit(String dropDownId, String editButtonId, String name) {
+        openForm(dropDownId, "edit" + editButtonId, name);
     }
 
-    public void openCloneMenuForm(String name) {
-        openCloneEntityForm("dropDownMenu", "MenuApplication", name);
+    public void openFormCloneMenu(String name) {
+        openFormClone("dropDownMenu", "MenuApplication", name);
     }
 
-    private void openCloneEntityForm(String dropDownId, String cloneButtonId, String name) {
-        openEntityForm(dropDownId, "clone" + cloneButtonId, name);
+    private void openFormClone(String dropDownId, String cloneButtonId, String name) {
+        openForm(dropDownId, "clone" + cloneButtonId, name);
     }
 
-    private void openEntityForm(String dropDownId, String buttonId, String name) {
+    private void openForm(String dropDownId, String buttonId, String name) {
         open(dropDownId);
         searchEntity(dropDownId, name);
         WebElement entity = getEntity(dropDownId, name);
@@ -91,10 +91,10 @@ public class NewNewDropDown {
     }
 
     public void deleteMenu(String name) {
-        deleteEntity("dropDownMenu", "MenuApplication", name);
+        delete("dropDownMenu", "MenuApplication", name);
     }
 
-    private void deleteEntity(String dropDownId, String deleteButtonId, String name) {
+    private void delete(String dropDownId, String deleteButtonId, String name) {
         open(dropDownId);
         searchEntity(dropDownId, name);
         WebElement entity = getEntity(dropDownId, name);

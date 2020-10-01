@@ -63,7 +63,7 @@ public class Dashboard {
     }
 
     public void openAddDashboardForm() {
-        newNewDropDown.openAddDashboardForm();
+        newNewDropDown.openFormAddDashboard();
 
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
