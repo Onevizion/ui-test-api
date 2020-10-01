@@ -1,6 +1,6 @@
 package com.onevizion.uitest.api.vo.entity;
 
-public class Menu {
+public class MenuVo {
 
     private String name;
     private String label;
@@ -9,7 +9,7 @@ public class Menu {
     private String dropgridFolder;
     private String iconLabel;
 
-    public Menu(String name, String label, String description, String orderNumber, String dropgridFolder, String iconLabel) {
+    public MenuVo(String name, String label, String description, String orderNumber, String dropgridFolder, String iconLabel) {
         this.name = name;
         this.label = label;
         this.description = description;

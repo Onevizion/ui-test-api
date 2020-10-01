@@ -13,7 +13,7 @@ import com.onevizion.uitest.api.helper.NewNewDropDown;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
-import com.onevizion.uitest.api.vo.entity.Menu;
+import com.onevizion.uitest.api.vo.entity.MenuVo;
 
 @Component
 public class EntityMenu {
@@ -36,7 +36,7 @@ public class EntityMenu {
     @Autowired
     private NewNewDropDown newNewDropDown;
 
-    public void testOnForm(Menu menu) {
+    public void testOnForm(MenuVo menu) {
         newNewDropDown.openEditMenuForm(menu.getLabel());
 
         assertElement.assertText("name", menu.getName());
@@ -49,7 +49,7 @@ public class EntityMenu {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testRoleAssignments(Menu menu, List<String> roles) {
+    public void testRoleAssignments(MenuVo menu, List<String> roles) {
         newNewDropDown.openEditMenuForm(menu.getLabel());
 
         tab.goToTab(2); // Roles

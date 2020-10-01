@@ -15,6 +15,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.ElementJs;
 import com.onevizion.uitest.api.helper.Js;
+import com.onevizion.uitest.api.helper.NewNewDropDown;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.vo.DashAxisType;
@@ -47,6 +49,25 @@ public class Dashboard {
 
     @Autowired
     private Jquery jquery;
+
+    @Autowired
+    private NewNewDropDown newNewDropDown;
+
+    @Autowired
+    private Wait wait;
+
+    public void selectDashboard(String name) {
+        newNewDropDown.selectDashboard(name);
+
+        waitDashboardLoad();
+    }
+
+    public void openAddDashboardForm() {
+        newNewDropDown.openAddDashboardForm();
+
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
 
     public void closeAddDashboardFormOk() {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));

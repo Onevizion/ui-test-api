@@ -7,12 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
-import com.onevizion.uitest.api.helper.dashboard.Dashboard;
-import com.onevizion.uitest.api.helper.jquery.Jquery;
-import com.onevizion.uitest.api.helper.tree.Tree;
 
 @Component
 public class NewNewDropDown {
@@ -30,57 +26,33 @@ public class NewNewDropDown {
     private Window window;
 
     @Autowired
-    private Jquery jquery;
-
-    @Autowired
-    private Tree tree;
-
-    @Autowired
-    private Dashboard dashboard;
-
-    @Autowired
     private Element element;
 
     public void selectDashboard(String name) {
         selectEntity("dropDownDashboards", name);
-
-        dashboard.waitDashboardLoad();
     }
 
     public void selectPortal(String name) {
         selectEntity("dropDownPortals", name);
-
-        //TODO move waiting from different places to this place
     }
 
     public void selectMenu(String name) {
         selectEntity("dropDownMenu", name);
-
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jquery.waitLoad();
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jquery.waitLoad();
     }
 
     private void selectEntity(String dropDownId, String name) {
         open(dropDownId);
         searchEntity(dropDownId, name);
         WebElement entity = getEntity(dropDownId, name);
-        entity.click();
+        element.click(entity);
     }
 
     public void openAddDashboardForm() {
         openAddEntityForm("dropDownDashboards", "Dashboard");
-
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
     }
 
     public void openAddMenuForm() {
         openAddEntityForm("dropDownMenu", "MenuApplication");
-
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
     }
 
     private void openAddEntityForm(String dropDownId, String addButtonId) {
@@ -90,10 +62,6 @@ public class NewNewDropDown {
 
     public void openEditMenuForm(String name) {
         openEditEntityForm("dropDownMenu", "MenuApplication", name);
-
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-        jquery.waitLoad();
     }
 
     private void openEditEntityForm(String dropDownId, String editButtonId, String name) {
@@ -102,10 +70,6 @@ public class NewNewDropDown {
 
     public void openCloneMenuForm(String name) {
         openCloneEntityForm("dropDownMenu", "MenuApplication", name);
-
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-        jquery.waitLoad();
     }
 
     private void openCloneEntityForm(String dropDownId, String cloneButtonId, String name) {
@@ -120,7 +84,7 @@ public class NewNewDropDown {
 
         WebElement entityOptions = entity.findElement(By.className("ddi_menu_button"));
         elementWait.waitElementVisible(entityOptions);
-        entityOptions.click();
+        element.click(entityOptions);
 
         elementWait.waitElementVisibleById(buttonId);
         window.openModal(By.id(buttonId));
@@ -128,11 +92,6 @@ public class NewNewDropDown {
 
     public void deleteMenu(String name) {
         deleteEntity("dropDownMenu", "MenuApplication", name);
-
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jquery.waitLoad();
-        tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
-        jquery.waitLoad();
     }
 
     private void deleteEntity(String dropDownId, String deleteButtonId, String name) {
@@ -143,7 +102,7 @@ public class NewNewDropDown {
 
         WebElement entityOptions = entity.findElement(By.className("ddi_menu_button"));
         elementWait.waitElementVisible(entityOptions);
-        entityOptions.click();
+        element.click(entityOptions);
 
         seleniumSettings.getWebDriver().findElement(By.id("delete" + deleteButtonId)).click();
         wait.waitAlert();

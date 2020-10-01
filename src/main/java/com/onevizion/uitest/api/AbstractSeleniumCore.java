@@ -45,7 +45,6 @@ import com.onevizion.uitest.api.helper.Login;
 import com.onevizion.uitest.api.helper.Logoff;
 import com.onevizion.uitest.api.helper.Nav;
 import com.onevizion.uitest.api.helper.NewDropDown;
-import com.onevizion.uitest.api.helper.NewNewDropDown;
 import com.onevizion.uitest.api.helper.Privilegies;
 import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Qs;
@@ -108,6 +107,7 @@ import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.mainmenu.MainMenu;
 import com.onevizion.uitest.api.helper.map.Map;
+import com.onevizion.uitest.api.helper.menu.Menu;
 import com.onevizion.uitest.api.helper.notification.Notification;
 import com.onevizion.uitest.api.helper.page.button.PageButton;
 import com.onevizion.uitest.api.helper.portal.Portal;
@@ -331,7 +331,7 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected FilterLogic filterLogic;
 
     @Autowired
-    protected NewNewDropDown newNewDropDown;
+    protected Menu menu;
     /* Helpers End */
 
     /* Entity Helpers Begin */
