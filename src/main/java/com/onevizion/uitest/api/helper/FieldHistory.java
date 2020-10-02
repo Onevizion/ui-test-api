@@ -19,6 +19,11 @@ import com.onevizion.uitest.api.helper.grid.Grid2;
 @Component
 public class FieldHistory {
 
+    //TODO split one method to many methods without boolean parameters "checkFieldsHistory"
+    //TODO split one method to many methods without boolean parameters "checkFieldHistory"
+    //TODO split one method to many methods without boolean parameters "openFieldHistoryForm"
+    //TODO remove loop and wait while element will be visible "sub_item_text"
+
     private static Pattern regexTdContent = Pattern.compile("<TD class.+?>(.+?)</td>", Pattern.DOTALL | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 
     private static Pattern regexHrefContent = Pattern.compile("<A.+?>(.+?)</A>", Pattern.DOTALL | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
@@ -125,10 +130,19 @@ public class FieldHistory {
         if (elementPosition > 1) {
             id = tb.getLastFieldIndex(fieldId, elementPosition);
             id = id.replace("_disp", ""); //for efile field
+            id = id.replace("_start", "").replace("_finish", ""); //for task date
             id = "idx" + id;
         } else {
             id = seleniumSettings.getWebDriver().findElement(By.name(fieldId)).getAttribute("id");
             id = id.replace("_disp", ""); //for efile field
+            id = id.replace("_start", "").replace("_finish", ""); //for task date
+        }
+
+        String menuItemText = "Field History";
+        if (fieldId.contains("_start")) {
+            menuItemText = "Start " + menuItemText;
+        } else if (fieldId.contains("_finish")) {
+            menuItemText = "Finish " + menuItemText;
         }
 
         if (isShowMenu) {
@@ -138,7 +152,7 @@ public class FieldHistory {
             do {
                 try {
                     for (WebElement webElement : seleniumSettings.getWebDriver().findElements(By.className("sub_item_text"))) {
-                        if ("Field History".equals(webElement.getText())) {
+                        if (menuItemText.equals(webElement.getText())) {
                             window.openModal(webElement);
                             break;
                         }
