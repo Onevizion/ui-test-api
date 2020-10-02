@@ -19,6 +19,7 @@ import com.onevizion.uitest.api.vo.LockType;
 public class Grid2 {
 
     private static final String SAVE_PANEL_ID_BASE = "savePanel";
+    private static final String PROGRESS_BAR_ID_BASE = "progressBar";
 
     @Autowired
     private Grid2Wait grid2Wait;
@@ -42,28 +43,37 @@ public class Grid2 {
         waitLoad(AbstractSeleniumCore.getGridIdx());
     }
 
-    public void waitLoad(Long gridId) {
+    public void waitLoad(Long gridIdx) {
         jquery.waitLoad(); //TODO bug in Grid-115098 load views/filters before load grid
-        wait.waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + gridId));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridId));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + gridIdx));
 
-        Long parentGridId;
-        if (grid2Js.getIsSubGrid(gridId)) {
-            parentGridId = grid2Js.getParentGridIdx(gridId);
+        Long parentGridIdx;
+        if (grid2Js.getIsSubGrid(gridIdx)) {
+            parentGridIdx = grid2Js.getParentGridIdx(gridIdx);
         } else {
-            parentGridId = gridId;
+            parentGridIdx = gridIdx;
         }
 
-        wait.waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + parentGridId));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + parentGridId));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.GRID_ID_BASE + parentGridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.LOADING_ID_BASE + parentGridIdx));
 
-        elementWait.waitElementNotVisibleById(AbstractSeleniumCore.LOADING_ID_BASE + parentGridId);
-        elementWait.waitElementNotDisplayById(AbstractSeleniumCore.LOADING_ID_BASE + parentGridId);
+        elementWait.waitElementNotVisibleById(AbstractSeleniumCore.LOADING_ID_BASE + parentGridIdx);
+        elementWait.waitElementNotDisplayById(AbstractSeleniumCore.LOADING_ID_BASE + parentGridIdx);
 
-        grid2Wait.waitIsGridLoaded(gridId);
-        grid2Wait.waitIsGridDataLoaded(gridId);
-        grid2Wait.waitIsGridAllRowsLoaded(gridId);
-        grid2Wait.waitIsGridUpdated(gridId);
+        grid2Wait.waitIsGridLoaded(gridIdx);
+        grid2Wait.waitIsGridDataLoaded(gridIdx);
+        grid2Wait.waitIsGridAllRowsLoaded(gridIdx);
+        grid2Wait.waitIsGridUpdated(gridIdx);
+    }
+
+    public void waitProgressBarLoad() {
+        waitProgressBarLoad(AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void waitProgressBarLoad(Long gridIdx) {
+        elementWait.waitElementNotVisibleById(PROGRESS_BAR_ID_BASE + gridIdx);
+        elementWait.waitElementNotDisplayById(PROGRESS_BAR_ID_BASE + gridIdx);
     }
 
     public void saveChanges(Long gridId) {
