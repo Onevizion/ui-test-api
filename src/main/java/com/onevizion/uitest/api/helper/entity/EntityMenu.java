@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
-import com.onevizion.uitest.api.helper.NewNewDropDown;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
+import com.onevizion.uitest.api.helper.menu.Menu;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.MenuVo;
 
@@ -34,23 +34,23 @@ public class EntityMenu {
     private Grid2 grid2;
 
     @Autowired
-    private NewNewDropDown newNewDropDown;
+    private Menu menu;
 
-    public void testOnForm(MenuVo menu) {
-        newNewDropDown.openFormEditMenu(menu.getLabel());
+    public void testOnForm(MenuVo menuVo) {
+        menu.openEditMenuForm(menuVo.getLabel());
 
-        assertElement.assertText("name", menu.getName());
-        assertElement.assertText("label", menu.getLabel());
-        assertElement.assertText("description", menu.getDescription());
-        assertElement.assertText("orderNumber", menu.getOrderNumber());
-        assertElement.assertSelectWithFolder("dropgridFolderId", menu.getDropgridFolder());
-        //assertElement.assertText("icon", menu.getIconName()); TODO
+        assertElement.assertText("name", menuVo.getName());
+        assertElement.assertText("label", menuVo.getLabel());
+        assertElement.assertText("description", menuVo.getDescription());
+        assertElement.assertText("orderNumber", menuVo.getOrderNumber());
+        assertElement.assertSelectWithFolder("dropgridFolderId", menuVo.getDropgridFolder());
+        //assertElement.assertText("icon", menuVo.getIconName()); TODO
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
 
-    public void testRoleAssignments(MenuVo menu, List<String> roles) {
-        newNewDropDown.openFormEditMenu(menu.getLabel());
+    public void testRoleAssignments(MenuVo menuVo, List<String> roles) {
+        menu.openEditMenuForm(menuVo.getLabel());
 
         tab.goToTab(2); // Roles
         grid2.waitLoad(2L);
