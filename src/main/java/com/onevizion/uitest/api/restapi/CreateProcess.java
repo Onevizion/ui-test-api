@@ -33,7 +33,8 @@ public class CreateProcess {
                     "   \"fields\": { " + 
                     "     \"SPRC_VERSION\": \"" + restApiVersion + "\", " + 
                     "     \"SPRC_BROWSER\": \"" + browserName + "\", " + 
-                    "     \"SPRC_STATUS\": \"in progress\" " + 
+                    "     \"SPRC_STATUS\": \"in progress\", " + 
+                    "     \"SPRC_TYPE\": \"web\" " + 
                     "   } " + 
                     " }";
 
