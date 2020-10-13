@@ -10,6 +10,10 @@ class ListboxJs extends Js {
         execJs3("arguments[0].parentNode.parentNode.scrollTop = arguments[0].offsetTop;", webElement);
     }
 
+    void scrollToElementInListbox2(WebElement webElement) {
+        execJs3("arguments[0].scrollIntoView({block: \"center\"});", webElement);
+    }
+
     Boolean isReadyListbox(String listboxId) {
         return Boolean.valueOf(execJs("return " + listboxId + ".listBox.isReady == true;"));
     }
