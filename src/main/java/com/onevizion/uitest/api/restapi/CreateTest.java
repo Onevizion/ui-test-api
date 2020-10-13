@@ -44,7 +44,7 @@ public class CreateTest {
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Authorization", "Bearer " + seleniumSettings.getRestApiCredential());
 
-            String input = "equal(XITOR_KEY, \"\\\"" + testName + "\\\"\")";
+            String input = "equal(XITOR_KEY, \"\\\"" + testName + "\\\"\") and equal(ST_TYPE, \"\\\"web\\\"\")";
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
@@ -95,7 +95,8 @@ public class CreateTest {
                     "     \"ST_IN_MASTER\": \"1\", " + 
                     "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
                     "     \"ST_MODULE_NAME\": \"" + moduleName + "\", " + 
-                    "     \"ST_BUGS\": \"" + bugs + "\" " + 
+                    "     \"ST_BUGS\": \"" + bugs + "\", " + 
+                    "     \"ST_TYPE\": \"web\" " + 
                     "   } " + 
                     " }";
 
@@ -115,7 +116,7 @@ public class CreateTest {
 
     private void updateTest(String testName, String fullTestName, String moduleName, String bugs) {
         try {
-            URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME + ".TRACKOR_KEY=%22" + testName + "%22");
+            URL url = new URL(seleniumSettings.getRestApiUrl() + "/api/v3/trackor_types/" + TRACKOR_TYPE_NAME + "/trackors?" + TRACKOR_TYPE_NAME + ".TRACKOR_KEY=%22" + testName + "%22&" + TRACKOR_TYPE_NAME + ".ST_TYPE=%22web%22");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
@@ -128,7 +129,8 @@ public class CreateTest {
                     "     \"ST_IN_MASTER\": \"1\", " + 
                     "     \"ST_FULL_NAME\": \"" + fullTestName + "\", " + 
                     "     \"ST_MODULE_NAME\": \"" + moduleName + "\", " + 
-                    "     \"ST_BUGS\": \"" + bugs + "\" " + 
+                    "     \"ST_BUGS\": \"" + bugs + "\", " + 
+                    "     \"ST_TYPE\": \"web\" " + 
                     "   } " + 
                     " }";
 
