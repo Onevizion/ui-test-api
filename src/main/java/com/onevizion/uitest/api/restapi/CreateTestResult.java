@@ -117,7 +117,7 @@ public class CreateTestResult {
                             "     \"STR_RUNTIME_TEST_METHO_SECONDS\": \"" + runtimeTestMethods + "\", " + 
                             "     \"STR_ERROR_REPORT\": \"" + errorReport + "\", " + 
                             "     \"STR_ERROR_CALLSTACK\": \"" + errorCallstack + "\", " + 
-                            "     \"STR_ERROR_FILE\": {\"file_name\": \"screenshot.jpg\", \"data\": \"" + errorScreenshot + "\"} " + 
+                            "     \"STR_ERROR_FILE\": {\"file_name\": \"screenshot.jpg\", \"data\": \"" + OnevizionUtils.escapeStringForRestApiV3(errorScreenshot) + "\"} " + 
                             "   } " + 
                             " }";
                 } else {
