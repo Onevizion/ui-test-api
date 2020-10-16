@@ -76,6 +76,7 @@ public class PageButton {
     private static final String BUTTON_TT_TRACKOR_MAIL_ID_BASE = "itemTmSetup";
     private static final String BUTTON_AUDIT_LOG_RECOVERY_ID_BASE = "itemRecover";
     private static final String BUTTON_BPDOC_ITEM_PREVIEW_ID_BASE = "itemReport";
+    private static final String BUTTON_BULK_FILES_UPLOAD_ID_BASE = "itemBulkUpload";
 
     private static final String BUTTON_REPORT_DETAILS_ID_BASE = "btnDetails";
     private static final String BUTTON_PROCESS_DETAILS_ID_BASE = "btnDetails";
@@ -556,6 +557,15 @@ public class PageButton {
 
         window.openModal(By.id(BUTTON_BPDOC_ITEM_PREVIEW_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void openBulkFilesUpload(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+        waitButtonInPanel(BUTTON_BULK_FILES_UPLOAD_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_BULK_FILES_UPLOAD_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
 
