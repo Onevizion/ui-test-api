@@ -83,6 +83,8 @@ public class EntitySecurityRole {
     private static final String DEF_PRIV_RELATION_E = "cbPrivE12";
     private static final String DEF_PRIV_RELATION_A = "cbPrivA12";
     private static final String DEF_PRIV_RELATION_D = "cbPrivD12";
+    private static final String DEF_PRIV_REPORT_R = "cbPrivR7";
+    private static final String DEF_PRIV_REPORT_E = "cbPrivE7";
     private static final String DEF_PRIV_SYSTEM_ADMINISTRATION_R = "cbPrivR160";
     private static final String DEF_PRIV_SYSTEM_ADMINISTRATION_E = "cbPrivE160";
     private static final String DEF_PRIV_SYSTEM_ADMINISTRATION_A = "cbPrivA160";
@@ -127,7 +129,6 @@ public class EntitySecurityRole {
     private static final String DEF_ASSIGN_GLOBAL_PORTAL = "autoPortalAssign";
     private static final String DEF_ASSIGN_RULE = "autoRuleAssign";
     private static final String DEF_ASSIGN_IMPORT = "autoImportAssign";
-    private static final String DEF_ASSIGN_REPORT = "autoReportAssign";
     private static final String DEF_ASSIGN_GLOBAL_NOTIF = "autoNotifAssign";
     private static final String DEF_ASSIGN_CHAT_NOTIF = "autoChatAssign";
     private static final String DEF_ASSIGN_TRACKOR_TOUR = "autoTourAssign";
@@ -224,6 +225,8 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultPrivs().getRelationE(), DEF_PRIV_RELATION_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getRelationA(), DEF_PRIV_RELATION_A);
         setCheckboxValue(securityRole.getDefaultPrivs().getRelationD(), DEF_PRIV_RELATION_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getReportR(), DEF_PRIV_REPORT_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getReportE(), DEF_PRIV_REPORT_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getSystemAdministrationR(), DEF_PRIV_SYSTEM_ADMINISTRATION_R);
         setCheckboxValue(securityRole.getDefaultPrivs().getSystemAdministrationE(), DEF_PRIV_SYSTEM_ADMINISTRATION_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getSystemAdministrationA(), DEF_PRIV_SYSTEM_ADMINISTRATION_A);
@@ -267,8 +270,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalFilter(), DEF_ASSIGN_GLOBAL_FILTER);
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalPortal(), DEF_ASSIGN_GLOBAL_PORTAL);
         setCheckboxValue(securityRole.getDefaultAssignments().getRule(), DEF_ASSIGN_RULE);
-        setCheckboxValue(securityRole.getDefaultAssignments().getImportt(), DEF_ASSIGN_IMPORT);
-        setCheckboxValue(securityRole.getDefaultAssignments().getReport(), DEF_ASSIGN_REPORT);
+        setCheckboxValue(securityRole.getDefaultAssignments().getImport(), DEF_ASSIGN_IMPORT);
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), DEF_ASSIGN_GLOBAL_NOTIF);
         setCheckboxValue(securityRole.getDefaultAssignments().getChatNotif(), DEF_ASSIGN_CHAT_NOTIF);
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
@@ -347,6 +349,8 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultPrivs().getRelationE(), DEF_PRIV_RELATION_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getRelationA(), DEF_PRIV_RELATION_A);
         setCheckboxValue(securityRole.getDefaultPrivs().getRelationD(), DEF_PRIV_RELATION_D);
+        setCheckboxValue(securityRole.getDefaultPrivs().getReportR(), DEF_PRIV_REPORT_R);
+        setCheckboxValue(securityRole.getDefaultPrivs().getReportE(), DEF_PRIV_REPORT_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getSystemAdministrationR(), DEF_PRIV_SYSTEM_ADMINISTRATION_R);
         setCheckboxValue(securityRole.getDefaultPrivs().getSystemAdministrationE(), DEF_PRIV_SYSTEM_ADMINISTRATION_E);
         setCheckboxValue(securityRole.getDefaultPrivs().getSystemAdministrationA(), DEF_PRIV_SYSTEM_ADMINISTRATION_A);
@@ -390,8 +394,7 @@ public class EntitySecurityRole {
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalFilter(), DEF_ASSIGN_GLOBAL_FILTER);
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalPortal(), DEF_ASSIGN_GLOBAL_PORTAL);
         setCheckboxValue(securityRole.getDefaultAssignments().getRule(), DEF_ASSIGN_RULE);
-        setCheckboxValue(securityRole.getDefaultAssignments().getImportt(), DEF_ASSIGN_IMPORT);
-        setCheckboxValue(securityRole.getDefaultAssignments().getReport(), DEF_ASSIGN_REPORT);
+        setCheckboxValue(securityRole.getDefaultAssignments().getImport(), DEF_ASSIGN_IMPORT);
         setCheckboxValue(securityRole.getDefaultAssignments().getGlobalNotif(), DEF_ASSIGN_GLOBAL_NOTIF);
         setCheckboxValue(securityRole.getDefaultAssignments().getChatNotif(), DEF_ASSIGN_CHAT_NOTIF);
         setCheckboxValue(securityRole.getDefaultAssignments().getTrackorTour(), DEF_ASSIGN_TRACKOR_TOUR);
@@ -467,6 +470,8 @@ public class EntitySecurityRole {
         assertElement.assertCheckbox(DEF_PRIV_RELATION_E, securityRole.getDefaultPrivs().getRelationE());
         assertElement.assertCheckbox(DEF_PRIV_RELATION_A, securityRole.getDefaultPrivs().getRelationA());
         assertElement.assertCheckbox(DEF_PRIV_RELATION_D, securityRole.getDefaultPrivs().getRelationD());
+        assertElement.assertCheckbox(DEF_PRIV_REPORT_R, securityRole.getDefaultPrivs().getReportR());
+        assertElement.assertCheckbox(DEF_PRIV_REPORT_E, securityRole.getDefaultPrivs().getReportE());
         assertElement.assertCheckbox(DEF_PRIV_SYSTEM_ADMINISTRATION_R, securityRole.getDefaultPrivs().getSystemAdministrationR());
         assertElement.assertCheckbox(DEF_PRIV_SYSTEM_ADMINISTRATION_E, securityRole.getDefaultPrivs().getSystemAdministrationE());
         assertElement.assertCheckbox(DEF_PRIV_SYSTEM_ADMINISTRATION_A, securityRole.getDefaultPrivs().getSystemAdministrationA());
@@ -510,8 +515,7 @@ public class EntitySecurityRole {
         assertElement.assertCheckbox(DEF_ASSIGN_GLOBAL_FILTER, securityRole.getDefaultAssignments().getGlobalFilter());
         assertElement.assertCheckbox(DEF_ASSIGN_GLOBAL_PORTAL, securityRole.getDefaultAssignments().getGlobalPortal());
         assertElement.assertCheckbox(DEF_ASSIGN_RULE, securityRole.getDefaultAssignments().getRule());
-        assertElement.assertCheckbox(DEF_ASSIGN_IMPORT, securityRole.getDefaultAssignments().getImportt());
-        assertElement.assertCheckbox(DEF_ASSIGN_REPORT, securityRole.getDefaultAssignments().getReport());
+        assertElement.assertCheckbox(DEF_ASSIGN_IMPORT, securityRole.getDefaultAssignments().getImport());
         assertElement.assertCheckbox(DEF_ASSIGN_GLOBAL_NOTIF, securityRole.getDefaultAssignments().getGlobalNotif());
         assertElement.assertCheckbox(DEF_ASSIGN_CHAT_NOTIF, securityRole.getDefaultAssignments().getChatNotif());
         assertElement.assertCheckbox(DEF_ASSIGN_TRACKOR_TOUR, securityRole.getDefaultAssignments().getTrackorTour());

@@ -11,7 +11,6 @@ public class SecurityRoleDefaultAssignments {
     private String globalPortal;
     private String rule;
     private String importt;
-    private String report;
     private String globalNotif;
     private String chatNotif;
     private String trackorTour;
@@ -47,12 +46,8 @@ public class SecurityRoleDefaultAssignments {
         return rule;
     }
 
-    public String getImportt() {
+    public String getImport() {
         return importt;
-    }
-
-    public String getReport() {
-        return report;
     }
 
     public String getGlobalNotif() {
@@ -81,7 +76,6 @@ public class SecurityRoleDefaultAssignments {
                     SecurityRoleDefaultAssignments.this.globalPortal == null ||
                     SecurityRoleDefaultAssignments.this.rule == null ||
                     SecurityRoleDefaultAssignments.this.importt == null ||
-                    SecurityRoleDefaultAssignments.this.report == null ||
                     SecurityRoleDefaultAssignments.this.globalNotif == null ||
                     SecurityRoleDefaultAssignments.this.chatNotif == null ||
                     SecurityRoleDefaultAssignments.this.trackorTour == null) {
@@ -120,13 +114,8 @@ public class SecurityRoleDefaultAssignments {
             return this;
         }
 
-        public Builder setImportt(String importt) {
+        public Builder setImport(String importt) {
             SecurityRoleDefaultAssignments.this.importt = importt;
-            return this;
-        }
-
-        public Builder setReport(String report) {
-            SecurityRoleDefaultAssignments.this.report = report;
             return this;
         }
 
