@@ -63,6 +63,8 @@ public class SecurityRoleDefaultPrivs {
     private String relationE;
     private String relationA;
     private String relationD;
+    private String reportR;
+    private String reportE;
     private String systemAdministrationR;
     private String systemAdministrationE;
     private String systemAdministrationA;
@@ -339,6 +341,14 @@ public class SecurityRoleDefaultPrivs {
         return relationD;
     }
 
+    public String getReportR() {
+        return reportR;
+    }
+
+    public String getReportE() {
+        return reportE;
+    }
+
     public String getSystemAdministrationR() {
         return systemAdministrationR;
     }
@@ -529,6 +539,8 @@ public class SecurityRoleDefaultPrivs {
                     SecurityRoleDefaultPrivs.this.relationE == null ||
                     SecurityRoleDefaultPrivs.this.relationA == null ||
                     SecurityRoleDefaultPrivs.this.relationD == null ||
+                    SecurityRoleDefaultPrivs.this.reportR == null ||
+                    SecurityRoleDefaultPrivs.this.reportE == null ||
                     SecurityRoleDefaultPrivs.this.systemAdministrationR == null ||
                     SecurityRoleDefaultPrivs.this.systemAdministrationE == null ||
                     SecurityRoleDefaultPrivs.this.systemAdministrationA == null ||
@@ -857,6 +869,16 @@ public class SecurityRoleDefaultPrivs {
 
         public Builder setRelationD(String relationD) {
             SecurityRoleDefaultPrivs.this.relationD = relationD;
+            return this;
+        }
+
+        public Builder setReportR(String reportR) {
+            SecurityRoleDefaultPrivs.this.reportR = reportR;
+            return this;
+        }
+
+        public Builder setReportE(String reportE) {
+            SecurityRoleDefaultPrivs.this.reportE = reportE;
             return this;
         }
 
