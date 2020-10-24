@@ -45,6 +45,7 @@ public class PageButton {
     private static final String BUTTON_UP_GRID_ID_BASE = "itemUp";
     private static final String BUTTON_DOWN_GRID_ID_BASE = "itemDown";
     private static final String BUTTON_CALL_STACK_ID_BASE = "itemCallStack";
+    private static final String BUTTON_BULK_FILE_UPLOAD_ID_BASE = "itemBulkUpload";
 
     private static final String BUTTON_COMPONENT_EXPORT_ID_BASE = "itemExportRun";
     private static final String BUTTON_COMPONENT_IMPORT_ID_BASE = "itemImportRun";
@@ -76,7 +77,6 @@ public class PageButton {
     private static final String BUTTON_TT_TRACKOR_MAIL_ID_BASE = "itemTmSetup";
     private static final String BUTTON_AUDIT_LOG_RECOVERY_ID_BASE = "itemRecover";
     private static final String BUTTON_BPDOC_ITEM_PREVIEW_ID_BASE = "itemReport";
-    private static final String BUTTON_BULK_FILES_UPLOAD_ID_BASE = "itemBulkUpload";
 
     private static final String BUTTON_REPORT_DETAILS_ID_BASE = "btnDetails";
     private static final String BUTTON_PROCESS_DETAILS_ID_BASE = "btnDetails";
@@ -275,6 +275,15 @@ public class PageButton {
         window.openModal(By.id(BUTTON_CALL_STACK_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         grid2.waitLoad();
+    }
+
+    public void openBulkFileUpload(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+        waitButtonInPanel(BUTTON_BULK_FILE_UPLOAD_ID_BASE + gridIdx);
+
+        window.openModal(By.id(BUTTON_BULK_FILE_UPLOAD_ID_BASE + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
     }
 
     public void openComponentExportForm(Long gridIdx) {
@@ -557,15 +566,6 @@ public class PageButton {
 
         window.openModal(By.id(BUTTON_BPDOC_ITEM_PREVIEW_ID_BASE + gridIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        wait.waitFormLoad();
-    }
-
-    public void openBulkFilesUpload(Long gridIdx) {
-        openOptionsPanel(gridIdx);
-        waitButtonInPanel(BUTTON_BULK_FILES_UPLOAD_ID_BASE + gridIdx);
-
-        window.openModal(By.id(BUTTON_BULK_FILES_UPLOAD_ID_BASE + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         wait.waitFormLoad();
     }
 
