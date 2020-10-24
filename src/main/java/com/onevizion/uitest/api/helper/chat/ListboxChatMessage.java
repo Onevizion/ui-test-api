@@ -13,12 +13,26 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.ElementWait;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 
 @Component
 public class ListboxChatMessage {
 
     //TODO need create AbstractListbox
 
+    @Autowired
+    private ElementWait elementWait;
+
+    @Autowired
+    private ChatJs chatJs;
+
+    @Autowired
+    private Jquery jquery;
+
+    @Autowired
+    private ListboxChatMessage listboxChatMessage;
+    
     @Autowired
     private SeleniumSettings seleniumSettings;
 
@@ -64,6 +78,28 @@ public class ListboxChatMessage {
 
     public void checkElementByDate(List<ListboxElementChatMessage> elements, int position, String date) {
         Assert.assertEquals(IntStream.range(0, elements.size()).filter(p -> elements.get(p).getDate().equals(date) && p == position - 1).count(), 1L, "Element with date [" + date + "] not found in position [" + position + "] in Listbox");
+    }
+
+    public void scrollUp() {
+        chatJs.scrollUp();
+
+        List<ListboxElementChatMessage> loadedMessages = listboxChatMessage.getMessagesInGrid();
+        String FirstMessageId = loadedMessages.get(0).getId().toString();
+        WebElement FirstMessage = seleniumSettings.getWebDriver().findElement(By.id("chatPanel0")).findElement(By.id(FirstMessageId));
+        elementWait.waitElementVisible(FirstMessage);
+
+        jquery.waitLoad();
+    }
+
+    public void scrollDown() {
+        chatJs.scrollDown();
+
+        List<ListboxElementChatMessage> loadedMessages = listboxChatMessage.getMessagesInGrid();
+        String LastMessageId = loadedMessages.get(loadedMessages.size() - 1).getId().toString();
+        WebElement LastMessage = seleniumSettings.getWebDriver().findElement(By.id("chatPanel0")).findElement(By.id(LastMessageId));
+        elementWait.waitElementVisible(LastMessage);
+
+        jquery.waitLoad();
     }
 
 }
