@@ -1,6 +1,5 @@
 package com.onevizion.uitest.api.helper.chat;
 
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.helper.Js;
