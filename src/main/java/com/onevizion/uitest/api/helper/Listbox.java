@@ -184,11 +184,6 @@ public class Listbox {
         elementWait.waitElementVisible(element);
     }
 
-    public void scrollToElementInListbox2(WebElement element) {
-        listboxJs.scrollToElementInListbox2(element);
-        elementWait.waitElementVisible(element);
-    }
-
     public void selectElementByLabel(List<ListboxElement> elements, String label) {
         ListboxElement listboxElement = getElementByLabel(elements, label);
         listboxJs.scrollToElementInListbox(listboxElement.getWebElement());
