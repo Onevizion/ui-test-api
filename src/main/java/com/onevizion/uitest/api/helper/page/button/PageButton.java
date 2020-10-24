@@ -277,7 +277,7 @@ public class PageButton {
         grid2.waitLoad();
     }
 
-    public void openBulkFileUpload(Long gridIdx) {
+    public void openBulkFileUploadForm(Long gridIdx) {
         openOptionsPanel(gridIdx);
         waitButtonInPanel(BUTTON_BULK_FILE_UPLOAD_ID_BASE + gridIdx);
 
