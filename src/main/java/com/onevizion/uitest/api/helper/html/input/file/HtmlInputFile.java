@@ -1,5 +1,7 @@
 package com.onevizion.uitest.api.helper.html.input.file;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ public class HtmlInputFile {
     private static final String INPUT_FILE_ID_ON_ADMIN_CLIENT_FILE = "inputFileUploader";
     private static final String INPUT_FILE_ID_ON_DROP_GRID = "excelFile";
     private static final String INPUT_FILE_ID_ON_CASCADE_FIELD = "txtFile";
+    private static final String INPUT_FILE_ID_ON_BULK_FILE_UPLOAD = "inputFileUploaderuploader1";
 
     private static final String FRAME_ID_ON_FORM = "ifrmHideForm";
 
@@ -111,6 +114,15 @@ public class HtmlInputFile {
         elementWait.waitElementVisibleById(INPUT_FILE_ID_ON_CASCADE_FIELD);
         elementWait.waitElementDisplayById(INPUT_FILE_ID_ON_CASCADE_FIELD);
         seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_CASCADE_FIELD)).sendKeys(seleniumSettings.getUploadFilesPath() + value);
+    }
+
+    public void uploadOnBulkFileUpload(List<String> values) {
+        String path = "";
+        for (String value : values) {
+            path = path + seleniumSettings.getUploadFilesPath() + value + "\n";
+        }
+        path = path.substring(0, path.lastIndexOf("\n"));
+        seleniumSettings.getWebDriver().findElement(By.id(INPUT_FILE_ID_ON_BULK_FILE_UPLOAD)).sendKeys(path);
     }
 
     public void uploadOnForm(String fieldName, String value) {
