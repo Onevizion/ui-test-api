@@ -11,12 +11,12 @@ class ChatJs extends Js {
         return Boolean.valueOf(execJs("return isUsersLoaded == true;"));
     }
 
-    void scrollUp() {
-        execJs3("document.getElementsByClassName('ch_list')[0].parentElement.parentElement.parentElement.scrollTop = 0;", null);
+    void scrollUpList(String listId) {
+        execJs("document.getElementById('" + listId + "').parentElement.parentElement.parentElement.scrollTop = 0;");
     }
 
-    void scrollDown() {
-        execJs3("document.getElementsByClassName('ch_list')[0].parentElement.parentElement.parentElement.scrollTop = document.getElementsByClassName('ch_list')[0].parentElement.parentElement.parentElement.scrollHeight", null);
+    void scrollDownList(String listId) {
+        execJs("document.getElementById('" + listId + "').parentElement.parentElement.parentElement.scrollTop = document.getElementById('" + listId + "').parentElement.parentElement.parentElement.scrollHeight");
     }
 
 }
