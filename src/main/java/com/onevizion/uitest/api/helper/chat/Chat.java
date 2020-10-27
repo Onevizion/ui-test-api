@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
-import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
@@ -74,9 +73,6 @@ public class Chat {
 
     @Autowired
     private ChatJs chatJs;
-
-    @Autowired
-    private SeleniumLogger seleniumLogger;
 
     public void checkMainPanelOnFormExist() {
         checkElementExist(ID_MAIN_BUTTON);
@@ -492,73 +488,73 @@ public class Chat {
 
     public void scrollUpListWithMessagesOnForm() {
         chatJs.scrollUpList(ID_COMMENT_LIST);
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollUpListWithMessagesInGrid() {
         chatJs.scrollUpList(ID_COMMENT_LIST + AbstractSeleniumCore.getGridIdx());
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollDownListWithMessagesOnForm() {
         chatJs.scrollDownList(ID_COMMENT_LIST);
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollDownListWithMessagesInGrid() {
         chatJs.scrollDownList(ID_COMMENT_LIST + AbstractSeleniumCore.getGridIdx());
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollUpListWithSearchMessagesOnForm() {
         chatJs.scrollUpList(ID_SEARCH_COMMENT_LIST);
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollUpListWithSearchMessagesInGrid() {
         chatJs.scrollUpList(ID_SEARCH_COMMENT_LIST + AbstractSeleniumCore.getGridIdx());
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollDownListWithSearchMessagesOnForm() {
         chatJs.scrollDownList(ID_SEARCH_COMMENT_LIST);
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollDownListWithSearchMessagesInGrid() {
         chatJs.scrollDownList(ID_SEARCH_COMMENT_LIST + AbstractSeleniumCore.getGridIdx());
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollUpListWithSubscribersOnForm() {
         chatJs.scrollUpList(ID_SUBSCRIBE_LIST);
-        correctSleep(1000L);
+        AbstractSeleniumCore.correctSleep(1000L);
         jquery.waitLoad();
     }
 
     public void scrollUpListWithSubscribersInGrid() {
         chatJs.scrollUpList(ID_SUBSCRIBE_LIST + AbstractSeleniumCore.getGridIdx());
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollDownListWithSubscribersOnForm() {
         chatJs.scrollDownList(ID_SUBSCRIBE_LIST);
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
     public void scrollDownListWithSubscribersInGrid() {
         chatJs.scrollDownList(ID_SUBSCRIBE_LIST + AbstractSeleniumCore.getGridIdx());
-        correctSleep(100L);
+        AbstractSeleniumCore.correctSleep(100L);
         jquery.waitLoad();
     }
 
@@ -665,15 +661,6 @@ public class Chat {
 
     private WebElement getDialog() {
         return seleniumSettings.getWebDriver().findElement(By.className("md_dialog"));
-    }
-
-    private void correctSleep(Long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            seleniumLogger.error("Interrupted!");
-            Thread.currentThread().interrupt();
-        }
     }
 
 }

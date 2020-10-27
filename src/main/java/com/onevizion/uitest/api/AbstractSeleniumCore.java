@@ -699,7 +699,14 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            //logger.error("Interrupted!", e); //TODO
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    public static void correctSleep(Long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }

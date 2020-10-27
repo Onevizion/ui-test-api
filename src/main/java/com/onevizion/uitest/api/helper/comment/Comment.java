@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.onevizion.uitest.api.SeleniumLogger;
+import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.Element;
@@ -25,9 +25,6 @@ public class Comment {
 
     @Autowired
     private SeleniumSettings seleniumSettings;
-
-    @Autowired
-    private SeleniumLogger seleniumLogger;
 
     @Autowired
     private Element element;
@@ -138,7 +135,7 @@ public class Comment {
         elementWait.waitElementDisabledById("btnSubmit");
         elementWait.waitElementAttributeById("comment", "value", "");
 
-        correctSleep(500L);
+        AbstractSeleniumCore.correctSleep(500L);
     }
 
     public void deleteComment(String text) {
@@ -180,15 +177,6 @@ public class Comment {
         seleniumSettings.getWebDriver().switchTo().parentFrame();
 
         seleniumSettings.getWebDriver().findElement(By.className("dhxwin_active")).findElement(By.className("dhxwin_button_close")).click();
-    }
-
-    private void correctSleep(Long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            seleniumLogger.error("Interrupted!");
-            Thread.currentThread().interrupt();
-        }
     }
 
 }
