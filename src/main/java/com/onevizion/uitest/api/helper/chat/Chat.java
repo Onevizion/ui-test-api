@@ -48,6 +48,7 @@ public class Chat {
     private static final String ID_SEARCH_PANEL = "filterPanel";
     private static final String ID_SEARCH_PANEL_OPEN = "btnToSearchPanel";
     private static final String ID_SEARCH_PANEL_CLOSE = "btnOffFilterPanel";
+    private static final String ID_SEARCH_PANEL_USERS = "btnPerson";
 
     private static final String ID_SEARCH_TEXT = "chatFilterSearch";
     private static final String ID_SEARCH_SEARCH = "filterStartSearch";
@@ -263,6 +264,50 @@ public class Chat {
         elementWait.waitElementNotDisplayById(ID_SEARCH_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementVisibleById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
         elementWait.waitElementDisplayById(ID_MAIN_PANEL + AbstractSeleniumCore.getGridIdx());
+    }
+
+    public void selectUserOnSearchPanelOnForm(String userName) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_USERS)).click();
+
+        WebElement dialog = getDialog();
+        jquery.waitLoad();
+        WebElement user = getUserFromSearchPanel(userName);
+        element.click(user);
+        dialog.findElement(By.id("buttonOk")).click();
+        jquery.waitLoad();
+    }
+
+    public void selectUserOnSearchPanelInGrid(String userName) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_USERS + AbstractSeleniumCore.getGridIdx())).click();
+
+        WebElement dialog = getDialog();
+        jquery.waitLoad();
+        WebElement user = getUserFromSearchPanel(userName);
+        element.click(user);
+        dialog.findElement(By.id("buttonOk")).click();
+        jquery.waitLoad();
+    }
+
+    public void unselectUserOnSearchPanelOnForm(String userName) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_USERS)).click();
+
+        WebElement dialog = getDialog();
+        jquery.waitLoad();
+        WebElement user = getUserFromSearchPanel(userName);
+        element.click(user);
+        dialog.findElement(By.id("buttonOk")).click();
+        jquery.waitLoad();
+    }
+
+    public void unselectUserOnSearchPanelInGrid(String userName) {
+        seleniumSettings.getWebDriver().findElement(By.id(ID_SEARCH_PANEL_USERS + AbstractSeleniumCore.getGridIdx())).click();
+
+        WebElement dialog = getDialog();
+        jquery.waitLoad();
+        WebElement user = getUserFromSearchPanel(userName);
+        element.click(user);
+        dialog.findElement(By.id("buttonOk")).click();
+        jquery.waitLoad();
     }
 
     public void subscribeCurrentUserOnForm() {
@@ -517,6 +562,26 @@ public class Chat {
         jquery.waitLoad();
     }
 
+    private WebElement getUserFromSearchPanel(String userName) {
+        WebElement result = null;
+
+        List<WebElement> users = seleniumSettings.getWebDriver().findElement(By.className("md_dialog")).findElements(By.className(CLASS_USER_ON_MANAGE_PANEL));
+        for (WebElement user : users) {
+            if (userName.equals(user.findElement(By.className(CLASS_USER_NAME_ON_MANAGE_PANEL)).getAttribute("textContent"))) {
+                if (result != null) {
+                    throw new SeleniumUnexpectedException("User [" + userName + "] found many times");
+                }
+                result = user;
+            }
+        }
+
+        if (result == null) {
+            throw new SeleniumUnexpectedException("User [" + userName + "] not found");
+        }
+
+        return result;
+    }
+
     private WebElement getUserFromManagePanelOnForm(String userName) {
         WebElement result = null;
 
@@ -596,6 +661,10 @@ public class Chat {
 
     private WebElement getToggleCheckbox(WebElement toggle) {
         return toggle.findElement(By.className("tg_checkbox"));
+    }
+
+    private WebElement getDialog() {
+        return seleniumSettings.getWebDriver().findElement(By.className("md_dialog"));
     }
 
     private void correctSleep(Long millis) {
