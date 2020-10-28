@@ -338,73 +338,64 @@ public class View {
         isExistAndSelectedView(gridIdx, AbstractSeleniumCore.PREFIX_GLOBAL + viewName);
     }
 
-    public void openOrganizer(Long gridIdx) {
-        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
-    }
-
     public void addFolder(Long gridIdx, String folderName, String folderParentName) {
         openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
-        organizer.addFolder(folderName, folderParentName);
-        closeOrganizer();
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
+        organizer.add(folderName, folderParentName);
+        organizer.closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);
     }
 
     public void editFolder(Long gridIdx, String oldfolderName, String newfolderName, String newfolderParentName) {
         openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
         organizer.edit(oldfolderName, newfolderName, newfolderParentName);
-        closeOrganizer();
+        organizer.closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);
     }
 
     public void deleteFolder(Long gridIdx, String folderName) {
         openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
         organizer.delete(folderName);
-        closeOrganizer();
+        organizer.closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);
     }
 
     public void moveUpFolder(Long gridIdx, String folderName) {
         openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
         organizer.moveUp(folderName);
-        closeOrganizer();
+        organizer.closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);
     }
 
     public void moveDownFolder(Long gridIdx, String folderName) {
         openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
         organizer.moveDown(folderName);
-        closeOrganizer();
+        organizer.closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);
     }
 
     public void checkSubItemsInFolder(Long gridIdx, String folderName, List<String> subItems) {
         openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
         organizer.checkSubItems(folderName, subItems);
-        closeOrganizer();
-        jquery.waitLoad();
-        closeMainPanel(gridIdx);
-    }
-
-    public void closeOrganizer() {
         organizer.closeOrganizer();
+        closeMainPanel(gridIdx);
     }
 
     public void promoteToGlobal(Long gridIdx, String oldViewName, String newViewName, String folderParentName) {
         openMainPanel(gridIdx);
-        openOrganizer(gridIdx);
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
         organizer.promoteToGlobal(oldViewName, newViewName, folderParentName);
-        closeOrganizer();
+        organizer.closeOrganizer();
         jquery.waitLoad();
         closeMainPanel(gridIdx);
     }
@@ -416,9 +407,9 @@ public class View {
 
         openMainPanel(gridIdx);
 
-        openOrganizer(gridIdx);
+        organizer.openOrganizer(BUTTON_ORGANIZE + gridIdx);
         organizer.delete(entityPrefix);
-        closeOrganizer();
+        organizer.closeOrganizer();
 
         grid2.waitLoad(gridIdx);
 

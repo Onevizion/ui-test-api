@@ -84,6 +84,10 @@ public class Tree {
         return treeJs.getItemTextById(treeId, itemId);
     }
 
+    public String getItemIdByText(Long treeId, String itemText) {
+        return treeJs.getItemIdByText(treeId.toString(), itemText);
+    }
+
     public String getSelectedItem(Long treeId) {
         return treeJs.getSelectedItem(treeId);
     }

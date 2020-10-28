@@ -38,6 +38,28 @@ class TreeJs extends Js {
         return execJs("return treeArr['" + treeId + "'].tree.getItemText('" + itemId + "');");
     }
 
+    String getItemIdByText(String treeId, String itemText) {
+        return execJs(""
+                + "var result = null;"
+                + "var itemsStr = treeArr['" + treeId + "'].tree.getAllSubItems(0);"
+                + "var items = itemsStr.split(\",\");"
+                + ""
+                + "for (let i = 0; i < items.length; i++) {"
+                + "    if ('" + itemText + "' == treeArr['" + treeId + "'].tree.getItemText(items[i])) {"
+                + "        if (result != null) {"
+                + "            throw 'Item in tree with name[" + itemText + "] found many times';"
+                + "        }"
+                + "        result = items[i];"
+                + "    }"
+                + "}"
+                + ""
+                + "if (result == null) {"
+                + "    throw 'Item in tree with name[" + itemText + "] not found';"
+                + "}"
+                + ""
+                + "return result;");
+    }
+
     String getSelectedItem(Long treeId) {
         return execJs("return treeArr[" + treeId + "].tree.getSelectedItemId();");
     }
