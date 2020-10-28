@@ -73,6 +73,7 @@ public class Organizer {
         selectParentFolderInDialog(dialog, parentFolderName);
         dialog.findElement(By.id(DIALOG_BUTTON_OK_ID)).click();
 
+        wait.waitLoadingLoad();
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
@@ -92,6 +93,7 @@ public class Organizer {
         selectParentFolderInDialog(dialog, parentFolderName);
         dialog.findElement(By.id(DIALOG_BUTTON_OK_ID)).click();
 
+        wait.waitLoadingLoad();
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
@@ -126,6 +128,7 @@ public class Organizer {
         selectParentFolderInDialog(dialog, parentFolderName);
         dialog.findElement(By.id(DIALOG_BUTTON_OK_ID)).click();
 
+        wait.waitLoadingLoad();
         tree.waitLoad(AbstractSeleniumCore.getTreeIdx());
     }
 
