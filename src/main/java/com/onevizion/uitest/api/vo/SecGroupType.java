@@ -2,7 +2,6 @@ package com.onevizion.uitest.api.vo;
 
 public enum SecGroupType {
 
-    REPORT("Report"),
     TOUR("Trackor Tour"),
     RULE("Rule"),
     REPORT_DELIVERY("Report Delivery"),
