@@ -10,7 +10,8 @@ public enum RuleClassType {
     FORWARD_GEOCODING("Forward Geocoding"),
     TOWER_DIAGRAM("Tower Diagram"),
     MAP_SNIPPET("Map Snippet"),
-    TOWER_PROFILE("Tower Profile");
+    TOWER_PROFILE("Tower Profile"),
+    PROCESS_NOTIFICATIONS("Process Notifications");
 
     private String name;
 
