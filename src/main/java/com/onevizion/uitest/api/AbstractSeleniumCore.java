@@ -29,6 +29,7 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.CloneButton;
 import com.onevizion.uitest.api.helper.CompAuditLog;
+import com.onevizion.uitest.api.helper.ComponentPackage;
 import com.onevizion.uitest.api.helper.DropDown;
 import com.onevizion.uitest.api.helper.DualListbox;
 import com.onevizion.uitest.api.helper.Element;
@@ -44,7 +45,6 @@ import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.Login;
 import com.onevizion.uitest.api.helper.Logoff;
 import com.onevizion.uitest.api.helper.Nav;
-import com.onevizion.uitest.api.helper.NewDropDown;
 import com.onevizion.uitest.api.helper.Privilegies;
 import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Qs;
@@ -262,9 +262,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
     protected ApiV3Parameter apiV3Parameter;
 
     @Autowired
-    protected NewDropDown newDropDown;
-
-    @Autowired
     protected ConfigField configField;
 
     @Autowired
@@ -332,6 +329,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected Menu menu;
+
+    @Autowired
+    protected ComponentPackage componentPackage;
     /* Helpers End */
 
     /* Entity Helpers Begin */

@@ -7,21 +7,13 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.ElementWait;
-import com.onevizion.uitest.api.helper.NewDropDown;
-import com.onevizion.uitest.api.helper.Wait;
+import com.onevizion.uitest.api.helper.ComponentPackage;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
-import com.onevizion.uitest.api.vo.entity.ComponentPackage;
+import com.onevizion.uitest.api.vo.entity.ComponentPackageVo;
 
 @Component
 public class EntityComponentPackage {
-
-    @Autowired
-    private NewDropDown newDropDown;
-
-    @Autowired
-    private Wait wait;
 
     @Autowired
     private Window window;
@@ -36,42 +28,31 @@ public class EntityComponentPackage {
     private SeleniumSettings seleniumSettings;
 
     @Autowired
-    private ElementWait elementWait;
+    private ComponentPackage componentPackage;
 
-    public void add(ComponentPackage componentPackage) {
-        seleniumSettings.getWebDriver().findElement(By.id("new_lbCompPkg0")).click();
-        elementWait.waitElementById("new_rows_lbCompPkg0");
-        elementWait.waitElementVisibleById("new_lbCompPkg0");
-        elementWait.waitElementDisplayById("new_rows_lbCompPkg0");
+    public void add(ComponentPackageVo componentPackageVo) {
+        componentPackage.openAddComponentPackageForm();
 
-        window.openModal(By.id("btnAddCompPkg0"));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-
-        seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackage.getName());
+        seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackageVo.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
 
-    public void edit(ComponentPackage componentPackageOld, ComponentPackage componentPackage) {
-        newDropDown.openEditComponentPackageForm(componentPackageOld.getName());
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+    public void edit(ComponentPackageVo componentPackageOld, ComponentPackageVo componentPackageVo) {
+        componentPackage.openEditComponentPackageForm(componentPackageOld.getName());
 
         seleniumSettings.getWebDriver().findElement(By.name("name")).clear();
-        seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackage.getName());
+        seleniumSettings.getWebDriver().findElement(By.name("name")).sendKeys(componentPackageVo.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
 
-    public void testOnForm(ComponentPackage componentPackage) {
-        newDropDown.openEditComponentPackageForm(componentPackage.getName());
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+    public void testOnForm(ComponentPackageVo componentPackageVo) {
+        componentPackage.openEditComponentPackageForm(componentPackageVo.getName());
 
-        assertElement.assertText("name", componentPackage.getName());
+        assertElement.assertText("name", componentPackageVo.getName());
 
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
     }
