@@ -40,6 +40,10 @@ public class NewNewDropDown {
         select("dropDownMenu", name);
     }
 
+    public void selectComponentPackage(String name) {
+        select("dropDownComponentsExport", name);
+    }
+
     private void select(String dropDownId, String name) {
         open(dropDownId);
         searchEntity(dropDownId, name);
@@ -55,6 +59,10 @@ public class NewNewDropDown {
         openFormAdd("dropDownMenu", "MenuApplication");
     }
 
+    public void openFormAddComponentPackage() {
+        openFormAdd("dropDownComponentsExport", "CompPkg");
+    }
+
     private void openFormAdd(String dropDownId, String addButtonId) {
         open(dropDownId);
         window.openModal(By.id("add" + addButtonId));
@@ -62,6 +70,10 @@ public class NewNewDropDown {
 
     public void openFormEditMenu(String name) {
         openFormEdit("dropDownMenu", "MenuApplication", name);
+    }
+
+    public void openFormEditComponentPackage(String name) {
+        openFormEdit("dropDownComponentsExport", "CompPkg", name);
     }
 
     private void openFormEdit(String dropDownId, String editButtonId, String name) {
@@ -92,6 +104,10 @@ public class NewNewDropDown {
 
     public void deleteMenu(String name) {
         delete("dropDownMenu", "MenuApplication", name);
+    }
+
+    public void deleteComponentPackage(String name) {
+        delete("dropDownComponentsExport", "CompPkg", name);
     }
 
     private void delete(String dropDownId, String deleteButtonId, String name) {

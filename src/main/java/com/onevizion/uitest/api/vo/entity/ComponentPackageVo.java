@@ -2,16 +2,16 @@ package com.onevizion.uitest.api.vo.entity;
 
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 
-public class ComponentPackage {
+public class ComponentPackageVo {
 
     private String name;
 
-    private ComponentPackage() {
+    private ComponentPackageVo() {
         
     }
 
     public static Builder newBuilder() {
-        return new ComponentPackage().new Builder();
+        return new ComponentPackageVo().new Builder();
     }
 
     public String getName() {
@@ -24,15 +24,15 @@ public class ComponentPackage {
             
         }
 
-        public ComponentPackage build() {
-            if (ComponentPackage.this.name == null) {
+        public ComponentPackageVo build() {
+            if (ComponentPackageVo.this.name == null) {
                 throw new SeleniumUnexpectedException("");
             }
-            return ComponentPackage.this;
+            return ComponentPackageVo.this;
         }
 
         public Builder setName(String name) {
-            ComponentPackage.this.name = name;
+            ComponentPackageVo.this.name = name;
             return this;
         }
 
