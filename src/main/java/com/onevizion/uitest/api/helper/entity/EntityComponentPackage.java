@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
-import com.onevizion.uitest.api.helper.ComponentPackage;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.comppack.ComponentPackage;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.ComponentPackageVo;
 

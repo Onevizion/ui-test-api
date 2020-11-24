@@ -1,10 +1,12 @@
-package com.onevizion.uitest.api.helper;
+package com.onevizion.uitest.api.helper.comppack;
 
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
+import com.onevizion.uitest.api.helper.NewNewDropDown;
+import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 
