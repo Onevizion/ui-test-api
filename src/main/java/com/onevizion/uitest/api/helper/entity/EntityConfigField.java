@@ -567,6 +567,9 @@ public class EntityConfigField {
         } else {
             packagesTabIndex = 6L;
         }
+        if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType()) && !configFieldVo.getConfigFieldTrackorSelector().getShortName().isEmpty()) {
+            packagesTabIndex = packagesTabIndex + 1L;
+        }
         if ("YES".equals(configFieldVo.getLockable())) {
             packagesTabIndex = packagesTabIndex + 1L;
         }
@@ -986,6 +989,9 @@ public class EntityConfigField {
         } else {
             packagesTabIndex = 6L;
         }
+        if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType()) && !configFieldVo.getConfigFieldTrackorSelector().getShortName().isEmpty()) {
+            packagesTabIndex = packagesTabIndex + 1L;
+        }
         if ("YES".equals(configFieldVo.getLockable()) || removeLockable) {
             packagesTabIndex = packagesTabIndex + 1L;
         }
@@ -1245,6 +1251,9 @@ public class EntityConfigField {
             packagesTabIndex = 8L;
         } else {
             packagesTabIndex = 6L;
+        }
+        if (ConfigFieldType.TRACKOR_SELECTOR.equals(configFieldVo.getConfigFieldType()) && !configFieldVo.getConfigFieldTrackorSelector().getShortName().isEmpty()) {
+            packagesTabIndex = packagesTabIndex + 1L;
         }
         if ("YES".equals(configFieldVo.getLockable())) {
             packagesTabIndex = packagesTabIndex + 1L;
