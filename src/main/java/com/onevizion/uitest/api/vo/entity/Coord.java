@@ -9,6 +9,8 @@ public class Coord {
     private String latFieldLabel;
     private String longFieldName;
     private String longFieldLabel;
+    private String colorLegendFieldName;
+    private String colorLegendFieldLabel;
     private String trackorTypeName;
     private String trackorTypeLabel;
 
@@ -40,6 +42,14 @@ public class Coord {
         return longFieldLabel;
     }
 
+    public String getColorLegendFieldName() {
+        return colorLegendFieldName;
+    }
+
+    public String getColorLegendFieldLabel() {
+        return colorLegendFieldLabel;
+    }
+
     public String getTrackorTypeName() {
         return trackorTypeName;
     }
@@ -60,6 +70,8 @@ public class Coord {
                     Coord.this.latFieldLabel == null ||
                     Coord.this.longFieldName == null ||
                     Coord.this.longFieldLabel == null ||
+                    Coord.this.colorLegendFieldName == null ||
+                    Coord.this.colorLegendFieldLabel == null ||
                     Coord.this.trackorTypeName == null ||
                     Coord.this.trackorTypeLabel == null) {
                 throw new SeleniumUnexpectedException("");
@@ -89,6 +101,16 @@ public class Coord {
 
         public Builder setLongFieldLabel(String longFieldLabel) {
             Coord.this.longFieldLabel = longFieldLabel;
+            return this;
+        }
+
+        public Builder setColorLegendFieldName(String colorLegendFieldName) {
+            Coord.this.colorLegendFieldName = colorLegendFieldName;
+            return this;
+        }
+
+        public Builder setColorLegendFieldLabel(String colorLegendFieldLabel) {
+            Coord.this.colorLegendFieldLabel = colorLegendFieldLabel;
             return this;
         }
 

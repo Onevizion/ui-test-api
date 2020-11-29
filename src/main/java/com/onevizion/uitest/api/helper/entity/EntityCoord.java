@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,8 @@ public class EntityCoord {
     private static final String LATITUDE_BUTTON = "btnlatitudeField";
     private static final String LONGITUDE = "longitudeField";
     private static final String LONGITUDE_BUTTON = "btnlongitudeField";
+    private static final String COLOR_LEGEND = "colorLegendField";
+    private static final String COLOR_LEGEND_BUTTON = "btncolorLegendField";
 
     @Autowired
     private Window window;
@@ -62,6 +66,10 @@ public class EntityCoord {
 
         selector.selectRadio(By.name(LONGITUDE_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, coord.getLongFieldName(), 1L);
 
+        if (!coord.getColorLegendFieldName().isEmpty()) {
+            selector.selectRadio(By.name(COLOR_LEGEND_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, coord.getColorLegendFieldName(), 1L);
+        }
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
@@ -79,6 +87,12 @@ public class EntityCoord {
         assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LONGITUDE)));
         assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LONGITUDE_BUTTON)));
 
+        Actions action = new Actions(seleniumSettings.getWebDriver());
+        action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(COLOR_LEGEND))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
+        if (!coord.getColorLegendFieldName().isEmpty()) {
+            selector.selectRadio(By.name(COLOR_LEGEND_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, coord.getColorLegendFieldName(), 1L);
+        }
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
@@ -91,6 +105,7 @@ public class EntityCoord {
         assertElement.assertText(NAME, coord.getName());
         assertElement.assertRadioPsSelector(LATITUDE, null, null, coord.getLatFieldName(), null, false);
         assertElement.assertRadioPsSelector(LONGITUDE, null, null, coord.getLongFieldName(), null, false);
+        assertElement.assertRadioPsSelector(COLOR_LEGEND, COLOR_LEGEND_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, coord.getColorLegendFieldName(), 1L, true);
 
         assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LATITUDE)));
         assertElement.assertElementDisabled(seleniumSettings.getWebDriver().findElement(By.name(LATITUDE_BUTTON)));
@@ -109,6 +124,8 @@ public class EntityCoord {
         gridVals.put(js.getColumnIndexByLabel(gridId, "Longitude Field Name"), coord.getLongFieldName());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Longitude Field Label"), coord.getLongFieldLabel());
         gridVals.put(js.getColumnIndexByLabel(gridId, "Trackor Type"), coord.getTrackorTypeLabel());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Color Legend Field Name"), coord.getColorLegendFieldName());
+        gridVals.put(js.getColumnIndexByLabel(gridId, "Color Legend Field Label"), coord.getColorLegendFieldLabel());
 
         grid.checkGridRowByRowIndexAndColIndex(gridId, rowIndex, gridVals);
     }
