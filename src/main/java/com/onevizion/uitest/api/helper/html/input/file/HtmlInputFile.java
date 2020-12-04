@@ -25,7 +25,7 @@ public class HtmlInputFile {
     private static final String INPUT_FILE_ID_ON_ADMIN_CLIENT_FILE = "inputFileUploader";
     private static final String INPUT_FILE_ID_ON_DROP_GRID = "excelFile";
     private static final String INPUT_FILE_ID_ON_CASCADE_FIELD = "txtFile";
-    private static final String INPUT_FILE_ID_ON_BULK_FILE_UPLOAD = "inputFileUploaderuploader1";
+    private static final String INPUT_FILE_ID_ON_BULK_FILE_UPLOAD = "inputFileUploader0";
 
     private static final String FRAME_ID_ON_FORM = "ifrmHideForm";
 
