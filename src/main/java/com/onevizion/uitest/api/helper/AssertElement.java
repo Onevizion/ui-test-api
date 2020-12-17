@@ -31,6 +31,12 @@ public class AssertElement {
     @Autowired
     private Element element;
 
+    public void assertLink(String name, String expectedVal) {
+        element.moveToElementByName(name);
+        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).getText();
+        Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
+    }
+
     public void assertLinkById(String id, String expectedVal) {
         element.moveToElementById(id);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).getText();
