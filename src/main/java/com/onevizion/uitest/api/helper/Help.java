@@ -46,7 +46,7 @@ public class Help {
 
     public void checkHelp(final String name, final String number, final String type) {
         elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, INNER_TEXT, number);
-        assertElement.assertLink(SERIAL_NUMBER_ID, number);
+        assertElement.assertLinkById(SERIAL_NUMBER_ID, number);
 
         element.clickById(BUTTON_OPEN);
 
@@ -61,7 +61,7 @@ public class Help {
 
     public void checkHelpOnFilterForm(Long gridIdx, final String name, final String number, final String type) {
         elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, INNER_TEXT, number);
-        assertElement.assertLink(SERIAL_NUMBER_ID, number);
+        assertElement.assertLinkById(SERIAL_NUMBER_ID, number);
 
         element.clickById(BUTTON_OPEN_ON_FILTER_FORM + gridIdx);
 
@@ -76,7 +76,7 @@ public class Help {
 
     public void checkHelpOnViewForm(Long gridIdx, final String name, final String number, final String type) {
         elementWait.waitElementAttributeById(SERIAL_NUMBER_ID, INNER_TEXT, number);
-        assertElement.assertLink(SERIAL_NUMBER_ID, number);
+        assertElement.assertLinkById(SERIAL_NUMBER_ID, number);
 
         element.clickById(BUTTON_OPEN_ON_VIEW_FORM + gridIdx);
 

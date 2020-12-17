@@ -152,12 +152,12 @@ public class Export {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
-        assertElement.assertLink("gridPageName", exportRun.getGridPageName() + " ");
-        assertElement.assertLink("trackorTypeName", exportRun.getTrackorTypeName());
-        assertElement.assertLink("statusName", exportRun.getStatusName() + " ");
-        assertElement.assertLink("exportTypeName", exportRun.getMode() + " ");
-        assertElement.assertLink("exportDeliveryName", exportRun.getDelivery());
-        assertElement.assertLink("un", seleniumSettings.getTestUser());
+        assertElement.assertLinkById("gridPageName", exportRun.getGridPageName() + " ");
+        assertElement.assertLinkById("trackorTypeName", exportRun.getTrackorTypeName());
+        assertElement.assertLinkById("statusName", exportRun.getStatusName() + " ");
+        assertElement.assertLinkById("exportTypeName", exportRun.getMode() + " ");
+        assertElement.assertLinkById("exportDeliveryName", exportRun.getDelivery());
+        assertElement.assertLinkById("un", seleniumSettings.getTestUser());
         assertElement.assertTextById("errorMessage", exportRun.getErrorMessage());
         assertElement.assertTextById("comments", exportRun.getComments());
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));

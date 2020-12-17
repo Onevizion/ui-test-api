@@ -31,7 +31,7 @@ public class AssertElement {
     @Autowired
     private Element element;
 
-    public void assertLink(String id, String expectedVal) {
+    public void assertLinkById(String id, String expectedVal) {
         element.moveToElementById(id);
         String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).getText();
         Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
