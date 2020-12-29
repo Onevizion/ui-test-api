@@ -81,7 +81,7 @@ public class CompAuditLog {
         int rowsCount = js.getGridRowsCount(1L);
         Assert.assertEquals(rowsCount, values.size());
 
-        for(int i = 0; i < values.size(); i++) {
+        for (int i = 0; i < values.size(); i++) {
             checkCompFieldHistoryGridRowByRowIndex(1L, i, values.get(i));
         }
 
