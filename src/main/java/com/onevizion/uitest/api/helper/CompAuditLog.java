@@ -1,12 +1,17 @@
 package com.onevizion.uitest.api.helper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
+import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.grid.Grid2;
 
 @Component
 public class CompAuditLog {
@@ -17,6 +22,21 @@ public class CompAuditLog {
     private static final String COLUMN_ID_FIELD = "8";
     private static final String COLUMN_ID_NEW_VAL = "9";
     private static final String COLUMN_ID_OLD_VAL = "10";
+
+    private static final String COMPONENT_FIELD_HISTORY_COLUMN_ID_USER = "2";
+    private static final String COMPONENT_FIELD_HISTORY_COLUMN_ID_VALUE = "0";
+
+    @Autowired
+    private Js js;
+
+    @Autowired
+    private Wait wait;
+
+    @Autowired
+    private Window window;
+
+    @Autowired
+    private Grid2 grid2;
 
     @Autowired
     private Grid grid;
@@ -50,4 +70,31 @@ public class CompAuditLog {
 
         return rowIndex;
     }
+
+    public void checkCompFieldHistory(String componentFieldElementId, List<String> values) {
+        window.openModal(By.id(componentFieldElementId));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+        wait.waitFormLoad();
+
+        grid2.waitLoad(1L);
+
+        int rowsCount = js.getGridRowsCount(1L);
+        Assert.assertEquals(rowsCount, values.size());
+
+        for(int i = 0; i < values.size(); i++) {
+            checkCompFieldHistoryGridRowByRowIndex(1L, i, values.get(i));
+        }
+
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
+    }
+
+    private void checkCompFieldHistoryGridRowByRowIndex(Long gridId, int rowIndex, String newVal) {
+        Map<String, String> gridVals = new HashMap<>();
+
+        gridVals.put(COMPONENT_FIELD_HISTORY_COLUMN_ID_USER, seleniumSettings.getTestUser());
+        gridVals.put(COMPONENT_FIELD_HISTORY_COLUMN_ID_VALUE, newVal);
+
+        grid.checkGridRowByRowIndex(gridId, rowIndex, gridVals);
+    }
+
 }
