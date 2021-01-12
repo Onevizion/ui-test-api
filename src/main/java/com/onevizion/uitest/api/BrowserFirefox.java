@@ -23,6 +23,7 @@ public class BrowserFirefox {
 
         FirefoxOptions options = new FirefoxOptions();
 //        options.setProfile(profile);
+        options.addPreference("marionette.actors.enabled", false); //TODO https://bugzilla.mozilla.org/show_bug.cgi?id=1685951
         options.addPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294
         options.addPreference("dom.successive_dialog_time_limit", 0);
         options.addPreference("dom.max_script_run_time", 1000);
