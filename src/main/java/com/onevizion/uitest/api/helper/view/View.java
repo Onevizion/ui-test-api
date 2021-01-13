@@ -13,6 +13,9 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Checkbox;
+import com.onevizion.uitest.api.helper.DropDown;
+import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Listbox;
@@ -21,13 +24,16 @@ import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.organizer.Organizer;
+import com.onevizion.uitest.api.vo.DropDownElement;
 import com.onevizion.uitest.api.vo.ListboxElement;
 
 @Component
 public class View {
 
     public static final String GROUP_BY_EMPTY_VALUE = "Select column for grouping";
-    public static final String GROUP_BY_DROPDOWN_ID = "groupByBox";
+    public static final String GROUP_BY_ID = "groupByBox";
+
+    private static final String COMPACT_MODE_ID = "compactModeToggle";
 
     public static final String VIEW_NAME = "TestViewOption";
     public static final String UNSAVED_VIEW_NAME = "Unsaved View";
@@ -104,6 +110,15 @@ public class View {
 
     @Autowired
     private Organizer organizer;
+
+    @Autowired
+    private Checkbox checkbox;
+
+    @Autowired
+    private DropDown dropDown;
+
+    @Autowired
+    private Element element;
 
     public void openMainPanel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
@@ -639,6 +654,31 @@ public class View {
         int count = seleniumSettings.getWebDriver().findElements(By.id("mult_sort" + position)).size();
         seleniumSettings.getWebDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(count, 0);
+    }
+
+    public void removeGroupBy() {
+        selectGroupBy(GROUP_BY_EMPTY_VALUE);
+    }
+
+    public void selectGroupBy(String value) {
+        List<DropDownElement> dropDownElements = dropDown.getElements(GROUP_BY_ID);
+        dropDown.open(GROUP_BY_ID);
+        dropDown.selectElementByLabel(dropDownElements, value);
+    }
+
+    public void checkGroupBy(String expectedValue) {
+        String actualValue = seleniumSettings.getWebDriver().findElement(By.id(GROUP_BY_ID)).findElement(By.className("dl_selected")).findElement(By.tagName("input")).getAttribute("value");
+        Assert.assertEquals(actualValue, expectedValue);
+    }
+
+    public void switchCompactMode() {
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(COMPACT_MODE_ID));
+        element.click(toggle);
+    }
+
+    public void checkCompactMode(boolean expectedValue) {
+        WebElement compactModeCheckbox = seleniumSettings.getWebDriver().findElement(By.id(COMPACT_MODE_ID)).findElement(By.tagName("input"));
+        Assert.assertEquals(checkbox.isElementChecked(compactModeCheckbox), expectedValue);
     }
 
 }
