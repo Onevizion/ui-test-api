@@ -11,18 +11,7 @@ public class BrowserFirefox {
 //        System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
 //        System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\firefox_today_13\\firefox.exe");
 
-//        FirefoxProfile profile = new FirefoxProfile();
-//        profile.setPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294
-//        profile.setPreference("dom.successive_dialog_time_limit", 0);
-//        profile.setPreference("dom.max_script_run_time", 1000);
-//        profile.setPreference("browser.download.folderList", 2);
-//        profile.setPreference("browser.download.dir", seleniumSettings.getUploadFilesPath().replaceAll("\\\\", "\\\\\\\\"));
-//        profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/xml");
-//        //profile.setPreference("security.sandbox.content.level", 5);
-//        //profile.setEnableNativeEvents(false); /* TODO selenium 5374 issue */
-
         FirefoxOptions options = new FirefoxOptions();
-//        options.setProfile(profile);
         options.addPreference("marionette.actors.enabled", false); //TODO https://bugzilla.mozilla.org/show_bug.cgi?id=1685951
         options.addPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294
         options.addPreference("dom.successive_dialog_time_limit", 0);
@@ -31,7 +20,6 @@ public class BrowserFirefox {
         options.addPreference("browser.download.dir", seleniumSettings.getUploadFilesPath().replaceAll("\\\\", "\\\\\\\\"));
         options.addPreference("browser.download.viewableInternally.enabledTypes", "");
         options.addPreference("browser.helperApps.neverAsk.saveToDisk", "text/xml");
-        //options.addPreference("security.sandbox.content.level", 5);
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
         //options.setLegacy(true);
         //options.setLogLevel(FirefoxDriverLogLevel.TRACE);

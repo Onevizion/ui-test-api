@@ -505,8 +505,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
         testResultTrackorKey = createTestResult(context.getSuite().getParameter("test.selenium.processTrackorKey"));
 
-        //System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Firefox Nightly\\firefox.exe");
-
         try {
             seleniumSettings.getProfiler().start("openBrowser");
             seleniumLogger.info("openBrowser start");
