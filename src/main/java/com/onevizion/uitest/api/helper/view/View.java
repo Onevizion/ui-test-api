@@ -558,7 +558,7 @@ public class View {
     }
 
     public void switchToGridRowEditorFields() {
-        listbox.switchToDatePairGroup("leftListBox");
+        listbox.switchToGridRowEditorFields("leftListBox");
     }
 
     public void waitCurrentViewName(Long gridIdx, String viewName) {
