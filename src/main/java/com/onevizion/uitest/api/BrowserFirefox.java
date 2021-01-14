@@ -12,7 +12,7 @@ public class BrowserFirefox {
 //        System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\firefox_today_13\\firefox.exe");
 
         FirefoxOptions options = new FirefoxOptions();
-        options.addPreference("marionette.actors.enabled", false); //TODO https://bugzilla.mozilla.org/show_bug.cgi?id=1685951
+        options.addPreference("marionette.actors.enabled", false); //TODO Test-171378
         options.addPreference("dom.disable_beforeunload", false); //TODO BUG IN W3C https://github.com/w3c/webdriver/issues/1294
         options.addPreference("dom.successive_dialog_time_limit", 0);
         options.addPreference("dom.max_script_run_time", 1000);
