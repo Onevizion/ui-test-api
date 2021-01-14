@@ -64,8 +64,10 @@ public class FormDesigner {
 
     public void addElementToForm(String fieldName, String elementId) {
         fillSearch(fieldName);
+
         WebElement listBoxfields = seleniumSettings.getWebDriver().findElement(By.id("listBox"));
         element.doubleClick(listBoxfields.findElement(By.id(elementId)));
+
         clearSearch();
     }
 
@@ -107,12 +109,18 @@ public class FormDesigner {
         fillSearch(label);
 
         List<ListboxElement> fields = listbox.getElements("listBox");
-        for (ListboxElement field : fields) {
-            if (label.equals(field.getLabel())) {
-                element.doubleClick(field.getWebElement());
-                break;
-            }
-        }
+        ListboxElement field = listbox.getElementByLabel(fields, label);
+        element.doubleClick(field.getWebElement());
+
+        clearSearch();
+    }
+
+    public void addElementToGridRowEditor(String label) {
+        fillSearch(label);
+
+        List<ListboxElement> fields = listbox.getElements("leftListBox");
+        ListboxElement field = listbox.getElementByLabel(fields, label);
+        element.doubleClick(field.getWebElement());
 
         clearSearch();
     }
@@ -206,6 +214,10 @@ public class FormDesigner {
 
     public List<FormDesignerField> getElementsOnForm() {
         return formDesignerJs.getElementsOnForm();
+    }
+
+    public List<FormDesignerField> getElementsOnGridRowEditor() {
+        return formDesignerJs.getElementsOnGridRowEditor();
     }
 
     public void checkElementOnFormByPositionAndName(List<FormDesignerField> fields, String row, String col, String fieldName) {

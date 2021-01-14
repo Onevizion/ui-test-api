@@ -34,6 +34,7 @@ public class View {
     public static final String GROUP_BY_ID = "groupByBox";
 
     private static final String COMPACT_MODE_ID = "compactModeToggle";
+    private static final String RESET_LAYOUT_ID = "btn_reset";
 
     public static final String VIEW_NAME = "TestViewOption";
     public static final String UNSAVED_VIEW_NAME = "Unsaved View";
@@ -542,7 +543,21 @@ public class View {
         listbox.switchToDrillDownGroup("leftListBox");
     }
 
+    public void switchToMarkupGroup() {
+        listbox.switchToMarkupGroup("leftListBox");
+    }
+
     public void switchToDatePairGroup() {
+        listbox.switchToDatePairGroup("leftListBox");
+    }
+
+    public void switchToViewColumns() {
+        listbox.switchToViewColumns();
+        waitLeftListBoxReady();
+        waitRightListBoxReady();
+    }
+
+    public void switchToGridRowEditorFields() {
         listbox.switchToDatePairGroup("leftListBox");
     }
 
@@ -672,13 +687,19 @@ public class View {
     }
 
     public void switchCompactMode() {
-        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(COMPACT_MODE_ID));
+        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(COMPACT_MODE_ID)).findElement(By.className("tg_toggle")); //TODO Issue Task 19714
         element.click(toggle);
     }
 
     public void checkCompactMode(boolean expectedValue) {
         WebElement compactModeCheckbox = seleniumSettings.getWebDriver().findElement(By.id(COMPACT_MODE_ID)).findElement(By.tagName("input"));
         Assert.assertEquals(checkbox.isElementChecked(compactModeCheckbox), expectedValue);
+    }
+
+    public void resetGridRowEditorLayout() {
+        seleniumSettings.getWebDriver().findElement(By.id(RESET_LAYOUT_ID)).click();
+        wait.waitAlert();
+        seleniumSettings.getWebDriver().switchTo().alert().accept();
     }
 
 }

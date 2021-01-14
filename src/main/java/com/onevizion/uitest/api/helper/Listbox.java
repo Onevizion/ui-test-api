@@ -25,6 +25,8 @@ public class Listbox {
     private static final String BUTTON_GROUP_DRILLDOWN = "drilldownfields";
     private static final String BUTTON_GROUP_DATE_PAIR = "datepairs";
     private static final String BUTTON_GROUP_MARKUP = "markup";
+    private static final String BUTTON_GROUP_VIEW_COLUMNS = "columns";
+    private static final String BUTTON_GROUP_GRID_ROW_EDITOR_FIELDS = "designer";
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -120,7 +122,7 @@ public class Listbox {
         checkElementById(elements, ids.get(21)); //MULTI_TRACKOR_SELECTOR
     }
 
-    private ListboxElement getElementByLabel(List<ListboxElement> elements, String label) {
+    public ListboxElement getElementByLabel(List<ListboxElement> elements, String label) {
         checkElementByLabel(elements, label);
         Optional<ListboxElement> optional = elements.stream().filter(p -> p.getLabel().equals(label)).findFirst();
         return optional.orElseThrow(() -> new SeleniumUnexpectedException());
@@ -226,6 +228,15 @@ public class Listbox {
 
     public void switchToMarkupGroup(String listboxId) {
         element.clickById(BUTTON_GROUP_MARKUP);
+        listboxWait.waitIsReadyListbox(listboxId);
+    }
+
+    public void switchToViewColumns() {
+        seleniumSettings.getWebDriver().findElements(By.id(BUTTON_GROUP_VIEW_COLUMNS)).get(1).click(); //TODO Issue Task  19716
+    }
+
+    public void switchToGridRowEditorFields(String listboxId) {
+        element.clickById(BUTTON_GROUP_GRID_ROW_EDITOR_FIELDS);
         listboxWait.waitIsReadyListbox(listboxId);
     }
 

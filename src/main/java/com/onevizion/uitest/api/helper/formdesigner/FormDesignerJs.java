@@ -15,10 +15,18 @@ import com.onevizion.uitest.api.vo.FormDesignerField;
 class FormDesignerJs extends Js {
 
     List<FormDesignerField> getElementsOnForm() {
+        return getElements("formDesigner.getFields()");
+    }
+
+    List<FormDesignerField> getElementsOnGridRowEditor() {
+        return getElements("rightListBox.formDesigner.getFields()");
+    }
+
+    private List<FormDesignerField> getElements(String fieldsVar) {
         String resultStr = (String) execJs2("" + 
                 "var result = \"\";" + 
                 "result = result + \"[\";" + 
-                "for (var field of formDesigner.getFields()) {" + 
+                "for (var field of " + fieldsVar + ") {" + 
                 "    result = result + \"{\";" + 
                 "    result = result + \"\\\"id\\\": \\\"\" + field.getId() + \"\\\", \";" + 
                 "    result = result + \"\\\"name\\\": \\\"\" + field.getName() + \"\\\", \";" + 
