@@ -232,7 +232,7 @@ public class Listbox {
     }
 
     public void switchToViewColumns() {
-        seleniumSettings.getWebDriver().findElements(By.id(BUTTON_GROUP_VIEW_COLUMNS)).get(1).click(); //TODO Issue Task  19716
+        seleniumSettings.getWebDriver().findElements(By.id(BUTTON_GROUP_VIEW_COLUMNS)).get(1).click(); //TODO GUI-171452
     }
 
     public void switchToGridRowEditorFields(String listboxId) {
