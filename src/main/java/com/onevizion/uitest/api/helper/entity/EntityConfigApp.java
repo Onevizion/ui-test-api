@@ -36,7 +36,7 @@ public class EntityConfigApp {
     private static final String ICON_BUTTON = "btnicon";
 
     private static final String BUTTON_ADD_TAB = "addItem";
-    private static final String BUTTON_REMOVE_ALL_TABS = "removeAllItems";
+    private static final String BUTTON_REMOVE_ALL_TABS = "removeItemAll";
 
     @Autowired
     private Window window;
@@ -88,7 +88,13 @@ public class EntityConfigApp {
         if (isCanHaveRelatedTrackorType(configApp)) {
             new Select(seleniumSettings.getWebDriver().findElement(By.name(RELATED_TRACKOR_TYPE))).selectByVisibleText(configApp.getRelatedTrackorType());
         }
-        selector.selectRadio(By.name(ICON_BUTTON), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + AbstractSeleniumCore.getGridIdx()), 1, configApp.getIcon(), 1L);
+
+        window.openModal(By.id("btnCreateIcon"));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+        List<ListboxElement> icons = listbox.getElements("iconList");
+        listbox.selectElementByLabel(icons, configApp.getIcon());
+        window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
 
         element.clickById(AbstractSeleniumCore.BUTTON_APPLY_ID);
         wait.waitReloadForm("reloaded=1");
