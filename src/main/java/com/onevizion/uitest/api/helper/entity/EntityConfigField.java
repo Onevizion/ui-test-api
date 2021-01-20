@@ -555,12 +555,13 @@ public class EntityConfigField {
                 ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             packagesTabIndex = 5L;
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())
+                || ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())
                 || ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())
                 || ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
+                || ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
             packagesTabIndex = 7L;
+        } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 8L;
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType()) ||
                 "XITOR_CLASS_ID".equals(configFieldVo.getName())) {
             packagesTabIndex = 8L;
@@ -977,12 +978,13 @@ public class EntityConfigField {
                 ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             packagesTabIndex = 5L;
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())
+                || ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())
                 || ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())
                 || ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
+                || ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
             packagesTabIndex = 7L;
+        } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 8L;
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType()) ||
                 "XITOR_CLASS_ID".equals(configFieldVo.getName())) {
             packagesTabIndex = 8L;
@@ -1240,12 +1242,13 @@ public class EntityConfigField {
                 ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             packagesTabIndex = 5L;
         } else if (ConfigFieldType.DROP_DOWN.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.TEXT.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())
+                || ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE.equals(configFieldVo.getConfigFieldType())
                 || ConfigFieldType.MEMO.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.WIKI.equals(configFieldVo.getConfigFieldType())
                 || ConfigFieldType.HYPERLINK.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.LONGITUDE.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())
-                || ConfigFieldType.TIME.equals(configFieldVo.getConfigFieldType())) {
+                || ConfigFieldType.LATITUDE.equals(configFieldVo.getConfigFieldType()) || ConfigFieldType.DATE_TIME.equals(configFieldVo.getConfigFieldType())) {
             packagesTabIndex = 7L;
+        } else if (ConfigFieldType.NUMBER.equals(configFieldVo.getConfigFieldType())) {
+            packagesTabIndex = 8L;
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(configFieldVo.getConfigFieldType()) ||
                 "XITOR_CLASS_ID".equals(configFieldVo.getName())) {
             packagesTabIndex = 8L;
