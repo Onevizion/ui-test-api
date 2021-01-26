@@ -98,6 +98,10 @@ public class UsersSettings {
         new Select(seleniumSettings.getWebDriver().findElement(By.name("DateFormat"))).selectByVisibleText(dateFormat);
     }
 
+    public void changeLinkedValueDisplayMode(String linkedValueDisplayMode) {
+        new Select(seleniumSettings.getWebDriver().findElement(By.name("linkedValuesDispMode"))).selectByVisibleText(linkedValueDisplayMode);
+    }
+
     public void changeExactQuickSearchForClipboard(String exactQuickSearchForClipboard) {
         element.moveToElementByName("exactSearchClipboard");
         new Select(seleniumSettings.getWebDriver().findElement(By.name("exactSearchClipboard"))).selectByVisibleText(exactQuickSearchForClipboard);
@@ -105,6 +109,10 @@ public class UsersSettings {
 
     public void checkHideStartTaskDates(String hideStartTaskDates) {
         assertElement.assertSelect("HideStart", hideStartTaskDates);
+    }
+
+    public void checkLinkedValueDisplayMode(String linkedValueDisplayMode) {
+        assertElement.assertSelect("linkedValuesDispMode", linkedValueDisplayMode);
     }
 
 }
