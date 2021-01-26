@@ -575,6 +575,21 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.getWindows().add(seleniumSettings.getWebDriver().getWindowHandle());
             seleniumLogger.info("openBrowser success");
 
+            seleniumSettings.getProfiler().start("fillGlobalSettings");
+            seleniumLogger.info("fillGlobalSettings start");
+            fillGlobalSettings();
+            seleniumLogger.info("fillGlobalSettings success");
+
+            seleniumSettings.getProfiler().start("fillUserSettings");
+            seleniumLogger.info("fillUserSettings start");
+            fillUserSettings(seleniumSettings.getTestUser());
+            seleniumLogger.info("fillUserSettings success");
+
+            seleniumSettings.getProfiler().start("dataPreparation");
+            seleniumLogger.info("dataPreparation start");
+            dataPreparation();
+            seleniumLogger.info("dataPreparation success");
+
             seleniumSettings.getProfiler().start("codeCoverageStart");
             seleniumLogger.info("codeCoverageStart start");
             browserCodeCoverage.start();
@@ -590,21 +605,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumLogger.info("login as " + seleniumSettings.getTestUser());
             loginIntoSystem(seleniumSettings.getTestUser(), seleniumSettings.getTestPassword());
             seleniumLogger.info("loginIntoSystem success");
-
-            seleniumSettings.getProfiler().start("fillGlobalSettings");
-            seleniumLogger.info("fillGlobalSettings start");
-            fillGlobalSettings();
-            seleniumLogger.info("fillGlobalSettings success");
-
-            seleniumSettings.getProfiler().start("fillUserSettings");
-            seleniumLogger.info("fillUserSettings start");
-            fillUserSettings(seleniumSettings.getTestUser());
-            seleniumLogger.info("fillUserSettings success");
-
-            seleniumSettings.getProfiler().start("dataPreparation");
-            seleniumLogger.info("dataPreparation start");
-            dataPreparation();
-            seleniumLogger.info("dataPreparation success");
 
             seleniumSettings.setProfilerTestMethods(new Profiler(getTestName()));
 
