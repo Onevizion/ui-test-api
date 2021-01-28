@@ -4,6 +4,8 @@ public enum ApiV3EndpointType {
 
     AUTH_TOKEN_CREATE("POST", "/v3/auth_token", "Generate API Authentication Token"),
 
+    AUTHORIZE_CHECK("GET", "/authorize", "Check user credentials"),
+
     CHATS_UNSUBSCRIBE("DELETE", "/v3/chats/{chat_id}/subscribers", "Unsubscribe users to Chat"),
     CHATS_READ_SUBSCRIBERS("GET", "/v3/chats/{chat_id}/subscribers", "Read Chat subscribers"),
     CHATS_READ_CHATS("GET", "/v3/chats", "Find Chats by Trackor ID or Task ID"),

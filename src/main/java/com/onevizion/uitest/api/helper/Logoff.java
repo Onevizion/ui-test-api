@@ -64,7 +64,7 @@ public class Logoff {
         jquery.waitLoad();
     }
 
-    public void logoffFromApiV3() {
+    public void logoffFromSystemAndApiV3() {
         document.open(seleniumSettings.getServerUrl());
 
         wait.waitWebElement(By.id("mainContainer"));
@@ -78,6 +78,14 @@ public class Logoff {
         wait.waitWebElement(By.id(ID_USERMENU_LOGOFF));
 
         logoff();
+    }
+
+    public void logoffFromApiV3() {
+        seleniumSettings.getWebDriver().findElement(By.className("authorize__btn")).click();
+        seleniumSettings.getWebDriver().findElement(By.className("auth_logout__button")).click();
+
+        wait.waitWebElement(By.className("info_title"));
+        wait.waitWebElement(By.className("authorize__btn"));
     }
 
 }
