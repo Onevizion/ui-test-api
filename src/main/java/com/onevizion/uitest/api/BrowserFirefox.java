@@ -19,7 +19,7 @@ public class BrowserFirefox {
         options.addPreference("browser.download.folderList", 2);
         options.addPreference("browser.download.dir", seleniumSettings.getUploadFilesPath().replaceAll("\\\\", "\\\\\\\\"));
         options.addPreference("browser.download.viewableInternally.enabledTypes", "");
-        options.addPreference("browser.helperApps.neverAsk.saveToDisk", "text/xml");
+        options.addPreference("browser.helperApps.neverAsk.saveToDisk", "text/xml,image/jpeg");
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
         //options.setLegacy(true);
         //options.setLogLevel(FirefoxDriverLogLevel.TRACE);
