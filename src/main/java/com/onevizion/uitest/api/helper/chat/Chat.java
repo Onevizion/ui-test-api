@@ -400,16 +400,24 @@ public class Chat {
         return Integer.parseInt(subscribedUsersCount);
     }
 
+    public void sendMessageOnFormAndWait(String message) {
+        sendMessageOnForm(message);
+        elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER);
+    }
+
     public void sendMessageOnForm(String message) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_TEXT)).sendKeys(message);
         element.clickById(ID_COMMENT_SEND);
-        elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER);
+    }
+
+    public void sendMessageInGridAndWait(String message) {
+        sendMessageInGrid(message);
+        elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER + AbstractSeleniumCore.getGridIdx());
     }
 
     public void sendMessageInGrid(String message) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_COMMENT_TEXT + AbstractSeleniumCore.getGridIdx())).sendKeys(message);
         element.clickById(ID_COMMENT_SEND + AbstractSeleniumCore.getGridIdx());
-        elementWait.waitElementNotDisplayById(ID_COMMENT_LOADER + AbstractSeleniumCore.getGridIdx());
     }
 
     public void searchMessageOnForm(String text) {

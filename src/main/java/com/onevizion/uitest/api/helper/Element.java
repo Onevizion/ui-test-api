@@ -1,6 +1,7 @@
 package com.onevizion.uitest.api.helper;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -181,4 +182,58 @@ public class Element {
         elementJs.removeByClass(className);
     }
 
+    public void clearViaBackspace(WebElement element) {
+        click(element);
+        String val = element.getAttribute("value");
+
+        Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+        for (int i = 0; i < val.length(); i++) {
+            actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
+        }
+        for (int i = 0; i < val.length(); i++) {
+            actionObject.sendKeys(Keys.BACK_SPACE).perform();
+        }
+    }
+
+    public void clearViaBackspaceByName(String name) {
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
+        click(element);
+        String val = element.getAttribute("value");
+
+        Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+        for (int i = 0; i < val.length(); i++) {
+            actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
+        }
+        for (int i = 0; i < val.length(); i++) {
+            actionObject.sendKeys(Keys.BACK_SPACE).perform();
+        }
+    }
+
+    public void clearViaBackspaceById(String id) {
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.id(id));
+        click(element);
+        String val = element.getAttribute("value");
+
+        Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+        for (int i = 0; i < val.length(); i++) {
+            actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
+        }
+        for (int i = 0; i < val.length(); i++) {
+            actionObject.sendKeys(Keys.BACK_SPACE).perform();
+        }
+    }
+
+    public void clearViaBackspaceByClass(String className) {
+         WebElement element = seleniumSettings.getWebDriver().findElement(By.className(className));
+         click(element);
+         String val = element.getAttribute("value");
+
+         Actions actionObject = new Actions(seleniumSettings.getWebDriver());
+         for (int i = 0; i < val.length(); i++) {
+             actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
+         }
+         for (int i = 0; i < val.length(); i++) {
+             actionObject.sendKeys(Keys.BACK_SPACE).perform();
+         }
+    }
 }
