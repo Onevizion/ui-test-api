@@ -197,43 +197,16 @@ public class Element {
 
     public void clearViaBackspaceByName(String name) {
         WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
-        click(element);
-        String val = element.getAttribute("value");
-
-        Actions actionObject = new Actions(seleniumSettings.getWebDriver());
-        for (int i = 0; i < val.length(); i++) {
-            actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
-        }
-        for (int i = 0; i < val.length(); i++) {
-            actionObject.sendKeys(Keys.BACK_SPACE).perform();
-        }
+        clearViaBackspace(element);
     }
 
     public void clearViaBackspaceById(String id) {
         WebElement element = seleniumSettings.getWebDriver().findElement(By.id(id));
-        click(element);
-        String val = element.getAttribute("value");
-
-        Actions actionObject = new Actions(seleniumSettings.getWebDriver());
-        for (int i = 0; i < val.length(); i++) {
-            actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
-        }
-        for (int i = 0; i < val.length(); i++) {
-            actionObject.sendKeys(Keys.BACK_SPACE).perform();
-        }
+        clearViaBackspace(element);
     }
 
     public void clearViaBackspaceByClass(String className) {
          WebElement element = seleniumSettings.getWebDriver().findElement(By.className(className));
-         click(element);
-         String val = element.getAttribute("value");
-
-         Actions actionObject = new Actions(seleniumSettings.getWebDriver());
-         for (int i = 0; i < val.length(); i++) {
-             actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
-         }
-         for (int i = 0; i < val.length(); i++) {
-             actionObject.sendKeys(Keys.BACK_SPACE).perform();
-         }
+         clearViaBackspace(element);
     }
 }
