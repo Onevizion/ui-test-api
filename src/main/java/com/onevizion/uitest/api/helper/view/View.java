@@ -687,8 +687,7 @@ public class View {
     }
 
     public void switchCompactMode() {
-        WebElement toggle = seleniumSettings.getWebDriver().findElement(By.id(COMPACT_MODE_ID)).findElement(By.className("tg_toggle")); //TODO GUI-171450
-        element.click(toggle);
+        element.clickById(COMPACT_MODE_ID);
     }
 
     public void checkCompactMode(boolean expectedValue) {

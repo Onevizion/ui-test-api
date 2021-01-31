@@ -25,7 +25,7 @@ public class Listbox {
     private static final String BUTTON_GROUP_DRILLDOWN = "drilldownfields";
     private static final String BUTTON_GROUP_DATE_PAIR = "datepairs";
     private static final String BUTTON_GROUP_MARKUP = "markup";
-    private static final String BUTTON_GROUP_VIEW_COLUMNS = "columns";
+    private static final String BUTTON_GROUP_VIEW_COLUMNS = "selectedColumns";
     private static final String BUTTON_GROUP_GRID_ROW_EDITOR_FIELDS = "designer";
 
     @Autowired
@@ -232,7 +232,7 @@ public class Listbox {
     }
 
     public void switchToViewColumns() {
-        seleniumSettings.getWebDriver().findElements(By.id(BUTTON_GROUP_VIEW_COLUMNS)).get(1).click(); //TODO GUI-171452
+        element.clickById(BUTTON_GROUP_VIEW_COLUMNS);
     }
 
     public void switchToGridRowEditorFields(String listboxId) {
