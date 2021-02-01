@@ -27,7 +27,6 @@ import com.onevizion.uitest.api.annotation.SeleniumBug;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.CloneButton;
 import com.onevizion.uitest.api.helper.CompAuditLog;
 import com.onevizion.uitest.api.helper.DropDown;
 import com.onevizion.uitest.api.helper.DualListbox;
@@ -197,9 +196,6 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected Qs qs;
-
-    @Autowired
-    protected CloneButton cloneButton;
 
     @Autowired
     protected Checkbox checkbox;
