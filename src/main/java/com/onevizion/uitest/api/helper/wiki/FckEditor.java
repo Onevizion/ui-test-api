@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
-import com.onevizion.uitest.api.SeleniumScreenshot;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Wait;
@@ -33,9 +32,6 @@ public class FckEditor {
     @Autowired
     private Clipboard clipboard;
 
-    @Autowired
-    private SeleniumScreenshot seleniumScreenshot;
-
     public void setValue(String name, String value) {
         if (value.startsWith("<p>") && value.endsWith("</p>")) {
             value = value.substring(3, value.length() - 4);
@@ -45,7 +41,6 @@ public class FckEditor {
         wait.waitWebElement(By.id("cke_" + name));
         element.moveToElementById("cke_" + name);
         fckEditorWait.waitReady(name);
-        seleniumScreenshot.getScreenshot();
         WebElement div = seleniumSettings.getWebDriver().findElement(By.id("cke_" + name));
         WebElement iframe = div.findElement(By.tagName("iframe"));
         seleniumSettings.getWebDriver().switchTo().frame(iframe);
@@ -59,7 +54,6 @@ public class FckEditor {
             actionObject.sendKeys(Keys.ARROW_RIGHT).perform();
             actionObject.sendKeys(Keys.BACK_SPACE).perform();
         }
-        seleniumScreenshot.getScreenshot();
         if (value.length() > 0) {
             actionObject.sendKeys(value).perform();
             actionObject.sendKeys(" ").perform();
@@ -67,7 +61,6 @@ public class FckEditor {
         }
 
         seleniumSettings.getWebDriver().switchTo().parentFrame();
-        seleniumScreenshot.getScreenshot();
     }
 
     public void setValueFromClipboard(String name, String value) {
