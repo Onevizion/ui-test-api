@@ -56,6 +56,7 @@ public class PageButton {
     private static final String BUTTON_FIELD_CASCADING_FIELDS_ID_BASE = "itemFieldsMap";
     private static final String BUTTON_CASCADE_FIELDS_IMPORT_RELATIONS_ID_BASE = "itemVtableLinksValueTree";
     private static final String BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE = "itemVtableLinksTree";
+    private static final String BUTTON_REPORT_REPORT_WIZARD_ID = "itemReportWizard";
     private static final String BUTTON_REPORT_GROUPS_ID_BASE = "itemReportGroup";
     private static final String BUTTON_REPORT_TEST_SQL_ID_BASE = "itemTestSql";
     private static final String BUTTON_REPORT_SCAN_PARAMS_ID_BASE = "itemScanParams";
@@ -360,6 +361,15 @@ public class PageButton {
 
         window.openModal(By.id(BUTTON_CASCADE_FIELDS_RELATIONS_ID_BASE + treeIdx));
         wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void openReportWizardForm(Long gridIdx) {
+        openOptionsPanel(gridIdx);
+        waitButtonInPanel(BUTTON_REPORT_REPORT_WIZARD_ID + gridIdx);
+
+        window.openModal(By.id(BUTTON_REPORT_REPORT_WIZARD_ID + gridIdx));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
     }
 
