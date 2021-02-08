@@ -23,7 +23,8 @@ public enum ConfigFieldType {
     ROLLUP("Rollup", "Rollup", "ROLLUP"),
     MULTI_SELECTOR("MultiSelector", "MultiSelector", "MULTI_SEL"),
     DATE_TIME("Date/Time", "Date/Time", "DATE_TIME"),
-    TIME("Time", "Time", "TIME");
+    TIME("Time", "Time", "TIME"),
+    MULTI_EFILE("Multiple EFiles", "MultiEFile", "MULTI_EFILE");
 
     private String label;
     private String shortLabel; //Field name can not be longer than 30 characters and can not be a reserved Oracle word
