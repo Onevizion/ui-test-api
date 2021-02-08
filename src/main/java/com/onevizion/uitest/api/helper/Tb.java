@@ -25,6 +25,7 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumAlertException;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
+import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.wiki.FckEditor;
 import com.onevizion.uitest.api.vo.ConfigFieldType;
 
@@ -66,6 +67,9 @@ public class Tb {
 
     @Autowired
     private FckEditor fckEditor;
+
+    @Autowired
+    private Jquery jquery;
 
     String getLastFieldIndex(String name, int elementPosition) {
         List<WebElement> elems = seleniumSettings.getWebDriver().findElements(By.name(name));
@@ -750,6 +754,7 @@ public class Tb {
             }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
+            jquery.waitLoad();
             Select sel = new Select(seleniumSettings.getWebDriver().findElement(By.name("epmDd1")));
             wait.waitListBoxLoad2(sel);
             sel.selectByVisibleText(value);
@@ -959,6 +964,7 @@ public class Tb {
             }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
+            jquery.waitLoad();
             Select sel = new Select(seleniumSettings.getWebDriver().findElement(By.name("epmDd1")));
             wait.waitListBoxLoad2(sel);
             sel.selectByVisibleText("");
