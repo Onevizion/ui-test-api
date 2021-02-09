@@ -654,4 +654,19 @@ public class Js {
         return Integer.parseInt(execJs("return gridArr[" + gridIdx + "].grid.getUserData(null, 'datesCnt');"));
     }
 
+    //TODO Dash-170962
+    public String localStorageGetItem(String item) {
+        return execJs("return localStorage.getItem('" + item + "');");
+    }
+
+    //TODO Dash-170962
+    public void localStorageSetItem(String item, String value) {
+        execJs("localStorage.setItem('" + item + "', '" + value + "');");
+    }
+
+    //TODO Dash-170962
+    public void localStorageRemoveItem(String item) {
+        execJs("localStorage.removeItem('" + item + "');");
+    }
+
 }
