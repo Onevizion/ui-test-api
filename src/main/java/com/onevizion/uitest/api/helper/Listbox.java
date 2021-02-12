@@ -20,8 +20,8 @@ import com.onevizion.uitest.api.vo.ListboxElement;
 public class Listbox {
 
     private static final String NAV_PANEL = "navigation";
-    private static final String BUTTON_GROUP_FIELD = "configfields";
-    private static final String BUTTON_GROUP_TASK = "tasksfields";
+    private static final String BUTTON_GROUP_FIELD = "trackortypes";
+    private static final String BUTTON_GROUP_TASK = "tasks";
     private static final String BUTTON_GROUP_DRILLDOWN = "drilldownfields";
     private static final String BUTTON_GROUP_DATE_PAIR = "datepairs";
     private static final String BUTTON_GROUP_MARKUP = "markup";
