@@ -35,7 +35,9 @@ public enum RuleTypeType {
     WP_TASK_DATE_UPDATE("Task Date Updated (After)"),
     COMMENT_CREATE_TRACKOR("Trackor Chat Message Created (After)"),
     COMMENT_CREATE_TASK("Task Chat Message Created (After)"),
-    SHARE_PAGE("Page Shared (After)");
+    SHARE_PAGE("Page Shared (After)"),
+    INTEGRATION_START("Integration Start (Before)"),
+    INTEGRATION_COMPLETE("Integration Complete (After)");
 
     private String name;
 
