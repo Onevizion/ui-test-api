@@ -1,0 +1,47 @@
+package com.onevizion.uitest.api.helper.report;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.onevizion.uitest.api.SeleniumSettings;
+
+@Component
+class ReportWait {
+
+    @Autowired
+    private SeleniumSettings seleniumSettings;
+
+    void waitReport() {
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for export is failed")
+            .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> {
+                WebElement panel = webdriver.findElement(By.id("processEventList"));
+                List<WebElement> processes = panel.findElements(By.className("group_event"));
+                return !processes.isEmpty();
+            });
+    }
+
+    void waitReportDone() {
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for export done is failed")
+            .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> {
+                WebElement panel = webdriver.findElement(By.id("processEventList"));
+                List<WebElement> statuses = panel.findElements(By.className("ie_status"));
+                for (WebElement status : statuses) {
+                    if ("Executed without Errors".equals(status.getAttribute("textContent"))) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+    }
+
+}

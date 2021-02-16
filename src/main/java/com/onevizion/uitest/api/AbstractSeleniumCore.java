@@ -110,6 +110,7 @@ import com.onevizion.uitest.api.helper.menu.Menu;
 import com.onevizion.uitest.api.helper.notification.Notification;
 import com.onevizion.uitest.api.helper.page.button.PageButton;
 import com.onevizion.uitest.api.helper.portal.Portal;
+import com.onevizion.uitest.api.helper.report.Report;
 import com.onevizion.uitest.api.helper.tab.ListboxTab;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.tree.Tree;
@@ -238,6 +239,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected Export export;
+
+    @Autowired
+    protected Report report;
 
     @Autowired
     protected FormDesigner formDesigner;
