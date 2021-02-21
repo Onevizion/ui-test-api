@@ -16,7 +16,6 @@ import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Listbox;
-import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
@@ -33,7 +32,6 @@ public class EntityConfigApp {
     private static final String TRACKOR_TYPE = "ttid";
     private static final String RELATED_TRACKOR_TYPE = "wpTtid";
     private static final String ICON = "icon";
-    private static final String ICON_BUTTON = "btnicon";
 
     private static final String BUTTON_ADD_TAB = "addItem";
     private static final String BUTTON_REMOVE_ALL_TABS = "removeItemAll";
@@ -49,9 +47,6 @@ public class EntityConfigApp {
 
     @Autowired
     private SeleniumSettings seleniumSettings;
-
-    @Autowired
-    private Selector selector;
 
     @Autowired
     private Element element;
