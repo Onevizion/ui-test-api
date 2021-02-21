@@ -140,34 +140,32 @@ public class Tb {
         return vals;
     }
 
-    public void editFields(List<String> vals, List<String> fieldNames, List<String> columnNames, Map<String, String> expVals,
-            Map<String, String> gridExpVals, int elementsPosition) {
-        editField(ConfigFieldType.CHECKBOX, vals.get(0), columnNames != null ? columnNames.get(0) : null, fieldNames.get(0), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.DATE, vals.get(1), columnNames != null ? columnNames.get(1) : null, fieldNames.get(1), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.DB_DROP_DOWN, vals.get(2), columnNames != null ? columnNames.get(2) : null, fieldNames.get(2), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.DB_SELECTOR, vals.get(3), columnNames != null ? columnNames.get(3) : null, fieldNames.get(3), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.DROP_DOWN, vals.get(4), columnNames != null ? columnNames.get(4) : null, fieldNames.get(4), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.ELECTRONIC_FILE, vals.get(5), columnNames != null ? columnNames.get(5) : null, fieldNames.get(5), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.HYPERLINK, vals.get(6), columnNames != null ? columnNames.get(6) : null, fieldNames.get(6), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.LATITUDE, vals.get(7), columnNames != null ? columnNames.get(7) : null, fieldNames.get(7), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.LONGITUDE, vals.get(8), columnNames != null ? columnNames.get(8) : null, fieldNames.get(8), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.MEMO, vals.get(9), columnNames != null ? columnNames.get(9) : null, fieldNames.get(9), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.NUMBER, vals.get(10), columnNames != null ? columnNames.get(10) : null, fieldNames.get(10), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.SELECTOR, vals.get(11), columnNames != null ? columnNames.get(11) : null, fieldNames.get(11), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.TEXT, vals.get(12), columnNames != null ? columnNames.get(12) : null, fieldNames.get(12), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.TRACKOR_SELECTOR, vals.get(13), columnNames != null ? columnNames.get(13) : null, fieldNames.get(13), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.WIKI, vals.get(14), columnNames != null ? columnNames.get(14) : null, fieldNames.get(14), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.MULTI_SELECTOR, vals.get(15), columnNames != null ? columnNames.get(15) : null, fieldNames.get(15), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.DATE_TIME, vals.get(16), columnNames != null ? columnNames.get(16) : null, fieldNames.get(16), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.TIME, vals.get(17), columnNames != null ? columnNames.get(17) : null, fieldNames.get(17), expVals, gridExpVals, elementsPosition);
-        editField(ConfigFieldType.TRACKOR_DROP_DOWN, vals.get(18), columnNames != null ? columnNames.get(18) : null, fieldNames.get(18), expVals, gridExpVals, elementsPosition);
+    public void editFields(List<String> vals, List<String> fieldNames, int elementsPosition) {
+        editField(ConfigFieldType.CHECKBOX, vals.get(0), fieldNames.get(0), elementsPosition);
+        editField(ConfigFieldType.DATE, vals.get(1), fieldNames.get(1), elementsPosition);
+        editField(ConfigFieldType.DB_DROP_DOWN, vals.get(2), fieldNames.get(2), elementsPosition);
+        editField(ConfigFieldType.DB_SELECTOR, vals.get(3), fieldNames.get(3), elementsPosition);
+        editField(ConfigFieldType.DROP_DOWN, vals.get(4), fieldNames.get(4), elementsPosition);
+        editField(ConfigFieldType.ELECTRONIC_FILE, vals.get(5), fieldNames.get(5), elementsPosition);
+        editField(ConfigFieldType.HYPERLINK, vals.get(6), fieldNames.get(6), elementsPosition);
+        editField(ConfigFieldType.LATITUDE, vals.get(7), fieldNames.get(7), elementsPosition);
+        editField(ConfigFieldType.LONGITUDE, vals.get(8), fieldNames.get(8), elementsPosition);
+        editField(ConfigFieldType.MEMO, vals.get(9), fieldNames.get(9), elementsPosition);
+        editField(ConfigFieldType.NUMBER, vals.get(10), fieldNames.get(10), elementsPosition);
+        editField(ConfigFieldType.SELECTOR, vals.get(11), fieldNames.get(11), elementsPosition);
+        editField(ConfigFieldType.TEXT, vals.get(12), fieldNames.get(12), elementsPosition);
+        editField(ConfigFieldType.TRACKOR_SELECTOR, vals.get(13), fieldNames.get(13), elementsPosition);
+        editField(ConfigFieldType.WIKI, vals.get(14), fieldNames.get(14), elementsPosition);
+        editField(ConfigFieldType.MULTI_SELECTOR, vals.get(15), fieldNames.get(15), elementsPosition);
+        editField(ConfigFieldType.DATE_TIME, vals.get(16), fieldNames.get(16), elementsPosition);
+        editField(ConfigFieldType.TIME, vals.get(17), fieldNames.get(17), elementsPosition);
+        editField(ConfigFieldType.TRACKOR_DROP_DOWN, vals.get(18), fieldNames.get(18), elementsPosition);
         //CALCULATED
         //ROLLUP
-        editField(ConfigFieldType.MULTI_TRACKOR_SELECTOR, vals.get(21), columnNames != null ? columnNames.get(21) : null, fieldNames.get(21), expVals, gridExpVals, elementsPosition);
+        editField(ConfigFieldType.MULTI_TRACKOR_SELECTOR, vals.get(21), fieldNames.get(21), elementsPosition);
     }
 
-    public void editField(ConfigFieldType fieldDataType, String value, String gridColumnId,
-            String fieldName, Map<String, String> expVals, Map<String, String> gridExpVals, int elementPosition) {
+    public void editField(ConfigFieldType fieldDataType, String value, String fieldName, int elementPosition) {
         Actions action = new Actions(seleniumSettings.getWebDriver());
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
@@ -187,10 +185,6 @@ public class Tb {
                     element.click(newCheckbox);
                 }
             }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value);
-            }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -200,10 +194,6 @@ public class Tb {
             } else {
                 element.moveToElementByName(fieldName);
                 new Select(seleniumSettings.getWebDriver().findElement(By.name(fieldName))).selectByVisibleText(value);
-            }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value);
             }
         } else if (ConfigFieldType.TEXT.equals(fieldDataType) || ConfigFieldType.NUMBER.equals(fieldDataType)
                 || ConfigFieldType.MEMO.equals(fieldDataType) || ConfigFieldType.HYPERLINK.equals(fieldDataType)
@@ -246,10 +236,6 @@ public class Tb {
                 }
                 actionObject.sendKeys(value).perform();
             }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value);
-            }
         } else if (ConfigFieldType.LATITUDE.equals(fieldDataType) || ConfigFieldType.LONGITUDE.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
@@ -287,10 +273,6 @@ public class Tb {
                     throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
                 }
             }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value);
-            }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
@@ -300,10 +282,6 @@ public class Tb {
             } else {
                 element.moveToElementByName(fieldName + "_but");
                 selector.selectRadio(By.name(fieldName + "_but"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, value, 1L);
-            }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value);
             }
         } else if (ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
             try {
@@ -340,10 +318,6 @@ public class Tb {
                 //seleniumSettings.getWebDriver().switchTo().defaultContent(); //need or not need?
                 wait.waitFormLoad();
             }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value);
-            }
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
@@ -356,10 +330,6 @@ public class Tb {
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(fieldName + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
                 selector.selectCheckbox(By.name(fieldName + "_but"), 1, Arrays.asList(value.split(",")), 1L);
             }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
-            }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName + "_disp", elementPosition);
@@ -370,10 +340,6 @@ public class Tb {
                 String hiddenInputFile = seleniumSettings.getWebDriver().findElement(By.name(fieldName + "_disp")).getAttribute("hiddeninputfile");
                 htmlInputFile.uploadOnForm(hiddenInputFile, value);
             }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value);
-            }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(fieldName, elementPosition);
@@ -381,10 +347,6 @@ public class Tb {
             } else {
                 String id = seleniumSettings.getWebDriver().findElement(By.name(fieldName)).getAttribute("id");
                 fckEditor.setValue(id, value);
-            }
-            expVals.put(fieldName, value);
-            if (gridColumnId != null) {
-                gridExpVals.put(gridColumnId, value);
             }
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
@@ -494,34 +456,32 @@ public class Tb {
         }
     }
 
-    public void clearFields(List<String> fieldNames, List<String> columnNames, Map<String, String> expVals,
-            Map<String, String> gridExpVals, int elementsPosition) {
-        clearField(ConfigFieldType.CHECKBOX, fieldNames.get(0), columnNames != null ? columnNames.get(0) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.DATE, fieldNames.get(1), columnNames != null ? columnNames.get(1) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.DB_DROP_DOWN, fieldNames.get(2), columnNames != null ? columnNames.get(2) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.DB_SELECTOR, fieldNames.get(3), columnNames != null ? columnNames.get(3) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.DROP_DOWN, fieldNames.get(4), columnNames != null ? columnNames.get(4) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.ELECTRONIC_FILE, fieldNames.get(5), columnNames != null ? columnNames.get(5) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.HYPERLINK, fieldNames.get(6), columnNames != null ? columnNames.get(6) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.LATITUDE, fieldNames.get(7), columnNames != null ? columnNames.get(7) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.LONGITUDE, fieldNames.get(8), columnNames != null ? columnNames.get(8) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.MEMO, fieldNames.get(9), columnNames != null ? columnNames.get(9) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.NUMBER, fieldNames.get(10), columnNames != null ? columnNames.get(10) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.SELECTOR, fieldNames.get(11), columnNames != null ? columnNames.get(11) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.TEXT, fieldNames.get(12), columnNames != null ? columnNames.get(12) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.TRACKOR_SELECTOR, fieldNames.get(13), columnNames != null ? columnNames.get(13) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.WIKI, fieldNames.get(14), columnNames != null ? columnNames.get(14) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.MULTI_SELECTOR, fieldNames.get(15), columnNames != null ? columnNames.get(15) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.DATE_TIME, fieldNames.get(16), columnNames != null ? columnNames.get(16) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.TIME, fieldNames.get(17), columnNames != null ? columnNames.get(17) : null, expVals, gridExpVals, elementsPosition);
-        clearField(ConfigFieldType.TRACKOR_DROP_DOWN, fieldNames.get(18), columnNames != null ? columnNames.get(18) : null, expVals, gridExpVals, elementsPosition);
+    public void clearFields(List<String> fieldNames, int elementsPosition) {
+        clearField(ConfigFieldType.CHECKBOX, fieldNames.get(0), elementsPosition);
+        clearField(ConfigFieldType.DATE, fieldNames.get(1), elementsPosition);
+        clearField(ConfigFieldType.DB_DROP_DOWN, fieldNames.get(2), elementsPosition);
+        clearField(ConfigFieldType.DB_SELECTOR, fieldNames.get(3), elementsPosition);
+        clearField(ConfigFieldType.DROP_DOWN, fieldNames.get(4), elementsPosition);
+        clearField(ConfigFieldType.ELECTRONIC_FILE, fieldNames.get(5), elementsPosition);
+        clearField(ConfigFieldType.HYPERLINK, fieldNames.get(6), elementsPosition);
+        clearField(ConfigFieldType.LATITUDE, fieldNames.get(7), elementsPosition);
+        clearField(ConfigFieldType.LONGITUDE, fieldNames.get(8), elementsPosition);
+        clearField(ConfigFieldType.MEMO, fieldNames.get(9), elementsPosition);
+        clearField(ConfigFieldType.NUMBER, fieldNames.get(10), elementsPosition);
+        clearField(ConfigFieldType.SELECTOR, fieldNames.get(11), elementsPosition);
+        clearField(ConfigFieldType.TEXT, fieldNames.get(12), elementsPosition);
+        clearField(ConfigFieldType.TRACKOR_SELECTOR, fieldNames.get(13), elementsPosition);
+        clearField(ConfigFieldType.WIKI, fieldNames.get(14), elementsPosition);
+        clearField(ConfigFieldType.MULTI_SELECTOR, fieldNames.get(15), elementsPosition);
+        clearField(ConfigFieldType.DATE_TIME, fieldNames.get(16), elementsPosition);
+        clearField(ConfigFieldType.TIME, fieldNames.get(17), elementsPosition);
+        clearField(ConfigFieldType.TRACKOR_DROP_DOWN, fieldNames.get(18), elementsPosition);
         //CALCULATED
         //ROLLUP
-        clearField(ConfigFieldType.MULTI_TRACKOR_SELECTOR, fieldNames.get(21), columnNames != null ? columnNames.get(21) : null, expVals, gridExpVals, elementsPosition);
+        clearField(ConfigFieldType.MULTI_TRACKOR_SELECTOR, fieldNames.get(21), elementsPosition);
     }
 
-    public void clearField(ConfigFieldType fieldDataType, String field, String column, Map<String, String> expVals, Map<String, String> gridExpVals,
-            int elementPosition) {
+    public void clearField(ConfigFieldType fieldDataType, String field, int elementPosition) {
         Actions action = new Actions(seleniumSettings.getWebDriver());
 
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
@@ -541,10 +501,6 @@ public class Tb {
                     element.click(newCheckbox);
                 }
             }
-            expVals.put(field, "NO");
-            if (column != null) {
-                gridExpVals.put(column, "NO");
-            }
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.HYPERLINK.equals(fieldDataType)
                 || ConfigFieldType.MEMO.equals(fieldDataType) || ConfigFieldType.NUMBER.equals(fieldDataType)
                 || ConfigFieldType.TEXT.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType)
@@ -556,10 +512,6 @@ public class Tb {
             } else {
                 element.moveToElementByName(field);
                 seleniumSettings.getWebDriver().findElement(By.name(field)).clear();
-            }
-            expVals.put(field, "");
-            if (column != null) {
-                gridExpVals.put(column, "");
             }
         } else if (ConfigFieldType.LATITUDE.equals(fieldDataType) || ConfigFieldType.LONGITUDE.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -594,10 +546,6 @@ public class Tb {
                     throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
                 }
             }
-            expVals.put(field, "");
-            if (column != null) {
-                gridExpVals.put(column, "");
-            }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -607,10 +555,6 @@ public class Tb {
             } else {
                 element.moveToElementByName(field);
                 new Select(seleniumSettings.getWebDriver().findElement(By.name(field))).selectByVisibleText("");
-            }
-            expVals.put(field, "");
-            if (column != null) {
-                gridExpVals.put(column, "");
             }
         } else if (ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -623,10 +567,6 @@ public class Tb {
                 seleniumSettings.getWebDriver().findElement(By.name(field + "_disp")).clear();
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(field + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             }
-            expVals.put(field, "");
-            if (column != null) {
-                gridExpVals.put(column, "");
-            }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)
                 || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -636,10 +576,6 @@ public class Tb {
             } else {
                 element.moveToElementByName(field + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(field + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-            }
-            expVals.put(field, "");
-            if (column != null) {
-                gridExpVals.put(column, "");
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             if (elementPosition > 1) {
@@ -651,10 +587,6 @@ public class Tb {
                 element.moveToElementByName(field + "_disp");
                 action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name(field + "_disp"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             }
-            expVals.put(field, "");
-            if (column != null) {
-                gridExpVals.put(column, "");
-            }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
@@ -662,10 +594,6 @@ public class Tb {
             } else {
                 String id = seleniumSettings.getWebDriver().findElement(By.name(field)).getAttribute("id");
                 fckEditor.setValue(id, "");
-            }
-            expVals.put(field, "");
-            if (column != null) {
-                gridExpVals.put(column, "");
             }
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
