@@ -111,35 +111,6 @@ public class Tb {
         return actualColumnsCnt;
     }
 
-    public Map<String, String> transformValsForCheckFields(List<String> fieldNames, List<String> values) {
-        Map<String, String> vals = new HashMap<String, String>();
-
-        vals.put(fieldNames.get(0), values.get(0)); //CHECKBOX
-        vals.put(fieldNames.get(1), values.get(1)); //DATE
-        vals.put(fieldNames.get(2), values.get(2)); //DB_DROP_DOWN
-        vals.put(fieldNames.get(3), values.get(3)); //DB_SELECTOR
-        vals.put(fieldNames.get(4), values.get(4)); //DROP_DOWN
-        vals.put(fieldNames.get(5), values.get(5)); //ELECTRONIC_FILE
-        vals.put(fieldNames.get(6), values.get(6)); //HYPERLINK
-        vals.put(fieldNames.get(7), values.get(7)); //LATITUDE
-        vals.put(fieldNames.get(8), values.get(8)); //LONGITUDE
-        vals.put(fieldNames.get(9), values.get(9)); //MEMO
-        vals.put(fieldNames.get(10), values.get(10)); //NUMBER
-        vals.put(fieldNames.get(11), values.get(11)); //SELECTOR
-        vals.put(fieldNames.get(12), values.get(12)); //TEXT
-        vals.put(fieldNames.get(13), values.get(13)); //TRACKOR_SELECTOR
-        vals.put(fieldNames.get(14), values.get(14)); //WIKI
-        vals.put(fieldNames.get(15), values.get(15)); //MULTI_SELECTOR
-        vals.put(fieldNames.get(16), values.get(16)); //DATE_TIME
-        vals.put(fieldNames.get(17), values.get(17)); //TIME
-        vals.put(fieldNames.get(18), values.get(18)); //TRACKOR_DROPDOWN
-        //CALCULATED
-        //ROLLUP
-        vals.put(fieldNames.get(21), values.get(21)); //TRACKOR_DROPDOWN
-
-        return vals;
-    }
-
     public void editFields(List<String> vals, List<String> fieldNames, int elementsPosition) {
         editField(ConfigFieldType.CHECKBOX, vals.get(0), fieldNames.get(0), elementsPosition);
         editField(ConfigFieldType.DATE, vals.get(1), fieldNames.get(1), elementsPosition);
@@ -353,46 +324,40 @@ public class Tb {
         }
     }
 
-    public void checkFields(List<String> fields, Map<String, String> vals, int elementsPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
-        checkField(ConfigFieldType.CHECKBOX, fields.get(0), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.DATE, fields.get(1), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.DB_DROP_DOWN, fields.get(2), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.DB_SELECTOR, fields.get(3), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.DROP_DOWN, fields.get(4), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.ELECTRONIC_FILE, fields.get(5), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
+    public void checkFields(List<String> fields, List<String> vals, int elementsPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
+        checkField(ConfigFieldType.CHECKBOX, fields.get(0), vals.get(0), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.DATE, fields.get(1), vals.get(1), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.DB_DROP_DOWN, fields.get(2), vals.get(2), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.DB_SELECTOR, fields.get(3), vals.get(3), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.DROP_DOWN, fields.get(4), vals.get(4), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.ELECTRONIC_FILE, fields.get(5), vals.get(5), elementsPosition, isOpenSelector, isWikiReadOnly);
         if (fields.get(6) != null) {
-            checkField(ConfigFieldType.HYPERLINK, fields.get(6), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
+            checkField(ConfigFieldType.HYPERLINK, fields.get(6), vals.get(6), elementsPosition, isOpenSelector, isWikiReadOnly);
         }
-        checkField(ConfigFieldType.LATITUDE, fields.get(7), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.LONGITUDE, fields.get(8), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.MEMO, fields.get(9), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.NUMBER, fields.get(10), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.SELECTOR, fields.get(11), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.TEXT, fields.get(12), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.TRACKOR_SELECTOR, fields.get(13), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.WIKI, fields.get(14), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.MULTI_SELECTOR, fields.get(15), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.DATE_TIME, fields.get(16), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.TIME, fields.get(17), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
-        checkField(ConfigFieldType.TRACKOR_DROP_DOWN, fields.get(18), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.LATITUDE, fields.get(7), vals.get(7), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.LONGITUDE, fields.get(8), vals.get(8), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.MEMO, fields.get(9), vals.get(9), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.NUMBER, fields.get(10), vals.get(10), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.SELECTOR, fields.get(11), vals.get(11), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.TEXT, fields.get(12), vals.get(12), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.TRACKOR_SELECTOR, fields.get(13), vals.get(13), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.WIKI, fields.get(14), vals.get(14), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.MULTI_SELECTOR, fields.get(15), vals.get(15), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.DATE_TIME, fields.get(16), vals.get(16), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.TIME, fields.get(17), vals.get(17), elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.TRACKOR_DROP_DOWN, fields.get(18), vals.get(18), elementsPosition, isOpenSelector, isWikiReadOnly);
         //CALCULATED
         //ROLLUP
-        checkField(ConfigFieldType.MULTI_TRACKOR_SELECTOR, fields.get(21), vals, elementsPosition, isOpenSelector, isWikiReadOnly);
+        checkField(ConfigFieldType.MULTI_TRACKOR_SELECTOR, fields.get(21), vals.get(21), elementsPosition, isOpenSelector, isWikiReadOnly);
     }
 
     public void checkField(ConfigFieldType fieldDataType, String field, String val, int elementPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
-        Map<String, String> vals = new HashMap<>();
-        vals.put(field, val);
-        checkField(fieldDataType, field, vals, elementPosition, isOpenSelector, isWikiReadOnly);
-    }
-
-    public void checkField(ConfigFieldType fieldDataType, String field, Map<String, String> vals, int elementPosition, boolean isOpenSelector, boolean isWikiReadOnly) {
         if (ConfigFieldType.CHECKBOX.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                assertElement.assertCheckboxById("idx" + idx, vals.get(field));
+                assertElement.assertCheckboxById("idx" + idx, val);
             } else {
-                assertElement.assertCheckbox(field, vals.get(field));
+                assertElement.assertCheckbox(field, val);
             }
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.HYPERLINK.equals(fieldDataType)
                 || ConfigFieldType.LATITUDE.equals(fieldDataType) || ConfigFieldType.LONGITUDE.equals(fieldDataType)
@@ -401,55 +366,55 @@ public class Tb {
                 || ConfigFieldType.TIME.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                assertElement.assertTextById("idx" + idx, vals.get(field));
+                assertElement.assertTextById("idx" + idx, val);
             } else {
-                assertElement.assertText(field, vals.get(field));
+                assertElement.assertText(field, val);
             }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                assertElement.assertSelectById("idx" + idx, vals.get(field));
+                assertElement.assertSelectById("idx" + idx, val);
             } else {
-                assertElement.assertSelect(field, vals.get(field));
+                assertElement.assertSelect(field, val);
             }
         } else if (ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType) || ConfigFieldType.DB_SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                assertElement.assertRadioPsSelectorById("idx" + idx + "_disp", "idx" + idx + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, vals.get(field), 1L, isOpenSelector);
+                assertElement.assertRadioPsSelectorById("idx" + idx + "_disp", "idx" + idx + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, val, 1L, isOpenSelector);
             } else {
-                assertElement.assertRadioPsSelector(field + "_disp", field + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, vals.get(field), 1L, isOpenSelector);
+                assertElement.assertRadioPsSelector(field + "_disp", field + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, val, 1L, isOpenSelector);
             }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
                 if (isWikiReadOnly) {
-                    fckEditor.checkValueReadOnly("idx" + idx, vals.get(field));
+                    fckEditor.checkValueReadOnly("idx" + idx, val);
                 } else {
-                    fckEditor.checkValue("idx" + idx, vals.get(field));
+                    fckEditor.checkValue("idx" + idx, val);
                 }
             } else {
                 if (isWikiReadOnly) {
-                    fckEditor.checkValueReadOnly(field, vals.get(field));
+                    fckEditor.checkValueReadOnly(field, val);
                 } else {
                     String id = seleniumSettings.getWebDriver().findElement(By.name(field)).getAttribute("id");
-                    fckEditor.checkValue(id, vals.get(field));
+                    fckEditor.checkValue(id, val);
                 }
             }
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field, elementPosition);
-                assertElement.assertCheckboxPsSelectorById("idx" + idx + "_disp", "idx" + idx + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(vals.get(field).split(",")), 1L, isOpenSelector);
+                assertElement.assertCheckboxPsSelectorById("idx" + idx + "_disp", "idx" + idx + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(val.split(",")), 1L, isOpenSelector);
             } else {
-                assertElement.assertCheckboxPsSelector(field + "_disp", field + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(vals.get(field).split(",")), 1L, isOpenSelector);
+                assertElement.assertCheckboxPsSelector(field + "_disp", field + "_but", AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, Arrays.asList(val.split(",")), 1L, isOpenSelector);
             }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             if (elementPosition > 1) {
                 String idx = getLastFieldIndex(field + "_disp", elementPosition);
                 idx = idx.replace("_disp", "");
-                assertElement.assertTextById("idx" + idx + "_disp", vals.get(field));
+                assertElement.assertTextById("idx" + idx + "_disp", val);
             } else {
-                assertElement.assertText(field + "_disp", vals.get(field));
+                assertElement.assertText(field + "_disp", val);
             }
         } else {
             throw new SeleniumUnexpectedException("Not support ConfigFieldType");
