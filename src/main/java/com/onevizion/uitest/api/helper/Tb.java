@@ -331,9 +331,7 @@ public class Tb {
         checkField(ConfigFieldType.DB_SELECTOR, fields.get(3), vals.get(3), elementsPosition, isOpenSelector, isWikiReadOnly);
         checkField(ConfigFieldType.DROP_DOWN, fields.get(4), vals.get(4), elementsPosition, isOpenSelector, isWikiReadOnly);
         checkField(ConfigFieldType.ELECTRONIC_FILE, fields.get(5), vals.get(5), elementsPosition, isOpenSelector, isWikiReadOnly);
-        if (fields.get(6) != null) {
-            checkField(ConfigFieldType.HYPERLINK, fields.get(6), vals.get(6), elementsPosition, isOpenSelector, isWikiReadOnly);
-        }
+        checkField(ConfigFieldType.HYPERLINK, fields.get(6), vals.get(6), elementsPosition, isOpenSelector, isWikiReadOnly);
         checkField(ConfigFieldType.LATITUDE, fields.get(7), vals.get(7), elementsPosition, isOpenSelector, isWikiReadOnly);
         checkField(ConfigFieldType.LONGITUDE, fields.get(8), vals.get(8), elementsPosition, isOpenSelector, isWikiReadOnly);
         checkField(ConfigFieldType.MEMO, fields.get(9), vals.get(9), elementsPosition, isOpenSelector, isWikiReadOnly);
@@ -602,7 +600,7 @@ public class Tb {
         editCell(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR, vals.get(3), columnNames.get(3), fieldNames != null ? fieldNames.get(3) : null, gridExpVals, expVals);
         editCell(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN, vals.get(4), columnNames.get(4), fieldNames != null ? fieldNames.get(4) : null, gridExpVals, expVals);
         editCell(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE, vals.get(5), columnNames.get(5), fieldNames != null ? fieldNames.get(5) : null, gridExpVals, expVals);
-        //hyperlink
+        editCell(gridIndex, rowIndex, columns.get(6), ConfigFieldType.HYPERLINK, vals.get(6), columnNames.get(6), fieldNames != null ? fieldNames.get(6) : null, gridExpVals, expVals);
         editCell(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE, vals.get(7), columnNames.get(7), fieldNames != null ? fieldNames.get(7) : null, gridExpVals, expVals);
         editCell(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE, vals.get(8), columnNames.get(8), fieldNames != null ? fieldNames.get(8) : null, gridExpVals, expVals);
         editCell(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO, vals.get(9), columnNames.get(9), fieldNames != null ? fieldNames.get(9) : null, gridExpVals, expVals);
@@ -718,6 +716,13 @@ public class Tb {
             if (fieldName != null) {
                 expVals.put(fieldName, value);
             }
+        } else if (ConfigFieldType.HYPERLINK.equals(fieldDataType)) {
+            seleniumSettings.getWebDriver().findElement(By.name("epmLink1")).clear();
+            seleniumSettings.getWebDriver().findElement(By.name("epmLink1")).sendKeys(value);
+            gridExpVals.put(gridColumnId, value);
+            if (fieldName != null) {
+                expVals.put(fieldName, value);
+            }
         } else if (ConfigFieldType.NUMBER.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("NumberField1")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("NumberField1")).sendKeys(value);
@@ -784,7 +789,7 @@ public class Tb {
         clearCell(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR, columnNames.get(3), fieldNames != null ? fieldNames.get(3) : null, gridExpVals, expVals);
         clearCell(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN, columnNames.get(4), fieldNames != null ? fieldNames.get(4) : null, gridExpVals, expVals);
         clearCell(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE, columnNames.get(5), fieldNames != null ? fieldNames.get(5) : null, gridExpVals, expVals);
-        //hyperlink
+        clearCell(gridIndex, rowIndex, columns.get(6), ConfigFieldType.HYPERLINK, columnNames.get(6), fieldNames != null ? fieldNames.get(6) : null, gridExpVals, expVals);
         clearCell(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE, columnNames.get(7), fieldNames != null ? fieldNames.get(7) : null, gridExpVals, expVals);
         clearCell(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE, columnNames.get(8), fieldNames != null ? fieldNames.get(8) : null, gridExpVals, expVals);
         clearCell(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO, columnNames.get(9), fieldNames != null ? fieldNames.get(9) : null, gridExpVals, expVals);
@@ -883,6 +888,12 @@ public class Tb {
             if (fieldName != null) {
                 expVals.put(fieldName, "");
             }
+        } else if (ConfigFieldType.HYPERLINK.equals(fieldDataType)) {
+            seleniumSettings.getWebDriver().findElement(By.name("epmLink1")).clear();
+            gridExpVals.put(gridColumnId, "");
+            if (fieldName != null) {
+                expVals.put(fieldName, "");
+            }
         } else if (ConfigFieldType.NUMBER.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("NumberField1")).clear();
             gridExpVals.put(gridColumnId, "");
@@ -931,7 +942,7 @@ public class Tb {
         checkCellEnabled(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR);
         checkCellEnabled(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN);
         checkCellEnabled(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE);
-        //hyperlink
+        checkCellEnabled(gridIndex, rowIndex, columns.get(6), ConfigFieldType.HYPERLINK);
         checkCellEnabled(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE);
         checkCellEnabled(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE);
         checkCellEnabled(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO);
@@ -981,6 +992,8 @@ public class Tb {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmLong1")).size(), 1);
         } else if (ConfigFieldType.MEMO.equals(fieldDataType) || ConfigFieldType.TEXT.equals(fieldDataType) || ConfigFieldType.WIKI.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmMemo1")).size(), 1);
+        } else if (ConfigFieldType.HYPERLINK.equals(fieldDataType)) {
+            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmLink1")).size(), 1);
         } else if (ConfigFieldType.NUMBER.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("NumberField1")).size(), 1);
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType) || ConfigFieldType.TIME.equals(fieldDataType)) {
@@ -1004,7 +1017,7 @@ public class Tb {
         checkCellDisabled(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR);
         checkCellDisabled(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN);
         checkCellDisabled(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE);
-        //hyperlink
+        checkCellDisabled(gridIndex, rowIndex, columns.get(6), ConfigFieldType.HYPERLINK);
         checkCellDisabled(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE);
         checkCellDisabled(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE);
         checkCellDisabled(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO);
@@ -1054,6 +1067,8 @@ public class Tb {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmLong1")).size(), 0);
         } else if (ConfigFieldType.MEMO.equals(fieldDataType) || ConfigFieldType.TEXT.equals(fieldDataType) || ConfigFieldType.WIKI.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmMemo1")).size(), 0);
+        } else if (ConfigFieldType.HYPERLINK.equals(fieldDataType)) {
+            Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("epmLink1")).size(), 0);
         } else if (ConfigFieldType.NUMBER.equals(fieldDataType)) {
             Assert.assertEquals(seleniumSettings.getWebDriver().findElements(By.name("NumberField1")).size(), 0);
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType) || ConfigFieldType.TIME.equals(fieldDataType)) {

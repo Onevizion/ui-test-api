@@ -59,9 +59,7 @@ public class FieldHistory {
         checkFieldHistory(false, fieldIds.get(3), getHistoryVals(3, vals), isShowMenu, elementPosition); //DB_SELECTOR
         checkFieldHistory(false, fieldIds.get(4), getHistoryVals(4, vals), isShowMenu, elementPosition); //DROP_DOWN
         checkFieldHistory(false, fieldIds.get(5) + "_disp", getHistoryValsEfile(5, vals), true, elementPosition); //ELECTRONIC_FILE
-        if (fieldIds.get(6) != null) {
-            checkFieldHistory(false, fieldIds.get(6), getHistoryVals(6, vals), isShowMenu, elementPosition); //HYPERLINK
-        }
+        checkFieldHistory(false, fieldIds.get(6), getHistoryVals(6, vals), isShowMenu, elementPosition); //HYPERLINK
         checkFieldHistory(false, fieldIds.get(7), getHistoryVals(7, vals), isShowMenu, elementPosition); //LATITUDE
         checkFieldHistory(false, fieldIds.get(8), getHistoryVals(8, vals), isShowMenu, elementPosition); //LONGITUDE
         checkFieldHistory(false, fieldIds.get(9), getHistoryVals(9, vals), isShowMenu, elementPosition); //MEMO
