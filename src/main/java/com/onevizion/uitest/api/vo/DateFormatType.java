@@ -5,11 +5,7 @@ public enum DateFormatType {
     MM_DD_YYYY_SLASH("MM/DD/YYYY", "MM/dd/yyyy", "/"),
     DD_MM_YYYY_SLASH("DD/MM/YYYY", "dd/MM/yyyy", "/"),
     MM_DD_YYYY_DOT("MM.DD.YYYY", "MM.dd.yyyy", "."),
-    DD_MM_YYYY_DOT("DD.MM.YYYY", "dd.MM.yyyy", "."),
-    MM_DD_YY_SLASH("MM/DD/YY", "MM/dd/yy", "/"),
-    DD_MM_YY_SLASH("DD/MM/YY", "dd/MM/yy", "/"),
-    MM_DD_YY_DOT("MM.DD.YY", "MM.dd.yy", "."),
-    DD_MM_YY_DOT("DD.MM.YY", "dd.MM.yy", ".");
+    DD_MM_YYYY_DOT("DD.MM.YYYY", "dd.MM.yyyy", ".");
 
     private String format;
     private String javaFormat;
