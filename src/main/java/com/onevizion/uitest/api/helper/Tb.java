@@ -592,34 +592,32 @@ public class Tb {
         return vals;
     }
 
-    public void editCells(Long gridIndex, int rowIndex, List<Integer> columns, List<String> vals,
-            Map<String, String> gridExpVals, Map<String, String> expVals, List<String> columnNames, List<String> fieldNames) {
-        editCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, vals.get(0), columnNames.get(0), fieldNames != null ? fieldNames.get(0) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, vals.get(1), columnNames.get(1), fieldNames != null ? fieldNames.get(1) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN, vals.get(2), columnNames.get(2), fieldNames != null ? fieldNames.get(2) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR, vals.get(3), columnNames.get(3), fieldNames != null ? fieldNames.get(3) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN, vals.get(4), columnNames.get(4), fieldNames != null ? fieldNames.get(4) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE, vals.get(5), columnNames.get(5), fieldNames != null ? fieldNames.get(5) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(6), ConfigFieldType.HYPERLINK, vals.get(6), columnNames.get(6), fieldNames != null ? fieldNames.get(6) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE, vals.get(7), columnNames.get(7), fieldNames != null ? fieldNames.get(7) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE, vals.get(8), columnNames.get(8), fieldNames != null ? fieldNames.get(8) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO, vals.get(9), columnNames.get(9), fieldNames != null ? fieldNames.get(9) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(10), ConfigFieldType.NUMBER, vals.get(10), columnNames.get(10), fieldNames != null ? fieldNames.get(10) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(11), ConfigFieldType.SELECTOR, vals.get(11), columnNames.get(11), fieldNames != null ? fieldNames.get(11) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(12), ConfigFieldType.TEXT, vals.get(12), columnNames.get(12), fieldNames != null ? fieldNames.get(12) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(13), ConfigFieldType.TRACKOR_SELECTOR, vals.get(13), columnNames.get(13), fieldNames != null ? fieldNames.get(13) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(14), ConfigFieldType.WIKI, vals.get(14), columnNames.get(14), fieldNames != null ? fieldNames.get(14) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(15), ConfigFieldType.MULTI_SELECTOR, vals.get(15), columnNames.get(15), fieldNames != null ? fieldNames.get(15) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(16), ConfigFieldType.DATE_TIME, vals.get(16), columnNames.get(16), fieldNames != null ? fieldNames.get(16) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(17), ConfigFieldType.TIME, vals.get(17), columnNames.get(17), fieldNames != null ? fieldNames.get(17) : null, gridExpVals, expVals);
-        editCell(gridIndex, rowIndex, columns.get(18), ConfigFieldType.TRACKOR_DROP_DOWN, vals.get(18), columnNames.get(18), fieldNames != null ? fieldNames.get(18) : null, gridExpVals, expVals);
+    public void editCells(Long gridIndex, int rowIndex, List<Integer> columns, List<String> vals) {
+        editCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, vals.get(0));
+        editCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, vals.get(1));
+        editCell(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN, vals.get(2));
+        editCell(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR, vals.get(3));
+        editCell(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN, vals.get(4));
+        editCell(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE, vals.get(5));
+        editCell(gridIndex, rowIndex, columns.get(6), ConfigFieldType.HYPERLINK, vals.get(6));
+        editCell(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE, vals.get(7));
+        editCell(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE, vals.get(8));
+        editCell(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO, vals.get(9));
+        editCell(gridIndex, rowIndex, columns.get(10), ConfigFieldType.NUMBER, vals.get(10));
+        editCell(gridIndex, rowIndex, columns.get(11), ConfigFieldType.SELECTOR, vals.get(11));
+        editCell(gridIndex, rowIndex, columns.get(12), ConfigFieldType.TEXT, vals.get(12));
+        editCell(gridIndex, rowIndex, columns.get(13), ConfigFieldType.TRACKOR_SELECTOR, vals.get(13));
+        editCell(gridIndex, rowIndex, columns.get(14), ConfigFieldType.WIKI, vals.get(14));
+        editCell(gridIndex, rowIndex, columns.get(15), ConfigFieldType.MULTI_SELECTOR, vals.get(15));
+        editCell(gridIndex, rowIndex, columns.get(16), ConfigFieldType.DATE_TIME, vals.get(16));
+        editCell(gridIndex, rowIndex, columns.get(17), ConfigFieldType.TIME, vals.get(17));
+        editCell(gridIndex, rowIndex, columns.get(18), ConfigFieldType.TRACKOR_DROP_DOWN, vals.get(18));
         //CALCULATED
         //ROLLUP
-        editCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, vals.get(21), columnNames.get(21), fieldNames != null ? fieldNames.get(21) : null, gridExpVals, expVals);
+        editCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, vals.get(21));
     }
 
-    public void editCell(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType, String value,
-            String gridColumnId, String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals) {
+    public void editCell(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType, String value) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
@@ -639,34 +637,18 @@ public class Tb {
             if (!val.equals(value)) {
                 checkbox.clickByElement(elem);
             }
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             jquery.waitLoad();
             Select sel = new Select(seleniumSettings.getWebDriver().findElement(By.name("epmDd1")));
             wait.waitListBoxLoad2(sel);
             sel.selectByVisibleText(value);
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
             selector.selectRadio(By.name("btn1"), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE + 0L), 1, value, 1L);
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("epmSelector1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
             selector.selectCheckbox(By.name("btn1"), 1, Arrays.asList(value.split(",")), 1L);
-            gridExpVals.put(gridColumnId, value.replaceAll(",", ", "));
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.LATITUDE.equals(fieldDataType)) {
             //elementHelper.clickByName("epmLat1");
             if (seleniumSettings.getBrowser().equals("chrome")) {
@@ -683,10 +665,6 @@ public class Tb {
                 actionObject.sendKeys(value).perform();
             } else {
                 throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
-            }
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
             }
         } else if (ConfigFieldType.LONGITUDE.equals(fieldDataType)) {
             //elementHelper.clickByName("epmLong1");
@@ -705,31 +683,15 @@ public class Tb {
             } else {
                 throw new SeleniumUnexpectedException("Not support browser[" + seleniumSettings.getBrowser() + "]");
             }
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.MEMO.equals(fieldDataType) || ConfigFieldType.TEXT.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("epmMemo1")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("epmMemo1")).sendKeys(value);
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.HYPERLINK.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("epmLink1")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("epmLink1")).sendKeys(value);
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.NUMBER.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("NumberField1")).clear();
             seleniumSettings.getWebDriver().findElement(By.name("NumberField1")).sendKeys(value);
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType)
                 || ConfigFieldType.TIME.equals(fieldDataType)) {
             element.clickByName("epmDate1");
@@ -743,11 +705,6 @@ public class Tb {
                 actionObject.sendKeys(Keys.BACK_SPACE).perform();
             }
             actionObject.sendKeys(value).perform();
-
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.moveToElement(gridCell);
             List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
@@ -762,16 +719,8 @@ public class Tb {
             gridCell.findElement(By.id(EFILE_EDIT_BUTTON)).click();
             String hiddenInputFile = gridCell.findElement(By.id(EFILE_EDIT_BUTTON)).getAttribute("hiddeninputfile");
             htmlInputFile.uploadOnGrid(gridIndex, hiddenInputFile, value);
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             fckEditor.setValue("epmMemo1", value);
-            gridExpVals.put(gridColumnId, value);
-            if (fieldName != null) {
-                expVals.put(fieldName, value);
-            }
 
             AbstractSeleniumCore.sleep(500L);
 
@@ -781,34 +730,32 @@ public class Tb {
         }
     }
 
-    public void clearCells(Long gridIndex, int rowIndex, List<Integer> columns, Map<String, String> gridExpVals,
-            Map<String, String> expVals, List<String> columnNames, List<String> fieldNames) {
-        clearCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX, columnNames.get(0), fieldNames != null ? fieldNames.get(0) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE, columnNames.get(1), fieldNames != null ? fieldNames.get(1) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN, columnNames.get(2), fieldNames != null ? fieldNames.get(2) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR, columnNames.get(3), fieldNames != null ? fieldNames.get(3) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN, columnNames.get(4), fieldNames != null ? fieldNames.get(4) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE, columnNames.get(5), fieldNames != null ? fieldNames.get(5) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(6), ConfigFieldType.HYPERLINK, columnNames.get(6), fieldNames != null ? fieldNames.get(6) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE, columnNames.get(7), fieldNames != null ? fieldNames.get(7) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE, columnNames.get(8), fieldNames != null ? fieldNames.get(8) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO, columnNames.get(9), fieldNames != null ? fieldNames.get(9) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(10), ConfigFieldType.NUMBER, columnNames.get(10), fieldNames != null ? fieldNames.get(10) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(11), ConfigFieldType.SELECTOR, columnNames.get(11), fieldNames != null ? fieldNames.get(11) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(12), ConfigFieldType.TEXT, columnNames.get(12), fieldNames != null ? fieldNames.get(12) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(13), ConfigFieldType.TRACKOR_SELECTOR, columnNames.get(13), fieldNames != null ? fieldNames.get(13) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(14), ConfigFieldType.WIKI, columnNames.get(14), fieldNames != null ? fieldNames.get(14) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(15), ConfigFieldType.MULTI_SELECTOR, columnNames.get(15), fieldNames != null ? fieldNames.get(15) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(16), ConfigFieldType.DATE_TIME, columnNames.get(16), fieldNames != null ? fieldNames.get(16) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(17), ConfigFieldType.TIME, columnNames.get(17), fieldNames != null ? fieldNames.get(17) : null, gridExpVals, expVals);
-        clearCell(gridIndex, rowIndex, columns.get(18), ConfigFieldType.TRACKOR_DROP_DOWN, columnNames.get(18), fieldNames != null ? fieldNames.get(18) : null, gridExpVals, expVals);
+    public void clearCells(Long gridIndex, int rowIndex, List<Integer> columns) {
+        clearCell(gridIndex, rowIndex, columns.get(0), ConfigFieldType.CHECKBOX);
+        clearCell(gridIndex, rowIndex, columns.get(1), ConfigFieldType.DATE);
+        clearCell(gridIndex, rowIndex, columns.get(2), ConfigFieldType.DB_DROP_DOWN);
+        clearCell(gridIndex, rowIndex, columns.get(3), ConfigFieldType.DB_SELECTOR);
+        clearCell(gridIndex, rowIndex, columns.get(4), ConfigFieldType.DROP_DOWN);
+        clearCell(gridIndex, rowIndex, columns.get(5), ConfigFieldType.ELECTRONIC_FILE);
+        clearCell(gridIndex, rowIndex, columns.get(6), ConfigFieldType.HYPERLINK);
+        clearCell(gridIndex, rowIndex, columns.get(7), ConfigFieldType.LATITUDE);
+        clearCell(gridIndex, rowIndex, columns.get(8), ConfigFieldType.LONGITUDE);
+        clearCell(gridIndex, rowIndex, columns.get(9), ConfigFieldType.MEMO);
+        clearCell(gridIndex, rowIndex, columns.get(10), ConfigFieldType.NUMBER);
+        clearCell(gridIndex, rowIndex, columns.get(11), ConfigFieldType.SELECTOR);
+        clearCell(gridIndex, rowIndex, columns.get(12), ConfigFieldType.TEXT);
+        clearCell(gridIndex, rowIndex, columns.get(13), ConfigFieldType.TRACKOR_SELECTOR);
+        clearCell(gridIndex, rowIndex, columns.get(14), ConfigFieldType.WIKI);
+        clearCell(gridIndex, rowIndex, columns.get(15), ConfigFieldType.MULTI_SELECTOR);
+        clearCell(gridIndex, rowIndex, columns.get(16), ConfigFieldType.DATE_TIME);
+        clearCell(gridIndex, rowIndex, columns.get(17), ConfigFieldType.TIME);
+        clearCell(gridIndex, rowIndex, columns.get(18), ConfigFieldType.TRACKOR_DROP_DOWN);
         //CALCULATED
         //ROLLUP
-        clearCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR, columnNames.get(21), fieldNames != null ? fieldNames.get(21) : null, gridExpVals, expVals);
+        clearCell(gridIndex, rowIndex, columns.get(21), ConfigFieldType.MULTI_TRACKOR_SELECTOR);
     }
 
-    public void clearCell(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType, String gridColumnId,
-            String fieldName, Map<String, String> gridExpVals, Map<String, String> expVals) {
+    public void clearCell(Long gridIndex, int rowIndex, int columnIndex, ConfigFieldType fieldDataType) {
         Long scrollLeft = js.getGridScrollLeft(gridIndex, columnIndex);
         js.gridScrollLeft(gridIndex, scrollLeft);
         Long scrollTop = js.getGridScrollTop(gridIndex, rowIndex);
@@ -828,26 +775,14 @@ public class Tb {
             if (!val.equals("NO")) {
                 checkbox.clickByElement(elem);
             }
-            gridExpVals.put(gridColumnId, "NO");
-            if (fieldName != null) {
-                expVals.put(fieldName, "NO");
-            }
         } else if (ConfigFieldType.SELECTOR.equals(fieldDataType) || ConfigFieldType.TRACKOR_SELECTOR.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("epmSelector1")).clear();
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("epmSelector1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.DB_SELECTOR.equals(fieldDataType) || ConfigFieldType.MULTI_SELECTOR.equals(fieldDataType)
                 || ConfigFieldType.MULTI_TRACKOR_SELECTOR.equals(fieldDataType)) {
             Actions action = new Actions(seleniumSettings.getWebDriver());
             action.moveToElement(seleniumSettings.getWebDriver().findElement(By.name("epmSelector1"))).click().keyDown(Keys.CONTROL).sendKeys(Keys.DELETE).keyUp(Keys.CONTROL).perform();
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.ELECTRONIC_FILE.equals(fieldDataType)) {
             element.moveToElement(gridCell);
             List<WebElement> buttons = gridCell.findElements(By.tagName("input"));
@@ -856,63 +791,27 @@ public class Tb {
             } else if (buttons.size() < 1 || 3 < buttons.size()) {
                 throw new SeleniumUnexpectedException("Wrong efile buttons size");
             }
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
             jquery.waitLoad();
             Select sel = new Select(seleniumSettings.getWebDriver().findElement(By.name("epmDd1")));
             wait.waitListBoxLoad2(sel);
             sel.selectByVisibleText("");
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.LATITUDE.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("epmLat1")).clear();
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.LONGITUDE.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("epmLong1")).clear();
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.MEMO.equals(fieldDataType) || ConfigFieldType.TEXT.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("epmMemo1")).clear();
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.HYPERLINK.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("epmLink1")).clear();
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.NUMBER.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("NumberField1")).clear();
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.DATE.equals(fieldDataType) || ConfigFieldType.DATE_TIME.equals(fieldDataType)
                 || ConfigFieldType.TIME.equals(fieldDataType)) {
             seleniumSettings.getWebDriver().findElement(By.name("epmDate1")).clear();
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
         } else if (ConfigFieldType.WIKI.equals(fieldDataType)) {
             fckEditor.setValue("epmMemo1", "");
-            gridExpVals.put(gridColumnId, "");
-            if (fieldName != null) {
-                expVals.put(fieldName, "");
-            }
 
             AbstractSeleniumCore.sleep(500L);
 
@@ -1141,10 +1040,6 @@ public class Tb {
 
     public void checkColumnNotExist(Long gridIndex, String columnLabel) {
         Assert.assertEquals(js.existColumnIndexByLabel(gridIndex, columnLabel), false, "Grid have column");
-    }
-
-    public void checkColumnNotExist(Long gridIndex, String columnLabel, String columnLabel2) {
-        Assert.assertEquals(js.existColumnIndexByLabel(gridIndex, columnLabel, columnLabel2), false, "Grid have column");
     }
 
     public void checkFieldsExist(List<String> fieldIds) {
