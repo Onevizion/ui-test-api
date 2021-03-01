@@ -101,6 +101,7 @@ import com.onevizion.uitest.api.helper.formdesigner.FormDesigner;
 import com.onevizion.uitest.api.helper.gantt.Gantt;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.grid.group.GridGroup;
+import com.onevizion.uitest.api.helper.grid.panel.GridPanel;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
@@ -284,6 +285,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected GridSort gridSort;
+
+    @Autowired
+    protected GridPanel gridPanel;
 
     @Autowired
     protected Notification notification;

@@ -292,12 +292,6 @@ public class Wait {
             .until(webdriver -> val.equals(actualValueSupplier.get()));
     }
 
-    public void waitDxtmlxWindowOpened(final String windowName) {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-            .withMessage("")
-            .until(webdriver -> js.isDxtmlxWindowOpened(windowName));
-    }
-
     public void waitCodeMirrorLoad(final String elementId) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Code Mirror for element with id=["+elementId+"] is failed")

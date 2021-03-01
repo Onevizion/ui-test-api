@@ -91,6 +91,10 @@ public class Grid2 {
     public void saveChangesByCtrlS(Long gridId) {
         Actions actionObject = new Actions(seleniumSettings.getWebDriver());
         actionObject.keyDown(Keys.CONTROL).sendKeys("s").keyUp(Keys.CONTROL).perform();
+    }
+
+    public void saveChangesByCtrlSAndWait(Long gridId) {
+        saveChangesByCtrlS(gridId);
 
         elementWait.waitElementNotVisibleById(AbstractSeleniumCore.SAVING_ID_BASE + gridId);
         elementWait.waitElementNotDisplayById(AbstractSeleniumCore.SAVING_ID_BASE + gridId);

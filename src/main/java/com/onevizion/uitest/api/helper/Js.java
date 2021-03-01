@@ -97,7 +97,7 @@ public class Js {
     }
 
     // TODO remove trim
-    public String getGridCellValueByRowIndexAndColIndex2(WebElement element, int rowIndex, int columnIndex) {
+    public String getGridCellValueByRowIndexAndColIndex(WebElement element, int rowIndex, int columnIndex) {
         return execJs4("return arguments[0].grid.cellByIndex(" + rowIndex + ", " + columnIndex + ").getValue().trim();", element);
     }
 
@@ -129,6 +129,10 @@ public class Js {
 
     public int getGridRowsCount(Long gridId) {
         return Integer.parseInt(execJs("return gridArr[" + gridId + "].grid.getRowsNum();"));
+    }
+
+    public int getGridRowsCount(WebElement element) {
+        return Integer.parseInt(execJs4("return arguments[0].grid.getRowsNum();", element));
     }
 
     public Double getTOGridRowsCount(Long gridId) {
@@ -367,14 +371,6 @@ public class Js {
                 + "} else {"
                 + "    return true;"
                 + "}"));
-    }
-
-    public Boolean isDxtmlxWindowOpened(String windowName) {
-        return Boolean.valueOf(execJs("return dhxWinsLog.isWindow('" + windowName + "');"));
-    }
-
-    public void closeDhtmlxWindow(String windowName) {
-        execJs("dhxWinsLog.window('" + windowName + "').close();");
     }
 
     public Object getSelectedAndEnabledCheckboxes(Long gridId, Long sec3Idx) {
