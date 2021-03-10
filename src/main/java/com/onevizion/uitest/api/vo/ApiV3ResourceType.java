@@ -5,6 +5,8 @@ public enum ApiV3ResourceType {
     AUTH_TOKEN("auth-token"),
     AUTHORIZE("authorize"),
     CHATS("chats"),
+    COMPONENTS_EXPORT("components-export"),
+    COMPONENTS_IMPORT("components-import"),
     EXPORTS("exports"),
     FIELD_COLORS("field-colors"),
     FILES("files"),
