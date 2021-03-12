@@ -179,7 +179,7 @@ public class MainMenu {
         hideMenu();
     }
 
-    private WebElement findMenuItem(String item) {
+    public WebElement findMenuItem(String item) {
         setSearchMenuItem(item);
         List<WebElement> menuItems = getMenuItems();
 
