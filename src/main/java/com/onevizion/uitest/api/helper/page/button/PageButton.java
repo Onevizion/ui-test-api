@@ -31,6 +31,11 @@ public class PageButton {
     private static final String BUTTON_APPLET_TASKS_ID_BASE = "itemTask";
     private static final String BUTTON_APPLET_WF_ID_BASE = "itemWF";
 
+    private static final String BUTTON_WF_START_ID_BASE = "newWf";
+    private static final String BUTTON_WF_START_TEMPLATE_ID_BASE = "wftmpl_";
+    private static final String BUTTON_WF_START_MASS_ID_BASE = "massNewWf";
+    private static final String BUTTON_WF_START_MASS_TEMPLATE_ID_BASE = "masswftmpl_";
+
     private static final String BUTTON_ADD_GRID_ID_BASE = "itemAdd";
     private static final String BUTTON_GRID_ROW_EDITOR_ID_BASE = "itemEditRow";
     private static final String BUTTON_SHOW_SQL_ID_BASE = "itemSQL";
@@ -144,6 +149,36 @@ public class PageButton {
         window.openModal(By.id(BUTTON_APPLET_WF_ID_BASE + gridIdx));
         wait.waitWebElement(By.id("Close"));
         tab.waitLoad(1);
+    }
+
+    public void openStartWfForm(Long gridIdx, Long wfTemplateId) {
+        openAppletsPanel(gridIdx);
+        waitButtonInPanel(BUTTON_APPLET_WF_ID_BASE + gridIdx);
+
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_APPLET_WF_ID_BASE + gridIdx)).click();
+        waitButtonInPanel(BUTTON_WF_START_ID_BASE);
+
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_WF_START_ID_BASE)).click();
+        waitButtonInPanel(BUTTON_WF_START_TEMPLATE_ID_BASE + wfTemplateId);
+
+        window.openModal(By.id(BUTTON_WF_START_TEMPLATE_ID_BASE + wfTemplateId));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
+    }
+
+    public void openMassStartWfForm(Long gridIdx, Long wfTemplateId) {
+        openAppletsPanel(gridIdx);
+        waitButtonInPanel(BUTTON_APPLET_WF_ID_BASE + gridIdx);
+
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_APPLET_WF_ID_BASE + gridIdx)).click();
+        waitButtonInPanel(BUTTON_WF_START_MASS_ID_BASE);
+
+        seleniumSettings.getWebDriver().findElement(By.id(BUTTON_WF_START_MASS_ID_BASE)).click();
+        waitButtonInPanel(BUTTON_WF_START_MASS_TEMPLATE_ID_BASE + wfTemplateId);
+
+        window.openModal(By.id(BUTTON_WF_START_MASS_TEMPLATE_ID_BASE + wfTemplateId));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitFormLoad();
     }
 
     public void openGridRowEditorForm(Long gridIdx) {
