@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Alert;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
@@ -28,6 +29,9 @@ public class WfVisualEditor {
 
     @Autowired
     private Window window;
+
+    @Autowired
+    private Alert alert;
 
     @Autowired
     private SeleniumSettings seleniumSettings;
@@ -90,8 +94,7 @@ public class WfVisualEditor {
     public void deleteStep(String text) {
         selectStepNode(text);
         element.clickById("btnDelete");
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept();
         wait.waitSavingLoad();
     }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Alert;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Grid;
@@ -46,6 +47,9 @@ public class Comment {
 
     @Autowired
     private ElementWait elementWait;
+
+    @Autowired
+    private Alert alert;
 
     public void openCommentFormFromForm(String fieldId, boolean isShowMenu, int elementPosition) {
         String id;
@@ -164,10 +168,7 @@ public class Comment {
         elementWait.waitElementDisplayById("btnDelete" + rowId);
 
         seleniumSettings.getWebDriver().findElement(By.id("btnDelete" + rowId)).click();
-
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
-
+        alert.accept();
         grid2.waitLoad();
 
         wait.waitGridRowsCount(0L, rowsCntBefore - 1);

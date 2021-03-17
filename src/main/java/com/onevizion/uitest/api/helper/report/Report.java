@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.Alert;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
-import com.onevizion.uitest.api.helper.Wait;
 
 @Component
 public class Report {
@@ -23,10 +23,10 @@ public class Report {
     private ElementWait elementWait;
 
     @Autowired
-    private Wait wait;
+    private ReportWait reportWait;
 
     @Autowired
-    private ReportWait reportWait;
+    private Alert alert;
 
     public String waitReportDone() {
         WebElement processListButton = seleniumSettings.getWebDriver().findElement(By.id("topPanelProcessContainer")).findElement(By.className("btn_input"));
@@ -47,10 +47,7 @@ public class Report {
         elementWait.waitElementDisplayById("ge_delete_" + processId);
 
         seleniumSettings.getWebDriver().findElement(By.id("ge_delete_" + processId)).click();
-
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
-
+        alert.accept();
         processListButton.click();
 
         return processId;

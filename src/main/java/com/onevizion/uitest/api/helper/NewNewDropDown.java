@@ -20,13 +20,13 @@ public class NewNewDropDown {
     private ElementWait elementWait;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private Window window;
 
     @Autowired
     private Element element;
+
+    @Autowired
+    private Alert alert;
 
     public void selectDashboard(String name) {
         select("dropDownDashboards", name);
@@ -121,8 +121,7 @@ public class NewNewDropDown {
         element.click(entityOptions);
 
         seleniumSettings.getWebDriver().findElement(By.id("delete" + deleteButtonId)).click();
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept();
     }
 
     private void open(String dropDownId) {

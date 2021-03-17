@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumLogger;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Alert;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Element;
@@ -59,6 +60,9 @@ public class Export {
 
     @Autowired
     private PageButton pageButton;
+
+    @Autowired
+    private Alert alert;
 
     public void export(Long gridIndex, ExportRun exportRun, List<Integer> uniqueColumns, CheckExportFile checkExportFile) {
         runExport(gridIndex, exportRun);
@@ -135,10 +139,7 @@ public class Export {
         elementWait.waitElementDisplayById("ge_delete_" + processId);
 
         seleniumSettings.getWebDriver().findElement(By.id("ge_delete_" + processId)).click();
-
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
-
+        alert.accept();
         processListButton.click();
 
         return processId;

@@ -13,6 +13,7 @@ import org.testng.Assert;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
+import com.onevizion.uitest.api.helper.Alert;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.DropDown;
 import com.onevizion.uitest.api.helper.Element;
@@ -120,6 +121,9 @@ public class View {
 
     @Autowired
     private Element element;
+
+    @Autowired
+    private Alert alert;
 
     public void openMainPanel(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(ID_MAIN_BUTTON + gridIdx)).click();
@@ -697,8 +701,7 @@ public class View {
 
     public void resetGridRowEditorLayout() {
         seleniumSettings.getWebDriver().findElement(By.id(RESET_LAYOUT_ID)).click();
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept();
     }
 
 }

@@ -10,7 +10,6 @@ import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumLogger;
@@ -42,6 +41,9 @@ public class Window {
 
     @Autowired
     private Grid2 grid2;
+
+    @Autowired
+    private Alert alert;
 
     public void openModal(final By elemenLocator) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
@@ -192,13 +194,11 @@ public class Window {
 
         seleniumSettings.getWebDriver().findElement(elementClick).click();
 
-        wait.waitAlert();
-
         if (message != null) {
-            Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
+            alert.accept(message);
+        } else {
+            alert.accept();
         }
-
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")
@@ -220,18 +220,8 @@ public class Window {
         String title = seleniumSettings.getWebDriver().getTitle();
 
         seleniumSettings.getWebDriver().findElement(elementClick).click();
-
-        wait.waitAlert();
-
-        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
-
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
-
-        wait.waitAlert();
-
-        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message2, "Apply alert have wrong message");
-
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept(message);
+        alert.accept(message2);
 
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for closing modal window with title=[" + title + "] failed.")

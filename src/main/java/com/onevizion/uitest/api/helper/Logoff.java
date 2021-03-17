@@ -33,6 +33,9 @@ public class Logoff {
     @Autowired
     private Jquery jquery;
 
+    @Autowired
+    private Alert alert;
+
     public void logoff() {
         elementWait.waitElementById(ID_USER);
         elementWait.waitElementVisibleById(ID_USER);
@@ -50,7 +53,7 @@ public class Logoff {
 
         element.clickById(ID_USERMENU_LOGOFF);
 
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept();
 
         elementWait.waitElementById("auth_header");
         elementWait.waitElementById("auth_login");

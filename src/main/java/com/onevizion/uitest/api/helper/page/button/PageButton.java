@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.helper.Alert;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Wait;
@@ -114,6 +115,9 @@ public class PageButton {
 
     @Autowired
     private PageButtonWait gridButtonWait;
+
+    @Autowired
+    private Alert alert;
 
     public void openAppletForm(Long gridIdx, Long configAppId) {
         openAppletsPanel(gridIdx);
@@ -248,8 +252,7 @@ public class PageButton {
         waitButtonInPanel(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
 
         element.clickById(BUTTON_DELETE_TREE_ID_BASE + treeIdx);
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept();
         tree.waitLoad(treeIdx);
     }
 
@@ -265,8 +268,7 @@ public class PageButton {
         waitButtonInPanel(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
-        wait.waitAlert();
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept();
         grid2.waitLoad(gridIdx);
     }
 
@@ -275,9 +277,7 @@ public class PageButton {
         waitButtonInPanel(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_DELETE_GRID_ID_BASE + gridIdx);
-        wait.waitAlert();
-        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), message, "Alert have wrong message");
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept(message);
         grid2.waitLoad(gridIdx);
     }
 
@@ -552,9 +552,7 @@ public class PageButton {
         waitButtonInPanel(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_V_TABLE_REORDER_ID_BASE + gridIdx);
-        wait.waitAlert();
-        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to reorder the entries based on alphabetically sorting the values?");
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept("Are you sure you want to reorder the entries based on alphabetically sorting the values?");
         grid2.waitLoad(gridIdx);
     }
 
@@ -563,9 +561,7 @@ public class PageButton {
         waitButtonInPanel(BUTTON_IMPORT_RECOVERY_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_IMPORT_RECOVERY_ID_BASE + gridIdx);
-        wait.waitAlert();
-        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to recover selected import (Process ID = " + processId + ")?", "Alert have wrong message");
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept("Are you sure you want to recover selected import (Process ID = " + processId + ")?");
     }
 
     public void openImportRecoveryHistoryForm(Long gridIdx) {
@@ -582,9 +578,7 @@ public class PageButton {
         waitButtonInPanel(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
 
         element.clickById(BUTTON_IMPORT_INTERRUPT_ID_BASE + gridIdx);
-        wait.waitAlert();
-        Assert.assertEquals(seleniumSettings.getWebDriver().switchTo().alert().getText(), "Are you sure you want to interrupt selected import (Process ID = " + processId + ")?", "Alert have wrong message");
-        seleniumSettings.getWebDriver().switchTo().alert().accept();
+        alert.accept("Are you sure you want to interrupt selected import (Process ID = " + processId + ")?");
     }
 
     public void openTfEmailAccountForm(Long gridIdx) {
