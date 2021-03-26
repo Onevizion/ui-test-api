@@ -13,9 +13,9 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.DynamicVtableValue;
 
@@ -32,10 +32,10 @@ public class EntityDynamicVtableValue {
     private Window window;
 
     @Autowired
-    private Wait wait;
+    private AssertElement assertElement;
 
     @Autowired
-    private AssertElement assertElement;
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -56,9 +56,7 @@ public class EntityDynamicVtableValue {
     private Grid2 grid2;
 
     public void add(DynamicVtableValue dynamicVtableValue) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAddWithoutTabs(2);
 
         seleniumSettings.getWebDriver().findElement(By.name(VALUE)).sendKeys(dynamicVtableValue.getValue());
 
@@ -85,9 +83,7 @@ public class EntityDynamicVtableValue {
     }
 
     public void edit(DynamicVtableValue dynamicVtableValue) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs(2);
 
         seleniumSettings.getWebDriver().findElement(By.name(VALUE)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(VALUE)).sendKeys(dynamicVtableValue.getValue());
@@ -117,9 +113,7 @@ public class EntityDynamicVtableValue {
     }
 
     public void testOnForm(DynamicVtableValue dynamicVtableValue) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs(2);
 
         assertElement.assertText(VALUE, dynamicVtableValue.getValue());
         assertElement.assertText(LABEL, dynamicVtableValue.getLabel());

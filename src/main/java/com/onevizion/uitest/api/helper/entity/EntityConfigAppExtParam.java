@@ -14,6 +14,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.ConfigAppExtParam;
 
@@ -40,15 +41,16 @@ public class EntityConfigAppExtParam {
     private AssertElement assertElement;
 
     @Autowired
+    private Form form;
+
+    @Autowired
     private Grid grid;
 
     @Autowired
     private Grid2 grid2;
 
     public void add(ConfigAppExtParam configAppExtParam) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAddWithoutTabs();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys("param1");
 
@@ -62,9 +64,7 @@ public class EntityConfigAppExtParam {
     }
 
     public void edit(ConfigAppExtParam configAppExtParam) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys("param1edit");
@@ -80,9 +80,7 @@ public class EntityConfigAppExtParam {
     }
 
     public void testOnForm(ConfigAppExtParam configAppExtParam) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs();
 
         assertElement.assertText(NAME, configAppExtParam.getName());
         assertElement.assertText(DESCRIPTION, configAppExtParam.getDescription());

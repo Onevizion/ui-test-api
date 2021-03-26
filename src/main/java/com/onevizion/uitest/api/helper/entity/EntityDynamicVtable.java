@@ -16,6 +16,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.grid.sort.GridSort;
 import com.onevizion.uitest.api.helper.tab.Tab;
@@ -37,6 +38,9 @@ public class EntityDynamicVtable {
 
     @Autowired
     private AssertElement assertElement;
+
+    @Autowired
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -65,9 +69,7 @@ public class EntityDynamicVtable {
     public void addWithChilds(DynamicVtable dynamicVtable) {
         add(dynamicVtable);
 
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         tab.goToTab(2); //Values
         grid2.waitLoad(2L);
@@ -81,9 +83,7 @@ public class EntityDynamicVtable {
     }
 
     public void add(DynamicVtable dynamicVtable) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(dynamicVtable.getName());
 
@@ -104,9 +104,7 @@ public class EntityDynamicVtable {
     }
 
     public void edit(DynamicVtable dynamicVtable) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(dynamicVtable.getName());
@@ -127,9 +125,7 @@ public class EntityDynamicVtable {
         testInGrid(AbstractSeleniumCore.getGridIdx(), 0, dynamicVtable);
         testOnForm(dynamicVtable);
 
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         tab.goToTab(2); //Values
         grid2.waitLoad(2L);
@@ -147,9 +143,7 @@ public class EntityDynamicVtable {
     }
 
     public void testOnForm(DynamicVtable dynamicVtable) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText(NAME, dynamicVtable.getName());
         assertElement.assertText(DESCRIPTION, dynamicVtable.getDesc());

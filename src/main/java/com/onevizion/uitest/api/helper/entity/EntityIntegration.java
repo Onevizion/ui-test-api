@@ -17,6 +17,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.html.input.file.HtmlInputFile;
 import com.onevizion.uitest.api.helper.page.button.PageButton;
@@ -48,6 +49,9 @@ public class EntityIntegration {
 
     @Autowired
     private Checkbox checkbox;
+
+    @Autowired
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -121,9 +125,7 @@ public class EntityIntegration {
     }
 
     public void edit(Integration integration) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         seleniumSettings.getWebDriver().findElement(By.name(URL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(URL)).sendKeys(integration.getUrl());
@@ -167,9 +169,7 @@ public class EntityIntegration {
     }
 
     public void testOnForm(Integration integration) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText(URL, integration.getUrl());
         assertElement.assertText(NAME, integration.getName());

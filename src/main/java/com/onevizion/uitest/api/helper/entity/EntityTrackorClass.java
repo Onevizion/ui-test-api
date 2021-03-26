@@ -12,8 +12,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.TrackorClass;
 
@@ -27,9 +27,6 @@ public class EntityTrackorClass {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private SeleniumSettings seleniumSettings;
 
     @Autowired
@@ -39,15 +36,16 @@ public class EntityTrackorClass {
     private Js js;
 
     @Autowired
+    private Form form;
+
+    @Autowired
     private Grid grid;
 
     @Autowired
     private Grid2 grid2;
 
     public void add(TrackorClass trackorClass) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         //trackorType disabled
 
@@ -60,9 +58,7 @@ public class EntityTrackorClass {
     }
 
     public void edit(TrackorClass trackorClass) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         //trackorType disabled
 
@@ -77,9 +73,7 @@ public class EntityTrackorClass {
     }
 
     public void testOnForm(TrackorClass trackorClass) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText("trackorType", trackorClass.getTrackorType());
         assertElement.assertText(NAME, trackorClass.getName());

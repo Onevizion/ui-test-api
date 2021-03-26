@@ -12,8 +12,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.RuleType;
 
@@ -30,9 +30,6 @@ public class EntityRuleType {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private SeleniumSettings seleniumSettings;
 
     @Autowired
@@ -45,12 +42,13 @@ public class EntityRuleType {
     private AssertElement assertElement;
 
     @Autowired
+    private Form form;
+
+    @Autowired
     private Grid grid;
 
     public void add(RuleType ruleType) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(ruleType.getName());
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(ruleType.getLabel());
@@ -63,9 +61,7 @@ public class EntityRuleType {
     }
 
     public void edit(RuleType ruleType) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(ruleType.getName());
@@ -83,9 +79,7 @@ public class EntityRuleType {
     }
 
     public void testOnForm(RuleType ruleType) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText(NAME, ruleType.getName());
         assertElement.assertText(LABEL, ruleType.getLabel());

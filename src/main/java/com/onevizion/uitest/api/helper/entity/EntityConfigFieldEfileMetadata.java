@@ -14,8 +14,8 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Selector;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.ConfigFieldVoEfileMetadata;
 
@@ -30,13 +30,13 @@ public class EntityConfigFieldEfileMetadata {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private Selector selector;
 
     @Autowired
     private SeleniumSettings seleniumSettings;
+
+    @Autowired
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -51,9 +51,7 @@ public class EntityConfigFieldEfileMetadata {
     private Js js;
 
     public void add(ConfigFieldVoEfileMetadata configFieldVoEfileMetadata) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 3L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAddWithoutTabs(3);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(TYPE))).selectByVisibleText(configFieldVoEfileMetadata.getType().getLabel());
 
@@ -64,9 +62,7 @@ public class EntityConfigFieldEfileMetadata {
     }
 
     public void testOnForm(ConfigFieldVoEfileMetadata configFieldVoEfileMetadata) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 3L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs(3);
 
         assertElement.assertSelect(TYPE, configFieldVoEfileMetadata.getType().getLabel());
         assertElement.assertRadioPsSelector(FIELD, FIELD_BUTTON, AbstractSeleniumCore.BUTTON_CLOSE_ID_BASE + 0L, configFieldVoEfileMetadata.getConfigField(), 1L, true);

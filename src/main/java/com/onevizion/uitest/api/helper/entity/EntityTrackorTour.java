@@ -19,6 +19,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.TrackorTour;
@@ -49,6 +50,9 @@ public class EntityTrackorTour {
     private Tab tab;
 
     @Autowired
+    private Form form;
+
+    @Autowired
     private Grid grid;
 
     @Autowired
@@ -69,9 +73,7 @@ public class EntityTrackorTour {
     public void addWithChilds(TrackorTour trackorTour) {
         add(trackorTour);
 
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         tab.goToTab(2); //Tour Steps
         grid2.waitLoad(2L);
@@ -84,9 +86,7 @@ public class EntityTrackorTour {
     }
 
     public void add(TrackorTour trackorTour) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(trackorTour.getLabel());
 
@@ -128,9 +128,7 @@ public class EntityTrackorTour {
     }
 
     public void edit(TrackorTour trackorTour) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(trackorTour.getLabel());
@@ -172,9 +170,7 @@ public class EntityTrackorTour {
         testInGrid(AbstractSeleniumCore.getGridIdx(), 0, trackorTour);
         testOnForm(trackorTour);
 
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         tab.goToTab(2); //Tour Steps
         grid2.waitLoad(2L);
@@ -190,9 +186,7 @@ public class EntityTrackorTour {
     }
 
     public void testOnForm(TrackorTour trackorTour) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText(LABEL, trackorTour.getLabel());
         assertElement.assertSelect(TRACKOR_TYPE, trackorTour.getTrackorType());

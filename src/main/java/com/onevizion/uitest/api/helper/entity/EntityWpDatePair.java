@@ -12,8 +12,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.WpDatePairType;
@@ -31,13 +31,13 @@ public class EntityWpDatePair {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private SeleniumSettings seleniumSettings;
 
     @Autowired
     private Tab tab;
+
+    @Autowired
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -52,9 +52,7 @@ public class EntityWpDatePair {
     private Js js;
 
     public void add(WpDatePair wpDatePair) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(wpDatePair.getName());
 
@@ -82,9 +80,7 @@ public class EntityWpDatePair {
     }
 
     public void edit(WpDatePair wpDatePair) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(wpDatePair.getName());
@@ -116,9 +112,7 @@ public class EntityWpDatePair {
     }
 
     public void testOnForm(WpDatePair wpDatePair) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText(NAME, wpDatePair.getName());
         assertElement.assertText(LABEL, wpDatePair.getLabel());

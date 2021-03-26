@@ -18,6 +18,7 @@ import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.vo.entity.TrackorType;
@@ -48,6 +49,9 @@ public class EntityTrackorType {
     private AssertElement assertElement;
 
     @Autowired
+    private Form form;
+
+    @Autowired
     private Grid grid;
 
     @Autowired
@@ -69,9 +73,7 @@ public class EntityTrackorType {
     private Element element;
 
     public void add(TrackorType trackorType) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(trackorType.getName());
         seleniumSettings.getWebDriver().findElement(By.name(LABEL)).sendKeys(trackorType.getLabel());
@@ -118,20 +120,16 @@ public class EntityTrackorType {
     }
 
     public void edit(TrackorType trackorType) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
+
         
-        
-        
+
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
     }
 
     public void testOnForm(TrackorType trackorType) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText(NAME, trackorType.getName());
         assertElement.assertText(LABEL, trackorType.getLabel());
@@ -169,9 +167,7 @@ public class EntityTrackorType {
     }
 
     public void testRolePrivs(List<String> secGroupsRead, List<String> secGroupsEdit, List<String> secGroupsAdd, List<String> secGroupsDelete, List<String> secGroupsNone) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         tab.goToTab(3); //Role Privs
         grid2.waitLoad(3L);
@@ -185,9 +181,7 @@ public class EntityTrackorType {
     }
 
     public void testRoleRestrictions(List<String> rolesRest, String roleRest) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         tab.goToTab(4); //Role Restrictions
         grid2.waitLoad(4L);

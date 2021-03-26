@@ -13,8 +13,8 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.SecurityRole;
 
@@ -137,9 +137,6 @@ public class EntitySecurityRole {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private SeleniumSettings seleniumSettings;
 
     @Autowired
@@ -147,6 +144,9 @@ public class EntitySecurityRole {
 
     @Autowired
     private Js js;
+
+    @Autowired
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -158,9 +158,7 @@ public class EntitySecurityRole {
     private Checkbox checkbox;
 
     public void add(SecurityRole securityRole) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(securityRole.getName());
 
@@ -280,9 +278,7 @@ public class EntitySecurityRole {
     }
 
     public void edit(SecurityRole securityRole) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(securityRole.getName());
@@ -404,9 +400,7 @@ public class EntitySecurityRole {
     }
 
     public void testOnForm(SecurityRole securityRole) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText(NAME, securityRole.getName());
         assertElement.assertText(DESCRIPTION, securityRole.getDescription());

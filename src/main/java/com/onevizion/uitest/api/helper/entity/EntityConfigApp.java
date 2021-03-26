@@ -18,6 +18,7 @@ import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Listbox;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.tab.Tab;
 import com.onevizion.uitest.api.helper.view.View;
@@ -64,16 +65,16 @@ public class EntityConfigApp {
     private Js js;
 
     @Autowired
+    private Form form;
+
+    @Autowired
     private Grid grid;
 
     @Autowired
     private Grid2 grid2;
 
     public void add(ConfigApp configApp) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-
+        form.openAdd();
         view.waitLeftListBoxReady();
         view.waitRightListBoxReady();
 
@@ -148,10 +149,7 @@ public class EntityConfigApp {
     }
 
     public void edit(ConfigApp configApp) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-
+        form.openEdit();
         view.waitLeftListBoxReady();
         view.waitRightListBoxReady();
 
@@ -215,10 +213,7 @@ public class EntityConfigApp {
     }
 
     public void testOnForm(ConfigApp configApp) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-
+        form.openEdit();
         view.waitLeftListBoxReady();
         view.waitRightListBoxReady();
 

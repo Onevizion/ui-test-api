@@ -15,8 +15,8 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.wiki.FckEditor;
 import com.onevizion.uitest.api.vo.entity.TrackorTourStep;
@@ -40,13 +40,13 @@ public class EntityTrackorTourStep {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private SeleniumSettings seleniumSettings;
 
     @Autowired
     private Checkbox checkbox;
+
+    @Autowired
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -64,9 +64,7 @@ public class EntityTrackorTourStep {
     private FckEditor fckEditor;
 
     public void add(TrackorTourStep trackorTourStep) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + 2L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAddWithoutTabs(2);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(ELEMENT_TYPE))).selectByVisibleText(trackorTourStep.getElementType());
 
@@ -105,9 +103,7 @@ public class EntityTrackorTourStep {
     }
 
     public void edit(TrackorTourStep trackorTourStep) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs(2);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(ELEMENT_TYPE))).selectByVisibleText(trackorTourStep.getElementType());
 
@@ -149,9 +145,7 @@ public class EntityTrackorTourStep {
     }
 
     public void testOnForm(TrackorTourStep trackorTourStep) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + 2L));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs(2);
 
         assertElement.assertSelect(ELEMENT_TYPE, trackorTourStep.getElementType());
         if (trackorTourStep.getElementType().equals("name=")) {

@@ -15,8 +15,8 @@ import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
 import com.onevizion.uitest.api.helper.Selector;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.Coord;
 
@@ -35,13 +35,13 @@ public class EntityCoord {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private Selector selector;
 
     @Autowired
     private Js js;
+
+    @Autowired
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -56,9 +56,7 @@ public class EntityCoord {
     private AssertElement assertElement;
 
     public void add(Coord coord) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAddWithoutTabs();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(coord.getName());
 
@@ -75,9 +73,7 @@ public class EntityCoord {
     }
 
     public void edit(Coord coord) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(coord.getName());
@@ -98,9 +94,7 @@ public class EntityCoord {
     }
 
     public void testOnForm(Coord coord) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs();
 
         assertElement.assertText(NAME, coord.getName());
         assertElement.assertRadioPsSelector(LATITUDE, null, null, coord.getLatFieldName(), null, false);

@@ -25,6 +25,7 @@ import com.onevizion.uitest.api.helper.Selector;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.configfield.ConfigField;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.helper.jquery.Jquery;
 import com.onevizion.uitest.api.helper.tab.Tab;
@@ -82,6 +83,9 @@ public class EntityConfigField {
     private Js js;
 
     @Autowired
+    private Form form;
+
+    @Autowired
     private Grid grid;
 
     @Autowired
@@ -115,9 +119,7 @@ public class EntityConfigField {
     private EntityConfigFieldEfileMetadata entityConfigFieldEfileMetadata;
 
     public void add(ConfigFieldVo configFieldVo) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             jquery.waitLoad();
@@ -542,9 +544,7 @@ public class EntityConfigField {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad();
 
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             jquery.waitLoad();
@@ -584,9 +584,7 @@ public class EntityConfigField {
     }
 
     public void edit(ConfigFieldVo configFieldVo) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             jquery.waitLoad();
@@ -1011,9 +1009,7 @@ public class EntityConfigField {
     }
 
     public void testOnForm(ConfigFieldVo configFieldVo) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         if (ConfigFieldType.ROLLUP.equals(configFieldVo.getConfigFieldType())) {
             jquery.waitLoad();

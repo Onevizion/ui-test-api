@@ -12,9 +12,9 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.colorpicker.ColorPicker;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.Color;
 
@@ -25,10 +25,10 @@ public class EntityColor {
     private Window window;
 
     @Autowired
-    private Wait wait;
+    private AssertElement assertElement;
 
     @Autowired
-    private AssertElement assertElement;
+    private Form form;
 
     @Autowired
     private Grid grid;
@@ -46,9 +46,7 @@ public class EntityColor {
     private ColorPicker colorPicker;
 
     public void add(Color color) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAddWithoutTabs();
 
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
 
@@ -63,9 +61,7 @@ public class EntityColor {
     }
 
     public void edit(Color color) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs();
 
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).clear();
         seleniumSettings.getWebDriver().findElement(By.name("colorName")).sendKeys(color.getName());
@@ -82,9 +78,7 @@ public class EntityColor {
     }
 
     public void testOnForm(Color color) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEditWithoutTabs();
 
         assertElement.assertText("colorName", color.getName());
         assertElement.assertText("rgbValue", color.getValue());

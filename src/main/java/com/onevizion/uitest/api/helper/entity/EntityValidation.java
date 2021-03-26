@@ -12,8 +12,8 @@ import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Js;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 import com.onevizion.uitest.api.vo.entity.Validation;
 
@@ -28,7 +28,7 @@ public class EntityValidation {
     private Window window;
 
     @Autowired
-    private Wait wait;
+    private Form form;
 
     @Autowired
     private Grid2 grid2;
@@ -46,9 +46,7 @@ public class EntityValidation {
     private SeleniumSettings seleniumSettings;
 
     public void add(Validation validation) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openAdd();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(validation.getName());
         seleniumSettings.getWebDriver().findElement(By.name(PATTERN)).sendKeys(validation.getPattern());
@@ -59,9 +57,7 @@ public class EntityValidation {
     }
 
     public void edit(Validation validation) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(NAME)).sendKeys(validation.getName());
@@ -75,9 +71,7 @@ public class EntityValidation {
     }
 
     public void testOnForm(Validation validation) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
 
         assertElement.assertText(NAME, validation.getName());
         assertElement.assertText(PATTERN, validation.getPattern());
