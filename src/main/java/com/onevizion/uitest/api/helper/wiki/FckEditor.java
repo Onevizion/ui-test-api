@@ -76,6 +76,7 @@ public class FckEditor {
 
         seleniumSettings.getWebDriver().findElement(By.tagName("body")).click();
         Actions action = new Actions(seleniumSettings.getWebDriver());
+        action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).sendKeys(Keys.BACK_SPACE).perform();
         action.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).perform();
 
         seleniumSettings.getWebDriver().switchTo().parentFrame();
