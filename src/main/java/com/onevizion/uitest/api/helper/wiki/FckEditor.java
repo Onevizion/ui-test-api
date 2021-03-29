@@ -83,7 +83,9 @@ public class FckEditor {
         AbstractSeleniumCore.sleep(1000L);
         Actions action = new Actions(seleniumSettings.getWebDriver());
         seleniumScreenshot.getScreenshot();
-        action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).sendKeys(Keys.BACK_SPACE).perform();
+        action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();
+        seleniumScreenshot.getScreenshot();
+        action.sendKeys(Keys.BACK_SPACE).perform();
         seleniumScreenshot.getScreenshot();
         action.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).perform();
         seleniumScreenshot.getScreenshot();
