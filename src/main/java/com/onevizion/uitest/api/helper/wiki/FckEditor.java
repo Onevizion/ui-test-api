@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.AbstractSeleniumCore;
+import com.onevizion.uitest.api.SeleniumScreenshot;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.Wait;
@@ -31,6 +32,9 @@ public class FckEditor {
 
     @Autowired
     private Clipboard clipboard;
+
+    @Autowired
+    private SeleniumScreenshot seleniumScreenshot;
 
     public void setValue(String name, String value) {
         if (value.startsWith("<p>") && value.endsWith("</p>")) {
@@ -76,8 +80,11 @@ public class FckEditor {
 
         seleniumSettings.getWebDriver().findElement(By.tagName("body")).click();
         Actions action = new Actions(seleniumSettings.getWebDriver());
+        seleniumScreenshot.getScreenshot();
         action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).sendKeys(Keys.BACK_SPACE).perform();
+        seleniumScreenshot.getScreenshot();
         action.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).perform();
+        seleniumScreenshot.getScreenshot();
 
         seleniumSettings.getWebDriver().switchTo().parentFrame();
     }
