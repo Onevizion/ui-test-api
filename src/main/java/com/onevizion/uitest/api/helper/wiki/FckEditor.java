@@ -78,7 +78,9 @@ public class FckEditor {
         WebElement iframe = div.findElement(By.tagName("iframe"));
         seleniumSettings.getWebDriver().switchTo().frame(iframe);
 
+        AbstractSeleniumCore.sleep(1000L);
         seleniumSettings.getWebDriver().findElement(By.tagName("body")).click();
+        AbstractSeleniumCore.sleep(1000L);
         Actions action = new Actions(seleniumSettings.getWebDriver());
         seleniumScreenshot.getScreenshot();
         action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).sendKeys(Keys.BACK_SPACE).perform();
