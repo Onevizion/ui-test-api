@@ -22,6 +22,7 @@ import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Grid;
 import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
+import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.page.button.PageButton;
 import com.onevizion.uitest.api.vo.entity.ExportRun;
 
@@ -63,6 +64,9 @@ public class Export {
 
     @Autowired
     private Alert alert;
+
+    @Autowired
+    private Form form;
 
     public void export(Long gridIndex, ExportRun exportRun, List<Integer> uniqueColumns, CheckExportFile checkExportFile) {
         runExport(gridIndex, exportRun);
@@ -150,9 +154,7 @@ public class Export {
         int gridRows = grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx());
         Assert.assertEquals(gridRows, 1, "Grid have wrong rows count");
 
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + AbstractSeleniumCore.getGridIdx()));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
-        wait.waitFormLoad();
+        form.openEdit();
         assertElement.assertLinkById("gridPageName", exportRun.getGridPageName() + " ");
         assertElement.assertLinkById("trackorTypeName", exportRun.getTrackorTypeName());
         assertElement.assertLinkById("statusName", exportRun.getStatusName() + " ");

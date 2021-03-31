@@ -44,12 +44,6 @@ public class Workplan {
         wait.waitFormLoad();
     }
 
-    public void openEditForm(Long gridIdx) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-    }
-
     public void closeFormOk(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
         grid2.waitLoad(gridIdx);
