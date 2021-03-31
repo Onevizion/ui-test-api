@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import com.onevizion.uitest.api.AbstractSeleniumCore;
 import com.onevizion.uitest.api.SeleniumSettings;
 import com.onevizion.uitest.api.helper.Checkbox;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.grid.Grid2;
 
@@ -30,19 +29,10 @@ public class Workplan {
     private Window window;
 
     @Autowired
-    private Wait wait;
-
-    @Autowired
     private Grid2 grid2;
 
     @Autowired
     private Checkbox checkbox;
-
-    public void openAddForm(Long gridIdx) {
-        window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
-        wait.waitFormLoad();
-    }
 
     public void closeFormOk(Long gridIdx) {
         window.closeModal(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
