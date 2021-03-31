@@ -27,7 +27,7 @@ public class Form {
 
     public void openAdd(int gridIdx) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
         tab.waitLoad(1);
     }
@@ -38,7 +38,7 @@ public class Form {
 
     public void openAddWithoutTabs(int gridIdx) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_ADD_ID_BASE + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
     }
 
@@ -48,7 +48,7 @@ public class Form {
 
     public void openEdit(int gridIdx) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
         tab.waitLoad(1);
     }
@@ -59,7 +59,7 @@ public class Form {
 
     public void openEditWithoutTabs(int gridIdx) {
         window.openModal(By.id(AbstractSeleniumCore.BUTTON_EDIT_ID_BASE + gridIdx));
-        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE));
+        wait.waitWebElement(By.id(AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE));
         wait.waitFormLoad();
     }
 
