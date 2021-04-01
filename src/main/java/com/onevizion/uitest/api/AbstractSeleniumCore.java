@@ -70,6 +70,7 @@ import com.onevizion.uitest.api.helper.configfield.ConfigField;
 import com.onevizion.uitest.api.helper.dashboard.Dashboard;
 import com.onevizion.uitest.api.helper.document.Document;
 import com.onevizion.uitest.api.helper.dropgrid.DropGrid;
+import com.onevizion.uitest.api.helper.entity.EntityAnnouncement;
 import com.onevizion.uitest.api.helper.entity.EntityClientFile;
 import com.onevizion.uitest.api.helper.entity.EntityColor;
 import com.onevizion.uitest.api.helper.entity.EntityComponentPackage;
@@ -421,6 +422,9 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
 
     @Autowired
     protected EntityRuleType entityRuleType;
+
+    @Autowired
+    protected EntityAnnouncement entityAnnouncement;
     /* Entity Helpers End */
 
     @Autowired
