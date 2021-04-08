@@ -20,7 +20,6 @@ import com.onevizion.uitest.api.helper.Checkbox;
 import com.onevizion.uitest.api.helper.Element;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Grid;
-import com.onevizion.uitest.api.helper.Wait;
 import com.onevizion.uitest.api.helper.Window;
 import com.onevizion.uitest.api.helper.form.Form;
 import com.onevizion.uitest.api.helper.page.button.PageButton;
@@ -31,9 +30,6 @@ public class Export {
 
     @Autowired
     private Window window;
-
-    @Autowired
-    private Wait wait;
 
     @Autowired
     private Element element;
