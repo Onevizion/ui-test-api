@@ -18,6 +18,10 @@ public class ElementJs extends Js {
         execJs("document.getElementById('" + id + "').scrollIntoView();");
     }
 
+    public void moveToElementByClass(String ClassName) {
+        execJs("document.getElementsByClassName('" + ClassName + "')[0].scrollIntoView();");
+    }
+
     public void setFocusOnElement(WebElement element) {
         execJs3("arguments[0].focus();", element);
     }
@@ -64,6 +68,10 @@ public class ElementJs extends Js {
 
     public void mouseMoveById(String id) {
         execJs2("var event = new Event('mousemove', {'bubbles':true, 'cancelable':true, 'composed':true}); document.getElementById('" + id + "').dispatchEvent(event);");
+    }
+
+    public void mouseMoveByClass(String ClassName) {
+        execJs2("var event = new Event('mousemove', {'bubbles':true, 'cancelable':true, 'composed':true}); document.getElementByClassName('" + ClassName + "').dispatchEvent(event);");
     }
 
     public void doubleClick(WebElement element) {
