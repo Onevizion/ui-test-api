@@ -44,6 +44,12 @@ public class ElementWait {
             .until(webdriver -> webdriver.findElement(By.id(id)));
     }
 
+    public void waitElementByClass(String className) {
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for Element class name=[" + className + "] is failed")
+            .until(webdriver -> webdriver.findElement(By.className(className)));
+    }
+
     @Deprecated
     public void waitElementByBy(By by) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
