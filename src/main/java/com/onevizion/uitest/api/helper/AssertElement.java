@@ -38,21 +38,18 @@ public class AssertElement {
     }
 
     public void assertLink(String name, String expectedVal) {
-        element.moveToElementByName(name);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.name(name)).getText();
-        Assert.assertEquals(actualVal, expectedVal, "Element with name=[" + name + "] has wrong value");
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.name(name));
+        assertLink(element, expectedVal);
     }
 
     public void assertLinkById(String id, String expectedVal) {
-        element.moveToElementById(id);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.id(id)).getText();
-        Assert.assertEquals(actualVal, expectedVal, "Element with id=[" + id + "] has wrong value");
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.id(id));
+        assertLink(element, expectedVal);
     }
 
     public void assertLinkByClass(String className, String expectedVal) {
-        element.moveToElementByClass(className);
-        String actualVal = seleniumSettings.getWebDriver().findElement(By.className(className)).getText();
-        Assert.assertEquals(actualVal, expectedVal, "Element with class name=[" + className + "] has wrong value");
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.className(className));
+        assertLink(element, expectedVal);
     }
 
     public void assertText(WebElement webElement, String expectedVal) {

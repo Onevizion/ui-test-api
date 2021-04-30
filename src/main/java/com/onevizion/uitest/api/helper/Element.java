@@ -75,22 +75,6 @@ public class Element {
         }
     }
 
-    public void moveToElementByClass(String className) {
-        elementWait.waitElementByClass(className);
-        elementJs.moveToElementByClass(className);
-
-        try {
-            Actions actionObject = new Actions(seleniumSettings.getWebDriver());
-            actionObject.moveToElement(seleniumSettings.getWebDriver().findElement(By.className(className))).perform();
-        } catch (WebDriverException e) { //firefox 59 throw WebDriverException instead of MoveTargetOutOfBoundsException or instead success execution
-            seleniumLogger.warn("Exception in moveToElementByClass");
-        }
-
-        if (seleniumSettings.getBrowser().equals("firefox")) {
-            elementJs.mouseMoveByClass(className);
-        }
-    }
-
     public void setFocusOnElement(WebElement element) {
         elementJs.setFocusOnElement(element);
     }
