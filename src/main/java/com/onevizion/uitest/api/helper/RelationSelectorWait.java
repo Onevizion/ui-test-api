@@ -21,10 +21,4 @@ class RelationSelectorWait {
             .until(webdriver -> relationSelectorJs.isReadyRelationSelector(gridIdx));
     }
 
-    void waitIsReadyMutationObserver(Long gridIdx) {
-        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
-        .withMessage("Waiting for Mutation Observer loading is failed")
-        .until(webdriver -> relationSelectorJs.isReadyMutationObserver(gridIdx));
-    }
-
 }
