@@ -38,6 +38,12 @@ public class ElementWait {
             .until(webdriver -> webdriver.findElement(By.name(name)));
     }
 
+    public void waitElementByClassName(String className) {
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Waiting for Element className=[" + className + "] is failed")
+            .until(webdriver -> webdriver.findElement(By.className(className)));
+    }
+
     public void waitElementById(String id) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Waiting for Element id=[" + id + "] is failed")
@@ -80,6 +86,17 @@ public class ElementWait {
             .until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitElementVisibleByClassName(String className) {
+        waitElementByClassName(className);
+
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.className(className));
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Element className=[" + className + "] visibility failed")
+            .ignoring(StaleElementReferenceException.class)
+            .until(ExpectedConditions.visibilityOf(element));
+    }
+
     public void waitElementNotVisible(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] invisibility failed")
@@ -109,6 +126,17 @@ public class ElementWait {
             .until(ExpectedConditions.invisibilityOf(element));
     }
 
+    public void waitElementNotVisibleByClassName(String className) {
+        waitElementByClassName(className);
+
+        WebElement element = seleniumSettings.getWebDriver().findElement(By.className(className));
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Element className=[" + className + "] invisibility failed")
+            .ignoring(StaleElementReferenceException.class)
+            .until(ExpectedConditions.invisibilityOf(element));
+    }
+
     public void waitElementDisplay(WebElement element) {
         new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
             .withMessage("Element [" + element + "] not displayed")
@@ -134,6 +162,15 @@ public class ElementWait {
             .until(webdriver -> webdriver.findElement(By.id(id)).isDisplayed());
     }
 
+    public void waitElementDisplayByClassName(String className) {
+        waitElementByClassName(className);
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Element className=[" + className + "] not displayed")
+            .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> webdriver.findElement(By.className(className)).isDisplayed());
+    }
+
     public void waitElementNotDisplayById(String id) {
         waitElementById(id);
 
@@ -141,6 +178,15 @@ public class ElementWait {
             .withMessage("Element id=[" + id + "] displayed")
             .ignoring(StaleElementReferenceException.class)
             .until(webdriver -> !webdriver.findElement(By.id(id)).isDisplayed());
+    }
+
+    public void waitElementNotDisplayByClassName(String className) {
+        waitElementByClassName(className);
+
+        new WebDriverWait(seleniumSettings.getWebDriver(), seleniumSettings.getDefaultTimeout())
+            .withMessage("Element className=[" + className + "] displayed")
+            .ignoring(StaleElementReferenceException.class)
+            .until(webdriver -> !webdriver.findElement(By.className(className)).isDisplayed());
     }
 
     public void waitElementAttribute(WebElement element, String attribute, String attributeValue) {
