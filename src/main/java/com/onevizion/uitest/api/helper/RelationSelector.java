@@ -50,14 +50,14 @@ public class RelationSelector {
     private RelationSelectorJs relationSelectorJs;
 
     public void checkRelationSelectorValuesCount(Long gridIdx, int count) {
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.className(REL_SEL_CONTAINER)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         Assert.assertEquals(rowNames.size(), count);
     }
 
     public void checkRelationSelectorValue(Long gridIdx, String trackorType, int count) {
         int cnt = 0;
 
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.className(REL_SEL_CONTAINER)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         for (WebElement rowName : rowNames) {
             String actualRowName = rowName.findElement(By.className(REL_SEL_CONTAINER_ITEM_TEXT)).getText();
 
@@ -114,7 +114,7 @@ public class RelationSelector {
     }
 
     public void chooseParentChildTrackorType(Long gridIdx, String trackorType) {
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.className(REL_SEL_CONTAINER)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         for (WebElement rowName : rowNames) {
             String actualRowName = rowName.findElement(By.className(REL_SEL_CONTAINER_ITEM_TEXT)).getText();
             if (trackorType.equals(actualRowName)) {
@@ -126,9 +126,7 @@ public class RelationSelector {
     public void checkCurrentValueInRelationSelector(Long gridIdx, String label, int count) {
         String actualLabel = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElement(By.className(REL_SEL_MAIN_ELEMENT_CURRENT_TEXT)).getText();
         String actualCount = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElement(By.className(REL_SEL_MAIN_ELEMENT_CURRENT_COUNT)).getText();
-        int intActualCount = Integer.parseInt(actualCount);
-        Assert.assertEquals(actualLabel, label);
-        Assert.assertEquals(intActualCount, count);
+        Assert.assertEquals(actualLabel + actualCount, label + count);
     }
 
     public void checkCurrentValueInRelationSelector(Long gridIdx, String label) {
