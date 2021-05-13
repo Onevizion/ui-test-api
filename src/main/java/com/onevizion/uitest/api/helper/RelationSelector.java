@@ -18,7 +18,7 @@ public class RelationSelector {
 
     private static final String REL_SEL_BUTTON = "parentChildButton";
 
-    private static final String REL_SEL_CONTAINER = "dd_content";
+    private static final String REL_SEL_CONTAINER = "parentsChildrenDropDownContent";
     private static final String REL_SEL_CONTAINER_ITEM = "drop_down_item";
     private static final String REL_SEL_CONTAINER_ITEM_TEXT = "ddc_label";
     private static final String REL_SEL_CONTAINER_ITEM_COUNT = "ddc_count";
@@ -50,14 +50,14 @@ public class RelationSelector {
     private RelationSelectorJs relationSelectorJs;
 
     public void checkRelationSelectorValuesCount(Long gridIdx, int count) {
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_CONTAINER + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         Assert.assertEquals(rowNames.size(), count);
     }
 
     public void checkRelationSelectorValue(Long gridIdx, String trackorType, int count) {
         int cnt = 0;
 
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_CONTAINER + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         for (WebElement rowName : rowNames) {
             String actualRowName = rowName.findElement(By.className(REL_SEL_CONTAINER_ITEM_TEXT)).getText();
 
@@ -87,23 +87,23 @@ public class RelationSelector {
 
         seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElement(By.className(REL_SEL_MAIN_ELEMENT_CURRENT)).click();
 
-        elementWait.waitElementByClassName(REL_SEL_CONTAINER);
-        elementWait.waitElementVisibleByClassName(REL_SEL_CONTAINER);
-        elementWait.waitElementDisplayByClassName(REL_SEL_CONTAINER);
+        elementWait.waitElementById(REL_SEL_CONTAINER + gridIdx);
+        elementWait.waitElementVisibleById(REL_SEL_CONTAINER + gridIdx);
+        elementWait.waitElementDisplayById(REL_SEL_CONTAINER + gridIdx);
     }
 
     public void closeRelationSelector(Long gridIdx) {
         seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElement(By.className(REL_SEL_MAIN_ELEMENT_CURRENT)).click();
 
-        elementWait.waitElementByClassName(REL_SEL_CONTAINER);
-        elementWait.waitElementNotVisibleByClassName(REL_SEL_CONTAINER);
-        elementWait.waitElementNotDisplayByClassName(REL_SEL_CONTAINER);
+        elementWait.waitElementById(REL_SEL_CONTAINER + gridIdx);
+        elementWait.waitElementNotVisibleById(REL_SEL_CONTAINER + gridIdx);
+        elementWait.waitElementNotDisplayById(REL_SEL_CONTAINER + gridIdx);
     }
 
     public void openRelationGrid(Long gridIdx) {
         waitRelationSelector(gridIdx);
         relationSelectorJs.setIsReadyToFalse(gridIdx);
-        window.openModal(By.id(REL_SEL_BUTTON));
+        window.openModal(By.id(REL_SEL_BUTTON + gridIdx));
         grid2.waitLoad(gridIdx);
     }
 
@@ -114,7 +114,7 @@ public class RelationSelector {
     }
 
     public void chooseParentChildTrackorType(Long gridIdx, String trackorType) {
-        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_MAIN_ELEMENT + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
+        List<WebElement> rowNames = seleniumSettings.getWebDriver().findElement(By.id(REL_SEL_CONTAINER + gridIdx)).findElements(By.className(REL_SEL_CONTAINER_ITEM));
         for (WebElement rowName : rowNames) {
             String actualRowName = rowName.findElement(By.className(REL_SEL_CONTAINER_ITEM_TEXT)).getText();
             if (trackorType.equals(actualRowName)) {
