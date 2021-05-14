@@ -1420,6 +1420,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountEqualsOrNull(ConfigFieldType fieldDataType, List<String> cellVals, String value, int rowsCntBefore, @SuppressWarnings("unchecked") List<String> ... cellValsKeys) {
+        int cnt = 0;
+        Map<String, List<Long>> equalsKeyMap = new HashMap<>();
+
+        for (int i = 0; i < rowsCntBefore ;i++) {
+            StringBuilder bld = new StringBuilder("");
+            for (List<String> cellValsKey : cellValsKeys) {
+                bld.append(cellValsKey.get(i));
+            }
+
+            if (equalsKeyMap.containsKey(bld.toString())) {
+                equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
+            } else {
+                List<Long> vals = new ArrayList<>();
+                vals.add(Long.valueOf(i));
+                equalsKeyMap.put(bld.toString(), vals);
+            }
+        }
+
         if (fieldDataType.equals(ConfigFieldType.TEXT) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.WIKI) || fieldDataType.equals(ConfigFieldType.SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.MEMO) || fieldDataType.equals(ConfigFieldType.ELECTRONIC_FILE)
@@ -1427,24 +1445,6 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-            int cnt = 0;
-            Map<String, List<Long>> equalsKeyMap = new HashMap<>();
-
-            for (int i = 0; i < rowsCntBefore ;i++) {
-                StringBuilder bld = new StringBuilder("");
-                for (List<String> cellValsKey : cellValsKeys) {
-                    bld.append(cellValsKey.get(i));
-                }
-
-                if (equalsKeyMap.containsKey(bld.toString())) {
-                    equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
-                } else {
-                    List<Long> vals = new ArrayList<>();
-                    vals.add(Long.valueOf(i));
-                    equalsKeyMap.put(bld.toString(), vals);
-                }
-            }
-
             for (Entry<String, List<Long>> equalsKey: equalsKeyMap.entrySet()) {
                 if (equalsKey.getValue().size() > 1) {
                     boolean isAddRow = false;
@@ -1464,24 +1464,6 @@ public class UserpageFilter {
 
             Assert.assertEquals(grid.getGridRowsCount(AbstractSeleniumCore.getGridIdx()), cnt, "Grid have wrong rows count");
         } else if (fieldDataType.equals(ConfigFieldType.CHECKBOX)) {
-            int cnt = 0;
-            Map<String, List<Long>> equalsKeyMap = new HashMap<>();
-
-            for (int i = 0; i < rowsCntBefore ;i++) {
-                StringBuilder bld = new StringBuilder("");
-                for (List<String> cellValsKey : cellValsKeys) {
-                    bld.append(cellValsKey.get(i));
-                }
-
-                if (equalsKeyMap.containsKey(bld.toString())) {
-                    equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
-                } else {
-                    List<Long> vals = new ArrayList<>();
-                    vals.add(Long.valueOf(i));
-                    equalsKeyMap.put(bld.toString(), vals);
-                }
-            }
-
             for (Entry<String, List<Long>> equalsKey: equalsKeyMap.entrySet()) {
                 if (equalsKey.getValue().size() > 1) {
                     boolean isAddRow = false;
@@ -1503,24 +1485,6 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            int cnt = 0;
-            Map<String, List<Long>> equalsKeyMap = new HashMap<>();
-
-            for (int i = 0; i < rowsCntBefore ;i++) {
-                StringBuilder bld = new StringBuilder("");
-                for (List<String> cellValsKey : cellValsKeys) {
-                    bld.append(cellValsKey.get(i));
-                }
-
-                if (equalsKeyMap.containsKey(bld.toString())) {
-                    equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
-                } else {
-                    List<Long> vals = new ArrayList<>();
-                    vals.add(Long.valueOf(i));
-                    equalsKeyMap.put(bld.toString(), vals);
-                }
-            }
-
             for (Entry<String, List<Long>> equalsKey: equalsKeyMap.entrySet()) {
                 if (equalsKey.getValue().size() > 1) {
                     boolean isAddRow = false;
@@ -1545,6 +1509,24 @@ public class UserpageFilter {
     }
 
     private void checkGridRowsCountNotEqualsOrNull(ConfigFieldType fieldDataType, List<String> cellVals, String value, int rowsCntBefore, @SuppressWarnings("unchecked") List<String> ... cellValsKeys) {
+        int cnt = 0;
+        Map<String, List<Long>> equalsKeyMap = new HashMap<>();
+
+        for (int i = 0; i < rowsCntBefore ;i++) {
+            StringBuilder bld = new StringBuilder("");
+            for (List<String> cellValsKey : cellValsKeys) {
+                bld.append(cellValsKey.get(i));
+            }
+
+            if (equalsKeyMap.containsKey(bld.toString())) {
+                equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
+            } else {
+                List<Long> vals = new ArrayList<>();
+                vals.add(Long.valueOf(i));
+                equalsKeyMap.put(bld.toString(), vals);
+            }
+        }
+
         if (fieldDataType.equals(ConfigFieldType.TEXT) || fieldDataType.equals(ConfigFieldType.TRACKOR_SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.WIKI) || fieldDataType.equals(ConfigFieldType.SELECTOR)
                 || fieldDataType.equals(ConfigFieldType.MEMO) || fieldDataType.equals(ConfigFieldType.ELECTRONIC_FILE)
@@ -1552,24 +1534,6 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.HYPERLINK) || fieldDataType.equals(ConfigFieldType.DROP_DOWN)
                 || fieldDataType.equals(ConfigFieldType.CALCULATED) || fieldDataType.equals(ConfigFieldType.ROLLUP)
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
-            int cnt = 0;
-            Map<String, List<Long>> equalsKeyMap = new HashMap<>();
-
-            for (int i = 0; i < rowsCntBefore ;i++) {
-                StringBuilder bld = new StringBuilder("");
-                for (List<String> cellValsKey : cellValsKeys) {
-                    bld.append(cellValsKey.get(i));
-                }
-
-                if (equalsKeyMap.containsKey(bld.toString())) {
-                    equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
-                } else {
-                    List<Long> vals = new ArrayList<>();
-                    vals.add(Long.valueOf(i));
-                    equalsKeyMap.put(bld.toString(), vals);
-                }
-            }
-
             for (Entry<String, List<Long>> equalsKey: equalsKeyMap.entrySet()) {
                 if (equalsKey.getValue().size() > 1) {
                     //isNullInAnyRows it is temporary  solution
@@ -1603,24 +1567,6 @@ public class UserpageFilter {
         } else if (fieldDataType.equals(ConfigFieldType.DATE) || fieldDataType.equals(ConfigFieldType.DATE_TIME)
                 || fieldDataType.equals(ConfigFieldType.TIME) || fieldDataType.equals(ConfigFieldType.NUMBER)
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
-            int cnt = 0;
-            Map<String, List<Long>> equalsKeyMap = new HashMap<>();
-
-            for (int i = 0; i < rowsCntBefore ;i++) {
-                StringBuilder bld = new StringBuilder("");
-                for (List<String> cellValsKey : cellValsKeys) {
-                    bld.append(cellValsKey.get(i));
-                }
-
-                if (equalsKeyMap.containsKey(bld.toString())) {
-                    equalsKeyMap.get(bld.toString()).add(Long.valueOf(i));
-                } else {
-                    List<Long> vals = new ArrayList<>();
-                    vals.add(Long.valueOf(i));
-                    equalsKeyMap.put(bld.toString(), vals);
-                }
-            }
-
             for (Entry<String, List<Long>> equalsKey: equalsKeyMap.entrySet()) {
                 if (equalsKey.getValue().size() > 1) {
                     //isNullInAnyRows it is temporary  solution
