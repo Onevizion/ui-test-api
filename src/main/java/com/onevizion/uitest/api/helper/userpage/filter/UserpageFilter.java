@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -1536,26 +1535,14 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.MULTI_SELECTOR) || fieldDataType.equals(ConfigFieldType.TRACKOR_DROP_DOWN)) {
             for (Entry<String, List<Long>> equalsKey: equalsKeyMap.entrySet()) {
                 if (equalsKey.getValue().size() > 1) {
-                    //isNullInAnyRows it is temporary  solution
-                    boolean isNullInAnyRows = false;
+                    boolean isAddRow = false;
                     for (Long value2 : equalsKey.getValue()) {
-                        if (StringUtils.isEmpty(cellVals.get(value2.intValue()))) {
-                            isNullInAnyRows = true;
-                        }
-                    }
-
-                    if (!isNullInAnyRows) {
-                        boolean isAddRow = false;
-                        for (Long value2 : equalsKey.getValue()) {
-                            if (!cellVals.get(value2.intValue()).contains(value)) {
-                                isAddRow = true;
-                                cnt = cnt + 1;
-                            }
-                        }
-                        if (!isAddRow) {
+                        if (!cellVals.get(value2.intValue()).contains(value)) {
+                            isAddRow = true;
                             cnt = cnt + 1;
                         }
-                    } else {
+                    }
+                    if (!isAddRow) {
                         cnt = cnt + 1;
                     }
                 } else {
@@ -1569,26 +1556,14 @@ public class UserpageFilter {
                 || fieldDataType.equals(ConfigFieldType.LATITUDE) || fieldDataType.equals(ConfigFieldType.LONGITUDE)) {
             for (Entry<String, List<Long>> equalsKey: equalsKeyMap.entrySet()) {
                 if (equalsKey.getValue().size() > 1) {
-                    //isNullInAnyRows it is temporary  solution
-                    boolean isNullInAnyRows = false;
+                    boolean isAddRow = false;
                     for (Long value2 : equalsKey.getValue()) {
-                        if (StringUtils.isEmpty(cellVals.get(value2.intValue())) || "&nbsp;".equals(cellVals.get(value2.intValue()))) {
-                            isNullInAnyRows = true;
-                        }
-                    }
-
-                    if (!isNullInAnyRows) {
-                        boolean isAddRow = false;
-                        for (Long value2 : equalsKey.getValue()) {
-                            if (!cellVals.get(value2.intValue()).contains(value)) {
-                                isAddRow = true;
-                                cnt = cnt + 1;
-                            }
-                        }
-                        if (!isAddRow) {
+                        if (!cellVals.get(value2.intValue()).contains(value)) {
+                            isAddRow = true;
                             cnt = cnt + 1;
                         }
-                    } else {
+                    }
+                    if (!isAddRow) {
                         cnt = cnt + 1;
                     }
                 } else {
