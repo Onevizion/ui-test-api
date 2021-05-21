@@ -276,7 +276,7 @@ public class Dashboard {
         column.findElement(By.className("ia_edit")).click();
 
         WebElement dialog = getDialog();
-        dialog.findElements(By.className("sw_buttons")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
+        dialog.findElements(By.className("sw_items")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
         dialog.findElement(By.id("buttonOk")).click();
     }
 
@@ -286,7 +286,7 @@ public class Dashboard {
         column.findElement(By.className("ia_edit")).click();
 
         WebElement dialog = getDialog();
-        dialog.findElements(By.className("sw_buttons")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
+        dialog.findElements(By.className("sw_items")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
         dialog.findElement(By.id("buttonOk")).click();
     }
 
@@ -297,7 +297,7 @@ public class Dashboard {
         column.findElement(By.className("ia_edit")).click();
 
         WebElement dialog = getDialog();
-        dialog.findElements(By.className("sw_buttons")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
+        dialog.findElements(By.className("sw_items")).get(0).findElement(By.id(dashColumnChartType.getIdx().toString())).click();
         dialog.findElement(By.id("buttonOk")).click();
     }
 
@@ -308,7 +308,7 @@ public class Dashboard {
         column.findElement(By.className("ia_edit")).click();
 
         WebElement dialog = getDialog();
-        dialog.findElements(By.className("sw_buttons")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
+        dialog.findElements(By.className("sw_items")).get(1).findElement(By.id(dashColumnCalcMethodType.getIdx().toString())).click();
         dialog.findElement(By.id("buttonOk")).click();
     }
 
