@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import com.onevizion.uitest.api.SeleniumSettings;
+import com.onevizion.uitest.api.exception.SeleniumUnexpectedException;
 import com.onevizion.uitest.api.helper.AssertElement;
 import com.onevizion.uitest.api.helper.ElementWait;
 import com.onevizion.uitest.api.helper.Js;
@@ -65,8 +66,11 @@ public class GridPanel {
         Assert.assertEquals(js.getGridCellValueByRowIndexAndColIndex(gridPanelGrid, rowNumber - 1, 1), key);
 
         String actualErrorStr = js.getGridCellValueByRowIndexAndColIndex(gridPanelGrid, rowNumber - 1, 2);
-        actualErrorStr = actualErrorStr.substring(0, actualErrorStr.indexOf("Error Report ID"));
-        Assert.assertEquals(actualErrorStr, message);
+        int errorReportIdOccurrenceIndex = actualErrorStr.indexOf(" Error Report ID");
+        if (errorReportIdOccurrenceIndex == -1) {
+            throw new SeleniumUnexpectedException("Error without Error Report ID");
+        }
+        Assert.assertEquals(actualErrorStr.substring(0, errorReportIdOccurrenceIndex), message);
     }
 
     public void closePanel() {
