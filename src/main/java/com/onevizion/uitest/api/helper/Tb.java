@@ -639,6 +639,7 @@ public class Tb {
             }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
+            elementWait.waitElementByName("epmDd1");
             jquery.waitLoad();
             Select sel = new Select(seleniumSettings.getWebDriver().findElement(By.name("epmDd1")));
             wait.waitListBoxLoad2(sel);
@@ -793,6 +794,7 @@ public class Tb {
             }
         } else if (ConfigFieldType.DB_DROP_DOWN.equals(fieldDataType) || ConfigFieldType.DROP_DOWN.equals(fieldDataType)
                 || ConfigFieldType.TRACKOR_DROP_DOWN.equals(fieldDataType)) {
+            elementWait.waitElementByName("epmDd1");
             jquery.waitLoad();
             Select sel = new Select(seleniumSettings.getWebDriver().findElement(By.name("epmDd1")));
             wait.waitListBoxLoad2(sel);
