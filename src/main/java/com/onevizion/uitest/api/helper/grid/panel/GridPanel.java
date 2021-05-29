@@ -66,7 +66,7 @@ public class GridPanel {
         Assert.assertEquals(js.getGridCellValueByRowIndexAndColIndex(gridPanelGrid, rowNumber - 1, 1), key);
 
         String actualErrorStr = js.getGridCellValueByRowIndexAndColIndex(gridPanelGrid, rowNumber - 1, 2);
-        int errorReportIdOccurrenceIndex = actualErrorStr.indexOf(" Error Report ID");
+        int errorReportIdOccurrenceIndex = actualErrorStr.indexOf("Error Report ID");
         if (errorReportIdOccurrenceIndex == -1) {
             throw new SeleniumUnexpectedException("Error without Error Report ID");
         }

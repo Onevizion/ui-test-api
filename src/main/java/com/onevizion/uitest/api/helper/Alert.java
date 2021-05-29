@@ -32,7 +32,7 @@ public class Alert {
     public void acceptWithErrorReportId(String message) {
         alertWait.waitAlert();
 
-        int errorReportIdOccurrenceIndex = seleniumSettings.getWebDriver().switchTo().alert().getText().indexOf(" Error Report ID");
+        int errorReportIdOccurrenceIndex = seleniumSettings.getWebDriver().switchTo().alert().getText().indexOf("Error Report ID");
         if (errorReportIdOccurrenceIndex == -1) {
             throw new SeleniumUnexpectedException("Alert without Error Report ID");
         }
