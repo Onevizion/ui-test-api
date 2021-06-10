@@ -19,6 +19,7 @@ public class Workplan {
     private static final String START_DATE = "start";
     private static final String FINISH_DATE = "finish";
     private static final String AUTO_CALC_LAG_TO_PRED = "autoCalcLagToPred";
+    private static final String AUTO_CALC_LAG_TO_BC_SUCC = "autoCalcLagToBcSucc";
     private static final String DONT_SHIFT_PROJ_DATES = "dontShiftProjDates";
     private static final String ACTIVE = "active";
 
@@ -66,6 +67,13 @@ public class Workplan {
         if ((autoCalcLagToPred.equals("YES") && !checkbox.isCheckedByName(AUTO_CALC_LAG_TO_PRED))
                 || (autoCalcLagToPred.equals("NO") && checkbox.isCheckedByName(AUTO_CALC_LAG_TO_PRED))) {
             checkbox.clickByName(AUTO_CALC_LAG_TO_PRED);
+        }
+    }
+
+    public void changeAutoCalcLagToBcSucc(String autoCalcLagToBcSucc) {
+        if ((autoCalcLagToBcSucc.equals("YES") && !checkbox.isCheckedByName(AUTO_CALC_LAG_TO_BC_SUCC))
+                || (autoCalcLagToBcSucc.equals("NO") && checkbox.isCheckedByName(AUTO_CALC_LAG_TO_BC_SUCC))) {
+            checkbox.clickByName(AUTO_CALC_LAG_TO_BC_SUCC);
         }
     }
 
