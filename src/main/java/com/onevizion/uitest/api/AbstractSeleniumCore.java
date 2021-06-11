@@ -614,6 +614,8 @@ public abstract class AbstractSeleniumCore extends AbstractTestNGSpringContextTe
             seleniumSettings.getProfiler().start("openLoginPage");
             seleniumLogger.info("openLoginPage start");
             document.open2(seleniumSettings.getServerUrl());
+            document.waitReadyStateComplete();
+            jquery.waitLoad();
             seleniumLogger.info("openLoginPage success");
 
             seleniumSettings.getProfiler().start("loginIntoSystem");

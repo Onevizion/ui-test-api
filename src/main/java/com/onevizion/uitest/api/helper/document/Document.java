@@ -29,6 +29,9 @@ public class Document {
         jquery.waitLoad();
 
         open2(page);
+
+        waitReadyStateComplete();
+        jquery.waitLoad();
     }
 
     public void open2(String page) {
@@ -36,9 +39,6 @@ public class Document {
         seleniumSettings.getWebDriver().get("about:blank");
         seleniumSettings.getWebDriver().get(page);
         elementWait.waitElementNotExist(html);
-
-        waitReadyStateComplete();
-        jquery.waitLoad();
     }
 
     public void waitReadyStateComplete() {
