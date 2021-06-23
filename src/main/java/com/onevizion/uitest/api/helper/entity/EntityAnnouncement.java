@@ -60,7 +60,7 @@ public class EntityAnnouncement {
     }
 
     public void edit(Announcement announcement) {
-        form.openEditWithoutTabs();
+        form.openEdit();
 
         seleniumSettings.getWebDriver().findElement(By.name(START_DATE)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(START_DATE)).sendKeys(announcement.getStartDate());
@@ -74,7 +74,7 @@ public class EntityAnnouncement {
     }
 
     public void testOnForm(Announcement announcement) {
-        form.openEditWithoutTabs();
+        form.openEdit();
 
         assertElement.assertText(START_DATE, announcement.getStartDate());
         assertElement.assertText(FINISH_DATE, announcement.getFinishDate());
