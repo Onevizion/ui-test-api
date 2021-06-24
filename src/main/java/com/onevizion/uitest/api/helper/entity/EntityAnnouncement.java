@@ -46,7 +46,7 @@ public class EntityAnnouncement {
     private Grid grid;
 
     public void add(Announcement announcement) {
-        form.openAddWithoutTabs();
+        form.openAdd();
 
         seleniumSettings.getWebDriver().findElement(By.name(START_DATE)).clear();
         seleniumSettings.getWebDriver().findElement(By.name(START_DATE)).sendKeys(announcement.getStartDate());
