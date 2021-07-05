@@ -666,7 +666,7 @@ public class UserpageFilter {
         new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + row))).selectByVisibleText(operator.getValue());
     }
 
-    private void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator, String value) {
+    public void selectFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator, String value) {
         selector.selectRadio(By.name(FILTER_ROW_ATTRIB_BUTTON + row), By.id(AbstractSeleniumCore.BUTTON_OK_ID_BASE), 1, fieldName, 1L);
 
         new Select(seleniumSettings.getWebDriver().findElement(By.name(FILTER_ROW_OPER + row))).selectByVisibleText(operator.getValue());
@@ -754,7 +754,7 @@ public class UserpageFilter {
         assertElement.assertSelect(FILTER_ROW_OPER + row, operator.getValue());
     }
 
-    private void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator, String value) {
+    public void checkFilterAttributeAndOperatorAndValue(int row, String fieldName, FilterOperatorType operator, String value) {
         assertElement.assertRadioPsSelector(FILTER_ROW_ATTRIB_TEXT + row, FILTER_ROW_ATTRIB_BUTTON + row, AbstractSeleniumCore.BUTTON_CANCEL_ID_BASE, fieldName, 1L, true);
 
         assertElement.assertSelect(FILTER_ROW_OPER + row, operator.getValue());
